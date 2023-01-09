@@ -6,6 +6,7 @@ import useColorScheme from "./src/hooks/useColorScheme";
 import Navigation from "./src/config/navigation";
 import { useEffect } from "react";
 import { registerForPushNotificationsAsync } from "./src/services/notifications";
+import { QueryClientComponent } from "@ribon.io/shared/hooks";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -19,10 +20,12 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+      <QueryClientComponent>
+        <SafeAreaProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </SafeAreaProvider>
+      </QueryClientComponent>
     );
   }
 }
