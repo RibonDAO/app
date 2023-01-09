@@ -1,0 +1,78 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "jest": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "airbnb",
+        "prettier",
+        "plugin:storybook/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "react-hooks"],
+    "rules": {
+        "quotes": [2, "double"],
+        "react/prop-types": "off",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".ts", ".tsx", "native.js"]
+            }
+        ],
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-curly-newline": "off",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never",
+                "js": "never",
+                "jsx": "never",
+                "mjs": "never"
+            }
+        ],
+        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": "off",
+        "semi": "off",
+        "react/jsx-props-no-spreading": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "react/jsx-wrap-multilines": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "no-else-return": "off",
+        "no-unused-vars": ["error", { "args": "none" }],
+        "@typescript-eslint/no-explicit-any": "off",
+        "func-names": "off"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".ts", ".tsx", ".js", ".jsx", ".d.ts"],
+                "paths": ["src"]
+            }
+        }
+    },
+    "globals": {
+        "React": true,
+        "google": true,
+        "mount": true,
+        "mountWithRouter": true,
+        "shallow": true,
+        "shallowWithRouter": true,
+        "context": true,
+        "expect": true,
+        "jsdom": true,
+        "JSX": true
+    }
+}

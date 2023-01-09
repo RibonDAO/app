@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "lint": "eslint src/**/*.ts src/**/*.tsx && prettier --check src/**/*.ts src/**/*.tsx"
   },
   "jest": {
     "preset": "jest-expo"
@@ -41,8 +42,22 @@
     "@testing-library/react-native": "^11.5.0",
     "@types/react": "~18.0.24",
     "@types/react-native": "~0.70.6",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.6.8",
     "jest": "^26.6.3",
     "jest-expo": "~47.0.1",
+    "prettier": "^2.8.2",
     "react-test-renderer": "18.1.0",
     "typescript": "^4.6.3"
   },
