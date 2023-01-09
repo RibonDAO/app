@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "442729605579",
+    "project_id": "ribon-native-dapp",
+    "storage_bucket": "ribon-native-dapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442729605579:android:cb353cda151e60abdbae4e",
+        "android_client_info": {
+          "package_name": "com.ribondapp.nativedapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442729605579-qvaskor6ichc39499de5p19k9dk2e6u3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2K0cNRB55CG6I1cxcfcGbCx-MCRov6sA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442729605579-qvaskor6ichc39499de5p19k9dk2e6u3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
