@@ -7,6 +7,7 @@ import Navigation from "./src/config/navigation";
 import { useEffect } from "react";
 import { registerForPushNotificationsAsync } from "./src/services/notifications";
 import { QueryClientComponent } from "@ribon.io/shared/hooks";
+import "./i18n.config";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
