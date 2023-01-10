@@ -5,5 +5,7 @@
     "baseUrl": "src",
     "sourceRoot": "/"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
