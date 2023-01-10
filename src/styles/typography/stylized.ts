@@ -11,19 +11,19 @@ const stylizedDisplay = {
 
 export const stylizedDisplayLarge = {
   ...stylizedDisplay,
-  fontsize: 56,
+  fontSize: 56,
   lineHeight: 96,
 };
 
 export const stylizedDisplayMedium = {
   ...stylizedDisplay,
-  fontsize: 48,
+  fontSize: 48,
   lineHeight: 80,
 };
 
 export const stylizedDisplaySmall = {
   ...stylizedDisplay,
-  fontsize: 40,
+  fontSize: 40,
   lineHeight: 68,
 };
 
@@ -33,19 +33,19 @@ const stylizedHeading = {
 };
 export const stylizedHeadingLarge = {
   ...stylizedHeading,
-  fontsize: 36,
+  fontSize: 36,
   lineHeight: 70,
 };
 
 export const stylizedHeadingMedium = {
   ...stylizedHeading,
-  fontsize: 32,
+  fontSize: 32,
   lineHeight: 56,
 };
 
 export const stylizedHeadingSmall = {
   ...stylizedHeading,
-  fontsize: 28,
+  fontSize: 28,
   lineHeight: 48,
 };
 
@@ -55,12 +55,12 @@ const stylizedTitle = {
 };
 export const stylizedTitleLarge = {
   ...stylizedTitle,
-  fontsize: 24,
+  fontSize: 24,
   lineHeight: 40,
 };
 
 export const stylizedTitleMedium = {
   ...stylizedTitle,
-  fontsize: 20,
+  fontSize: 20,
   lineHeight: 36,
 };
