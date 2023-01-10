@@ -21,8 +21,8 @@ import Colors from "utils/constants/Colors";
 import useColorScheme from "hooks/useColorScheme";
 import ModalScreen from "screens/ModalScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
-import CausesPage from "screens/CausesPage";
-import ProfilePage from "screens/ProfilePage";
+import CausesScreen from "screens/CausesScreen";
+import ProfileScreen from "screens/ProfileScreen";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -78,16 +78,16 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="CausesPage"
+      initialRouteName="CausesScreen"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="CausesPage"
-        component={CausesPage}
-        options={({ navigation }: RootTabScreenProps<"CausesPage">) => ({
-          title: "Causes Page",
+        name="CausesScreen"
+        component={CausesScreen}
+        options={({ navigation }: RootTabScreenProps<"CausesScreen">) => ({
+          title: "Causes",
           tabBarIcon: ({ color }) => color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
           headerRight: () => (
             <Pressable
@@ -107,21 +107,14 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="ProfilePage"
-        component={ProfilePage}
+        name="ProfileScreen"
+        component={ProfileScreen}
         options={{
-          title: "Profile Page",
+          title: "Profile",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />
         }}
       />
     </BottomTab.Navigator>
   );
-}
-
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
