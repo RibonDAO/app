@@ -29,14 +29,11 @@ import {
 } from "types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
-<<<<<<< HEAD
 import Header from "components/moleculars/Header";
 import CogIcon from "components/vectors/CogIcon";
 import S from "./styles";
-=======
 import CurrentUserProvider from "contexts/currentUserContext";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
->>>>>>> f530996ac372f66f90f20c878e080b9b3eb15303
 
 export default function Navigation({
   colorScheme,
@@ -97,7 +94,7 @@ function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: theme.colors.green30,
         tabBarStyle: { ...S.tabBar },
-        tabBarLabelStyle: { ...S.tabBarLabel }
+        tabBarLabelStyle: { ...S.tabBarLabel },
       }}
     >
       <BottomTab.Screen
@@ -105,8 +102,9 @@ function BottomTabNavigator() {
         component={CausesScreen}
         options={{
           title: "Causes",
-          tabBarIcon: ({ color }) => color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
-          header: () => <Header rightComponent={<CogIcon />} />
+          tabBarIcon: ({ color }) =>
+            color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
+          header: () => <Header rightComponent={<CogIcon />} />,
         }}
       />
       <BottomTab.Screen
@@ -116,7 +114,7 @@ function BottomTabNavigator() {
           title: "Profile",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
-          header: () => <Header rightComponent={<CogIcon />} />
+          header: () => <Header rightComponent={<CogIcon />} />,
         }}
       />
     </BottomTab.Navigator>
