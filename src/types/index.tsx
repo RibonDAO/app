@@ -1,11 +1,10 @@
-/**
- * Learn more about using TypeScript with React Navigation:
- * https://reactnavigation.org/docs/typescript/
- */
-
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { NonProfit } from "@ribon.io/shared/types";
 
 declare global {
   namespace ReactNavigation {
@@ -15,21 +14,29 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Modal: undefined;
+  DonateModal: ModalParamList;
+  DonationDoneScreen: DonationDoneParamsList;
   NotFound: undefined;
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-  RootStackParamList,
-  Screen
->;
+export type ModalParamList = {
+  nonProfit: NonProfit;
+};
+
+export type DonationDoneParamsList = {
+  nonProfit: NonProfit;
+};
+
+export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
   CausesScreen: undefined;
   ProfileScreen: undefined;
 };
 
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, Screen>,
-  NativeStackScreenProps<RootStackParamList>
->;
+export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<RootTabParamList, Screen>,
+    NativeStackScreenProps<RootStackParamList>
+  >;

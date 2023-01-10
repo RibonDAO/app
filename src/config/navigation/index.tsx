@@ -3,7 +3,6 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -19,9 +18,9 @@ import ProfileIconOn from "./assets/ProfileIconOn";
 import ProfileIconOff from "./assets/ProfileIconOff";
 import Colors from "utils/constants/Colors";
 import useColorScheme from "hooks/useColorScheme";
-import ModalScreen from "screens/ModalScreen";
+import DonateModal from "screens/donations/DonateModal";
 import NotFoundScreen from "screens/NotFoundScreen";
-import CausesScreen from "screens/CausesScreen";
+import CausesScreen from "screens/donations/CausesScreen";
 import ProfileScreen from "screens/ProfileScreen";
 import {
   RootStackParamList,
@@ -30,6 +29,8 @@ import {
 } from "types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
+import CurrentUserProvider from "contexts/currentUserContext";
+import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 
 export default function Navigation({
   colorScheme,
@@ -41,7 +42,9 @@ export default function Navigation({
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      <RootNavigator />
+      <CurrentUserProvider>
+        <RootNavigator />
+      </CurrentUserProvider>
     </NavigationContainer>
   );
 }
@@ -63,8 +66,14 @@ function RootNavigator() {
         options={{ title: "Oops!" }}
       />
 
+      <Stack.Screen
+        name="DonationDoneScreen"
+        component={DonationDoneScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="DonateModal" component={DonateModal} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -88,22 +97,8 @@ function BottomTabNavigator() {
         component={CausesScreen}
         options={({ navigation }: RootTabScreenProps<"CausesScreen">) => ({
           title: "Causes",
-          tabBarIcon: ({ color }) => color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+          tabBarIcon: ({ color }) =>
+            color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
         })}
       />
       <BottomTab.Screen
@@ -112,7 +107,7 @@ function BottomTabNavigator() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }: any) =>
-            color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />
+            color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
         }}
       />
     </BottomTab.Navigator>
