@@ -56,7 +56,7 @@ export default function CausesPage({ navigation }: RootTabScreenProps<any>) {
               imageDescription={`${nonProfit.impactByTicket} ${nonProfit.impactDescription}`}
               buttonText="Donate"
               onClickButton={() => {
-                navigation.navigate("Modal");
+                navigation.navigate("DonateModal", { nonProfit });
               }}
             />
           </View>

@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, View, Text } from "react-native";
-import { RootStackScreenProps } from "src/../types";
-import theme from "styles/theme";
-import * as S from "screens/donations/DonationDonePage/styles";
+import { Button, View, Text, Image } from "react-native";
+import { RootStackScreenProps } from "types";
+import { theme } from "@ribon.io/shared/styles";
+import S from "./styles";
 
 export default function DonationDonePage({
   route,
@@ -10,20 +10,20 @@ export default function DonationDonePage({
 }: RootStackScreenProps<"DonationDonePage">) {
   const { nonProfit } = route.params;
   return (
-    <S.Container>
-      <View style={S.inline.diamond}>
-        <S.CardImage source={{ uri: nonProfit.mainImage }} />
+    <View style={S.container}>
+      <View style={S.diamond}>
+        <Image style={S.cardImage} source={{ uri: nonProfit.mainImage }} />
       </View>
-      <S.Title>Congratulations!</S.Title>
-      <S.Description>
+      <Text style={S.title}>Congratulations!</Text>
+      <Text style={S.description}>
         You donated {nonProfit.impactByTicket} {nonProfit.impactDescription} to{" "}
         {nonProfit.name}.
-      </S.Description>
+      </Text>
       <Button
         onPress={() => navigation.goBack()}
         title="Close"
-        color={theme.colors.ribonBlue}
+        color={theme.colors.green30}
       />
-    </S.Container>
+    </View>
   );
 }
