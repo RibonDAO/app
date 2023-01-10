@@ -4,6 +4,8 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
+  TextInput,
 } from "react-native";
 import { RootStackScreenProps } from "types";
 import { useDonations, useUsers } from "@ribon.io/shared/hooks";
@@ -12,8 +14,10 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import Button from "components/atomics/Button";
 import { showToast } from "lib/Toast";
 import { isValidEmail } from "lib/validators/email";
-import * as S from "screens/donations/DonateModal/styles";
+import S from "screens/donations/DonateModal/styles";
 import { LinearGradient } from "expo-linear-gradient";
+import { Text, View } from "components/Themed";
+import { theme } from "@ribon.io/shared/styles";
 
 export default function DonateModal({
   route,
@@ -67,21 +71,21 @@ export default function DonateModal({
   };
 
   return (
-    <S.ModalWrapper>
-      <S.NonProfitContainer>
-        <S.NonProfitText>
+    <View style={S.modalWrapper}>
+      <View style={S.nonProfitContainer}>
+        <Text style={S.nonProfitText}>
           You are donating to {"\n"}
-          <S.NonProfitHighlight>{nonProfit.name}</S.NonProfitHighlight>
-        </S.NonProfitText>
-        <S.Logo source={{ uri: nonProfit.mainImage }} />
+          <Text style={S.nonProfitHighlight}>{nonProfit.name}</Text>
+        </Text>
+        <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
         <LinearGradient
           colors={["rgb(0, 218, 147)", "transparent"]}
           start={[0.0, 0.5]}
           end={[1.0, 0.5]}
           locations={[0.0, 1.0]}
-          style={S.inline.gradient}
+          style={S.gradient}
         />
-      </S.NonProfitContainer>
+      </View>
 
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -89,32 +93,48 @@ export default function DonateModal({
         style={{ flex: 1 }}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <S.Container>
-            <S.InputEmailContainer>
-              <S.Description>
+          <View style={S.container}>
+            <View style={S.inputEmailContainer}>
+              <Text style={S.description}>
                 Hey! It looks like you're donating for the first time. Enter
                 your email address to proceed.
-              </S.Description>
+              </Text>
 
-              <S.Title>Place your e-mail to donate</S.Title>
-              <S.Input
+              <Text style={S.title}>Place your e-mail to donate</Text>
+              <TextInput
+                style={[
+                  S.input,
+                  {
+                    borderColor: invalidInput
+                      ? theme.colors.red10
+                      : theme.colors.green30,
+                  },
+                ]}
                 placeholder="Place your email"
                 keyboardType="email-address"
                 onChangeText={handleTextChange}
                 value={email}
                 autoCapitalize="none"
                 textContentType="emailAddress"
-                error={invalidInput}
                 autoFocus
               />
-              <S.InputHint error={invalidInput}>
+              <Text
+                style={[
+                  S.inputHint,
+                  {
+                    color: invalidInput
+                      ? theme.colors.red10
+                      : theme.colors.gray30,
+                  },
+                ]}
+              >
                 {invalidInput
                   ? "Please enter a valid email address"
                   : "All your data is safe with us"}
-              </S.InputHint>
-            </S.InputEmailContainer>
+              </Text>
+            </View>
 
-            <S.ButtonContainer>
+            <View style={S.buttonContainer}>
               <Button
                 text={isDonating ? "Donating..." : "Donate"}
                 onPress={handleButtonPress}
@@ -122,14 +142,14 @@ export default function DonateModal({
                 timeoutCallback={donateCallback}
                 disabled={isDonating}
               />
-            </S.ButtonContainer>
-          </S.Container>
+            </View>
+          </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
 
-      <S.Footer>
-        <S.FooterText>(c) Ribon {new Date().getFullYear()}</S.FooterText>
-      </S.Footer>
-    </S.ModalWrapper>
+      <View style={S.footer}>
+        <Text style={S.footerText}>(c) Ribon {new Date().getFullYear()}</Text>
+      </View>
+    </View>
   );
 }
