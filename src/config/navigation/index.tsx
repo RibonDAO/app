@@ -13,19 +13,23 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
-
+import CausesIconOn from "./assets/CausesIconOn";
+import CausesIconOff from "./assets/CausesIconOff";
+import ProfileIconOn from "./assets/ProfileIconOn";
+import ProfileIconOff from "./assets/ProfileIconOff";
 import Colors from "utils/constants/Colors";
 import useColorScheme from "hooks/useColorScheme";
 import ModalScreen from "screens/ModalScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
-import TabOneScreen from "screens/TabOneScreen";
-import TabTwoScreen from "screens/TabTwoScreen";
+import CausesPage from "screens/CausesPage";
+import ProfilePage from "screens/ProfilePage";
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from "types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import { theme } from "@ribon.io/shared/styles";
 
 export default function Navigation({
   colorScheme,
@@ -42,10 +46,6 @@ export default function Navigation({
   );
 }
 
-/**
- * A root stack navigator is often used for displaying modals on top of all other content.
- * https://reactnavigation.org/docs/modal
- */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
@@ -56,11 +56,13 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
+
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
@@ -68,28 +70,25 @@ function RootNavigator() {
   );
 }
 
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const activeColor = theme.colors.green30;
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="CausesPage"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        name="CausesPage"
+        component={CausesPage}
+        options={({ navigation }: RootTabScreenProps<"CausesPage">) => ({
+          title: "Causes Page",
+          tabBarIcon: ({ color }) => color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate("Modal")}
@@ -108,20 +107,18 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="ProfilePage"
+        component={ProfilePage}
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Profile Page",
+          tabBarIcon: ({ color }: any) =>
+            color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />
         }}
       />
     </BottomTab.Navigator>
   );
 }
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
