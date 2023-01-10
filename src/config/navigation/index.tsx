@@ -11,7 +11,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import { ColorSchemeName } from "react-native";
 import CausesIconOn from "./assets/CausesIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
@@ -29,6 +29,9 @@ import {
 } from "types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
+import Header from "components/moleculars/Header";
+import CogIcon from "components/vectors/CogIcon";
+import S from "./styles";
 import CurrentUserProvider from "contexts/currentUserContext";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 
@@ -89,17 +92,20 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="CausesScreen"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: theme.colors.green30,
+        tabBarStyle: { ...S.tabBar },
+        tabBarLabelStyle: { ...S.tabBarLabel },
       }}
     >
       <BottomTab.Screen
         name="CausesScreen"
         component={CausesScreen}
-        options={({ navigation }: RootTabScreenProps<"CausesScreen">) => ({
+        options={{
           title: "Causes",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
-        })}
+          header: () => <Header rightComponent={<CogIcon />} />,
+        }}
       />
       <BottomTab.Screen
         name="ProfileScreen"
@@ -108,6 +114,7 @@ function BottomTabNavigator() {
           title: "Profile",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
+          header: () => <Header rightComponent={<CogIcon />} />,
         }}
       />
     </BottomTab.Navigator>
