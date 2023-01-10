@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingTop: 16,
     paddingLeft: 16,
-    paddingRight: 12
+    paddingRight: 12,
   },
   logo: {
     height: 34,
@@ -22,10 +22,9 @@ const styles = StyleSheet.create({
     color: theme.colors.gray20,
   },
   insideContainer: {
-    height: 56,
     display: "flex",
     alignItems: "center",
-  }
+  },
 });
 
 export default styles;
