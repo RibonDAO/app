@@ -12,7 +12,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import { ColorSchemeName } from "react-native";
 import CausesIconOn from "./assets/CausesIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
@@ -30,6 +30,9 @@ import {
 } from "types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
+import Header from "components/moleculars/Header";
+import CogIcon from "components/vectors/CogIcon";
+import S from "./styles";
 
 export default function Navigation({
   colorScheme,
@@ -80,31 +83,19 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="CausesScreen"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: theme.colors.green30,
+        tabBarStyle: { ...S.tabBar },
+        tabBarLabelStyle: { ...S.tabBarLabel }
       }}
     >
       <BottomTab.Screen
         name="CausesScreen"
         component={CausesScreen}
-        options={({ navigation }: RootTabScreenProps<"CausesScreen">) => ({
+        options={{
           title: "Causes",
           tabBarIcon: ({ color }) => color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
-        })}
+          header: () => <Header rightComponent={<CogIcon />} />
+        }}
       />
       <BottomTab.Screen
         name="ProfileScreen"
@@ -112,7 +103,8 @@ function BottomTabNavigator() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }: any) =>
-            color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />
+            color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
+          header: () => <Header rightComponent={<CogIcon />} />
         }}
       />
     </BottomTab.Navigator>
