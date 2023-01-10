@@ -1,0 +1,22 @@
+name: Create main promotion pull request
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  mainPromotion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Reset promotion branch
+        run: |
+          git fetch origin develop:develop
+          git reset --hard develop
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: main-promotion
+          title: Deploy
+          body: ':rocket:'
