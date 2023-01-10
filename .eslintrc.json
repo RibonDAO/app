@@ -24,6 +24,7 @@
     "rules": {
         "quotes": [2, "double"],
         "react/prop-types": "off",
+        "react/require-default-props": "off",
         "react/jsx-filename-extension": [
             1,
             {
