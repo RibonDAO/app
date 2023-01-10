@@ -15,14 +15,14 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          CausesPage: {
+          CausesScreen: {
             screens: {
-              CausesPage: 'one',
+              CausesScreen: 'one',
             },
           },
-          ProfilePage: {
+          ProfileScreen: {
             screens: {
-              ProfilePage: 'two',
+              ProfileScreen: 'two',
             },
           },
         },

@@ -5,9 +5,9 @@ import { Text, View } from "components/Themed";
 import { RootTabScreenProps } from "../types";
 import { useTranslation } from "react-i18next";
 
-export default function CausesPage({
+export default function CausesScreen({
   navigation,
-}: RootTabScreenProps<"CausesPage">) {
+}: RootTabScreenProps<"CausesScreen">) {
   const { t } = useTranslation();
 
   return (
