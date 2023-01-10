@@ -1,16 +1,20 @@
-import styled from "styled-components/native";
+import { StyleSheet } from "react-native";
+import { theme } from "@ribon.io/shared/styles";
 
-export const Container = styled.TouchableOpacity`
-  background-color: ${({ theme }) => theme.colors.ribonBlue};
-  width: 100%;
-  height: 40px;
-  border-radius: 5px;
-  justify-content: center;
-  align-items: center;
-`;
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: theme.colors.green30,
+    width: "100%",
+    height: 40,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: theme.colors.neutral10,
+  },
+});
 
-export const Text = styled.Text`
-  color: ${({ theme }) => theme.colors.ribonWhite};
-  font-size: 16px;
-  font-weight: 600;
-`;
+export default styles;

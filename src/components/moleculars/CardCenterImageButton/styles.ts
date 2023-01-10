@@ -1,10 +1,7 @@
-import styled, { css } from "styled-components/native";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { theme } from "@ribon.io/shared/styles";
 
-// React Native Inline Styles
-// https://reactnative.dev/docs/stylesheet
-
-export const inline = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     shadowColor: "rgba(40, 36, 28, 0.2)",
     shadowOffset: {
@@ -15,104 +12,70 @@ export const inline = StyleSheet.create({
     shadowOpacity: 0.8,
     margin: 8,
   },
+  containerImage: {
+    position: "relative",
+  },
   darkStroke: {
     height: 100,
     width: "100%",
     position: "absolute",
     bottom: 0,
   },
+  cardWrapper: {
+    display: "flex",
+    backgroundColor: theme.colors.neutral10,
+    flexDirection: "column",
+    borderRadius: 12,
+    height: "auto",
+    width: "100%",
+  },
+  cardImage: {
+    width: "100%",
+    aspectRatio: 1.1,
+    borderRadius: 12,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+  infoContainer: {
+    width: "100%",
+    marginBottom: 16,
+    marginTop: 8,
+    display: "flex",
+    flexDirection: "row",
+  },
+  bullet: {
+    marginLeft: 4,
+    marginRight: 4,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    color: theme.colors.gray40,
+  },
+  info: {
+    textAlign: "center",
+    color: theme.colors.gray40,
+  },
+  icon: {
+    marginTop: 2,
+    marginLeft: 4,
+  },
+  imageDescription: {
+    padding: 14,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    zIndex: 1,
+    color: theme.colors.neutral10,
+    fontWeight: "600",
+    fontSize: 16,
+  },
+  containerText: {
+    padding: "8px 12px 12px 12px",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
 });
 
-export const Container = styled(View)``;
-
-export const CardWrapper = styled(View)`
-  ${({ theme }) => css`
-    display: flex;
-    background-color: ${theme.colors.ribonWhite};
-    flex-direction: column;
-    border-radius: 12px;
-    height: auto;
-    width: 100%;
-  `}
-`;
-
-export const ContainerImage = styled(View)`
-  ${({ theme }) => css`
-    position: relative;
-  `}
-`;
-
-export const CardImage = styled(Image)`
-  ${() => css`
-    width: 100%;
-    aspect-ratio: 1.1;
-    border-radius: 12px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  `}
-`;
-
-export const InfoContainer = styled(View)`
-  ${({ theme }) => css`
-    width: 100%;
-    margin-bottom: 16px;
-    margin-top: 8px;
-    display: flex;
-    flex-direction: row;
-  `}
-`;
-
-export const Bullet = styled(Text)`
-  ${({ theme }) => css`
-    margin-left: 4px;
-    margin-right: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: ${({ theme }) => theme.colors.ribonBlack};
-  `}
-`;
-
-export const Info = styled(Text)`
-  ${({ theme }) => css`
-    text-align: center;
-    color: ${({ theme }) => theme.colors.ribonBlack};
-  `}
-`;
-
-export const Icon = styled(View)`
-  ${({ theme }) => css`
-    margin-top: 2px;
-    margin-left: 4px;
-  `}
-`;
-
-export const ImageDescription = styled.Text`
-  padding: 14px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  color: ${({ theme }) => theme.colors.ribonWhite};
-  font-weight: 600;
-  font-size: 16px;
-`;
-
-export const ContainerText = styled(View)`
-  ${() => css`
-    padding: 8px 12px 12px 12px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  `}
-`;
-
-export const Title = styled(Text)`
-  ${({ theme }) => css`
-    color: ${theme.colors.darkGray};
-    font-weight: 400;
-    margin-bottom: 16px;
-    margin-top: 8px;
-  `}
-`;
+export default styles;

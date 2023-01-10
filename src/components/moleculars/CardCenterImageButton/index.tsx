@@ -2,7 +2,9 @@ import Button from "components/atomics/Button";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import VerifiedBadge from "components/vectors/VerifiedBadge";
-import * as S from "./styles";
+import S from "./styles";
+import { Text, View } from "components/Themed";
+import { Image } from "react-native";
 
 export type Props = {
   image: string;
@@ -22,38 +24,38 @@ function CardCenterImageButton({
   infoTextRight,
 }: Props): JSX.Element {
   return (
-    <S.Container style={S.inline.container}>
-      <S.CardWrapper>
-        <S.ContainerImage>
-          <S.CardImage source={{ uri: image }} />
-          <S.ImageDescription>{imageDescription}</S.ImageDescription>
+    <View style={S.container}>
+      <View style={S.cardWrapper}>
+        <View style={S.containerImage}>
+          <Image style={S.cardImage} source={{ uri: image }} />
+          <Text style={S.imageDescription}>{imageDescription}</Text>
           <LinearGradient
             colors={["transparent", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.7)"]}
-            style={S.inline.darkStroke}
+            style={S.darkStroke}
           />
-        </S.ContainerImage>
+        </View>
 
-        <S.ContainerText>
-          <S.InfoContainer>
+        <View style={S.containerText}>
+          <View style={S.infoContainer}>
             {infoTextLeft && (
               <>
-                <S.Info>{infoTextLeft}</S.Info>
-                <S.Icon>
+                <Text style={S.info}>{infoTextLeft}</Text>
+                <View style={S.icon}>
                   <VerifiedBadge />
-                </S.Icon>
+                </View>
               </>
             )}
             {infoTextRight && (
               <>
-                <S.Bullet>•</S.Bullet>
-                <S.Info>{infoTextRight}</S.Info>
+                <Text style={S.bullet}>•</Text>
+                <Text style={S.info}>{infoTextRight}</Text>
               </>
             )}
-          </S.InfoContainer>
+          </View>
           <Button onPress={onClickButton} text={buttonText} />
-        </S.ContainerText>
-      </S.CardWrapper>
-    </S.Container>
+        </View>
+      </View>
+    </View>
   );
 }
 

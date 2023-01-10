@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Easing } from "react-native";
+import { Easing, TouchableOpacity } from "react-native";
 import { Animated, StyleSheet, View } from "react-native";
-import * as S from "./styles";
+import S from "./styles";
+import { Text } from "components/Themed";
 
 export type Props = {
   text: string;
@@ -90,7 +91,8 @@ export default function Button({
   };
 
   return (
-    <S.Container
+    <TouchableOpacity
+      style={S.container}
       onPress={handlePress}
       disabled={disabled}
       onLayout={(e: any) => handleLayout(e)}
@@ -107,7 +109,7 @@ export default function Button({
           }}
         />
       </View>
-      <S.Text>{text}</S.Text>
-    </S.Container>
+      <Text style={S.text}>{text}</Text>
+    </TouchableOpacity>
   );
 }

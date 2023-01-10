@@ -1,21 +1,16 @@
 import React from "react";
-import { screen } from "@testing-library/react-native";
-import { renderComponent } from "config/testUtils";
+import { screen, render } from "@testing-library/react-native";
 import CardCenterImageButton from ".";
 
 describe("CardCenterImageButton", () => {
   it("should render without error", () => {
-    renderComponent(
+    render(
       <CardCenterImageButton
         image=""
-        title="Recursos de saúde básica para famílias"
-        buttonText=""
+        buttonText="OK"
         onClickButton={() => {}}
-        softDisabled={false}
-      />
+      />,
     );
-    expect(
-      screen.getByText("Recursos de saúde básica para famílias")
-    ).toBeInTheDocument();
+    expect(screen.getByText("OK")).toBeDefined();
   });
 });
