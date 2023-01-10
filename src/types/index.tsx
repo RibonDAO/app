@@ -7,17 +7,9 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { NonProfit } from "@ribon.io/shared/types";
 
 declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {}
 }
-
-export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  DonateModal: ModalParamList;
-  DonationDoneScreen: DonationDoneParamsList;
-  NotFound: undefined;
-};
 
 export type ModalParamList = {
   nonProfit: NonProfit;
@@ -27,13 +19,20 @@ export type DonationDoneParamsList = {
   nonProfit: NonProfit;
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
-  NativeStackScreenProps<RootStackParamList, Screen>;
-
 export type RootTabParamList = {
   CausesScreen: undefined;
   ProfileScreen: undefined;
 };
+
+export type RootStackParamList = {
+  Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  DonateModal: ModalParamList;
+  DonationDoneScreen: DonationDoneParamsList;
+  NotFound: undefined;
+};
+
+export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   CompositeScreenProps<

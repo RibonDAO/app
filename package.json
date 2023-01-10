@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
+    "testCoverage": "jest --coverage --watchAll=false",
     "lint": "eslint src/**/*.ts src/**/*.tsx && prettier --check src/**/*.ts src/**/*.tsx"
   },
   "jest": {
