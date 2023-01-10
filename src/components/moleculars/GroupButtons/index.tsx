@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { theme } from "@ribon.io/shared/styles";
-import * as S from "./styles";
+import S from "./styles";
+import { View } from "components/Themed";
+import Button from "./Button";
 
 export type Props = {
   elements: any[];
@@ -42,7 +44,7 @@ function GroupButtons({
 
   function renderGroupButtons() {
     return elements?.map((element, index) => (
-      <S.Button
+      <Button
         outline={index !== selectedButtonIndex}
         onPress={() => handleElementClick(index, element)}
         key={index.toString()}
@@ -50,19 +52,14 @@ function GroupButtons({
         backgroundColorOutline={backgroundColorOutline}
         borderColor={borderColor}
         borderColorOutline={borderColorOutline}
-      >
-        <S.ButtonText
-          outline={index !== selectedButtonIndex}
-          textColor={textColor}
-          textColorOutline={textColorOutline}
-        >
-          {nameExtractor(element)}
-        </S.ButtonText>
-      </S.Button>
+        text={nameExtractor(element)}
+        textColor={textColor}
+        textColorOutline={textColorOutline}
+      />
     ));
   }
 
-  return <S.Container>{renderGroupButtons()}</S.Container>;
+  return <View style={S.container}>{renderGroupButtons()}</View>;
 }
 
 export default GroupButtons;

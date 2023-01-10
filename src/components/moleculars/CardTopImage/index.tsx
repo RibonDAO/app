@@ -1,5 +1,7 @@
 import React from "react";
-import * as S from "./styles";
+import S from "./styles";
+import { Text, View } from "components/Themed";
+import { Image } from "react-native";
 
 export type Props = {
   imageUrl?: string;
@@ -7,10 +9,10 @@ export type Props = {
 };
 function CardTopImage({ imageUrl, text }: Props): JSX.Element {
   return (
-    <S.Container>
-      <S.Image source={{ uri: imageUrl }} />
-      <S.Text>{text}</S.Text>
-    </S.Container>
+    <View style={S.container}>
+      <Image style={S.image} source={{ uri: imageUrl }} />
+      <Text style={S.text}>{text}</Text>
+    </View>
   );
 }
 
