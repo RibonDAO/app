@@ -6,13 +6,12 @@ import {
   Keyboard,
 } from "react-native";
 import { RootStackScreenProps } from "types";
-import useDonations from "../../../hooks/apiHooks/useDonations";
-import { RIBON_INTEGRATION_ID } from "../../../constants/Application";
-import { useCurrentUser } from "../../../contexts/currentUserContext";
-import useUsers from "../../../hooks/apiHooks/useUsers";
+import { useDonations, useUsers } from "@ribon.io/shared/hooks";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useCurrentUser } from "contexts/currentUserContext";
 import Button from "components/atomics/Button";
-import { showToast } from "../../../lib/Toast";
-import { isValidEmail } from "../../../lib/validators/email";
+import { showToast } from "lib/Toast";
+import { isValidEmail } from "lib/validators/email";
 import * as S from "screens/donations/DonateModal/styles";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -26,7 +25,7 @@ export default function DonateModal({
   const { findOrCreateUser } = useUsers();
   const { setCurrentUser, currentUser } = useCurrentUser();
   const [email, setEmail] = useState(currentUser?.email || "");
-  const { donate } = useDonations();
+  const { donate } = useDonations(currentUser?.id);
 
   useEffect(() => {
     if (isValidEmail(email)) {
