@@ -3,7 +3,6 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -19,9 +18,9 @@ import ProfileIconOn from "./assets/ProfileIconOn";
 import ProfileIconOff from "./assets/ProfileIconOff";
 import Colors from "utils/constants/Colors";
 import useColorScheme from "hooks/useColorScheme";
-import ModalScreen from "screens/ModalScreen";
+import DonateModal from "screens/donations/DonateModal";
 import NotFoundScreen from "screens/NotFoundScreen";
-import CausesScreen from "screens/CausesScreen";
+import CausesScreen from "screens/donations/CausesScreen";
 import ProfileScreen from "screens/ProfileScreen";
 import {
   RootStackParamList,
@@ -30,9 +29,14 @@ import {
 } from "types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
+<<<<<<< HEAD
 import Header from "components/moleculars/Header";
 import CogIcon from "components/vectors/CogIcon";
 import S from "./styles";
+=======
+import CurrentUserProvider from "contexts/currentUserContext";
+import DonationDoneScreen from "screens/donations/DonationDoneScreen";
+>>>>>>> f530996ac372f66f90f20c878e080b9b3eb15303
 
 export default function Navigation({
   colorScheme,
@@ -44,7 +48,9 @@ export default function Navigation({
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      <RootNavigator />
+      <CurrentUserProvider>
+        <RootNavigator />
+      </CurrentUserProvider>
     </NavigationContainer>
   );
 }
@@ -66,8 +72,14 @@ function RootNavigator() {
         options={{ title: "Oops!" }}
       />
 
+      <Stack.Screen
+        name="DonationDoneScreen"
+        component={DonationDoneScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="DonateModal" component={DonateModal} />
       </Stack.Group>
     </Stack.Navigator>
   );

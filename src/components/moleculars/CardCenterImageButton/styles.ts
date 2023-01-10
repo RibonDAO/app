@@ -71,7 +71,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   containerText: {
-    padding: "8px 12px 12px 12px",
+    paddingTop: 8,
+    paddingBottom: 12,
+    paddingLeft: 12,
+    paddingRight: 12,
     width: "100%",
     display: "flex",
     flexDirection: "column",
