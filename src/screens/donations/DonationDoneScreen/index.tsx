@@ -3,12 +3,14 @@ import { Button, View, Text, Image } from "react-native";
 import { RootStackScreenProps } from "types";
 import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
+import { useNavigation } from "hooks/useNavigation";
 
 export default function DonationDoneScreen({
   route,
-  navigation,
 }: RootStackScreenProps<"DonationDoneScreen">) {
   const { nonProfit } = route.params;
+  const { popNavigation } = useNavigation();
+
   return (
     <View style={S.container}>
       <View style={S.diamond}>
@@ -20,7 +22,7 @@ export default function DonationDoneScreen({
         {nonProfit.name}.
       </Text>
       <Button
-        onPress={() => navigation.goBack()}
+        onPress={() => popNavigation()}
         title="Close"
         color={theme.colors.green30}
       />

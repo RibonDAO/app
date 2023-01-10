@@ -18,10 +18,10 @@ import S from "screens/donations/DonateModal/styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { Text, View } from "components/Themed";
 import { theme } from "@ribon.io/shared/styles";
+import { useNavigation } from "hooks/useNavigation";
 
 export default function DonateModal({
   route,
-  navigation,
 }: RootStackScreenProps<"DonateModal">) {
   const [isDonating, setIsDonating] = useState(false);
   const [invalidInput, setInvalidInput] = useState(false);
@@ -30,6 +30,7 @@ export default function DonateModal({
   const { setCurrentUser, currentUser } = useCurrentUser();
   const [email, setEmail] = useState(currentUser?.email || "");
   const { donate } = useDonations(currentUser?.id);
+  const { navigateTo, popNavigation } = useNavigation();
 
   useEffect(() => {
     if (isValidEmail(email)) {
@@ -53,12 +54,12 @@ export default function DonateModal({
         const user = await findOrCreateUser(email);
         setCurrentUser(user);
         await donate(RIBON_INTEGRATION_ID, nonProfit.id, email);
-        navigation.pop();
+        popNavigation();
         setTimeout(() => {
-          navigation.navigate("DonationDoneScreen", { nonProfit });
+          navigateTo("DonationDoneScreen", { nonProfit });
         }, 500);
       } catch (error: any) {
-        navigation.pop();
+        popNavigation();
         showToast(error.response.data.formatted_message);
       } finally {
         setIsDonating(false);
