@@ -15,7 +15,7 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   DonateModal: ModalParamList;
-  DonationDonePage: DonationDoneParamsList;
+  DonationDoneScreen: DonationDoneParamsList;
   NotFound: undefined;
 };
 

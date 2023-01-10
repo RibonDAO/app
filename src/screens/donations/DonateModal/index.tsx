@@ -55,9 +55,10 @@ export default function DonateModal({
         await donate(RIBON_INTEGRATION_ID, nonProfit.id, email);
         navigation.pop();
         setTimeout(() => {
-          navigation.navigate("DonationDonePage", { nonProfit });
+          navigation.navigate("DonationDoneScreen", { nonProfit });
         }, 500);
       } catch (error: any) {
+        console.log(error);
         navigation.pop();
         showToast(error.response.data.formatted_message);
       } finally {

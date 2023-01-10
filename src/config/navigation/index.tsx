@@ -18,7 +18,7 @@ import ProfileIconOn from "./assets/ProfileIconOn";
 import ProfileIconOff from "./assets/ProfileIconOff";
 import Colors from "utils/constants/Colors";
 import useColorScheme from "hooks/useColorScheme";
-import ModalScreen from "screens/ModalScreen";
+import DonateModal from "screens/donations/DonateModal";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
 import ProfileScreen from "screens/ProfileScreen";
@@ -63,7 +63,7 @@ function RootNavigator() {
       />
 
       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="DonateModal" component={ModalScreen} />
+        <Stack.Screen name="DonateModal" component={DonateModal} />
       </Stack.Group>
     </Stack.Navigator>
   );

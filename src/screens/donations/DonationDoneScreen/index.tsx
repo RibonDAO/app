@@ -7,7 +7,7 @@ import S from "./styles";
 export default function DonationDoneScreen({
   route,
   navigation,
-}: RootStackScreenProps<"DonationDonePage">) {
+}: RootStackScreenProps<"DonationDoneScreen">) {
   const { nonProfit } = route.params;
   return (
     <View style={S.container}>
