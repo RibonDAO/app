@@ -29,6 +29,8 @@ import {
 } from "types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
+import CurrentUserProvider from "contexts/currentUserContext";
+import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 
 export default function Navigation({
   colorScheme,
@@ -40,7 +42,9 @@ export default function Navigation({
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      <RootNavigator />
+      <CurrentUserProvider>
+        <RootNavigator />
+      </CurrentUserProvider>
     </NavigationContainer>
   );
 }
@@ -60,6 +64,12 @@ function RootNavigator() {
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
+      />
+
+      <Stack.Screen
+        name="DonationDoneScreen"
+        component={DonationDoneScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
       <Stack.Group screenOptions={{ presentation: "modal" }}>

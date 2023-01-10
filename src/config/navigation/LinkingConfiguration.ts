@@ -17,12 +17,13 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           CausesScreen: {
             screens: {
-              CausesScreen: "one",
+              CausesScreen: "causes",
+              DonationDonePage: "donation-done",
             },
           },
           ProfileScreen: {
             screens: {
-              ProfileScreen: "two",
+              ProfileScreen: "profile",
             },
           },
         },

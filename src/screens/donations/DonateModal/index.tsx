@@ -58,7 +58,6 @@ export default function DonateModal({
           navigation.navigate("DonationDoneScreen", { nonProfit });
         }, 500);
       } catch (error: any) {
-        console.log(error);
         navigation.pop();
         showToast(error.response.data.formatted_message);
       } finally {
