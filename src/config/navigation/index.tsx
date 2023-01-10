@@ -20,7 +20,7 @@ import Colors from "utils/constants/Colors";
 import useColorScheme from "hooks/useColorScheme";
 import ModalScreen from "screens/ModalScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
-import CausesScreen from "screens/CausesScreen";
+import CausesScreen from "screens/donations/CausesScreen";
 import ProfileScreen from "screens/ProfileScreen";
 import {
   RootStackParamList,

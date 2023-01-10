@@ -4,7 +4,7 @@ import { RootStackScreenProps } from "types";
 import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
 
-export default function DonationDonePage({
+export default function DonationDoneScreen({
   route,
   navigation,
 }: RootStackScreenProps<"DonationDonePage">) {

@@ -1,7 +1,7 @@
 /* Gambarino */
 
 const gambarino = {
-  fontFamily: "GambarinoRegular",
+  fontFamily: "Gambarino-Regular",
 };
 
 const stylizedDisplay = {

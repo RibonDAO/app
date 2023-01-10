@@ -7,7 +7,7 @@ import GroupButtons from "components/moleculars/GroupButtons";
 import { Text, View } from "components/Themed";
 import { ScrollView } from "react-native";
 
-export default function CausesPage({ navigation }: RootTabScreenProps<any>) {
+export default function CausesScreen({ navigation }: RootTabScreenProps<any>) {
   const { nonProfits, isLoading } = useNonProfits();
   const { causes } = useCauses();
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
