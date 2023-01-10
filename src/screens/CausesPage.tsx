@@ -5,9 +5,9 @@ import { Text, View } from "components/Themed";
 import { RootTabScreenProps } from "../types";
 import { useTranslation } from "react-i18next";
 
-export default function TabOneScreen({
+export default function CausesPage({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
+}: RootTabScreenProps<"CausesPage">) {
   const { t } = useTranslation();
 
   return (
