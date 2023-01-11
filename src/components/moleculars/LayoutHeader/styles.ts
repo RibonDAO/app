@@ -1,0 +1,51 @@
+import { StyleSheet } from "react-native";
+import { theme } from "@ribon.io/shared";
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex"
+  },
+  supportContainer: {
+    position: "absolute",
+    right: -5,
+    top: 50,
+    height: 160,
+    width: 300,
+    borderRadius: 16,
+    borderColor: theme.colors.gray20,
+    borderWidth: 1,
+    shadowColor: "rgba(40, 36, 28, 0.2)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowRadius: 10,
+    shadowOpacity: 0.8,
+    display: "flex",
+    flexDirection: "column",
+    paddingHorizontal: 12
+  },
+  configItem: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    height: 53,
+    borderColor: theme.colors.gray20,
+    borderBottomWidth: 2
+  },
+  text: {
+    paddingLeft: 8,
+  },
+  iconContainer: {
+    width: "10%"
+  },
+  textContainer: {
+    width: "60%"
+  },
+  ctaContainer: {
+    width: "30%",
+    paddingRight: 8
+  },
+});
+
+export default styles;
