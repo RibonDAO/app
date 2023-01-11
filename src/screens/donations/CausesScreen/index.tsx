@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useNonProfits, useCauses } from "@ribon.io/shared/hooks";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import S from "./styles";
-import { RootTabScreenProps } from "types";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { Text, View } from "components/Themed";
 import { ScrollView } from "react-native";
+import { useNavigation } from "hooks/useNavigation";
 
-export default function CausesScreen({ navigation }: RootTabScreenProps<any>) {
+export default function CausesScreen() {
   const { nonProfits, isLoading } = useNonProfits();
   const { causes } = useCauses();
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
+  const { navigateTo } = useNavigation();
 
   const causesFilter = () => {
     const causesApi = causes.filter((cause) => cause.active);
@@ -56,7 +57,7 @@ export default function CausesScreen({ navigation }: RootTabScreenProps<any>) {
               imageDescription={`${nonProfit.impactByTicket} ${nonProfit.impactDescription}`}
               buttonText="Donate"
               onClickButton={() => {
-                navigation.navigate("DonateModal", { nonProfit });
+                navigateTo("DonateModal", { nonProfit });
               }}
             />
           </View>
