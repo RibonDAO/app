@@ -3,9 +3,6 @@ import { Switch } from "react-native";
 import S from "./styles";
 import { theme } from "@ribon.io/shared";
 import { Text, View } from "components/Themed";
-import { useLanguage } from "hooks/useLanguage";
-import { useTranslation } from "react-i18next";
-import { Languages } from "types/enums/Languages";
 
 const { colors } = theme;
 const { green30, neutral10 } = colors;
@@ -23,13 +20,9 @@ function ButtonSwitch({
   initialCheckState = false,
 }: Props): JSX.Element {
   const [checked, setChecked] = useState(initialCheckState);
-  const { handleSwitchLanguage } = useLanguage();
-  const { i18n } = useTranslation();
 
   const handleChange = () => {
     setChecked(!checked);
-    handleSwitchLanguage();
-    // i18n.changeLanguage(Languages.PT);
     if (onSwitch) onSwitch(checked);
   };
 
