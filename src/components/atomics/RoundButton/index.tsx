@@ -7,6 +7,7 @@ import { Text } from "components/Themed";
 export type Props = {
   text: string;
   onPress: () => void;
+  active?: boolean;
   disabled?: boolean;
   timeout?: number | null;
   timeoutCallback?: () => void;
@@ -16,6 +17,7 @@ export default function RoundButton({
   text,
   onPress,
   disabled = false,
+  active = true,
   timeout = null,
   timeoutCallback = () => {},
 }: Props): JSX.Element {
@@ -92,7 +94,7 @@ export default function RoundButton({
 
   return (
     <TouchableOpacity
-      style={S.container}
+      style={active ? S.containerGreen : S.container }
       onPress={handlePress}
       disabled={disabled}
       onLayout={(e: any) => handleLayout(e)}
@@ -109,7 +111,7 @@ export default function RoundButton({
           }}
         />
       </View>
-      <Text style={S.text}>{text}</Text>
+      <Text style={active ? S.textGreen : S.text }>{text}</Text>
     </TouchableOpacity>
   );
 }

@@ -25,6 +25,12 @@ function LayoutHeader(): JSX.Element {
     toggleModal();
   };
 
+  function logButton() {
+    return currentUser ?
+      <RoundButton active={false} text="Sair" onPress={logUserOut} />
+      : <RoundButton text="Doar" onPress={toggleModal} />
+  }
+
   function renderConfigModal() {
     return (
       <Modal
@@ -55,10 +61,10 @@ function LayoutHeader(): JSX.Element {
               <LetterIcon />
             </View>
             <View style={S.textContainer}>
-              <Text style={S.text}>{currentUser?.email}</Text>
+              <Text style={S.text}>{currentUser ? currentUser?.email : "Fazer login"}</Text>
             </View>
             <View style={S.ctaContainer}>
-              <RoundButton text="Sair" onPress={logUserOut} />
+              {logButton()}
             </View>
           </View>
         </View>
