@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Languages } from "types/enums/Languages";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Localization from "expo-localization";
 
 export const LANGUAGE_KEY = "LANGUAGE_KEY";
 
