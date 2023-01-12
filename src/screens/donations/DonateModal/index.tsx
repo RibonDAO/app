@@ -11,7 +11,7 @@ import { RootStackScreenProps } from "types";
 import { useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
-import Button from "components/atomics/Button";
+import Button from "components/atomics/buttons/Button";
 import { showToast } from "lib/Toast";
 import { isValidEmail } from "lib/validators/email";
 import S from "screens/donations/DonateModal/styles";

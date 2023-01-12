@@ -46,6 +46,25 @@ const styles = StyleSheet.create({
     width: "30%",
     paddingRight: 8
   },
+  configContainer: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  ticketSection: {
+    paddingVertical: 5,
+    paddingHorizontal: 7,
+    borderColor: theme.colors.green30,
+    borderRadius: 4,
+    borderWidth: 1,
+    flexDirection: "row",
+    marginRight: 12
+  },
+  ticketCounter: {
+    marginRight: 4,
+    fontSize: 14,
+    fontWeight: "bold",
+    color: theme.colors.green30,
+  }
 });
 
 export default styles;

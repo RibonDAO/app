@@ -6,15 +6,25 @@ import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
 import SupportIcon from "components/vectors/SupportIcon";
 import LetterIcon from "components/vectors/LetterIcon";
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Modal from "react-native-modal"
 import S from "./styles";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import RoundButton from "components/atomics/RoundButton";
+import TicketModal from "./TicketModal";
+import ChooseCauseModal from "./ChooseCauseModal";
+import { useCanDonate } from "@ribon.io/shared";
+import useVoucher from "hooks/useVoucher";
+import TicketIcon from "components/vectors/TicketIcon";
 
 function LayoutHeader(): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [ticketModalVisible, setTicketModalVisible] = useState(false);
+  const [causesModalVisible, setCausesModalVisible] = useState(true);
   const { currentUser, logoutCurrentUser } = useCurrentUser();
+  const { canDonate } = useCanDonate(2);
+  const { isVoucherAvailable } = useVoucher();
+  const canDonateAndHasVoucher = canDonate && isVoucherAvailable();
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
@@ -29,6 +39,18 @@ function LayoutHeader(): JSX.Element {
     return currentUser ?
       <RoundButton active={false} text="Sair" onPress={logUserOut} />
       : <RoundButton text="Doar" onPress={toggleModal} />
+  }
+
+  function toggleTicketModal() {
+    setTicketModalVisible(!ticketModalVisible);
+  };
+
+  function renderTicketModal() {
+    return <TicketModal visible={ticketModalVisible} setVisible={setTicketModalVisible} />
+  }
+
+  function renderCausesModal() {
+    return <ChooseCauseModal visible={causesModalVisible} setVisible={setCausesModalVisible} />
   }
 
   function renderConfigModal() {
@@ -73,13 +95,24 @@ function LayoutHeader(): JSX.Element {
   }
 
   return (
-    <>
-      <TouchableHighlight style={S.container} onPress={toggleModal}>
+    <View style={S.configContainer}>
+      <TouchableOpacity style={S.container} onPress={toggleTicketModal}>
+        <View style={S.ticketSection}>
+          <Text style={S.ticketCounter}>{canDonateAndHasVoucher ? 1 : 0}</Text>
+          <TicketIcon />
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={S.container} onPress={toggleModal}>
         <CogIcon />
-      </TouchableHighlight>
+      </TouchableOpacity>
+
+      {renderTicketModal()}
+
+      {renderCausesModal()}
 
       {renderConfigModal()}
-    </>
+    </View>
   );
 }
 

@@ -1,4 +1,4 @@
-import ButtonSwitch from "components/atomics/ButtonSwitch";
+import ButtonSwitch from "components/atomics/buttons/ButtonSwitch";
 import { View } from "components/Themed";
 import { useLanguage } from "hooks/useLanguage";
 
