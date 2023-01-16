@@ -1,4 +1,4 @@
-import Button from "components/atomics/Button";
+import Button from "components/atomics/buttons/Button";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import VerifiedBadge from "components/vectors/VerifiedBadge";
