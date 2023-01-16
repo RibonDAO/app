@@ -1,5 +1,12 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { GrowthBookProvider } from "@growthbook/growthbook-react";
+import {
+  growthbook,
+  growthbookSetAttributes,
+  growthbookSetFeatures,
+} from "services/growthbook";
 import useCachedResources from "./src/hooks/useCachedResources";
 import useColorScheme from "./src/hooks/useColorScheme";
 import Navigation from "./src/config/navigation";
@@ -21,15 +28,25 @@ export default function App() {
     registerForPushNotificationsAsync().then((token) => console.log(token));
   }, []);
 
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") return;
+
+    growthbookSetFeatures();
+    // eslint-disable-next-line no-console
+    growthbookSetAttributes().catch(console.error);
+  }, []);
+
   if (!isLoadingComplete || !fontsLoaded) {
     return null;
   } else {
     return (
       <QueryClientComponent>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </SafeAreaProvider>
+        <GrowthBookProvider growthbook={growthbook}>
+          <SafeAreaProvider>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </SafeAreaProvider>
+        </GrowthBookProvider>
       </QueryClientComponent>
     );
   }
