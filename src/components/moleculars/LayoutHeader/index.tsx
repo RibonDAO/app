@@ -16,6 +16,7 @@ import ChooseCauseModal from "./ChooseCauseModal";
 import { useCanDonate } from "@ribon.io/shared";
 import useVoucher from "hooks/useVoucher";
 import TicketIcon from "components/vectors/TicketIcon";
+import ConfigItem from "./ConfigItem";
 
 function LayoutHeader(): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -67,39 +68,25 @@ function LayoutHeader(): JSX.Element {
         onBackdropPress={toggleModal}
       >
         <View style={S.supportContainer}>
-          <View style={S.configItem}>
-            <View style={S.iconContainer}>
-              <GlobeIcon />
-            </View>
-            <View style={S.textContainer}>
-              <Text style={S.text}>Alterar idioma</Text>
-            </View>
-            <View style={S.ctaContainer}>
-              <ChangeLanguageItem />
-            </View>
-          </View>
-          <View style={S.configItem}>
-            <View style={S.iconContainer}>
-              <SupportIcon />
-            </View>
-            <View style={S.textContainer}>
-              <Text style={S.text}>Suporte ao Usuário</Text>
-            </View>
-            <View style={S.ctaContainer}>
-              <RoundButton text="Suporte" onPress={linkToSupport} />
-            </View>
-          </View>
-          <View style={S.configItem}>
-            <View style={S.iconContainer}>
-              <LetterIcon />
-            </View>
-            <View style={S.textContainer}>
-              <Text style={S.text}>{currentUser ? currentUser?.email : "Fazer login"}</Text>
-            </View>
-            <View style={S.ctaContainer}>
-              {logButton()}
-            </View>
-          </View>
+          <ConfigItem
+            icon={GlobeIcon}
+            text="Alterar idioma"
+            linkIcon={ChangeLanguageItem}
+          />
+
+          <ConfigItem
+            icon={SupportIcon}
+            text="Suporte ao Usuário"
+            cta={<RoundButton text="Suporte" onPress={linkToSupport} />}
+          />
+
+          <ConfigItem
+            icon={LetterIcon}
+            text={currentUser ? currentUser?.email : "Fazer login"}
+            cta={currentUser ?
+              <RoundButton active={false} text="Sair" onPress={logUserOut} />
+              : <RoundButton text="Doar" onPress={toggleModal} />}
+          />
         </View>
       </Modal>
     );
