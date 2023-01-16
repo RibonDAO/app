@@ -21,7 +21,7 @@
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
-    "@ribon.io/shared": "^1.0.16",
+    "@ribon.io/shared": "^1.0.17",
     "@walletconnect/react-native-dapp": "^1.8.0",
     "expo": "~47.0.12",
     "expo-asset": "~8.7.0",

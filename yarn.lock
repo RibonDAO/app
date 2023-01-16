@@ -2220,10 +2220,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.0.16":
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.16.tgz#98365db158bae0473cf8b731b190cecb4431c6db"
-  integrity sha512-WwWwh3phOnlTOmgyoFPw5ny71PBk21fA14FIZ7lYph72bZm9DSJRH4lrs0e/I20LX182AP8LHZApx/0fOtP1uQ==
+"@ribon.io/shared@^1.0.17":
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.17.tgz#b0c9d038bc0297ada89b8ea4909e45a72c15a114"
+  integrity sha512-utdiEme0GEZXRrhwgfV0Y+EziQ9F8l52kI4fTbeDbJ1pxHQTfXCm9y03jyJCMwqGHYXtF07rdf3Sef0DH1VT5w==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -11460,14 +11460,6 @@ react-native-gradle-plugin@^0.70.3:
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz#cbcf0619cbfbddaa9128701aa2d7b4145f9c4fc8"
   integrity sha512-oOanj84fJEXUg9FoEAQomA8ISG+DVIrTZ3qF7m69VQUJyOGYyDZmPqKcjvRku4KXlEH6hWO9i4ACLzNBh8gC0A==
 
-react-native-qrcode-svg@6.0.6:
-  version "6.0.6"
-  resolved "https://registry.yarnpkg.com/react-native-qrcode-svg/-/react-native-qrcode-svg-6.0.6.tgz#bd4756cc0d76eeb3d162dca2f55eea80e3ebbe97"
-  integrity sha512-b+/teD+xj17VDujJzf956U2+9mX+gKwVJss2aqmhEIyjP7+TVOuE08D3UkzfOCWXE8gppcUTTz5gkY1NXgfwyQ==
-  dependencies:
-    prop-types "^15.5.10"
-    qrcode "^1.3.2"
-
 react-native-modal@^13.0.1:
   version "13.0.1"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-13.0.1.tgz#691f1e646abb96fa82c1788bf18a16d585da37cd"
@@ -11475,6 +11467,14 @@ react-native-modal@^13.0.1:
   dependencies:
     prop-types "^15.6.2"
     react-native-animatable "1.3.3"
+
+react-native-qrcode-svg@6.0.6:
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-qrcode-svg/-/react-native-qrcode-svg-6.0.6.tgz#bd4756cc0d76eeb3d162dca2f55eea80e3ebbe97"
+  integrity sha512-b+/teD+xj17VDujJzf956U2+9mX+gKwVJss2aqmhEIyjP7+TVOuE08D3UkzfOCWXE8gppcUTTz5gkY1NXgfwyQ==
+  dependencies:
+    prop-types "^15.5.10"
+    qrcode "^1.3.2"
 
 react-native-root-siblings@^4.0.0:
   version "4.1.1"
