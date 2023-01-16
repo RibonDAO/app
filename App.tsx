@@ -32,7 +32,7 @@ export default function App() {
     if (process.env.NODE_ENV === "development") return;
 
     growthbookSetFeatures();
-    // eslint-disable-next-line no-console
+
     growthbookSetAttributes().catch(console.error);
   }, []);
 
