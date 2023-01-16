@@ -1,8 +1,3 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -16,7 +11,6 @@ import CausesIconOn from "./assets/CausesIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
 import ProfileIconOff from "./assets/ProfileIconOff";
-import Colors from "utils/constants/Colors";
 import useColorScheme from "hooks/useColorScheme";
 import DonateModal from "screens/donations/DonateModal";
 import NotFoundScreen from "screens/NotFoundScreen";
@@ -25,15 +19,14 @@ import ProfileScreen from "screens/ProfileScreen";
 import {
   RootStackParamList,
   RootTabParamList,
-  RootTabScreenProps,
 } from "types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
-import CogIcon from "components/vectors/CogIcon";
 import S from "./styles";
 import CurrentUserProvider from "contexts/currentUserContext";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
+import LayoutHeader from "components/moleculars/LayoutHeader";
 
 export default function Navigation({
   colorScheme,
@@ -104,7 +97,7 @@ function BottomTabNavigator() {
           title: "Causes",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
-          header: () => <Header rightComponent={<CogIcon />} />,
+          header: () => <Header rightComponent={<LayoutHeader />} />,
         }}
       />
       <BottomTab.Screen
@@ -114,7 +107,7 @@ function BottomTabNavigator() {
           title: "Profile",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
-          header: () => <Header rightComponent={<CogIcon />} />,
+          header: () => <Header rightComponent={<LayoutHeader />} />,
         }}
       />
     </BottomTab.Navigator>

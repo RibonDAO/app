@@ -1,5 +1,10 @@
 {
   "tabOneScreen": {
     "hello": "Hello!"
+  },
+  "donations": {
+    "causesScreen": {
+      "title": "Donate to a Project"
+    }
   }
 }

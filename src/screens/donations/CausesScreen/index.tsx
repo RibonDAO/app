@@ -6,12 +6,14 @@ import GroupButtons from "components/moleculars/GroupButtons";
 import { Text, View } from "components/Themed";
 import { ScrollView } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
+import { useTranslation } from "react-i18next";
 
 export default function CausesScreen() {
   const { nonProfits, isLoading } = useNonProfits();
   const { causes } = useCauses();
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const { navigateTo } = useNavigation();
+  const { t } = useTranslation();
 
   const causesFilter = () => {
     const causesApi = causes.filter((cause) => cause.active);
@@ -35,7 +37,7 @@ export default function CausesScreen() {
     <></>
   ) : (
     <View style={S.container}>
-      <Text style={S.title}>Donate to a project</Text>
+      <Text style={S.title}>{t("donations.causesScreen.title")}</Text>
       <View style={S.groupButtonsContainer}>
         <GroupButtons
           elements={causesFilter()}
