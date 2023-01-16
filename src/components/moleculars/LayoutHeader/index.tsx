@@ -6,7 +6,7 @@ import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
 import SupportIcon from "components/vectors/SupportIcon";
 import LetterIcon from "components/vectors/LetterIcon";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Linking } from "react-native";
 import Modal from "react-native-modal"
 import S from "./styles";
 import ChangeLanguageItem from "./ChangeLanguageItem";
@@ -20,7 +20,7 @@ import TicketIcon from "components/vectors/TicketIcon";
 function LayoutHeader(): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
-  const [causesModalVisible, setCausesModalVisible] = useState(true);
+  const [causesModalVisible, setCausesModalVisible] = useState(false);
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { canDonate } = useCanDonate(2);
   const { isVoucherAvailable } = useVoucher();
@@ -53,6 +53,10 @@ function LayoutHeader(): JSX.Element {
     return <ChooseCauseModal visible={causesModalVisible} setVisible={setCausesModalVisible} />
   }
 
+  function linkToSupport() {
+    Linking.openURL("https://google.com");
+  }
+
   function renderConfigModal() {
     return (
       <Modal
@@ -75,8 +79,15 @@ function LayoutHeader(): JSX.Element {
             </View>
           </View>
           <View style={S.configItem}>
-            <SupportIcon />
-            <Text style={S.text}>Suporte ao Usuário</Text>
+            <View style={S.iconContainer}>
+              <SupportIcon />
+            </View>
+            <View style={S.textContainer}>
+              <Text style={S.text}>Suporte ao Usuário</Text>
+            </View>
+            <View style={S.ctaContainer}>
+              <RoundButton text="Suporte" onPress={linkToSupport} />
+            </View>
           </View>
           <View style={S.configItem}>
             <View style={S.iconContainer}>
