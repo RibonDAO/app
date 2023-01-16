@@ -25,6 +25,8 @@ import ProfileIconOff from "./assets/ProfileIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
+import GivingIconOn from "./assets/GivingIconOn";
+import GivingIconOff from "./assets/GivingIconOff";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -55,9 +57,9 @@ function BottomTabNavigator() {
         name="PromotersScreen"
         component={SupportCauseScreen}
         options={{
-          title: "Promoters",
+          title: "Giving",
           tabBarIcon: ({ color }: any) =>
-            color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
+            color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
           header: () => <Header rightComponent={<LayoutHeader />} />,
         }}
       />
