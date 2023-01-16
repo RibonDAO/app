@@ -6,5 +6,10 @@
     "causesScreen": {
       "title": "Donate to a Project"
     }
+  },
+  "contexts": {
+    "walletContext": {
+      "walletConnectionErrorMessage": "Error connecting wallet"
+    }
   }
 }
