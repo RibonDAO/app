@@ -11,5 +11,19 @@
     "walletContext": {
       "walletConnectionErrorMessage": "Error connecting wallet"
     }
+  },
+  "promoters": {
+    "supportCausePage": {
+      "title": "Donate with a community",
+      "communityAddText": "The Community will add",
+      "communityAddButtonText": "How the community does it?",
+      "donateButtonText": "Donate {{value}}",
+      "selectOfferSection": {
+        "causeText": "You'll donate to"
+      },
+      "connectWalletButtonText": "Connect wallet",
+      "userBalanceText": "Your balance: ",
+      "refundText": "*Cryptocurrency payments are non-refundable"
+    }
   }
 }

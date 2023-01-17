@@ -19,6 +19,7 @@ import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 import LayoutHeader from "components/moleculars/LayoutHeader";
 import WalletProvider from "contexts/walletContext";
 import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
+import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ProfileIconOff from "./assets/ProfileIconOff";
@@ -117,7 +118,9 @@ export default function Navigation({
     >
       <CurrentUserProvider>
         <WalletProvider>
-          <RootNavigator />
+          <CryptoPaymentProvider>
+            <RootNavigator />
+          </CryptoPaymentProvider>
         </WalletProvider>
       </CurrentUserProvider>
     </NavigationContainer>

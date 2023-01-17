@@ -99,10 +99,7 @@ function CryptoPage(): JSX.Element {
         borderColorOutline={theme.colors.orange20}
       />
       <View style={styles.contentContainer}>
-        <Image
-          style={styles.supportImage}
-          source={cause?.coverImage || SupportImage}
-        />
+        <Image style={styles.supportImage} source={SupportImage} />
         <View style={styles.donateContainer}>
           <View style={styles.givingContainer}>
             <View style={styles.contributionContainer}>

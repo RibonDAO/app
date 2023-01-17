@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View } from "components/Themed";
 import { RootTabScreenProps } from "types";
 import { walletTruncate } from "lib/formatters/walletTruncate";
 import { useWalletContext } from "contexts/walletContext";
+import CryptoPage from "screens/promoters/SupportCauseScreen/CryptoPage";
 
 const styles = StyleSheet.create({
   container: {
@@ -45,6 +46,11 @@ export default function SupportCauseScreen({
   navigation,
 }: RootTabScreenProps<"PromotersScreen">) {
   const { wallet, connectWallet, killSession } = useWalletContext();
+  const [pageType] = useState<"card" | "crypto">("crypto");
+
+  if (pageType === "crypto") {
+    return <CryptoPage />;
+  }
 
   return (
     <View style={styles.container}>
