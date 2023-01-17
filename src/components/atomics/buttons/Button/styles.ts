@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
   },
   text: {
     fontSize: 16,

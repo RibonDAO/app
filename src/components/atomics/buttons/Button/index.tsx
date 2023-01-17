@@ -1,8 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Easing, TouchableOpacity } from "react-native";
+import {
+  Easing,
+  StyleProp,
+  TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
 import { Animated, StyleSheet, View } from "react-native";
-import S from "./styles";
 import { Text } from "components/Themed";
+import { theme } from "@ribon.io/shared/styles";
+import S from "./styles";
 
 export type Props = {
   text: string;
@@ -10,6 +17,15 @@ export type Props = {
   disabled?: boolean;
   timeout?: number | null;
   timeoutCallback?: () => void;
+  outline?: boolean;
+  backgroundColor?: string;
+  backgroundColorOutline?: string;
+  borderColor?: string;
+  borderColorOutline?: string;
+  textColorOutline?: string;
+  textColor?: string;
+  customStyles?: StyleProp<ViewStyle>;
+  customTextStyles?: StyleProp<TextStyle>;
 };
 
 export default function Button({
@@ -18,6 +34,15 @@ export default function Button({
   disabled = false,
   timeout = null,
   timeoutCallback = () => {},
+  outline,
+  backgroundColor = theme.colors.green30,
+  backgroundColorOutline = theme.colors.neutral10,
+  borderColor = theme.colors.green30,
+  borderColorOutline = theme.colors.green30,
+  textColorOutline = theme.colors.green30,
+  textColor = theme.colors.neutral10,
+  customStyles = {},
+  customTextStyles = {},
 }: Props): JSX.Element {
   const counter = useRef(new Animated.Value(0)).current;
   const [running, setRunning] = useState(false);
@@ -92,7 +117,14 @@ export default function Button({
 
   return (
     <TouchableOpacity
-      style={S.container}
+      style={[
+        S.container,
+        {
+          backgroundColor: outline ? backgroundColorOutline : backgroundColor,
+          borderColor: outline ? borderColorOutline : borderColor,
+        },
+        customStyles,
+      ]}
       onPress={handlePress}
       disabled={disabled}
       onLayout={(e: any) => handleLayout(e)}
@@ -109,7 +141,15 @@ export default function Button({
           }}
         />
       </View>
-      <Text style={S.text}>{text}</Text>
+      <Text
+        style={[
+          S.text,
+          { color: outline ? textColorOutline : textColor },
+          customTextStyles,
+        ]}
+      >
+        {text}
+      </Text>
     </TouchableOpacity>
   );
 }

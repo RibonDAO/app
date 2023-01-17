@@ -116,6 +116,19 @@ function CryptoPage(): JSX.Element {
               <Button
                 text={t("communityAddButtonText")}
                 onPress={handleCommunityAddClick}
+                outline
+                customStyles={{
+                  borderColor: theme.colors.orange40,
+                  marginTop: 8,
+                  paddingTop: 4,
+                  paddingRight: 4,
+                  paddingBottom: 4,
+                  paddingLeft: 4,
+                }}
+                customTextStyles={{
+                  color: theme.colors.orange40,
+                  fontSize: 11,
+                }}
               />
             </View>
           </View>
@@ -129,6 +142,14 @@ function CryptoPage(): JSX.Element {
             text={donateButtonText()}
             onPress={handleDonateClick}
             disabled={disableButton()}
+            customTextStyles={{
+              color: theme.colors.orange40,
+              fontWeight: "600",
+            }}
+            customStyles={{
+              borderColor: theme.colors.orange20,
+              backgroundColor: theme.colors.orange20,
+            }}
           />
           <Text style={styles.refundText}>{t("refundText")}</Text>
         </View>
