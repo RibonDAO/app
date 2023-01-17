@@ -12,6 +12,7 @@ import S from "./styles";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import RoundButton from "components/atomics/RoundButton";
 import TicketModal from "./TicketModal";
+import BlockedDonationModal from "./BlockedDonationModal";
 import ChooseCauseModal from "./ChooseCauseModal";
 import { useCanDonate } from "@ribon.io/shared";
 import useVoucher from "hooks/useVoucher";
@@ -21,6 +22,7 @@ import ConfigItem from "./ConfigItem";
 function LayoutHeader(): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
+  const [blockedDonationModalVisible, setBlockedDonationModalVisible] = useState(false);
   const [causesModalVisible, setCausesModalVisible] = useState(false);
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { canDonate } = useCanDonate(2);
@@ -46,8 +48,23 @@ function LayoutHeader(): JSX.Element {
     setTicketModalVisible(!ticketModalVisible);
   };
 
+  function toggleBlockedDonationModal() {
+    setBlockedDonationModalVisible(!ticketModalVisible);
+  };
+
   function renderTicketModal() {
     return <TicketModal visible={ticketModalVisible} setVisible={setTicketModalVisible} />
+  }
+
+  function renderBlockedDonationModal() {
+    return <BlockedDonationModal visible={blockedDonationModalVisible} setVisible={setBlockedDonationModalVisible} />
+  }
+
+  function handleTicketClick() {
+    if (!canDonateAndHasVoucher) toggleTicketModal();
+    else {
+      toggleBlockedDonationModal();
+    }
   }
 
   function renderCausesModal() {
@@ -94,7 +111,7 @@ function LayoutHeader(): JSX.Element {
 
   return (
     <View style={S.configContainer}>
-      <TouchableOpacity style={S.container} onPress={toggleTicketModal}>
+      <TouchableOpacity style={S.container} onPress={handleTicketClick}>
         <View style={S.ticketSection}>
           <Text style={S.ticketCounter}>{canDonateAndHasVoucher ? 1 : 0}</Text>
           <TicketIcon />
@@ -106,6 +123,8 @@ function LayoutHeader(): JSX.Element {
       </TouchableOpacity>
 
       {renderTicketModal()}
+
+      {renderBlockedDonationModal()}
 
       {renderCausesModal()}
 

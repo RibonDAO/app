@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 20,
     fontWeight: "bold",
-    lineHeight: 36
+    lineHeight: 36,
+    textAlign: "center"
   },
   description: {
     fontSize: 14,

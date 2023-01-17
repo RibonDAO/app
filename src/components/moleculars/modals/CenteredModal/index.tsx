@@ -8,12 +8,13 @@ import S from "./styles";
 type Props = {
   title: string;
   icon: JSX.Element;
+  buttonText: string;
   description: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
 }
 
-function CenteredModal({ title, icon, description, visible, setVisible }: Props): JSX.Element {
+function CenteredModal({ title, icon, buttonText, description, visible, setVisible }: Props): JSX.Element {
   function toggleModal() {
     setVisible(!visible);
   };
@@ -33,7 +34,7 @@ function CenteredModal({ title, icon, description, visible, setVisible }: Props)
           </View>
           <Text style={S.title}>{title}</Text>
           <Text style={S.description}>{description}</Text>
-          <Button text="Receber Ticket" onPress={() => { }} />
+          <Button text={buttonText} onPress={() => { }} />
         </View>
       </Modal>
     );

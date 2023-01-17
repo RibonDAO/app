@@ -32,13 +32,14 @@ export const CurrentUserContext = createContext<ICurrentUserContext>(
 export const CURRENT_USER_KEY = "CURRENT_USER_KEY";
 export const CURRENT_USER_LAST_DONATION_KEY = "CURRENT_USER_LAST_DONATION_KEY";
 
-function CurrentUserProvider({ children }: Props) {
-  async function getUserFromLocalStorage() {
-    const user = await AsyncStorage.getItem(CURRENT_USER_KEY);
-    if (!user || user === "undefined") return undefined;
+export async function getUserFromLocalStorage() {
+  const user = await AsyncStorage.getItem(CURRENT_USER_KEY);
+  if (!user || user === "undefined") return undefined;
 
-    return JSON.parse(user);
-  }
+  return JSON.parse(user);
+}
+
+function CurrentUserProvider({ children }: Props) {
 
   const [currentUser, setCurrentUser] = useState<User | undefined>();
   const [userLastDonation, setUserLastDonation] = useState<string>("");
