@@ -9,8 +9,7 @@ import {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    marginBottom: 100,
-    paddingVertical: 24,
+    paddingTop: 24,
     paddingHorizontal: 16,
   },
   title: {

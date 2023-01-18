@@ -47,7 +47,7 @@ function CryptoPaymentProvider({ children }: Props) {
   );
   const [tokenSymbol] = useState("");
 
-  const insufficientBalance = () => true;
+  const insufficientBalance = () => false;
 
   const disableButton = () =>
     amount === "0.00" || insufficientBalance() || loading;

@@ -9,7 +9,7 @@ import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
 import SupportImage from "assets/images/support-image.png";
 import { Text, View } from "components/Themed";
-import { Image } from "react-native";
+import { Image, ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
@@ -88,72 +88,76 @@ function CryptoPage(): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{t("title")}</Text>
-      <GroupButtons
-        elements={causesFilter()}
-        onChange={handleCauseClick}
-        nameExtractor={(element) => element.name}
-        backgroundColor={theme.colors.orange40}
-        textColorOutline={theme.colors.orange40}
-        borderColor={theme.colors.orange40}
-        borderColorOutline={theme.colors.orange20}
-      />
-      <View style={styles.contentContainer}>
-        <Image style={styles.supportImage} source={SupportImage} />
-        <View style={styles.donateContainer}>
-          <View style={styles.givingContainer}>
-            <View style={styles.contributionContainer}>
-              <SelectCryptoOfferSection
-                cause={cause}
-                onValueChange={(value: number) => setAmount(value.toString())}
-              />
+      <ScrollView>
+        <Text style={styles.title}>{t("title")}</Text>
+        <GroupButtons
+          elements={causesFilter()}
+          onChange={handleCauseClick}
+          nameExtractor={(element) => element.name}
+          backgroundColor={theme.colors.orange40}
+          textColorOutline={theme.colors.orange40}
+          borderColor={theme.colors.orange40}
+          borderColorOutline={theme.colors.orange20}
+        />
+        <View style={styles.contentContainer}>
+          <Image style={styles.supportImage} source={SupportImage} />
+          <View style={styles.donateContainer}>
+            <View style={styles.givingContainer}>
+              <View style={styles.contributionContainer}>
+                <SelectCryptoOfferSection
+                  cause={cause}
+                  onValueChange={(value: number) => setAmount(value.toString())}
+                />
+              </View>
+              <View style={styles.communityAddContainer}>
+                <Text style={styles.communityAddText}>
+                  {t("communityAddText")}
+                </Text>
+                <Text style={styles.communityAddValue}>
+                  {communityAddText()}
+                </Text>
+                <Button
+                  text={t("communityAddButtonText")}
+                  onPress={handleCommunityAddClick}
+                  outline
+                  customStyles={{
+                    borderColor: theme.colors.orange40,
+                    marginTop: 8,
+                    paddingTop: 4,
+                    paddingRight: 4,
+                    paddingBottom: 4,
+                    paddingLeft: 4,
+                  }}
+                  customTextStyles={{
+                    color: theme.colors.orange40,
+                    fontSize: 11,
+                  }}
+                />
+              </View>
             </View>
-            <View style={styles.communityAddContainer}>
-              <Text style={styles.communityAddText}>
-                {t("communityAddText")}
+            {wallet && (
+              <Text style={styles.userBalanceText}>
+                {t("userBalanceText")}
+                {userBalance} {tokenSymbol}
               </Text>
-              <Text style={styles.communityAddValue}>{communityAddText()}</Text>
-              <Button
-                text={t("communityAddButtonText")}
-                onPress={handleCommunityAddClick}
-                outline
-                customStyles={{
-                  borderColor: theme.colors.orange40,
-                  marginTop: 8,
-                  paddingTop: 4,
-                  paddingRight: 4,
-                  paddingBottom: 4,
-                  paddingLeft: 4,
-                }}
-                customTextStyles={{
-                  color: theme.colors.orange40,
-                  fontSize: 11,
-                }}
-              />
-            </View>
+            )}
+            <Button
+              text={donateButtonText()}
+              onPress={handleDonateClick}
+              disabled={disableButton()}
+              customTextStyles={{
+                color: theme.colors.orange40,
+                fontWeight: "600",
+              }}
+              customStyles={{
+                borderColor: theme.colors.orange20,
+                backgroundColor: theme.colors.orange20,
+              }}
+            />
+            <Text style={styles.refundText}>{t("refundText")}</Text>
           </View>
-          {wallet && (
-            <Text style={styles.userBalanceText}>
-              {t("userBalanceText")}
-              {userBalance} {tokenSymbol}
-            </Text>
-          )}
-          <Button
-            text={donateButtonText()}
-            onPress={handleDonateClick}
-            disabled={disableButton()}
-            customTextStyles={{
-              color: theme.colors.orange40,
-              fontWeight: "600",
-            }}
-            customStyles={{
-              borderColor: theme.colors.orange20,
-              backgroundColor: theme.colors.orange20,
-            }}
-          />
-          <Text style={styles.refundText}>{t("refundText")}</Text>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }

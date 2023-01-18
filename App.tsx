@@ -20,6 +20,7 @@ export default function App() {
 
   const [fontsLoaded] = useFonts({
     "Gambarino-Regular": require("./src/assets/fonts/Gambarino-Regular.ttf"),
+    Inter: require("./src/assets/fonts/Inter.ttf"),
   });
 
   useEffect(() => {
