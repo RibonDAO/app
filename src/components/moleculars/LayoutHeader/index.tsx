@@ -1,6 +1,6 @@
 
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Text, View } from "components/Themed";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -18,29 +18,38 @@ import { useCanDonate } from "@ribon.io/shared";
 import useVoucher from "hooks/useVoucher";
 import TicketIcon from "components/vectors/TicketIcon";
 import ConfigItem from "./ConfigItem";
+import { useNavigation } from "hooks/useNavigation";
 
 function LayoutHeader(): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [blockedDonationModalVisible, setBlockedDonationModalVisible] = useState(false);
   const [causesModalVisible, setCausesModalVisible] = useState(false);
+  const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { canDonate } = useCanDonate(2);
-  const { isVoucherAvailable } = useVoucher();
+  const { isVoucherAvailable, createVoucher, getTicket } = useVoucher();
   const canDonateAndHasVoucher = canDonate && isVoucherAvailable();
+
+
+  useEffect(() => {
+    console.log(getTicket());
+  }, [getTicket])
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
   };
 
-  function logUserOut() {
+  function handleLogout() {
     logoutCurrentUser();
+    createVoucher();
+    navigateTo("/");
     toggleModal();
-  };
+  }
 
-  function logButton() {
+  function handleUserLogin() {
     return currentUser ?
-      <RoundButton active={false} text="Sair" onPress={logUserOut} />
+      <RoundButton active={false} text="Sair" onPress={handleLogout} />
       : <RoundButton text="Doar" onPress={toggleModal} />
   }
 
@@ -61,7 +70,9 @@ function LayoutHeader(): JSX.Element {
   }
 
   function handleTicketClick() {
-    if (!canDonateAndHasVoucher) toggleTicketModal();
+    if (canDonateAndHasVoucher) {
+      toggleTicketModal();
+    }
     else {
       toggleBlockedDonationModal();
     }
@@ -100,9 +111,7 @@ function LayoutHeader(): JSX.Element {
           <ConfigItem
             icon={LetterIcon}
             text={currentUser ? currentUser?.email : "Fazer login"}
-            cta={currentUser ?
-              <RoundButton active={false} text="Sair" onPress={logUserOut} />
-              : <RoundButton text="Doar" onPress={toggleModal} />}
+            cta={handleUserLogin()}
           />
         </View>
       </Modal>

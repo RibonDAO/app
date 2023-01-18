@@ -19,6 +19,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Text, View } from "components/Themed";
 import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
+import useVoucher from "hooks/useVoucher";
 
 export default function DonateModal({
   route,
@@ -30,6 +31,7 @@ export default function DonateModal({
   const { setCurrentUser, currentUser } = useCurrentUser();
   const [email, setEmail] = useState(currentUser?.email || "");
   const { donate } = useDonations(currentUser?.id);
+  const { destroyVoucher } = useVoucher();
   const { navigateTo, popNavigation } = useNavigation();
 
   useEffect(() => {
@@ -55,6 +57,7 @@ export default function DonateModal({
         setCurrentUser(user);
         await donate(RIBON_INTEGRATION_ID, nonProfit.id, email);
         popNavigation();
+        destroyVoucher();
         setTimeout(() => {
           navigateTo("DonationDoneScreen", { nonProfit });
         }, 500);

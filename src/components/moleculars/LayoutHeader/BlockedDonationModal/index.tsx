@@ -17,6 +17,7 @@ function BlockedDonationModal({ visible, setVisible }: Props): JSX.Element {
         buttonText="Vamos lá!"
         visible={visible}
         setVisible={setVisible}
+        primaryButtonClick={() => setVisible(false)}
       />
     );
   }

@@ -12,9 +12,10 @@ type Props = {
   description: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
+  primaryButtonClick: () => void;
 }
 
-function CenteredModal({ title, icon, buttonText, description, visible, setVisible }: Props): JSX.Element {
+function CenteredModal({ title, icon, buttonText, description, visible, setVisible, primaryButtonClick }: Props): JSX.Element {
   function toggleModal() {
     setVisible(!visible);
   };
@@ -34,7 +35,7 @@ function CenteredModal({ title, icon, buttonText, description, visible, setVisib
           </View>
           <Text style={S.title}>{title}</Text>
           <Text style={S.description}>{description}</Text>
-          <Button text={buttonText} onPress={() => { }} />
+          <Button text={buttonText} onPress={primaryButtonClick} />
         </View>
       </Modal>
     );

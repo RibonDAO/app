@@ -17,6 +17,7 @@ function TicketModal({ visible, setVisible }: Props): JSX.Element {
         description="Você pode destiná-lo para qualquer projeto"
         visible={visible}
         setVisible={setVisible}
+        primaryButtonClick={() => setVisible(false)}
       />
     );
   }
