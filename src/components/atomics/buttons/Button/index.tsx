@@ -115,13 +115,34 @@ export default function Button({
     });
   };
 
+  function backgroundColorByState() {
+    if (disabled) return theme.colors.gray20;
+    if (outline) return backgroundColorOutline;
+
+    return backgroundColor;
+  }
+
+  function borderColorByState() {
+    if (disabled) return theme.colors.gray20;
+    if (outline) return borderColorOutline;
+
+    return borderColor;
+  }
+
+  function textColorByState() {
+    if (disabled) return theme.colors.gray30;
+    if (outline) return textColorOutline;
+
+    return textColor;
+  }
+
   return (
     <TouchableOpacity
       style={[
         S.container,
         {
-          backgroundColor: outline ? backgroundColorOutline : backgroundColor,
-          borderColor: outline ? borderColorOutline : borderColor,
+          backgroundColor: backgroundColorByState(),
+          borderColor: borderColorByState(),
         },
         customStyles,
       ]}
@@ -141,13 +162,7 @@ export default function Button({
           }}
         />
       </View>
-      <Text
-        style={[
-          S.text,
-          { color: outline ? textColorOutline : textColor },
-          customTextStyles,
-        ]}
-      >
+      <Text style={[S.text, { color: textColorByState() }, customTextStyles]}>
         {text}
       </Text>
     </TouchableOpacity>

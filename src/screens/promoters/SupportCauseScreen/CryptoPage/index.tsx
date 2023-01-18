@@ -148,13 +148,13 @@ function CryptoPage(): JSX.Element {
               text={donateButtonText()}
               onPress={handleDonateClick}
               disabled={disableButton()}
+              borderColor={theme.colors.orange20}
+              backgroundColor={theme.colors.orange20}
+              textColor={theme.colors.orange40}
               customTextStyles={{
-                color: theme.colors.orange40,
                 fontWeight: "600",
               }}
               customStyles={{
-                borderColor: theme.colors.orange20,
-                backgroundColor: theme.colors.orange20,
                 height: 50,
               }}
             />

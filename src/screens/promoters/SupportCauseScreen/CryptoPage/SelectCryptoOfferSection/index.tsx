@@ -1,8 +1,11 @@
 import { theme } from "@ribon.io/shared/styles";
 import { Cause } from "@ribon.io/shared/types";
-import { Text, View } from "components/Themed";
+import { View } from "components/Themed";
+import InputRange from "components/atomics/inputs/InputRange";
+import { useState } from "react";
+import { Dimensions } from "react-native";
 
-const { orange30, orange40 } = theme.colors;
+const { gray20, orange40 } = theme.colors;
 
 type Props = {
   cause: Cause | undefined;
@@ -13,11 +16,29 @@ function SelectCryptoOfferSection({
   cause,
   onValueChange,
 }: Props): JSX.Element {
-  const values = [5, 10, 15, 20, 25, 50, 70, 100];
+  const [currentValue, setCurrentValue] = useState(5);
+
+  const handleValueChange = (value: number) => {
+    setCurrentValue(value);
+    onValueChange(value);
+  };
 
   return (
-    <View>
-      <Text>{cause?.name}</Text>
+    <View
+      style={{
+        width: Dimensions.get("window").width - 32,
+      }}
+    >
+      <InputRange
+        value={currentValue}
+        min={5}
+        step={5}
+        max={100}
+        onChange={handleValueChange}
+        color={orange40}
+        minimumTrackTintColor={orange40}
+        maximumTrackTintColor={gray20}
+      />
     </View>
   );
 }
