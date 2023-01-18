@@ -48,6 +48,7 @@ function CryptoPage(): JSX.Element {
     logEvent("supportCauseSelection_click", {
       id: causeClicked?.id,
     });
+
     setCause(causeClicked);
   };
 
@@ -103,7 +104,10 @@ function CryptoPage(): JSX.Element {
           borderColorOutline={theme.colors.orange20}
         />
         <View style={styles.contentContainer}>
-          <Image style={styles.supportImage} source={SupportImage} />
+          <Image
+            style={styles.supportImage}
+            source={{ uri: (cause as any)?.coverImage }}
+          />
           <View style={styles.donateContainer}>
             <View style={styles.givingContainer}>
               <View style={styles.contributionContainer}>

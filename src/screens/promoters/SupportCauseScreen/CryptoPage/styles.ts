@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     overflowX: "hidden",
   },
   supportImage: {
+    height: 120,
     width: "100%",
     position: "relative",
     display: "flex",

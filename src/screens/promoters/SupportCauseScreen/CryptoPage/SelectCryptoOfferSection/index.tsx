@@ -1,9 +1,11 @@
 import { theme } from "@ribon.io/shared/styles";
 import { Cause } from "@ribon.io/shared/types";
-import { View } from "components/Themed";
+import { Text, View } from "components/Themed";
 import InputRange from "components/atomics/inputs/InputRange";
 import { useState } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, TextInput } from "react-native";
+import { useTranslation } from "react-i18next";
+import styles from "./styles";
 
 const { gray20, orange40 } = theme.colors;
 
@@ -17,6 +19,9 @@ function SelectCryptoOfferSection({
   onValueChange,
 }: Props): JSX.Element {
   const [currentValue, setCurrentValue] = useState(5);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "promoters.supportCausePage.selectOfferSection",
+  });
 
   const handleValueChange = (value: number) => {
     setCurrentValue(value);
@@ -26,9 +31,18 @@ function SelectCryptoOfferSection({
   return (
     <View
       style={{
-        width: Dimensions.get("window").width - 32,
+        width: Dimensions.get("window").width - 132,
       }}
     >
+      <Text style={styles.title}>
+        {t("causeText")} {cause?.name}
+      </Text>
+      <TextInput
+        value={currentValue.toString()}
+        onChange={(e) => {
+          handleValueChange(parseInt(e.nativeEvent.text || "0", 10));
+        }}
+      />
       <InputRange
         value={currentValue}
         min={5}

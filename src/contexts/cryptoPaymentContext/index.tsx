@@ -164,7 +164,7 @@ function CryptoPaymentProvider({ children }: Props) {
       setCause,
       loading,
     }),
-    [amount, currentPool, userBalance, tokenSymbol, loading],
+    [amount, currentPool, userBalance, tokenSymbol, loading, cause],
   );
 
   return (
