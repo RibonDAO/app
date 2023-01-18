@@ -20,6 +20,7 @@ import LayoutHeader from "components/moleculars/LayoutHeader";
 import WalletProvider from "contexts/walletContext";
 import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
+import NetworkProvider from "contexts/networkContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ProfileIconOff from "./assets/ProfileIconOff";
@@ -118,9 +119,11 @@ export default function Navigation({
     >
       <CurrentUserProvider>
         <WalletProvider>
-          <CryptoPaymentProvider>
-            <RootNavigator />
-          </CryptoPaymentProvider>
+          <NetworkProvider>
+            <CryptoPaymentProvider>
+              <RootNavigator />
+            </CryptoPaymentProvider>
+          </NetworkProvider>
         </WalletProvider>
       </CurrentUserProvider>
     </NavigationContainer>

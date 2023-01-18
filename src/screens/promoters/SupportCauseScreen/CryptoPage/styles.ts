@@ -39,6 +39,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     resizeMode: "cover",
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
   },
   donateContainer: {
     marginBottom: 24,

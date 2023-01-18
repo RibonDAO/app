@@ -152,6 +152,7 @@ function CryptoPage(): JSX.Element {
               customStyles={{
                 borderColor: theme.colors.orange20,
                 backgroundColor: theme.colors.orange20,
+                height: 50,
               }}
             />
             <Text style={styles.refundText}>{t("refundText")}</Text>
