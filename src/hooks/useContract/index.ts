@@ -21,7 +21,6 @@ export function useContract<T extends Contract = Contract>({
   return useMemo(() => {
     if (!address || !ABI) return null;
     try {
-      console.log("provssss", provider);
       if (provider) return getContract(address, ABI, provider.getSigner());
 
       const providerJsonRpc = new JsonRpcProvider(currentNetwork.nodeUrl);

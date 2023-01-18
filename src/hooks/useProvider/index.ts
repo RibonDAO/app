@@ -3,8 +3,10 @@ import { logError } from "services/crashReport";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { providers } from "ethers";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { useWalletContext } from "contexts/walletContext";
 
 export function useProvider() {
+  const { wallet } = useWalletContext();
   const [provider, setProvider] = useState<providers.Web3Provider | null>(null);
   const connector = useWalletConnect();
 
@@ -30,8 +32,8 @@ export function useProvider() {
   }
 
   useEffect(() => {
-    fetchProvider();
-  }, []);
+    if (wallet) fetchProvider();
+  }, [wallet]);
 
   return provider;
 }
