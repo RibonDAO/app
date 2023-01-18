@@ -21,6 +21,7 @@ import { stringToNumber } from "lib/formatters/stringToNumberFormatter";
 import useTokenDecimals from "hooks/useTokenDecimals";
 import { useWalletContext } from "contexts/walletContext";
 import { BigNumber, utils } from "ethers";
+import { showToast } from "lib/Toast";
 
 export type onDonationToContractSuccessProps = (
   hash: string,
@@ -42,6 +43,7 @@ export interface ICryptoPaymentContext {
   tokenSymbol: string;
   cause?: Cause;
   setCause: (cause: Cause) => void;
+  loading?: boolean;
 }
 
 export type Props = {
@@ -101,7 +103,7 @@ function CryptoPaymentProvider({ children }: Props) {
   }, [wallet, tokenDecimals]);
 
   useEffect(() => {
-    fetchUsdcUserBalance();
+    if (wallet) fetchUsdcUserBalance();
   }, [fetchUsdcUserBalance]);
 
   const insufficientBalance = () => {
@@ -117,9 +119,10 @@ function CryptoPaymentProvider({ children }: Props) {
   const handleDonationToContract = async (
     onSuccess?: onDonationToContractSuccessProps,
   ) => {
-    setLoading(true);
     try {
+      setLoading(true);
       const approval = await approveAmount();
+      showToast("Waiting for approval");
       await approval.wait();
       const response = await donateToContract();
 
@@ -159,8 +162,9 @@ function CryptoPaymentProvider({ children }: Props) {
       tokenSymbol,
       cause,
       setCause,
+      loading,
     }),
-    [amount, currentPool, userBalance, tokenSymbol],
+    [amount, currentPool, userBalance, tokenSymbol, loading],
   );
 
   return (

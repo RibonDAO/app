@@ -4,6 +4,7 @@ import React, {
   SetStateAction,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -33,6 +34,10 @@ function WalletProvider({ children }: Props) {
   });
 
   const connector = useWalletConnect();
+
+  useEffect(() => {
+    setWallet(connector.accounts[0]);
+  }, [connector]);
 
   const connectWallet = useCallback(async () => {
     try {

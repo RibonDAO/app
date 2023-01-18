@@ -11,6 +11,7 @@ import SupportImage from "assets/images/support-image.png";
 import { Text, View } from "components/Themed";
 import { Image, ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
+import { showToast } from "lib/Toast";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
 
@@ -25,6 +26,7 @@ function CryptoPage(): JSX.Element {
     handleDonationToContract,
     userBalance,
     tokenSymbol,
+    loading: loadingCryptoPayment,
   } = useCryptoPayment();
 
   const { causes } = useCauses();
@@ -54,7 +56,7 @@ function CryptoPage(): JSX.Element {
       status: "transactionProcessed",
     });
 
-    console.log("success donation contract", hash);
+    showToast(`success donation contract ${hash}`);
   };
 
   const handleDonateClick = async () => {
@@ -80,6 +82,7 @@ function CryptoPage(): JSX.Element {
   };
 
   const donateButtonText = () => {
+    if (loadingCryptoPayment) return "...";
     if (wallet)
       return t("donateButtonText", { value: `${amount} ${tokenSymbol}` });
 
