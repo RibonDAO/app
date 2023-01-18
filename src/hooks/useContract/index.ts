@@ -4,7 +4,7 @@ import { getContract } from "utils/contractUtils";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { logError } from "services/crashReport";
 import { useNetworkContext } from "contexts/networkContext";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { useProvider } from "hooks/useProvider";
 
 type Props = {
   address: string;
@@ -15,17 +15,21 @@ export function useContract<T extends Contract = Contract>({
   address,
   ABI,
 }: Props): T | null {
+  const provider = useProvider();
   const { currentNetwork } = useNetworkContext();
-  const connector = useWalletConnect();
+
   return useMemo(() => {
     if (!address || !ABI) return null;
     try {
-      const provider = new JsonRpcProvider(currentNetwork.nodeUrl);
+      console.log("provssss", provider);
+      if (provider) return getContract(address, ABI, provider.getSigner());
 
-      return getContract(address, ABI, provider);
+      const providerJsonRpc = new JsonRpcProvider(currentNetwork.nodeUrl);
+
+      return getContract(address, ABI, providerJsonRpc);
     } catch (error) {
       logError(error);
       return null;
     }
-  }, [address, ABI]) as T;
+  }, [address, ABI, provider]) as T;
 }
