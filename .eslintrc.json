@@ -46,6 +46,7 @@
         ],
         "import/prefer-default-export": "off",
         "import/no-extraneous-dependencies": "off",
+        "import/no-duplicates": "off",
         "semi": "off",
         "react/jsx-props-no-spreading": "off",
         "@typescript-eslint/no-non-null-assertion": "off",

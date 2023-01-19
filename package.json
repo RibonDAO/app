@@ -15,14 +15,18 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@ethersproject/shims": "^5.7.0",
     "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^0.17.2",
+    "@miblanchard/react-native-slider": "^2.2.0",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "@ribon.io/shared": "^1.0.17",
     "@walletconnect/react-native-dapp": "^1.8.0",
+    "@walletconnect/web3-provider": "^1.8.0",
+    "ethers": "^5.7.2",
     "expo": "~47.0.12",
     "expo-asset": "~8.7.0",
     "expo-constants": "~14.0.2",
@@ -54,6 +58,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/react-native": "^11.5.0",
     "@types/jest": "^29.2.5",
     "@types/react": "~18.0.24",

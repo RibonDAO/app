@@ -7,10 +7,17 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
+import WalletProvider from "contexts/walletContext";
+import NetworkProvider from "contexts/networkContext";
+import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
+import CausesProvider from "contexts/causesContext";
+import CurrentUserProvider from "contexts/currentUserContext";
 import CausesIconOn from "./assets/CausesIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
 import ProfileIconOff from "./assets/ProfileIconOff";
+import GivingIconOn from "./assets/GivingIconOn";
+import GivingIconOff from "./assets/GivingIconOff";
 import DonateModal from "screens/donations/DonateModal";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
@@ -23,37 +30,17 @@ import {
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
-import S from "./styles";
-import CausesProvider from "contexts/causesContext";
-import CurrentUserProvider from "contexts/currentUserContext";
-import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 import LayoutHeader from "components/moleculars/LayoutHeader";
+import DonationDoneScreen from "screens/donations/DonationDoneScreen";
+import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
+import S from "./styles";
 import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
-
-export default function Navigation({
-  colorScheme,
-}: {
-  colorScheme: ColorSchemeName;
-}) {
-  return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
-      <CurrentUserProvider>
-        <CausesProvider>
-          <RootNavigator />
-        </CausesProvider>
-      </CurrentUserProvider>
-    </NavigationContainer>
-  );
-}
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="ReceiveTicketScreen">
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
@@ -67,15 +54,36 @@ function RootNavigator() {
       />
 
       <Stack.Screen
+        name="ReceiveTicketScreen"
+        component={ReceiveTicketScreen}
+        options={{
+          title: "ReceiveTicketScreen",
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
         name="DonationDoneScreen"
         component={DonationDoneScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
-      <Stack.Screen
+      <BottomTab.Screen
         name="ChooseCauseScreen"
         component={ChooseCauseScreen}
-        options={{ headerShown: false, animation: "slide_from_bottom" }}
+        options={{
+          title: "ChooseCausesScreen",
+          header: () => <Header rightComponent={<LayoutHeader />} />,
+        }}
+      />
+
+      <Stack.Screen
+        name="CausesScreen"
+        component={CausesScreen}
+        options={{
+          title: "Causes",
+          header: () => <Header rightComponent={<LayoutHeader />} />,
+        }}
       />
 
       <Stack.Group screenOptions={{ presentation: "modal" }}>
@@ -92,7 +100,6 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="ReceiveTicketScreen"
       screenOptions={{
         tabBarActiveTintColor: theme.colors.green30,
         tabBarStyle: { ...S.tabBar },
@@ -100,22 +107,23 @@ function BottomTabNavigator() {
       }}
     >
       <BottomTab.Screen
-        name="ReceiveTicketScreen"
-        component={ReceiveTicketScreen}
-        options={{
-          title: "Tickets",
-          headerShown: false,
-          tabBarStyle: { display: "none" }
-        }}
-      />
-
-      <BottomTab.Screen
         name="CausesScreen"
         component={CausesScreen}
         options={{
           title: "Causes",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
+          header: () => <Header rightComponent={<LayoutHeader />} />,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="PromotersScreen"
+        component={SupportCauseScreen}
+        options={{
+          title: "Giving",
+          tabBarIcon: ({ color }: any) =>
+            color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
           header: () => <Header rightComponent={<LayoutHeader />} />,
         }}
       />
@@ -131,5 +139,30 @@ function BottomTabNavigator() {
         }}
       />
     </BottomTab.Navigator>
+  );
+}
+
+export default function Navigation({
+  colorScheme,
+}: {
+  colorScheme: ColorSchemeName;
+}) {
+  return (
+    <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+    >
+      <CurrentUserProvider>
+        <WalletProvider>
+          <NetworkProvider>
+            <CryptoPaymentProvider>
+              <CausesProvider>
+                <RootNavigator />
+              </CausesProvider>
+            </CryptoPaymentProvider>
+          </NetworkProvider>
+        </WalletProvider>
+      </CurrentUserProvider>
+    </NavigationContainer>
   );
 }

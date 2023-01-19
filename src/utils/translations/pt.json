@@ -6,5 +6,24 @@
     "causesScreen": {
       "title": "Doe para um projeto"
     }
+  },
+  "contexts": {
+    "walletContext": {
+      "walletConnectionErrorMessage": "Erro ao conectar carteira"
+    }
+  },
+  "promoters": {
+    "supportCausePage": {
+      "title": "Doe com a comunidade",
+      "communityAddText": "A Comunidade adicionará",
+      "communityAddButtonText": "Como a comunidade faz isso?",
+      "donateButtonText": "Doar {{value}}",
+      "selectOfferSection": {
+        "causeText": "Você doará para"
+      },
+      "connectWalletButtonText": "Conectar carteira",
+      "userBalanceText": "Seu saldo: ",
+      "refundText": "*Pagamentos em criptomoeda não são estornáveis"
+    }
   }
 }

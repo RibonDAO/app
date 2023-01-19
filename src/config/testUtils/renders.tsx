@@ -1,8 +1,24 @@
 import React from "react";
 import { render, RenderResult } from "@testing-library/react-native";
+import {
+  renderHook as renderTestingLibraryHook,
+  RenderHookResult,
+} from "@testing-library/react-hooks";
 import { I18nextProvider } from "react-i18next";
-import i18n from "../../../i18n-test";
 import { QueryClient, QueryClientProvider } from "react-query";
+import NetworkProvider, {
+  INetworkContext,
+  NetworkContext,
+} from "contexts/networkContext";
+import WalletProvider, {
+  IWalletContext,
+  WalletContext,
+} from "contexts/walletContext";
+import CryptoPaymentProvider, {
+  CryptoPaymentContext,
+  ICryptoPaymentContext,
+} from "contexts/cryptoPaymentContext";
+import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
   component: RenderResult;
@@ -35,15 +51,42 @@ function renderProvider(
 
 export type RenderComponentProps = {
   locationState?: Record<any, any>;
+  networkProviderValue?: Partial<INetworkContext>;
+  walletProviderValue?: Partial<IWalletContext>;
+  cryptoPaymentProviderValue?: Partial<ICryptoPaymentContext>;
 };
 
-function renderAllProviders(children: any, {}: RenderComponentProps = {}) {
+function renderAllProviders(
+  children: any,
+  {
+    networkProviderValue = {},
+    walletProviderValue = {},
+    cryptoPaymentProviderValue = {},
+  }: RenderComponentProps = {},
+) {
   const queryClient = new QueryClient();
 
   return {
     component: (
       <QueryClientProvider client={queryClient}>
-        <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
+        <I18nextProvider i18n={i18n}>
+          {renderProvider(
+            WalletProvider,
+            WalletContext,
+            walletProviderValue,
+            renderProvider(
+              NetworkProvider,
+              NetworkContext,
+              networkProviderValue,
+              renderProvider(
+                CryptoPaymentProvider,
+                CryptoPaymentContext,
+                cryptoPaymentProviderValue,
+                children,
+              ),
+            ),
+          )}
+        </I18nextProvider>
       </QueryClientProvider>
     ),
   };
@@ -59,5 +102,22 @@ export function renderComponent(
   );
   return {
     component: render(componentWithProviders),
+  };
+}
+
+type RenderHookReturn = {
+  hook: RenderHookResult<any, any>;
+};
+export function renderHook(
+  hook: (props: any) => any,
+  renderComponentProps: RenderComponentProps = {},
+): RenderHookReturn {
+  const wrapper = ({ children }: any) => {
+    const { component } = renderAllProviders(children, renderComponentProps);
+    return component;
+  };
+
+  return {
+    hook: renderTestingLibraryHook(hook, { wrapper }),
   };
 }
