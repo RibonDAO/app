@@ -8,7 +8,7 @@ import { NonProfit } from "@ribon.io/shared/types";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace ReactNavigation {}
+  namespace ReactNavigation { }
 }
 
 export type ModalParamList = {
@@ -22,6 +22,7 @@ export type DonationDoneParamsList = {
 export type RootTabParamList = {
   CausesScreen: undefined;
   ProfileScreen: undefined;
+  ReceiveTicketScreen: undefined;
 };
 
 export type RootStackParamList = {
@@ -29,6 +30,7 @@ export type RootStackParamList = {
   DonateModal: ModalParamList;
   DonationDoneScreen: DonationDoneParamsList;
   NotFound: undefined;
+  ChooseCauseScreen: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

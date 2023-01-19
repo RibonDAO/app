@@ -3,12 +3,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { HAS_AN_AVAILABLE_VOUCHER } from "@ribon.io/shared";
 
 function useVoucher() {
-  const [voucher, setVoucher] = useState<boolean>(true);
-  const [ticket, setTicket] = useState<boolean>();
+  const [ticket, setTicket] = useState<boolean>(true);
 
   const getTicket = useCallback(async () => {
     try {
       const myTicket = await AsyncStorage.getItem(HAS_AN_AVAILABLE_VOUCHER);
+      // setTicket(myTicket);
+
       return myTicket;
     } catch (error) {
       console.log(error);
@@ -18,7 +19,7 @@ function useVoucher() {
   const storeTicket = async () => {
     try {
       await AsyncStorage.setItem(HAS_AN_AVAILABLE_VOUCHER, "true");
-      setVoucher(true);
+      setTicket(true);
     } catch (error) {
       console.log(error);
     }
@@ -27,33 +28,31 @@ function useVoucher() {
   const deleteTicket = async () => {
     try {
       await AsyncStorage.removeItem(HAS_AN_AVAILABLE_VOUCHER);
-      destroyVoucher();
+      setTicket(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if (voucher) {
+    getTicket();
+  }, []);
+
+  useEffect(() => {
+    if (ticket) {
       storeTicket();
     } else {
       deleteTicket();
     }
-  }, [voucher]);
+  }, [ticket]);
 
-  const destroyVoucher = () => setVoucher(false);
-
-  const createVoucher = () => setVoucher(true);
-
-  const isVoucherAvailable = async () => {
+  const isVoucherAvailable = () => {
     const ticket = getTicket();
 
     return ticket;
   }
 
   return {
-    destroyVoucher,
-    createVoucher,
     storeTicket,
     deleteTicket,
     getTicket,

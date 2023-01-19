@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { stylizedHeadingMedium } from "styles/typography/stylized";
+import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
@@ -8,11 +9,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: 16
+    padding: 16,
+    width: "100%",
+    height: "100%",
   },
   icon: {
-    position: "absolute",
-    top: -40,
     borderRadius: 50,
     backgroundColor: "transparent"
   },
@@ -30,5 +31,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   }
 });
+
+
 
 export default styles;

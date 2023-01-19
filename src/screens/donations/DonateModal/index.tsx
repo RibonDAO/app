@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "react-native";
 import { RootStackScreenProps } from "types";
-import { useDonations, useUsers } from "@ribon.io/shared/hooks";
+import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import Button from "components/atomics/buttons/Button";
@@ -19,7 +19,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Text, View } from "components/Themed";
 import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
-import useVoucher from "hooks/useVoucher";
 
 export default function DonateModal({
   route,
@@ -31,8 +30,8 @@ export default function DonateModal({
   const { setCurrentUser, currentUser } = useCurrentUser();
   const [email, setEmail] = useState(currentUser?.email || "");
   const { donate } = useDonations(currentUser?.id);
-  const { destroyVoucher } = useVoucher();
   const { navigateTo, popNavigation } = useNavigation();
+  const { refetch: refetchCanDonate } = useCanDonate(RIBON_INTEGRATION_ID);
 
   useEffect(() => {
     if (isValidEmail(email)) {
@@ -56,8 +55,8 @@ export default function DonateModal({
         const user = await findOrCreateUser(email);
         setCurrentUser(user);
         await donate(RIBON_INTEGRATION_ID, nonProfit.id, email);
+        refetchCanDonate();
         popNavigation();
-        destroyVoucher();
         setTimeout(() => {
           navigateTo("DonationDoneScreen", { nonProfit });
         }, 500);

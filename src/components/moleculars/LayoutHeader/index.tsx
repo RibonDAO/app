@@ -1,6 +1,6 @@
 
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Text, View } from "components/Themed";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -13,37 +13,31 @@ import ChangeLanguageItem from "./ChangeLanguageItem";
 import RoundButton from "components/atomics/RoundButton";
 import TicketModal from "./TicketModal";
 import BlockedDonationModal from "./BlockedDonationModal";
-import ChooseCauseModal from "./ChooseCauseModal";
 import { useCanDonate } from "@ribon.io/shared";
-import useVoucher from "hooks/useVoucher";
 import TicketIcon from "components/vectors/TicketIcon";
-import ConfigItem from "./ConfigItem";
+import ConfigItem from "../ConfigItem";
 import { useNavigation } from "hooks/useNavigation";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 
 function LayoutHeader(): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [blockedDonationModalVisible, setBlockedDonationModalVisible] = useState(false);
-  const [causesModalVisible, setCausesModalVisible] = useState(false);
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
-  const { canDonate } = useCanDonate(2);
-  const { isVoucherAvailable, createVoucher, getTicket } = useVoucher();
-  const canDonateAndHasVoucher = canDonate && isVoucherAvailable();
-
-
-  useEffect(() => {
-    console.log(getTicket());
-  }, [getTicket])
+  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
   };
 
+  const renderTicketCounter = useCallback(() => {
+    return canDonate ? 1 : 0;
+  }, [canDonate]);
+
   function handleLogout() {
     logoutCurrentUser();
-    createVoucher();
-    navigateTo("/");
+    navigateTo("CausesScreen");
     toggleModal();
   }
 
@@ -70,16 +64,12 @@ function LayoutHeader(): JSX.Element {
   }
 
   function handleTicketClick() {
-    if (canDonateAndHasVoucher) {
+    if (canDonate) {
       toggleTicketModal();
     }
     else {
       toggleBlockedDonationModal();
     }
-  }
-
-  function renderCausesModal() {
-    return <ChooseCauseModal visible={causesModalVisible} setVisible={setCausesModalVisible} />
   }
 
   function linkToSupport() {
@@ -122,7 +112,7 @@ function LayoutHeader(): JSX.Element {
     <View style={S.configContainer}>
       <TouchableOpacity style={S.container} onPress={handleTicketClick}>
         <View style={S.ticketSection}>
-          <Text style={S.ticketCounter}>{canDonateAndHasVoucher ? 1 : 0}</Text>
+          <Text style={S.ticketCounter}>{renderTicketCounter()}</Text>
           <TicketIcon />
         </View>
       </TouchableOpacity>
@@ -134,8 +124,6 @@ function LayoutHeader(): JSX.Element {
       {renderTicketModal()}
 
       {renderBlockedDonationModal()}
-
-      {renderCausesModal()}
 
       {renderConfigModal()}
     </View>

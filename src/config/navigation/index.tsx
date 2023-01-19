@@ -11,10 +11,10 @@ import CausesIconOn from "./assets/CausesIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
 import ProfileIconOff from "./assets/ProfileIconOff";
-import useColorScheme from "hooks/useColorScheme";
 import DonateModal from "screens/donations/DonateModal";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
+import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
 import ProfileScreen from "screens/ProfileScreen";
 import {
   RootStackParamList,
@@ -24,9 +24,11 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
 import S from "./styles";
+import CausesProvider from "contexts/causesContext";
 import CurrentUserProvider from "contexts/currentUserContext";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 import LayoutHeader from "components/moleculars/LayoutHeader";
+import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
 
 export default function Navigation({
   colorScheme,
@@ -39,7 +41,9 @@ export default function Navigation({
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
       <CurrentUserProvider>
-        <RootNavigator />
+        <CausesProvider>
+          <RootNavigator />
+        </CausesProvider>
       </CurrentUserProvider>
     </NavigationContainer>
   );
@@ -68,6 +72,12 @@ function RootNavigator() {
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
+      <Stack.Screen
+        name="ChooseCauseScreen"
+        component={ChooseCauseScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="DonateModal" component={DonateModal} />
       </Stack.Group>
@@ -78,18 +88,27 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
   const activeColor = theme.colors.green30;
 
   return (
     <BottomTab.Navigator
-      initialRouteName="CausesScreen"
+      initialRouteName="ReceiveTicketScreen"
       screenOptions={{
         tabBarActiveTintColor: theme.colors.green30,
         tabBarStyle: { ...S.tabBar },
         tabBarLabelStyle: { ...S.tabBarLabel },
       }}
     >
+      <BottomTab.Screen
+        name="ReceiveTicketScreen"
+        component={ReceiveTicketScreen}
+        options={{
+          title: "Tickets",
+          headerShown: false,
+          tabBarStyle: { display: "none" }
+        }}
+      />
+
       <BottomTab.Screen
         name="CausesScreen"
         component={CausesScreen}
@@ -100,6 +119,7 @@ function BottomTabNavigator() {
           header: () => <Header rightComponent={<LayoutHeader />} />,
         }}
       />
+
       <BottomTab.Screen
         name="ProfileScreen"
         component={ProfileScreen}
