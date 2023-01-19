@@ -5,6 +5,7 @@ import InputRange from "components/atomics/inputs/InputRange";
 import { useState } from "react";
 import { Dimensions, TextInput } from "react-native";
 import { useTranslation } from "react-i18next";
+import Dropdown from "components/moleculars/Dropdown";
 import styles from "./styles";
 
 const { gray20, orange40 } = theme.colors;
@@ -37,13 +38,27 @@ function SelectCryptoOfferSection({
       <Text style={styles.title}>
         {t("causeText")} {cause?.name}
       </Text>
-      <TextInput
-        value={currentValue.toString()}
-        onChange={(e) => {
-          handleValueChange(parseInt(e.nativeEvent.text || "0", 10));
-        }}
-        style={styles.inputText}
-      />
+      <View style={styles.inputsContainer}>
+        <TextInput
+          value={currentValue.toString()}
+          onChange={(e) => {
+            handleValueChange(parseInt(e.nativeEvent.text || "0", 10));
+          }}
+          style={styles.inputText}
+          keyboardType="numeric"
+        />
+        <Dropdown
+          items={[
+            { label: "USDC", value: "usdc" },
+            { label: "BRL", value: "brl" },
+          ]}
+          onSelect={(value) => {
+            console.log(value);
+          }}
+          label="USDC"
+          containerStyle={styles.dropdownContainerStyles}
+        />
+      </View>
       <InputRange
         value={currentValue}
         min={5}

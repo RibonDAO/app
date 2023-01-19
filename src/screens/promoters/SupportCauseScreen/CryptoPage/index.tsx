@@ -7,7 +7,6 @@ import { useWalletContext } from "contexts/walletContext";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
-import SupportImage from "assets/images/support-image.png";
 import { Text, View } from "components/Themed";
 import { Image, ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
@@ -107,7 +106,7 @@ function CryptoPage(): JSX.Element {
         <View style={styles.contentContainer}>
           <Image
             style={styles.supportImage}
-            source={{ uri: (cause as any)?.coverImage }}
+            source={{ uri: cause?.coverImage }}
           />
           <View style={styles.donateContainer}>
             <View style={styles.givingContainer}>
