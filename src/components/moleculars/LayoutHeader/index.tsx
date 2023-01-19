@@ -1,6 +1,6 @@
 
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Text, View } from "components/Themed";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -18,6 +18,7 @@ import TicketIcon from "components/vectors/TicketIcon";
 import ConfigItem from "../ConfigItem";
 import { useNavigation } from "hooks/useNavigation";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { theme } from "@ribon.io/shared";
 
 function LayoutHeader(): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -26,6 +27,7 @@ function LayoutHeader(): JSX.Element {
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const ticketColor = canDonate ? theme.colors.green30 : theme.colors.gray30;
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
@@ -111,8 +113,8 @@ function LayoutHeader(): JSX.Element {
   return (
     <View style={S.configContainer}>
       <TouchableOpacity style={S.container} onPress={handleTicketClick}>
-        <View style={S.ticketSection}>
-          <Text style={S.ticketCounter}>{renderTicketCounter()}</Text>
+        <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
+          <Text style={{ ...S.ticketCounter, color: ticketColor }}>{renderTicketCounter()}</Text>
           <TicketIcon />
         </View>
       </TouchableOpacity>
@@ -126,7 +128,7 @@ function LayoutHeader(): JSX.Element {
       {renderBlockedDonationModal()}
 
       {renderConfigModal()}
-    </View>
+    </View >
   );
 }
 

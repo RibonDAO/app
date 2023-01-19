@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
   ticketSection: {
     paddingVertical: 5,
     paddingHorizontal: 7,
-    borderColor: theme.colors.green30,
     borderRadius: 4,
     borderWidth: 1,
     flexDirection: "row",

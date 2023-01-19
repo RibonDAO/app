@@ -37,10 +37,13 @@ const fadeIn = {
 function AnimationModal({ visible, setVisible }: Props): JSX.Element {
   const { navigateTo } = useNavigation();
 
+  function handleModalHide() {
+    navigateTo("ChooseCauseScreen");
+  }
+
   useEffect(() => {
     setTimeout(() => {
       setVisible(false);
-      navigateTo("ChooseCauseScreen");
     }, 4000);
   }, []);
 
@@ -49,6 +52,7 @@ function AnimationModal({ visible, setVisible }: Props): JSX.Element {
       <BlankModal
         visible={visible}
         setVisible={setVisible}
+        onModalHide={handleModalHide}
       >
         <View style={S.containerColumn}>
           <View style={S.containerRow}>

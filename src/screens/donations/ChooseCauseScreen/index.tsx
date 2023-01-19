@@ -9,10 +9,6 @@ import { useCausesContext } from "contexts/causesContext";
 function ChooseCauseScreen(): JSX.Element {
   const { activeCauses } = useCausesContext();
 
-  useEffect(() => {
-    console.log(activeCauses);
-  }, [activeCauses])
-
   const causesList = useCallback(
     () =>
       activeCauses?.map((cause: Cause) => (
