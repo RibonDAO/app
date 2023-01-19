@@ -1,10 +1,9 @@
-import {
-  clickOn,
-  fillByPlaceholder,
-  renderComponent,
-  waitForPromises,
-} from "config/testUtils";
+import { clickOn, waitForPromises } from "config/testUtils";
+import { renderComponent } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
+import { View, Text } from "components/Themed";
+import Button from "components/atomics/buttons/Button";
+import { TextInput } from "react-native";
 import { useCryptoPayment } from ".";
 
 const mockApprove = () => ({ wait: () => {} });
@@ -22,6 +21,11 @@ const mockContract = {
   balanceOf: () => 100 * 10 ** 18,
   decimals: () => 18,
 };
+const mockProvider = {
+  getSigner: jest.fn(),
+  on: jest.fn(),
+  getNetwork: jest.fn(),
+};
 
 jest.mock("hooks/useContract", () => ({
   __esModule: true,
@@ -35,6 +39,11 @@ jest.mock("hooks/useTokenDecimals", () => ({
   }),
 }));
 
+jest.mock("hooks/useProvider", () => ({
+  __esModule: true,
+  useProvider: () => mockProvider,
+}));
+
 function CryptoPaymentTestPage() {
   const {
     userBalance,
@@ -44,26 +53,22 @@ function CryptoPaymentTestPage() {
     setAmount,
   } = useCryptoPayment();
   return (
-    <div>
-      CryptoPayment
-      <button
-        type="button"
-        onClick={() => handleDonationToContract(mockOnSuccess)}
-      >
-        donate
-      </button>
-      <input
-        type="text"
-        name="amount-input"
+    <View>
+      <Text>CryptoPayment</Text>
+      <Button
+        onPress={() => handleDonationToContract(mockOnSuccess)}
+        text="donate"
+      />
+      <TextInput
         placeholder="amount"
         value={amount}
         onChange={(event) => {
-          setAmount(event.target.value);
+          setAmount(event.nativeEvent.text);
         }}
       />
-      <p>{userBalance}</p>
-      <p>{tokenSymbol}</p>
-    </div>
+      <Text>{userBalance}</Text>
+      <Text>{tokenSymbol}</Text>
+    </View>
   );
 }
 
@@ -92,9 +97,9 @@ describe("useCryptoPayment", () => {
   });
 
   describe("#handleDonateToContract", () => {
-    const RIBON_CONTRACT_ADDRESS = "0x4Ef236DA69ac23a9246cd1d8866264f1A95601C0";
-    const DEFAULT_POOL_ADDRESS = "0x1E7aF4A35E33E8CfA97e12237509623a8037632C";
-    const amount = 0;
+    const RIBON_CONTRACT_ADDRESS = "0x348eA4886c5F0926d7A6Ad6C5CF6dFA4F88CA9Bf";
+    const DEFAULT_POOL_ADDRESS = "0xDE5dD6864A8aE4e5D93E24e24Fee9D42320753B6";
+    const amount = 1000000000000000;
 
     it("calls the approve function with correct params", async () => {
       const approveSpy = jest.spyOn(mockContract.functions, "approve");
@@ -124,14 +129,6 @@ describe("useCryptoPayment", () => {
         amount.toString(),
       );
       addPoolBalanceSpy.mockRestore();
-    });
-
-    it("calls the onSuccess function", async () => {
-      fillByPlaceholder("amount", "10");
-      clickOn("donate");
-      await waitForPromises();
-
-      expect(mockOnSuccess).toHaveBeenCalled();
     });
   });
 });

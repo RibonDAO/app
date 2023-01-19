@@ -1,15 +1,21 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react-native";
+import { Text, View } from "components/Themed";
+import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { useWalletContext } from ".";
 
 function WalletTestPage() {
   useWalletContext();
-  return <div>Wallet</div>;
+  return (
+    <View>
+      <Text>Wallet</Text>
+    </View>
+  );
 }
 
 describe("useWallet", () => {
   it("should render without error", () => {
     render(<WalletTestPage />);
-    expect(screen.getByText("Wallet")).toBeInTheDocument();
+    expectTextToBeInTheDocument("Wallet");
   });
 });

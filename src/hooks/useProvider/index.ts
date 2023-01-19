@@ -11,7 +11,6 @@ export function useProvider() {
   const connector = useWalletConnect();
 
   async function fetchProvider() {
-    console.log("fetch provider called");
     try {
       const walletConnectProvider = new WalletConnectProvider({
         rpc: {
