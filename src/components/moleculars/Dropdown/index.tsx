@@ -7,6 +7,8 @@ import {
   View,
   ViewStyle,
 } from "react-native";
+import ArrowDown from "components/vectors/ArrowDown";
+import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
 
 type ItemType = {
@@ -78,7 +80,7 @@ function Dropdown({
     >
       {renderDropdown()}
       <Text style={S.buttonText}>{(selected && selected.label) || label}</Text>
-      <Text>\/</Text>
+      <ArrowDown height={16} width={16} color={theme.colors.orange40} />
     </TouchableOpacity>
   );
 }

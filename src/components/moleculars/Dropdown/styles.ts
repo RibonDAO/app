@@ -24,12 +24,15 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     position: "absolute",
+    marginTop: 4,
     backgroundColor: "#fff",
-    width: "70%",
+    alignSelf: "center",
+    width: "60%",
     shadowColor: "#000000",
     shadowRadius: 4,
     shadowOffset: { height: 4, width: 0 },
     shadowOpacity: 0.5,
+    borderRadius: 8,
   },
   overlay: {
     width: "100%",
@@ -39,6 +42,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderBottomWidth: 1,
+    borderColor: theme.colors.gray10,
   },
 });
 
