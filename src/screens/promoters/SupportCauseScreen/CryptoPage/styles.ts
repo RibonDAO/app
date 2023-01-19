@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     overflowX: "hidden",
   },
   supportImage: {
-    height: 120,
+    height: 148,
     width: "100%",
     position: "relative",
     display: "flex",
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   contributionContainer: {},
   communityAddContainer: {
-    marginTop: 34,
+    marginTop: 24,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

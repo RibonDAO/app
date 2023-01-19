@@ -42,6 +42,7 @@ function SelectCryptoOfferSection({
         onChange={(e) => {
           handleValueChange(parseInt(e.nativeEvent.text || "0", 10));
         }}
+        style={styles.inputText}
       />
       <InputRange
         value={currentValue}

@@ -102,6 +102,7 @@ function CryptoPage(): JSX.Element {
           textColorOutline={theme.colors.orange40}
           borderColor={theme.colors.orange40}
           borderColorOutline={theme.colors.orange20}
+          indexSelected={0}
         />
         <View style={styles.contentContainer}>
           <Image
