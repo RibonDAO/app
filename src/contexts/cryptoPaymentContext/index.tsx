@@ -56,7 +56,7 @@ export const CryptoPaymentContext = createContext<ICryptoPaymentContext>(
 
 function CryptoPaymentProvider({ children }: Props) {
   const { currentNetwork } = useNetworkContext();
-  const [amount, setAmount] = useState("0.0");
+  const [amount, setAmount] = useState("5.0");
   const [loading, setLoading] = useState(false);
   const [userBalance, setUserBalance] = useState("");
   const [cause, setCause] = useState<Cause>();
@@ -107,6 +107,8 @@ function CryptoPaymentProvider({ children }: Props) {
   }, [fetchUsdcUserBalance]);
 
   const insufficientBalance = () => {
+    console.log("userBalance", userBalance);
+    console.log("amount", amount);
     const amountNumber = stringToNumber(amount);
     const userBalanceNumber = stringToNumber(userBalance);
 

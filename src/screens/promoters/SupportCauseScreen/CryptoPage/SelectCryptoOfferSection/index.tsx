@@ -6,25 +6,27 @@ import { useState } from "react";
 import { Dimensions, TextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import Dropdown from "components/moleculars/Dropdown";
+import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import styles from "./styles";
 
 const { gray20, orange40 } = theme.colors;
 
 type Props = {
   cause: Cause | undefined;
-  onValueChange: (value: number) => void;
+  onValueChange: (value: string) => void;
 };
 
 function SelectCryptoOfferSection({
   cause,
   onValueChange,
 }: Props): JSX.Element {
-  const [currentValue, setCurrentValue] = useState(5);
+  const [currentValue, setCurrentValue] = useState("5");
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCausePage.selectOfferSection",
   });
+  const { tokenSymbol } = useCryptoPayment();
 
-  const handleValueChange = (value: number) => {
+  const handleValueChange = (value: string) => {
     setCurrentValue(value);
     onValueChange(value);
   };
@@ -42,29 +44,29 @@ function SelectCryptoOfferSection({
         <TextInput
           value={currentValue.toString()}
           onChange={(e) => {
-            handleValueChange(parseInt(e.nativeEvent.text || "0", 10));
+            handleValueChange(e.nativeEvent.text);
           }}
           style={styles.inputText}
           keyboardType="numeric"
         />
         <Dropdown
-          items={[
-            { label: "USDC", value: "usdc" },
-            { label: "BRL", value: "brl" },
-          ]}
+          items={[{ label: tokenSymbol, value: tokenSymbol }]}
           onSelect={(value) => {
             console.log(value);
           }}
-          label="USDC"
+          label={tokenSymbol}
           containerStyle={styles.dropdownContainerStyles}
         />
       </View>
       <InputRange
-        value={currentValue}
+        value={parseFloat(currentValue)}
         min={5}
         step={5}
         max={100}
-        onChange={handleValueChange}
+        onChange={(value) => {
+          const changeValue = Array.isArray(value) ? value[0] : value;
+          handleValueChange(changeValue.toString());
+        }}
         color={orange40}
         minimumTrackTintColor={orange40}
         maximumTrackTintColor={gray20}

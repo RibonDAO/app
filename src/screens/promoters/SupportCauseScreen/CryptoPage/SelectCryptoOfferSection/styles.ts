@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     color: theme.colors.orange40,
     fontWeight: "bold",
     marginRight: 4,
-    flex: 2,
+    flex: 3,
   },
   inputsContainer: {
     flexDirection: "row",
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   dropdownContainerStyles: {
-    flex: 1,
+    flex: 2,
   },
 });
 

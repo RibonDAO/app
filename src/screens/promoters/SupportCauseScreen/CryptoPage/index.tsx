@@ -113,7 +113,7 @@ function CryptoPage(): JSX.Element {
               <View style={styles.contributionContainer}>
                 <SelectCryptoOfferSection
                   cause={cause}
-                  onValueChange={(value: number) => setAmount(value.toString())}
+                  onValueChange={(value: string) => setAmount(value)}
                 />
               </View>
               <View style={styles.communityAddContainer}>
