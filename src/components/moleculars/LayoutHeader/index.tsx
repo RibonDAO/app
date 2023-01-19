@@ -15,6 +15,7 @@ import TicketModal from "./TicketModal";
 import BlockedDonationModal from "./BlockedDonationModal";
 import { useCanDonate } from "@ribon.io/shared";
 import TicketIcon from "components/vectors/TicketIcon";
+import GrayTicketIcon from "components/vectors/GrayTicketIcon";
 import ConfigItem from "../ConfigItem";
 import { useNavigation } from "hooks/useNavigation";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
@@ -28,6 +29,7 @@ function LayoutHeader(): JSX.Element {
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
   const ticketColor = canDonate ? theme.colors.green30 : theme.colors.gray30;
+  const ticketIcon = canDonate ? TicketIcon : GrayTicketIcon;
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
@@ -115,7 +117,7 @@ function LayoutHeader(): JSX.Element {
       <TouchableOpacity style={S.container} onPress={handleTicketClick}>
         <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
           <Text style={{ ...S.ticketCounter, color: ticketColor }}>{renderTicketCounter()}</Text>
-          <TicketIcon />
+          {ticketIcon()}
         </View>
       </TouchableOpacity>
 

@@ -8,7 +8,6 @@ function useVoucher() {
   const getTicket = useCallback(async () => {
     try {
       const myTicket = await AsyncStorage.getItem(HAS_AN_AVAILABLE_VOUCHER);
-      // setTicket(myTicket);
 
       return myTicket;
     } catch (error) {
