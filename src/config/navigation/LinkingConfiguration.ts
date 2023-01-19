@@ -26,6 +26,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               ProfileScreen: "profile",
             },
           },
+          PromotersScreen: {
+            screens: {
+              PromotersScreen: "promoters",
+            },
+          },
         },
       },
       DonateModal: "modal",

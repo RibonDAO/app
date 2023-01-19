@@ -51,7 +51,7 @@ export const stylizedHeadingSmall = {
 
 const stylizedTitle = {
   ...gambarino,
-  fontWeight: "400",
+  fontWeight: "400" as any,
 };
 export const stylizedTitleLarge = {
   ...stylizedTitle,
