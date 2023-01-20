@@ -1,17 +1,21 @@
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
 import { useCauses } from "@ribon.io/shared/hooks";
 import { Cause } from "@ribon.io/shared/types";
 import { useWalletContext } from "contexts/walletContext";
-import { useCryptoPayment } from "contexts/cryptoPaymentContext";
+import {
+  INITIAL_AMOUNT,
+  useCryptoPayment,
+} from "contexts/cryptoPaymentContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
 import { Text, View } from "components/Themed";
-import { ScrollView } from "react-native";
+import { RefreshControl, ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { showToast } from "lib/Toast";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
+import { logError } from "services/crashReport";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
 
@@ -27,9 +31,11 @@ function CryptoPage(): JSX.Element {
     userBalance,
     tokenSymbol,
     loading: loadingCryptoPayment,
+    setLoading,
   } = useCryptoPayment();
 
-  const { causes } = useCauses();
+  const [refreshing, setRefreshing] = useState(false);
+  const { causes, refetch: refetchCauses } = useCauses();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCausePage",
@@ -42,6 +48,26 @@ function CryptoPage(): JSX.Element {
   const causesFilter = () => {
     const causesApi = causes.filter((currentCause) => currentCause.active);
     return causesApi || [];
+  };
+
+  useEffect(() => {
+    setCause(causesFilter()[0]);
+  }, [JSON.stringify(causes)]);
+  const resetPage = () => {
+    async function reset() {
+      try {
+        setRefreshing(true);
+        await refetchCauses();
+        setAmount(INITIAL_AMOUNT);
+        setLoading(false);
+      } catch (error) {
+        logError(error);
+      } finally {
+        setRefreshing(false);
+      }
+    }
+
+    reset();
   };
 
   const handleCauseClick = (causeClicked: Cause) => {
@@ -91,7 +117,12 @@ function CryptoPage(): JSX.Element {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={resetPage} />
+      }
+    >
       <Text style={styles.title}>{t("title")}</Text>
       <GroupButtons
         elements={causesFilter()}

@@ -20,14 +20,13 @@ function SelectCryptoOfferSection({
   cause,
   onValueChange,
 }: Props): JSX.Element {
-  const [currentValue, setCurrentValue] = useState("5");
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCausePage.selectOfferSection",
   });
-  const { tokenSymbol } = useCryptoPayment();
+  const { tokenSymbol, amount, setAmount } = useCryptoPayment();
 
   const handleValueChange = (value: string) => {
-    setCurrentValue(value);
+    setAmount(value);
     onValueChange(value);
   };
 
@@ -42,7 +41,7 @@ function SelectCryptoOfferSection({
       </Text>
       <View style={styles.inputsContainer}>
         <TextInput
-          value={currentValue.toString()}
+          value={amount.toString()}
           onChange={(e) => {
             handleValueChange(e.nativeEvent.text);
           }}
@@ -59,7 +58,7 @@ function SelectCryptoOfferSection({
         />
       </View>
       <InputRange
-        value={parseFloat(currentValue)}
+        value={parseFloat(amount)}
         min={5}
         step={5}
         max={100}

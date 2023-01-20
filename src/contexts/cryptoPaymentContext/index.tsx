@@ -43,7 +43,8 @@ export interface ICryptoPaymentContext {
   tokenSymbol: string;
   cause?: Cause;
   setCause: (cause: Cause) => void;
-  loading?: boolean;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 }
 
 export type Props = {
@@ -54,9 +55,10 @@ export const CryptoPaymentContext = createContext<ICryptoPaymentContext>(
   {} as ICryptoPaymentContext,
 );
 
+export const INITIAL_AMOUNT = "5";
 function CryptoPaymentProvider({ children }: Props) {
   const { currentNetwork } = useNetworkContext();
-  const [amount, setAmount] = useState("5.0");
+  const [amount, setAmount] = useState(INITIAL_AMOUNT);
   const [loading, setLoading] = useState(false);
   const [userBalance, setUserBalance] = useState("");
   const [cause, setCause] = useState<Cause>();
@@ -107,8 +109,6 @@ function CryptoPaymentProvider({ children }: Props) {
   }, [fetchUsdcUserBalance]);
 
   const insufficientBalance = () => {
-    console.log("userBalance", userBalance);
-    console.log("amount", amount);
     const amountNumber = stringToNumber(amount);
     const userBalanceNumber = stringToNumber(userBalance);
 
@@ -165,6 +165,7 @@ function CryptoPaymentProvider({ children }: Props) {
       cause,
       setCause,
       loading,
+      setLoading,
     }),
     [amount, currentPool, userBalance, tokenSymbol, loading, cause],
   );
