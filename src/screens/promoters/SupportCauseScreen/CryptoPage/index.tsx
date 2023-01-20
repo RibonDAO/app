@@ -8,9 +8,10 @@ import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
 import { Text, View } from "components/Themed";
-import { Image, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { showToast } from "lib/Toast";
+import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
 
@@ -103,9 +104,9 @@ function CryptoPage(): JSX.Element {
         indexSelected={0}
       />
       <View style={styles.contentContainer}>
-        <Image
-          style={styles.supportImage}
-          source={{ uri: cause?.coverImage }}
+        <MaskedWaveCut
+          image={cause?.coverImage}
+          imageStyles={styles.supportImage}
         />
         <View style={styles.donateContainer}>
           <View style={styles.givingContainer}>
