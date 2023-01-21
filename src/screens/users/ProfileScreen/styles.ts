@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   badgesContainer: {
     width: "100%",
     paddingVertical: 20,
-    paddingHorizontal: 30,
+    paddingHorizontal: 10,
   },
   badgeContainer: {
     alignItems: "center",
@@ -63,14 +63,14 @@ const styles = StyleSheet.create({
   badgeRoundContainer: {
     width: 90,
     height: 90,
-    borderRadius: 50,
+    borderRadius: 60,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: theme.colors.gray10,
   },
   badgeImage: {
-    width: 55,
-    height: 55,
+    width: 45,
+    height: 45,
     resizeMode: "contain",
   },
   badgeText: {

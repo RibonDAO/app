@@ -99,7 +99,7 @@ describe("useCryptoPayment", () => {
   describe("#handleDonateToContract", () => {
     const RIBON_CONTRACT_ADDRESS = "0x348eA4886c5F0926d7A6Ad6C5CF6dFA4F88CA9Bf";
     const DEFAULT_POOL_ADDRESS = "0xDE5dD6864A8aE4e5D93E24e24Fee9D42320753B6";
-    const amount = 1000000000000000;
+    const amount = 5000000000000000000;
 
     it("calls the approve function with correct params", async () => {
       const approveSpy = jest.spyOn(mockContract.functions, "approve");

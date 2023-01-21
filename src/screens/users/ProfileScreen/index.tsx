@@ -13,8 +13,11 @@ type Props = {
 function Badge({ image, name, active = false, onPress }: Props) {
   return (
     <TouchableOpacity onPress={onPress} style={styles.badgeContainer}>
-      <View style={[styles.badgeRoundContainer, { opacity: active ? 1 : 0.4 }]}>
-        <Image source={{ uri: image }} style={styles.badgeImage} />
+      <View style={styles.badgeRoundContainer}>
+        <Image
+          source={{ uri: image }}
+          style={[styles.badgeImage, { opacity: active ? 1 : 0.4 }]}
+        />
       </View>
       <Text style={styles.badgeText}>{name}</Text>
     </TouchableOpacity>
