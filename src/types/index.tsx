@@ -22,6 +22,7 @@ export type DonationDoneParamsList = {
 export type RootTabParamList = {
   CausesScreen: undefined;
   ProfileScreen: undefined;
+  PromotersScreen: undefined;
 };
 
 export type RootStackParamList = {
