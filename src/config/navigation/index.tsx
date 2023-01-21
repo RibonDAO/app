@@ -10,7 +10,7 @@ import { ColorSchemeName } from "react-native";
 import DonateModal from "screens/donations/DonateModal";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
-import ProfileScreen from "screens/ProfileScreen";
+import ProfileScreen from "screens/users/ProfileScreen";
 import { RootStackParamList, RootTabParamList } from "types";
 import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
@@ -72,6 +72,7 @@ function BottomTabNavigator() {
           title: "Profile",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
+          headerShown: false,
           header: () => <Header rightComponent={<LayoutHeader />} />,
         }}
       />
