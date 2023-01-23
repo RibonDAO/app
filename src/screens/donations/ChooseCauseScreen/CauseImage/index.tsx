@@ -1,9 +1,9 @@
-import { Image, Text, TouchableOpacity } from 'react-native';
-import { useCausesContext } from 'contexts/causesContext';
-import Intersection from 'components/vectors/Intersect';
-import S from './styles';
-import { View } from 'components/Themed';
-import { useNavigation } from 'hooks/useNavigation';
+import { Image, Text, TouchableOpacity } from "react-native";
+import { useCausesContext } from "contexts/causesContext";
+import Intersection from "components/vectors/Intersect";
+import S from "./styles";
+import { View } from "components/Themed";
+import { useNavigation } from "hooks/useNavigation";
 
 type Props = {
   id: number;

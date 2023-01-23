@@ -1,11 +1,10 @@
-
 import CenteredModal from "components/moleculars/modals/CenteredModal";
 import Ticket from "components/vectors/Ticket";
 
 type Props = {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-}
+};
 
 function TicketModal({ visible, setVisible }: Props): JSX.Element {
   function renderModal() {

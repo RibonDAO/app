@@ -1,4 +1,3 @@
-
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useCallback, useState } from "react";
 import { Text, View } from "components/Themed";
@@ -7,7 +6,7 @@ import GlobeIcon from "components/vectors/GlobeIcon";
 import SupportIcon from "components/vectors/SupportIcon";
 import LetterIcon from "components/vectors/LetterIcon";
 import { TouchableOpacity, Linking } from "react-native";
-import Modal from "react-native-modal"
+import Modal from "react-native-modal";
 import S from "./styles";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import RoundButton from "components/atomics/RoundButton";
@@ -24,7 +23,8 @@ import { theme } from "@ribon.io/shared";
 function LayoutHeader(): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
-  const [blockedDonationModalVisible, setBlockedDonationModalVisible] = useState(false);
+  const [blockedDonationModalVisible, setBlockedDonationModalVisible] =
+    useState(false);
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
@@ -33,7 +33,7 @@ function LayoutHeader(): JSX.Element {
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
-  };
+  }
 
   const renderTicketCounter = useCallback(() => {
     return canDonate ? 1 : 0;
@@ -46,32 +46,43 @@ function LayoutHeader(): JSX.Element {
   }
 
   function handleUserLogin() {
-    return currentUser ?
+    return currentUser ? (
       <RoundButton active={false} text="Sair" onPress={handleLogout} />
-      : <RoundButton text="Doar" onPress={toggleModal} />
+    ) : (
+      <RoundButton text="Doar" onPress={toggleModal} />
+    );
   }
 
   function toggleTicketModal() {
     setTicketModalVisible(!ticketModalVisible);
-  };
+  }
 
   function toggleBlockedDonationModal() {
     setBlockedDonationModalVisible(!ticketModalVisible);
-  };
+  }
 
   function renderTicketModal() {
-    return <TicketModal visible={ticketModalVisible} setVisible={setTicketModalVisible} />
+    return (
+      <TicketModal
+        visible={ticketModalVisible}
+        setVisible={setTicketModalVisible}
+      />
+    );
   }
 
   function renderBlockedDonationModal() {
-    return <BlockedDonationModal visible={blockedDonationModalVisible} setVisible={setBlockedDonationModalVisible} />
+    return (
+      <BlockedDonationModal
+        visible={blockedDonationModalVisible}
+        setVisible={setBlockedDonationModalVisible}
+      />
+    );
   }
 
   function handleTicketClick() {
     if (canDonate) {
       toggleTicketModal();
-    }
-    else {
+    } else {
       toggleBlockedDonationModal();
     }
   }
@@ -116,7 +127,9 @@ function LayoutHeader(): JSX.Element {
     <View style={S.configContainer}>
       <TouchableOpacity style={S.container} onPress={handleTicketClick}>
         <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
-          <Text style={{ ...S.ticketCounter, color: ticketColor }}>{renderTicketCounter()}</Text>
+          <Text style={{ ...S.ticketCounter, color: ticketColor }}>
+            {renderTicketCounter()}
+          </Text>
           {ticketIcon()}
         </View>
       </TouchableOpacity>
@@ -130,7 +143,7 @@ function LayoutHeader(): JSX.Element {
       {renderBlockedDonationModal()}
 
       {renderConfigModal()}
-    </View >
+    </View>
   );
 }
 

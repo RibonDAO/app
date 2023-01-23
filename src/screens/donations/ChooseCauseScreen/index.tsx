@@ -1,4 +1,3 @@
-
 import { Cause } from "@ribon.io/shared/types";
 import { Text, View } from "components/Themed";
 import { useCallback } from "react";

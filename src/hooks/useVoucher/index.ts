@@ -49,7 +49,7 @@ function useVoucher() {
     const ticket = getTicket();
 
     return ticket;
-  }
+  };
 
   return {
     storeTicket,

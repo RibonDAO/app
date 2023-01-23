@@ -23,10 +23,7 @@ import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
 import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
 import ProfileScreen from "screens/ProfileScreen";
-import {
-  RootStackParamList,
-  RootTabParamList,
-} from "types";
+import { RootStackParamList, RootTabParamList } from "types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";

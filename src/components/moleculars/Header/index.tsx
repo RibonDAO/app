@@ -29,10 +29,7 @@ function Header({
     <SafeAreaView style={S.container}>
       <View style={S.insideContainer}>
         {hasBackButton ? (
-          <Button
-            onPress={() => onBackButtonClick}
-            text="Voltar"
-          />
+          <Button onPress={() => onBackButtonClick} text="Voltar" />
         ) : (
           <>
             <TouchableOpacity onPress={() => navigateToTicketsPage()}>

@@ -8,7 +8,7 @@ import { NonProfit } from "@ribon.io/shared/types";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace ReactNavigation { }
+  namespace ReactNavigation {}
 }
 
 export type ModalParamList = {

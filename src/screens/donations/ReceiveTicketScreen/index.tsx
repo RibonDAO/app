@@ -1,4 +1,3 @@
-
 import Button from "components/atomics/buttons/Button";
 import { Text, View } from "components/Themed";
 import RibonBackgroundLogo from "components/vectors/RibonBackgroundLogo";
@@ -14,10 +13,12 @@ function ReceiveTicketScreen(): JSX.Element {
   const [animationModalVisible, setAnimationModalVisible] = useState(false);
 
   function renderAnimationModal() {
-    return <AnimationModal
-      visible={animationModalVisible}
-      setVisible={setAnimationModalVisible}
-    />
+    return (
+      <AnimationModal
+        visible={animationModalVisible}
+        setVisible={setAnimationModalVisible}
+      />
+    );
   }
 
   function toggleAnimationModal() {

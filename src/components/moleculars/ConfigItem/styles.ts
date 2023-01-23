@@ -8,25 +8,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 53,
     borderColor: theme.colors.gray20,
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
   },
   text: {
     paddingLeft: 8,
   },
   iconContainer: {
-    width: "10%"
+    width: "10%",
   },
   textContainer: {
-    width: "60%"
+    width: "60%",
   },
   ctaContainer: {
     width: "30%",
-    paddingRight: 8
+    paddingRight: 8,
   },
   configContainer: {
     flexDirection: "row",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 
 export default styles;

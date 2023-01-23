@@ -1,4 +1,3 @@
-
 import { Text, View } from "components/Themed";
 import Modal from "react-native-modal";
 import S from "./styles";
@@ -9,12 +8,18 @@ type Props = {
   setVisible: (visible: boolean) => void;
   onModalHide?: () => void;
   children: JSX.Element;
-}
+};
 
-function BlankModal({ title, visible, setVisible, children, onModalHide }: Props): JSX.Element {
+function BlankModal({
+  title,
+  visible,
+  setVisible,
+  children,
+  onModalHide,
+}: Props): JSX.Element {
   function toggleModal() {
     setVisible(!visible);
-  };
+  }
 
   function renderModal() {
     return (

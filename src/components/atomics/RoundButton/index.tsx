@@ -94,7 +94,7 @@ export default function RoundButton({
 
   return (
     <TouchableOpacity
-      style={active ? S.containerGreen : S.container }
+      style={active ? S.containerGreen : S.container}
       onPress={handlePress}
       disabled={disabled}
       onLayout={(e: any) => handleLayout(e)}
@@ -111,7 +111,7 @@ export default function RoundButton({
           }}
         />
       </View>
-      <Text style={active ? S.textGreen : S.text }>{text}</Text>
+      <Text style={active ? S.textGreen : S.text}>{text}</Text>
     </TouchableOpacity>
   );
 }

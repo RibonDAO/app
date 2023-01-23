@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     fontSize: 26,
     fontWeight: "bold",
-    lineHeight: 36
+    lineHeight: 36,
   },
   imageContainer: {
     display: "flex",
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
   },
   imageBackground: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     borderRadius: 16,
-  }
+  },
 });
 
 export default styles;

@@ -1,4 +1,3 @@
-
 import BlankModal from "components/moleculars/modals/BlankModal";
 import { View } from "components/Themed";
 import SupportersIcon from "components/vectors/SupportersIcon";
@@ -15,7 +14,7 @@ import { useTranslation } from "react-i18next";
 type Props = {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-}
+};
 
 const boxAnimation = {
   from: {
@@ -70,7 +69,11 @@ function AnimationModal({ visible, setVisible }: Props): JSX.Element {
               <View style={S.stripedLine}></View>
             </View>
 
-            <Animatable.View animation={boxAnimation} duration={4000} style={S.ticketRoundBox}>
+            <Animatable.View
+              animation={boxAnimation}
+              duration={4000}
+              style={S.ticketRoundBox}
+            >
               <TicketWhiteIcon />
             </Animatable.View>
 
@@ -81,7 +84,9 @@ function AnimationModal({ visible, setVisible }: Props): JSX.Element {
             </View>
           </View>
 
-          <Animatable.Text animation={fadeIn} duration={4000} style={S.text}>{t("text")}</Animatable.Text>
+          <Animatable.Text animation={fadeIn} duration={4000} style={S.text}>
+            {t("text")}
+          </Animatable.Text>
         </View>
       </BlankModal>
     );

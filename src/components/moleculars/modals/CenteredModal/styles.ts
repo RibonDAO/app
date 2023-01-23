@@ -8,13 +8,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: 16
+    padding: 16,
   },
   icon: {
     position: "absolute",
     top: -40,
     borderRadius: 50,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   title: {
     marginTop: 32,
@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     lineHeight: 36,
-    textAlign: "center"
+    textAlign: "center",
   },
   description: {
     fontSize: 14,
     lineHeight: 28,
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
 });
 
 export default styles;

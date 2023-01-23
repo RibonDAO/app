@@ -3,7 +3,7 @@ import { theme } from "@ribon.io/shared";
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     height: 72,
     display: "flex",
     alignItems: "center",
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
   },
   tabBarLabel: {
-    fontSize: 14
-  }
+    fontSize: 14,
+  },
 });
 
 export default styles;

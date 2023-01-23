@@ -1,4 +1,3 @@
-
 import Button from "components/atomics/buttons/Button";
 import { Text, View } from "components/Themed";
 import DangerIcon from "components/vectors/DangerIcon";
@@ -13,12 +12,20 @@ type Props = {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   primaryButtonClick: () => void;
-}
+};
 
-function CenteredModal({ title, icon, buttonText, description, visible, setVisible, primaryButtonClick }: Props): JSX.Element {
+function CenteredModal({
+  title,
+  icon,
+  buttonText,
+  description,
+  visible,
+  setVisible,
+  primaryButtonClick,
+}: Props): JSX.Element {
   function toggleModal() {
     setVisible(!visible);
-  };
+  }
 
   function renderModal() {
     return (
@@ -30,9 +37,7 @@ function CenteredModal({ title, icon, buttonText, description, visible, setVisib
         onBackdropPress={toggleModal}
       >
         <View style={S.container}>
-          <View style={S.icon}>
-            {icon}
-          </View>
+          <View style={S.icon}>{icon}</View>
           <Text style={S.title}>{title}</Text>
           <Text style={S.description}>{description}</Text>
           <Button text={buttonText} onPress={primaryButtonClick} />

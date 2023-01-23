@@ -6,19 +6,19 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   containerColumn: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   containerRow: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   diamond: {
     display: "flex",
@@ -31,20 +31,15 @@ const styles = StyleSheet.create({
     zIndex: theme.zindex.above,
     overflow: "hidden",
     backgroundColor: theme.colors.green30,
-    transform: [
-      { scale: 0.8 },
-      { rotate: '-45deg'},
-    ],
+    transform: [{ scale: 0.8 }, { rotate: "-45deg" }],
     transformOrigin: "center",
   },
   diamondImage: {
     backgroundColor: "transparent",
-    transform: [
-      { rotate: '45deg'},
-    ],
+    transform: [{ rotate: "45deg" }],
   },
   stripedLine: {
-    borderStyle: 'dotted',
+    borderStyle: "dotted",
     borderWidth: 3,
     borderRadius: 1,
     borderColor: theme.colors.gray20,
@@ -60,13 +55,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
-    backgroundColor: theme.colors.green20
+    backgroundColor: theme.colors.green20,
   },
   text: {
     marginTop: 20,
     color: theme.colors.green30,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 
 export default styles;

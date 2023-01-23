@@ -40,7 +40,6 @@ export async function getUserFromLocalStorage() {
 }
 
 function CurrentUserProvider({ children }: Props) {
-
   const [currentUser, setCurrentUser] = useState<User | undefined>();
   const [userLastDonation, setUserLastDonation] = useState<string>("");
 
