@@ -78,12 +78,12 @@ function CryptoPage(): JSX.Element {
     setCause(causeClicked);
   };
 
-  const onDonationToContractSuccess = (hash: string) => {
+  const onDonationToContractSuccess = () => {
     logEvent("toastNotification_view", {
       status: "transactionProcessed",
     });
 
-    showToast(`success donation contract ${hash}`);
+    showToast(t("successDonationMessage", { amount, tokenSymbol }));
   };
 
   const handleDonateClick = async () => {

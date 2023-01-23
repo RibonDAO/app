@@ -23,7 +23,10 @@
       },
       "connectWalletButtonText": "Connect wallet",
       "userBalanceText": "Your balance: ",
-      "refundText": "*Cryptocurrency payments are non-refundable"
+      "refundText": "*Cryptocurrency payments are non-refundable",
+      "tokenAmountTransferMessage": "Approving token amount transfer...",
+      "contractTransferMessage": "Transferring to contract...",
+      "successDonationMessage": "You successfully donated {{amount}} {{tokenSymbol}}"
     }
   }
 }
