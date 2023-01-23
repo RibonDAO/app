@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingTop: 24,
     paddingHorizontal: 16,
+    backgroundColor: theme.colors.neutral10,
   },
   title: {
     ...stylizedTitleLarge,
@@ -23,12 +24,18 @@ const styles = StyleSheet.create({
   contentContainer: {
     maxWidth: 472,
     marginTop: 24,
+    marginBottom: 24,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
     position: "relative",
     overflowX: "hidden",
+    shadowColor: theme.colors.gray40,
+    elevation: 4,
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   supportImage: {
     height: 148,

@@ -3,7 +3,7 @@ import { theme } from "@ribon.io/shared";
 
 const styles = StyleSheet.create({
   container: {
-    height: 56,
+    height: 80,
     display: "flex",
     alignItems: "flex-start",
     flexDirection: "row",

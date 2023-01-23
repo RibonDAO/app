@@ -12,26 +12,27 @@ import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import CausesProvider from "contexts/causesContext";
 import CurrentUserProvider from "contexts/currentUserContext";
-import CausesIconOn from "./assets/CausesIconOn";
-import CausesIconOff from "./assets/CausesIconOff";
-import ProfileIconOn from "./assets/ProfileIconOn";
-import ProfileIconOff from "./assets/ProfileIconOff";
-import GivingIconOn from "./assets/GivingIconOn";
-import GivingIconOff from "./assets/GivingIconOff";
 import DonateModal from "screens/donations/DonateModal";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
+import ProfileScreen from "screens/users/ProfileScreen";
 import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
-import ProfileScreen from "screens/ProfileScreen";
 import { RootStackParamList, RootTabParamList } from "types";
-import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
 import LayoutHeader from "components/moleculars/LayoutHeader";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
-import S from "./styles";
+import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
+import S from "./styles";
+import LinkingConfiguration from "./LinkingConfiguration";
+import GivingIconOff from "./assets/GivingIconOff";
+import GivingIconOn from "./assets/GivingIconOn";
+import ProfileIconOff from "./assets/ProfileIconOff";
+import ProfileIconOn from "./assets/ProfileIconOn";
+import CausesIconOff from "./assets/CausesIconOff";
+import CausesIconOn from "./assets/CausesIconOn";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -133,6 +134,7 @@ function BottomTabNavigator() {
           title: "Profile",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
+          headerShown: false,
           header: () => <Header rightComponent={<LayoutHeader />} />,
         }}
       />
@@ -150,17 +152,19 @@ export default function Navigation({
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      <CurrentUserProvider>
-        <WalletProvider>
-          <NetworkProvider>
-            <CryptoPaymentProvider>
-              <CausesProvider>
-                <RootNavigator />
-              </CausesProvider>
-            </CryptoPaymentProvider>
-          </NetworkProvider>
-        </WalletProvider>
-      </CurrentUserProvider>
+      <LoadingOverlayProvider>
+        <CurrentUserProvider>
+          <WalletProvider>
+            <NetworkProvider>
+              <CryptoPaymentProvider>
+                <CausesProvider>
+                  <RootNavigator />
+                </CausesProvider>
+              </CryptoPaymentProvider>
+            </NetworkProvider>
+          </WalletProvider>
+        </CurrentUserProvider>
+      </LoadingOverlayProvider>
     </NavigationContainer>
   );
 }

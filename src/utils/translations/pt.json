@@ -34,7 +34,9 @@
       },
       "connectWalletButtonText": "Conectar carteira",
       "userBalanceText": "Seu saldo: ",
-      "refundText": "*Pagamentos em criptomoeda não são estornáveis"
+      "refundText": "*Pagamentos em criptomoeda não são estornáveis",
+      "tokenAmountTransferMessage": "Aprovando quantidade de tokens pra transação...",
+      "contractTransferMessage": "Transferindo pro contrato..."
     }
   }
 }

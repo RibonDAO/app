@@ -21,7 +21,8 @@ import { stringToNumber } from "lib/formatters/stringToNumberFormatter";
 import useTokenDecimals from "hooks/useTokenDecimals";
 import { useWalletContext } from "contexts/walletContext";
 import { BigNumber, utils } from "ethers";
-import { showToast } from "lib/Toast";
+import { useLoadingOverlay } from "contexts/loadingOverlayContext";
+import { useTranslation } from "react-i18next";
 
 export type onDonationToContractSuccessProps = (
   hash: string,
@@ -43,7 +44,8 @@ export interface ICryptoPaymentContext {
   tokenSymbol: string;
   cause?: Cause;
   setCause: (cause: Cause) => void;
-  loading?: boolean;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 }
 
 export type Props = {
@@ -54,9 +56,10 @@ export const CryptoPaymentContext = createContext<ICryptoPaymentContext>(
   {} as ICryptoPaymentContext,
 );
 
+export const INITIAL_AMOUNT = "5";
 function CryptoPaymentProvider({ children }: Props) {
   const { currentNetwork } = useNetworkContext();
-  const [amount, setAmount] = useState("0.001");
+  const [amount, setAmount] = useState(INITIAL_AMOUNT);
   const [loading, setLoading] = useState(false);
   const [userBalance, setUserBalance] = useState("");
   const [cause, setCause] = useState<Cause>();
@@ -66,6 +69,10 @@ function CryptoPaymentProvider({ children }: Props) {
   const [tokenSymbol, setTokenSymbol] = useState("");
   const { tokenDecimals } = useTokenDecimals();
   const { wallet } = useWalletContext();
+  const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "promoters.supportCausePage",
+  });
 
   const contract = useContract({
     address: currentNetwork.ribonContractAddress,
@@ -121,9 +128,10 @@ function CryptoPaymentProvider({ children }: Props) {
   ) => {
     try {
       setLoading(true);
+      showLoadingOverlay(t("tokenAmountTransferMessage") || "");
       const approval = await approveAmount();
-      showToast("Waiting for approval");
       await approval.wait();
+      showLoadingOverlay(t("contractTransferMessage") || "");
       const response = await donateToContract();
 
       const { hash } = response;
@@ -136,6 +144,7 @@ function CryptoPaymentProvider({ children }: Props) {
       });
       logError(error);
     } finally {
+      hideLoadingOverlay();
       setLoading(false);
     }
   };
@@ -163,6 +172,7 @@ function CryptoPaymentProvider({ children }: Props) {
       cause,
       setCause,
       loading,
+      setLoading,
     }),
     [amount, currentPool, userBalance, tokenSymbol, loading, cause],
   );
