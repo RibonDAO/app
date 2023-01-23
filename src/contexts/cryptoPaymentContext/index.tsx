@@ -126,9 +126,9 @@ function CryptoPaymentProvider({ children }: Props) {
   const handleDonationToContract = async (
     onSuccess?: onDonationToContractSuccessProps,
   ) => {
-    setLoading(true);
-    showLoadingOverlay(t("tokenAmountTransferMessage") || "");
     try {
+      setLoading(true);
+      showLoadingOverlay(t("tokenAmountTransferMessage") || "");
       const approval = await approveAmount();
       await approval.wait();
       showLoadingOverlay(t("contractTransferMessage") || "");

@@ -80,6 +80,10 @@ describe("useCryptoPayment", () => {
       walletProviderValue: {
         wallet,
       },
+      loadingOverlayValue: {
+        showLoadingOverlay: jest.fn(),
+        hideLoadingOverlay: jest.fn(),
+      },
     });
     await waitForPromises();
   });

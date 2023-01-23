@@ -77,21 +77,21 @@ function renderAllProviders(
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18n}>
           {renderProvider(
-            WalletProvider,
-            WalletContext,
-            walletProviderValue,
+            LoadingOverlayProvider,
+            LoadingOverlayContext,
+            loadingOverlayValue,
             renderProvider(
-              NetworkProvider,
-              NetworkContext,
-              networkProviderValue,
+              WalletProvider,
+              WalletContext,
+              walletProviderValue,
               renderProvider(
-                CryptoPaymentProvider,
-                CryptoPaymentContext,
-                cryptoPaymentProviderValue,
+                NetworkProvider,
+                NetworkContext,
+                networkProviderValue,
                 renderProvider(
-                  LoadingOverlayProvider,
-                  LoadingOverlayContext,
-                  loadingOverlayValue,
+                  CryptoPaymentProvider,
+                  CryptoPaymentContext,
+                  cryptoPaymentProviderValue,
                   children,
                 ),
               ),
