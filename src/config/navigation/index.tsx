@@ -29,6 +29,7 @@ import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import GivingIconOn from "./assets/GivingIconOn";
 import GivingIconOff from "./assets/GivingIconOff";
+import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -118,15 +119,17 @@ export default function Navigation({
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      <CurrentUserProvider>
-        <WalletProvider>
-          <NetworkProvider>
-            <CryptoPaymentProvider>
-              <RootNavigator />
-            </CryptoPaymentProvider>
-          </NetworkProvider>
-        </WalletProvider>
-      </CurrentUserProvider>
+      <LoadingOverlayProvider>
+        <CurrentUserProvider>
+          <WalletProvider>
+            <NetworkProvider>
+              <CryptoPaymentProvider>
+                <RootNavigator />
+              </CryptoPaymentProvider>
+            </NetworkProvider>
+          </WalletProvider>
+        </CurrentUserProvider>
+      </LoadingOverlayProvider>
     </NavigationContainer>
   );
 }

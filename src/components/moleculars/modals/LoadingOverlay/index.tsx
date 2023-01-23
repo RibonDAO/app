@@ -13,11 +13,11 @@ function LoadingOverlay({ text, visible = false }: Props): JSX.Element {
     <View style={styles.container}>
       <Modal
         isVisible={visible}
-        animationIn="slideInRight"
-        backdropOpacity={0.5}
+        animationIn="slideInUp"
+        backdropOpacity={0.75}
       >
         <View style={styles.centerDiv}>
-          <ActivityIndicator />
+          <ActivityIndicator size={40}/>
           {text && <Text style={styles.message}>{text}</Text>}
         </View>
       </Modal>

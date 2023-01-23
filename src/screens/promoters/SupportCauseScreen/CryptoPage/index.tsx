@@ -82,6 +82,7 @@ function CryptoPage(): JSX.Element {
     logEvent("toastNotification_view", {
       status: "transactionProcessed",
     });
+    resetPage();
 
     showToast(t("successDonationMessage", { amount, tokenSymbol }));
   };

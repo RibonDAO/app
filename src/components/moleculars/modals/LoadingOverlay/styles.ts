@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { defaultParagraphLarge } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,21 +11,25 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    zIndex: theme.zindex.loading,
+    zIndex: 1,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "transparent",
   },
   centerDiv: {
     padding: 16,
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "transparent",
   },
   message: {
-    marginLeft: 8,
-    color: theme.colors.gray40,
+    ...defaultParagraphLarge,
+    color: theme.colors.green30,
+    fontSize: 24,
+    textAlign: "center",
   },
 });
 
