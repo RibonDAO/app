@@ -14,8 +14,10 @@ import Navigation from "./src/config/navigation";
 import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
 import { initializeApi } from "./src/services/api";
+import { AnimatedAppLoader } from "./src/components/AnimatedAppLoader";
+import SplashImage from "./src/assets/images/splash.png";
 
-export default function App() {
+function MainScreen() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
@@ -53,4 +55,12 @@ export default function App() {
       </WalletConnectProvider>
     );
   }
+}
+
+export default function App() {
+  return (
+    <AnimatedAppLoader image={SplashImage}>
+      <MainScreen />
+    </AnimatedAppLoader>
+  );
 }
