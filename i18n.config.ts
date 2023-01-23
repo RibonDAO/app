@@ -9,7 +9,7 @@ const resources = {
   },
   pt: {
     translation: pt,
-  }
+  },
 };
 
 i18n

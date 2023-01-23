@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   text: {
-    color: theme.colors.green30
+    color: theme.colors.green30,
   },
 });
 
