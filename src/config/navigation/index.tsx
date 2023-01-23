@@ -24,7 +24,6 @@ import LayoutHeader from "components/moleculars/LayoutHeader";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
-import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -65,15 +64,6 @@ function RootNavigator() {
         name="DonationDoneScreen"
         component={DonationDoneScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
-      />
-
-      <BottomTab.Screen
-        name="ChooseCauseScreen"
-        component={ChooseCauseScreen}
-        options={{
-          title: "ChooseCausesScreen",
-          header: () => <Header rightComponent={<LayoutHeader />} />,
-        }}
       />
 
       <Stack.Screen
@@ -121,6 +111,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
           header: () => <Header rightComponent={<LayoutHeader />} />,
+          lazy: false,
         }}
       />
 
@@ -132,6 +123,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
           header: () => <Header rightComponent={<LayoutHeader hideTicket />} />,
+          lazy: false,
         }}
       />
 
@@ -144,6 +136,7 @@ function BottomTabNavigator() {
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
           headerShown: false,
           header: () => <Header rightComponent={<LayoutHeader />} />,
+          lazy: false,
         }}
       />
     </BottomTab.Navigator>

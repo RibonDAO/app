@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 import { Text, View } from "components/Themed";
 import { RootTabScreenProps } from "types";
-import { walletTruncate } from "lib/formatters/walletTruncate";
-import { useWalletContext } from "contexts/walletContext";
 import CryptoPage from "screens/promoters/SupportCauseScreen/CryptoPage";
 
 const styles = StyleSheet.create({
@@ -45,7 +43,6 @@ const styles = StyleSheet.create({
 export default function SupportCauseScreen({
   navigation,
 }: RootTabScreenProps<"PromotersScreen">) {
-  const { wallet, connectWallet, killSession } = useWalletContext();
   const [pageType] = useState<"card" | "crypto">("crypto");
 
   if (pageType === "crypto") {
@@ -60,19 +57,6 @@ export default function SupportCauseScreen({
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      {!wallet && (
-        <TouchableOpacity onPress={connectWallet} style={styles.buttonStyle}>
-          <Text style={styles.buttonTextStyle}>Connect a Wallet</Text>
-        </TouchableOpacity>
-      )}
-      {wallet && (
-        <>
-          <Text>{walletTruncate(wallet)}</Text>
-          <TouchableOpacity onPress={killSession} style={styles.buttonStyle}>
-            <Text style={styles.buttonTextStyle}>Log out</Text>
-          </TouchableOpacity>
-        </>
-      )}
     </View>
   );
 }
