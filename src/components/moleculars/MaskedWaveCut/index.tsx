@@ -4,7 +4,7 @@ import { Image, ImageStyle } from "react-native";
 import WaveCut from "components/vectors/WaveCut";
 
 type Props = {
-  image: string;
+  image?: string;
   imageStyles?: ImageStyle;
 };
 function MaskedWaveCut({ image, imageStyles }: Props) {
