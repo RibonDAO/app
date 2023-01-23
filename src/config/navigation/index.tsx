@@ -131,7 +131,7 @@ function BottomTabNavigator() {
           title: "Giving",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
-          header: () => <Header rightComponent={<LayoutHeader />} />,
+          header: () => <Header rightComponent={<LayoutHeader hideTicket />} />,
         }}
       />
 
