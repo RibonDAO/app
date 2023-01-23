@@ -3,22 +3,13 @@ import { stylizedTitleLarge } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
-  desktopContainer: {
+  container: {
     width: "100%",
     height: "100%",
-    flex: 1,
     padding: 32,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: theme.colors.neutral10,
-  },
-  container: {
-    width: "100%",
-    height: "100%",
-    flex: 1,
-    padding: 16,
-    borderRadius: 8,
     backgroundColor: theme.colors.neutral10,
   },
   title: {
@@ -28,6 +19,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     marginTop: 24,
+    resizeMode: "contain",
   },
   donateButton: {
     marginTop: 34,

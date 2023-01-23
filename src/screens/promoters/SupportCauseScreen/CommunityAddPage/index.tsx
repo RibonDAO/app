@@ -27,18 +27,14 @@ function CommunityAddPage({
   }
 
   return (
-    <View style={styles.desktopContainer}>
-      <View style={styles.container}>
-        <Text style={styles.title}>
-          {t("title", { value: amount })}
-        </Text>
-        <Image source={communityAddImage()} style={styles.image} />
-        <Button
-          text={t("button", { value: amount })}
-          onPress={popNavigation}
-          customStyles={styles.donateButton}
-        />
-      </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>{t("title", { value: amount })}</Text>
+      <Image source={communityAddImage()} style={styles.image} />
+      <Button
+        text={t("button", { value: amount })}
+        onPress={popNavigation}
+        customStyles={styles.donateButton}
+      />
     </View>
   );
 }
