@@ -37,7 +37,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator initialRouteName="ReceiveTicketScreen">
+    <Stack.Navigator>
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
@@ -97,6 +97,7 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
+      initialRouteName="CausesScreen"
       screenOptions={{
         tabBarActiveTintColor: theme.colors.green30,
         tabBarStyle: { ...S.tabBar },
