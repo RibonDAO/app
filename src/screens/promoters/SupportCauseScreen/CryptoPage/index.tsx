@@ -16,6 +16,7 @@ import Button from "components/atomics/buttons/Button";
 import { showToast } from "lib/Toast";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { logError } from "services/crashReport";
+import { useNavigation } from "hooks/useNavigation";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
 
@@ -33,6 +34,7 @@ function CryptoPage(): JSX.Element {
     loading: loadingCryptoPayment,
     setLoading,
   } = useCryptoPayment();
+  const { navigateTo } = useNavigation();
 
   const [refreshing, setRefreshing] = useState(false);
   const { causes, refetch: refetchCauses } = useCauses();
@@ -98,7 +100,7 @@ function CryptoPage(): JSX.Element {
   };
 
   const handleCommunityAddClick = () => {
-    console.log("handleCommunityAddClick");
+    navigateTo("CommunityAddModal", { amount: `${amount} ${tokenSymbol}` });
   };
 
   const communityAddText = () => {

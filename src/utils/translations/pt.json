@@ -36,7 +36,11 @@
       "userBalanceText": "Seu saldo: ",
       "refundText": "*Pagamentos em criptomoeda não são estornáveis",
       "tokenAmountTransferMessage": "Aprovando quantidade de tokens pra transação...",
-      "contractTransferMessage": "Transferindo pro contrato..."
+      "contractTransferMessage": "Transferindo pro contrato...",
+      "communityAddPage": {
+        "title": "Como a comunidade aumenta a sua doação de {{value}}?",
+        "button": "Doar {{value}}"
+      }
     }
   }
 }

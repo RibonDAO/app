@@ -37,7 +37,11 @@
       "refundText": "*Cryptocurrency payments are non-refundable",
       "tokenAmountTransferMessage": "Approving token amount transfer...",
       "contractTransferMessage": "Transferring to contract...",
-      "successDonationMessage": "You successfully donated {{amount}} {{tokenSymbol}}"
+      "successDonationMessage": "You successfully donated {{amount}} {{tokenSymbol}}",
+      "communityAddPage": {
+        "title": "How does the community increase your {{value}} donation?",
+        "button": "Donate {{value}}"
+      }
     }
   }
 }
