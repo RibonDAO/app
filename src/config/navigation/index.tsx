@@ -33,6 +33,7 @@ import ProfileIconOff from "./assets/ProfileIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
+import CommunityAddPage from "screens/promoters/SupportCauseScreen/CommunityAddPage";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -86,6 +87,13 @@ function RootNavigator() {
 
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="DonateModal" component={DonateModal} />
+        <Stack.Screen
+          name="CommunityAddModal"
+          component={CommunityAddPage}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
