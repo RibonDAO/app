@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import ChooseCauseModal from "../../ChooseCauseScreen";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   visible: boolean;
@@ -36,6 +37,9 @@ const fadeIn = {
 
 function AnimationModal({ visible, setVisible }: Props): JSX.Element {
   const { navigateTo } = useNavigation();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "donations.receiveTicketScreen.animationModal",
+  });
 
   function handleModalHide() {
     navigateTo("ChooseCauseScreen");
@@ -77,7 +81,7 @@ function AnimationModal({ visible, setVisible }: Props): JSX.Element {
             </View>
           </View>
 
-          <Animatable.Text animation={fadeIn} duration={4000} style={S.text}>Recebendo ticket</Animatable.Text>
+          <Animatable.Text animation={fadeIn} duration={4000} style={S.text}>{t("text")}</Animatable.Text>
         </View>
       </BlankModal>
     );

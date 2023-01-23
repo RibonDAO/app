@@ -1,12 +1,16 @@
 
 import { Cause } from "@ribon.io/shared/types";
 import { Text, View } from "components/Themed";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import CauseImage from "./CauseImage";
 import S from "./styles";
 import { useCausesContext } from "contexts/causesContext";
+import { useTranslation } from "react-i18next";
 
 function ChooseCauseScreen(): JSX.Element {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "donations.chooseCauseScreen",
+  });
   const { activeCauses } = useCausesContext();
 
   const causesList = useCallback(
@@ -25,7 +29,7 @@ function ChooseCauseScreen(): JSX.Element {
   function renderModal() {
     return (
       <View style={S.container}>
-        <Text style={S.text}>Escolha uma causa</Text>
+        <Text style={S.text}>{t("title")}</Text>
 
         {causesList()}
       </View>
