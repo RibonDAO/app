@@ -42,10 +42,10 @@
       [
         "expo-notifications",
         {
-          "icon": "./src/assets/sounds/notification-icon.png",
+          "icon": "./src/assets/sounds/notificationicon.png",
           "color": "#ffffff",
           "sounds": [
-            "./src/assets/sounds/notification-sound.wav"
+            "./src/assets/sounds/notificationsound.wav"
           ]
         }
       ]
