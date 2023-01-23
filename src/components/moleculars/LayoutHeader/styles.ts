@@ -3,7 +3,7 @@ import { theme } from "@ribon.io/shared";
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex"
+    display: "flex",
   },
   supportContainer: {
     position: "absolute",
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     display: "flex",
     flexDirection: "column",
-    paddingHorizontal: 12
+    paddingHorizontal: 12,
   },
   configItem: {
     display: "flex",
@@ -31,40 +31,39 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 53,
     borderColor: theme.colors.gray20,
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
   },
   text: {
     paddingLeft: 8,
   },
   iconContainer: {
-    width: "10%"
+    width: "10%",
   },
   textContainer: {
-    width: "60%"
+    width: "60%",
   },
   ctaContainer: {
     width: "30%",
-    paddingRight: 8
+    paddingRight: 8,
   },
   configContainer: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   ticketSection: {
     paddingVertical: 5,
     paddingHorizontal: 7,
-    borderColor: theme.colors.green30,
     borderRadius: 4,
     borderWidth: 1,
     flexDirection: "row",
-    marginRight: 12
+    marginRight: 12,
   },
   ticketCounter: {
     marginRight: 4,
     fontSize: 14,
     fontWeight: "bold",
     color: theme.colors.green30,
-  }
+  },
 });
 
 export default styles;

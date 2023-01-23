@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "react-native";
 import { RootStackScreenProps } from "types";
-import { useDonations, useUsers } from "@ribon.io/shared/hooks";
+import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import Button from "components/atomics/buttons/Button";
@@ -31,6 +31,7 @@ export default function DonateModal({
   const [email, setEmail] = useState(currentUser?.email || "");
   const { donate } = useDonations(currentUser?.id);
   const { navigateTo, popNavigation } = useNavigation();
+  const { refetch: refetchCanDonate } = useCanDonate(RIBON_INTEGRATION_ID);
 
   useEffect(() => {
     if (isValidEmail(email)) {
@@ -54,6 +55,7 @@ export default function DonateModal({
         const user = await findOrCreateUser(email);
         setCurrentUser(user);
         await donate(RIBON_INTEGRATION_ID, nonProfit.id, email);
+        refetchCanDonate();
         popNavigation();
         setTimeout(() => {
           navigateTo("DonationDoneScreen", { nonProfit });

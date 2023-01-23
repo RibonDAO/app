@@ -19,4 +19,4 @@ jobs:
         with:
           branch: main-promotion
           title: Deploy
-          body: ':rocket:'
+          body: ":rocket:"

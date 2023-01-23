@@ -1,57 +1,90 @@
-
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Text, View } from "components/Themed";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
 import SupportIcon from "components/vectors/SupportIcon";
 import LetterIcon from "components/vectors/LetterIcon";
 import { TouchableOpacity, Linking } from "react-native";
-import Modal from "react-native-modal"
+import Modal from "react-native-modal";
 import S from "./styles";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import RoundButton from "components/atomics/RoundButton";
 import TicketModal from "./TicketModal";
-import ChooseCauseModal from "./ChooseCauseModal";
+import BlockedDonationModal from "./BlockedDonationModal";
 import { useCanDonate } from "@ribon.io/shared";
-import useVoucher from "hooks/useVoucher";
 import TicketIcon from "components/vectors/TicketIcon";
-import ConfigItem from "./ConfigItem";
+import GrayTicketIcon from "components/vectors/GrayTicketIcon";
+import ConfigItem from "../ConfigItem";
+import { useNavigation } from "hooks/useNavigation";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { theme } from "@ribon.io/shared";
 
 function LayoutHeader(): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
-  const [causesModalVisible, setCausesModalVisible] = useState(false);
+  const [blockedDonationModalVisible, setBlockedDonationModalVisible] =
+    useState(false);
+  const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
-  const { canDonate } = useCanDonate(2);
-  const { isVoucherAvailable } = useVoucher();
-  const canDonateAndHasVoucher = canDonate && isVoucherAvailable();
+  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const ticketColor = canDonate ? theme.colors.green30 : theme.colors.gray30;
+  const ticketIcon = canDonate ? TicketIcon : GrayTicketIcon;
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
-  };
+  }
 
-  function logUserOut() {
+  const renderTicketCounter = useCallback(() => {
+    return canDonate ? 1 : 0;
+  }, [canDonate]);
+
+  function handleLogout() {
     logoutCurrentUser();
+    navigateTo("CausesScreen");
     toggleModal();
-  };
+  }
 
-  function logButton() {
-    return currentUser ?
-      <RoundButton active={false} text="Sair" onPress={logUserOut} />
-      : <RoundButton text="Doar" onPress={toggleModal} />
+  function handleUserLogin() {
+    return currentUser ? (
+      <RoundButton active={false} text="Sair" onPress={handleLogout} />
+    ) : (
+      <RoundButton text="Doar" onPress={toggleModal} />
+    );
   }
 
   function toggleTicketModal() {
     setTicketModalVisible(!ticketModalVisible);
-  };
-
-  function renderTicketModal() {
-    return <TicketModal visible={ticketModalVisible} setVisible={setTicketModalVisible} />
   }
 
-  function renderCausesModal() {
-    return <ChooseCauseModal visible={causesModalVisible} setVisible={setCausesModalVisible} />
+  function toggleBlockedDonationModal() {
+    setBlockedDonationModalVisible(!ticketModalVisible);
+  }
+
+  function renderTicketModal() {
+    return (
+      <TicketModal
+        visible={ticketModalVisible}
+        setVisible={setTicketModalVisible}
+      />
+    );
+  }
+
+  function renderBlockedDonationModal() {
+    return (
+      <BlockedDonationModal
+        visible={blockedDonationModalVisible}
+        setVisible={setBlockedDonationModalVisible}
+      />
+    );
+  }
+
+  function handleTicketClick() {
+    if (canDonate) {
+      toggleTicketModal();
+    } else {
+      toggleBlockedDonationModal();
+    }
   }
 
   function linkToSupport() {
@@ -83,9 +116,7 @@ function LayoutHeader(): JSX.Element {
           <ConfigItem
             icon={LetterIcon}
             text={currentUser ? currentUser?.email : "Fazer login"}
-            cta={currentUser ?
-              <RoundButton active={false} text="Sair" onPress={logUserOut} />
-              : <RoundButton text="Doar" onPress={toggleModal} />}
+            cta={handleUserLogin()}
           />
         </View>
       </Modal>
@@ -94,10 +125,12 @@ function LayoutHeader(): JSX.Element {
 
   return (
     <View style={S.configContainer}>
-      <TouchableOpacity style={S.container} onPress={toggleTicketModal}>
-        <View style={S.ticketSection}>
-          <Text style={S.ticketCounter}>{canDonateAndHasVoucher ? 1 : 0}</Text>
-          <TicketIcon />
+      <TouchableOpacity style={S.container} onPress={handleTicketClick}>
+        <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
+          <Text style={{ ...S.ticketCounter, color: ticketColor }}>
+            {renderTicketCounter()}
+          </Text>
+          {ticketIcon()}
         </View>
       </TouchableOpacity>
 
@@ -107,7 +140,7 @@ function LayoutHeader(): JSX.Element {
 
       {renderTicketModal()}
 
-      {renderCausesModal()}
+      {renderBlockedDonationModal()}
 
       {renderConfigModal()}
     </View>
