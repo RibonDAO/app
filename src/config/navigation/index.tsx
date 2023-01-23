@@ -91,7 +91,7 @@ function RootNavigator() {
           name="CommunityAddModal"
           component={CommunityAddPage}
           options={{
-            headerShown: false,
+            headerTitle: "",
           }}
         />
       </Stack.Group>

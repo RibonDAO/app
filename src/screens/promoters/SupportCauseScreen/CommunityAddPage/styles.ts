@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   donateButton: {
-    marginTop: 34,
+    marginTop: 24,
   },
 });
 
