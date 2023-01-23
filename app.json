@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "native-dapp",
-    "slug": "native-dapp",
+    "name": "app",
+    "slug": "app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
@@ -20,7 +20,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ribondapp.nativedapp"
+      "bundleIdentifier": "com.ribon.app"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -28,15 +28,10 @@
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ribondapp.nativedapp"
+      "package": "com.ribon.app"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "0624ff92-f90a-4692-9b4a-c32b0a151bd5"
-      }
     },
     "plugins": [
       [
@@ -49,6 +44,11 @@
           ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960"
+      }
+    }
   }
 }
