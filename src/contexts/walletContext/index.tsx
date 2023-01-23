@@ -36,7 +36,7 @@ function WalletProvider({ children }: Props) {
   const connector = useWalletConnect();
 
   useEffect(() => {
-    setWallet(connector.accounts[0]);
+    if(connector.accounts[0]) setWallet(connector.accounts[0]);
   }, [connector]);
 
   const connectWallet = useCallback(async () => {
