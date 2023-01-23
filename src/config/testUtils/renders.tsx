@@ -19,6 +19,10 @@ import CryptoPaymentProvider, {
   ICryptoPaymentContext,
 } from "contexts/cryptoPaymentContext";
 import i18n from "../../../i18n-test";
+import LoadingOverlayProvider, {
+  ILoadingOverlayContext,
+  LoadingOverlayContext,
+} from "contexts/loadingOverlayContext";
 
 export interface RenderWithContextResult {
   component: RenderResult;
@@ -53,6 +57,7 @@ export type RenderComponentProps = {
   locationState?: Record<any, any>;
   networkProviderValue?: Partial<INetworkContext>;
   walletProviderValue?: Partial<IWalletContext>;
+  loadingOverlayValue?: Partial<ILoadingOverlayContext>;
   cryptoPaymentProviderValue?: Partial<ICryptoPaymentContext>;
 };
 
@@ -62,6 +67,7 @@ function renderAllProviders(
     networkProviderValue = {},
     walletProviderValue = {},
     cryptoPaymentProviderValue = {},
+    loadingOverlayValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -82,7 +88,12 @@ function renderAllProviders(
                 CryptoPaymentProvider,
                 CryptoPaymentContext,
                 cryptoPaymentProviderValue,
-                children,
+                renderProvider(
+                  LoadingOverlayProvider,
+                  LoadingOverlayContext,
+                  loadingOverlayValue,
+                  children,
+                ),
               ),
             ),
           )}

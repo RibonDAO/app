@@ -10,7 +10,7 @@ export function expectTextToBeInTheDocument(text: string) {
 }
 
 export function expectTextNotToBeInTheDocument(text: string) {
-  return expect(screen.queryByText(text)).toBeUndefined();
+  return expect(screen.queryByText(text)).toEqual(null);
 }
 
 export function expectDisplayValueToBeInTheDocument(value: string) {
