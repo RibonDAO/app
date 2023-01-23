@@ -23,6 +23,7 @@ export type RootTabParamList = {
   CausesScreen: undefined;
   ProfileScreen: undefined;
   PromotersScreen: undefined;
+  ChooseCauseScreen: undefined;
 };
 
 export type RootStackParamList = {
@@ -30,10 +31,9 @@ export type RootStackParamList = {
   DonateModal: ModalParamList;
   DonationDoneScreen: DonationDoneParamsList;
   NotFound: undefined;
-  ChooseCauseScreen: undefined;
   ReceiveTicketScreen: undefined;
   CausesScreen: undefined;
-  ChooseCausesScreen: undefined;
+  ChooseCauseScreen: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
