@@ -19,6 +19,10 @@ import CryptoPaymentProvider, {
   ICryptoPaymentContext,
 } from "contexts/cryptoPaymentContext";
 import i18n from "../../../i18n-test";
+import LoadingOverlayProvider, {
+  ILoadingOverlayContext,
+  LoadingOverlayContext,
+} from "contexts/loadingOverlayContext";
 
 export interface RenderWithContextResult {
   component: RenderResult;
@@ -53,6 +57,7 @@ export type RenderComponentProps = {
   locationState?: Record<any, any>;
   networkProviderValue?: Partial<INetworkContext>;
   walletProviderValue?: Partial<IWalletContext>;
+  loadingOverlayValue?: Partial<ILoadingOverlayContext>;
   cryptoPaymentProviderValue?: Partial<ICryptoPaymentContext>;
 };
 
@@ -62,6 +67,7 @@ function renderAllProviders(
     networkProviderValue = {},
     walletProviderValue = {},
     cryptoPaymentProviderValue = {},
+    loadingOverlayValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -71,18 +77,23 @@ function renderAllProviders(
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18n}>
           {renderProvider(
-            WalletProvider,
-            WalletContext,
-            walletProviderValue,
+            LoadingOverlayProvider,
+            LoadingOverlayContext,
+            loadingOverlayValue,
             renderProvider(
-              NetworkProvider,
-              NetworkContext,
-              networkProviderValue,
+              WalletProvider,
+              WalletContext,
+              walletProviderValue,
               renderProvider(
-                CryptoPaymentProvider,
-                CryptoPaymentContext,
-                cryptoPaymentProviderValue,
-                children,
+                NetworkProvider,
+                NetworkContext,
+                networkProviderValue,
+                renderProvider(
+                  CryptoPaymentProvider,
+                  CryptoPaymentContext,
+                  cryptoPaymentProviderValue,
+                  children,
+                ),
               ),
             ),
           )}

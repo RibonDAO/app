@@ -2506,6 +2506,16 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
+"@react-native-masked-view/masked-view@0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.2.8.tgz#34405a4361882dae7c81b1b771fe9f5fbd545a97"
+  integrity sha512-+1holBPDF1yi/y0uc1WB6lA5tSNHhM7PpTMapT3ypvSnKQ9+C6sy/zfjxNxRA/llBQ1Ci6f94EaK56UCKs5lTA==
+
+"@react-native-picker/picker@^2.4.8":
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.8.tgz#a1a21f3d6ecadedbc3f0b691a444ddd7baa081f8"
+  integrity sha512-5NQ5XPo1B03YNqKFrV6h9L3CQaHlB80wd4ETHUEABRP2iLh7FHLVObX2GfziD+K/VJb8G4KZcZ23NFBFP1f7bg==
+
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@react-native/assets/-/assets-1.0.0.tgz#c6f9bf63d274bafc8e970628de24986b30a55c8e"
@@ -2577,10 +2587,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.0.17":
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.17.tgz#b0c9d038bc0297ada89b8ea4909e45a72c15a114"
-  integrity sha512-utdiEme0GEZXRrhwgfV0Y+EziQ9F8l52kI4fTbeDbJ1pxHQTfXCm9y03jyJCMwqGHYXtF07rdf3Sef0DH1VT5w==
+"@ribon.io/shared@^1.0.19":
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.19.tgz#139d0e18f0065d43f65f4ef993a3539789203531"
+  integrity sha512-BFK+sICPOHlyYUs+zdEDrltIyc8iYShK1s5IN+PVGRTMvSFQimtprO6OR7dD4b+bC+iiM//7fqAglYgeYHH+/A==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -12662,6 +12672,11 @@ react-native-codegen@^0.70.6:
     flow-parser "^0.121.0"
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
+
+react-native-dropdown-picker@^5.4.4:
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.4.tgz#59da1ecd4bc6d1fb698ed57f4ce615adf3944e90"
+  integrity sha512-MGsFc3Oi6Rc94WoJk3oOGfPe6IVscCrWn1DRCUDB508U4Wmd2b+EYONpsgiXQ89ESoBcOE3qQR6gkY2CVxoC+Q==
 
 react-native-get-random-values@^1.7.2, react-native-get-random-values@^1.8.0:
   version "1.8.0"

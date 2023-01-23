@@ -17,7 +17,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     color: theme.colors.orange40,
     fontWeight: "bold",
+    marginRight: 4,
+    flex: 3,
+  },
+  inputsContainer: {
+    flexDirection: "row",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 8,
+  },
+  dropdownContainerStyles: {
+    flex: 2,
   },
 });
 
