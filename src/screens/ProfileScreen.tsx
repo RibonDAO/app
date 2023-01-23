@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { Text, View } from "components/Themed";
-import { RootTabScreenProps } from "types";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 
@@ -48,9 +47,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
 });
-export default function ProfileScreen({
-  navigation,
-}: RootTabScreenProps<"ProfileScreen">) {
+export default function ProfileScreen() {
   const connector = useWalletConnect();
 
   const connectWallet = React.useCallback(

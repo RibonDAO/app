@@ -1,19 +1,25 @@
-
 import { Text, View } from "components/Themed";
 import Modal from "react-native-modal";
 import S from "./styles";
 
 type Props = {
-  title: string;
+  title?: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
+  onModalHide?: () => void;
   children: JSX.Element;
-}
+};
 
-function BlankModal({ title, visible, setVisible, children }: Props): JSX.Element {
+function BlankModal({
+  title,
+  visible,
+  setVisible,
+  children,
+  onModalHide,
+}: Props): JSX.Element {
   function toggleModal() {
     setVisible(!visible);
-  };
+  }
 
   function renderModal() {
     return (
@@ -23,9 +29,10 @@ function BlankModal({ title, visible, setVisible, children }: Props): JSX.Elemen
         hasBackdrop
         backdropOpacity={0.5}
         onBackdropPress={toggleModal}
+        onModalHide={onModalHide}
       >
         <View style={S.container}>
-          <Text style={S.title}>{title}</Text>
+          {title && <Text style={S.title}>{title}</Text>}
           {children}
         </View>
       </Modal>

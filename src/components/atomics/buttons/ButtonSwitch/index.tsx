@@ -33,7 +33,7 @@ function ButtonSwitch({
       </View>
       <Switch
         onValueChange={() => handleChange()}
-        style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }}
+        style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
         value={checked}
         trackColor={{ false: green30, true: green30 }}
         thumbColor={checked ? neutral10 : neutral10}

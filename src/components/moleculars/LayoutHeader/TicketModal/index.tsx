@@ -1,21 +1,22 @@
-
 import CenteredModal from "components/moleculars/modals/CenteredModal";
-import DangerIcon from "components/vectors/DangerIcon";
+import Ticket from "components/vectors/Ticket";
 
 type Props = {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-}
+};
 
 function TicketModal({ visible, setVisible }: Props): JSX.Element {
   function renderModal() {
     return (
       <CenteredModal
-        title="Doar juntos para mudar vidas!"
-        icon={<DangerIcon />}
-        description="Você tem um ticket para receber"
+        title="Legal! Você tem 1 vale para doar :)"
+        icon={<Ticket />}
+        buttonText="Vamos lá!"
+        description="Você pode destiná-lo para qualquer projeto"
         visible={visible}
         setVisible={setVisible}
+        primaryButtonClick={() => setVisible(false)}
       />
     );
   }
