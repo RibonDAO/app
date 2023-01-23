@@ -1,6 +1,7 @@
 import React from "react";
 import MaskedView from "@react-native-masked-view/masked-view";
-import { Image, ImageStyle } from "react-native";
+import { ImageStyle } from "react-native";
+import Image from "components/atomics/Image";
 import WaveCut from "components/vectors/WaveCut";
 
 type Props = {

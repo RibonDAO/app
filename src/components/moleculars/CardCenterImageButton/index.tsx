@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import VerifiedBadge from "components/vectors/VerifiedBadge";
 import S from "./styles";
 import { Text, View } from "components/Themed";
-import { Image } from "react-native";
+import Image from "components/atomics/Image";
 
 export type Props = {
   image: string;
