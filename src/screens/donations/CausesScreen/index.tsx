@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNonProfits, useCauses } from "@ribon.io/shared/hooks";
+import { useNonProfits, useCauses, useCanDonate } from "@ribon.io/shared/hooks";
 import { ScrollView } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
@@ -7,13 +7,24 @@ import { Text, View } from "components/Themed";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
 import S from "./styles";
+import TicketModal from "./TicketModal";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 
 export default function CausesScreen() {
   const { nonProfits, isLoading } = useNonProfits();
   const { causes } = useCauses();
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
+  const [ticketModalVisible, setTicketModalVisible] = useState(true);
   const { navigateTo } = useNavigation();
+  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
   const { t } = useTranslation();
+
+  function renderTicketModal() {
+    return canDonate && <TicketModal
+      visible={ticketModalVisible}
+      setVisible={setTicketModalVisible}
+    />
+  }
 
   const causesFilter = () => {
     const causesApi = causes.filter((cause) => cause.active);
@@ -65,6 +76,8 @@ export default function CausesScreen() {
           </View>
         ))}
       </ScrollView>
+
+      {renderTicketModal()}
     </View>
   );
 }

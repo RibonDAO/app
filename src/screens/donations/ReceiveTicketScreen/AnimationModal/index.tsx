@@ -5,9 +5,7 @@ import UserIcon from "components/vectors/UserIcon";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
 import * as Animatable from "react-native-animatable";
 import S from "./styles";
-import { useEffect, useState } from "react";
-import ChooseCauseModal from "../../ChooseCauseScreen";
-import { TouchableOpacity } from "react-native";
+import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 
