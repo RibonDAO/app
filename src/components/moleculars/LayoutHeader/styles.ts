@@ -4,6 +4,9 @@ import { theme } from "@ribon.io/shared";
 const styles = StyleSheet.create({
   container: {
     display: "flex",
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
   supportContainer: {
     position: "absolute",

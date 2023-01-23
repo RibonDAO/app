@@ -7,20 +7,23 @@ import SupportIcon from "components/vectors/SupportIcon";
 import LetterIcon from "components/vectors/LetterIcon";
 import { TouchableOpacity, Linking } from "react-native";
 import Modal from "react-native-modal";
-import S from "./styles";
-import ChangeLanguageItem from "./ChangeLanguageItem";
 import RoundButton from "components/atomics/RoundButton";
-import TicketModal from "./TicketModal";
-import BlockedDonationModal from "./BlockedDonationModal";
 import { useCanDonate } from "@ribon.io/shared";
 import TicketIcon from "components/vectors/TicketIcon";
 import GrayTicketIcon from "components/vectors/GrayTicketIcon";
-import ConfigItem from "../ConfigItem";
 import { useNavigation } from "hooks/useNavigation";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared";
+import ConfigItem from "../ConfigItem";
+import BlockedDonationModal from "./BlockedDonationModal";
+import TicketModal from "./TicketModal";
+import ChangeLanguageItem from "./ChangeLanguageItem";
+import S from "./styles";
 
-function LayoutHeader(): JSX.Element {
+type Props = {
+  hideTicket?: boolean;
+}
+function LayoutHeader({hideTicket = false}: Props): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [blockedDonationModalVisible, setBlockedDonationModalVisible] =
@@ -35,9 +38,7 @@ function LayoutHeader(): JSX.Element {
     setMenuVisible(!menuVisible);
   }
 
-  const renderTicketCounter = useCallback(() => {
-    return canDonate ? 1 : 0;
-  }, [canDonate]);
+  const renderTicketCounter = useCallback(() => canDonate ? 1 : 0, [canDonate]);
 
   function handleLogout() {
     logoutCurrentUser();
@@ -62,6 +63,8 @@ function LayoutHeader(): JSX.Element {
   }
 
   function renderTicketModal() {
+    if(hideTicket) return (<View />);
+
     return (
       <TicketModal
         visible={ticketModalVisible}
@@ -71,6 +74,8 @@ function LayoutHeader(): JSX.Element {
   }
 
   function renderBlockedDonationModal() {
+    if(hideTicket) return (<View />);
+
     return (
       <BlockedDonationModal
         visible={blockedDonationModalVisible}
@@ -125,14 +130,14 @@ function LayoutHeader(): JSX.Element {
 
   return (
     <View style={S.configContainer}>
-      <TouchableOpacity style={S.container} onPress={handleTicketClick}>
+      {!hideTicket && <TouchableOpacity style={S.container} onPress={handleTicketClick}>
         <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
           <Text style={{ ...S.ticketCounter, color: ticketColor }}>
             {renderTicketCounter()}
           </Text>
           {ticketIcon()}
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity>}
 
       <TouchableOpacity style={S.container} onPress={toggleModal}>
         <CogIcon />
