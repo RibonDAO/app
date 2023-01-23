@@ -5,7 +5,7 @@ import Image from "components/atomics/Image";
 import WaveCut from "components/vectors/WaveCut";
 
 type Props = {
-  image: string;
+  image?: string;
   imageStyles?: ImageStyle;
 };
 function MaskedWaveCut({ image, imageStyles }: Props) {

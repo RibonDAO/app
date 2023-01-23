@@ -21,7 +21,8 @@ import { stringToNumber } from "lib/formatters/stringToNumberFormatter";
 import useTokenDecimals from "hooks/useTokenDecimals";
 import { useWalletContext } from "contexts/walletContext";
 import { BigNumber, utils } from "ethers";
-import { showToast } from "lib/Toast";
+import { useLoadingOverlay } from "contexts/loadingOverlayContext";
+import { useTranslation } from "react-i18next";
 
 export type onDonationToContractSuccessProps = (
   hash: string,
@@ -68,6 +69,10 @@ function CryptoPaymentProvider({ children }: Props) {
   const [tokenSymbol, setTokenSymbol] = useState("");
   const { tokenDecimals } = useTokenDecimals();
   const { wallet } = useWalletContext();
+  const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "promoters.supportCausePage",
+  });
 
   const contract = useContract({
     address: currentNetwork.ribonContractAddress,
@@ -123,9 +128,10 @@ function CryptoPaymentProvider({ children }: Props) {
   ) => {
     try {
       setLoading(true);
+      showLoadingOverlay(t("tokenAmountTransferMessage") || "");
       const approval = await approveAmount();
-      showToast("Waiting for approval");
       await approval.wait();
+      showLoadingOverlay(t("contractTransferMessage") || "");
       const response = await donateToContract();
 
       const { hash } = response;
@@ -138,6 +144,7 @@ function CryptoPaymentProvider({ children }: Props) {
       });
       logError(error);
     } finally {
+      hideLoadingOverlay();
       setLoading(false);
     }
   };

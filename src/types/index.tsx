@@ -19,10 +19,15 @@ export type DonationDoneParamsList = {
   nonProfit: NonProfit;
 };
 
+export type CommunityAddModalParamList = {
+  amount: string;
+};
+
 export type RootTabParamList = {
   CausesScreen: undefined;
   ProfileScreen: undefined;
   PromotersScreen: undefined;
+  ChooseCauseScreen: undefined;
 };
 
 export type RootStackParamList = {
@@ -30,6 +35,10 @@ export type RootStackParamList = {
   DonateModal: ModalParamList;
   DonationDoneScreen: DonationDoneParamsList;
   NotFound: undefined;
+  ReceiveTicketScreen: undefined;
+  CausesScreen: undefined;
+  ChooseCauseScreen: undefined;
+  CommunityAddModal: CommunityAddModalParamList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

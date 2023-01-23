@@ -5,6 +5,17 @@
   "donations": {
     "causesScreen": {
       "title": "Donate to a Project"
+    },
+    "chooseCauseScreen": {
+      "title": "Choose a Cause"
+    },
+    "receiveTicketScreen": {
+      "title": "Donating together to change lives!",
+      "description": "You have a ticket to receive :)",
+      "buttonText": "Receive ticket",
+      "animationModal": {
+        "text": "Receiving ticket"
+      }
     }
   },
   "contexts": {
@@ -23,7 +34,14 @@
       },
       "connectWalletButtonText": "Connect wallet",
       "userBalanceText": "Your balance: ",
-      "refundText": "*Cryptocurrency payments are non-refundable"
+      "refundText": "*Cryptocurrency payments are non-refundable",
+      "tokenAmountTransferMessage": "Approving token amount transfer...",
+      "contractTransferMessage": "Transferring to contract...",
+      "successDonationMessage": "You successfully donated {{amount}} {{tokenSymbol}}",
+      "communityAddPage": {
+        "title": "How does the community increase your {{value}} donation?",
+        "button": "Donate {{value}}"
+      }
     }
   }
 }
