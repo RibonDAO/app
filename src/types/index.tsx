@@ -21,7 +21,7 @@ export type DonationDoneParamsList = {
 
 export type CommunityAddModalParamList = {
   amount: string;
-}
+};
 
 export type RootTabParamList = {
   CausesScreen: undefined;

@@ -16,7 +16,7 @@ import Button from "components/atomics/buttons/Button";
 import { showToast } from "lib/Toast";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { logError } from "services/crashReport";
-import {useNavigation} from "hooks/useNavigation";
+import { useNavigation } from "hooks/useNavigation";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
 
