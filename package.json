@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@ethersproject/shims": "^5.7.0",
+    "@expo/config-plugins": "^5.0.2",
     "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^0.17.2",
     "@miblanchard/react-native-slider": "^2.2.0",
@@ -89,7 +90,9 @@
     "typescript": "^4.6.3"
   },
   "resolutions": {
-    "react-native-svg": "13.4.0"
+    "react-native-svg": "13.4.0",
+    "@expo/config-plugins": "~5.0.0",
+    "@expo/prebuild-config": "~5.0.0"
   },
   "private": true
 }
