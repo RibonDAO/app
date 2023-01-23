@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { Text, View } from "components/Themed";
-import { RootTabScreenProps } from "types";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 
