@@ -16,6 +16,7 @@ i18n
   .use(initReactI18next)
   .use(languageDetectorPlugin)
   .init({
+    compatibilityJSON: "v3",
     resources,
     fallbackLng: "en",
     debug: false,
