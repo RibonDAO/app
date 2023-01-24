@@ -12,7 +12,10 @@
     "lint": "eslint src/**/*.ts src/**/*.tsx && prettier --check src/**/*.ts src/**/*.tsx"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native-slider)/"
+    ]
   },
   "dependencies": {
     "@ethersproject/shims": "^5.7.0",

@@ -9,13 +9,11 @@ import {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingTop: 24,
     paddingHorizontal: 16,
     backgroundColor: theme.colors.neutral10,
   },
   title: {
     ...stylizedTitleLarge,
-    marginTop: 4,
     marginRight: 0,
     marginBottom: 24,
     marginLeft: 0,

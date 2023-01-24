@@ -39,7 +39,7 @@
     }
   },
   "promoters": {
-    "supportCausePage": {
+    "supportCauseScreen": {
       "title": "Doe com a comunidade",
       "communityAddText": "A Comunidade adicionará",
       "communityAddButtonText": "Como a comunidade faz isso?",
@@ -52,7 +52,7 @@
       "refundText": "*Pagamentos em criptomoeda não são estornáveis",
       "tokenAmountTransferMessage": "Aprovando quantidade de tokens pra transação...",
       "contractTransferMessage": "Transferindo pro contrato...",
-      "communityAddPage": {
+      "communityAddScreen": {
         "title": "Como a comunidade aumenta a sua doação de {{value}}?",
         "button": "Doar {{value}}"
       }

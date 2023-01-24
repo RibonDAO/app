@@ -24,6 +24,8 @@ import LayoutHeader from "components/moleculars/LayoutHeader";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
+import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
+import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -32,7 +34,6 @@ import ProfileIconOff from "./assets/ProfileIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
-import CommunityAddPage from "screens/promoters/SupportCauseScreen/CommunityAddPage";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -79,7 +80,7 @@ function RootNavigator() {
         <Stack.Screen name="DonateModal" component={DonateModal} />
         <Stack.Screen
           name="CommunityAddModal"
-          component={CommunityAddPage}
+          component={CommunityAddScreen}
           options={{
             headerTitle: "",
           }}
@@ -158,9 +159,11 @@ export default function Navigation({
           <WalletProvider>
             <NetworkProvider>
               <CryptoPaymentProvider>
-                <CausesProvider>
-                  <RootNavigator />
-                </CausesProvider>
+                <CardPaymentInformationProvider>
+                  <CausesProvider>
+                    <RootNavigator />
+                  </CausesProvider>
+                </CardPaymentInformationProvider>
               </CryptoPaymentProvider>
             </NetworkProvider>
           </WalletProvider>

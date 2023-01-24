@@ -10,13 +10,13 @@ import styles from "./styles";
 import CommunityAddCycle from "./assets/community-add-cycle.png";
 import CommunityAddCyclePT from "./assets/community-add-cycle-pt.png";
 
-function CommunityAddPage({
+function CommunityAddScreen({
   route,
 }: RootStackScreenProps<"CommunityAddModal">): JSX.Element {
   const { popNavigation } = useNavigation();
   const { amount } = route.params;
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.supportCausePage.communityAddPage",
+    keyPrefix: "promoters.supportCauseScreen.communityAddScreen",
   });
   const { currentLang } = useLanguage();
 
@@ -39,4 +39,4 @@ function CommunityAddPage({
   );
 }
 
-export default CommunityAddPage;
+export default CommunityAddScreen;
