@@ -12,7 +12,7 @@ import { useCardPaymentInformation } from "contexts/cardPaymentInformationContex
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
 import { View, Text } from "components/Themed";
-import { Image, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import S from "./styles";

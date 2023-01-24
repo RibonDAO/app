@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: 16,
+    paddingBottom: 24,
     marginBottom: 100,
     backgroundColor: theme.colors.neutral10,
   },
@@ -19,6 +20,11 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     position: "relative",
     overflowX: "hidden",
+    shadowColor: theme.colors.gray40,
+    elevation: 4,
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   donateContainer: {
     marginBottom: 24,
@@ -78,13 +84,12 @@ export const styles = StyleSheet.create({
   },
   title: {
     ...stylizedTitleLarge,
-    margin: 4,
     marginBottom: 24,
     color: theme.colors.gray40,
   },
   supportImage: {
     width: "100%",
-    height: 140,
+    height: 148,
     position: "relative",
     display: "flex",
     flexWrap: "wrap",
