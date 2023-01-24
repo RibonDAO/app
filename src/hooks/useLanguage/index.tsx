@@ -7,7 +7,9 @@ export const LANGUAGE_KEY = "LANGUAGE_KEY";
 
 export function useLanguage() {
   const { i18n } = useTranslation();
-  const [currentLang, setCurrentLang] = useState(i18n.language);
+  const [currentLang, setCurrentLang] = useState<Languages>(
+    i18n.language as Languages,
+  );
 
   useEffect(() => {
     i18n.changeLanguage(currentLang);

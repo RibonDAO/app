@@ -1,0 +1,110 @@
+import { useNavigation } from "hooks/useNavigation";
+import { useTranslation } from "react-i18next";
+import { Currencies } from "@ribon.io/shared/types";
+import { useCardGivingFees } from "@ribon.io/shared/hooks";
+import { useEffect, useState } from "react";
+import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
+import getThemeByFlow from "lib/themeByFlow";
+import { useRouteParams } from "hooks/useRouteParams";
+import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
+import { Text, View } from "components/Themed";
+import Button from "components/atomics/buttons/Button";
+import styles from "./styles";
+import UserInfoSection from "./UserInfoSection";
+import CardInfoSection from "./CardInfoSection";
+
+function PaymentPage(): JSX.Element {
+  const { params } = useRouteParams<"PaymentPage">();
+  const { popNavigation } = useNavigation();
+  const { offer, cause, nonProfit, flow } = params;
+  const { t } = useTranslation("translation", {
+    keyPrefix: "promoters.supportWithCommunityPage.paymentPage",
+  });
+  const [currentSection, setCurrentSection] = useState<"user" | "card">("user");
+  const { cardGivingFees } = useCardGivingFees(
+    offer.priceValue,
+    offer.currency.toUpperCase() as Currencies,
+  );
+  const { buttonDisabled, handleSubmit, setCause, setNonProfit } =
+    useCardPaymentInformation();
+
+  const colorTheme = getThemeByFlow(flow);
+
+  useEffect(() => {
+    setCause(cause);
+  }, [cause]);
+
+  useEffect(() => {
+    setNonProfit(nonProfit);
+  }, [nonProfit]);
+
+  const isUserSection = () => currentSection === "user";
+  const isCardSection = () => currentSection === "card";
+
+  const renderCurrentSection = () => {
+    if (isUserSection()) return <UserInfoSection />;
+
+    return <CardInfoSection />;
+  };
+
+  const handleContinueClick = () => {
+    if (isUserSection()) {
+      setCurrentSection("card");
+    } else if (isCardSection()) {
+      handleSubmit();
+    }
+  };
+
+  const handleBackButtonClick = () => {
+    if (isCardSection()) {
+      setCurrentSection("user");
+    } else {
+      popNavigation();
+    }
+  };
+
+  const highlightText = () => nonProfit?.name || cause?.name;
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.mainContainer}>
+        <MaskedWaveCut image={nonProfit?.mainImage} />
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>
+            {t("title")}{" "}
+            <Text
+              style={[styles.titleHighlight, { color: colorTheme.shade30 }]}
+            >
+              {highlightText()}
+            </Text>
+          </Text>
+          <Text
+            style={[styles.donationValueText, { color: colorTheme.shade20 }]}
+          >
+            {offer.price}
+          </Text>
+          {cardGivingFees && (
+            <Text style={styles.feeText}>
+              {t("netDonationText")} {cardGivingFees.netGiving}
+            </Text>
+          )}
+          {cardGivingFees && (
+            <Text style={styles.feeText}>
+              {t("serviceFeesText")} {cardGivingFees.serviceFees}
+            </Text>
+          )}
+          {renderCurrentSection()}
+        </View>
+        <View style={styles.donateButtonContainer}>
+          <Button
+            text={t("button")}
+            onPress={handleContinueClick}
+            disabled={buttonDisabled}
+          />
+        </View>
+      </View>
+    </View>
+  );
+}
+
+export default PaymentPage;

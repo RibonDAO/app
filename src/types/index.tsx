@@ -4,7 +4,7 @@ import {
   NavigatorScreenParams,
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { NonProfit } from "@ribon.io/shared/types";
+import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -23,6 +23,13 @@ export type CommunityAddModalParamList = {
   amount: string;
 };
 
+export type PaymentPageList = {
+  offer: Offer;
+  cause: Cause;
+  nonProfit: NonProfit;
+  flow: string;
+};
+
 export type RootTabParamList = {
   CausesScreen: undefined;
   ProfileScreen: undefined;
@@ -39,6 +46,7 @@ export type RootStackParamList = {
   CausesScreen: undefined;
   ChooseCauseScreen: undefined;
   CommunityAddModal: CommunityAddModalParamList;
+  PaymentPage: PaymentPageList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
