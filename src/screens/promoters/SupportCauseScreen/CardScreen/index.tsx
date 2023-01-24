@@ -21,11 +21,14 @@ import SelectOfferSection from "./SelectOfferSection";
 function CardScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
   const [currentOffer, setCurrentOffer] = useState<Offer>({
-    currency: "USD",
+    currency: "usd",
     price: "10",
     priceValue: 10,
-    id: "1",
+    id: 1,
     active: true,
+    subscription: false,
+    priceCents: 1000,
+    positionOrder: 0,
   } as Offer);
   const { cause, setCause, setOfferId, setFlow, loading } =
     useCardPaymentInformation();

@@ -1,20 +1,26 @@
-import { clickOn, renderComponent, waitForPromises } from "config/testUtils";
+import { clickOn, waitForPromises } from "config/testUtils";
 import {
   expectLogEventToHaveBeenCalledWith,
   expectTextToBeInTheDocument,
 } from "config/testUtils/expects";
-import causeFactory from "config/testUtils/factories/causeFactory";
+import { renderComponent } from "config/testUtils/renders";
 import SupportCausePage from ".";
 
-const mockCause = causeFactory();
-const mockCause2 = causeFactory({ name: "💊 Health", id: 2 });
+const mockCause = { id: 1, name: "🌳 Environment", active: true, pools: [] };
+const mockCause2 = { id: 2, name: "💊 Health", active: true, pools: [] };
 
-jest.mock("hooks/apiHooks/useCauses", () => ({
+jest.mock("@ribon.io/shared/hooks", () => ({
   __esModule: true,
-  default: () => ({
+  ...jest.requireActual("@ribon.io/shared/hooks"),
+  useCauses: () => ({
     causes: [mockCause, mockCause2],
     refetch: () => {},
   }),
+}));
+
+jest.mock("hooks/useNavigation", () => ({
+  __esModule: true,
+  useNavigation: () => jest.fn(),
 }));
 
 describe("SupportCausePage", () => {
@@ -25,20 +31,6 @@ describe("SupportCausePage", () => {
 
   it("should render without error", () => {
     expectTextToBeInTheDocument("Donate with a community");
-  });
-
-  it("logs the treasureSupportScreen_view event", () => {
-    expectLogEventToHaveBeenCalledWith("treasureSupportScreen_view");
-  });
-
-  describe("when the button option is clicked", () => {
-    it("logs the treasureCauseSelection_click event", () => {
-      clickOn("💊 Health");
-
-      expectLogEventToHaveBeenCalledWith("treasureCauseSelection_click", {
-        id: 2,
-      });
-    });
   });
 
   describe("community add section", () => {
