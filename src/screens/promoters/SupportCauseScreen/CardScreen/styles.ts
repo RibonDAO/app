@@ -9,7 +9,7 @@ import { stylizedTitleLarge } from "styles/typography/stylized";
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
     marginBottom: 100,
     backgroundColor: theme.colors.neutral10,
   },
@@ -58,8 +58,6 @@ export const styles = StyleSheet.create({
   },
   communityAddValue: {
     ...stylizedTitleLarge,
-    fontSize: 36,
-    lineHeight: 48,
     color: theme.colors.orange20,
   },
   communityAddButton: {
