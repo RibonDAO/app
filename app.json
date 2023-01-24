@@ -20,7 +20,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ribon.app"
+      "bundleIdentifier": "com.app.ribon"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -28,7 +28,7 @@
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ribon.app"
+      "package": "com.app.ribon"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
