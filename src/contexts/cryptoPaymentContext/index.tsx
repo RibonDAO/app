@@ -71,7 +71,7 @@ function CryptoPaymentProvider({ children }: Props) {
   const { wallet } = useWalletContext();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.supportCausePage",
+    keyPrefix: "promoters.supportCauseScreen",
   });
 
   const contract = useContract({

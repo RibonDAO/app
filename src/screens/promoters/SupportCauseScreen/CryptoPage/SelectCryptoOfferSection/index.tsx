@@ -21,7 +21,7 @@ function SelectCryptoOfferSection({
   onValueChange,
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.supportCausePage.selectOfferSection",
+    keyPrefix: "promoters.supportCauseScreen.selectOfferSection",
   });
   const { tokenSymbol, amount, setAmount } = useCryptoPayment();
 

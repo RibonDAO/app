@@ -40,7 +40,7 @@ function CryptoPage(): JSX.Element {
   const { causes, refetch: refetchCauses } = useCauses();
 
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.supportCausePage",
+    keyPrefix: "promoters.supportCauseScreen",
   });
 
   useEffect(() => {

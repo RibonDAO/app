@@ -16,7 +16,7 @@ function CommunityAddPage({
   const { popNavigation } = useNavigation();
   const { amount } = route.params;
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.supportCausePage.communityAddPage",
+    keyPrefix: "promoters.supportCauseScreen.communityAddPage",
   });
   const { currentLang } = useLanguage();
 
