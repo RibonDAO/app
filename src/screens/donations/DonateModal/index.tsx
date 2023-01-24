@@ -19,10 +19,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Text, View } from "components/Themed";
 import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
+import { useTranslation } from "react-i18next";
 
 export default function DonateModal({
   route,
 }: RootStackScreenProps<"DonateModal">) {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "donations.donateModal",
+  });
   const [isDonating, setIsDonating] = useState(false);
   const [invalidInput, setInvalidInput] = useState(false);
   const { nonProfit } = route.params;
@@ -77,7 +81,7 @@ export default function DonateModal({
     <View style={S.modalWrapper}>
       <View style={S.nonProfitContainer}>
         <Text style={S.nonProfitText}>
-          You are donating to {"\n"}
+          {t("nonProfitText")}{"\n"}
           <Text style={S.nonProfitHighlight}>{nonProfit.name}</Text>
         </Text>
         <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
@@ -98,12 +102,9 @@ export default function DonateModal({
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={S.container}>
             <View style={S.inputEmailContainer}>
-              <Text style={S.description}>
-                Hey! It looks like you're donating for the first time. Enter
-                your email address to proceed.
-              </Text>
+              <Text style={S.description}>{t("description")}</Text>
 
-              <Text style={S.title}>Place your e-mail to donate</Text>
+              <Text style={S.title}>{t("title")}</Text>
               <TextInput
                 style={[
                   S.input,
@@ -113,7 +114,7 @@ export default function DonateModal({
                       : theme.colors.green30,
                   },
                 ]}
-                placeholder="Place your email"
+                placeholder={t("textInputPlaceholder")}
                 keyboardType="email-address"
                 onChangeText={handleTextChange}
                 value={email}
@@ -132,14 +133,14 @@ export default function DonateModal({
                 ]}
               >
                 {invalidInput
-                  ? "Please enter a valid email address"
-                  : "All your data is safe with us"}
+                  ? t("invalidEmailText")
+                  : t("safeDataText")}
               </Text>
             </View>
 
             <View style={S.buttonContainer}>
               <Button
-                text={isDonating ? "Donating..." : "Donate"}
+                text={isDonating ? t("donatingText") : t("donateText")}
                 onPress={handleButtonPress}
                 timeout={isValidEmail(email) ? 2000 : null}
                 timeoutCallback={donateCallback}
