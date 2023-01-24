@@ -16,15 +16,15 @@ import { creditCardPaymentApi } from "@ribon.io/shared/services";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import {
   Cause,
+  Currencies,
   Languages,
   NonProfit,
-  Currencies,
 } from "@ribon.io/shared/types";
 import { showToast } from "lib/Toast";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 
 export interface ICardPaymentInformationContext {
-  setCurrentCoin: (value: SetStateAction<Currencies>) => void;
+  setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
   setCountry: (value: SetStateAction<string>) => void;
   setState: (value: SetStateAction<string>) => void;
   setCity: (value: SetStateAction<string>) => void;
@@ -39,7 +39,7 @@ export interface ICardPaymentInformationContext {
   setOfferId: (value: SetStateAction<number>) => void;
   setFlow: (value: SetStateAction<"cause" | "nonProfit">) => void;
   buttonDisabled: boolean;
-  currentCoin: Currencies;
+  currentCoin?: Currencies;
   country: string;
   state: string;
   city: string;
@@ -57,6 +57,7 @@ export interface ICardPaymentInformationContext {
   setCause: (value: SetStateAction<Cause | undefined>) => void;
   nonProfit: NonProfit | undefined;
   setNonProfit: (value: SetStateAction<NonProfit | undefined>) => void;
+  loading: boolean;
 }
 
 export type Props = {
@@ -73,17 +74,21 @@ export const CURRENT_COIN_KEY = "CURRENT_COIN_KEY";
 function CardPaymentInformationProvider({ children }: Props) {
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
-  const [currentCoin, setCurrentCoin] = useState<Currencies>(Currencies.USD);
+  const [loading, setLoading] = useState(false);
+  const [currentCoin, setCurrentCoin] = useState<Currencies>();
   const defaultCoin = async () =>
     ((await getLocalStorageItem(CURRENT_COIN_KEY)) as Currencies) ||
     coinByLanguage(currentLang as Languages);
 
   useEffect(() => {
-    defaultCoin().then((coin) => setCurrentCoin(coin));
+    setLoading(true);
+    defaultCoin()
+      .then((coin) => setCurrentCoin(coin))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
-    setLocalStorageItem(CURRENT_COIN_KEY, currentCoin);
+    setLocalStorageItem(CURRENT_COIN_KEY, currentCoin || Currencies.USD);
   }, [currentCoin]);
 
   const integrationId = 3;
@@ -196,6 +201,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       setNonProfit,
       flow,
       setFlow,
+      loading,
     }),
     [
       currentCoin,
@@ -213,6 +219,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       cause,
       nonProfit,
       flow,
+      loading,
     ],
   );
 

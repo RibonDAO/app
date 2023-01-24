@@ -27,7 +27,8 @@ function CardScreen(): JSX.Element {
     id: "1",
     active: true,
   } as Offer);
-  const { cause, setCause, setOfferId, setFlow } = useCardPaymentInformation();
+  const { cause, setCause, setOfferId, setFlow, loading } =
+    useCardPaymentInformation();
 
   const { causes } = useCauses();
 
@@ -86,7 +87,7 @@ function CardScreen(): JSX.Element {
     setOfferId(offer.id);
   };
 
-  if (!currentOffer) return <View />;
+  if (!currentOffer || loading) return <View />;
 
   return (
     <ScrollView contentContainerStyle={S.container}>
