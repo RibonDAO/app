@@ -2,7 +2,6 @@ import { theme } from "@ribon.io/shared/styles";
 import { Cause } from "@ribon.io/shared/types";
 import { Text, View } from "components/Themed";
 import InputRange from "components/atomics/inputs/InputRange";
-import { useState } from "react";
 import { Dimensions, TextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import Dropdown from "components/moleculars/Dropdown";

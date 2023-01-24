@@ -12,10 +12,14 @@ import {
 import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
 import { logError } from "services/crashReport";
-import { Currencies } from "types/enums/Currencies";
 import { creditCardPaymentApi } from "@ribon.io/shared/services";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
-import { Cause, Languages, NonProfit } from "@ribon.io/shared/types";
+import {
+  Cause,
+  Languages,
+  NonProfit,
+  Currencies,
+} from "@ribon.io/shared/types";
 import { showToast } from "lib/Toast";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 

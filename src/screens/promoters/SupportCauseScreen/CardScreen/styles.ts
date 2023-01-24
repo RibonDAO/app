@@ -42,10 +42,9 @@ export const styles = StyleSheet.create({
   contributionContainer: {
     maxWidth: "100%",
     marginRight: 30,
-    marginBottom: 24,
   },
   communityAddContainer: {
-    marginTop: 34,
+    marginTop: 24,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

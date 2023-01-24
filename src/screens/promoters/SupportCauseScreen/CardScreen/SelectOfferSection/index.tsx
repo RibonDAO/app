@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import InputRange from "components/atomics/inputs/InputRange";
-import useOffers from "hooks/apiHooks/useOffers";
+import { useOffers } from "@ribon.io/shared/hooks";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
-import Offer from "types/entities/Offer";
+import { Offer, Cause, Currencies } from "@ribon.io/shared/types";
 import { useTranslation } from "react-i18next";
-import Cause from "types/entities/Cause";
-import { Currencies } from "types/enums/Currencies";
-import theme from "styles/theme";
+import { theme } from "@ribon.io/shared/styles";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
-import { useLocationSearch } from "hooks/useLocationSearch";
-import * as S from "./styles";
+import { Dimensions } from "react-native";
+import { Text, View } from "components/Themed";
+import Dropdown from "components/moleculars/Dropdown";
+import styles from "./styles";
 
-const { orange30, orange40 } = theme.colors;
+const { orange40, gray20 } = theme.colors;
 
 type Props = {
   cause: Cause | undefined;
@@ -23,18 +23,21 @@ const CURRENT_OFFER_INDEX_KEY = "CURRENT_OFFER_INDEX_KEY";
 
 function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
   const [maxRange, setMaxRange] = useState(0);
-  const { updateLocationSearch } = useLocationSearch();
+  const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
 
-  const defaultCurrentOfferIndex = () => {
-    const localstorageIndex = getLocalStorageItem(CURRENT_OFFER_INDEX_KEY);
+  const defaultCurrentOfferIndex = async () => {
+    const localstorageIndex = await getLocalStorageItem(
+      CURRENT_OFFER_INDEX_KEY,
+    );
     if (localstorageIndex) return Number(localstorageIndex);
 
     return 0;
   };
 
-  const [currentOfferIndex, setCurrentOfferIndex] = useState(
-    defaultCurrentOfferIndex(),
-  );
+  useEffect(() => {
+    defaultCurrentOfferIndex().then((index) => setCurrentOfferIndex(index));
+  }, []);
+
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const { currentCoin, setCurrentCoin } = useCardPaymentInformation();
   const { offers, refetch: refetchOffers } = useOffers(currentCoin, false);
@@ -47,7 +50,7 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
   }, [currentCoin]);
 
   useEffect(() => {
-    setMaxRange(offers.length - 1);
+    if (offers.length > 0) setMaxRange(offers.length - 1);
     setCurrentOffer(offers[currentOfferIndex]);
   }, [offers]);
 
@@ -60,9 +63,9 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
     setLocalStorageItem(CURRENT_OFFER_INDEX_KEY, currentOfferIndex.toString());
   }, [currentOfferIndex]);
 
-  const onCurrencyChanged = (currency: Currencies) => {
-    if (currency === Currencies.USDC) {
-      updateLocationSearch("payment_method", "crypto");
+  const onCurrencyChanged = (currency: Currencies | "USDC") => {
+    if (currency === "USDC") {
+      console.log(currency);
     } else {
       setCurrentCoin(currency);
       setCurrentOfferIndex(0);
@@ -70,43 +73,46 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
   };
 
   return (
-    <S.Container>
-      <S.CauseText>
-        {t("causeText")}{" "}
-        <S.CauseTextHighlight>{cause?.name}</S.CauseTextHighlight>
-      </S.CauseText>
-      <S.ValueContainer>
-        <S.ValueText>
+    <View
+      style={{
+        width: Dimensions.get("window").width - 132,
+      }}
+    >
+      <Text style={styles.title}>
+        {t("causeText")} {cause?.name}
+      </Text>
+      <View style={styles.inputsContainer}>
+        <Text style={styles.valueText}>
           {currentOffer &&
             formatPrice(currentOffer.priceValue, currentOffer.currency)}
-        </S.ValueText>
-        <S.CurrencySelectorContainer>
-          <S.CurrencySelector
-            values={[Currencies.BRL, Currencies.USD, Currencies.USDC]}
-            name="currency"
-            onOptionChanged={onCurrencyChanged}
-            defaultValue={currentCoin}
-            containerId="currencies-dropdown"
-            customInputStyles={{
-              borderColor: orange40,
-              height: 40,
-              marginBottom: 0,
-              color: orange40,
-              width: 80,
-            }}
-          />
-        </S.CurrencySelectorContainer>
-      </S.ValueContainer>
+        </Text>
+        <Dropdown
+          items={[
+            { label: Currencies.BRL, value: Currencies.BRL },
+            { label: Currencies.USD, value: Currencies.USD },
+            { label: "USDC", value: "USDC" },
+          ]}
+          onSelect={(value) => {
+            console.log(value);
+            onCurrencyChanged(value.value as Currencies | "USDC");
+          }}
+          label={currentCoin}
+          containerStyle={styles.dropdownContainerStyles}
+        />
+      </View>
       <InputRange
         value={currentOfferIndex}
         min={0}
         max={maxRange}
-        onChange={(event) => {
-          setCurrentOfferIndex(event.target.value);
+        onChange={(value) => {
+          const changeValue = Array.isArray(value) ? value[0] : value;
+          setCurrentOfferIndex(changeValue);
         }}
-        color={orange30}
+        color={orange40}
+        minimumTrackTintColor={orange40}
+        maximumTrackTintColor={gray20}
       />
-    </S.Container>
+    </View>
   );
 }
 

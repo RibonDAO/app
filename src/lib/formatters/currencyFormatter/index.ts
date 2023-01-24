@@ -1,3 +1,5 @@
+import { Currencies } from "@ribon.io/shared/types";
+
 export function removeInsignificantZeros(price: string) {
   const lastThree = price.slice(price.length - 3);
   if (lastThree === ".00" || lastThree === ",00")
@@ -6,10 +8,10 @@ export function removeInsignificantZeros(price: string) {
 }
 
 export function formatPrice(price: number, currency: string) {
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-  });
-  const formattedPrice = formatter.format(price);
-  return removeInsignificantZeros(formattedPrice);
+  if (currency === Currencies.BRL)
+    return `R$ ${price
+      .toFixed(2)
+      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`.replace(".", ",");
+
+  return `$ ${price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`;
 }

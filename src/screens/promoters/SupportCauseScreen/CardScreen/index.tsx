@@ -16,7 +16,7 @@ import { Image, ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import S from "./styles";
-// import SelectOfferSection from "./SelectOfferSection";
+import SelectOfferSection from "./SelectOfferSection";
 
 function CardScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
@@ -106,10 +106,10 @@ function CardScreen(): JSX.Element {
         <View style={S.donateContainer}>
           <View style={S.givingContainer}>
             <View style={S.contributionContainer}>
-              {/* <SelectOfferSection */}
-              {/*  cause={cause} */}
-              {/*  onOfferChange={handleOfferChange} */}
-              {/* /> */}
+              <SelectOfferSection
+                cause={cause}
+                onOfferChange={handleOfferChange}
+              />
             </View>
             <View style={S.communityAddContainer}>
               <Text style={S.communityAddText}>{t("communityAddText")}</Text>

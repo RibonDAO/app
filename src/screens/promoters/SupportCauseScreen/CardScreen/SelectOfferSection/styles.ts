@@ -1,51 +1,41 @@
-import styled from "styled-components";
+import { StyleSheet } from "react-native";
+import { theme } from "@ribon.io/shared/styles";
 import { defaultParagraphSmall } from "styles/typography/default";
 import { stylizedTitleLarge } from "styles/typography/stylized";
-import Dropdown from "components/atomics/Dropdown";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+const styles = StyleSheet.create({
+  title: {
+    ...defaultParagraphSmall,
+    color: theme.colors.gray30,
+    textAlign: "center",
+  },
+  inputText: {
+    borderWidth: 1,
+    borderColor: theme.colors.orange40,
+    height: 40,
+    borderRadius: 4,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    color: theme.colors.orange40,
+    fontWeight: "bold",
+    marginRight: 4,
+    flex: 3,
+  },
+  inputsContainer: {
+    flexDirection: "row",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 8,
+  },
+  dropdownContainerStyles: {
+    width: 80,
+  },
+  valueText: {
+    ...stylizedTitleLarge,
+    marginRight: 8,
+    color: theme.colors.orange20,
+  },
+});
 
-export const ValueContainer = styled.div`
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const ValueText = styled.p`
-  ${stylizedTitleLarge}
-
-  margin-right: 8px;
-  color: ${({ theme }) => theme.colors.orange20};
-`;
-
-export const CauseText = styled.p`
-  ${defaultParagraphSmall}
-
-  margin-bottom: 4px;
-  text-align: center;
-  color: ${({ theme }) => theme.colors.gray30};
-`;
-
-export const CauseTextHighlight = styled.span`
-  ${defaultParagraphSmall}
-
-  color: ${({ theme }) => theme.colors.orange30};
-`;
-
-export const CurrencySelectorContainer = styled.div`
-  width: 80px;
-
-  img {
-    width: 14px;
-    filter: ${({ theme }) => theme.filters.filterOrange40};
-  }
-`;
-
-export const CurrencySelector = styled(Dropdown)`
-  border: 1px solid ${({ theme }) => theme.colors.orange40};
-`;
+export default styles;
