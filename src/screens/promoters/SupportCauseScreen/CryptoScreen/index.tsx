@@ -20,7 +20,7 @@ import { useNavigation } from "hooks/useNavigation";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
 
-function CryptoPage(): JSX.Element {
+function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();
   const {
     cause,
@@ -55,7 +55,7 @@ function CryptoPage(): JSX.Element {
   useEffect(() => {
     setCause(causesFilter()[0]);
   }, [JSON.stringify(causes)]);
-  const resetPage = () => {
+  const resetScreen = () => {
     async function reset() {
       try {
         setRefreshing(true);
@@ -84,7 +84,7 @@ function CryptoPage(): JSX.Element {
     logEvent("toastNotification_view", {
       status: "transactionProcessed",
     });
-    resetPage();
+    resetScreen();
 
     showToast(t("successDonationMessage", { amount, tokenSymbol }));
   };
@@ -123,7 +123,7 @@ function CryptoPage(): JSX.Element {
     <ScrollView
       contentContainerStyle={styles.container}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={resetPage} />
+        <RefreshControl refreshing={refreshing} onRefresh={resetScreen} />
       }
     >
       <Text style={styles.title}>{t("title")}</Text>
@@ -201,4 +201,4 @@ function CryptoPage(): JSX.Element {
   );
 }
 
-export default CryptoPage;
+export default CryptoScreen;

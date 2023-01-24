@@ -38,7 +38,7 @@
       "tokenAmountTransferMessage": "Approving token amount transfer...",
       "contractTransferMessage": "Transferring to contract...",
       "successDonationMessage": "You successfully donated {{amount}} {{tokenSymbol}}",
-      "communityAddPage": {
+      "communityAddScreen": {
         "title": "How does the community increase your {{value}} donation?",
         "button": "Donate {{value}}"
       }

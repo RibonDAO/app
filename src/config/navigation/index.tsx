@@ -24,7 +24,7 @@ import LayoutHeader from "components/moleculars/LayoutHeader";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
 import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
-import CommunityAddPage from "screens/promoters/SupportCauseScreen/CommunityAddPage";
+import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -80,7 +80,7 @@ function RootNavigator() {
         <Stack.Screen name="DonateModal" component={DonateModal} />
         <Stack.Screen
           name="CommunityAddModal"
-          component={CommunityAddPage}
+          component={CommunityAddScreen}
           options={{
             headerTitle: "",
           }}
