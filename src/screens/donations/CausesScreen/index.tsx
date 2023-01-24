@@ -9,11 +9,13 @@ import GroupButtons from "components/moleculars/GroupButtons";
 import S from "./styles";
 
 export default function CausesScreen() {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "donations.causesScreen",
+  });
   const { nonProfits, isLoading } = useNonProfits();
   const { causes } = useCauses();
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const { navigateTo } = useNavigation();
-  const { t } = useTranslation();
 
   const causesFilter = () => {
     const causesApi = causes.filter((cause) => cause.active);
@@ -37,7 +39,7 @@ export default function CausesScreen() {
     <></>
   ) : (
     <View style={S.container}>
-      <Text style={S.title}>{t("donations.causesScreen.title")}</Text>
+      <Text style={S.title}>{t("title")}</Text>
       <View style={S.groupButtonsContainer}>
         <GroupButtons
           elements={causesFilter()}
@@ -57,7 +59,7 @@ export default function CausesScreen() {
               infoTextLeft={nonProfit.name}
               infoTextRight={nonProfit.cause.name}
               imageDescription={`${nonProfit.impactByTicket} ${nonProfit.impactDescription}`}
-              buttonText="Donate"
+              buttonText={t("buttonText")}
               onClickButton={() => {
                 navigateTo("DonateModal", { nonProfit });
               }}

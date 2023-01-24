@@ -10,10 +10,12 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    margin: 8,
+    marginRight: 12,
+    borderRadius: 12,
   },
   containerImage: {
     position: "relative",
+    borderRadius: 12,
   },
   darkStroke: {
     height: 100,
@@ -22,8 +24,6 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   cardWrapper: {
-    display: "flex",
-    backgroundColor: theme.colors.neutral10,
     flexDirection: "column",
     borderRadius: 12,
     height: "auto",
@@ -33,8 +33,6 @@ const styles = StyleSheet.create({
     width: "100%",
     aspectRatio: 1.1,
     borderRadius: 12,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
   },
   infoContainer: {
     width: "100%",

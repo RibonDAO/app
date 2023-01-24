@@ -5,6 +5,7 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   container: {
     height: "100%",
+    paddingHorizontal: 16
   },
   causesCardContainer: {
     height: "auto",
@@ -17,16 +18,12 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   groupButtonsContainer: {
-    paddingLeft: 8,
-    paddingRight: 8,
     paddingTop: 16,
   },
   title: {
     ...stylizedHeadingMedium,
     color: theme.colors.gray40,
-    padding: 8,
     width: "100%",
-    marginTop: 10,
   },
 });
 
