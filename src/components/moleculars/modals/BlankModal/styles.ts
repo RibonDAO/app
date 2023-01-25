@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared";
-import { stylizedHeadingMedium } from "styles/typography/stylized";
+import { stylizedDisplayMd } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   title: {
-    ...stylizedHeadingMedium,
+    ...stylizedDisplayMd,
     marginBottom: 8,
     fontSize: 20,
     fontWeight: "bold",

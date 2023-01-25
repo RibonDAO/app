@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { stylizedHeadingMedium } from "styles/typography/stylized";
+import { stylizedDisplayMd } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
   container: {

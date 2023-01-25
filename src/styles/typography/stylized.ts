@@ -9,58 +9,38 @@ const stylizedDisplay = {
   fontWeight: "400" as any,
 };
 
-export const stylizedDisplayLarge = {
-  ...stylizedDisplay,
-  fontSize: 56,
-  lineHeight: 96,
-};
-
-export const stylizedDisplayMedium = {
-  ...stylizedDisplay,
-  fontSize: 48,
-  lineHeight: 80,
-};
-
-export const stylizedDisplaySmall = {
+export const stylizedDisplayXl = {
   ...stylizedDisplay,
   fontSize: 40,
-  lineHeight: 68,
-};
-
-const stylizedHeading = {
-  ...gambarino,
-  fontWeight: "400" as any,
-};
-export const stylizedHeadingLarge = {
-  ...stylizedHeading,
-  fontSize: 36,
-  lineHeight: 70,
-};
-
-export const stylizedHeadingMedium = {
-  ...stylizedHeading,
-  fontSize: 32,
-  lineHeight: 56,
-};
-
-export const stylizedHeadingSmall = {
-  ...stylizedHeading,
-  fontSize: 28,
   lineHeight: 48,
 };
 
-const stylizedTitle = {
-  ...gambarino,
-  fontWeight: "400" as any,
+export const stylizedDisplayLg = {
+  ...stylizedDisplay,
+  fontSize: 36,
+  lineHeight: 44,
 };
-export const stylizedTitleLarge = {
-  ...stylizedTitle,
-  fontSize: 24,
+
+export const stylizedDisplayMd = {
+  ...stylizedDisplay,
+  fontSize: 32,
   lineHeight: 40,
 };
 
-export const stylizedTitleMedium = {
-  ...stylizedTitle,
-  fontSize: 20,
+export const stylizedDisplaySm = {
+  ...stylizedDisplay,
+  fontSize: 28,
   lineHeight: 36,
+};
+
+export const stylizedDisplayXs = {
+  ...stylizedDisplay,
+  fontSize: 24,
+  lineHeight: 32,
+};
+
+export const stylizedDisplayXxs = {
+  ...stylizedDisplay,
+  fontSize: 20,
+  lineHeight: 28,
 };

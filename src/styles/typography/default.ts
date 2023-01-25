@@ -3,136 +3,165 @@ const inter = {
   fontFamily: "Inter",
 };
 
-const defaultDisplay = {
-  ...inter,
-  fontWeight: "700" as any,
-};
-
-export const defaultDisplayLarge = {
-  ...defaultDisplay,
-  fontsize: 56,
-  lineHeight: 88,
-};
-
-export const defaultDisplayMedium = {
-  ...defaultDisplay,
-  fontsize: 48,
-  lineHeight: 88,
-};
-
-export const defaultDisplaySmall = {
-  ...defaultDisplay,
-  fontsize: 40,
-  lineHeight: 68,
-};
-
+/* Heading */
 const defaultHeading = {
-  fontWeight: "700" as any,
   ...inter,
-};
-export const defaultHeadingLarge = {
-  ...defaultHeading,
-  fontsize: 36,
-  lineHeight: 60,
+  fontWeight: "700" as any,
 };
 
-export const defaultHeadingMedium = {
+export const defaultHeadingXl = {
   ...defaultHeading,
-  fontsize: 32,
-  lineHeight: 56,
+  fontSize: 40,
+  lineHeight: 52,
 };
 
-export const defaultHeadingSmall = {
+export const defaultHeadingLg = {
   ...defaultHeading,
-  fontsize: 28,
+  fontSize: 36,
   lineHeight: 48,
 };
 
-const defaultTitle = {
-  fontWeight: "700" as any,
-  ...inter,
+export const defaultHeadingMd = {
+  ...defaultHeading,
+  fontSize: 32,
+  lineHeight: 44,
 };
-export const defaultTitleLarge = {
-  ...defaultTitle,
-  fontsize: 24,
+
+export const defaultHeadingSm = {
+  ...defaultHeading,
+  fontSize: 28,
   lineHeight: 40,
 };
 
-export const defaultTitleMedium = {
-  ...defaultTitle,
-  fontsize: 20,
+export const defaultHeadingXs = {
+  ...defaultHeading,
+  fontSize: 24,
   lineHeight: 36,
 };
 
-export const defaultTitleSmall = {
-  ...defaultTitle,
-  fontsize: 16,
-  lineHeight: 32,
-};
-
-const defaultSubtitle = {
-  fontWeight: "600" as any,
-  ...inter,
-};
-export const defaultSubtitleLarge = {
-  ...defaultSubtitle,
-  fontsize: 16,
-  lineHeight: 32,
-};
-
-export const defaultSubtitleMedium = {
-  ...defaultSubtitle,
-  fontsize: 14,
+export const defaultHeadingXxs = {
+  ...defaultHeading,
+  fontSize: 20,
   lineHeight: 28,
 };
 
-export const defaultSubtitleSmall = {
-  ...defaultSubtitle,
-  fontWeight: "500" as any,
-  fontsize: 12,
-  lineHeight: 24,
-};
-
-const defaultParagraph = {
-  fontWeight: "400" as any,
+/* Body */
+const defaultBodyRegular = {
+  fontWeight: 400,
   ...inter,
 };
-export const defaultParagraphLarge = {
-  ...defaultParagraph,
-  fontsize: 16,
-  lineHeight: 32,
+
+const defaultBodyMedium = {
+  fontWeight: 500,
+  ...inter,
 };
 
-export const defaultParagraphMedium = {
-  ...defaultParagraph,
-  fontsize: 14,
+const defaultBodySemibold = {
+  fontWeight: 600,
+  ...inter,
+};
+
+const defaultBodyBold = {
+  fontWeight: 700,
+  ...inter,
+};
+
+const defaultBodyLg = {
+  fontSize: 18,
   lineHeight: 28,
 };
 
-export const defaultParagraphSmall = {
-  ...defaultParagraph,
-  fontsize: 12,
+const defaultBodyMd = {
+  fontSize: 16,
   lineHeight: 24,
 };
 
-const defaultComponentText = {
-  fontWeight: "600" as any,
-  ...inter,
-};
-export const defaultComponentTextLarge = {
-  ...defaultComponentText,
-  fontsize: 16,
+const defaultBodySm = {
+  fontSize: 14,
   lineHeight: 24,
 };
 
-export const defaultComponentTextMedium = {
-  ...defaultComponentText,
-  fontsize: 14,
-  lineHeight: 24,
+const defaultBodyXs = {
+  fontSize: 12,
+  lineHeight: 20,
 };
 
-export const defaultComponentTextSmall = {
-  ...defaultComponentText,
-  fontsize: 12,
-  lineHeight: 16,
+export const defaultBodyLgRegular = {
+  ...defaultBodyRegular,
+  ...defaultBodyLg,
+};
+
+export const defaultBodyMdRegular = {
+  ...defaultBodyRegular,
+  ...defaultBodyMd,
+};
+
+export const defaultBodySmRegular = {
+  ...defaultBodyRegular,
+  ...defaultBodySm,
+};
+
+export const defaultBodyXsRegular = {
+  ...defaultBodyRegular,
+  ...defaultBodyXs,
+};
+
+export const defaultBodyLgMedium = {
+  ...defaultBodyMedium,
+  ...defaultBodyLg,
+};
+
+export const defaultBodyMdMedium = {
+  ...defaultBodyMedium,
+  ...defaultBodyMd,
+};
+
+export const defaultBodySmMedium = {
+  ...defaultBodyMedium,
+  ...defaultBodySm,
+};
+
+export const defaultBodyXsMedium = {
+  ...defaultBodyMedium,
+  ...defaultBodyXs,
+};
+
+export const defaultBodyLgSemibold = {
+  ...defaultBodySemibold,
+  ...defaultBodyLg,
+};
+
+export const defaultBodyMdSemibold = {
+  ...defaultBodySemibold,
+  ...defaultBodyMd,
+};
+
+export const defaultBodySmSemibold = {
+  ...defaultBodySemibold,
+  ...defaultBodySm,
+};
+
+export const defaultBodyXsSemibold = {
+  ...defaultBodySemibold,
+  ...defaultBodyXs,
+};
+
+export const defaultBodyLgBold = {
+  ...defaultBodyBold,
+  ...defaultBodyLg,
+};
+
+export const defaultBodyMdBold = {
+  ...defaultBodyBold,
+  ...defaultBodyMd,
+};
+
+export const defaultBodySmBold = {
+  ...defaultBodyBold,
+  ...defaultBodySm,
+};
+
+export const defaultBodyXsBold = {
+  ...defaultBodyBold,
+  ...defaultBodyXs,
 };
