@@ -1,10 +1,7 @@
 import { clickOn, fillByPlaceholder, waitForPromises } from "config/testUtils";
 import { renderComponent } from "config/testUtils/renders";
-import {
-  expectPageToNavigateBack,
-  expectTextToBeInTheDocument,
-} from "config/testUtils/expects";
-import { offerFactory, causeFactory } from "config/testUtils/factories";
+import { expectTextToBeInTheDocument } from "config/testUtils/expects";
+import { offerFactory, causeFactory } from "@ribon.io/shared/config";
 import { screen } from "@testing-library/react-native";
 import PaymentPage from ".";
 

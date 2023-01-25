@@ -2,10 +2,16 @@ import { renderComponent } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { waitForPromises } from "config/testUtils";
+import { offerFactory, causeFactory } from "@ribon.io/shared/config";
 import OfferSelectionSection from ".";
 
-const mockOffer = { priceValue: 50, currency: "USD" };
-const mockCause = { name: "Cause", id: 1, active: true, pools: [] };
+const mockOffer = offerFactory({ priceValue: 50, currency: "usd" });
+const mockCause = causeFactory({
+  name: "Cause",
+  id: 1,
+  active: true,
+  pools: [],
+});
 jest.mock("@ribon.io/shared/hooks", () => ({
   __esModule: true,
   ...jest.requireActual("@ribon.io/shared/hooks"),
