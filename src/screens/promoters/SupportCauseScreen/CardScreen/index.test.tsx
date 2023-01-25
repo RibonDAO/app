@@ -1,13 +1,11 @@
-import { clickOn, waitForPromises } from "config/testUtils";
-import {
-  expectLogEventToHaveBeenCalledWith,
-  expectTextToBeInTheDocument,
-} from "config/testUtils/expects";
+import { waitForPromises } from "config/testUtils";
+import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { renderComponent } from "config/testUtils/renders";
+import { causeFactory } from "@ribon.io/shared/config";
 import SupportCausePage from ".";
 
-const mockCause = { id: 1, name: "🌳 Environment", active: true, pools: [] };
-const mockCause2 = { id: 2, name: "💊 Health", active: true, pools: [] };
+const mockCause = causeFactory();
+const mockCause2 = causeFactory({ id: 2, name: "💊 Health" });
 
 jest.mock("@ribon.io/shared/hooks", () => ({
   __esModule: true,
@@ -16,11 +14,6 @@ jest.mock("@ribon.io/shared/hooks", () => ({
     causes: [mockCause, mockCause2],
     refetch: () => {},
   }),
-}));
-
-jest.mock("hooks/useNavigation", () => ({
-  __esModule: true,
-  useNavigation: () => jest.fn(),
 }));
 
 describe("SupportCausePage", () => {

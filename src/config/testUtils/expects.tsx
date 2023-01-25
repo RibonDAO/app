@@ -1,9 +1,10 @@
 import { screen } from "@testing-library/react-native";
-
-const mockLogErrorFunction = jest.fn();
-const mockLogEventFunction = jest.fn();
-const mockNavigateBackFunction = jest.fn();
-const mockNavigationFunction = jest.fn();
+import {
+  mockLogErrorFunction,
+  mockNavigationFunction,
+  mockNavigateBackFunction,
+  mockLogEventFunction,
+} from "config/testUtils/setupTests";
 
 export function expectTextToBeInTheDocument(text: string) {
   return expect(screen.getByText(text)).toBeDefined();

@@ -2,10 +2,6 @@ import { renderComponent } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import SupportWithCommunityPage from ".";
 
-jest.mock("hooks/useNavigation", () => ({
-  __esModule: true,
-  useNavigation: () => jest.fn(),
-}));
 describe("SupportWithCommunityPage", () => {
   it("should render without error", () => {
     renderComponent(

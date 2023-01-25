@@ -41,18 +41,11 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
   }, []);
 
   const [currentOffer, setCurrentOffer] = useState<Offer>();
-  const { currentCoin, setCurrentCoin } = useCardPaymentInformation();
-  const { offers, refetch: refetchOffers } = useOffers(
-    currentCoin || Currencies.USD,
-    false,
-  );
+  const { currentCoin, setCurrentCoin, loading } = useCardPaymentInformation();
+  const { offers } = useOffers(currentCoin || Currencies.USD, false);
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCauseScreen.selectOfferSection",
   });
-
-  useEffect(() => {
-    refetchOffers();
-  }, [currentCoin]);
 
   useEffect(() => {
     if (offers.length > 0) setMaxRange(offers.length - 1);
@@ -77,6 +70,8 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
     }
   };
 
+  if (loading) return <View />;
+
   return (
     <View
       style={{
@@ -97,9 +92,8 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
             { label: Currencies.USD, value: Currencies.USD },
             { label: "USDC", value: "USDC" },
           ]}
-          onSelect={(value) => {
-            console.log(value);
-            onCurrencyChanged(value.value as Currencies | "USDC");
+          onSelect={({ value }) => {
+            onCurrencyChanged(value as Currencies | "USDC");
           }}
           label={currentCoin || Currencies.USD}
           containerStyle={styles.dropdownContainerStyles}
