@@ -1,5 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import * as Font from "expo-font";
+import * as Sentry from "sentry-expo";
 import { useEffect, useState } from "react";
 import { registerForPushNotificationsAsync } from "services/notifications";
 import { initializeApi } from "services/api";
@@ -12,6 +13,14 @@ export default function useCachedResources() {
 
   useEffect(() => {
     initializeApi();
+  }, []);
+
+  useEffect(() => {
+    Sentry.init({
+      dsn: "https://c39226956ee34786a8acdb34123f7d3b@o409844.ingest.sentry.io/4504565365473280",
+      enableInExpoDevelopment: false,
+      debug: true,
+    });
   }, []);
 
   useEffect(() => {

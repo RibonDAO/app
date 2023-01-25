@@ -81,7 +81,8 @@ export default function DonateModal({
     <View style={S.modalWrapper}>
       <View style={S.nonProfitContainer}>
         <Text style={S.nonProfitText}>
-          {t("nonProfitText")}{"\n"}
+          {t("nonProfitText")}
+          {"\n"}
           <Text style={S.nonProfitHighlight}>{nonProfit.name}</Text>
         </Text>
         <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
@@ -132,9 +133,7 @@ export default function DonateModal({
                   },
                 ]}
               >
-                {invalidInput
-                  ? t("invalidEmailText")
-                  : t("safeDataText")}
+                {invalidInput ? t("invalidEmailText") : t("safeDataText")}
               </Text>
             </View>
 

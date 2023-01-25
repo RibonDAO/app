@@ -3,6 +3,7 @@ import { Asset } from "expo-asset";
 import { Animated, Image, StyleSheet, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import Constants from "expo-constants";
+import { logError } from "services/crashReport";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -29,7 +30,7 @@ function AnimatedSplashScreen({ children, image }: Props) {
       await SplashScreen.hideAsync();
       // Load stuff
     } catch (e) {
-      // handle errors
+      logError(e);
     } finally {
       setAppReady(true);
     }
