@@ -3,7 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "baseUrl": "src",
+    "sourceMap": true,
     "sourceRoot": "/"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
