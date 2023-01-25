@@ -10,6 +10,7 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   mainContainer: {
     width: "100%",
+    paddingHorizontal: 8,
   },
   container: {},
   contentContainer: {
@@ -37,8 +38,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: "100%",
-    marginTop: 64,
+    height: 148,
   },
   backArrowButton: {
     width: 24,
@@ -59,3 +59,5 @@ const styles = StyleSheet.create({
     color: "shade40",
   },
 });
+
+export default styles;

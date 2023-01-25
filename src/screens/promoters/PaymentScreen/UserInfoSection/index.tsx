@@ -13,7 +13,7 @@ import S from "screens/promoters/PaymentScreen/UserInfoSection/styles";
 function UserInfoSection(): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix:
-      "promoters.supportTreasurePage.cardSection.billingInformationPage.billingInformationSection",
+      "promoters.supportCauseScreen.paymentScreen.billingInformationSection",
   });
   const { currentLang } = useLanguage();
   const {

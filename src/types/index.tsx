@@ -25,8 +25,8 @@ export type CommunityAddModalParamList = {
 
 export type PaymentPageList = {
   offer: Offer;
-  cause: Cause;
-  nonProfit: NonProfit;
+  cause?: Cause;
+  nonProfit?: NonProfit;
   flow: string;
 };
 
@@ -46,7 +46,7 @@ export type RootStackParamList = {
   CausesScreen: undefined;
   ChooseCauseScreen: undefined;
   CommunityAddModal: CommunityAddModalParamList;
-  PaymentPage: PaymentPageList;
+  PaymentScreen: PaymentPageList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

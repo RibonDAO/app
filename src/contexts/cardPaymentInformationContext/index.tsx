@@ -81,14 +81,23 @@ function CardPaymentInformationProvider({ children }: Props) {
     coinByLanguage(currentLang as Languages);
 
   useEffect(() => {
-    setLoading(true);
-    defaultCoin()
-      .then((coin) => setCurrentCoin(coin))
-      .finally(() => setLoading(false));
+    async function setDefaultCoin() {
+      try {
+        setLoading(true);
+        const coin = await defaultCoin();
+        setCurrentCoin(coin);
+      } catch (error) {
+        logError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    setDefaultCoin();
   }, []);
 
   useEffect(() => {
-    setLocalStorageItem(CURRENT_COIN_KEY, currentCoin || Currencies.USD);
+    if (currentCoin) setLocalStorageItem(CURRENT_COIN_KEY, currentCoin);
   }, [currentCoin]);
 
   const integrationId = 3;

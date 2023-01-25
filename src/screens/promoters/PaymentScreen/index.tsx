@@ -13,12 +13,12 @@ import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
 
-function PaymentPage(): JSX.Element {
-  const { params } = useRouteParams<"PaymentPage">();
+function PaymentScreen(): JSX.Element {
+  const { params } = useRouteParams<"PaymentScreen">();
   const { popNavigation } = useNavigation();
   const { offer, cause, nonProfit, flow } = params;
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.supportWithCommunityPage.paymentPage",
+    keyPrefix: "promoters.supportCauseScreen.paymentScreen",
   });
   const [currentSection, setCurrentSection] = useState<"user" | "card">("user");
   const { cardGivingFees } = useCardGivingFees(
@@ -68,7 +68,10 @@ function PaymentPage(): JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <MaskedWaveCut image={nonProfit?.mainImage} />
+        <MaskedWaveCut
+          image={nonProfit?.mainImage || cause?.mainImage}
+          imageStyles={styles.image}
+        />
         <View style={styles.contentContainer}>
           <Text style={styles.title}>
             {t("title")}{" "}
@@ -107,4 +110,4 @@ function PaymentPage(): JSX.Element {
   );
 }
 
-export default PaymentPage;
+export default PaymentScreen;

@@ -12,7 +12,7 @@ import S from "./styles";
 function CardInfoSection() {
   const { t } = useTranslation("translation", {
     keyPrefix:
-      "promoters.supportTreasurePage.cardSection.paymentInformationPage.paymentInformationSection",
+      "promoters.supportCauseScreen.paymentScreen.paymentInformationSection",
   });
 
   const {
