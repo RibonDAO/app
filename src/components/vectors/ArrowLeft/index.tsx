@@ -1,7 +1,7 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 
-function ArrowRight() {
+function ArrowLeft() {
   return (
     <Svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <Path
@@ -12,4 +12,4 @@ function ArrowRight() {
   );
 }
 
-export default ArrowRight;
+export default ArrowLeft;
