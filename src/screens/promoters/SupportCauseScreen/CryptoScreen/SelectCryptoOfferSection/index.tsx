@@ -1,12 +1,12 @@
 import { theme } from "@ribon.io/shared/styles";
-import { Cause } from "@ribon.io/shared/types";
+import { Cause, Currencies } from "@ribon.io/shared/types";
 import { Text, View } from "components/Themed";
 import InputRange from "components/atomics/inputs/InputRange";
-import { useState } from "react";
 import { Dimensions, TextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import Dropdown from "components/moleculars/Dropdown";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
+import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import styles from "./styles";
 
 const { gray20, orange40 } = theme.colors;
@@ -21,9 +21,11 @@ function SelectCryptoOfferSection({
   onValueChange,
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.supportCausePage.selectOfferSection",
+    keyPrefix: "promoters.supportCauseScreen.selectOfferSection",
   });
-  const { tokenSymbol, amount, setAmount } = useCryptoPayment();
+  const { tokenSymbol, amount, setAmount, setIsInCryptoPage } =
+    useCryptoPayment();
+  const { setCurrentCoin } = useCardPaymentInformation();
 
   const handleValueChange = (value: string) => {
     setAmount(value);
@@ -49,9 +51,16 @@ function SelectCryptoOfferSection({
           keyboardType="numeric"
         />
         <Dropdown
-          items={[{ label: tokenSymbol, value: tokenSymbol }]}
-          onSelect={(value) => {
-            console.log(value);
+          items={[
+            { label: tokenSymbol, value: tokenSymbol },
+            { label: Currencies.USD, value: Currencies.USD },
+            { label: Currencies.BRL, value: Currencies.BRL },
+          ]}
+          onSelect={({ value }) => {
+            if (value !== tokenSymbol) {
+              setIsInCryptoPage(false);
+              setCurrentCoin(value as Currencies);
+            }
           }}
           label={tokenSymbol}
           containerStyle={styles.dropdownContainerStyles}

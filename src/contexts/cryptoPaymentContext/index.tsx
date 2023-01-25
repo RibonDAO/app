@@ -46,6 +46,8 @@ export interface ICryptoPaymentContext {
   setCause: (cause: Cause) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
+  isInCryptoPage: boolean;
+  setIsInCryptoPage: (isInCryptoPage: boolean) => void;
 }
 
 export type Props = {
@@ -58,6 +60,7 @@ export const CryptoPaymentContext = createContext<ICryptoPaymentContext>(
 
 export const INITIAL_AMOUNT = "5";
 function CryptoPaymentProvider({ children }: Props) {
+  const [isInCryptoPage, setIsInCryptoPage] = useState(false);
   const { currentNetwork } = useNetworkContext();
   const [amount, setAmount] = useState(INITIAL_AMOUNT);
   const [loading, setLoading] = useState(false);
@@ -71,7 +74,7 @@ function CryptoPaymentProvider({ children }: Props) {
   const { wallet } = useWalletContext();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.supportCausePage",
+    keyPrefix: "promoters.supportCauseScreen",
   });
 
   const contract = useContract({
@@ -173,8 +176,19 @@ function CryptoPaymentProvider({ children }: Props) {
       setCause,
       loading,
       setLoading,
+      isInCryptoPage,
+      setIsInCryptoPage,
     }),
-    [amount, currentPool, userBalance, tokenSymbol, loading, cause],
+    [
+      amount,
+      currentPool,
+      userBalance,
+      tokenSymbol,
+      loading,
+      cause,
+      isInCryptoPage,
+      setIsInCryptoPage,
+    ],
   );
 
   return (
