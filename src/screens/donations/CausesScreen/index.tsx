@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNonProfits, useCauses } from "@ribon.io/shared/hooks";
 import { ScrollView } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "components/Themed";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
+import * as Sentry from "sentry-expo";
 import S from "./styles";
 
 export default function CausesScreen() {
