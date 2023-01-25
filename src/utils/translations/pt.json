@@ -56,7 +56,7 @@
         "title": "Como a comunidade aumenta a sua doação de {{value}}?",
         "button": "Doar {{value}}"
       },
-      "paymentPage": {
+      "paymentScreen": {
         "title": "Sua doação para",
         "button": "Continuar",
         "netDonationText": "Doação líquida:",
