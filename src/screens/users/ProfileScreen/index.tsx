@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Image, FlatList, TouchableOpacity } from "react-native";
 import { Text } from "components/Themed";
 import UserSection from "./UserSection";
+import Lottie from 'lottie-react-native';
 import styles from "./styles";
 
 type Props = {
@@ -14,10 +15,7 @@ function Badge({ image, name, active = false, onPress }: Props) {
   return (
     <TouchableOpacity onPress={onPress} style={styles.badgeContainer}>
       <View style={styles.badgeRoundContainer}>
-        <Image
-          source={{ uri: image }}
-          style={[styles.badgeImage, { opacity: active ? 1 : 0.4 }]}
-        />
+        <Lottie source={require('./assets/gold-badge.json')} autoPlay loop={false} />
       </View>
       <Text style={styles.badgeText}>{name}</Text>
     </TouchableOpacity>
@@ -25,7 +23,8 @@ function Badge({ image, name, active = false, onPress }: Props) {
 }
 
 function BadgesProfilePage() {
-  const image = "https://cdn-icons-png.flaticon.com/512/4387/4387887.png";
+  const image = "./gold-badge.json";
+
   const [badges] = useState([
     { image, name: "Badge 1", active: true },
     { image, name: "Badge 1", active: true },
@@ -54,6 +53,7 @@ function BadgesProfilePage() {
   return (
     <View style={styles.container}>
       <UserSection />
+
       <FlatList
         data={badges}
         numColumns={3}
