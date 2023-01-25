@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "components/Themed";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import * as Sentry from 'sentry-expo';
+import * as Sentry from "sentry-expo";
 import S from "./styles";
 
 export default function CausesScreen() {

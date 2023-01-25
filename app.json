@@ -27,9 +27,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.app.ribon"
@@ -51,14 +49,10 @@
         {
           "icon": "./src/assets/sounds/notificationicon.png",
           "color": "#ffffff",
-          "sounds": [
-            "./src/assets/sounds/notificationsound.wav"
-          ]
+          "sounds": ["./src/assets/sounds/notificationsound.wav"]
         }
       ],
-      [
-        "sentry-expo"
-      ]
+      ["sentry-expo"]
     ],
     "extra": {
       "eas": {
