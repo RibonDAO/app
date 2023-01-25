@@ -22,6 +22,7 @@ import {
 } from "@ribon.io/shared/types";
 import { showToast } from "lib/Toast";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
+import { useNavigation } from "hooks/useNavigation";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -117,6 +118,7 @@ function CardPaymentInformationProvider({ children }: Props) {
   const [cause, setCause] = useState<Cause>();
   const [nonProfit, setNonProfit] = useState<NonProfit>();
   const [flow, setFlow] = useState<"nonProfit" | "cause">("nonProfit");
+  const { navigateTo } = useNavigation();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "contexts.cardPaymentInformation",
@@ -162,16 +164,17 @@ function CardPaymentInformationProvider({ children }: Props) {
 
     try {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
-
+      navigateTo("PromotersScreen");
       logEvent("treasureGivingConfirmMdl_view");
     } catch (error) {
-      hideLoadingOverlay();
       logError(error);
       showToast(t("onErrorMessage"));
 
       logEvent("toastNotification_view", {
         status: "transactionFailed",
       });
+    } finally {
+      hideLoadingOverlay();
     }
   };
 
