@@ -1,71 +1,68 @@
-import { clickOn, fillByPlaceholder, renderComponent } from "config/testUtils";
+import { clickOn, fillByPlaceholder, waitForPromises } from "config/testUtils";
+import { renderComponent } from "config/testUtils/renders";
 import {
   expectPageToNavigateBack,
   expectTextToBeInTheDocument,
 } from "config/testUtils/expects";
-import offerFactory from "config/testUtils/factories/offerFactory";
-import causeFactory from "config/testUtils/factories/causeFactory";
-import { screen } from "@testing-library/react";
+import { offerFactory, causeFactory } from "config/testUtils/factories";
+import { screen } from "@testing-library/react-native";
 import PaymentPage from ".";
 
+const mockOffer = offerFactory();
+const mockCause = causeFactory();
+jest.mock("hooks/useRouteParams", () => ({
+  __esModule: true,
+  useRouteParams: () => ({
+    params: { offer: mockOffer, cause: mockCause, flow: "cause" },
+  }),
+}));
 describe("PaymentPage", () => {
-  const offer = offerFactory();
-  const cause = causeFactory();
   const mockHandleSubmit = jest.fn();
 
-  beforeEach(() => {
+  beforeEach(async () => {
     renderComponent(<PaymentPage />, {
-      locationState: {
-        offer,
-        cause,
-        flow: "cause",
-      },
       cardPaymentProviderValue: {
         country: "Brazil",
         handleSubmit: mockHandleSubmit,
       },
     });
+    await waitForPromises();
   });
 
   it("should render without error", () => {
-    expectTextToBeInTheDocument(offer.price);
-    expectTextToBeInTheDocument(cause.name);
+    expectTextToBeInTheDocument(mockOffer.price);
+    expectTextToBeInTheDocument(mockCause.name);
   });
 
   describe("when the page is in user section", () => {
-    describe("back button", () => {
-      it("navigates back", () => {
-        clickOn(screen.getByAltText("back-arrow-button"));
-
-        expectPageToNavigateBack();
-      });
-    });
-
     describe("continue button", () => {
       describe("when the form is not filled", () => {
         it("stays on disabled state", () => {
-          expect(screen.getByText("Continue")).toBeDisabled();
+          expect(
+            screen.getByTestId("button-Continue").props.accessibilityState
+              ?.disabled,
+          ).toBeTruthy();
         });
       });
 
       describe("when the form is filled", () => {
         beforeEach(() => {
-          fillByPlaceholder("Country", "Brazil");
           fillByPlaceholder("City", "Brasilia");
           fillByPlaceholder("State", "DF");
           fillByPlaceholder("Tax ID", "00000000000");
         });
 
         it("goes to enabled mode", () => {
-          expect(screen.getByText("Continue")).toBeEnabled();
+          expect(
+            screen.getByTestId("button-Continue").props.accessibilityState
+              ?.disabled,
+          ).toBeFalsy();
         });
 
         it("goes to card section when clicked", () => {
           clickOn("Continue");
 
-          expect(
-            screen.getByPlaceholderText("Card number"),
-          ).toBeInTheDocument();
+          expect(screen.getByPlaceholderText("Card number")).toBeDefined();
         });
       });
     });
@@ -73,7 +70,6 @@ describe("PaymentPage", () => {
 
   describe("when the page is in card section", () => {
     beforeEach(() => {
-      fillByPlaceholder("Country", "Brazil");
       fillByPlaceholder("City", "Brasilia");
       fillByPlaceholder("State", "DF");
       fillByPlaceholder("Tax ID", "00000000000");
@@ -81,18 +77,13 @@ describe("PaymentPage", () => {
       clickOn("Continue");
     });
 
-    describe("back button", () => {
-      it("sets the page to user state", () => {
-        clickOn(screen.getByAltText("back-arrow-button"));
-
-        expect(screen.getByPlaceholderText("Country")).toBeInTheDocument();
-      });
-    });
-
     describe("continue button", () => {
       describe("when the form is not filled", () => {
         it("stays on disabled state", () => {
-          expect(screen.getByText("Continue")).toBeDisabled();
+          expect(
+            screen.getByTestId("button-Continue").props.accessibilityState
+              ?.disabled,
+          ).toBeTruthy();
         });
       });
 

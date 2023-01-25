@@ -149,6 +149,7 @@ export default function Button({
       onPress={handlePress}
       disabled={disabled}
       onLayout={(e: any) => handleLayout(e)}
+      testID={`button-${text}`}
     >
       <View style={styles.progressBar}>
         <Animated.View

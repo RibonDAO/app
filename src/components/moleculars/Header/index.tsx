@@ -37,7 +37,10 @@ function Header({
     <SafeAreaView style={S.container}>
       <View style={S.insideContainer}>
         {hasBackButton ? (
-          <TouchableOpacity onPress={handleBackButtonClick}>
+          <TouchableOpacity
+            onPress={handleBackButtonClick}
+            testID="arrow-back-button"
+          >
             <ArrowLeft />
           </TouchableOpacity>
         ) : (

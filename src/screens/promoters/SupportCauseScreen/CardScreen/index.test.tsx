@@ -18,11 +18,6 @@ jest.mock("@ribon.io/shared/hooks", () => ({
   }),
 }));
 
-jest.mock("hooks/useNavigation", () => ({
-  __esModule: true,
-  useNavigation: () => jest.fn(),
-}));
-
 describe("SupportCausePage", () => {
   beforeEach(async () => {
     renderComponent(<SupportCausePage />);

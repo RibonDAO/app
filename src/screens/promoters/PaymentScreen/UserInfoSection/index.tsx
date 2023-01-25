@@ -48,10 +48,8 @@ function UserInfoSection(): JSX.Element {
   };
 
   useEffect(() => {
-    setButtonDisabled(
-      !(country && state && city && taxId.length === maxTaxIdLength()),
-    );
-  }, [country, state, city, taxId]);
+    setButtonDisabled(!(state && city && taxId.length === maxTaxIdLength()));
+  }, [state, city, taxId]);
 
   useEffect(() => {
     logEvent("treasureSupportBillingInfo_view");

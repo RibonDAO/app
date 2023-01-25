@@ -1,6 +1,5 @@
-import { screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { renderComponent } from "config/testUtils";
+import { screen, fireEvent } from "@testing-library/react-native";
+import { renderComponent } from "config/testUtils/renders";
 import { expectDisplayValueToBeInTheDocument } from "config/testUtils/expects";
 import UserInfoSection from ".";
 
@@ -12,12 +11,10 @@ describe("UserInfoSection", () => {
       },
     });
 
-    userEvent.type(screen.getByPlaceholderText("Country"), "Brazil");
-    userEvent.type(screen.getByPlaceholderText("City"), "São Paulo");
-    userEvent.type(screen.getByPlaceholderText("State"), "SP");
-    userEvent.type(screen.getByPlaceholderText("Tax ID"), "00000000000");
+    fireEvent.changeText(screen.getByPlaceholderText("City"), "São Paulo");
+    fireEvent.changeText(screen.getByPlaceholderText("State"), "SP");
+    fireEvent.changeText(screen.getByPlaceholderText("Tax ID"), "00000000000");
 
-    expectDisplayValueToBeInTheDocument("Brazil");
     expectDisplayValueToBeInTheDocument("São Paulo");
     expectDisplayValueToBeInTheDocument("SP");
     expectDisplayValueToBeInTheDocument("000.000.000-00");

@@ -1,6 +1,7 @@
 import { renderComponent } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { formatPrice } from "lib/formatters/currencyFormatter";
+import { waitForPromises } from "config/testUtils";
 import OfferSelectionSection from ".";
 
 const mockOffer = { priceValue: 50, currency: "USD" };
@@ -17,10 +18,11 @@ jest.mock("@ribon.io/shared/hooks", () => ({
 describe("OfferSelectionSection", () => {
   const mockFn = jest.fn();
 
-  beforeEach(() => {
+  beforeEach(async () => {
     renderComponent(
       <OfferSelectionSection cause={mockCause} onOfferChange={mockFn} />,
     );
+    await waitForPromises();
   });
 
   it("show the first offer", () => {
