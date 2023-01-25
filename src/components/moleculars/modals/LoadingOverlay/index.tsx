@@ -11,13 +11,9 @@ export type Props = {
 function LoadingOverlay({ text, visible = false }: Props): JSX.Element {
   return (
     <View style={styles.container}>
-      <Modal
-        isVisible={visible}
-        animationIn="slideInUp"
-        backdropOpacity={0.75}
-      >
+      <Modal isVisible={visible} animationIn="slideInUp" backdropOpacity={0.75}>
         <View style={styles.centerDiv}>
-          <ActivityIndicator size={40}/>
+          <ActivityIndicator size={40} />
           {text && <Text style={styles.message}>{text}</Text>}
         </View>
       </Modal>

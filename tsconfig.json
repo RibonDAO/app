@@ -6,7 +6,5 @@
     "sourceMap": true,
     "sourceRoot": "/"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

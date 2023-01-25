@@ -22,8 +22,8 @@ import S from "./styles";
 
 type Props = {
   hideTicket?: boolean;
-}
-function LayoutHeader({hideTicket = false}: Props): JSX.Element {
+};
+function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [blockedDonationModalVisible, setBlockedDonationModalVisible] =
@@ -38,7 +38,10 @@ function LayoutHeader({hideTicket = false}: Props): JSX.Element {
     setMenuVisible(!menuVisible);
   }
 
-  const renderTicketCounter = useCallback(() => canDonate ? 1 : 0, [canDonate]);
+  const renderTicketCounter = useCallback(
+    () => (canDonate ? 1 : 0),
+    [canDonate],
+  );
 
   function handleLogout() {
     logoutCurrentUser();
@@ -63,7 +66,7 @@ function LayoutHeader({hideTicket = false}: Props): JSX.Element {
   }
 
   function renderTicketModal() {
-    if(hideTicket) return (<View />);
+    if (hideTicket) return <View />;
 
     return (
       <TicketModal
@@ -74,7 +77,7 @@ function LayoutHeader({hideTicket = false}: Props): JSX.Element {
   }
 
   function renderBlockedDonationModal() {
-    if(hideTicket) return (<View />);
+    if (hideTicket) return <View />;
 
     return (
       <BlockedDonationModal
@@ -130,14 +133,16 @@ function LayoutHeader({hideTicket = false}: Props): JSX.Element {
 
   return (
     <View style={S.configContainer}>
-      {!hideTicket && <TouchableOpacity style={S.container} onPress={handleTicketClick}>
-        <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
-          <Text style={{ ...S.ticketCounter, color: ticketColor }}>
-            {renderTicketCounter()}
-          </Text>
-          {ticketIcon()}
-        </View>
-      </TouchableOpacity>}
+      {!hideTicket && (
+        <TouchableOpacity style={S.container} onPress={handleTicketClick}>
+          <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
+            <Text style={{ ...S.ticketCounter, color: ticketColor }}>
+              {renderTicketCounter()}
+            </Text>
+            {ticketIcon()}
+          </View>
+        </TouchableOpacity>
+      )}
 
       <TouchableOpacity style={S.container} onPress={toggleModal}>
         <CogIcon />
