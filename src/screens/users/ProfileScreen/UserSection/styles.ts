@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { stylizedDisplayLarge } from "styles/typography/stylized";
-import { defaultParagraphSmall } from "styles/typography/default";
+import { stylizedDisplayXl } from "styles/typography/stylized";
+import { defaultBodyXsRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,12 +16,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    ...stylizedDisplayLarge,
+    ...stylizedDisplayXl,
     lineHeight: 60,
     color: theme.colors.neutral10,
   },
   subtitle: {
-    ...defaultParagraphSmall,
+    ...defaultBodyXsRegular,
     color: theme.colors.neutral10,
   },
 });

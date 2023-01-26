@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultParagraphSmall } from "styles/typography/default";
+import { defaultBodyXsRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   title: {
-    ...defaultParagraphSmall,
+    ...defaultBodyXsRegular,
     color: theme.colors.gray30,
     textAlign: "center",
   },

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { stylizedTitleLarge } from "styles/typography/stylized";
+import { stylizedDisplayXs } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.neutral10,
   },
   title: {
-    ...stylizedTitleLarge,
+    ...stylizedDisplayXs,
     textAlign: "center",
   },
   image: {

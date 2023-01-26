@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
-import { stylizedHeadingLarge } from "styles/typography/stylized";
+import { stylizedDisplayLg } from "styles/typography/stylized";
 import {
-  defaultParagraphLarge,
-  defaultParagraphSmall,
-  defaultSubtitleLarge,
+  defaultBodyMdRegular,
+  defaultBodyXsRegular,
+  defaultBodyMdSemibold,
 } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
@@ -19,20 +19,20 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   donationValueText: {
-    ...stylizedHeadingLarge,
+    ...stylizedDisplayLg,
     textAlign: "center",
     color: "gray40",
   },
   title: {
-    ...defaultParagraphLarge,
+    ...defaultBodyMdRegular,
     textAlign: "center",
   },
   titleHighlight: {
-    ...defaultSubtitleLarge,
+    ...defaultBodyMdSemibold,
     color: theme.colors.gray40,
   },
   feeText: {
-    ...defaultParagraphSmall,
+    ...defaultBodyXsRegular,
     textAlign: "center",
     color: theme.colors.gray30,
   },

@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
-  defaultParagraphSmall,
-  defaultSubtitleMedium,
+  defaultBodyXsRegular,
+  defaultBodySmSemibold,
 } from "styles/typography/default";
-import { stylizedTitleLarge } from "styles/typography/stylized";
+import { stylizedDisplayXs } from "styles/typography/stylized";
 
 export const styles = StyleSheet.create({
   container: {
@@ -57,13 +57,13 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   communityAddText: {
-    ...defaultParagraphSmall,
+    ...defaultBodyXsRegular,
     fontSize: 14,
     lineHeight: 20,
     color: theme.colors.gray30,
   },
   communityAddValue: {
-    ...stylizedTitleLarge,
+    ...stylizedDisplayXs,
     color: theme.colors.orange20,
   },
   communityAddButton: {
@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
     display: "none",
   },
   title: {
-    ...stylizedTitleLarge,
+    ...stylizedDisplayXs,
     marginBottom: 24,
     color: theme.colors.gray40,
   },
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
     transform: [{ translateY: -100 }],
   },
   userBalanceText: {
-    ...defaultSubtitleMedium,
+    ...defaultBodySmSemibold,
     fontSize: 18,
     lineHeight: 24,
     marginBottom: 4,
@@ -111,13 +111,13 @@ export const styles = StyleSheet.create({
     color: theme.colors.gray30,
   },
   userBalanceTextHighlight: {
-    ...defaultSubtitleMedium,
+    ...defaultBodySmSemibold,
     fontSize: 18,
     lineHeight: 24,
     color: theme.colors.orange30,
   },
   refundText: {
-    ...defaultParagraphSmall,
+    ...defaultBodyXsRegular,
     fontSize: 14,
     lineHeight: 20,
     marginTop: 4,
