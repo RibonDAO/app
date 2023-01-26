@@ -24,7 +24,7 @@ export default function useCachedResources() {
   }, []);
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then((token) => console.log(token));
+    registerForPushNotificationsAsync();
   }, []);
 
   useEffect(() => {

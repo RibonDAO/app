@@ -98,7 +98,6 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
             { label: "USDC", value: "USDC" },
           ]}
           onSelect={(value) => {
-            console.log(value);
             onCurrencyChanged(value.value as Currencies | "USDC");
           }}
           label={currentCoin || Currencies.USD}
