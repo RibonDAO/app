@@ -1,4 +1,4 @@
-import React from "react";
+import React, { RefObject } from "react";
 import { View } from "components/Themed";
 import {
   KeyboardType,
@@ -19,6 +19,7 @@ export interface Props extends Omit<TextInputProps, "placeholder"> {
   onChangeText?: (text: string) => void;
   style?: TextStyle;
   containerStyle?: ViewStyle;
+  ref?: RefObject<TextInput>;
 }
 
 function InputText({
@@ -36,6 +37,7 @@ function InputText({
   return (
     <View style={[S.container, containerStyle]}>
       <TextInput
+        ref={rest.ref}
         placeholder={placeholder || ""}
         keyboardType={keyboardType}
         aria-label={name}

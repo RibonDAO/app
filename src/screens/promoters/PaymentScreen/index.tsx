@@ -9,8 +9,9 @@ import { useRouteParams } from "hooks/useRouteParams";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { Text, View } from "components/Themed";
 import Button from "components/atomics/buttons/Button";
-import { ScrollView } from "react-native";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
@@ -31,6 +32,7 @@ function PaymentScreen(): JSX.Element {
     useCardPaymentInformation();
 
   const colorTheme = getThemeByFlow(flow);
+  const { isKeyboardVisible } = useKeyboardVisibility();
 
   useEffect(() => {
     setCause(cause);
@@ -74,7 +76,7 @@ function PaymentScreen(): JSX.Element {
           image={nonProfit?.mainImage || cause?.mainImage}
           imageStyles={styles.image}
         />
-        <View style={styles.contentContainer}>
+        <KeyboardAvoidingView style={styles.contentContainer}>
           <Text style={styles.title}>
             {t("title")}{" "}
             <Text
@@ -99,18 +101,20 @@ function PaymentScreen(): JSX.Element {
             </Text>
           )}
           {renderCurrentSection()}
-        </View>
+        </KeyboardAvoidingView>
       </ScrollView>
-      <View style={styles.donateButtonContainer}>
-        <Button
-          text={t("button")}
-          onPress={handleContinueClick}
-          disabled={buttonDisabled}
-          customStyles={styles.donateButton}
-          backgroundColor={theme.colors.orange20}
-          borderColor={theme.colors.orange20}
-        />
-      </View>
+      {!isKeyboardVisible && (
+        <View style={styles.donateButtonContainer}>
+          <Button
+            text={t("button")}
+            onPress={handleContinueClick}
+            disabled={buttonDisabled}
+            customStyles={styles.donateButton}
+            backgroundColor={theme.colors.orange20}
+            borderColor={theme.colors.orange20}
+          />
+        </View>
+      )}
     </View>
   );
 }
