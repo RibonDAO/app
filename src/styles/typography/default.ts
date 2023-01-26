@@ -47,22 +47,22 @@ export const defaultHeadingXxs = {
 
 /* Body */
 const defaultBodyRegular = {
-  fontWeight: 400,
+  fontWeight: "400" as any,
   ...inter,
 };
 
 const defaultBodyMedium = {
-  fontWeight: 500,
+  fontWeight: "500" as any,
   ...inter,
 };
 
 const defaultBodySemibold = {
-  fontWeight: 600,
+  fontWeight: "600" as any,
   ...inter,
 };
 
 const defaultBodyBold = {
-  fontWeight: 700,
+  fontWeight: "700" as any,
   ...inter,
 };
 
