@@ -76,7 +76,8 @@
           "state": "State",
           "city": "City",
           "taxId": "Tax ID",
-          "brazilName": "Brazil"
+          "brazilName": "Brazil",
+          "searchCountryPlaceholder": "Search country"
         }
       }
     }

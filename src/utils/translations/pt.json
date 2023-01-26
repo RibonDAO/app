@@ -75,7 +75,8 @@
           "state": "Estado",
           "city": "Cidade",
           "taxId": "CPF",
-          "brazilName": "Brasil"
+          "brazilName": "Brasil",
+          "searchCountryPlaceholder": "Procurar país"
         }
       }
     }

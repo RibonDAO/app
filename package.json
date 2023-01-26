@@ -16,7 +16,9 @@
     "transformIgnorePatterns": [
       "node_modules/(?!react-native-slider)/"
     ],
-    "setupFiles": ["<rootDir>/src/config/testUtils/setupTests.ts"]
+    "setupFiles": [
+      "<rootDir>/src/config/testUtils/setupTests.ts"
+    ]
   },
   "dependencies": {
     "@ethersproject/shims": "^5.7.0",
@@ -58,6 +60,7 @@
     "react-dom": "18.1.0",
     "react-i18next": "^12.1.4",
     "react-native": "0.70.5",
+    "react-native-country-picker-modal": "^2.0.0",
     "react-native-dropdown-picker": "^5.4.4",
     "react-native-get-random-values": "^1.8.0",
     "react-native-modal": "^13.0.1",

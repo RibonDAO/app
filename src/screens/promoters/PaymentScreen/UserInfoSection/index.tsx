@@ -4,11 +4,16 @@ import { useLanguage } from "hooks/useLanguage";
 import { maskForTaxId } from "@ribon.io/shared/lib";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { logEvent } from "services/analytics";
-import { countryList } from "utils/countryList";
 import getThemeByFlow from "lib/themeByFlow";
 import InputText from "components/atomics/inputs/InputText";
 import { View } from "components/Themed";
 import S from "screens/promoters/PaymentScreen/UserInfoSection/styles";
+import CountryPicker, {
+  Country,
+  CountryCode,
+} from "react-native-country-picker-modal";
+import { countryByLanguage } from "lib/countryByLanguage";
+import { Languages } from "types/enums/Languages";
 
 function UserInfoSection(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -17,7 +22,6 @@ function UserInfoSection(): JSX.Element {
   });
   const { currentLang } = useLanguage();
   const {
-    country,
     setCountry,
     state,
     setState,
@@ -28,6 +32,10 @@ function UserInfoSection(): JSX.Element {
     setButtonDisabled,
     flow,
   } = useCardPaymentInformation();
+
+  const [currentCountryCode, setCurrentCountryCode] = useState(
+    countryByLanguage(currentLang),
+  );
 
   function isBrazil(countryName: string) {
     return countryName === t("brazilName");
@@ -42,9 +50,10 @@ function UserInfoSection(): JSX.Element {
     setTaxId(maskForTaxId(value, brazilFormatForTaxId));
   };
 
-  const handleCountryChange = (value: string) => {
-    setCountry(value);
-    setBrazilFormatForTaxId(isBrazil(value));
+  const handleCountryChange = (selectedCountry: Country) => {
+    setCountry(selectedCountry.name as string);
+    setCurrentCountryCode(selectedCountry.cca2);
+    setBrazilFormatForTaxId(isBrazil(selectedCountry.name as string));
   };
 
   useEffect(() => {
@@ -62,13 +71,33 @@ function UserInfoSection(): JSX.Element {
 
   return (
     <View style={S.container}>
-      {/* <S.CountryInput */}
-      {/*  name="country" */}
-      {/*  suggestions={countryList(currentLang)} */}
-      {/*  placeholder={t("country")} */}
-      {/*  onOptionChanged={handleCountryChange} */}
-      {/*  required */}
-      {/* /> */}
+      <CountryPicker
+        translation={currentLang === Languages.PT ? "por" : undefined}
+        withEmoji
+        preferredCountries={["BR", "US"]}
+        withCountryNameButton
+        countryCode={currentCountryCode as CountryCode}
+        onSelect={handleCountryChange}
+        withFilter
+        filterProps={{ placeholder: t("searchCountryPlaceholder") || "" }}
+        containerButtonStyle={{
+          borderColor: colorTheme.shade40,
+          marginVertical: 12,
+          borderWidth: 1,
+          borderRadius: 8,
+          height: 48,
+          justifyContent: "center",
+          paddingLeft: 4,
+        }}
+        theme={{
+          primaryColor: colorTheme.shade20,
+          primaryColorVariant: colorTheme.shade20,
+          filterPlaceholderTextColor: colorTheme.shade20,
+          onBackgroundTextColor: colorTheme.shade40,
+          fontFamily: "Inter",
+          fontSize: 14,
+        }}
+      />
       <View style={S.halfInputContainer}>
         <InputText
           style={inputStyles}
