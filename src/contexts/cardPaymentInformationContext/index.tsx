@@ -23,6 +23,7 @@ import {
 import { showToast } from "lib/Toast";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { useNavigation } from "hooks/useNavigation";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -101,7 +102,7 @@ function CardPaymentInformationProvider({ children }: Props) {
     if (currentCoin) setLocalStorageItem(CURRENT_COIN_KEY, currentCoin);
   }, [currentCoin]);
 
-  const integrationId = 3;
+  const integrationId = RIBON_INTEGRATION_ID;
 
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
@@ -126,6 +127,18 @@ function CardPaymentInformationProvider({ children }: Props) {
 
   // const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
+
+  const resetStates = () => {
+    setCountry("");
+    setState("");
+    setCity("");
+    setTaxId("");
+    setNumber("");
+    setName("");
+    setExpirationDate("");
+    setCvv("");
+    setButtonDisabled(false);
+  };
 
   // const handleConfirmation = () => {
   //   navigateTo("donationDoneCauseScreen", {
@@ -166,6 +179,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
       navigateTo("PromotersScreen");
       logEvent("treasureGivingConfirmMdl_view");
+      resetStates();
     } catch (error) {
       logError(error);
       showToast(t("onErrorMessage"));
