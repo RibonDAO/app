@@ -11,8 +11,8 @@ const IconRounded = createIconSet(
 
 const IconOutline = createIconSet(
   MaterialIconsOutlineGlyphMap,
-  "MaterialSymbolsOutline",
-  "material-symbols-outline.ttf",
+  "MaterialSymbolsOutlined",
+  "material-symbols-outlined.ttf",
 );
 
 const IconSharp = createIconSet(
