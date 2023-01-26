@@ -76,6 +76,8 @@ function UserInfoSection(): JSX.Element {
           placeholder={t("city")}
           value={city}
           onChangeText={(value) => setCity(value)}
+          containerStyle={{ marginRight: 4 }}
+          autoFocus
         />
         <InputText
           style={inputStyles}
@@ -83,6 +85,7 @@ function UserInfoSection(): JSX.Element {
           placeholder={t("state")}
           value={state}
           onChangeText={(value) => setState(value)}
+          containerStyle={{ marginLeft: 4 }}
         />
       </View>
       <InputText
@@ -92,6 +95,7 @@ function UserInfoSection(): JSX.Element {
         value={taxId}
         onChangeText={handleChangeMask}
         maxLength={maxTaxIdLength()}
+        keyboardType="numeric"
       />
     </View>
   );

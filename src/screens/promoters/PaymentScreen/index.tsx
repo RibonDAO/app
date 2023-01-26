@@ -9,6 +9,8 @@ import { useRouteParams } from "hooks/useRouteParams";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { Text, View } from "components/Themed";
 import Button from "components/atomics/buttons/Button";
+import { ScrollView } from "react-native";
+import { theme } from "@ribon.io/shared/styles";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
@@ -67,7 +69,7 @@ function PaymentScreen(): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <View style={styles.mainContainer}>
+      <ScrollView contentContainerStyle={styles.mainContainer}>
         <MaskedWaveCut
           image={nonProfit?.mainImage || cause?.mainImage}
           imageStyles={styles.image}
@@ -98,13 +100,16 @@ function PaymentScreen(): JSX.Element {
           )}
           {renderCurrentSection()}
         </View>
-        <View style={styles.donateButtonContainer}>
-          <Button
-            text={t("button")}
-            onPress={handleContinueClick}
-            disabled={buttonDisabled}
-          />
-        </View>
+      </ScrollView>
+      <View style={styles.donateButtonContainer}>
+        <Button
+          text={t("button")}
+          onPress={handleContinueClick}
+          disabled={buttonDisabled}
+          customStyles={styles.donateButton}
+          backgroundColor={theme.colors.orange20}
+          borderColor={theme.colors.orange20}
+        />
       </View>
     </View>
   );

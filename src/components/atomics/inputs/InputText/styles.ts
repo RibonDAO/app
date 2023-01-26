@@ -3,8 +3,7 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    position: "relative",
+    flex: 1,
   },
   input: {
     width: "100%",
@@ -13,6 +12,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.green30,
     borderRadius: 8,
+    height: 48,
   },
   inputDisabled: {
     width: "100%",

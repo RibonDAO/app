@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
   },
   halfInputContainer: {
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: "row",
     width: "100%",
   },
   countryInput: {},

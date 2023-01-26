@@ -67,6 +67,7 @@ function CardInfoSection() {
         onChangeText={(value) => setEmail(value)}
         disabled={!!currentUser?.email}
         keyboardType="email-address"
+        autoCapitalize="none"
       />
       <InputText
         style={inputStyles}
@@ -93,6 +94,7 @@ function CardInfoSection() {
           onChangeText={maskExpiration}
           maxLength={7}
           keyboardType="numeric"
+          containerStyle={{ marginRight: 4 }}
         />
         <InputText
           style={inputStyles}
@@ -102,6 +104,7 @@ function CardInfoSection() {
           value={cvv}
           onChangeText={(value) => setCvv(value)}
           keyboardType="numeric"
+          containerStyle={{ marginLeft: 4 }}
         />
       </View>
     </View>
