@@ -5,6 +5,7 @@ import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import S from "./styles";
+import useNavigationReady from "hooks/useNavigationReady";
 
 export type Props = {
   sideLogo?: string;
@@ -20,6 +21,7 @@ function Header({
   onBackButtonClick,
 }: Props): JSX.Element {
   const { navigateTo, popNavigation } = useNavigation();
+  const navigationReady = useNavigationReady();
 
   const navigateToTicketsPage = () => {
     navigateTo("CausesScreen");
@@ -60,7 +62,7 @@ function Header({
           </>
         )}
       </View>
-      {rightComponent && (
+      {rightComponent && navigationReady && (
         <View style={S.insideContainer}>{rightComponent}</View>
       )}
     </SafeAreaView>
