@@ -15,8 +15,10 @@ import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
+import useNavigationReady from "hooks/useNavigationReady";
 
 function PaymentScreen(): JSX.Element {
+  const navigationReady = useNavigationReady();
   const { params } = useRouteParams<"PaymentScreen">();
   const { popNavigation } = useNavigation();
   const { offer, cause, nonProfit, flow } = params;
@@ -68,6 +70,8 @@ function PaymentScreen(): JSX.Element {
   };
 
   const highlightText = () => nonProfit?.name || cause?.name;
+
+  if(!navigationReady) return <View />;
 
   return (
     <View style={styles.container}>
