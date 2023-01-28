@@ -12,10 +12,11 @@ import Button from "components/atomics/buttons/Button";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
+import useNavigationReady from "hooks/useNavigationReady";
+import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
-import useNavigationReady from "hooks/useNavigationReady";
 
 function PaymentScreen(): JSX.Element {
   const navigationReady = useNavigationReady();
@@ -71,7 +72,7 @@ function PaymentScreen(): JSX.Element {
 
   const highlightText = () => nonProfit?.name || cause?.name;
 
-  if(!navigationReady) return <View />;
+  if (!navigationReady) return <PaymentScreenPlaceholder />;
 
   return (
     <View style={styles.container}>

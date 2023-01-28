@@ -71,6 +71,7 @@
     "react-native-web": "~0.18.9",
     "react-native-webview": "11.23.1",
     "react-zendesk": "^0.1.13",
+    "rn-placeholder": "^3.0.3",
     "sentry-expo": "^6.0.0"
   },
   "devDependencies": {
