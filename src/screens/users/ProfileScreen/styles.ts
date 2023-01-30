@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
-import { stylizedTitleMedium } from "styles/typography/stylized";
+import { stylizedDisplayXxs } from "styles/typography/stylized";
 import {
-  defaultParagraphMedium,
-  defaultParagraphSmall,
+  defaultBodySmRegular,
+  defaultBodyXsRegular,
 } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   userName: {
-    ...stylizedTitleMedium,
+    ...stylizedDisplayXxs,
   },
   userEmail: {
-    ...defaultParagraphMedium,
+    ...defaultBodySmRegular,
     color: theme.colors.gray30,
   },
   userPoints: {
-    ...defaultParagraphMedium,
+    ...defaultBodySmRegular,
     color: theme.colors.gray30,
   },
   badgesContainer: {
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   badgeText: {
-    ...defaultParagraphSmall,
+    ...defaultBodyXsRegular,
     marginTop: 4,
     color: theme.colors.gray30,
     fontSize: 12,

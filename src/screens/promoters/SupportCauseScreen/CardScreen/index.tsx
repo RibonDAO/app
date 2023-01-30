@@ -39,10 +39,6 @@ function CardScreen(): JSX.Element {
     keyPrefix: "promoters.supportCauseScreen",
   });
 
-  useEffect(() => {
-    logEvent("treasureSupportScreen_view");
-  }, []);
-
   const causesFilter = () => {
     const causesApi = causes.filter((currentCause) => currentCause.active);
     return causesApi || [];

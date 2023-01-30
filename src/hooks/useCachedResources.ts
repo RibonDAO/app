@@ -4,6 +4,10 @@ import * as Sentry from "sentry-expo";
 import { useEffect, useState } from "react";
 import { registerForPushNotificationsAsync } from "services/notifications";
 import { initializeApi } from "services/api";
+import * as SplashScreen from "expo-splash-screen";
+import MaterialSymbolsRounded from "assets/fonts/MaterialSymbolsRounded.ttf";
+import MaterialSymbolsOutlined from "assets/fonts/MaterialSymbolsOutlined.ttf";
+import MaterialSymbolsSharp from "assets/fonts/MaterialSymbolsSharp.ttf";
 import SpaceMono from "../assets/fonts/SpaceMono-Regular.ttf";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter from "../assets/fonts/Inter.ttf";
@@ -24,18 +28,22 @@ export default function useCachedResources() {
   }, []);
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then((token) => console.log(token));
+    registerForPushNotificationsAsync();
   }, []);
 
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
+        SplashScreen.preventAutoHideAsync();
         // Load fonts
         await Font.loadAsync({
           ...FontAwesome.font,
           "space-mono": SpaceMono,
           "Gambarino-Regular": GambarinoRegular,
           Inter,
+          MaterialSymbolsRounded,
+          MaterialSymbolsOutlined,
+          MaterialSymbolsSharp,
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
@@ -43,6 +51,7 @@ export default function useCachedResources() {
         console.warn(e);
       } finally {
         setLoadingComplete(true);
+        SplashScreen.hideAsync();
       }
     }
 

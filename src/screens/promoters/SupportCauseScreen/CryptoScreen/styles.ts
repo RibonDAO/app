@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
-import { stylizedTitleLarge } from "styles/typography/stylized";
+import { stylizedDisplayXs } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 import {
-  defaultParagraphSmall,
-  defaultSubtitleMedium,
+  defaultBodyXsRegular,
+  defaultBodySmSemibold,
 } from "styles/typography/default";
 
 const styles = StyleSheet.create({
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.neutral10,
   },
   title: {
-    ...stylizedTitleLarge,
+    ...stylizedDisplayXs,
     marginRight: 0,
     marginBottom: 24,
     marginLeft: 0,
@@ -77,21 +77,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   communityAddText: {
-    ...defaultParagraphSmall,
+    ...defaultBodyXsRegular,
     color: theme.colors.gray30,
   },
   communityAddValue: {
-    ...stylizedTitleLarge,
+    ...stylizedDisplayXs,
     color: theme.colors.orange20,
   },
   userBalanceText: {
-    ...defaultSubtitleMedium,
+    ...defaultBodySmSemibold,
     color: theme.colors.gray40,
     marginBottom: 4,
     textAlign: "center",
   },
   refundText: {
-    ...defaultParagraphSmall,
+    ...defaultBodyXsRegular,
     color: theme.colors.gray30,
     marginTop: 4,
     textAlign: "center",

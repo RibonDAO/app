@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultParagraphSmall } from "styles/typography/default";
-import { stylizedTitleLarge } from "styles/typography/stylized";
+import { defaultBodyXsRegular } from "styles/typography/default";
+import { stylizedDisplayXs } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
   title: {
-    ...defaultParagraphSmall,
+    ...defaultBodyXsRegular,
     color: theme.colors.gray30,
     textAlign: "center",
   },
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: 80,
   },
   valueText: {
-    ...stylizedTitleLarge,
+    ...stylizedDisplayXs,
     marginRight: 8,
     color: theme.colors.orange20,
   },
