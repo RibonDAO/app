@@ -7,6 +7,7 @@ import { initializeApi } from "services/api";
 import SpaceMono from "../assets/fonts/SpaceMono-Regular.ttf";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter from "../assets/fonts/Inter.ttf";
+import * as SplashScreen from 'expo-splash-screen';
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -30,6 +31,7 @@ export default function useCachedResources() {
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
+        SplashScreen.preventAutoHideAsync();
         // Load fonts
         await Font.loadAsync({
           ...FontAwesome.font,
@@ -43,6 +45,7 @@ export default function useCachedResources() {
         console.warn(e);
       } finally {
         setLoadingComplete(true);
+        SplashScreen.hideAsync();
       }
     }
 

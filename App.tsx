@@ -10,8 +10,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Navigation from "./src/config/navigation";
 import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
-import { AnimatedAppLoader } from "./src/components/AnimatedAppLoader";
-import SplashImage from "./src/assets/images/splash.png";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
@@ -42,8 +40,6 @@ function Main() {
 
 export default function App() {
   return (
-    <AnimatedAppLoader image={SplashImage}>
-      <Main />
-    </AnimatedAppLoader>
+    <Main />
   );
 }
