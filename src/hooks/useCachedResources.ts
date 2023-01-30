@@ -4,13 +4,13 @@ import * as Sentry from "sentry-expo";
 import { useEffect, useState } from "react";
 import { registerForPushNotificationsAsync } from "services/notifications";
 import { initializeApi } from "services/api";
+import * as SplashScreen from "expo-splash-screen";
 import MaterialSymbolsRounded from "assets/fonts/MaterialSymbolsRounded.ttf";
 import MaterialSymbolsOutlined from "assets/fonts/MaterialSymbolsOutlined.ttf";
 import MaterialSymbolsSharp from "assets/fonts/MaterialSymbolsSharp.ttf";
 import SpaceMono from "../assets/fonts/SpaceMono-Regular.ttf";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter from "../assets/fonts/Inter.ttf";
-import * as SplashScreen from 'expo-splash-screen';
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
