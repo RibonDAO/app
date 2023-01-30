@@ -1,10 +1,10 @@
 import RibonLogo from "components/vectors/RibonLogo";
 import { View } from "components/Themed";
-import S from "./styles";
-import Button from "components/atomics/buttons/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
+import ArrowLeft from "components/vectors/ArrowLeft";
+import S from "./styles";
 
 export type Props = {
   sideLogo?: string;
@@ -19,17 +19,30 @@ function Header({
   hasBackButton = false,
   onBackButtonClick,
 }: Props): JSX.Element {
-  const { navigateTo } = useNavigation();
+  const { navigateTo, popNavigation } = useNavigation();
 
-  function navigateToTicketsPage() {
+  const navigateToTicketsPage = () => {
     navigateTo("CausesScreen");
-  }
+  };
+
+  const handleBackButtonClick = () => {
+    if (onBackButtonClick) {
+      onBackButtonClick();
+    }
+
+    popNavigation();
+  };
 
   return (
     <SafeAreaView style={S.container}>
       <View style={S.insideContainer}>
         {hasBackButton ? (
-          <Button onPress={() => onBackButtonClick} text="Voltar" />
+          <TouchableOpacity
+            onPress={handleBackButtonClick}
+            testID="arrow-back-button"
+          >
+            <ArrowLeft />
+          </TouchableOpacity>
         ) : (
           <>
             <TouchableOpacity onPress={() => navigateToTicketsPage()}>

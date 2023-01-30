@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultParagraphLarge } from "styles/typography/default";
+import { defaultBodyMdRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   message: {
-    ...defaultParagraphLarge,
+    ...defaultBodyMdRegular,
     color: theme.colors.green30,
     fontSize: 24,
     textAlign: "center",

@@ -4,6 +4,9 @@ import * as Sentry from "sentry-expo";
 import { useEffect, useState } from "react";
 import { registerForPushNotificationsAsync } from "services/notifications";
 import { initializeApi } from "services/api";
+import MaterialSymbolsRounded from "assets/fonts/MaterialSymbolsRounded.ttf";
+import MaterialSymbolsOutlined from "assets/fonts/MaterialSymbolsOutlined.ttf";
+import MaterialSymbolsSharp from "assets/fonts/MaterialSymbolsSharp.ttf";
 import SpaceMono from "../assets/fonts/SpaceMono-Regular.ttf";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter from "../assets/fonts/Inter.ttf";
@@ -38,6 +41,9 @@ export default function useCachedResources() {
           "space-mono": SpaceMono,
           "Gambarino-Regular": GambarinoRegular,
           Inter,
+          MaterialSymbolsRounded,
+          MaterialSymbolsOutlined,
+          MaterialSymbolsSharp,
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

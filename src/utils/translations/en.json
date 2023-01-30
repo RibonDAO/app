@@ -56,6 +56,28 @@
       "communityAddScreen": {
         "title": "How does the community increase your {{value}} donation?",
         "button": "Donate {{value}}"
+      },
+      "paymentScreen": {
+        "title": "Your donation to",
+        "button": "Continue",
+        "netDonationText": "Net donation:",
+        "serviceFeesText": "Service fees:",
+        "paymentInformationSection": {
+          "title": "Payment method",
+          "email": "E-mail",
+          "cardNumber": "Card number",
+          "cardName": "Name on card",
+          "cardDueDate": "Expiration",
+          "cvv": "Card verification code"
+        },
+        "billingInformationSection": {
+          "title": "Billing Information",
+          "country": "Country",
+          "state": "State",
+          "city": "City",
+          "taxId": "Tax ID",
+          "brazilName": "Brazil"
+        }
       }
     }
   }

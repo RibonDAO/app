@@ -13,3 +13,7 @@ export function clickOn(textOrComponent: string | any) {
 
   return fireEvent.press(textOrComponent);
 }
+
+export function fillByPlaceholder(placeholder: string, value: string) {
+  fireEvent.changeText(screen.getByPlaceholderText(placeholder), value);
+}

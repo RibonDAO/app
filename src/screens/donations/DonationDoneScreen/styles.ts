@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { stylizedHeadingMedium } from "styles/typography/stylized";
+import { stylizedDisplayMd } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "-45deg" }, { scale: 1.4 }],
   },
   title: {
-    ...stylizedHeadingMedium,
+    ...stylizedDisplayMd,
     color: theme.colors.green30,
     marginTop: 10,
   },

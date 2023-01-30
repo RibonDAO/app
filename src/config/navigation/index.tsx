@@ -26,6 +26,7 @@ import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
+import PaymentScreen from "screens/promoters/PaymentScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -73,6 +74,17 @@ function RootNavigator() {
         options={{
           title: "Causes",
           header: () => <Header rightComponent={<LayoutHeader />} />,
+        }}
+      />
+
+      <Stack.Screen
+        name="PaymentScreen"
+        component={PaymentScreen}
+        options={{
+          title: "Payment",
+          header: () => (
+            <Header hasBackButton rightComponent={<LayoutHeader />} />
+          ),
         }}
       />
 
