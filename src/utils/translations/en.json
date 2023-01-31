@@ -15,7 +15,8 @@
       "invalidEmailText": "Please enter a valid email address",
       "safeDataText": "All your data is safe with us",
       "donatingText": "Donating",
-      "donateText": "Donate"
+      "donateText": "Donate",
+      "cancel": "go back"
     },
     "donationDoneScreen": {
       "title": "Congratulations!",

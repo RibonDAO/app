@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   },
   modalWrapper: {},
   container: {
-    backgroundColor: theme.colors.neutral10,
     alignItems: "center",
     paddingHorizontal: 8,
     marginTop: 24,
@@ -34,15 +33,9 @@ const styles = StyleSheet.create({
   logo: {
     width: "50%",
     height: "100%",
-    borderBottomRightRadius: 18,
   },
-  inputEmailContainer: {},
-  input: {
-    height: 40,
+  inputEmailContainer: {
     width: "100%",
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingLeft: 8,
   },
   inputHint: {
     fontSize: 12,
@@ -55,8 +48,6 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     backgroundColor: theme.colors.green20,
     color: theme.colors.neutral10,
-    borderBottomLeftRadius: 18,
-    borderBottomRightRadius: 18,
   },
   nonProfitText: {
     ...defaultBodySmRegular,
@@ -73,12 +64,22 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    flex: 1,
+    height: "100%",
+  },
+  button: {
+    height: 48,
+  },
+  cancelButton: {
+    height: 32,
+    marginTop: 14,
+    borderWidth: 0,
+    backgroundColor: "transparent",
   },
   textWrapper: {
     flex: 1,
     backgroundColor: "transparent",
-    paddingVertical: 24,
+    paddingBottom: 24,
+    paddingTop: 34,
   },
 });
 

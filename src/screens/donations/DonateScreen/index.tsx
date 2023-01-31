@@ -122,7 +122,14 @@ export default function DonateModal() {
                 onPress={handleButtonPress}
                 timeout={isValidEmail(email) ? 2000 : null}
                 timeoutCallback={donateCallback}
-                disabled={isDonating}
+                disabled={isDonating || !isValidEmail(email)}
+                customStyles={S.button}
+              />
+              <Button
+                text={t("cancel")}
+                onPress={() => popNavigation()}
+                customStyles={S.cancelButton}
+                outline
               />
             </View>
           </View>

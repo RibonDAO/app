@@ -91,6 +91,7 @@ function RootNavigator() {
         name="DonateScreen"
         component={DonateScreen}
         options={{
+          headerShown: false,
           headerTintColor: theme.colors.orange40,
           headerTitle: "",
           headerBackTitleVisible: false,
