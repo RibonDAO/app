@@ -13,16 +13,16 @@ function ReceiveTicketScreen({ onTicketReceived }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.receiveTicketScreen",
   });
-  const [animationModalVisible, setAnimationModalVisible] = useState(false);
+  const [animationVisible, setAnimationVisible] = useState(false);
 
   const openAnimation = () => {
-    setAnimationModalVisible(true);
+    setAnimationVisible(true);
   };
 
-  return animationModalVisible ? (
+  return animationVisible ? (
     <AnimationModal
       onAnimationEnd={() => {
-        setAnimationModalVisible(false);
+        setAnimationVisible(false);
         onTicketReceived();
       }}
     />
