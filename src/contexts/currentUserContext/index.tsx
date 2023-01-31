@@ -43,17 +43,6 @@ function CurrentUserProvider({ children }: Props) {
   const [currentUser, setCurrentUser] = useState<User | undefined>();
   const [userLastDonation, setUserLastDonation] = useState<string>("");
 
-  useEffect(() => {
-    async function setInitialUser() {
-      const user = await getUserFromLocalStorage();
-      const userLastDonation = await getUserLastDonation();
-      setCurrentUser(user);
-      setUserLastDonation(userLastDonation);
-    }
-
-    setInitialUser();
-  }, []);
-
   async function getUserLastDonation() {
     const lastDonation = await AsyncStorage.getItem(
       `${CURRENT_USER_LAST_DONATION_KEY}_${currentUser?.id}`,
@@ -66,6 +55,18 @@ function CurrentUserProvider({ children }: Props) {
 
     return JSON.parse(lastDonation);
   }
+
+  useEffect(() => {
+    async function setInitialUser() {
+      const user = await getUserFromLocalStorage();
+      const lastDonation = await getUserLastDonation();
+      setCurrentUser(user);
+      setUserLastDonation(lastDonation);
+    }
+
+    setInitialUser();
+  }, []);
+
   const [signedIn, setSignedIn] = useState(false);
 
   function updateCurrentUser(data: Partial<User>) {

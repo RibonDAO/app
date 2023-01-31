@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
     height: "100%",
     paddingHorizontal: 16,
   },
+  containerTicket: {
+    height: 350,
+  },
   causesCardContainer: {
     height: "auto",
     width: 300,

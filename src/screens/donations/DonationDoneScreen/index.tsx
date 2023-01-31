@@ -1,10 +1,11 @@
 import React from "react";
-import { Button, View, Text, Image } from "react-native";
+import { Button, View, Text } from "react-native";
+import Image from "components/atomics/Image";
 import { RootStackScreenProps } from "types";
 import { theme } from "@ribon.io/shared/styles";
-import S from "./styles";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
+import S from "./styles";
 
 export default function DonationDoneScreen({
   route,

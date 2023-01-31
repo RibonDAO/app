@@ -9,13 +9,14 @@
     },
     "donateModal": {
       "nonProfitText": "Você está doando para",
-      "description": "Ei! Parece que você está doando pela primeira vez. Preencha seu email para continuar.",
+      "description": "Insira seu e-mail para usar seu ticket de doação",
       "title": "Preencha seu email para doar",
       "textInputPlaceholder": "Preencha seu email",
       "invalidEmailText": "Por favor, use um email válido",
       "safeDataText": "Os seus dados estão seguros com a gente",
       "donatingText": "Doando",
-      "donateText": "Doar"
+      "donateText": "Doar",
+      "cancel": "voltar"
     },
     "donationDoneScreen": {
       "title": "Parabéns!",

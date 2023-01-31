@@ -9,13 +9,14 @@
     },
     "donateModal": {
       "nonProfitText": "You are donating to",
-      "description": "Hey! It looks like you're donating for the first time. Enter your email address to proceed.",
+      "description": "Enter your e-mail to use your donation ticket",
       "title": "Place your e-mail to donate",
       "textInputPlaceholder": "Place your e-mail",
       "invalidEmailText": "Please enter a valid email address",
       "safeDataText": "All your data is safe with us",
       "donatingText": "Donating",
-      "donateText": "Donate"
+      "donateText": "Donate",
+      "cancel": "go back"
     },
     "donationDoneScreen": {
       "title": "Congratulations!",

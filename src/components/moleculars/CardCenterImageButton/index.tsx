@@ -2,9 +2,9 @@ import Button from "components/atomics/buttons/Button";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import VerifiedBadge from "components/vectors/VerifiedBadge";
-import S from "./styles";
 import { Text, View } from "components/Themed";
 import Image from "components/atomics/Image";
+import S from "./styles";
 
 export type Props = {
   image: string;
@@ -13,6 +13,7 @@ export type Props = {
   imageDescription?: string;
   infoTextLeft?: string;
   infoTextRight?: string;
+  buttonDisabled?: boolean;
 };
 
 function CardCenterImageButton({
@@ -22,6 +23,7 @@ function CardCenterImageButton({
   onClickButton,
   infoTextLeft,
   infoTextRight,
+  buttonDisabled = false,
 }: Props): JSX.Element {
   return (
     <View style={S.container}>
@@ -52,7 +54,11 @@ function CardCenterImageButton({
               </>
             )}
           </View>
-          <Button onPress={onClickButton} text={buttonText} />
+          <Button
+            onPress={onClickButton}
+            text={buttonText}
+            disabled={buttonDisabled}
+          />
         </View>
       </View>
     </View>

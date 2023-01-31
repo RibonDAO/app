@@ -1,84 +1,21 @@
 import { StyleSheet } from "react-native";
-import { stylizedDisplayXxs } from "styles/typography/stylized";
-import {
-  defaultBodySmRegular,
-  defaultBodyXsRegular,
-} from "styles/typography/default";
+import { stylizedDisplayMd } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
+  title: {
+    ...stylizedDisplayMd,
+    marginVertical: 20,
+    paddingHorizontal: 20,
+    fontSize: 26,
+    fontWeight: "bold",
+    lineHeight: 36,
+  },
   container: {
-    alignItems: "center",
     backgroundColor: theme.colors.neutral10,
     minHeight: "100%",
-  },
-  itemContainer: {
-    width: "33%",
-    alignItems: "center",
-  },
-  listContainer: {
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingBottom: 200,
-  },
-  userContainer: {
-    width: "100%",
-    height: 150,
-    backgroundColor: "#ECF0F1",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    padding: 20,
-    marginBottom: 20,
-  },
-  userAvatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginRight: 20,
-  },
-  userInfo: {
-    flex: 1,
-  },
-  userName: {
-    ...stylizedDisplayXxs,
-  },
-  userEmail: {
-    ...defaultBodySmRegular,
-    color: theme.colors.gray30,
-  },
-  userPoints: {
-    ...defaultBodySmRegular,
-    color: theme.colors.gray30,
-  },
-  badgesContainer: {
-    width: "100%",
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-  },
-  badgeContainer: {
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  badgeRoundContainer: {
-    width: 90,
-    height: 90,
-    borderRadius: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: theme.colors.gray10,
-  },
-  badgeImage: {
-    width: 45,
-    height: 45,
-    resizeMode: "contain",
-  },
-  badgeText: {
-    ...defaultBodyXsRegular,
-    marginTop: 4,
-    color: theme.colors.gray30,
-    fontSize: 12,
-  },
+    marginTop: 24
+  }
 });
 
 export default styles;
