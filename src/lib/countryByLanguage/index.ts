@@ -1,4 +1,3 @@
-import { Currencies } from "@ribon.io/shared/types";
 import { Languages } from "types/enums/Languages";
 
 export function countryByLanguage(language: Languages) {

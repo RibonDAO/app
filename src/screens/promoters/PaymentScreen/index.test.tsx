@@ -20,6 +20,7 @@ describe("PaymentPage", () => {
     renderComponent(<PaymentPage />, {
       cardPaymentProviderValue: {
         country: "Brazil",
+        state: "DF",
         handleSubmit: mockHandleSubmit,
       },
     });
@@ -45,7 +46,6 @@ describe("PaymentPage", () => {
       describe("when the form is filled", () => {
         beforeEach(() => {
           fillByPlaceholder("City", "Brasilia");
-          fillByPlaceholder("State", "DF");
           fillByPlaceholder("Tax ID", "00000000000");
         });
 
@@ -68,7 +68,6 @@ describe("PaymentPage", () => {
   describe("when the page is in card section", () => {
     beforeEach(() => {
       fillByPlaceholder("City", "Brasilia");
-      fillByPlaceholder("State", "DF");
       fillByPlaceholder("Tax ID", "00000000000");
 
       clickOn("Continue");
