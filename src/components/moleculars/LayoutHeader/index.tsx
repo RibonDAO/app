@@ -1,5 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Text, View } from "components/Themed";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -30,13 +30,19 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
     useState(false);
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
-  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const { canDonate, refetch } = useCanDonate(RIBON_INTEGRATION_ID);
   const ticketColor = canDonate ? theme.colors.green30 : theme.colors.gray30;
   const ticketIcon = canDonate ? TicketIcon : GrayTicketIcon;
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      refetch();
+    }, 200);
+  }, [JSON.stringify(currentUser)]);
 
   const renderTicketCounter = useCallback(
     () => (canDonate ? 1 : 0),

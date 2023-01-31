@@ -176,19 +176,17 @@ export default function Navigation({
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
       <LoadingOverlayProvider>
-        <CurrentUserProvider>
-          <WalletProvider>
-            <NetworkProvider>
-              <CryptoPaymentProvider>
-                <CardPaymentInformationProvider>
-                  <CausesProvider>
-                    <RootNavigator />
-                  </CausesProvider>
-                </CardPaymentInformationProvider>
-              </CryptoPaymentProvider>
-            </NetworkProvider>
-          </WalletProvider>
-        </CurrentUserProvider>
+        <WalletProvider>
+          <NetworkProvider>
+            <CryptoPaymentProvider>
+              <CardPaymentInformationProvider>
+                <CausesProvider>
+                  <RootNavigator />
+                </CausesProvider>
+              </CardPaymentInformationProvider>
+            </CryptoPaymentProvider>
+          </NetworkProvider>
+        </WalletProvider>
       </LoadingOverlayProvider>
     </NavigationContainer>
   );

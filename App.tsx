@@ -7,6 +7,7 @@ import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
 import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
@@ -40,6 +41,8 @@ function Main() {
 
 export default function App() {
   return (
-    <Main />
+    <CurrentUserProvider>
+      <Main />
+    </CurrentUserProvider>
   );
 }

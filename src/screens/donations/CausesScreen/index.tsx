@@ -1,23 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { useNonProfits, useCauses } from "@ribon.io/shared/hooks";
+import { useNonProfits, useCauses, useCanDonate } from "@ribon.io/shared/hooks";
 import { ScrollView } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "components/Themed";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { createIconSet } from "@expo/vector-icons";
-import glyphMap from "./rounded.ttf";
+import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
+import BlankModal from "components/moleculars/modals/BlankModal";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { useLanguage } from "hooks/useLanguage";
 import S from "./styles";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
-  const { nonProfits, isLoading } = useNonProfits();
+  const { nonProfits, isLoading, refetch: refetchNonProfits } = useNonProfits();
   const { causes } = useCauses();
+  const {
+    canDonate,
+    isLoading: loadingCanDonate,
+    refetch: refetchCanDonate,
+  } = useCanDonate(RIBON_INTEGRATION_ID);
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
+  const [ticketModalVisible, setTicketModalVisible] = useState(canDonate);
   const { navigateTo } = useNavigation();
+  const { currentUser } = useCurrentUser();
+  const { currentLang } = useLanguage();
+
+  useEffect(() => {
+    setTicketModalVisible(canDonate);
+  }, [canDonate]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      refetchCanDonate();
+    }, 200);
+  }, [JSON.stringify(currentUser)]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      refetchNonProfits().then((np) => {
+        console.log(np);
+      });
+    }, 200);
+  }, [currentLang]);
 
   const causesFilter = () => {
     const causesApi = causes.filter((cause) => cause.active);
@@ -37,10 +66,21 @@ export default function CausesScreen() {
     return nonProfitsFiltered || [];
   };
 
-  return isLoading ? (
-    <></>
+  return isLoading || loadingCanDonate ? (
+    <View />
   ) : (
     <View style={S.container}>
+      <BlankModal
+        visible={ticketModalVisible}
+        setVisible={setTicketModalVisible}
+        containerStyle={S.containerTicket}
+      >
+        <ReceiveTicketScreen
+          onTicketReceived={() => {
+            setTicketModalVisible(false);
+          }}
+        />
+      </BlankModal>
       <Text style={S.title}>{t("title")}</Text>
       <View style={S.groupButtonsContainer}>
         <GroupButtons
@@ -55,8 +95,8 @@ export default function CausesScreen() {
         horizontal
         showsHorizontalScrollIndicator={false}
       >
-        {nonProfitsFilter()?.map((nonProfit, idx) => (
-          <View style={S.causesCardContainer} key={idx.toString()}>
+        {nonProfitsFilter()?.map((nonProfit) => (
+          <View style={S.causesCardContainer} key={nonProfit.id}>
             <CardCenterImageButton
               image={nonProfit.mainImage}
               infoTextLeft={nonProfit.name}
@@ -66,6 +106,7 @@ export default function CausesScreen() {
               onClickButton={() => {
                 navigateTo("DonateScreen", { nonProfit });
               }}
+              buttonDisabled={!canDonate}
             />
           </View>
         ))}

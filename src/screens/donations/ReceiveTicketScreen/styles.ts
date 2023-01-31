@@ -1,6 +1,4 @@
 import { StyleSheet } from "react-native";
-import { stylizedDisplayMd } from "styles/typography/stylized";
-import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {

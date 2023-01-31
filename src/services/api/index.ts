@@ -7,18 +7,18 @@ import {
   initializeApi as initializeSharedApi,
 } from "@ribon.io/shared/services";
 import { initializeHooks } from "@ribon.io/shared/hooks";
-import { getUserFromLocalStorage } from "contexts/currentUserContext";
 
 const RIBON_API = "https://dapp-dev-api.ribon.io/";
 export const baseURL = process.env.REACT_APP_RIBON_API || RIBON_API;
 
-export async function initializeApi() {
+type initializeApiProps = {
+  email?: string;
+  language: "pt-BR" | "en";
+};
+export function initializeApi({ language, email }: initializeApiProps) {
   // TODO update this to use the useLanguage hook / localstorage when it's available
-  const lang = "pt-BR";
 
-  const userEmail = (await getUserFromLocalStorage())?.email;
-
-  const authHeaders = { Language: lang, Email: userEmail };
+  const authHeaders = { Language: language, Email: email };
 
   initializeSharedApi({ url: baseURL, headers: authHeaders });
 

@@ -1,5 +1,6 @@
 import { Text, View } from "components/Themed";
 import Modal from "react-native-modal";
+import { ViewStyle } from "react-native";
 import S from "./styles";
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
   setVisible: (visible: boolean) => void;
   onModalHide?: () => void;
   children: JSX.Element;
+  containerStyle?: ViewStyle;
 };
 
 function BlankModal({
@@ -16,6 +18,7 @@ function BlankModal({
   setVisible,
   children,
   onModalHide,
+  containerStyle,
 }: Props): JSX.Element {
   function toggleModal() {
     setVisible(!visible);
@@ -31,7 +34,7 @@ function BlankModal({
         onBackdropPress={toggleModal}
         onModalHide={onModalHide}
       >
-        <View style={S.container}>
+        <View style={[S.container, containerStyle]}>
           {title && <Text style={S.title}>{title}</Text>}
           {children}
         </View>

@@ -3,29 +3,30 @@ import { Text, View } from "components/Themed";
 import RibonBackgroundLogo from "components/vectors/RibonBackgroundLogo";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import AnimationModal from "../ReceiveTicketScreen/AnimationModal";
+import AnimationModal from "./ReceiveTicketAnimation";
 import S from "./styles";
 
-function ReceiveTicketScreen(): JSX.Element {
+type Props = {
+  onTicketReceived: () => void;
+};
+function ReceiveTicketScreen({ onTicketReceived }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.receiveTicketScreen",
   });
   const [animationModalVisible, setAnimationModalVisible] = useState(false);
 
-  function renderAnimationModal() {
-    return (
-      <AnimationModal
-        visible={animationModalVisible}
-        setVisible={setAnimationModalVisible}
-      />
-    );
-  }
+  const openAnimation = () => {
+    setAnimationModalVisible(true);
+  };
 
-  function toggleAnimationModal() {
-    setAnimationModalVisible(!animationModalVisible);
-  }
-
-  return (
+  return animationModalVisible ? (
+    <AnimationModal
+      onAnimationEnd={() => {
+        setAnimationModalVisible(false);
+        onTicketReceived();
+      }}
+    />
+  ) : (
     <View style={S.container}>
       <View style={S.icon}>
         <RibonBackgroundLogo />
@@ -35,9 +36,7 @@ function ReceiveTicketScreen(): JSX.Element {
 
       <Text style={S.description}>{t("description")}</Text>
 
-      <Button text={t("buttonText")} onPress={toggleAnimationModal} />
-
-      {renderAnimationModal()}
+      <Button text={t("buttonText")} onPress={openAnimation} />
     </View>
   );
 }
