@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   title: {
     ...stylizedDisplayMd,
     marginVertical: 20,
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
     fontSize: 26,
     fontWeight: "bold",
     lineHeight: 36,

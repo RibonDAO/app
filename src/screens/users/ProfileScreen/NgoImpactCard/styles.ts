@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+  image: {
+    width: 60,
+    height: 60
+  },
   contentSection: {
     width: "75%",
     height: "100%",
