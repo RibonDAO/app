@@ -2,7 +2,7 @@
   "expo": {
     "name": "app",
     "slug": "app",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
@@ -42,7 +42,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.app.ribon",
-      "versionCode": 291
+      "versionCode": 292
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
