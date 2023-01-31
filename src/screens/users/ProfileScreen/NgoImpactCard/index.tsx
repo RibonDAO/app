@@ -1,8 +1,7 @@
 import { View, Text } from "components/Themed";
-import Lottie from 'lottie-react-native';
-import { TouchableOpacity } from "react-native";
-import TicketIcon from "components/vectors/TicketIcon";
+import { Image, TouchableOpacity } from "react-native";
 import S from "./styles";
+
 
 export type Props = {
   impact: string;
@@ -14,10 +13,14 @@ export type Props = {
 function NgoImpactCard({ icon, impact, description, onPress }: Props): JSX.Element {
   return (
     <TouchableOpacity onPress={onPress} style={S.badgeContainer}>
-      <View style={S.badgeRoundContainer}>
-        <TicketIcon />
-        <Text style={S.impact}>{impact}</Text>
-        <Text style={S.description}>{description}</Text>
+      <View style={S.impactCardContainer}>
+        <View style={S.imageSection}>
+          <Image source={require("./ngo.png")} />
+        </View>
+        <View style={S.contentSection}>
+          <Text style={S.impact}>{impact}</Text>
+          <Text style={S.description}>{description}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );

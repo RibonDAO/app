@@ -7,12 +7,14 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginBottom: 10,
   },
-  badgeRoundContainer: {
+  impactCardContainer: {
+    display: "flex",
+    flexDirection: "row",
     width: 330,
     height: 108,
     borderRadius: 8,
     padding: 16,
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
     backgroundColor: theme.colors.neutral10,
     shadowColor: "rgba(40, 36, 28, 0.2)",
@@ -34,6 +36,17 @@ const styles = StyleSheet.create({
     marginTop: 4,
     color: theme.colors.gray30,
     fontSize: 12,
+  },
+  imageSection: {
+    width: "25%",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  contentSection: {
+    width: "75%",
+    height: "100%",
+    marginLeft: 12,
+    justifyContent: "center"
   },
 });
 
