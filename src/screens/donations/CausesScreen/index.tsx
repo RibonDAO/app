@@ -11,6 +11,7 @@ import BlankModal from "components/moleculars/modals/BlankModal";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import S from "./styles";
+import Placeholder from "./placeholder";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
@@ -57,9 +58,7 @@ export default function CausesScreen() {
   };
 
   return isLoading || loadingCanDonate ? (
-    <View style={S.container}>
-      <ActivityIndicator size={40} />
-    </View>
+    <Placeholder />
   ) : (
     <View style={S.container}>
       <BlankModal
