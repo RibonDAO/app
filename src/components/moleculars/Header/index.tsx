@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import ArrowLeft from "components/vectors/ArrowLeft";
+import { withPlaceholder } from "config/navigation/withPlaceholder";
 import S from "./styles";
 
 export type Props = {
@@ -66,5 +67,4 @@ function Header({
     </SafeAreaView>
   );
 }
-
-export default Header;
+export default withPlaceholder(Header);

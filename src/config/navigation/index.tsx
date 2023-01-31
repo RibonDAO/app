@@ -37,7 +37,7 @@ import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
+const header = () => <Header rightComponent={<LayoutHeader />} />;
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -73,7 +73,7 @@ function RootNavigator() {
         component={CausesScreen}
         options={{
           title: "Causes",
-          header: () => <Header rightComponent={<LayoutHeader />} />,
+          header,
         }}
       />
 
@@ -81,10 +81,9 @@ function RootNavigator() {
         name="PaymentScreen"
         component={PaymentScreen}
         options={{
-          title: "Payment",
-          header: () => (
-            <Header hasBackButton rightComponent={<LayoutHeader />} />
-          ),
+            headerTintColor: theme.colors.orange40,
+            headerTitle: "",
+            headerBackTitleVisible: false,
         }}
       />
 
@@ -123,7 +122,7 @@ function BottomTabNavigator() {
           title: "Causes",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
-          header: () => <Header rightComponent={<LayoutHeader />} />,
+          header,
           lazy: false,
         }}
       />
@@ -135,7 +134,7 @@ function BottomTabNavigator() {
           title: "Giving",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
-          header: () => <Header rightComponent={<LayoutHeader hideTicket />} />,
+          header,
           lazy: false,
         }}
       />
@@ -148,7 +147,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
           headerShown: false,
-          header: () => <Header rightComponent={<LayoutHeader />} />,
+          header,
           lazy: false,
         }}
       />

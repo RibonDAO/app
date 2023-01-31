@@ -23,6 +23,7 @@ import {
 import { showToast } from "lib/Toast";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { useNavigation } from "hooks/useNavigation";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -101,7 +102,7 @@ function CardPaymentInformationProvider({ children }: Props) {
     if (currentCoin) setLocalStorageItem(CURRENT_COIN_KEY, currentCoin);
   }, [currentCoin]);
 
-  const integrationId = 3;
+  const integrationId = RIBON_INTEGRATION_ID;
 
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
@@ -127,15 +128,17 @@ function CardPaymentInformationProvider({ children }: Props) {
   // const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
 
-  // const handleConfirmation = () => {
-  //   navigateTo("donationDoneCauseScreen", {
-  //     hasButton: true,
-  //     offerId,
-  //     cause,
-  //     nonProfit,
-  //     flow,
-  //   });
-  // };
+  const resetStates = () => {
+    setCountry("");
+    setState("");
+    setCity("");
+    setTaxId("");
+    setNumber("");
+    setName("");
+    setExpirationDate("");
+    setCvv("");
+    setButtonDisabled(false);
+  };
 
   const handleSubmit = async () => {
     logEvent("treasureSupportConfirmBtn_click");
@@ -152,7 +155,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       offerId,
       integrationId: integrationId ?? 1,
       card: {
-        number: number.replace(/\D/g, ""),
+        number: number.replace(/\D/g, "").slice(0, 16),
         name,
         expirationMonth: expiration[0],
         expirationYear: expiration[1].slice(-2),
@@ -166,6 +169,8 @@ function CardPaymentInformationProvider({ children }: Props) {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
       navigateTo("PromotersScreen");
       logEvent("treasureGivingConfirmMdl_view");
+      showToast(t("successMessage"));
+      resetStates();
     } catch (error) {
       logError(error);
       showToast(t("onErrorMessage"));

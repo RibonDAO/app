@@ -67,7 +67,7 @@ function CardScreen(): JSX.Element {
 
   const handleCommunityAddClick = () => {
     navigateTo("CommunityAddModal", {
-      donationAmount: currentOffer?.price,
+      amount: currentOffer?.price,
     });
   };
 
