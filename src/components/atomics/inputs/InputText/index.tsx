@@ -1,9 +1,15 @@
-import React from "react";
+import React, { RefObject } from "react";
 import { View } from "components/Themed";
-import { KeyboardType, TextInput, TextStyle } from "react-native";
+import {
+  KeyboardType,
+  TextInput,
+  TextInputProps,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 import S from "./styles";
 
-export type Props = {
+export interface Props extends Omit<TextInputProps, "placeholder"> {
   name: string;
   value?: string;
   keyboardType?: KeyboardType;
@@ -12,7 +18,9 @@ export type Props = {
   disabled?: boolean;
   onChangeText?: (text: string) => void;
   style?: TextStyle;
-};
+  containerStyle?: ViewStyle;
+  ref?: RefObject<TextInput>;
+}
 
 function InputText({
   name,
@@ -23,10 +31,13 @@ function InputText({
   maxLength,
   disabled,
   style,
+  containerStyle,
+  ...rest
 }: Props): JSX.Element {
   return (
-    <View style={S.container}>
+    <View style={[S.container, containerStyle]}>
       <TextInput
+        ref={rest.ref}
         placeholder={placeholder || ""}
         keyboardType={keyboardType}
         aria-label={name}
@@ -36,6 +47,7 @@ function InputText({
         editable={!disabled}
         selectTextOnFocus={!disabled}
         style={[disabled ? S.inputDisabled : S.input, style]}
+        {...rest}
       />
     </View>
   );

@@ -8,7 +8,7 @@ export function removeInsignificantZeros(price: string) {
 }
 
 export function formatPrice(price: number, currency: string) {
-  if (currency === Currencies.BRL)
+  if (currency.toLowerCase() === Currencies.BRL.toLowerCase())
     return `R$ ${price
       .toFixed(2)
       .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`.replace(".", ",");

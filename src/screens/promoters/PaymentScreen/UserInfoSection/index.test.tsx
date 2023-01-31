@@ -12,11 +12,9 @@ describe("UserInfoSection", () => {
     });
 
     fireEvent.changeText(screen.getByPlaceholderText("City"), "São Paulo");
-    fireEvent.changeText(screen.getByPlaceholderText("State"), "SP");
     fireEvent.changeText(screen.getByPlaceholderText("Tax ID"), "00000000000");
 
     expectDisplayValueToBeInTheDocument("São Paulo");
-    expectDisplayValueToBeInTheDocument("SP");
     expectDisplayValueToBeInTheDocument("000.000.000-00");
   });
 });

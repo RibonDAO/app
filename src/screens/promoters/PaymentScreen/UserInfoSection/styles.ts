@@ -12,11 +12,27 @@ const styles = StyleSheet.create({
   },
   halfInputContainer: {
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: "row",
     width: "100%",
   },
-  countryInput: {},
+  countryInputContainer: {
+    marginVertical: 12,
+    borderWidth: 1,
+    borderRadius: 8,
+    height: 48,
+    justifyContent: "center",
+    paddingLeft: 4,
+  },
+  countryInputTheme: {
+    fontFamily: "Inter",
+    fontSize: 14,
+  },
+  dropdownContainer: {
+    flex: 1,
+    marginLeft: 4,
+    height: 48,
+    borderRadius: 8,
+  },
 });
 
 export default styles;

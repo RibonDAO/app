@@ -1,4 +1,3 @@
-import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { Currencies } from "@ribon.io/shared/types";
 import { useCardGivingFees } from "@ribon.io/shared/hooks";
@@ -9,13 +8,17 @@ import { useRouteParams } from "hooks/useRouteParams";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { Text, View } from "components/Themed";
 import Button from "components/atomics/buttons/Button";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
+import { theme } from "@ribon.io/shared/styles";
+import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
+import { withPlaceholder } from "config/navigation/withPlaceholder";
+import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
 
 function PaymentScreen(): JSX.Element {
   const { params } = useRouteParams<"PaymentScreen">();
-  const { popNavigation } = useNavigation();
   const { offer, cause, nonProfit, flow } = params;
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCauseScreen.paymentScreen",
@@ -29,6 +32,7 @@ function PaymentScreen(): JSX.Element {
     useCardPaymentInformation();
 
   const colorTheme = getThemeByFlow(flow);
+  const { isKeyboardVisible } = useKeyboardVisibility();
 
   useEffect(() => {
     setCause(cause);
@@ -54,25 +58,16 @@ function PaymentScreen(): JSX.Element {
       handleSubmit();
     }
   };
-
-  const handleBackButtonClick = () => {
-    if (isCardSection()) {
-      setCurrentSection("user");
-    } else {
-      popNavigation();
-    }
-  };
-
   const highlightText = () => nonProfit?.name || cause?.name;
 
   return (
     <View style={styles.container}>
-      <View style={styles.mainContainer}>
+      <ScrollView contentContainerStyle={styles.mainContainer}>
         <MaskedWaveCut
           image={nonProfit?.mainImage || cause?.mainImage}
           imageStyles={styles.image}
         />
-        <View style={styles.contentContainer}>
+        <KeyboardAvoidingView style={styles.contentContainer}>
           <Text style={styles.title}>
             {t("title")}{" "}
             <Text
@@ -97,17 +92,21 @@ function PaymentScreen(): JSX.Element {
             </Text>
           )}
           {renderCurrentSection()}
-        </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
+      {!isKeyboardVisible && (
         <View style={styles.donateButtonContainer}>
           <Button
             text={t("button")}
             onPress={handleContinueClick}
             disabled={buttonDisabled}
+            customStyles={styles.donateButton}
+            backgroundColor={theme.colors.orange20}
+            borderColor={theme.colors.orange20}
           />
         </View>
-      </View>
+      )}
     </View>
   );
 }
-
-export default PaymentScreen;
+export default withPlaceholder(PaymentScreen, PaymentScreenPlaceholder);

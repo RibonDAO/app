@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
@@ -23,10 +23,11 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   dropdown: {
-    position: "absolute",
-    marginTop: 4,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: "#fff",
-    alignSelf: "center",
     width: "60%",
     shadowColor: "#000000",
     shadowRadius: 4,
@@ -35,8 +36,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   overlay: {
-    width: "100%",
-    height: "100%",
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    paddingVertical: 32,
   },
   item: {
     paddingHorizontal: 10,

@@ -12,7 +12,10 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 8,
   },
-  container: {},
+  container: {
+    flex: 1,
+    marginTop: 14,
+  },
   contentContainer: {
     marginBottom: 24,
     padding: 24,
@@ -22,6 +25,7 @@ const styles = StyleSheet.create({
     ...stylizedDisplayLg,
     textAlign: "center",
     color: "gray40",
+    marginVertical: 12,
   },
   title: {
     ...defaultBodyMdRegular,
@@ -47,16 +51,11 @@ const styles = StyleSheet.create({
   },
   donateButtonContainer: {
     width: "100%",
-    padding: 16,
-    position: "absolute",
-    bottom: 0,
-    left: 0,
     backgroundColor: "neutral10",
+    padding: 16,
   },
   donateButton: {
-    borderColor: "shade20",
-    backgroundColor: "shade20",
-    color: "shade40",
+    height: 48,
   },
 });
 
