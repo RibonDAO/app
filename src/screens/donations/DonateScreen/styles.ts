@@ -1,5 +1,10 @@
-import { Text, Image, View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import {
+  defaultBodySmBold,
+  defaultBodySmRegular,
+} from "styles/typography/default";
+import { stylizedDisplaySm } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
   gradient: {
@@ -8,18 +13,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 0,
   },
-  modalWrapper: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    width: "100%",
-    height: "100%",
-  },
+  modalWrapper: {},
   container: {
-    flex: 1,
     backgroundColor: theme.colors.neutral10,
     alignItems: "center",
-    justifyContent: "space-around",
+    paddingHorizontal: 8,
+    marginTop: 24,
   },
   title: {
     fontSize: 20,
@@ -28,21 +27,16 @@ const styles = StyleSheet.create({
     color: theme.colors.gray30,
   },
   description: {
-    fontSize: 16,
-    marginBottom: 16,
+    ...defaultBodySmBold,
+    marginBottom: 8,
     color: theme.colors.gray30,
   },
   logo: {
     width: "50%",
     height: "100%",
+    borderBottomRightRadius: 18,
   },
-  inputEmailContainer: {
-    width: "100%",
-    boxSizing: "border-box",
-    textAlign: "center",
-    paddingLeft: 8,
-    paddingRight: 8,
-  },
+  inputEmailContainer: {},
   input: {
     height: 40,
     width: "100%",
@@ -58,46 +52,33 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
     paddingLeft: 16,
-    backgroundColor: theme.colors.green30,
+    backgroundColor: theme.colors.green20,
     color: theme.colors.neutral10,
+    borderBottomLeftRadius: 18,
+    borderBottomRightRadius: 18,
   },
   nonProfitText: {
-    flex: 1,
-    flexWrap: "wrap",
-    fontSize: 16,
+    ...defaultBodySmRegular,
     fontWeight: "500",
     color: theme.colors.neutral10,
-    marginTop: 15,
-    marginBottom: 16,
-    lineHeight: 26,
+    marginBottom: 4,
+    flexWrap: "wrap",
   },
   nonProfitHighlight: {
-    fontWeight: "900",
+    ...stylizedDisplaySm,
     color: theme.colors.neutral10,
     textTransform: "uppercase",
+    flexWrap: "wrap",
   },
   buttonContainer: {
     width: "100%",
-    paddingLeft: 8,
-    paddingRight: 8,
+    flex: 1,
   },
-  footer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingLeft: 16,
-    paddingRight: 16,
-    backgroundColor: theme.colors.green30,
-    color: theme.colors.neutral10,
-  },
-  footerText: {
-    color: theme.colors.neutral10,
-    marginVertical: 32,
+  textWrapper: {
+    flex: 1,
+    backgroundColor: "transparent",
+    paddingVertical: 24,
   },
 });
 

@@ -2,9 +2,7 @@ import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
   input: {
     width: "100%",
     marginBottom: 12,

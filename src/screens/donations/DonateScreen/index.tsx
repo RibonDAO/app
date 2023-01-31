@@ -20,6 +20,7 @@ import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { useRouteParams } from "hooks/useRouteParams";
+import InputText from "components/atomics/inputs/InputText";
 
 export default function DonateModal() {
   const { t } = useTranslation("translation", {
@@ -80,14 +81,13 @@ export default function DonateModal() {
   return (
     <View style={S.modalWrapper}>
       <View style={S.nonProfitContainer}>
-        <Text style={S.nonProfitText}>
-          {t("nonProfitText")}
-          {"\n"}
+        <View style={S.textWrapper}>
+          <Text style={S.nonProfitText}>{t("nonProfitText")}</Text>
           <Text style={S.nonProfitHighlight}>{nonProfit.name}</Text>
-        </Text>
+        </View>
         <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
         <LinearGradient
-          colors={["rgb(0, 218, 147)", "transparent"]}
+          colors={["rgb(140, 224, 190)", "transparent"]}
           start={[0.0, 0.5]}
           end={[1.0, 0.5]}
           locations={[0.0, 1.0]}
@@ -98,24 +98,15 @@ export default function DonateModal() {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
-        style={{ flex: 1 }}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={S.container}>
             <View style={S.inputEmailContainer}>
               <Text style={S.description}>{t("description")}</Text>
 
-              <Text style={S.title}>{t("title")}</Text>
-              <TextInput
-                style={[
-                  S.input,
-                  {
-                    borderColor: invalidInput
-                      ? theme.colors.red10
-                      : theme.colors.green30,
-                  },
-                ]}
-                placeholder={t("textInputPlaceholder")}
+              <InputText
+                name="email"
+                placeholder={t("textInputPlaceholder") || ""}
                 keyboardType="email-address"
                 onChangeText={handleTextChange}
                 value={email}
@@ -123,18 +114,6 @@ export default function DonateModal() {
                 textContentType="emailAddress"
                 autoFocus
               />
-              <Text
-                style={[
-                  S.inputHint,
-                  {
-                    color: invalidInput
-                      ? theme.colors.red10
-                      : theme.colors.gray30,
-                  },
-                ]}
-              >
-                {invalidInput ? t("invalidEmailText") : t("safeDataText")}
-              </Text>
             </View>
 
             <View style={S.buttonContainer}>
@@ -149,10 +128,6 @@ export default function DonateModal() {
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-
-      <View style={S.footer}>
-        <Text style={S.footerText}>(c) Ribon {new Date().getFullYear()}</Text>
-      </View>
     </View>
   );
 }

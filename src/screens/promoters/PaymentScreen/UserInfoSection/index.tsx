@@ -118,7 +118,7 @@ function UserInfoSection(): JSX.Element {
           placeholder={t("city")}
           value={city}
           onChangeText={(value) => setCity(value)}
-          containerStyle={{ marginRight: 4 }}
+          containerStyle={{ marginRight: 4, flex: 1 }}
           autoFocus
         />
         <Dropdown
