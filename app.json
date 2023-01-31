@@ -2,10 +2,11 @@
   "expo": {
     "name": "app",
     "slug": "app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
+    "jsEngine": "hermes",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./src/assets/images/splash.png",
@@ -27,7 +28,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.app.ribon"
@@ -38,7 +41,8 @@
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.app.ribon"
+      "package": "com.app.ribon",
+      "versionCode": 291
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
@@ -49,10 +53,13 @@
         {
           "icon": "./src/assets/sounds/notificationicon.png",
           "color": "#ffffff",
-          "sounds": ["./src/assets/sounds/notificationsound.wav"]
+          "sounds": [
+            "./src/assets/sounds/notificationsound.wav"
+          ]
         }
       ],
-      ["sentry-expo"]
+      "sentry-expo",
+      "expo-community-flipper"
     ],
     "extra": {
       "eas": {

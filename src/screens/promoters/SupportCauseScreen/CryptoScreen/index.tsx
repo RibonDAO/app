@@ -33,6 +33,7 @@ function CryptoScreen(): JSX.Element {
     tokenSymbol,
     loading: loadingCryptoPayment,
     setLoading,
+    setCurrentPool,
   } = useCryptoPayment();
   const { navigateTo } = useNavigation();
 
@@ -55,6 +56,12 @@ function CryptoScreen(): JSX.Element {
   useEffect(() => {
     setCause(causesFilter()[0]);
   }, [JSON.stringify(causes)]);
+
+  useEffect(() => {
+    if (cause?.pools && cause?.pools[0])
+      setCurrentPool(cause?.pools[0].address);
+  }, [cause]);
+
   const resetScreen = () => {
     async function reset() {
       try {
