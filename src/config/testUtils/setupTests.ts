@@ -19,6 +19,10 @@ function setupMocks() {
     __esModule: true,
     logEvent: mockLogEventFunction,
   }));
+  jest.mock("hooks/useNavigationReady", () => ({
+    __esModule: true,
+    default: () => true,
+  }));
 }
 
 setupMocks();
