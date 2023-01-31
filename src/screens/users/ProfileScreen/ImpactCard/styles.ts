@@ -26,8 +26,7 @@ const styles = StyleSheet.create({
   },
   impact: {
     ...defaultBodyLgBold,
-    marginTop: 8,
-    color: theme.colors.green30,
+    color: theme.colors.green40,
   },
   description: {
     ...defaultBodyXsRegular,
