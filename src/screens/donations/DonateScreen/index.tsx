@@ -7,29 +7,29 @@ import {
   Image,
   TextInput,
 } from "react-native";
-import { RootStackScreenProps } from "types";
 import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import Button from "components/atomics/buttons/Button";
 import { showToast } from "lib/Toast";
 import { isValidEmail } from "lib/validators/email";
-import S from "screens/donations/DonateModal/styles";
+import S from "screens/donations/DonateScreen/styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { Text, View } from "components/Themed";
 import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
+import { useRouteParams } from "hooks/useRouteParams";
 
-export default function DonateModal({
-  route,
-}: RootStackScreenProps<"DonateModal">) {
+export default function DonateModal() {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donateModal",
   });
   const [isDonating, setIsDonating] = useState(false);
   const [invalidInput, setInvalidInput] = useState(false);
-  const { nonProfit } = route.params;
+  const {
+    params: { nonProfit },
+  } = useRouteParams<"DonateScreen">();
   const { findOrCreateUser } = useUsers();
   const { setCurrentUser, currentUser } = useCurrentUser();
   const [email, setEmail] = useState(currentUser?.email || "");

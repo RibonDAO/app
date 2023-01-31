@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "components/Themed";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { createIconSet } from '@expo/vector-icons';
-import glyphMap from './rounded.ttf';
+import { createIconSet } from "@expo/vector-icons";
+import glyphMap from "./rounded.ttf";
 import S from "./styles";
 
 export default function CausesScreen() {
@@ -52,7 +52,7 @@ export default function CausesScreen() {
 
       <ScrollView
         style={S.causesContainer}
-        horizontal={true}
+        horizontal
         showsHorizontalScrollIndicator={false}
       >
         {nonProfitsFilter()?.map((nonProfit, idx) => (
@@ -64,7 +64,7 @@ export default function CausesScreen() {
               imageDescription={`${nonProfit.impactByTicket} ${nonProfit.impactDescription}`}
               buttonText={t("buttonText")}
               onClickButton={() => {
-                navigateTo("DonateModal", { nonProfit });
+                navigateTo("DonateScreen", { nonProfit });
               }}
             />
           </View>
