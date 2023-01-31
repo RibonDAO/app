@@ -59,6 +59,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     marginRight: 12,
   },
   ticketCounter: {

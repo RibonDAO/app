@@ -11,7 +11,7 @@ import Button from "components/atomics/buttons/Button";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
-import { withPlaceholderScreen } from "config/navigation/withPlaceholderScreen";
+import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
@@ -109,4 +109,4 @@ function PaymentScreen(): JSX.Element {
     </View>
   );
 }
-export default withPlaceholderScreen(PaymentScreen, PaymentScreenPlaceholder);
+export default withPlaceholder(PaymentScreen, PaymentScreenPlaceholder);
