@@ -11,7 +11,6 @@ import WalletProvider from "contexts/walletContext";
 import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import CausesProvider from "contexts/causesContext";
-import CurrentUserProvider from "contexts/currentUserContext";
 import DonateScreen from "screens/donations/DonateScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";

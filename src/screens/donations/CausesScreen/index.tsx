@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNonProfits, useCauses, useCanDonate } from "@ribon.io/shared/hooks";
-import { ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "components/Themed";
@@ -10,14 +10,13 @@ import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
 import BlankModal from "components/moleculars/modals/BlankModal";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useLanguage } from "hooks/useLanguage";
 import S from "./styles";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
-  const { nonProfits, isLoading, refetch: refetchNonProfits } = useNonProfits();
+  const { nonProfits, isLoading } = useNonProfits();
   const { causes } = useCauses();
   const {
     canDonate,
@@ -28,7 +27,6 @@ export default function CausesScreen() {
   const [ticketModalVisible, setTicketModalVisible] = useState(canDonate);
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
-  const { currentLang } = useLanguage();
 
   useEffect(() => {
     setTicketModalVisible(canDonate);
@@ -39,14 +37,6 @@ export default function CausesScreen() {
       refetchCanDonate();
     }, 200);
   }, [JSON.stringify(currentUser)]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      refetchNonProfits().then((np) => {
-        console.log(np);
-      });
-    }, 200);
-  }, [currentLang]);
 
   const causesFilter = () => {
     const causesApi = causes.filter((cause) => cause.active);
@@ -67,7 +57,9 @@ export default function CausesScreen() {
   };
 
   return isLoading || loadingCanDonate ? (
-    <View />
+    <View style={S.container}>
+      <ActivityIndicator size={40} />
+    </View>
   ) : (
     <View style={S.container}>
       <BlankModal

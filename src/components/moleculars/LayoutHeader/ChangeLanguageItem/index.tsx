@@ -1,12 +1,12 @@
 import ButtonSwitch from "components/atomics/buttons/ButtonSwitch";
 import { View } from "components/Themed";
-import { useLanguage } from "hooks/useLanguage";
+import { useLanguage } from "contexts/languageContext";
 
 function ChangeLanguageItem(): JSX.Element {
   const { currentLang, handleSwitchLanguage } = useLanguage();
 
   function handleSwitch() {
-    handleSwitchLanguage();
+    if (handleSwitchLanguage) handleSwitchLanguage();
   }
 
   return (

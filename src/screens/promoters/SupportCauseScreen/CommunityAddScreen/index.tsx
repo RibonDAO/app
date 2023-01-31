@@ -1,6 +1,6 @@
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import { useLanguage } from "hooks/useLanguage";
+import { useLanguage } from "contexts/languageContext";
 import { Languages } from "types/enums/Languages";
 import { Text, View } from "components/Themed";
 import { Image } from "react-native";

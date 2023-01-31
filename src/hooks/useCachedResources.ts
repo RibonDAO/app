@@ -9,7 +9,7 @@ import MaterialSymbolsRounded from "assets/fonts/MaterialSymbolsRounded.ttf";
 import MaterialSymbolsOutlined from "assets/fonts/MaterialSymbolsOutlined.ttf";
 import MaterialSymbolsSharp from "assets/fonts/MaterialSymbolsSharp.ttf";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useLanguage } from "hooks/useLanguage";
+import { useLanguage } from "contexts/languageContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
 import SpaceMono from "../assets/fonts/SpaceMono-Regular.ttf";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
@@ -21,8 +21,6 @@ export default function useCachedResources() {
   const { currentLang } = useLanguage();
 
   useEffect(() => {
-    console.log("cl", currentLang);
-
     initializeApi({
       email: currentUser?.email,
       language: formattedLanguage(currentLang),
