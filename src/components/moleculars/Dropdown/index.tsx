@@ -61,7 +61,7 @@ function Dropdown({
   const renderDropdown = (): ReactElement<any, any> => (
     <Modal visible={visible} transparent animationType="none">
       <TouchableOpacity style={S.overlay} onPress={() => setVisible(false)}>
-        <View style={[S.dropdown, { top: dropdownTop }]}>
+        <View style={[S.dropdown]}>
           <FlatList
             data={items}
             renderItem={renderItem}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "hooks/useLanguage";
 import { maskForTaxId } from "@ribon.io/shared/lib";
@@ -12,8 +12,16 @@ import CountryPicker, {
   Country,
   CountryCode,
 } from "react-native-country-picker-modal";
-import { countryByLanguage } from "lib/countryByLanguage";
+import {
+  countryByLanguage,
+  countryCodeByLanguage,
+} from "lib/countryByLanguage";
 import { Languages } from "types/enums/Languages";
+import Dropdown from "components/moleculars/Dropdown";
+import {
+  BRstates,
+  USAstates,
+} from "screens/promoters/PaymentScreen/UserInfoSection/federationStates";
 
 function UserInfoSection(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -22,6 +30,7 @@ function UserInfoSection(): JSX.Element {
   });
   const { currentLang } = useLanguage();
   const {
+    country,
     setCountry,
     state,
     setState,
@@ -34,8 +43,12 @@ function UserInfoSection(): JSX.Element {
   } = useCardPaymentInformation();
 
   const [currentCountryCode, setCurrentCountryCode] = useState(
-    countryByLanguage(currentLang),
+    countryCodeByLanguage(currentLang),
   );
+
+  useEffect(() => {
+    setCountry(countryByLanguage(currentLang));
+  }, []);
 
   function isBrazil(countryName: string) {
     return countryName === t("brazilName");
@@ -55,6 +68,13 @@ function UserInfoSection(): JSX.Element {
     setCurrentCountryCode(selectedCountry.cca2);
     setBrazilFormatForTaxId(isBrazil(selectedCountry.name as string));
   };
+
+  const federationStates = useCallback(() => {
+    console.log(country);
+    if (isBrazil(country)) return BRstates;
+
+    return USAstates;
+  }, [country]);
 
   useEffect(() => {
     setButtonDisabled(!(state && city && taxId.length === maxTaxIdLength()));
@@ -102,13 +122,18 @@ function UserInfoSection(): JSX.Element {
           containerStyle={{ marginRight: 4 }}
           autoFocus
         />
-        <InputText
-          style={inputStyles}
-          name={state}
-          placeholder={t("state")}
-          value={state}
-          onChangeText={(value) => setState(value)}
-          containerStyle={{ marginLeft: 4 }}
+        <Dropdown
+          label={state || t("state")}
+          items={federationStates()}
+          containerStyle={{
+            flex: 1,
+            marginLeft: 4,
+            height: 48,
+            borderRadius: 8,
+          }}
+          onSelect={(selectedState) => {
+            setState(selectedState.value);
+          }}
         />
       </View>
       <InputText
