@@ -155,7 +155,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       offerId,
       integrationId: integrationId ?? 1,
       card: {
-        number: number.replace(/\D/g, ""),
+        number: number.replace(/\D/g, "").slice(0, 16),
         name,
         expirationMonth: expiration[0],
         expirationYear: expiration[1].slice(-2),
