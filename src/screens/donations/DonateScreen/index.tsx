@@ -5,7 +5,6 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Image,
-  TextInput,
 } from "react-native";
 import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
@@ -16,13 +15,14 @@ import { isValidEmail } from "lib/validators/email";
 import S from "screens/donations/DonateScreen/styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { Text, View } from "components/Themed";
-import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { useRouteParams } from "hooks/useRouteParams";
 import InputText from "components/atomics/inputs/InputText";
+import { withPlaceholder } from "config/navigation/withPlaceholder";
+import Placeholder from "./placeholder";
 
-export default function DonateModal() {
+function DonateScreen() {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donateModal",
   });
@@ -138,3 +138,4 @@ export default function DonateModal() {
     </View>
   );
 }
+export default withPlaceholder(DonateScreen, Placeholder);
