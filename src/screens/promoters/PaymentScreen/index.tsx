@@ -1,4 +1,3 @@
-import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { Currencies } from "@ribon.io/shared/types";
 import { useCardGivingFees } from "@ribon.io/shared/hooks";
@@ -12,16 +11,14 @@ import Button from "components/atomics/buttons/Button";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
-import useNavigationReady from "hooks/useNavigationReady";
+import { withPlaceholderScreen } from "config/navigation/withPlaceholderScreen";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
 
 function PaymentScreen(): JSX.Element {
-  const navigationReady = useNavigationReady();
   const { params } = useRouteParams<"PaymentScreen">();
-  const { popNavigation } = useNavigation();
   const { offer, cause, nonProfit, flow } = params;
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCauseScreen.paymentScreen",
@@ -61,18 +58,7 @@ function PaymentScreen(): JSX.Element {
       handleSubmit();
     }
   };
-
-  const handleBackButtonClick = () => {
-    if (isCardSection()) {
-      setCurrentSection("user");
-    } else {
-      popNavigation();
-    }
-  };
-
   const highlightText = () => nonProfit?.name || cause?.name;
-
-  if (!navigationReady) return <PaymentScreenPlaceholder />;
 
   return (
     <View style={styles.container}>
@@ -123,5 +109,4 @@ function PaymentScreen(): JSX.Element {
     </View>
   );
 }
-
-export default PaymentScreen;
+export default withPlaceholderScreen(PaymentScreen, PaymentScreenPlaceholder);

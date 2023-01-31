@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 
 const useNavigationReady = () => {
@@ -6,7 +5,7 @@ const useNavigationReady = () => {
   useEffect(() => {
     setTimeout(() => {
       if (!isReady) setIsReady(true);
-    }, 1)
+    }, 5);
   }, []);
 
   return isReady;

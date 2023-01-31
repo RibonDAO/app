@@ -15,7 +15,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
   },
-  countryInput: {},
+  countryInputContainer: {
+    marginVertical: 12,
+    borderWidth: 1,
+    borderRadius: 8,
+    height: 48,
+    justifyContent: "center",
+    paddingLeft: 4,
+  },
+  countryInputTheme: {
+    fontFamily: "Inter",
+    fontSize: 14,
+  },
 });
 
 export default styles;

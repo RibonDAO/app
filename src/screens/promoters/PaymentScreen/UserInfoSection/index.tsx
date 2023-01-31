@@ -80,22 +80,16 @@ function UserInfoSection(): JSX.Element {
         onSelect={handleCountryChange}
         withFilter
         filterProps={{ placeholder: t("searchCountryPlaceholder") || "" }}
-        containerButtonStyle={{
-          borderColor: colorTheme.shade40,
-          marginVertical: 12,
-          borderWidth: 1,
-          borderRadius: 8,
-          height: 48,
-          justifyContent: "center",
-          paddingLeft: 4,
-        }}
+        containerButtonStyle={[
+          S.countryInputContainer,
+          { borderColor: colorTheme.shade40 },
+        ]}
         theme={{
+          ...S.countryInputTheme,
           primaryColor: colorTheme.shade20,
           primaryColorVariant: colorTheme.shade20,
           filterPlaceholderTextColor: colorTheme.shade20,
           onBackgroundTextColor: colorTheme.shade40,
-          fontFamily: "Inter",
-          fontSize: 14,
         }}
       />
       <View style={S.halfInputContainer}>
