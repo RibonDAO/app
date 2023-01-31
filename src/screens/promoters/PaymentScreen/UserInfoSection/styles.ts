@@ -27,6 +27,12 @@ const styles = StyleSheet.create({
     fontFamily: "Inter",
     fontSize: 14,
   },
+  dropdownContainer: {
+    flex: 1,
+    marginLeft: 4,
+    height: 48,
+    borderRadius: 8,
+  },
 });
 
 export default styles;

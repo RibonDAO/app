@@ -124,12 +124,7 @@ function UserInfoSection(): JSX.Element {
         <Dropdown
           label={state || t("state")}
           items={federationStates()}
-          containerStyle={{
-            flex: 1,
-            marginLeft: 4,
-            height: 48,
-            borderRadius: 8,
-          }}
+          containerStyle={S.dropdownContainer}
           onSelect={(selectedState) => {
             setState(selectedState.value);
           }}
