@@ -36,6 +36,9 @@
   "contexts": {
     "walletContext": {
       "walletConnectionErrorMessage": "Erro ao conectar carteira"
+    },
+    "cardPaymentInformation": {
+      "successMessage": "Você doou com sucesso para a causa!"
     }
   },
   "promoters": {

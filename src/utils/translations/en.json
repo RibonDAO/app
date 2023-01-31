@@ -36,6 +36,9 @@
   "contexts": {
     "walletContext": {
       "walletConnectionErrorMessage": "Error connecting wallet"
+    },
+    "cardPaymentInformation": {
+      "successMessage": "You have successfully donated to this cause!"
     }
   },
   "promoters": {

@@ -140,16 +140,6 @@ function CardPaymentInformationProvider({ children }: Props) {
     setButtonDisabled(false);
   };
 
-  // const handleConfirmation = () => {
-  //   navigateTo("donationDoneCauseScreen", {
-  //     hasButton: true,
-  //     offerId,
-  //     cause,
-  //     nonProfit,
-  //     flow,
-  //   });
-  // };
-
   const handleSubmit = async () => {
     logEvent("treasureSupportConfirmBtn_click");
     showLoadingOverlay();
@@ -179,6 +169,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
       navigateTo("PromotersScreen");
       logEvent("treasureGivingConfirmMdl_view");
+      showToast(t("successMessage"));
       resetStates();
     } catch (error) {
       logError(error);

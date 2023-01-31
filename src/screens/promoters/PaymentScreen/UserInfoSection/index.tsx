@@ -70,7 +70,6 @@ function UserInfoSection(): JSX.Element {
   };
 
   const federationStates = useCallback(() => {
-    console.log(country);
     if (isBrazil(country)) return BRstates;
 
     return USAstates;
