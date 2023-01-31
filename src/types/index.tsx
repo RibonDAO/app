@@ -11,7 +11,7 @@ declare global {
   namespace ReactNavigation {}
 }
 
-export type ModalParamList = {
+export type DonateScreenList = {
   nonProfit: NonProfit;
 };
 
@@ -39,7 +39,7 @@ export type RootTabParamList = {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  DonateModal: ModalParamList;
+  DonateScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;
   NotFound: undefined;
   ReceiveTicketScreen: undefined;

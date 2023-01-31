@@ -8,16 +8,24 @@ import * as SplashScreen from "expo-splash-screen";
 import MaterialSymbolsRounded from "assets/fonts/MaterialSymbolsRounded.ttf";
 import MaterialSymbolsOutlined from "assets/fonts/MaterialSymbolsOutlined.ttf";
 import MaterialSymbolsSharp from "assets/fonts/MaterialSymbolsSharp.ttf";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { useLanguage } from "contexts/languageContext";
+import { formattedLanguage } from "lib/formatters/languageFormatter";
 import SpaceMono from "../assets/fonts/SpaceMono-Regular.ttf";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter from "../assets/fonts/Inter.ttf";
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
+  const { currentUser } = useCurrentUser();
+  const { currentLang } = useLanguage();
 
   useEffect(() => {
-    initializeApi();
-  }, []);
+    initializeApi({
+      email: currentUser?.email,
+      language: formattedLanguage(currentLang),
+    });
+  }, [JSON.stringify(currentUser), currentLang]);
 
   useEffect(() => {
     Sentry.init({
