@@ -33,7 +33,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.app.ribon"
+      "bundleIdentifier": "org.reactjs.native.example.Ribon",
+      "buildNumber": "291"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -58,8 +59,7 @@
           ]
         }
       ],
-      "sentry-expo",
-      "expo-community-flipper"
+      "sentry-expo"
     ],
     "extra": {
       "eas": {
