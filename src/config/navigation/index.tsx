@@ -37,6 +37,9 @@ import CausesIconOn from "./assets/CausesIconOn";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const header = () => <Header rightComponent={<LayoutHeader />} />;
+const headerWithoutTicket = () => (
+  <Header rightComponent={<LayoutHeader hideTicket />} />
+);
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -143,7 +146,7 @@ function BottomTabNavigator() {
           title: "Giving",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
-          header,
+          header: headerWithoutTicket,
           lazy: false,
         }}
       />
