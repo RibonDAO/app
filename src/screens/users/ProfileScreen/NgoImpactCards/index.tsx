@@ -1,40 +1,31 @@
 import { View } from "components/Themed";
-import { useState } from "react";
-import S from "./styles";
+import { useCallback, useEffect } from "react";
+import { useImpact } from "@ribon.io/shared/hooks";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { Impact } from "@ribon.io/shared/types";
 import NgoImpactCard from "../NgoImpactCard";
+import S from "./styles";
 
 function NgoImpactCards(): JSX.Element {
-  const [ngoImpacts] = useState([
-    {
-      name: "Evidence Action",
-      impact: "Você doou 3 dias de água tratada para uma pessoa",
-    },
-    {
-      name: "Donated money",
-      impact: "Você doou 3 dias de água tratada para uma pessoa",
-    },
-    {
-      name: "Supported NGOs",
-      impact: "Você doou 3 dias de água tratada para uma pessoa",
-    },
-    {
-      name: "Supporter causes",
-      impact: "Você doou 3 dias de água tratada para uma pessoa",
-    },
-  ]);
+  const { currentUser } = useCurrentUser();
+  const { userImpact } = useImpact(currentUser?.id);
 
-  const renderItem = ({ name, impact }: { name: string; impact: string }) => (
-    <NgoImpactCard
-      key={name}
-      onPress={() => {}}
-      description={impact}
-      impact={name}
-    />
+  const impactItems = useCallback(
+    () => userImpact?.filter((item) => item.impact.toString() !== "0"),
+    [userImpact],
   );
 
   return (
     <View style={S.cardsContainer}>
-      {ngoImpacts.map((badge) => renderItem(badge))}
+      {impactItems()?.map((item: Impact) => (
+        <NgoImpactCard
+          key={item?.nonProfit.id}
+          description={`${item.impact} de ${item.nonProfit.impactDescription} para ${item.nonProfit.name}`}
+          name={item?.nonProfit.name}
+          icon={item?.nonProfit.logo}
+          onPress={() => {}}
+        />
+      ))}
     </View>
   );
 }
