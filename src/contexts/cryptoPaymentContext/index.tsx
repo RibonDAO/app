@@ -188,7 +188,7 @@ function CryptoPaymentProvider({ children }: Props) {
       cause,
       isInCryptoPage,
       setIsInCryptoPage,
-      currentNetwork,
+      currentNetwork?.chainId,
     ],
   );
 
