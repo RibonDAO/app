@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./global";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import WalletConnectProvider from "@walletconnect/react-native-dapp";
 import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LanguageProvider from "./src/contexts/languageContext";
+import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
 import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
@@ -40,6 +42,12 @@ function Main() {
 
 export default function App() {
   return (
-    <Main />
+    <Suspense fallback={<View />}>
+      <CurrentUserProvider>
+        <LanguageProvider>
+          <Main />
+        </LanguageProvider>
+      </CurrentUserProvider>
+    </Suspense>
   );
 }

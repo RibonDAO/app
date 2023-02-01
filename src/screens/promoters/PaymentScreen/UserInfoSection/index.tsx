@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLanguage } from "hooks/useLanguage";
+import { useLanguage } from "contexts/languageContext";
 import { maskForTaxId } from "@ribon.io/shared/lib";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { logEvent } from "services/analytics";
@@ -118,7 +118,7 @@ function UserInfoSection(): JSX.Element {
           placeholder={t("city")}
           value={city}
           onChangeText={(value) => setCity(value)}
-          containerStyle={{ marginRight: 4 }}
+          containerStyle={{ marginRight: 4, flex: 1 }}
           autoFocus
         />
         <Dropdown

@@ -11,8 +11,7 @@ import WalletProvider from "contexts/walletContext";
 import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import CausesProvider from "contexts/causesContext";
-import CurrentUserProvider from "contexts/currentUserContext";
-import DonateModal from "screens/donations/DonateModal";
+import DonateScreen from "screens/donations/DonateScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
 import ProfileScreen from "screens/users/ProfileScreen";
@@ -81,14 +80,24 @@ function RootNavigator() {
         name="PaymentScreen"
         component={PaymentScreen}
         options={{
-            headerTintColor: theme.colors.orange40,
-            headerTitle: "",
-            headerBackTitleVisible: false,
+          headerTintColor: theme.colors.orange40,
+          headerTitle: "",
+          headerBackTitleVisible: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="DonateScreen"
+        component={DonateScreen}
+        options={{
+          headerShown: false,
+          headerTintColor: theme.colors.orange40,
+          headerTitle: "",
+          headerBackTitleVisible: false,
         }}
       />
 
       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="DonateModal" component={DonateModal} />
         <Stack.Screen
           name="CommunityAddModal"
           component={CommunityAddScreen}
@@ -166,19 +175,17 @@ export default function Navigation({
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
       <LoadingOverlayProvider>
-        <CurrentUserProvider>
-          <WalletProvider>
-            <NetworkProvider>
-              <CryptoPaymentProvider>
-                <CardPaymentInformationProvider>
-                  <CausesProvider>
-                    <RootNavigator />
-                  </CausesProvider>
-                </CardPaymentInformationProvider>
-              </CryptoPaymentProvider>
-            </NetworkProvider>
-          </WalletProvider>
-        </CurrentUserProvider>
+        <WalletProvider>
+          <NetworkProvider>
+            <CryptoPaymentProvider>
+              <CardPaymentInformationProvider>
+                <CausesProvider>
+                  <RootNavigator />
+                </CausesProvider>
+              </CardPaymentInformationProvider>
+            </CryptoPaymentProvider>
+          </NetworkProvider>
+        </WalletProvider>
       </LoadingOverlayProvider>
     </NavigationContainer>
   );

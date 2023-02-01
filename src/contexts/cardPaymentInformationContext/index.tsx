@@ -1,5 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useLanguage } from "hooks/useLanguage";
+import { useLanguage } from "contexts/languageContext";
 import { coinByLanguage } from "lib/coinByLanguage";
 import {
   createContext,
