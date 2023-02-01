@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 60,
-    height: 60
+    height: 60,
+    borderRadius: 50
   },
   contentSection: {
     width: "75%",
