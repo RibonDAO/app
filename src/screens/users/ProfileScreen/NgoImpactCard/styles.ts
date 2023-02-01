@@ -1,6 +1,9 @@
 import { theme } from "@ribon.io/shared";
 import { StyleSheet } from "react-native";
-import { defaultBodyLgBold, defaultBodyXsRegular } from "styles/typography/default";
+import {
+  defaultBodyLgBold,
+  defaultBodyXsRegular,
+} from "styles/typography/default";
 
 const styles = StyleSheet.create({
   badgeContainer: {
@@ -24,7 +27,8 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    marginRight: 8
+    marginRight: 8,
+    elevation: 18,
   },
   impact: {
     ...defaultBodyLgBold,
@@ -40,17 +44,17 @@ const styles = StyleSheet.create({
   imageSection: {
     width: "25%",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   image: {
     width: 60,
-    height: 60
+    height: 60,
   },
   contentSection: {
     width: "75%",
     height: "100%",
     marginLeft: 12,
-    justifyContent: "center"
+    justifyContent: "center",
   },
 });
 
