@@ -1,3 +1,4 @@
+import { theme } from "@ribon.io/shared";
 import * as WebBrowser from "expo-web-browser";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   helpContainer: {
-    marginTop: 15,
+    marginTop: theme.spacingNative(16),
     marginHorizontal: 20,
     alignItems: "center",
   },

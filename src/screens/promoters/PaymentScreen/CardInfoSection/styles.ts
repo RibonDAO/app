@@ -4,10 +4,10 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   container: {
     height: 256,
-    marginTop: 18,
+    marginTop: theme.spacingNative(20),
   },
   title: {
-    marginBottom: 20,
+    marginBottom: theme.spacingNative(20),
     color: theme.colors.gray40,
   },
   half: {

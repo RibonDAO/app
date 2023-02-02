@@ -8,7 +8,7 @@ import {
 const styles = StyleSheet.create({
   badgeContainer: {
     alignItems: "flex-start",
-    marginBottom: 10,
+    marginBottom: theme.spacingNative(12),
   },
   impactCardContainer: {
     display: "flex",
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     width: 330,
     height: 108,
     borderRadius: 8,
-    padding: 16,
+    padding: theme.spacingNative(16),
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: theme.colors.neutral10,
@@ -27,17 +27,17 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    marginRight: 8,
+    marginRight: theme.spacingNative(8),
     elevation: 18,
   },
   impact: {
     ...defaultBodyLgBold,
-    marginTop: 8,
+    marginTop: theme.spacingNative(8),
     color: theme.colors.green30,
   },
   description: {
     ...defaultBodyXsRegular,
-    marginTop: 4,
+    marginTop: theme.spacingNative(4),
     color: theme.colors.gray30,
     fontSize: 12,
   },
@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
   image: {
     width: 60,
     height: 60,
-    borderRadius: 50
+    borderRadius: 50,
   },
   contentSection: {
     width: "75%",
     height: "100%",
-    marginLeft: 12,
+    marginLeft: theme.spacingNative(12),
     justifyContent: "center",
   },
 });

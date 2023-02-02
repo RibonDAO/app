@@ -1,5 +1,5 @@
+import { theme } from "@ribon.io/shared";
 import { StyleSheet } from "react-native";
-import { stylizedDisplayMd } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
   container: {
@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: 16,
+    padding: theme.spacingNative(16),
   },
   icon: {
     position: "absolute",
@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   title: {
-    marginTop: 32,
-    marginBottom: 8,
+    marginTop: theme.spacingNative(32),
+    marginBottom: theme.spacingNative(8),
     fontSize: 20,
     fontWeight: "bold",
     lineHeight: 36,
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     lineHeight: 28,
-    marginBottom: 20,
+    marginBottom: theme.spacingNative(20),
   },
 });
 

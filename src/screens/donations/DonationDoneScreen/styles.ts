@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     backgroundColor: "#f2f2f2",
     borderRadius: 10,
-    marginTop: 60,
+    marginTop: theme.spacingNative(64),
     marginBottom: 60,
     transform: [{ rotate: "45deg" }],
   },
@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
   title: {
     ...stylizedDisplayMd,
     color: theme.colors.green30,
-    marginTop: 10,
+    marginTop: theme.spacingNative(10),
   },
   description: {
     color: theme.colors.gray30,
-    marginTop: 10,
-    marginBottom: 30,
+    marginTop: theme.spacingNative(10),
+    marginBottom: theme.spacingNative(32),
   },
 });
 

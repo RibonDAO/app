@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: theme.colors.neutral10,
     justifyContent: "space-between",
-    paddingTop: 16,
-    paddingLeft: 16,
-    paddingRight: 12,
+    paddingTop: theme.spacingNative(16),
+    paddingLeft: theme.spacingNative(16),
+    paddingRight: theme.spacingNative(12),
   },
   logo: {
     height: 34,

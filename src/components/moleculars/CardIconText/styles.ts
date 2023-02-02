@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 24,
     height: 24,
-    marginRight: 10,
+    marginRight: theme.spacingNative(12),
     objectFit: "cover",
   },
   text: {

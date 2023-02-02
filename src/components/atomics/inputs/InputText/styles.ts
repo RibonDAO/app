@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
   container: {},
   input: {
     width: "100%",
-    marginBottom: 12,
-    padding: 8,
+    marginBottom: theme.spacingNative(12),
+    padding: theme.spacingNative(8),
     borderWidth: 1,
     borderColor: theme.colors.green30,
     borderRadius: 8,
@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
   },
   inputDisabled: {
     width: "100%",
-    marginBottom: 12,
-    padding: 8,
+    marginBottom: theme.spacingNative(12),
+    padding: theme.spacingNative(8),
     borderWidth: 1,
     borderColor: theme.colors.gray30,
     borderRadius: 8,

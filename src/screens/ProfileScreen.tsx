@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View } from "components/Themed";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { theme } from "@ribon.io/shared";
 
 const shortenAddress = (address: string) =>
   `${address.slice(0, 6)}...${address.slice(
@@ -34,10 +35,10 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: "center",
     borderRadius: 30,
-    marginLeft: 35,
-    marginRight: 35,
-    marginTop: 20,
-    marginBottom: 20,
+    marginLeft: theme.spacingNative(32),
+    marginRight: theme.spacingNative(32),
+    marginTop: theme.spacingNative(20),
+    marginBottom: theme.spacingNative(20),
   },
   buttonTextStyle: {
     color: "#FFFFFF",

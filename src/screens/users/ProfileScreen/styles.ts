@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.neutral10,
     minHeight: "100%",
-    marginTop: 24
-  }
+    marginTop: theme.spacingNative(24),
+  },
 });
 
 export default styles;

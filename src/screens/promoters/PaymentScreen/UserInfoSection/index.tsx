@@ -22,6 +22,7 @@ import {
   BRstates,
   USAstates,
 } from "screens/promoters/PaymentScreen/UserInfoSection/federationStates";
+import { theme } from "@ribon.io/shared";
 
 function UserInfoSection(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -118,7 +119,7 @@ function UserInfoSection(): JSX.Element {
           placeholder={t("city")}
           value={city}
           onChangeText={(value) => setCity(value)}
-          containerStyle={{ marginRight: 4, flex: 1 }}
+          containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
           autoFocus
         />
         <Dropdown

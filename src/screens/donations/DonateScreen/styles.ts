@@ -17,17 +17,17 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     paddingHorizontal: 8,
-    marginTop: 24,
+    marginTop: theme.spacingNative(24),
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 8,
+    marginBottom: theme.spacingNative(8),
     color: theme.colors.gray30,
   },
   description: {
     ...defaultBodySmBold,
-    marginBottom: 8,
+    marginBottom: theme.spacingNative(8),
     color: theme.colors.gray30,
   },
   logo: {
@@ -39,13 +39,13 @@ const styles = StyleSheet.create({
   },
   inputHint: {
     fontSize: 12,
-    marginTop: 4,
+    marginTop: theme.spacingNative(4),
   },
   nonProfitContainer: {
     width: "100%",
     display: "flex",
     flexDirection: "row",
-    paddingLeft: 16,
+    paddingLeft: theme.spacingNative(16),
     backgroundColor: theme.colors.green20,
     color: theme.colors.neutral10,
   },
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     ...defaultBodySmRegular,
     fontWeight: "500",
     color: theme.colors.neutral10,
-    marginBottom: 4,
+    marginBottom: theme.spacingNative(4),
     flexWrap: "wrap",
   },
   nonProfitHighlight: {
@@ -71,15 +71,15 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     height: 32,
-    marginTop: 14,
+    marginTop: theme.spacingNative(16),
     borderWidth: 0,
     backgroundColor: "transparent",
   },
   textWrapper: {
     flex: 1,
     backgroundColor: "transparent",
-    paddingBottom: 24,
-    paddingTop: 34,
+    paddingBottom: theme.spacingNative(24),
+    paddingTop: theme.spacingNative(32),
   },
 });
 

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: 16,
+    padding: theme.spacingNative(16),
   },
   icon: {
     position: "absolute",
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...stylizedDisplayMd,
-    marginBottom: 8,
+    marginBottom: theme.spacingNative(8),
     fontSize: 20,
     fontWeight: "bold",
     lineHeight: 36,
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     lineHeight: 28,
-    marginBottom: 20,
+    marginBottom: theme.spacingNative(20),
   },
 });
 

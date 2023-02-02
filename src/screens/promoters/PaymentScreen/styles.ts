@@ -14,11 +14,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginTop: 14,
+    marginTop: theme.spacingNative(16),
   },
   contentContainer: {
-    marginBottom: 24,
-    padding: 24,
+    marginBottom: theme.spacingNative(24),
+    padding: theme.spacingNative(24),
     borderRadius: 8,
   },
   donationValueText: {
@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
   backArrowButton: {
     width: 24,
     height: 24,
-    marginBottom: 20,
+    marginBottom: theme.spacingNative(20),
   },
   donateButtonContainer: {
     width: "100%",
     backgroundColor: "neutral10",
-    padding: 16,
+    padding: theme.spacingNative(16),
   },
   donateButton: {
     height: 48,

@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    paddingBottom: 8,
+    paddingBottom: theme.spacingNative(8),
     shadowColor: "rgba(40, 36, 28, 0.2)",
     shadowOffset: {
       width: 0,
