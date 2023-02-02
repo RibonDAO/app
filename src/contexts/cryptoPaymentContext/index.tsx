@@ -110,7 +110,7 @@ function CryptoPaymentProvider({ children }: Props) {
     } catch (error) {
       logError(error);
     }
-  }, [wallet, tokenDecimals]);
+  }, [wallet, tokenDecimals, donationTokenContract?.address]);
 
   useEffect(() => {
     if (wallet) fetchUsdcUserBalance();
@@ -155,7 +155,7 @@ function CryptoPaymentProvider({ children }: Props) {
   const fetchTokenSymbol = useCallback(async () => {
     const contractSymbol = await donationTokenContract?.functions.symbol();
     setTokenSymbol(contractSymbol);
-  }, [donationTokenContract]);
+  }, [donationTokenContract?.address]);
 
   useEffect(() => {
     fetchTokenSymbol();
@@ -188,6 +188,7 @@ function CryptoPaymentProvider({ children }: Props) {
       cause,
       isInCryptoPage,
       setIsInCryptoPage,
+      currentNetwork?.chainId,
     ],
   );
 

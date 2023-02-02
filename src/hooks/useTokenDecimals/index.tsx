@@ -18,7 +18,7 @@ function useTokenDecimals() {
       setTokenDecimals(decimals);
     }
     fetchDecimals();
-  }, []);
+  }, [donationTokenContract?.address]);
 
   return { tokenDecimals };
 }

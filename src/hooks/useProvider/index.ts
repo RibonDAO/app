@@ -4,8 +4,12 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { providers } from "ethers";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { useWalletContext } from "contexts/walletContext";
+import { networks } from "config/networks";
 
-export function useProvider() {
+type Props = {
+  onChainChanged?: (chainId: number) => void;
+};
+export function useProvider({ onChainChanged }: Props = {}) {
   const { wallet } = useWalletContext();
   const [provider, setProvider] = useState<providers.Web3Provider | null>(null);
   const connector = useWalletConnect();
@@ -14,17 +18,19 @@ export function useProvider() {
     try {
       const walletConnectProvider = new WalletConnectProvider({
         rpc: {
-          80001:
-            "https://polygon-mumbai.g.alchemy.com/v2/9G3Z4VFJG7ni_BDJ9hDqoWZw_K7vMSFC",
+          [networks[0].chainId]: networks[0].nodeUrl,
+          [networks[1].chainId]: networks[1].nodeUrl,
+          [networks[2].chainId]: networks[2].nodeUrl,
         },
-        chainId: 80001,
         connector,
         qrcode: false,
       });
 
       await walletConnectProvider.enable();
       const web3Provider = new providers.Web3Provider(walletConnectProvider);
-
+      walletConnectProvider.on("chainChanged", (chainId: number) => {
+        if (onChainChanged) onChainChanged(chainId);
+      });
       setProvider(web3Provider);
     } catch (e) {
       logError(e);
