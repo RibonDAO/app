@@ -5,7 +5,7 @@ import S from "./styles";
 import ImpactCards from "./ImpactCards";
 import NgoImpactCards from "./NgoImpactCards";
 
-function BadgesProfilePage() {
+function ProfileScreen() {
   return (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
       <Text style={S.title}>My Impact</Text>
@@ -17,4 +17,4 @@ function BadgesProfilePage() {
   );
 }
 
-export default BadgesProfilePage;
+export default ProfileScreen;
