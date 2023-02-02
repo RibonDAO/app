@@ -30,5 +30,5 @@ export function useContract<T extends Contract = Contract>({
       logError(error);
       return null;
     }
-  }, [address, ABI, provider]) as T;
+  }, [address, ABI, provider, currentNetwork?.chainId]) as T;
 }
