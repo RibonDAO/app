@@ -85,6 +85,11 @@
           "searchCountryPlaceholder": "Procurar país"
         }
       }
+    },
+    "contributionDoneScreen": {
+      "title": "Obrigado!",
+      "buttonTitle": "fechar",
+      "description": "Você contribuiu para"
     }
   },
   "users": {

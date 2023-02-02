@@ -23,6 +23,7 @@ import CardPaymentInformationProvider from "contexts/cardPaymentInformationConte
 import PaymentScreen from "screens/promoters/PaymentScreen";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
+import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -65,6 +66,12 @@ function RootNavigator() {
       <Stack.Screen
         name="DonationDoneScreen"
         component={DonationDoneScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="ContributionDoneScreen"
+        component={ContributionDoneScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 

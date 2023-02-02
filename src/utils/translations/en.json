@@ -86,6 +86,11 @@
           "searchCountryPlaceholder": "Search country"
         }
       }
+    },
+    "contributionDoneScreen": {
+      "title": "Thank you!",
+      "buttonTitle": "close",
+      "description": "You contributed to"
     }
   },
   "users": {

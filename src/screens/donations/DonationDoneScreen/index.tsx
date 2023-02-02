@@ -1,11 +1,8 @@
 import React from "react";
-import { Button, View, Text } from "react-native";
-import Image from "components/atomics/Image";
 import { RootStackScreenProps } from "types";
-import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import S from "./styles";
+import DoneScreenTemplate from "screens/templates/DoneScreenTemplate";
 
 export default function DonationDoneScreen({
   route,
@@ -17,20 +14,13 @@ export default function DonationDoneScreen({
   const { popNavigation } = useNavigation();
 
   return (
-    <View style={S.container}>
-      <View style={S.diamond}>
-        <Image style={S.cardImage} source={{ uri: nonProfit.mainImage }} />
-      </View>
-      <Text style={S.title}>{t("title")}</Text>
-      <Text style={S.description}>
-        You donated {nonProfit.impactByTicket} {nonProfit.impactDescription} to{" "}
-        {nonProfit.name}.
-      </Text>
-      <Button
-        onPress={() => popNavigation()}
-        title={t("buttonText")}
-        color={theme.colors.green30}
-      />
-    </View>
+    <DoneScreenTemplate
+      image={nonProfit.mainImage}
+      title={t("title") || ""}
+      description={`
+      You donated ${nonProfit.impactByTicket} ${nonProfit.impactDescription} to ${nonProfit.name}.`}
+      buttonTitle={t("buttonText") || ""}
+      onButtonPress={() => popNavigation()}
+    />
   );
 }

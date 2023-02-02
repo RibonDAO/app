@@ -167,9 +167,11 @@ function CardPaymentInformationProvider({ children }: Props) {
 
     try {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
-      navigateTo("PromotersScreen");
+      navigateTo("ContributionDoneScreen", {
+        cause,
+        nonProfit,
+      });
       logEvent("treasureGivingConfirmMdl_view");
-      showToast(t("successMessage"));
       resetStates();
     } catch (error) {
       logError(error);
