@@ -166,7 +166,7 @@ const DefaultTheme: Theme = {
     dark: false,
     colors: {
         primary: theme.colors.green20,
-        background: theme.colors.neutral10,
+        background: theme.colors.gray10,
         card: theme.colors.neutral10,
         text: theme.colors.gray40,
         border: theme.colors.neutral10,

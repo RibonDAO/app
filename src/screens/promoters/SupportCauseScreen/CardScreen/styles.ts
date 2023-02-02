@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 24,
     marginBottom: 100,
-    backgroundColor: theme.colors.neutral10,
   },
   contentContainer: {
     maxWidth: 472,
@@ -35,6 +34,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 2,
     elevation: 2,
+    backgroundColor: theme.colors.neutral10,
   },
   givingContainer: {
     marginBottom: 24,
