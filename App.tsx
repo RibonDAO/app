@@ -12,6 +12,7 @@ import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
 import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
+import { theme } from "@ribon.io/shared";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
@@ -31,13 +32,18 @@ function Main() {
       >
         <QueryClientComponent>
           <SafeAreaProvider>
-            <SafeAreaView style={{ flex: 1 }}>
-              <Navigation colorScheme={colorScheme} />
-              <StatusBar />
+            <SafeAreaView
+              edges={["top"]}
+              style={{ flex: 1, backgroundColor: theme.colors.gray10 }}
+            >
+              <SafeAreaView edges={["bottom"]} style={{ flex: 1, backgroundColor: theme.colors.neutral10 }}>
+                <Navigation colorScheme={colorScheme} />
+                <StatusBar />
+              </SafeAreaView>
             </SafeAreaView>
           </SafeAreaProvider>
         </QueryClientComponent>
-      </WalletConnectProvider>
+      </WalletConnectProvider >
     );
   }
 }
