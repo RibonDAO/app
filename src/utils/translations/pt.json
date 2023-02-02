@@ -95,6 +95,11 @@
         "totalDonated": "Dinheiro doado",
         "totalNonProfits": "ONGs auxiliadas",
         "totalCauses": "Causas auxiliadas"
+      },
+      "ngoImpactCards": {
+        "title": "Suas doações em comunidade irão aparecer aqui",
+        "description": "Você ainda não fez doações em comunidade, por quê não fazer a primeira?",
+        "buttonText": "Doar em comunidade"
       }
     }
   }
