@@ -21,6 +21,9 @@ import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
 import PaymentScreen from "screens/promoters/PaymentScreen";
+import { Theme } from "@react-navigation/native/src/types";
+import { useTranslation } from "react-i18next";
+import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -29,8 +32,7 @@ import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
-import { Theme } from "@react-navigation/native/src/types";
-import { useTranslation } from "react-i18next";
+
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
   <Header rightComponent={<LayoutHeader hideTicket />} />
@@ -68,6 +70,12 @@ function RootNavigator() {
       />
 
       <Stack.Screen
+        name="ContributionDoneScreen"
+        component={ContributionDoneScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
         name="CausesScreen"
         component={CausesScreen}
         options={{
@@ -83,6 +91,7 @@ function RootNavigator() {
           headerTintColor: theme.colors.orange40,
           headerTitle: "",
           headerBackTitleVisible: false,
+          headerStyle: { backgroundColor: theme.colors.gray10 },
         }}
       />
 
@@ -156,7 +165,7 @@ function BottomTabNavigator() {
           title: t("tabs.profile") || "Impact",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ImpactIconOn /> : <ImpactIconOff />,
-          header,
+          header: headerWithoutTicket,
           lazy: false,
         }}
       />

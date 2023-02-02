@@ -22,7 +22,8 @@
     },
     "donationDoneScreen": {
       "title": "Parabéns!",
-      "buttonText": "Fechar"
+      "buttonText": "Fechar",
+      "description": "Você doou"
     },
     "chooseCauseScreen": {
       "title": "Escolha uma causa"
@@ -85,6 +86,11 @@
           "searchCountryPlaceholder": "Procurar país"
         }
       }
+    },
+    "contributionDoneScreen": {
+      "title": "Obrigado!",
+      "buttonTitle": "fechar",
+      "description": "Você contribuiu para"
     }
   },
   "users": {
