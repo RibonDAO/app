@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { stylizedDisplayXs } from "styles/typography/stylized";
+import {stylizedDisplaySm, stylizedDisplayXs} from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyXsRegular,
@@ -12,15 +12,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   title: {
-    ...stylizedDisplayXs,
+    ...stylizedDisplaySm,
     marginRight: 0,
-    marginBottom: 24,
+    marginBottom: 16,
     marginLeft: 0,
     color: theme.colors.gray40,
   },
   contentContainer: {
     maxWidth: 472,
-    marginTop: 24,
+    marginTop: 16,
     marginBottom: 24,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,

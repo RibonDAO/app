@@ -15,12 +15,13 @@ export const styles = StyleSheet.create({
   },
   contentContainer: {
     maxWidth: 472,
-    marginTop: 24,
+    marginTop: 16,
     borderRadius: 8,
     position: "relative",
     overflowX: "hidden",
     shadowColor: theme.colors.gray40,
-    elevation: 4,
+    backgroundColor: theme.colors.neutral10,
+    elevation: 2,
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
@@ -84,7 +85,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     ...stylizedDisplaySm,
-    marginBottom: 24,
+    marginBottom: 16,
     color: theme.colors.gray40,
   },
   supportImage: {
