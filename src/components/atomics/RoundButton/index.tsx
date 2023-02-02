@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Easing, TouchableOpacity } from "react-native";
-import { Animated, StyleSheet, View } from "react-native";
+import { Animated, StyleSheet, View, Text } from "react-native";
 import S from "./styles";
-import { Text } from "components/Themed";
 
 export type Props = {
   text: string;

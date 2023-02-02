@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     marginRight: 12,
     borderRadius: 12,
+    backgroundColor: theme.colors.neutral10,
   },
   containerImage: {
     position: "relative",

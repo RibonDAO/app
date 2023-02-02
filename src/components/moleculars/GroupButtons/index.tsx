@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
-import { View } from "components/Themed";
+import { View } from "react-native";
 import Button from "./Button";
 
 export type Props = {

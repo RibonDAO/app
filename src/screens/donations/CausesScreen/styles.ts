@@ -1,4 +1,4 @@
-import { stylizedDisplayMd } from "styles/typography/stylized";
+import { stylizedDisplaySm } from "styles/typography/stylized";
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   title: {
-    ...stylizedDisplayMd,
+    ...stylizedDisplaySm,
     color: theme.colors.gray40,
     width: "100%",
   },

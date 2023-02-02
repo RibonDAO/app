@@ -4,13 +4,13 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.neutral10,
+    backgroundColor: theme.colors.gray10,
     minHeight: "100%",
+    paddingHorizontal: 16,
   },
   title: {
     ...stylizedDisplayMd,
     marginBottom: 20,
-    paddingHorizontal: 20,
     fontSize: 26,
     fontWeight: "bold",
     lineHeight: 36,

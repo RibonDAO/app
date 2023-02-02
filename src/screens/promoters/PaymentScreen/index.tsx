@@ -6,7 +6,7 @@ import { useCardPaymentInformation } from "contexts/cardPaymentInformationContex
 import getThemeByFlow from "lib/themeByFlow";
 import { useRouteParams } from "hooks/useRouteParams";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
@@ -63,36 +63,39 @@ function PaymentScreen(): JSX.Element {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.mainContainer}>
-        <MaskedWaveCut
-          image={nonProfit?.mainImage || cause?.mainImage}
-          imageStyles={styles.image}
-        />
-        <KeyboardAvoidingView style={styles.contentContainer}>
-          <Text style={styles.title}>
-            {t("title")}{" "}
+        <View style={styles.innerContainer}>
+          <MaskedWaveCut
+              image={nonProfit?.mainImage || cause?.mainImage}
+              imageStyles={styles.image}
+          />
+          <KeyboardAvoidingView style={styles.contentContainer}>
+            <Text style={styles.title}>
+              {t("title")}{" "}
+              <Text
+                  style={[styles.titleHighlight, { color: colorTheme.shade30 }]}
+              >
+                {highlightText()}
+              </Text>
+            </Text>
             <Text
-              style={[styles.titleHighlight, { color: colorTheme.shade30 }]}
+                style={[styles.donationValueText, { color: colorTheme.shade20 }]}
             >
-              {highlightText()}
+              {offer.price}
             </Text>
-          </Text>
-          <Text
-            style={[styles.donationValueText, { color: colorTheme.shade20 }]}
-          >
-            {offer.price}
-          </Text>
-          {cardGivingFees && (
-            <Text style={styles.feeText}>
-              {t("netDonationText")} {cardGivingFees.netGiving}
-            </Text>
-          )}
-          {cardGivingFees && (
-            <Text style={styles.feeText}>
-              {t("serviceFeesText")} {cardGivingFees.serviceFees}
-            </Text>
-          )}
-          {renderCurrentSection()}
-        </KeyboardAvoidingView>
+            {cardGivingFees && (
+                <Text style={styles.feeText}>
+                  {t("netDonationText")} {cardGivingFees.netGiving}
+                </Text>
+            )}
+            {cardGivingFees && (
+                <Text style={styles.feeText}>
+                  {t("serviceFeesText")} {cardGivingFees.serviceFees}
+                </Text>
+            )}
+            {renderCurrentSection()}
+          </KeyboardAvoidingView>
+        </View>
+
       </ScrollView>
       {!isKeyboardVisible && (
         <View style={styles.donateButtonContainer}>
