@@ -18,7 +18,9 @@ export default function DonationDoneScreen({
       image={nonProfit.mainImage}
       title={t("title") || ""}
       description={`
-      You donated ${nonProfit.impactByTicket} ${nonProfit.impactDescription} to ${nonProfit.name}.`}
+      ${t("description")} ${nonProfit.impactByTicket} ${
+        nonProfit.impactDescription
+      } to ${nonProfit.name}.`}
       buttonTitle={t("buttonText") || ""}
       onButtonPress={() => popNavigation()}
     />

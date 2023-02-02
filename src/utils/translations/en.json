@@ -22,7 +22,8 @@
     },
     "donationDoneScreen": {
       "title": "Congratulations!",
-      "buttonText": "Close"
+      "buttonText": "Close",
+      "description": "You donated"
     },
     "chooseCauseScreen": {
       "title": "Choose a Cause"
