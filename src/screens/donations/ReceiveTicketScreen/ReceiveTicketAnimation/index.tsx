@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import {Dimensions, View} from "react-native";
 import SupportersIcon from "components/vectors/SupportersIcon";
 import UserIcon from "components/vectors/UserIcon";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
@@ -16,7 +16,7 @@ const boxAnimation = {
     left: 20,
   },
   to: {
-    left: 220,
+    left: Dimensions.get("window").width - 150,
   },
 };
 
