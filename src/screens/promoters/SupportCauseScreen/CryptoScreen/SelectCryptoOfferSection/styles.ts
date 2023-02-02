@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
   dropdownContainerStyles: {
     flex: 2,
   },
+  sliderStyle: {
+    marginTop: 8
+  }
 });
 
 export default styles;

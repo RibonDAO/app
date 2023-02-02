@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: 16,
+    paddingBottom: 24,
   },
   title: {
     ...stylizedDisplaySm,
@@ -21,7 +22,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     maxWidth: 472,
     marginTop: 16,
-    marginBottom: 24,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 5,
   },
   donateContainer: {
-    marginBottom: 24,
     paddingTop: 24,
     paddingRight: 24,
     paddingBottom: 24,

@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 16,
     paddingBottom: 24,
-    marginBottom: 100,
   },
   contentContainer: {
     maxWidth: 472,
@@ -27,7 +26,6 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   donateContainer: {
-    marginBottom: 24,
     padding: 24,
     borderRadius: 8,
     shadowColor: theme.colors.defaultShadow10,

@@ -1,7 +1,7 @@
 import React from "react";
 import { theme } from "@ribon.io/shared/styles";
 import { Slider } from "@miblanchard/react-native-slider";
-import { View } from "react-native";
+import { View, ViewStyle } from "react-native";
 import styles from "./styles";
 
 export type Props = {
@@ -14,6 +14,7 @@ export type Props = {
   color?: string;
   minimumTrackTintColor?: string;
   maximumTrackTintColor?: string;
+  sliderStyle?: ViewStyle;
 };
 
 function InputRange({
@@ -26,11 +27,12 @@ function InputRange({
   color = theme.colors.green30,
   minimumTrackTintColor = theme.colors.green40,
   maximumTrackTintColor = theme.colors.green20,
+  sliderStyle,
 }: Props): JSX.Element {
   return (
     <View style={styles.container}>
       <Slider
-        containerStyle={styles.slider}
+        containerStyle={{...styles.slider, ...sliderStyle}}
         minimumValue={min}
         maximumValue={max}
         disabled={disabled}
