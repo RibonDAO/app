@@ -85,5 +85,16 @@
         }
       }
     }
+  },
+  "users": {
+    "profileScreen": {
+      "title": "My Impact",
+      "impactCards": {
+        "totalTickets": "Donated tickets",
+        "totalDonated": "Donated money",
+        "totalNonProfits": "Supported NGOs",
+        "totalCauses": "Supporter causes"
+      }
+    }
   }
 }

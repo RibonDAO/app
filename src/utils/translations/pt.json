@@ -84,5 +84,16 @@
         }
       }
     }
+  },
+  "users": {
+    "profileScreen": {
+      "title": "Meu Impacto",
+      "impactCards": {
+        "totalTickets": "Tickets doados",
+        "totalDonated": "Dinheiro doado",
+        "totalNonProfits": "ONGs auxiliadas",
+        "totalCauses": "Causas auxiliadas"
+      }
+    }
   }
 }
