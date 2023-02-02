@@ -1,6 +1,6 @@
 import React from "react";
 import S from "./styles";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { Image } from "react-native";
 
 export type Props = {

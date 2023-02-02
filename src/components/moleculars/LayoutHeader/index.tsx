@@ -1,6 +1,6 @@
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useCallback, useEffect, useState } from "react";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
 import SupportIcon from "components/vectors/SupportIcon";

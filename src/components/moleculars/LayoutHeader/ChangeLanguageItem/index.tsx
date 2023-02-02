@@ -1,5 +1,5 @@
 import ButtonSwitch from "components/atomics/buttons/ButtonSwitch";
-import { View } from "components/Themed";
+import { View } from "react-native";
 import { useLanguage } from "contexts/languageContext";
 
 function ChangeLanguageItem(): JSX.Element {

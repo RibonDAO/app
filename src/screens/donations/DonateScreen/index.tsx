@@ -14,7 +14,7 @@ import { showToast } from "lib/Toast";
 import { isValidEmail } from "lib/validators/email";
 import S from "screens/donations/DonateScreen/styles";
 import { LinearGradient } from "expo-linear-gradient";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { useRouteParams } from "hooks/useRouteParams";

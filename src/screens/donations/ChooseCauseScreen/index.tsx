@@ -1,5 +1,5 @@
 import { Cause } from "@ribon.io/shared/types";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { useCallback } from "react";
 import CauseImage from "./CauseImage";
 import S from "./styles";

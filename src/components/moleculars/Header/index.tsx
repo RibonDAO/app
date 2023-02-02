@@ -1,5 +1,5 @@
 import RibonLogo from "components/vectors/RibonLogo";
-import { View } from "components/Themed";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";

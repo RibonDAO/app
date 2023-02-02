@@ -1,5 +1,5 @@
 import Button from "components/atomics/buttons/Button";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import DangerIcon from "components/vectors/DangerIcon";
 import Modal from "react-native-modal";
 import S from "./styles";

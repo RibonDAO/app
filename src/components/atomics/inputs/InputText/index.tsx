@@ -1,5 +1,5 @@
 import React, { RefObject } from "react";
-import { View } from "components/Themed";
+import { View } from "react-native";
 import {
   KeyboardType,
   TextInput,

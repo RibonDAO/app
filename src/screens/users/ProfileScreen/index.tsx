@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView } from "react-native";
-import { Text } from "components/Themed";
+import { Text } from "react-native";
 import S from "./styles";
 import ImpactCards from "./ImpactCards";
 import NgoImpactCards from "./NgoImpactCards";

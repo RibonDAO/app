@@ -6,7 +6,7 @@ import { useCardPaymentInformation } from "contexts/cardPaymentInformationContex
 import getThemeByFlow from "lib/themeByFlow";
 import { useRouteParams } from "hooks/useRouteParams";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { theme } from "@ribon.io/shared/styles";

@@ -1,6 +1,6 @@
 import { TouchableOpacity } from "react-native";
 import S from "./styles";
-import { Text } from "components/Themed";
+import { Text } from "react-native";
 
 export type Props = {
   outline: boolean;
