@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 1,
     borderColor: theme.colors.gray20,
-    width: 120,
+    width: Dimensions.get("window").width - 270,
     marginBottom: 0,
   },
   ticketRoundBox: {

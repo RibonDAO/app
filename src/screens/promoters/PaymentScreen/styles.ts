@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     marginTop: 14,
   },
   contentContainer: {
-    marginBottom: 24,
-    padding: 24,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
     borderRadius: 8,
   },
   donationValueText: {

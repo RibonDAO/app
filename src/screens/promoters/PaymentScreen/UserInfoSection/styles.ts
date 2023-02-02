@@ -4,7 +4,6 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   container: {
     marginTop: 16,
-    height: 256,
   },
   title: {
     marginBottom: 18,

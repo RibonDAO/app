@@ -3,21 +3,6 @@
     "version": ">= 3.4.1"
   },
   "build": {
-    "development-simulator": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "ios": {
-        "simulator": true,
-        "resourceClass": "m1-medium"
-      }
-    },
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
-    },
     "preview": {
       "distribution": "internal",
       "ios": {
@@ -29,7 +14,8 @@
     },
     "production": {
       "ios": {
-        "resourceClass": "m1-medium"
+        "resourceClass": "m1-medium",
+        "enterpriseProvisioning": "universal"
       }
     }
   },
