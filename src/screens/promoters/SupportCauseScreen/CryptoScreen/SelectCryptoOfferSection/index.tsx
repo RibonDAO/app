@@ -78,6 +78,7 @@ function SelectCryptoOfferSection({
         color={orange40}
         minimumTrackTintColor={orange40}
         maximumTrackTintColor={gray20}
+        sliderStyle={styles.sliderStyle}
       />
     </View>
   );

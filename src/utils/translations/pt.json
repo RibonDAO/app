@@ -1,6 +1,8 @@
 {
-  "tabOneScreen": {
-    "hello": "Olá!"
+  "tabs": {
+    "causes": "Tickets",
+    "giving": "Doações",
+    "profile": "Impacto"
   },
   "donations": {
     "causesScreen": {

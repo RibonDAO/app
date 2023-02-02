@@ -1,7 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import WalletProvider from "contexts/walletContext";
@@ -32,10 +30,13 @@ import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import { Theme } from "@react-navigation/native/src/types";
+import { useTranslation } from "react-i18next";
+const header = () => <Header rightComponent={<LayoutHeader />} />;
+const headerWithoutTicket = () => (
+  <Header rightComponent={<LayoutHeader hideTicket />} />
+);
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const header = () => <Header rightComponent={<LayoutHeader />} />;
-
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -113,6 +114,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const activeColor = theme.colors.green30;
+  const { t } = useTranslation();
 
   return (
     <BottomTab.Navigator
@@ -127,7 +129,7 @@ function BottomTabNavigator() {
         name="CausesScreen"
         component={CausesScreen}
         options={{
-          title: "Tickets",
+          title: t("tabs.causes") || "Tickets",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
           header,
@@ -139,10 +141,10 @@ function BottomTabNavigator() {
         name="PromotersScreen"
         component={SupportCauseScreen}
         options={{
-          title: "Donations",
+          title: t("tabs.giving") || "Donations",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
-          header,
+          header: headerWithoutTicket,
           lazy: false,
         }}
       />
@@ -151,7 +153,7 @@ function BottomTabNavigator() {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          title: "Impact",
+          title: t("tabs.profile") || "Impact",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ImpactIconOn /> : <ImpactIconOff />,
           header,

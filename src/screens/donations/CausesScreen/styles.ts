@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
   },
   containerTicket: {
     height: 350,
+    width: "100%",
+    margin: 0,
   },
   causesCardContainer: {
     height: "auto",
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
   causesContainer: {
     display: "flex",
     flexDirection: "row",
-    paddingTop: 10,
+    paddingTop: 16,
     paddingBottom: 40,
   },
   groupButtonsContainer: {
