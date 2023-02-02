@@ -4,7 +4,6 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
-    display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
