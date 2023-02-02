@@ -1,7 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import WalletProvider from "contexts/walletContext";
@@ -31,10 +29,14 @@ import ProfileIconOff from "./assets/ProfileIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
-import {Theme} from "@react-navigation/native/src/types";
+import { Theme } from "@react-navigation/native/src/types";
+import { useTranslation } from "react-i18next";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const header = () => <Header rightComponent={<LayoutHeader />} />;
+const headerWithoutTicket = () => (
+  <Header rightComponent={<LayoutHeader hideTicket />} />
+);
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -112,6 +114,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const activeColor = theme.colors.green30;
+  const { t } = useTranslation();
 
   return (
     <BottomTab.Navigator
@@ -126,7 +129,7 @@ function BottomTabNavigator() {
         name="CausesScreen"
         component={CausesScreen}
         options={{
-          title: "Causes",
+          title: t("tabs.causes") || "Causes",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
           header,
@@ -138,10 +141,10 @@ function BottomTabNavigator() {
         name="PromotersScreen"
         component={SupportCauseScreen}
         options={{
-          title: "Giving",
+          title: t("tabs.giving") || "Giving",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
-          header,
+          header: headerWithoutTicket,
           lazy: false,
         }}
       />
@@ -150,10 +153,10 @@ function BottomTabNavigator() {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          title: "Profile",
+          title: t("tabs.profile") || "Profile",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
-          header,
+          header: headerWithoutTicket,
           lazy: false,
         }}
       />
@@ -162,15 +165,15 @@ function BottomTabNavigator() {
 }
 
 const DefaultTheme: Theme = {
-    dark: false,
-    colors: {
-        primary: theme.colors.green20,
-        background: theme.colors.gray10,
-        card: theme.colors.neutral10,
-        text: theme.colors.gray40,
-        border: theme.colors.neutral10,
-        notification: theme.colors.green30,
-    },
+  dark: false,
+  colors: {
+    primary: theme.colors.green20,
+    background: theme.colors.gray10,
+    card: theme.colors.neutral10,
+    text: theme.colors.gray40,
+    border: theme.colors.neutral10,
+    notification: theme.colors.green30,
+  },
 };
 
 export default function Navigation() {
