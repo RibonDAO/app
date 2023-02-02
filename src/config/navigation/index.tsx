@@ -25,18 +25,18 @@ import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
 import GivingIconOn from "./assets/GivingIconOn";
-import ProfileIconOff from "./assets/ProfileIconOff";
-import ProfileIconOn from "./assets/ProfileIconOn";
+import ImpactIconOn from "./assets/ImpactIconOn";
+import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
-
-const Stack = createNativeStackNavigator<RootStackParamList>();
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
   <Header rightComponent={<LayoutHeader hideTicket />} />
 );
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -129,7 +129,7 @@ function BottomTabNavigator() {
         name="CausesScreen"
         component={CausesScreen}
         options={{
-          title: t("tabs.causes") || "Causes",
+          title: t("tabs.causes") || "Tickets",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
           header,
@@ -141,7 +141,7 @@ function BottomTabNavigator() {
         name="PromotersScreen"
         component={SupportCauseScreen}
         options={{
-          title: t("tabs.giving") || "Giving",
+          title: t("tabs.giving") || "Donations",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
           header: headerWithoutTicket,
@@ -153,10 +153,10 @@ function BottomTabNavigator() {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          title: t("tabs.profile") || "Profile",
+          title: t("tabs.profile") || "Impact",
           tabBarIcon: ({ color }: any) =>
-            color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
-          header: headerWithoutTicket,
+            color === activeColor ? <ImpactIconOn /> : <ImpactIconOff />,
+          header,
           lazy: false,
         }}
       />
