@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: 16,
-    backgroundColor: theme.colors.neutral10,
   },
   title: {
     ...stylizedDisplayXs,
@@ -29,6 +28,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 8,
     position: "relative",
     shadowColor: theme.colors.gray40,
+    backgroundColor: theme.colors.neutral10,
     elevation: 4,
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,

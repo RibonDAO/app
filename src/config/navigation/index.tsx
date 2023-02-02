@@ -1,12 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName } from "react-native";
 import WalletProvider from "contexts/walletContext";
 import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
@@ -34,6 +31,7 @@ import ProfileIconOff from "./assets/ProfileIconOff";
 import ProfileIconOn from "./assets/ProfileIconOn";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
+import {Theme} from "@react-navigation/native/src/types";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const header = () => <Header rightComponent={<LayoutHeader />} />;
@@ -163,16 +161,21 @@ function BottomTabNavigator() {
   );
 }
 
-export default function Navigation({
-  colorScheme,
-}: {
-  colorScheme: ColorSchemeName;
-}) {
+const DefaultTheme: Theme = {
+    dark: false,
+    colors: {
+        primary: theme.colors.green20,
+        background: theme.colors.gray10,
+        card: theme.colors.neutral10,
+        text: theme.colors.gray40,
+        border: theme.colors.neutral10,
+        notification: theme.colors.green30,
+    },
+};
+
+export default function Navigation() {
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
+    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
       <LoadingOverlayProvider>
         <WalletProvider>
           <NetworkProvider>

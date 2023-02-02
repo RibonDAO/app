@@ -4,7 +4,7 @@ import {
   defaultBodyXsRegular,
   defaultBodySmSemibold,
 } from "styles/typography/default";
-import { stylizedDisplayXs } from "styles/typography/stylized";
+import {stylizedDisplaySm, stylizedDisplayXs} from "styles/typography/stylized";
 
 export const styles = StyleSheet.create({
   container: {
@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 24,
     marginBottom: 100,
-    backgroundColor: theme.colors.neutral10,
   },
   contentContainer: {
     maxWidth: 472,
@@ -35,6 +34,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 2,
     elevation: 2,
+    backgroundColor: theme.colors.neutral10,
   },
   givingContainer: {
     marginBottom: 24,
@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
     display: "none",
   },
   title: {
-    ...stylizedDisplayXs,
+    ...stylizedDisplaySm,
     marginBottom: 24,
     color: theme.colors.gray40,
   },

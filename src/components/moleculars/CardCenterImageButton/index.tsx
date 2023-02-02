@@ -2,7 +2,7 @@ import Button from "components/atomics/buttons/Button";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import VerifiedBadge from "components/vectors/VerifiedBadge";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import Image from "components/atomics/Image";
 import S from "./styles";
 

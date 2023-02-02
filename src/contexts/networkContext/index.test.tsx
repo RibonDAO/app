@@ -1,7 +1,7 @@
 import { waitForPromises } from "config/testUtils";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { renderComponent } from "config/testUtils/renders";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { useNetworkContext } from ".";
 
 jest.mock("hooks/useProvider", () => ({

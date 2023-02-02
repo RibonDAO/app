@@ -1,7 +1,7 @@
 import React from "react";
 import { theme } from "@ribon.io/shared/styles";
 import { Slider } from "@miblanchard/react-native-slider";
-import { View } from "components/Themed";
+import { View } from "react-native";
 import styles from "./styles";
 
 export type Props = {

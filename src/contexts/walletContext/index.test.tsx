@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { useWalletContext } from ".";
 
