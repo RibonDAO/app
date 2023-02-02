@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import "./global";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import WalletConnectProvider from "@walletconnect/react-native-dapp";
 import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
@@ -31,8 +31,10 @@ function Main() {
       >
         <QueryClientComponent>
           <SafeAreaProvider>
-            <Navigation colorScheme={colorScheme} />
-            <StatusBar />
+            <SafeAreaView style={{ flex: 1 }}>
+              <Navigation colorScheme={colorScheme} />
+              <StatusBar />
+            </SafeAreaView>
           </SafeAreaProvider>
         </QueryClientComponent>
       </WalletConnectProvider>

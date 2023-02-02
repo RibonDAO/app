@@ -3,19 +3,14 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
     flexDirection: "column",
-    width: "100%",
   },
   containerColumn: {
-    height: "100%",
-    display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
   },
   containerRow: {
-    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

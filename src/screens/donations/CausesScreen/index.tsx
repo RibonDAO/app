@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNonProfits, useCauses, useCanDonate } from "@ribon.io/shared/hooks";
-import { ActivityIndicator, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "components/Themed";
