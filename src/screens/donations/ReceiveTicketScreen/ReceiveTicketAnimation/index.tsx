@@ -1,4 +1,4 @@
-import { View } from "components/Themed";
+import { View } from "react-native";
 import SupportersIcon from "components/vectors/SupportersIcon";
 import UserIcon from "components/vectors/UserIcon";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";

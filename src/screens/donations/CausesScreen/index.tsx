@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNonProfits, useCauses, useCanDonate } from "@ribon.io/shared/hooks";
-import { ScrollView } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "components/Themed";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
 import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";

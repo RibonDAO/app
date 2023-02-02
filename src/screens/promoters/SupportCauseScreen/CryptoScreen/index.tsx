@@ -10,7 +10,7 @@ import {
 } from "contexts/cryptoPaymentContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { RefreshControl, ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { showToast } from "lib/Toast";

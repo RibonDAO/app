@@ -5,9 +5,11 @@ import {
   TextStyle,
   TouchableOpacity,
   ViewStyle,
+  Animated,
+  StyleSheet,
+  View,
+  Text,
 } from "react-native";
-import { Animated, StyleSheet, View } from "react-native";
-import { Text } from "components/Themed";
 import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
 

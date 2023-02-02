@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
   impactCardContainer: {
     display: "flex",
     flexDirection: "row",
-    width: 330,
     height: 108,
     borderRadius: 8,
     padding: 16,

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 

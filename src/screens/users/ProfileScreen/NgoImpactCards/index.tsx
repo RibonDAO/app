@@ -1,4 +1,4 @@
-import { View } from "components/Themed";
+import { View } from "react-native";
 import { useCallback, useEffect } from "react";
 import { useImpact } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";

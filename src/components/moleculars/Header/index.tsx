@@ -1,6 +1,5 @@
 import RibonLogo from "components/vectors/RibonLogo";
-import { View } from "components/Themed";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { withPlaceholder } from "config/navigation/withPlaceholder";

@@ -1,7 +1,7 @@
 import { clickOn, waitForPromises } from "config/testUtils";
 import { renderComponent } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
-import { View, Text } from "components/Themed";
+import { View, Text } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { TextInput } from "react-native";
 import { useCryptoPayment } from ".";

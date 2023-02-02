@@ -1,4 +1,4 @@
-import { View, Text } from "components/Themed";
+import { View, Text } from "react-native";
 import { TouchableOpacity } from "react-native";
 import S from "./styles";
 import Icon from "components/atomics/Icon";

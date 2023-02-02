@@ -6,7 +6,7 @@ import { useCardPaymentInformation } from "contexts/cardPaymentInformationContex
 import { logEvent } from "services/analytics";
 import getThemeByFlow from "lib/themeByFlow";
 import InputText from "components/atomics/inputs/InputText";
-import { View } from "components/Themed";
+import { View } from "react-native";
 import S from "screens/promoters/PaymentScreen/UserInfoSection/styles";
 import CountryPicker, {
   Country,
