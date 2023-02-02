@@ -155,7 +155,6 @@ function BottomTabNavigator() {
           title: "Profile",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
-          headerShown: false,
           header,
           lazy: false,
         }}
