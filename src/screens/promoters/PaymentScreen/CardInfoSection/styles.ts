@@ -3,7 +3,6 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    height: 256,
     marginTop: theme.spacingNative(20),
   },
   title: {

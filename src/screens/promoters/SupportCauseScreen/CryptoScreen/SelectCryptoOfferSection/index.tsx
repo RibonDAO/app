@@ -1,6 +1,6 @@
 import { theme } from "@ribon.io/shared/styles";
 import { Cause, Currencies } from "@ribon.io/shared/types";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import InputRange from "components/atomics/inputs/InputRange";
 import { Dimensions, TextInput } from "react-native";
 import { useTranslation } from "react-i18next";
@@ -78,6 +78,7 @@ function SelectCryptoOfferSection({
         color={orange40}
         minimumTrackTintColor={orange40}
         maximumTrackTintColor={gray20}
+        sliderStyle={styles.sliderStyle}
       />
     </View>
   );

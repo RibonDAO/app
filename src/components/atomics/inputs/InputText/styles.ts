@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: theme.spacingNative(12),
     padding: theme.spacingNative(8),
+    height: 48,
     borderWidth: 1,
     borderColor: theme.colors.gray30,
     borderRadius: 8,

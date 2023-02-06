@@ -10,10 +10,9 @@ import {
 } from "contexts/cryptoPaymentContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { RefreshControl, ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
-import { showToast } from "lib/Toast";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { logError } from "services/crashReport";
 import { useNavigation } from "hooks/useNavigation";
@@ -92,8 +91,9 @@ function CryptoScreen(): JSX.Element {
       status: "transactionProcessed",
     });
     resetScreen();
-
-    showToast(t("successDonationMessage", { amount, tokenSymbol }));
+    navigateTo("ContributionDoneScreen", {
+      cause,
+    });
   };
 
   const handleDonateClick = async () => {

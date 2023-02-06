@@ -4,30 +4,31 @@ import {
   defaultBodyXsRegular,
   defaultBodySmSemibold,
 } from "styles/typography/default";
-import { stylizedDisplayXs } from "styles/typography/stylized";
+import {
+  stylizedDisplaySm,
+  stylizedDisplayXs,
+} from "styles/typography/stylized";
 
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: theme.spacingNative(16),
     paddingBottom: theme.spacingNative(24),
-    marginBottom: theme.spacingNative(112),
-    backgroundColor: theme.colors.neutral10,
   },
   contentContainer: {
     maxWidth: 472,
-    marginTop: theme.spacingNative(24),
+    marginTop: theme.spacingNative(16),
     borderRadius: 8,
     position: "relative",
     overflowX: "hidden",
     shadowColor: theme.colors.gray40,
-    elevation: 4,
+    backgroundColor: theme.colors.neutral10,
+    elevation: 2,
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
   donateContainer: {
-    marginBottom: theme.spacingNative(24),
     padding: theme.spacingNative(24),
     borderRadius: 8,
     shadowColor: theme.colors.defaultShadow10,
@@ -35,6 +36,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 2,
     elevation: 2,
+    backgroundColor: theme.colors.neutral10,
   },
   givingContainer: {
     marginBottom: theme.spacingNative(24),
@@ -83,8 +85,8 @@ export const styles = StyleSheet.create({
     display: "none",
   },
   title: {
-    ...stylizedDisplayXs,
-    marginBottom: theme.spacingNative(24),
+    ...stylizedDisplaySm,
+    marginBottom: theme.spacingNative(16),
     color: theme.colors.gray40,
   },
   supportImage: {

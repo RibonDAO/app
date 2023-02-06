@@ -1,5 +1,5 @@
 import React, { RefObject } from "react";
-import { View } from "components/Themed";
+import { View } from "react-native";
 import {
   KeyboardType,
   TextInput,
@@ -8,6 +8,7 @@ import {
   ViewStyle,
 } from "react-native";
 import S from "./styles";
+import {theme} from "@ribon.io/shared/styles";
 
 export interface Props extends Omit<TextInputProps, "placeholder"> {
   name: string;
@@ -39,6 +40,7 @@ function InputText({
       <TextInput
         ref={rest.ref}
         placeholder={placeholder || ""}
+        placeholderTextColor={theme.colors.gray20}
         keyboardType={keyboardType}
         aria-label={name}
         value={value}

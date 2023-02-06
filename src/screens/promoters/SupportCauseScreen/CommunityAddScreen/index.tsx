@@ -2,7 +2,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "contexts/languageContext";
 import { Languages } from "types/enums/Languages";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { Image } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { RootStackScreenProps } from "types";

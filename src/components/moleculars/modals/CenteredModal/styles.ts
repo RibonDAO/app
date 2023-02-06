@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: theme.spacingNative(16),
+    backgroundColor: theme.colors.neutral10,
   },
   icon: {
     position: "absolute",

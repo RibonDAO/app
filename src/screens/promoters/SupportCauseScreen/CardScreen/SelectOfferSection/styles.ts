@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     marginRight: theme.spacingNative(8),
     color: theme.colors.orange20,
   },
+  sliderStyle: { width: 180, marginTop: 8 },
 });
 
 export default styles;

@@ -6,7 +6,7 @@ import getThemeByFlow from "lib/themeByFlow";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
-import { View } from "components/Themed";
+import { View } from "react-native";
 import S from "./styles";
 import { theme } from "@ribon.io/shared";
 

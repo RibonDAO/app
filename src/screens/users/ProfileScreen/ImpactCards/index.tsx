@@ -1,33 +1,37 @@
-import { View } from "components/Themed";
+import { View } from "react-native";
 import { useCallback } from "react";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useStatistics } from "@ribon.io/shared/hooks";
+import { useTranslation } from "react-i18next";
 import ImpactCard from "../ImpactCard";
 import S from "./styles";
 
 function ImpactCards(): JSX.Element {
   const { currentUser } = useCurrentUser();
   const { userStatistics } = useStatistics({ userId: currentUser?.id });
+  const { t } = useTranslation("translation", {
+    keyPrefix: "users.profileScreen.impactCards",
+  });
 
   const impacts = useCallback(
     () => [
       {
-        name: "Donated tickets",
+        name: t("totalTickets"),
         impact: userStatistics?.totalTickets ?? 0,
         iconName: "confirmation_number",
       },
       {
-        name: "Donated money",
+        name: t("totalDonated"),
         impact: userStatistics?.totalDonated?.brl ?? 0,
         iconName: "monetization_on",
       },
       {
-        name: "Supported NGOs",
+        name: t("totalNonProfits"),
         impact: userStatistics?.totalNonProfits ?? 0,
         iconName: "diversity_4",
       },
       {
-        name: "Supporter causes",
+        name: t("totalCauses"),
         impact: userStatistics?.totalCauses ?? 0,
         iconName: "interests",
       },
@@ -46,7 +50,7 @@ function ImpactCards(): JSX.Element {
   }) => (
     <ImpactCard
       key={name}
-      onPress={() => {}}
+      onPress={() => { }}
       description={name}
       impact={impact}
       iconName={iconName}

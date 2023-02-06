@@ -7,11 +7,10 @@ import {
 
 const styles = StyleSheet.create({
   badgeContainer: {
-    alignItems: "flex-start",
     marginBottom: theme.spacingNative(12),
+    width: "50%",
   },
   badgeRoundContainer: {
-    width: 160,
     height: 108,
     borderRadius: 8,
     padding: theme.spacingNative(16),

@@ -1,4 +1,4 @@
-import { stylizedDisplayMd } from "styles/typography/stylized";
+import { stylizedDisplaySm } from "styles/typography/stylized";
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
   },
   containerTicket: {
     height: 350,
+    width: "100%",
+    margin: 0,
   },
   causesCardContainer: {
     height: "auto",
@@ -17,14 +19,14 @@ const styles = StyleSheet.create({
   causesContainer: {
     display: "flex",
     flexDirection: "row",
-    paddingTop: theme.spacingNative(12),
+    paddingTop: theme.spacingNative(16),
     paddingBottom: theme.spacingNative(40),
   },
   groupButtonsContainer: {
     paddingTop: theme.spacingNative(16),
   },
   title: {
-    ...stylizedDisplayMd,
+    ...stylizedDisplaySm,
     color: theme.colors.gray40,
     width: "100%",
   },

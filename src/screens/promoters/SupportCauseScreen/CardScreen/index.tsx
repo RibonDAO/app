@@ -11,7 +11,7 @@ import {
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
-import { View, Text } from "components/Themed";
+import { View, Text } from "react-native";
 import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";

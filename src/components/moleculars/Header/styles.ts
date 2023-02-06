@@ -3,14 +3,12 @@ import { theme } from "@ribon.io/shared";
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
     display: "flex",
     alignItems: "flex-start",
     flexDirection: "row",
-    backgroundColor: theme.colors.neutral10,
+    backgroundColor: theme.colors.gray10,
     justifyContent: "space-between",
-    paddingTop: theme.spacingNative(16),
-    paddingLeft: theme.spacingNative(16),
+    padding: theme.spacingNative(16),
     paddingRight: theme.spacingNative(12),
   },
   logo: {

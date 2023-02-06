@@ -4,13 +4,13 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
-    display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     padding: theme.spacingNative(16),
     width: "100%",
     height: "100%",
+    backgroundColor: theme.colors.neutral10,
   },
   icon: {
     borderRadius: 50,

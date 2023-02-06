@@ -4,17 +4,17 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Image,
 } from "react-native";
 import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
+import Image from "components/atomics/Image";
 import Button from "components/atomics/buttons/Button";
 import { showToast } from "lib/Toast";
 import { isValidEmail } from "lib/validators/email";
 import S from "screens/donations/DonateScreen/styles";
 import { LinearGradient } from "expo-linear-gradient";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { useRouteParams } from "hooks/useRouteParams";

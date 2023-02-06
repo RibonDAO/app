@@ -1,6 +1,8 @@
 {
-  "tabOneScreen": {
-    "hello": "Hello!"
+  "tabs": {
+    "causes": "Tickets",
+    "giving": "Donations",
+    "profile": "Impact"
   },
   "donations": {
     "causesScreen": {
@@ -20,7 +22,8 @@
     },
     "donationDoneScreen": {
       "title": "Congratulations!",
-      "buttonText": "Close"
+      "buttonText": "Close",
+      "description": "You donated"
     },
     "chooseCauseScreen": {
       "title": "Choose a Cause"
@@ -83,6 +86,22 @@
           "brazilName": "Brazil",
           "searchCountryPlaceholder": "Search country"
         }
+      }
+    },
+    "contributionDoneScreen": {
+      "title": "Thank you!",
+      "buttonTitle": "close",
+      "description": "You contributed to"
+    }
+  },
+  "users": {
+    "profileScreen": {
+      "title": "My Impact",
+      "impactCards": {
+        "totalTickets": "Donated tickets",
+        "totalDonated": "Donated money",
+        "totalNonProfits": "Supported NGOs",
+        "totalCauses": "Supporter causes"
       }
     }
   }

@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
-import { stylizedDisplayXs } from "styles/typography/stylized";
+import {
+  stylizedDisplaySm,
+  stylizedDisplayXs,
+} from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyXsRegular,
@@ -9,26 +12,26 @@ import {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingHorizontal: 16,
-    backgroundColor: theme.colors.neutral10,
+    paddingHorizontal: theme.spacingNative(16),
+    paddingBottom: theme.spacingNative(24),
   },
   title: {
-    ...stylizedDisplayXs,
+    ...stylizedDisplaySm,
     marginRight: theme.spacingNative(0),
-    marginBottom: theme.spacingNative(24),
+    marginBottom: theme.spacingNative(16),
     marginLeft: theme.spacingNative(0),
     color: theme.colors.gray40,
   },
   contentContainer: {
     maxWidth: 472,
-    marginTop: theme.spacingNative(24),
-    marginBottom: theme.spacingNative(24),
+    marginTop: theme.spacingNative(16),
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
     position: "relative",
     shadowColor: theme.colors.gray40,
+    backgroundColor: theme.colors.neutral10,
     elevation: 4,
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
@@ -47,7 +50,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 5,
   },
   donateContainer: {
-    marginBottom: theme.spacingNative(24),
     paddingTop: theme.spacingNative(24),
     paddingRight: theme.spacingNative(24),
     paddingBottom: theme.spacingNative(24),

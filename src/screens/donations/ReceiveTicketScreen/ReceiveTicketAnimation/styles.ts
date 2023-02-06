@@ -1,21 +1,16 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
     flexDirection: "column",
-    width: "100%",
   },
   containerColumn: {
-    height: "100%",
-    display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
   },
   containerRow: {
-    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -43,7 +38,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 1,
     borderColor: theme.colors.gray20,
-    width: 120,
+    width: Dimensions.get("window").width - 270,
     marginBottom: theme.spacingNative(0),
   },
   ticketRoundBox: {
