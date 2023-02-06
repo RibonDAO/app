@@ -31,7 +31,10 @@ function CenteredModal({
     return (
       <Modal
         isVisible={visible}
-        animationIn="slideInRight"
+        animationIn="zoomIn"
+        animationOut="zoomOut"
+        animationInTiming={200}
+        animationOutTiming={200}
         hasBackdrop
         backdropOpacity={0.5}
         onBackdropPress={toggleModal}
