@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import { theme } from "@ribon.io/shared/styles";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
-import { Dimensions } from "react-native";
 import { Text, View } from "react-native";
 import Dropdown from "components/moleculars/Dropdown";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
@@ -75,7 +74,7 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
   return (
     <View
       style={{
-        width: Dimensions.get("window").width - 132,
+        width: "100%",
       }}
     >
       <Text style={styles.title}>
