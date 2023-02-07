@@ -9,6 +9,7 @@ import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
 import BlankModal from "components/moleculars/modals/BlankModal";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 import Placeholder from "./placeholder";
 
@@ -28,6 +29,10 @@ export default function CausesScreen() {
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
   const scrollViewRef = useRef<any>(null);
+
+  useEffect(() => {
+    logEvent("app_causes_page_view");
+  }, [logEvent]);
 
   useEffect(() => {
     setTicketModalVisible(canDonate);
