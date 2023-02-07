@@ -102,8 +102,14 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   }
 
   function linkToSupport() {
-    Linking.openURL("https://google.com");
+    Linking.openURL("https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com");
   }
+
+  // function linkToSupport() {
+  //   return <View style={{ flex: 1 }}>
+  //     <WebView source={{ uri: "https://google.com" }} />
+  //   </View>
+  // }
 
   function renderConfigModal() {
     return (
