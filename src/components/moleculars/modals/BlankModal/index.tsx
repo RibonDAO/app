@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View, Platform } from "react-native";
 import Modal from "react-native-modal";
 import { ViewStyle } from "react-native";
 import S from "./styles";
@@ -24,18 +24,23 @@ function BlankModal({
     setVisible(!visible);
   }
 
+  // Modal is crashing on Android 13 when animationInTiming and animationOutTiming are set
+  const iosProps =
+    Platform.OS === "ios"
+      ? { animationInTiming: 200, animationOutTiming: 200 }
+      : {};
+
   function renderModal() {
     return (
       <Modal
         isVisible={visible}
         animationIn="zoomIn"
         animationOut="zoomOut"
-        animationInTiming={200}
-        animationOutTiming={200}
         hasBackdrop
         backdropOpacity={0.5}
         onBackdropPress={toggleModal}
         onModalHide={onModalHide}
+        {...iosProps}
       >
         <View style={[S.container, containerStyle]}>
           {title && <Text style={S.title}>{title}</Text>}
