@@ -1,6 +1,5 @@
 import Button from "components/atomics/buttons/Button";
-import { Text, View } from "react-native";
-import DangerIcon from "components/vectors/DangerIcon";
+import { Platform, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import S from "./styles";
 
@@ -27,14 +26,22 @@ function CenteredModal({
     setVisible(!visible);
   }
 
+  // Modal is crashing on Android 13 when animationInTiming and animationOutTiming are set
+  const iosProps =
+    Platform.OS === "ios"
+      ? { animationInTiming: 200, animationOutTiming: 200 }
+      : {};
+
   function renderModal() {
     return (
       <Modal
         isVisible={visible}
-        animationIn="slideInRight"
+        animationIn="zoomIn"
+        animationOut="zoomOut"
         hasBackdrop
         backdropOpacity={0.5}
         onBackdropPress={toggleModal}
+        {...iosProps}
       >
         <View style={S.container}>
           <View style={S.icon}>{icon}</View>

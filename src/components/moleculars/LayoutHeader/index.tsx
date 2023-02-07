@@ -110,6 +110,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
       <Modal
         isVisible={menuVisible}
         animationIn="slideInRight"
+        animationOut="slideOutRight"
         hasBackdrop
         backdropOpacity={0.2}
         onBackdropPress={toggleModal}

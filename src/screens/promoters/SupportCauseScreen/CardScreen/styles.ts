@@ -4,7 +4,10 @@ import {
   defaultBodyXsRegular,
   defaultBodySmSemibold,
 } from "styles/typography/default";
-import {stylizedDisplaySm, stylizedDisplayXs} from "styles/typography/stylized";
+import {
+  stylizedDisplaySm,
+  stylizedDisplayXs,
+} from "styles/typography/stylized";
 
 export const styles = StyleSheet.create({
   container: {
@@ -46,7 +49,6 @@ export const styles = StyleSheet.create({
   },
   contributionContainer: {
     maxWidth: "100%",
-    marginRight: 30,
   },
   communityAddContainer: {
     marginTop: 24,
