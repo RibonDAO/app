@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNonProfits, useCauses, useCanDonate } from "@ribon.io/shared/hooks";
 import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
@@ -9,6 +9,7 @@ import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
 import BlankModal from "components/moleculars/modals/BlankModal";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 import Placeholder from "./placeholder";
 
@@ -27,6 +28,11 @@ export default function CausesScreen() {
   const [ticketModalVisible, setTicketModalVisible] = useState(canDonate);
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
+
+
+  useEffect(() => {
+    logEvent("app_causes_page_view");
+  }, [logEvent]);
 
   useEffect(() => {
     setTicketModalVisible(canDonate);
