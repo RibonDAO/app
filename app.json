@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "app",
+    "name": "Ribon",
     "slug": "app",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
@@ -34,7 +34,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
-      "buildNumber": "293"
+      "buildNumber": "294"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
