@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNonProfits, useCauses, useCanDonate } from "@ribon.io/shared/hooks";
 import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
@@ -28,7 +28,6 @@ export default function CausesScreen() {
   const [ticketModalVisible, setTicketModalVisible] = useState(canDonate);
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
-
 
   useEffect(() => {
     logEvent("app_causes_page_view");

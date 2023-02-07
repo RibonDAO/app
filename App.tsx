@@ -14,7 +14,6 @@ import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
 import { theme } from "@ribon.io/shared";
 
-
 function Main() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
