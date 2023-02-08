@@ -11,8 +11,6 @@ import { logError } from "services/crashReport";
 import { useProvider } from "hooks/useProvider";
 import { CurrentNetwork } from "@ribon.io/shared/types";
 import { useTranslation } from "react-i18next";
-import { SUBGRAPH_URL, CHAIN_ID } from "lib/localStorage/constants";
-import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
 
 export interface INetworkContext {
@@ -32,7 +30,15 @@ export const NetworkContext = createContext<INetworkContext>(
 function NetworkProvider({ children }: Props) {
   const [currentNetwork, setCurrentNetwork] = useState(networks[0]);
   const [isValidNetwork, setIsValidNetwork] = useState(false);
-  const provider = useProvider();
+
+  const onChainChanged = (chainId: number) => {
+    setCurrentNetwork(
+      networks.filter(
+        (network) => network.chainId.toString() === chainId.toString(),
+      )[0],
+    );
+  };
+  const provider = useProvider({ onChainChanged });
 
   const { t } = useTranslation("translation", {
     keyPrefix: "contexts.networkContext",
@@ -62,10 +68,6 @@ function NetworkProvider({ children }: Props) {
   useEffect(() => {
     getCurrentNetwork();
   }, [getCurrentNetwork]);
-
-  useEffect(() => {
-    provider?.on("chainChanged", getCurrentNetwork);
-  }, [currentNetwork]);
 
   const networkObject: INetworkContext = useMemo(
     () => ({

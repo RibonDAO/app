@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
-  defaultBodySmBold,
+  defaultBodyLgBold,
   defaultBodySmRegular,
 } from "styles/typography/default";
 import { stylizedDisplaySm } from "styles/typography/stylized";
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   modalWrapper: {},
   container: {
     alignItems: "center",
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
     marginTop: 24,
   },
   title: {
@@ -26,9 +26,10 @@ const styles = StyleSheet.create({
     color: theme.colors.gray30,
   },
   description: {
-    ...defaultBodySmBold,
-    marginBottom: 8,
-    color: theme.colors.gray30,
+    ...defaultBodyLgBold,
+    marginBottom: 16,
+    fontSize: 20,
+    textAlign: "center",
   },
   logo: {
     width: "50%",
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
   },
   inputEmailContainer: {
     width: "100%",
+    marginTop: 14,
   },
   inputHint: {
     fontSize: 12,
@@ -81,6 +83,10 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
     paddingTop: 34,
   },
+  ticketImage: {
+    height: 88,
+    width: 88
+  }
 });
 
 export default styles;

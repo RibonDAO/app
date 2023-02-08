@@ -19,6 +19,11 @@ export type DonationDoneParamsList = {
   nonProfit: NonProfit;
 };
 
+export type ContributionDoneParamsList = {
+  nonProfit?: NonProfit;
+  cause?: Cause;
+};
+
 export type CommunityAddModalParamList = {
   amount: string;
 };
@@ -45,6 +50,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   DonateScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;
+  ContributionDoneScreen: ContributionDoneParamsList;
   NotFound: undefined;
   ReceiveTicketScreen: undefined;
   CausesScreen: undefined;

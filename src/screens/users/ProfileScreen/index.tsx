@@ -1,22 +1,19 @@
-import React, { useState } from "react";
-import { View, FlatList, ScrollView } from "react-native";
-import { Text } from "components/Themed";
+import React from "react";
+import { ScrollView } from "react-native";
+import { Text } from "react-native";
 import S from "./styles";
 import ImpactCards from "./ImpactCards";
-import NgoImpactCard from "./NgoImpactCard";
 import NgoImpactCards from "./NgoImpactCards";
+import { useTranslation } from "react-i18next";
 
-type Props = {
-  image: string;
-  onPress: () => void;
-  active?: boolean;
-  name: string;
-};
+function ProfileScreen() {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "users.profileScreen",
+  });
 
-function BadgesProfilePage() {
   return (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
-      <Text style={S.title}>My Impact</Text>
+      <Text style={S.title}>{t("title")}</Text>
 
       <ImpactCards />
 
@@ -25,4 +22,4 @@ function BadgesProfilePage() {
   );
 }
 
-export default BadgesProfilePage;
+export default ProfileScreen;

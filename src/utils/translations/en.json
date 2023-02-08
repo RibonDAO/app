@@ -1,11 +1,19 @@
 {
-  "tabOneScreen": {
-    "hello": "Hello!"
+  "tabs": {
+    "causes": "Tickets",
+    "giving": "Donations",
+    "profile": "Impact"
   },
   "donations": {
     "causesScreen": {
       "title": "Donate to a Project",
-      "buttonText": "Donate"
+      "buttonText": "Donate",
+      "allCauses": "All",
+      "userSupportSection": {
+        "title": "User support",
+        "description": "Doubts, ideas, refunds. We're here!",
+        "primaryButtonText": "Access support"
+      }
     },
     "donateModal": {
       "nonProfitText": "You are donating to",
@@ -20,7 +28,8 @@
     },
     "donationDoneScreen": {
       "title": "Congratulations!",
-      "buttonText": "Close"
+      "buttonText": "Close",
+      "description": "You donated"
     },
     "chooseCauseScreen": {
       "title": "Choose a Cause"
@@ -83,6 +92,22 @@
           "brazilName": "Brazil",
           "searchCountryPlaceholder": "Search country"
         }
+      }
+    },
+    "contributionDoneScreen": {
+      "title": "Thank you!",
+      "buttonTitle": "close",
+      "description": "You contributed to"
+    }
+  },
+  "users": {
+    "profileScreen": {
+      "title": "My Impact",
+      "impactCards": {
+        "totalTickets": "Donated tickets",
+        "totalDonated": "Donated money",
+        "totalNonProfits": "Supported NGOs",
+        "totalCauses": "Supporter causes"
       }
     }
   }

@@ -4,30 +4,31 @@ import {
   defaultBodyXsRegular,
   defaultBodySmSemibold,
 } from "styles/typography/default";
-import { stylizedDisplayXs } from "styles/typography/stylized";
+import {
+  stylizedDisplaySm,
+  stylizedDisplayXs,
+} from "styles/typography/stylized";
 
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: 16,
     paddingBottom: 24,
-    marginBottom: 100,
-    backgroundColor: theme.colors.neutral10,
   },
   contentContainer: {
     maxWidth: 472,
-    marginTop: 24,
+    marginTop: 16,
     borderRadius: 8,
     position: "relative",
     overflowX: "hidden",
     shadowColor: theme.colors.gray40,
-    elevation: 4,
+    backgroundColor: theme.colors.neutral10,
+    elevation: 2,
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
   donateContainer: {
-    marginBottom: 24,
     padding: 24,
     borderRadius: 8,
     shadowColor: theme.colors.defaultShadow10,
@@ -35,6 +36,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 2,
     elevation: 2,
+    backgroundColor: theme.colors.neutral10,
   },
   givingContainer: {
     marginBottom: 24,
@@ -47,7 +49,6 @@ export const styles = StyleSheet.create({
   },
   contributionContainer: {
     maxWidth: "100%",
-    marginRight: 30,
   },
   communityAddContainer: {
     marginTop: 24,
@@ -83,8 +84,8 @@ export const styles = StyleSheet.create({
     display: "none",
   },
   title: {
-    ...stylizedDisplayXs,
-    marginBottom: 24,
+    ...stylizedDisplaySm,
+    marginBottom: 16,
     color: theme.colors.gray40,
   },
   supportImage: {

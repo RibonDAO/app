@@ -1,14 +1,16 @@
 import { theme } from "@ribon.io/shared";
 import { StyleSheet } from "react-native";
-import { defaultBodyLgBold, defaultBodyXsRegular } from "styles/typography/default";
+import {
+  defaultBodyLgBold,
+  defaultBodyXsRegular,
+} from "styles/typography/default";
 
 const styles = StyleSheet.create({
   badgeContainer: {
-    alignItems: "flex-start",
     marginBottom: 10,
+    width: "50%"
   },
   badgeRoundContainer: {
-    width: 160,
     height: 108,
     borderRadius: 8,
     padding: 16,
@@ -22,7 +24,8 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    marginRight: 8
+    marginRight: 8,
+    elevation: 18,
   },
   impact: {
     ...defaultBodyLgBold,

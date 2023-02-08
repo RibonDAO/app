@@ -1,6 +1,6 @@
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useCallback, useEffect, useState } from "react";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
 import SupportIcon from "components/vectors/SupportIcon";
@@ -102,7 +102,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   }
 
   function linkToSupport() {
-    Linking.openURL("https://google.com");
+    Linking.openURL("https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com");
   }
 
   function renderConfigModal() {
@@ -110,6 +110,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
       <Modal
         isVisible={menuVisible}
         animationIn="slideInRight"
+        animationOut="slideOutRight"
         hasBackdrop
         backdropOpacity={0.2}
         onBackdropPress={toggleModal}

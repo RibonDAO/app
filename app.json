@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "app",
+    "name": "Ribon",
     "slug": "app",
-    "version": "1.0.2",
+    "version": "4.0.2",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
@@ -32,8 +32,10 @@
       "**/*"
     ],
     "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
-      "bundleIdentifier": "com.app.ribon"
+      "bundleIdentifier": "org.reactjs.native.example.Ribon",
+      "buildNumber": "295"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -42,12 +44,20 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.app.ribon",
-      "versionCode": 292
+      "versionCode": 294
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
     },
     "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ],
       [
         "expo-notifications",
         {
@@ -59,7 +69,9 @@
         }
       ],
       "sentry-expo",
-      "expo-community-flipper"
+      "@react-native-firebase/app",
+      "@react-native-firebase/perf",
+      "@react-native-firebase/crashlytics"
     ],
     "extra": {
       "eas": {

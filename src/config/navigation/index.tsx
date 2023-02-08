@@ -1,12 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName } from "react-native";
 import WalletProvider from "contexts/walletContext";
 import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
@@ -26,20 +21,24 @@ import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
 import PaymentScreen from "screens/promoters/PaymentScreen";
+import { Theme } from "@react-navigation/native/src/types";
+import { useTranslation } from "react-i18next";
+import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
 import GivingIconOn from "./assets/GivingIconOn";
-import ProfileIconOff from "./assets/ProfileIconOff";
-import ProfileIconOn from "./assets/ProfileIconOn";
+import ImpactIconOn from "./assets/ImpactIconOn";
+import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
   <Header rightComponent={<LayoutHeader hideTicket />} />
 );
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -71,6 +70,12 @@ function RootNavigator() {
       />
 
       <Stack.Screen
+        name="ContributionDoneScreen"
+        component={ContributionDoneScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
         name="CausesScreen"
         component={CausesScreen}
         options={{
@@ -86,6 +91,7 @@ function RootNavigator() {
           headerTintColor: theme.colors.orange40,
           headerTitle: "",
           headerBackTitleVisible: false,
+          headerStyle: { backgroundColor: theme.colors.gray10 },
         }}
       />
 
@@ -117,6 +123,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const activeColor = theme.colors.green30;
+  const { t } = useTranslation();
 
   return (
     <BottomTab.Navigator
@@ -131,7 +138,7 @@ function BottomTabNavigator() {
         name="CausesScreen"
         component={CausesScreen}
         options={{
-          title: "Causes",
+          title: t("tabs.causes") || "Tickets",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
           header,
@@ -143,7 +150,7 @@ function BottomTabNavigator() {
         name="PromotersScreen"
         component={SupportCauseScreen}
         options={{
-          title: "Giving",
+          title: t("tabs.giving") || "Donations",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
           header: headerWithoutTicket,
@@ -155,11 +162,10 @@ function BottomTabNavigator() {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          title: "Profile",
+          title: t("tabs.profile") || "Impact",
           tabBarIcon: ({ color }: any) =>
-            color === activeColor ? <ProfileIconOn /> : <ProfileIconOff />,
-          headerShown: false,
-          header,
+            color === activeColor ? <ImpactIconOn /> : <ImpactIconOff />,
+          header: headerWithoutTicket,
           lazy: false,
         }}
       />
@@ -167,16 +173,21 @@ function BottomTabNavigator() {
   );
 }
 
-export default function Navigation({
-  colorScheme,
-}: {
-  colorScheme: ColorSchemeName;
-}) {
+const DefaultTheme: Theme = {
+  dark: false,
+  colors: {
+    primary: theme.colors.green20,
+    background: theme.colors.gray10,
+    card: theme.colors.neutral10,
+    text: theme.colors.gray40,
+    border: theme.colors.neutral10,
+    notification: theme.colors.green30,
+  },
+};
+
+export default function Navigation() {
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
+    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
       <LoadingOverlayProvider>
         <WalletProvider>
           <NetworkProvider>

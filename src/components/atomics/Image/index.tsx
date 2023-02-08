@@ -4,6 +4,7 @@ import {
   View,
   ActivityIndicator,
   ImageStyle,
+  ImageRequireSource,
 } from "react-native";
 import * as FileSystem from "expo-file-system";
 import {
@@ -13,10 +14,15 @@ import {
 } from "components/atomics/Image/helpers";
 
 type Props = {
-  source: { uri: string };
+  source: { uri: string } | ImageRequireSource;
   style?: ImageStyle;
 };
-function Image({ source: { uri }, style }: Props) {
+function Image({ source, style }: Props) {
+  if(typeof source === "number") {
+    return <ReactNativeImageComponent source={source} style={style} />
+  }
+
+  const { uri } = source;
   const isMounted = useRef(true);
   const [imgUri, setUri] = useState("");
 

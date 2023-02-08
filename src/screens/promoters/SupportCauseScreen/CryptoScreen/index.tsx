@@ -10,15 +10,15 @@ import {
 } from "contexts/cryptoPaymentContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { RefreshControl, ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
-import { showToast } from "lib/Toast";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { logError } from "services/crashReport";
 import { useNavigation } from "hooks/useNavigation";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
+import UserSupportSection from "components/moleculars/UserSupportItem";
 
 function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();
@@ -92,8 +92,9 @@ function CryptoScreen(): JSX.Element {
       status: "transactionProcessed",
     });
     resetScreen();
-
-    showToast(t("successDonationMessage", { amount, tokenSymbol }));
+    navigateTo("ContributionDoneScreen", {
+      cause,
+    });
   };
 
   const handleDonateClick = async () => {
@@ -204,6 +205,8 @@ function CryptoScreen(): JSX.Element {
           <Text style={styles.refundText}>{t("refundText")}</Text>
         </View>
       </View>
+
+      <UserSupportSection />
     </ScrollView>
   );
 }

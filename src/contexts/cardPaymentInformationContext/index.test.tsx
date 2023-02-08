@@ -1,6 +1,6 @@
 import { renderComponent } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import { waitForPromises } from "config/testUtils";
 import { useCardPaymentInformation } from ".";
 

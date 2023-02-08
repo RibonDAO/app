@@ -1,11 +1,19 @@
 {
-  "tabOneScreen": {
-    "hello": "Olá!"
+  "tabs": {
+    "causes": "Tickets",
+    "giving": "Doações",
+    "profile": "Impacto"
   },
   "donations": {
     "causesScreen": {
       "title": "Doe para um projeto",
-      "buttonText": "Donate"
+      "buttonText": "Donate",
+      "allCauses": "Todas",
+      "userSupportSection": {
+        "title": "Suporte ao Usuário",
+        "description": "Dúvidas, ideias, estornos. Estamos aqui!",
+        "primaryButtonText": "Acesse o suporte"
+      }
     },
     "donateModal": {
       "nonProfitText": "Você está doando para",
@@ -20,7 +28,8 @@
     },
     "donationDoneScreen": {
       "title": "Parabéns!",
-      "buttonText": "Fechar"
+      "buttonText": "Fechar",
+      "description": "Você doou"
     },
     "chooseCauseScreen": {
       "title": "Escolha uma causa"
@@ -82,6 +91,22 @@
           "brazilName": "Brasil",
           "searchCountryPlaceholder": "Procurar país"
         }
+      }
+    },
+    "contributionDoneScreen": {
+      "title": "Obrigado!",
+      "buttonTitle": "fechar",
+      "description": "Você contribuiu para"
+    }
+  },
+  "users": {
+    "profileScreen": {
+      "title": "Meu Impacto",
+      "impactCards": {
+        "totalTickets": "Tickets doados",
+        "totalDonated": "Dinheiro doado",
+        "totalNonProfits": "ONGs auxiliadas",
+        "totalCauses": "Causas auxiliadas"
       }
     }
   }

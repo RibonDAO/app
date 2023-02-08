@@ -1,7 +1,5 @@
 import RibonLogo from "components/vectors/RibonLogo";
-import { View } from "components/Themed";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
@@ -35,7 +33,7 @@ function Header({
   };
 
   return (
-    <SafeAreaView style={S.container}>
+    <View style={S.container}>
       <View style={S.insideContainer}>
         {hasBackButton ? (
           <TouchableOpacity
@@ -64,7 +62,7 @@ function Header({
       {rightComponent && (
         <View style={S.insideContainer}>{rightComponent}</View>
       )}
-    </SafeAreaView>
+    </View>
   );
 }
 export default withPlaceholder(Header);

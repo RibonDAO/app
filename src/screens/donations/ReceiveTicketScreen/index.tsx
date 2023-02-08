@@ -1,9 +1,9 @@
 import Button from "components/atomics/buttons/Button";
-import { Text, View } from "components/Themed";
+import { Text, View } from "react-native";
 import RibonBackgroundLogo from "components/vectors/RibonBackgroundLogo";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import AnimationModal from "./ReceiveTicketAnimation";
+import ReceiveTicketAnimation from "./ReceiveTicketAnimation";
 import S from "./styles";
 
 type Props = {
@@ -19,24 +19,30 @@ function ReceiveTicketScreen({ onTicketReceived }: Props): JSX.Element {
     setAnimationVisible(true);
   };
 
-  return animationVisible ? (
-    <AnimationModal
-      onAnimationEnd={() => {
-        setAnimationVisible(false);
-        onTicketReceived();
-      }}
-    />
-  ) : (
+  return (
     <View style={S.container}>
-      <View style={S.icon}>
-        <RibonBackgroundLogo />
-      </View>
+      {animationVisible ? (
+        <ReceiveTicketAnimation
+          onAnimationEnd={() => {
+            setTimeout(() => {
+              setAnimationVisible(false);
+            }, 500)
+            onTicketReceived();
+          }}
+        />
+      ) : (
+        <>
+          <View style={S.icon}>
+            <RibonBackgroundLogo />
+          </View>
 
-      <Text style={S.title}>{t("title")}</Text>
+          <Text style={S.title}>{t("title")}</Text>
 
-      <Text style={S.description}>{t("description")}</Text>
+          <Text style={S.description}>{t("description")}</Text>
 
-      <Button text={t("buttonText")} onPress={openAnimation} />
+          <Button text={t("buttonText")} onPress={openAnimation} />
+        </>
+      )}
     </View>
   );
 }

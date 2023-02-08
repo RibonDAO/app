@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { stylizedDisplayXs } from "styles/typography/stylized";
+import {stylizedDisplaySm, stylizedDisplayXs} from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyXsRegular,
@@ -10,25 +10,25 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: 16,
-    backgroundColor: theme.colors.neutral10,
+    paddingBottom: 24,
   },
   title: {
-    ...stylizedDisplayXs,
+    ...stylizedDisplaySm,
     marginRight: 0,
-    marginBottom: 24,
+    marginBottom: 16,
     marginLeft: 0,
     color: theme.colors.gray40,
   },
   contentContainer: {
     maxWidth: 472,
-    marginTop: 24,
-    marginBottom: 24,
+    marginTop: 16,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
     position: "relative",
     shadowColor: theme.colors.gray40,
+    backgroundColor: theme.colors.neutral10,
     elevation: 4,
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 5,
   },
   donateContainer: {
-    marginBottom: 24,
     paddingTop: 24,
     paddingRight: 24,
     paddingBottom: 24,
