@@ -17,6 +17,7 @@ import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
+import UserSupportSection from "components/moleculars/UserSupportItem";
 
 function CardScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
@@ -150,6 +151,8 @@ function CardScreen(): JSX.Element {
           />
         </View>
       </View>
+
+      <UserSupportSection />
     </ScrollView>
   );
 }
