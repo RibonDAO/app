@@ -8,7 +8,8 @@ import { useNavigation } from "hooks/useNavigation";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { useRouteParams } from "hooks/useRouteParams";
-import * as S from "../styles";
+import { Text, View } from "react-native";
+import styles from "../styles";
 import NonProfitCard from "./NonProfitCard";
 
 function CardPage(): JSX.Element {
@@ -73,10 +74,10 @@ function CardPage(): JSX.Element {
       : 0;
 
   return (
-    <S.Container>
-      <S.TitleContainer>
-        <S.Title>{t("title")}</S.Title>
-      </S.TitleContainer>
+    <View style={styles.Container}>
+      <View style={styles.TitleContainer}>
+        <Text style={styles.Title}>{t("title")}</Text>
+      </View>
 
       <GroupButtons
         elements={causesFilter()}
@@ -88,7 +89,7 @@ function CardPage(): JSX.Element {
         borderColor={theme.colors.red40}
         borderColorOutline={theme.colors.red20}
       />
-      <S.NonProfitsListContainer>
+      <View style={styles.NonProfitsListContainer}>
         {/* add inside slider */}
         {filteredNonProfits().map((nonProfit) => (
           <Fragment key={nonProfit.id}>
@@ -99,8 +100,8 @@ function CardPage(): JSX.Element {
             />
           </Fragment>
         ))}
-      </S.NonProfitsListContainer>
-    </S.Container>
+      </View>
+    </View>
   );
 }
 
