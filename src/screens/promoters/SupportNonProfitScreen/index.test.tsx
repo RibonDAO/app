@@ -1,11 +1,11 @@
-import { clickOn, renderComponent, waitForPromises } from "config/testUtils";
+import { clickOn, waitForPromises } from "config/testUtils";
+import { renderComponent } from "config/testUtils/renders";
 import {
   expectLogEventToHaveBeenCalledWith,
   expectTextNotToBeInTheDocument,
   expectTextToBeInTheDocument,
 } from "config/testUtils/expects";
-import causeFactory from "config/testUtils/factories/causeFactory";
-import nonProfitFactory from "config/testUtils/factories/nonProfitFactory";
+import { causeFactory, nonProfitFactory } from "@ribon.io/shared/config";
 import SupportCausePage from ".";
 
 const mockCause = causeFactory();
