@@ -37,7 +37,9 @@ export default function NonProfitCard({
     useNonProfitImpact(nonProfit?.id, currentOffer?.priceValue, currentCoin);
 
   useEffect(() => {
-    refetchNonProfitImpact();
+    setTimeout(() => {
+      refetchNonProfitImpact();
+    }, 200);
   }, [currentOffer?.priceValue]);
 
   return (
