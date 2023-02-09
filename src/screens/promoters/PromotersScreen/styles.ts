@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
+    zIndex: 1,
     bottom: 0,
     backgroundColor: "rgb(241,241,239)",
     borderTopLeftRadius: 8,

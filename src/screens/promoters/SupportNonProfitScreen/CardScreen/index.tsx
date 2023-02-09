@@ -7,7 +7,7 @@ import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, ScrollView, Text, View } from "react-native";
 import CardWaveImage from "components/moleculars/CardWaveImage";
 import S from "../styles";
 import SelectOfferSection from "./SelectOfferSection";
@@ -67,7 +67,7 @@ function CardPage(): JSX.Element {
   );
 
   return (
-    <View style={S.Container}>
+    <ScrollView contentContainerStyle={S.Container}>
       <View style={S.TitleContainer}>
         <Text style={S.Title}>{t("title")}</Text>
       </View>
@@ -110,7 +110,7 @@ function CardPage(): JSX.Element {
         contentContainerStyle={S.scrollContainer}
         showsHorizontalScrollIndicator={false}
       />
-    </View>
+    </ScrollView>
   );
 }
 

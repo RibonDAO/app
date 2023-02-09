@@ -12,16 +12,16 @@ import {
 const styles = StyleSheet.create({
   Container: {
     width: "100%",
-    marginBottom: 100,
+    paddingBottom: 50,
     paddingHorizontal: 16,
   },
   ContentContainer: {
     width: "100%",
-    marginTop: 24,
+    marginTop: 16,
     borderRadius: 8,
   },
   DonateContainer: {
-    marginBottom: 24,
+    marginBottom: 16,
     padding: 16,
     borderRadius: 8,
     shadowColor: theme.colors.gray30,
@@ -68,9 +68,8 @@ const styles = StyleSheet.create({
   },
   Title: {
     ...stylizedDisplaySm,
-    marginTop: 4,
     marginRight: "5%",
-    marginBottom: 24,
+    marginBottom: 16,
     color: theme.colors.gray40,
   },
   SupportImage: {

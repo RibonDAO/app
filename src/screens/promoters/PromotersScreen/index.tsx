@@ -22,11 +22,6 @@ export default function PromotersScreen() {
 
   return (
     <View>
-      {isInCommunityDonationFlow ? (
-        <SupportCauseScreen />
-      ) : (
-        <SupportNonProfitScreen />
-      )}
       <View style={S.container}>
         <View>
           <TouchableOpacity
@@ -93,6 +88,13 @@ export default function PromotersScreen() {
               customTextStyles={S.buttonText}
             />
           </View>
+        )}
+      </View>
+      <View style={{ height: "100%" }}>
+        {isInCommunityDonationFlow ? (
+          <SupportCauseScreen />
+        ) : (
+          <SupportNonProfitScreen />
         )}
       </View>
     </View>

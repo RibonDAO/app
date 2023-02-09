@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
-  defaultBodySmBold,
+  defaultBodyMdBold,
   defaultBodySmSemibold,
   defaultBodyXsRegular,
 } from "styles/typography/default";
@@ -9,7 +9,7 @@ import { stylizedDisplayXs } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
   title: {
-    ...defaultBodySmBold,
+    ...defaultBodyMdBold,
     color: theme.colors.red40,
     textAlign: "center",
   },
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   valueText: {
     ...stylizedDisplayXs,
     marginRight: 8,
-    color: theme.colors.orange20,
+    color: theme.colors.red40,
   },
   sliderStyle: { width: 180, marginTop: 8 },
   container: {

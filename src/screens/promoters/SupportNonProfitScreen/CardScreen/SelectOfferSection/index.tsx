@@ -10,7 +10,7 @@ import { Text, View } from "react-native";
 import Dropdown from "components/moleculars/Dropdown";
 import S from "./styles";
 
-const { orange40, gray20 } = theme.colors;
+const { red30, gray20 } = theme.colors;
 
 type Props = {
   onOfferChange: (offer: Offer) => void;
@@ -89,6 +89,7 @@ function SelectOfferSection({
           }}
           label={currentCoin || Currencies.USD}
           containerStyle={S.dropdownContainerStyles}
+          textStyle={S.dropdownTextStyles}
         />
       </View>
       <InputRange
@@ -99,8 +100,8 @@ function SelectOfferSection({
           const changeValue = Array.isArray(value) ? value[0] : value;
           setCurrentOfferIndex(changeValue);
         }}
-        color={orange40}
-        minimumTrackTintColor={orange40}
+        color={red30}
+        minimumTrackTintColor={red30}
         maximumTrackTintColor={gray20}
         sliderStyle={S.sliderStyle}
       />

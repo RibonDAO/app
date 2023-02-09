@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
   },
   inputText: {
     borderWidth: 1,
-    borderColor: theme.colors.orange40,
+    borderColor: theme.colors.red40,
     height: 40,
     borderRadius: 4,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    color: theme.colors.orange40,
+    color: theme.colors.red40,
     fontWeight: "bold",
     marginRight: 4,
     flex: 3,
@@ -30,11 +30,15 @@ const styles = StyleSheet.create({
   },
   dropdownContainerStyles: {
     width: 80,
+    borderColor: theme.colors.red40,
+  },
+  dropdownTextStyles: {
+    color: theme.colors.red40,
   },
   valueText: {
     ...stylizedDisplayXs,
     marginRight: 8,
-    color: theme.colors.orange20,
+    color: theme.colors.red40,
   },
   sliderStyle: { width: 180, marginTop: 8 },
 });

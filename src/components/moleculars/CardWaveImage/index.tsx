@@ -33,9 +33,9 @@ function CardWaveImage({
         <Button
           text={buttonText}
           onPress={onButtonClick}
-          borderColor={theme.colors.orange20}
-          backgroundColor={theme.colors.orange20}
-          textColor={theme.colors.orange40}
+          borderColor={theme.colors.red20}
+          backgroundColor={theme.colors.red20}
+          textColor={theme.colors.red40}
           customTextStyles={{
             fontWeight: "600",
           }}
