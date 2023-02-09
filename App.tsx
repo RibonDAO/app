@@ -41,7 +41,7 @@ function Main() {
                 style={{ flex: 1, backgroundColor: theme.colors.neutral10 }}
               >
                 <Navigation colorScheme={colorScheme} />
-                <StatusBar />
+                <StatusBar style="dark" />
               </SafeAreaView>
             </SafeAreaView>
           </SafeAreaProvider>

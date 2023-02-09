@@ -49,7 +49,6 @@ export const styles = StyleSheet.create({
   },
   contributionContainer: {
     maxWidth: "100%",
-    marginRight: theme.spacingNative(32),
   },
   communityAddContainer: {
     marginTop: theme.spacingNative(24),
