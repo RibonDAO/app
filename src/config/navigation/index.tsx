@@ -16,7 +16,7 @@ import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
 import LayoutHeader from "components/moleculars/LayoutHeader";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
-import SupportCauseScreen from "screens/promoters/SupportNonProfitScreen";
+import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
