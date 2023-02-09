@@ -53,6 +53,8 @@
   },
   "promoters": {
     "supportCauseScreen": {
+      "firstButtonText": "Community",
+      "secondButtonText": "Direct donation",
       "title": "Donate with a community",
       "communityAddText": "The Community will add",
       "communityAddButtonText": "How the community does it?",

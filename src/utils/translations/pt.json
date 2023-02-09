@@ -53,6 +53,8 @@
   },
   "promoters": {
     "supportCauseScreen": {
+      "firstButtonText": "Comunidade",
+      "secondButtonText": "Doação direta",
       "title": "Doe com a comunidade",
       "communityAddText": "A Comunidade adicionará",
       "communityAddButtonText": "Como a comunidade faz isso?",

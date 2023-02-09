@@ -16,7 +16,6 @@ import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
 import LayoutHeader from "components/moleculars/LayoutHeader";
 import DonationDoneScreen from "screens/donations/DonationDoneScreen";
-import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
@@ -24,6 +23,7 @@ import PaymentScreen from "screens/promoters/PaymentScreen";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
+import PromotersScreen from "screens/promoters/PromotersScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -148,7 +148,7 @@ function BottomTabNavigator() {
 
       <BottomTab.Screen
         name="PromotersScreen"
-        component={SupportCauseScreen}
+        component={PromotersScreen}
         options={{
           title: t("tabs.giving") || "Donations",
           tabBarIcon: ({ color }: any) =>
