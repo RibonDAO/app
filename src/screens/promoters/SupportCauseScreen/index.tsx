@@ -5,6 +5,7 @@ import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import { Text, TouchableOpacity, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { theme } from "@ribon.io/shared/styles";
+import Icon from "components/atomics/Icon";
 
 export default function SupportCauseScreen() {
   const { isInCryptoPage } = useCryptoPayment();
@@ -17,24 +18,42 @@ export default function SupportCauseScreen() {
         style={{
           position: "absolute",
           bottom: 0,
-          backgroundColor: theme.colors.gray20,
+          backgroundColor: "rgb(241,241,239)",
+          borderTopLeftRadius: 8,
+          borderTopRightRadius: 8,
           width: "100%",
         }}
       >
-        <View style={{ width: "100%", display: "flex", alignItems: "center" }}>
+        <View>
           <TouchableOpacity
             style={{
               width: "100%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              height: 24,
+              height: 34,
+              borderTopLeftRadius: 8,
+              borderTopRightRadius: 8,
             }}
             onPress={() => {
               setSubmenuVisible(!submenuVisible);
             }}
           >
-            {submenuVisible ? <Text>\/</Text> : <Text>^</Text>}
+            {submenuVisible ? (
+              <Icon
+                type="rounded"
+                name="expand_more"
+                size={30}
+                color={theme.colors.gray30}
+              />
+            ) : (
+              <Icon
+                type="rounded"
+                name="expand_less"
+                size={30}
+                color={theme.colors.gray30}
+              />
+            )}
           </TouchableOpacity>
         </View>
         {submenuVisible && (
