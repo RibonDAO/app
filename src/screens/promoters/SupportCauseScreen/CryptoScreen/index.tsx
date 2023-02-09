@@ -18,6 +18,7 @@ import { logError } from "services/crashReport";
 import { useNavigation } from "hooks/useNavigation";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
+import UserSupportSection from "components/moleculars/UserSupportItem";
 
 function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();
@@ -204,6 +205,8 @@ function CryptoScreen(): JSX.Element {
           <Text style={styles.refundText}>{t("refundText")}</Text>
         </View>
       </View>
+
+      <UserSupportSection />
     </ScrollView>
   );
 }

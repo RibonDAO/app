@@ -8,7 +8,12 @@
     "causesScreen": {
       "title": "Doe para um projeto",
       "buttonText": "Donate",
-      "allCauses": "Todas"
+      "allCauses": "Todas",
+      "userSupportSection": {
+        "title": "Suporte ao Usuário",
+        "description": "Dúvidas, ideias, estornos. Estamos aqui!",
+        "primaryButtonText": "Acesse o suporte"
+      }
     },
     "donateModal": {
       "nonProfitText": "Você está doando para",
