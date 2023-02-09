@@ -14,13 +14,22 @@ const { orange40, gray20 } = theme.colors;
 
 type Props = {
   onOfferChange: (offer: Offer) => void;
+  currentOffer?: Offer;
+  setCurrentOffer: (offer: Offer) => void;
+  currentOfferIndex: number;
+  setCurrentOfferIndex: (index: number) => void;
 };
 
 const CURRENT_OFFER_INDEX_KEY = "CURRENT_OFFER_INDEX_KEY";
 
-function SelectOfferSection({ onOfferChange }: Props): JSX.Element {
+function SelectOfferSection({
+  onOfferChange,
+  setCurrentOffer,
+  currentOffer,
+  currentOfferIndex,
+  setCurrentOfferIndex,
+}: Props): JSX.Element {
   const [maxRange, setMaxRange] = useState(0);
-  const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
 
   const defaultCurrentOfferIndex = async () => {
     const localstorageIndex = await getLocalStorageItem(
@@ -35,7 +44,6 @@ function SelectOfferSection({ onOfferChange }: Props): JSX.Element {
     defaultCurrentOfferIndex().then((index) => setCurrentOfferIndex(index));
   }, []);
 
-  const [currentOffer, setCurrentOffer] = useState<Offer>();
   const { currentCoin, setCurrentCoin, loading } = useCardPaymentInformation();
   const { offers } = useOffers(currentCoin || Currencies.USD, false);
 

@@ -15,6 +15,7 @@ import SelectOfferSection from "./SelectOfferSection";
 function CardPage(): JSX.Element {
   const { navigateTo } = useNavigation();
   const [currentOffer, setCurrentOffer] = useState<Offer>();
+  const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const { cause, setCause, setOfferId, setFlow } = useCardPaymentInformation();
   const { nonProfits } = useNonProfits();
   const { causes } = useCauses();
@@ -93,7 +94,13 @@ function CardPage(): JSX.Element {
               })}
               onButtonClick={() => handleDonateClick(nonProfit)}
             >
-              <SelectOfferSection onOfferChange={handleOfferChange} />
+              <SelectOfferSection
+                onOfferChange={handleOfferChange}
+                currentOffer={currentOffer}
+                setCurrentOffer={setCurrentOffer}
+                currentOfferIndex={currentOfferIndex}
+                setCurrentOfferIndex={setCurrentOfferIndex}
+              />
             </CardWaveImage>
           </View>
         )}
