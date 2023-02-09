@@ -1,14 +1,21 @@
-import { renderComponent } from "config/testUtils";
+import { renderComponent } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
-import offerFactory from "config/testUtils/factories/offerFactory";
 import { formatPrice } from "lib/formatters/currencyFormatter";
-import nonProfitFactory from "config/testUtils/factories/nonProfitFactory";
+import { waitForPromises } from "config/testUtils";
+import { offerFactory, causeFactory } from "@ribon.io/shared/config";
 import OfferSelectionSection from ".";
 
-const mockOffer = offerFactory();
-jest.mock("hooks/apiHooks/useOffers", () => ({
+const mockOffer = offerFactory({ priceValue: 50, currency: "usd" });
+const mockCause = causeFactory({
+  name: "Cause",
+  id: 1,
+  active: true,
+  pools: [],
+});
+jest.mock("@ribon.io/shared/hooks", () => ({
   __esModule: true,
-  default: () => ({
+  ...jest.requireActual("@ribon.io/shared/hooks"),
+  useOffers: () => ({
     offers: [mockOffer],
     refetch: jest.fn(),
   }),
@@ -17,13 +24,11 @@ jest.mock("hooks/apiHooks/useOffers", () => ({
 describe("OfferSelectionSection", () => {
   const mockFn = jest.fn();
 
-  beforeEach(() => {
+  beforeEach(async () => {
     renderComponent(
-      <OfferSelectionSection
-        nonProfit={nonProfitFactory()}
-        onOfferChange={mockFn}
-      />,
+      <OfferSelectionSection cause={mockCause} onOfferChange={mockFn} />,
     );
+    await waitForPromises();
   });
 
   it("show the first offer", () => {

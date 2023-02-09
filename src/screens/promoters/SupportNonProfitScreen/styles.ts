@@ -1,23 +1,24 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import {
   defaultBodySmSemibold,
   defaultBodyXsRegular,
 } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
-import { stylizedDisplayXs } from "styles/typography/stylized";
+import {
+  stylizedDisplaySm,
+  stylizedDisplayXs,
+} from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
   Container: {
     width: "100%",
     marginBottom: 100,
+    paddingHorizontal: 16,
   },
   ContentContainer: {
     width: "100%",
     marginTop: 24,
     borderRadius: 8,
-  },
-  NonProfitsListContainer: {
-    margin: -16,
   },
   DonateContainer: {
     marginBottom: 24,
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     bottom: -200,
   },
   Title: {
-    ...stylizedDisplayXs,
+    ...stylizedDisplaySm,
     marginTop: 4,
     marginRight: "5%",
     marginBottom: 24,
@@ -108,6 +109,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     display: "flex",
     justifyContent: "center",
+  },
+  scrollContainer: {},
+  cardWaveContainer: {
+    marginRight: 8,
+    width: Dimensions.get("window").width - 64,
   },
 });
 

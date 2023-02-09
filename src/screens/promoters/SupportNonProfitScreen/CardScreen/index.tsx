@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useCallback, useEffect, useState, Fragment } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
 import { useCauses, useNonProfits } from "@ribon.io/shared/hooks";
 import { Cause, Offer, NonProfit } from "@ribon.io/shared/types";
@@ -7,10 +7,10 @@ import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { useRouteParams } from "hooks/useRouteParams";
-import { Text, View } from "react-native";
-import styles from "../styles";
-import NonProfitCard from "./NonProfitCard";
+import { FlatList, Text, View } from "react-native";
+import CardWaveImage from "components/moleculars/CardWaveImage";
+import S from "../styles";
+import SelectOfferSection from "./SelectOfferSection";
 
 function CardPage(): JSX.Element {
   const { navigateTo } = useNavigation();
@@ -18,9 +18,6 @@ function CardPage(): JSX.Element {
   const { cause, setCause, setOfferId, setFlow } = useCardPaymentInformation();
   const { nonProfits } = useNonProfits();
   const { causes } = useCauses();
-  const {
-    params: { causeDonated },
-  } = useRouteParams<"SupportNonProfitScreen">();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportNonProfitPage",
@@ -36,7 +33,7 @@ function CardPage(): JSX.Element {
   };
 
   useEffect(() => {
-    setCause(causeDonated || causesFilter()[0]);
+    setCause(causesFilter()[0]);
   }, [causes]);
 
   const handleCauseClick = (causeClicked: Cause) => {
@@ -68,39 +65,44 @@ function CardPage(): JSX.Element {
     [cause, nonProfits],
   );
 
-  const preSelectedIndex = () =>
-    causeDonated
-      ? causesFilter().findIndex((c) => c.id === causeDonated?.id)
-      : 0;
-
   return (
-    <View style={styles.Container}>
-      <View style={styles.TitleContainer}>
-        <Text style={styles.Title}>{t("title")}</Text>
+    <View style={S.Container}>
+      <View style={S.TitleContainer}>
+        <Text style={S.Title}>{t("title")}</Text>
       </View>
 
       <GroupButtons
         elements={causesFilter()}
         onChange={handleCauseClick}
-        indexSelected={preSelectedIndex()}
+        indexSelected={0}
         nameExtractor={(element) => element.name}
         backgroundColor={theme.colors.red40}
         textColorOutline={theme.colors.red40}
         borderColor={theme.colors.red40}
         borderColorOutline={theme.colors.red20}
       />
-      <View style={styles.NonProfitsListContainer}>
-        {/* add inside slider */}
-        {filteredNonProfits().map((nonProfit) => (
-          <Fragment key={nonProfit.id}>
-            <NonProfitCard
-              nonProfit={nonProfit}
-              handleOfferChange={handleOfferChange}
-              handleDonate={() => handleDonateClick(nonProfit)}
-            />
-          </Fragment>
-        ))}
-      </View>
+      <FlatList
+        renderItem={({ item: nonProfit }) => (
+          <View style={S.cardWaveContainer}>
+            <CardWaveImage
+              title={nonProfit.name}
+              subtitle={`${nonProfit.impactByTicket} ${nonProfit.impactDescription}`}
+              image={nonProfit.mainImage}
+              buttonText={t("donateButtonText", {
+                value: "",
+              })}
+              onButtonClick={() => handleDonateClick(nonProfit)}
+            >
+              <SelectOfferSection onOfferChange={handleOfferChange} />
+            </CardWaveImage>
+          </View>
+        )}
+        data={filteredNonProfits()}
+        keyExtractor={(item) => item.id.toString()}
+        horizontal
+        contentContainerStyle={S.scrollContainer}
+        showsHorizontalScrollIndicator={false}
+      />
     </View>
   );
 }
