@@ -8,9 +8,8 @@ import { useNavigation } from "hooks/useNavigation";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { FlatList, ScrollView, Text, View } from "react-native";
-import CardWaveImage from "components/moleculars/CardWaveImage";
+import NonProfitCard from "screens/promoters/SupportNonProfitScreen/CardScreen/NonProfitCard";
 import S from "../styles";
-import SelectOfferSection from "./SelectOfferSection";
 
 function CardPage(): JSX.Element {
   const { navigateTo } = useNavigation();
@@ -84,25 +83,15 @@ function CardPage(): JSX.Element {
       />
       <FlatList
         renderItem={({ item: nonProfit }) => (
-          <View style={S.cardWaveContainer}>
-            <CardWaveImage
-              title={nonProfit.name}
-              subtitle={`${nonProfit.impactByTicket} ${nonProfit.impactDescription}`}
-              image={nonProfit.mainImage}
-              buttonText={t("donateButtonText", {
-                value: "",
-              })}
-              onButtonClick={() => handleDonateClick(nonProfit)}
-            >
-              <SelectOfferSection
-                onOfferChange={handleOfferChange}
-                currentOffer={currentOffer}
-                setCurrentOffer={setCurrentOffer}
-                currentOfferIndex={currentOfferIndex}
-                setCurrentOfferIndex={setCurrentOfferIndex}
-              />
-            </CardWaveImage>
-          </View>
+          <NonProfitCard
+            nonProfit={nonProfit}
+            handleOfferChange={handleOfferChange}
+            currentOffer={currentOffer}
+            setCurrentOffer={setCurrentOffer}
+            currentOfferIndex={currentOfferIndex}
+            setCurrentOfferIndex={setCurrentOfferIndex}
+            handleDonateClick={handleDonateClick}
+          />
         )}
         data={filteredNonProfits()}
         keyExtractor={(item) => item.id.toString()}

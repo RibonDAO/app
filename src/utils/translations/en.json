@@ -103,6 +103,7 @@
     },
     "supportNonProfitPage": {
       "title": "Make a direct donation",
+      "description": "fund",
       "donateButtonText": "Donate {{value}}",
       "selectOfferSection": {
         "fundText": "fund"
@@ -121,5 +122,16 @@
         "totalCauses": "Supporter causes"
       }
     }
+  },
+  "impactNormalizer": {
+    "year": "year",
+    "years": "years",
+    "month": "month",
+    "months": "months",
+    "day": "day",
+    "days": "days",
+    "for": "for",
+    "and": "and",
+    "of": "of"
   }
 }

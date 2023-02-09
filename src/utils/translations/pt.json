@@ -102,6 +102,7 @@
     },
     "supportNonProfitPage": {
       "title": "Faça uma doação direta",
+      "description": "geram",
       "donateButtonText": "Doar {{value}}",
       "selectOfferSection": {
         "fundText": "geram"
@@ -120,5 +121,16 @@
         "totalCauses": "Causas auxiliadas"
       }
     }
+  },
+  "impactNormalizer": {
+    "year": "ano",
+    "years": "anos",
+    "month": "mês",
+    "months": "meses",
+    "day": "dia",
+    "days": "dias",
+    "for": "para",
+    "and": "e",
+    "of": "de"
   }
 }
