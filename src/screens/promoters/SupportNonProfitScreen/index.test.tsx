@@ -6,7 +6,7 @@ import {
   expectTextToBeInTheDocument,
 } from "config/testUtils/expects";
 import { causeFactory, nonProfitFactory } from "@ribon.io/shared/config";
-import SupportCausePage from ".";
+import SupportNonProfitScreen from ".";
 
 const mockCause = causeFactory();
 const mockCause2 = causeFactory({ name: "💊 Health", id: 2, active: true });
@@ -16,25 +16,22 @@ const mockNonProfit2 = nonProfitFactory({
   name: "Other non Profit",
 });
 
-jest.mock("hooks/apiHooks/useCauses", () => ({
+jest.mock("@ribon.io/shared/hooks", () => ({
   __esModule: true,
-  default: () => ({
+  ...jest.requireActual("@ribon.io/shared/hooks"),
+  useCauses: () => ({
     causes: [mockCause, mockCause2],
     refetch: () => {},
   }),
-}));
-
-jest.mock("hooks/apiHooks/useNonProfits", () => ({
-  __esModule: true,
-  default: () => ({
+  useNonProfits: () => ({
     nonProfits: [mockNonProfit, mockNonProfit2],
     refetch: () => {},
   }),
 }));
 
-describe("SupportCausePage", () => {
+describe("SupportNonProfitScreen", () => {
   beforeEach(async () => {
-    renderComponent(<SupportCausePage />);
+    renderComponent(<SupportNonProfitScreen />);
     await waitForPromises();
   });
 
