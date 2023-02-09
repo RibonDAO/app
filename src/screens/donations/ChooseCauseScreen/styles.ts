@@ -1,4 +1,4 @@
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 import { StyleSheet } from "react-native";
 import { stylizedDisplayMd } from "styles/typography/stylized";
 

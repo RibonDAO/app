@@ -1,4 +1,4 @@
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
 import {
   Placeholder,

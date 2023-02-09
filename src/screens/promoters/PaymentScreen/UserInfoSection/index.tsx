@@ -22,7 +22,7 @@ import {
   BRstates,
   USAstates,
 } from "screens/promoters/PaymentScreen/UserInfoSection/federationStates";
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 
 function UserInfoSection(): JSX.Element {
   const { t } = useTranslation("translation", {

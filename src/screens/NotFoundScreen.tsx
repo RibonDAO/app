@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 import { RootStackScreenProps } from "../types";
 
 const styles = StyleSheet.create({

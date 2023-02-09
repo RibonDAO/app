@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   configItem: {

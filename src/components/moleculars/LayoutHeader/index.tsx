@@ -13,7 +13,7 @@ import TicketIcon from "components/vectors/TicketIcon";
 import GrayTicketIcon from "components/vectors/GrayTicketIcon";
 import { useNavigation } from "hooks/useNavigation";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";

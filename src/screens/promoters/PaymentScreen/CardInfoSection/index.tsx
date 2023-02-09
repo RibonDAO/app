@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
 import { View } from "react-native";
+import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
-import { theme } from "@ribon.io/shared";
 
 function CardInfoSection() {
   const { t } = useTranslation("translation", {
