@@ -6,11 +6,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.gray10,
     minHeight: "100%",
-    paddingHorizontal: 16,
+    paddingHorizontal: theme.spacingNative(16),
   },
   title: {
     ...stylizedDisplaySm,
-    marginBottom: 16,
+    marginBottom: theme.spacingNative(16),
   },
 });
 

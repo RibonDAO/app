@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     borderColor: theme.colors.gray20,
     width: Dimensions.get("window").width - 270,
-    marginBottom: 0,
+    marginBottom: theme.spacingNative(0),
   },
   ticketRoundBox: {
     position: "absolute",
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.green20,
   },
   text: {
-    marginTop: 20,
+    marginTop: theme.spacingNative(20),
     color: theme.colors.green30,
     fontWeight: "bold",
   },

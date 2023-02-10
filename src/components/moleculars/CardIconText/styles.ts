@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 24,
     height: 24,
-    marginRight: 10,
+    marginRight: theme.spacingNative(12),
     objectFit: "cover",
   },
   text: {

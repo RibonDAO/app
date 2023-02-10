@@ -3,7 +3,7 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 16,
+    marginBottom: theme.spacingNative(16),
     borderRadius: 4,
     overflow: "hidden",
     shadowColor: "#282428",
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   firstChildContainer: {
-    marginTop: 16,
+    marginTop: theme.spacingNative(16),
   },
   imageContainer: {
     width: 296,

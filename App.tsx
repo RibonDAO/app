@@ -7,12 +7,12 @@ import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { theme } from "@ribon.io/shared/styles";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
 import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
-import { theme } from "@ribon.io/shared";
 
 function Main() {
   const isLoadingComplete = useCachedResources();

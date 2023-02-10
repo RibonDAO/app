@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
-import {stylizedDisplaySm, stylizedDisplayXs} from "styles/typography/stylized";
+import {
+  stylizedDisplaySm,
+  stylizedDisplayXs,
+} from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyXsRegular,
@@ -9,19 +12,19 @@ import {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingHorizontal: 16,
-    paddingBottom: 24,
+    paddingHorizontal: theme.spacingNative(16),
+    paddingBottom: theme.spacingNative(24),
   },
   title: {
     ...stylizedDisplaySm,
-    marginRight: 0,
-    marginBottom: 16,
-    marginLeft: 0,
+    marginRight: theme.spacingNative(0),
+    marginBottom: theme.spacingNative(16),
+    marginLeft: theme.spacingNative(0),
     color: theme.colors.gray40,
   },
   contentContainer: {
     maxWidth: 472,
-    marginTop: 16,
+    marginTop: theme.spacingNative(16),
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
@@ -47,27 +50,27 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 5,
   },
   donateContainer: {
-    paddingTop: 24,
-    paddingRight: 24,
-    paddingBottom: 24,
-    paddingLeft: 24,
+    paddingTop: theme.spacingNative(24),
+    paddingRight: theme.spacingNative(24),
+    paddingBottom: theme.spacingNative(24),
+    paddingLeft: theme.spacingNative(24),
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
   },
   givingContainer: {
-    marginBottom: 24,
-    paddingTop: 0,
-    paddingRight: 34,
-    paddingBottom: 0,
-    paddingLeft: 34,
+    marginBottom: theme.spacingNative(24),
+    paddingTop: theme.spacingNative(0),
+    paddingRight: theme.spacingNative(32),
+    paddingBottom: theme.spacingNative(0),
+    paddingLeft: theme.spacingNative(32),
     alignItems: "center",
     justifyContent: "center",
   },
   contributionContainer: {},
   communityAddContainer: {
-    marginTop: 24,
+    marginTop: theme.spacingNative(24),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -84,13 +87,13 @@ const styles = StyleSheet.create({
   userBalanceText: {
     ...defaultBodySmSemibold,
     color: theme.colors.gray40,
-    marginBottom: 4,
+    marginBottom: theme.spacingNative(4),
     textAlign: "center",
   },
   refundText: {
     ...defaultBodyXsRegular,
     color: theme.colors.gray30,
-    marginTop: 4,
+    marginTop: theme.spacingNative(4),
     textAlign: "center",
   },
 });

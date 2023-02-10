@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Switch } from "react-native";
-import S from "./styles";
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 import { Text, View } from "react-native";
+import S from "./styles";
 
 const { colors } = theme;
 const { green30, neutral10 } = colors;
