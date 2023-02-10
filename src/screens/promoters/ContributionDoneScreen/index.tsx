@@ -14,10 +14,10 @@ export default function ContributionDoneScreen(): JSX.Element {
 
   return (
     <DoneScreenTemplate
-      image={cause?.mainImage || nonProfit?.mainImage}
+      image={nonProfit?.mainImage || cause?.mainImage}
       buttonTitle={t("buttonTitle") || ""}
       title={t("title") || ""}
-      description={`${t("description")} ${cause?.name || nonProfit?.name}`}
+      description={`${t("description")} ${nonProfit?.name || cause?.name}`}
       onButtonPress={() => {
         navigateTo("PromotersScreen");
       }}
