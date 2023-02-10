@@ -1,4 +1,5 @@
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { theme } from "@ribon.io/shared/styles";
 import { RootStackScreenProps } from "../types";
 
 const styles = StyleSheet.create({
@@ -6,14 +7,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: theme.spacingNative(20),
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
   },
   link: {
-    marginTop: 15,
+    marginTop: theme.spacingNative(16),
     paddingVertical: 15,
   },
   linkText: {

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
   },
   text: {
-    paddingLeft: 8,
+    paddingLeft: theme.spacingNative(8),
   },
   iconContainer: {
     width: "10%",
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   ctaContainer: {
     width: "30%",
-    paddingRight: 8,
+    paddingRight: theme.spacingNative(8),
   },
   configContainer: {
     flexDirection: "row",
@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 12,
+    marginRight: theme.spacingNative(12),
   },
   ticketCounter: {
-    marginRight: 4,
+    marginRight: theme.spacingNative(4),
     fontSize: 14,
     fontWeight: "bold",
     color: theme.colors.green30,

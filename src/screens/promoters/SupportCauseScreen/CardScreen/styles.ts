@@ -12,12 +12,12 @@ import {
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingHorizontal: 16,
-    paddingBottom: 24,
+    paddingHorizontal: theme.spacingNative(16),
+    paddingBottom: theme.spacingNative(24),
   },
   contentContainer: {
     maxWidth: 472,
-    marginTop: 16,
+    marginTop: theme.spacingNative(16),
     borderRadius: 8,
     position: "relative",
     overflowX: "hidden",
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   donateContainer: {
-    padding: 24,
+    padding: theme.spacingNative(24),
     borderRadius: 8,
     shadowColor: theme.colors.defaultShadow10,
     shadowOffset: { width: 0, height: 16 },
@@ -39,10 +39,10 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.neutral10,
   },
   givingContainer: {
-    marginBottom: 24,
-    padding: 0,
-    paddingLeft: 34,
-    paddingRight: 34,
+    marginBottom: theme.spacingNative(24),
+    padding: theme.spacingNative(0),
+    paddingLeft: theme.spacingNative(32),
+    paddingRight: theme.spacingNative(32),
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     maxWidth: "100%",
   },
   communityAddContainer: {
-    marginTop: 24,
+    marginTop: theme.spacingNative(24),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -68,8 +68,8 @@ export const styles = StyleSheet.create({
     color: theme.colors.orange20,
   },
   communityAddButton: {
-    marginTop: 8,
-    padding: 4,
+    marginTop: theme.spacingNative(8),
+    padding: theme.spacingNative(4),
     borderColor: theme.colors.orange40,
     fontSize: 11,
     color: theme.colors.orange40,
@@ -85,7 +85,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     ...stylizedDisplaySm,
-    marginBottom: 16,
+    marginBottom: theme.spacingNative(16),
     color: theme.colors.gray40,
   },
   supportImage: {
@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
     ...defaultBodySmSemibold,
     fontSize: 18,
     lineHeight: 24,
-    marginBottom: 4,
+    marginBottom: theme.spacingNative(4),
     textAlign: "center",
     color: theme.colors.gray30,
   },
@@ -121,7 +121,7 @@ export const styles = StyleSheet.create({
     ...defaultBodyXsRegular,
     fontSize: 14,
     lineHeight: 20,
-    marginTop: 4,
+    marginTop: theme.spacingNative(4),
     textAlign: "center",
     color: theme.colors.gray30,
   },

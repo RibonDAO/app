@@ -1,3 +1,4 @@
+import { theme } from "@ribon.io/shared/styles";
 import { StyleSheet } from "react-native";
 import { stylizedDisplayMd } from "styles/typography/stylized";
 
@@ -10,11 +11,11 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "cover",
     borderRadius: 4,
-    marginBottom: 16,
+    marginBottom: theme.spacingNative(16),
   },
   text: {
     ...stylizedDisplayMd,
-    marginBottom: 24,
+    marginBottom: theme.spacingNative(24),
     fontSize: 26,
     fontWeight: "bold",
     lineHeight: 36,
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     height: 160,
     resizeMode: "cover",
     borderRadius: 16,
-    marginBottom: 16,
+    marginBottom: theme.spacingNative(16),
     shadowColor: "rgba(40, 36, 28, 0.2)",
     shadowOffset: {
       width: 0,

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     color: theme.colors.orange40,
   },
   icon: {
-    marginRight: 10,
+    marginRight: theme.spacingNative(12),
   },
   dropdown: {
     top: 0,

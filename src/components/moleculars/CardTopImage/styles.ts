@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     width: 160,
-    padding: 16,
+    padding: theme.spacingNative(16),
     backgroundColor: theme.colors.neutral10,
     borderRadius: 16,
-    marginBottom: 16,
+    marginBottom: theme.spacingNative(16),
   },
   image: {
     height: 72,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   text: {
-    marginTop: 16,
+    marginTop: theme.spacingNative(16),
     fontSize: 14,
     color: theme.colors.gray40,
   },
