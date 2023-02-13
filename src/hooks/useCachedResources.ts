@@ -14,11 +14,21 @@ import { formattedLanguage } from "lib/formatters/languageFormatter";
 import SpaceMono from "../assets/fonts/SpaceMono-Regular.ttf";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter from "../assets/fonts/Inter.ttf";
+import * as Notifications from 'expo-notifications';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
+  const [expoPushToken, setExpoPushToken] = useState('');
 
   useEffect(() => {
     initializeApi({
@@ -36,7 +46,7 @@ export default function useCachedResources() {
   }, []);
 
   useEffect(() => {
-    registerForPushNotificationsAsync();
+    registerForPushNotificationsAsync().then((token: any) => setExpoPushToken(token));
   }, []);
 
   useEffect(() => {

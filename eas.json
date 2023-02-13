@@ -12,6 +12,7 @@
     },
     "preview": {
       "distribution": "internal",
+      "developmentClient": true,
       "ios": {
         "resourceClass": "m1-medium"
       },
