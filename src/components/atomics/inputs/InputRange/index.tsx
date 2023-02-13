@@ -32,7 +32,7 @@ function InputRange({
   return (
     <View style={styles.container}>
       <Slider
-        containerStyle={{...styles.slider, ...sliderStyle}}
+        containerStyle={{ ...styles.slider, ...sliderStyle }}
         minimumValue={min}
         maximumValue={max}
         disabled={disabled}

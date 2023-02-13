@@ -26,7 +26,7 @@ function ReceiveTicketScreen({ onTicketReceived }: Props): JSX.Element {
           onAnimationEnd={() => {
             setTimeout(() => {
               setAnimationVisible(false);
-            }, 500)
+            }, 500);
             onTicketReceived();
           }}
         />
