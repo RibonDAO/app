@@ -18,8 +18,8 @@ type Props = {
   style?: ImageStyle;
 };
 function Image({ source, style }: Props) {
-  if(typeof source === "number") {
-    return <ReactNativeImageComponent source={source} style={style} />
+  if (typeof source === "number") {
+    return <ReactNativeImageComponent source={source} style={style} />;
   }
 
   const { uri } = source;

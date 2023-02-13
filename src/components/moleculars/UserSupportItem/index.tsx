@@ -14,7 +14,9 @@ function UserSupportSection(): JSX.Element {
 
   const handleClick = () => {
     logEvent("UserSupportBtn_Click");
-    Linking.openURL("https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com");
+    Linking.openURL(
+      "https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com",
+    );
   };
 
   return (
@@ -22,17 +24,26 @@ function UserSupportSection(): JSX.Element {
       <ImageBackground source={cardBackground} style={S.imageBackground}>
         <View style={S.iconText}>
           <View style={S.iconContainer}>
-            <Icon type="rounded" name="live_help" size={24} color={theme.colors.green40} />
+            <Icon
+              type="rounded"
+              name="live_help"
+              size={24}
+              color={theme.colors.green40}
+            />
           </View>
           <Text style={S.title}>{t("title")}</Text>
         </View>
 
         <Text style={S.description}>{t("description")}</Text>
-        <Button textColor={theme.colors.orange40} customStyles={S.supportButton} text={t("primaryButtonText")} onPress={handleClick} />
+        <Button
+          textColor={theme.colors.orange40}
+          customStyles={S.supportButton}
+          text={t("primaryButtonText")}
+          onPress={handleClick}
+        />
       </ImageBackground>
     </View>
   );
 }
 
 export default UserSupportSection;
-

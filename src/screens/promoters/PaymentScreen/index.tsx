@@ -65,37 +65,36 @@ function PaymentScreen(): JSX.Element {
       <ScrollView contentContainerStyle={styles.mainContainer}>
         <View style={styles.innerContainer}>
           <MaskedWaveCut
-              image={nonProfit?.mainImage || cause?.mainImage}
-              imageStyles={styles.image}
+            image={nonProfit?.mainImage || cause?.mainImage}
+            imageStyles={styles.image}
           />
           <KeyboardAvoidingView style={styles.contentContainer}>
             <Text style={styles.title}>
               {t("title")}{" "}
               <Text
-                  style={[styles.titleHighlight, { color: colorTheme.shade30 }]}
+                style={[styles.titleHighlight, { color: colorTheme.shade30 }]}
               >
                 {highlightText()}
               </Text>
             </Text>
             <Text
-                style={[styles.donationValueText, { color: colorTheme.shade20 }]}
+              style={[styles.donationValueText, { color: colorTheme.shade20 }]}
             >
               {offer.price}
             </Text>
             {cardGivingFees && (
-                <Text style={styles.feeText}>
-                  {t("netDonationText")} {cardGivingFees.netGiving}
-                </Text>
+              <Text style={styles.feeText}>
+                {t("netDonationText")} {cardGivingFees.netGiving}
+              </Text>
             )}
             {cardGivingFees && (
-                <Text style={styles.feeText}>
-                  {t("serviceFeesText")} {cardGivingFees.serviceFees}
-                </Text>
+              <Text style={styles.feeText}>
+                {t("serviceFeesText")} {cardGivingFees.serviceFees}
+              </Text>
             )}
             {renderCurrentSection()}
           </KeyboardAvoidingView>
         </View>
-
       </ScrollView>
       {!isKeyboardVisible && (
         <View style={styles.donateButtonContainer}>

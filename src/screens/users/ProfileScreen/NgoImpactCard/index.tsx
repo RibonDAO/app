@@ -2,7 +2,6 @@ import { View, Text } from "react-native";
 import { Image, TouchableOpacity } from "react-native";
 import S from "./styles";
 
-
 export type Props = {
   name: string;
   icon: string;
@@ -10,7 +9,12 @@ export type Props = {
   description?: string | JSX.Element;
 };
 
-function NgoImpactCard({ icon, name, description, onPress }: Props): JSX.Element {
+function NgoImpactCard({
+  icon,
+  name,
+  description,
+  onPress,
+}: Props): JSX.Element {
   return (
     <TouchableOpacity onPress={onPress} style={S.badgeContainer}>
       <View style={S.impactCardContainer}>
