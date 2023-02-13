@@ -3,10 +3,10 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 16,
+    marginTop: theme.spacingNative(16),
   },
   title: {
-    marginBottom: 18,
+    marginBottom: theme.spacingNative(20),
     color: theme.colors.gray40,
   },
   halfInputContainer: {
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     height: 48,
     justifyContent: "center",
-    paddingLeft: 4,
+    paddingLeft: theme.spacingNative(4),
   },
   countryInputTheme: {
     fontFamily: "Inter",
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   dropdownContainer: {
     flex: 1,
-    marginLeft: 4,
+    marginLeft: theme.spacingNative(4),
     height: 48,
     borderRadius: 8,
   },

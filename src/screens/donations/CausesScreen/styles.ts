@@ -19,11 +19,11 @@ const styles = StyleSheet.create({
   causesContainer: {
     display: "flex",
     flexDirection: "row",
-    paddingTop: 16,
-    paddingBottom: 40,
+    paddingTop: theme.spacingNative(16),
+    paddingBottom: theme.spacingNative(40),
   },
   groupButtonsContainer: {
-    paddingTop: 16,
+    paddingTop: theme.spacingNative(16),
   },
   title: {
     ...stylizedDisplaySm,

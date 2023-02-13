@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   configItem: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
   },
   text: {
-    paddingLeft: 8,
+    paddingLeft: theme.spacingNative(8),
   },
   iconContainer: {
     width: "10%",
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   ctaContainer: {
     width: "30%",
-    paddingRight: 8,
+    paddingRight: theme.spacingNative(8),
   },
   configContainer: {
     flexDirection: "row",

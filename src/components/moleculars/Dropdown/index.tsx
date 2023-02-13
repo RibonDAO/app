@@ -6,6 +6,7 @@ import {
   Modal,
   View,
   ViewStyle,
+  TextStyle,
 } from "react-native";
 import ArrowDown from "components/vectors/ArrowDown";
 import { theme } from "@ribon.io/shared/styles";
@@ -20,6 +21,7 @@ interface Props {
   items: ItemType[];
   onSelect: (item: { label: string; value: string }) => void;
   containerStyle?: ViewStyle;
+  textStyle?: TextStyle;
 }
 
 function Dropdown({
@@ -27,6 +29,7 @@ function Dropdown({
   items,
   onSelect,
   containerStyle,
+  textStyle,
 }: Props): JSX.Element {
   const DropdownButton = useRef<any>();
   const [visible, setVisible] = useState(false);
@@ -79,7 +82,9 @@ function Dropdown({
       onPress={toggleDropdown}
     >
       {renderDropdown()}
-      <Text style={S.buttonText}>{(selected && selected.label) || label}</Text>
+      <Text style={[S.buttonText, textStyle]}>
+        {(selected && selected.label) || label}
+      </Text>
       <ArrowDown height={16} width={16} color={theme.colors.orange40} />
     </TouchableOpacity>
   );

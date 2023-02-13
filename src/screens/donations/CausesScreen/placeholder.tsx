@@ -1,3 +1,4 @@
+import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
 import {
   Placeholder,
@@ -18,7 +19,7 @@ function PaymentScreenPlaceholder() {
             width: "100%",
             height: 288,
             borderRadius: 14,
-            marginBottom: 24,
+            marginBottom: theme.spacingNative(24),
           }}
         />
       </Placeholder>

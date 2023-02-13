@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
 import { View } from "react-native";
+import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
 
 function CardInfoSection() {
@@ -94,7 +95,7 @@ function CardInfoSection() {
           onChangeText={maskExpiration}
           maxLength={7}
           keyboardType="numeric"
-          containerStyle={{ marginRight: 4, flex: 1 }}
+          containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
         />
         <InputText
           style={inputStyles}
@@ -104,7 +105,7 @@ function CardInfoSection() {
           value={cvv}
           onChangeText={(value) => setCvv(value)}
           keyboardType="numeric"
-          containerStyle={{ marginLeft: 4, flex: 1 }}
+          containerStyle={{ marginLeft: theme.spacingNative(4), flex: 1 }}
         />
       </View>
     </View>

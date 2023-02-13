@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   centerDiv: {
-    padding: 16,
+    padding: theme.spacingNative(16),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

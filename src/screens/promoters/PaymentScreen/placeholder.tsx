@@ -17,7 +17,7 @@ function PaymentScreenPlaceholder() {
             width: "100%",
             height: 188,
             borderRadius: 14,
-            marginBottom: 24,
+            marginBottom: theme.spacingNative(24),
           }}
         />
         <PlaceholderLine height={28} />

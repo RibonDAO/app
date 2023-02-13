@@ -42,6 +42,10 @@ export type RootTabParamList = {
   ChooseCauseScreen: undefined;
 };
 
+export type SupportNonProfitParamList = {
+  causeDonated?: Cause;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   DonateScreen: DonateScreenList;
@@ -53,6 +57,7 @@ export type RootStackParamList = {
   ChooseCauseScreen: undefined;
   CommunityAddModal: CommunityAddModalParamList;
   PaymentScreen: PaymentPageList;
+  SupportNonProfitScreen: SupportNonProfitParamList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

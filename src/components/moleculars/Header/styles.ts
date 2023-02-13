@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: theme.colors.gray10,
     justifyContent: "space-between",
-    padding: 16,
-    paddingRight: 12
+    padding: theme.spacingNative(16),
+    paddingRight: theme.spacingNative(12),
   },
   logo: {
     height: 34,

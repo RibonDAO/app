@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    padding: 32,
+    padding: theme.spacingNative(32),
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    marginTop: 24,
+    marginTop: theme.spacingNative(24),
     resizeMode: "contain",
   },
   donateButton: {
-    marginTop: 24,
+    marginTop: theme.spacingNative(24),
   },
 });
 

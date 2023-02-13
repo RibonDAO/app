@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     color: theme.colors.orange40,
     fontWeight: "bold",
-    marginRight: 4,
+    marginRight: theme.spacingNative(4),
     flex: 3,
   },
   inputsContainer: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 8,
+    marginTop: theme.spacingNative(8),
   },
   dropdownContainerStyles: {
     flex: 2,

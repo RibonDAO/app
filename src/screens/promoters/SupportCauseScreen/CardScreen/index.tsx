@@ -15,9 +15,9 @@ import { View, Text } from "react-native";
 import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
+import UserSupportSection from "components/moleculars/UserSupportItem";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
-import UserSupportSection from "components/moleculars/UserSupportItem";
 
 function CardScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
@@ -121,11 +121,11 @@ function CardScreen(): JSX.Element {
                 outline
                 customStyles={{
                   borderColor: theme.colors.orange40,
-                  marginTop: 8,
-                  paddingTop: 4,
-                  paddingRight: 4,
-                  paddingBottom: 4,
-                  paddingLeft: 4,
+                  marginTop: theme.spacingNative(8),
+                  paddingTop: theme.spacingNative(4),
+                  paddingRight: theme.spacingNative(4),
+                  paddingBottom: theme.spacingNative(4),
+                  paddingLeft: theme.spacingNative(4),
                 }}
                 customTextStyles={{
                   color: theme.colors.orange40,
