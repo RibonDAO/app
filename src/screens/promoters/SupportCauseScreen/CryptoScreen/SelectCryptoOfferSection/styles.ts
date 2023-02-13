@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   sliderStyle: {
-    marginTop: 8
-  }
+    marginTop: 8,
+  },
 });
 
 export default styles;

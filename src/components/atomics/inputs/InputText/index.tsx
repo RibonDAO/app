@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from "react-native";
 import S from "./styles";
-import {theme} from "@ribon.io/shared/styles";
+import { theme } from "@ribon.io/shared/styles";
 
 export interface Props extends Omit<TextInputProps, "placeholder"> {
   name: string;
