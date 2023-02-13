@@ -33,14 +33,11 @@ export default function NonProfitCard({
 
   const { currentCoin } = useCardPaymentInformation();
   const { formattedImpactText } = useFormattedImpactText();
-  const { nonProfitImpact, refetch: refetchNonProfitImpact } =
-    useNonProfitImpact(nonProfit?.id, currentOffer?.priceValue, currentCoin);
-
-  useEffect(() => {
-    setTimeout(() => {
-      refetchNonProfitImpact();
-    }, 200);
-  }, [currentOffer?.priceValue]);
+  const { nonProfitImpact } = useNonProfitImpact(
+    nonProfit?.id,
+    currentOffer?.priceValue,
+    currentCoin,
+  );
 
   return (
     <View style={S.cardWaveContainer}>
