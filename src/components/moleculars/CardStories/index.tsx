@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
-  Image,
   Modal,
   StatusBar,
   StyleSheet,
@@ -11,9 +10,11 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { ResizeMode, Video } from "expo-av";
+import Image from "components/atomics/Image";
+// import { ResizeMode, Video } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get("window");
 
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
   containerModal: {
     flex: 1,
     backgroundColor: "#000",
+    marginTop: 60,
   },
   backgroundContainer: {
     position: "absolute",
@@ -48,13 +50,13 @@ export default function CardStories() {
       finish: 0,
       id: 1,
     },
-    {
-      content:
-        "https://firebasestorage.googleapis.com/v0/b/instagram-clone-f3106.appspot.com/o/2.mp4?alt=media&token=fcd41460-a441-4841-98da-d8f9a714dd4d",
-      type: "video",
-      finish: 0,
-      id: 2,
-    },
+    // {
+    //   content:
+    //     "https://firebasestorage.googleapis.com/v0/b/instagram-clone-f3106.appspot.com/o/2.mp4?alt=media&token=fcd41460-a441-4841-98da-d8f9a714dd4d",
+    //   type: "video",
+    //   finish: 0,
+    //   id: 2,
+    // },
     {
       content:
         "https://firebasestorage.googleapis.com/v0/b/instagram-clone-f3106.appspot.com/o/3.jpg?alt=media&token=326c1809-adc2-4a23-b9c3-8995df7fcccd",
@@ -90,13 +92,13 @@ export default function CardStories() {
       finish: 0,
       id: 7,
     },
-    {
-      content:
-        "https://firebasestorage.googleapis.com/v0/b/instagram-clone-f3106.appspot.com/o/8.mp4?alt=media&token=5b6af212-045b-4195-9d65-d1cab613bd7f",
-      type: "video",
-      finish: 0,
-      id: 8,
-    },
+    // {
+    //   content:
+    //     "https://firebasestorage.googleapis.com/v0/b/instagram-clone-f3106.appspot.com/o/8.mp4?alt=media&token=5b6af212-045b-4195-9d65-d1cab613bd7f",
+    //   type: "video",
+    //   finish: 0,
+    //   id: 8,
+    // },
     {
       content:
         "https://firebasestorage.googleapis.com/v0/b/instagram-clone-f3106.appspot.com/o/9.jpg?alt=media&token=0a382e94-6f3f-4d4e-932f-e3c3f085ebc3",
@@ -145,7 +147,7 @@ export default function CardStories() {
         Animated.timing(progress, {
           toValue: 1,
           duration: n,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }).start(({ finished }) => {
           if (finished) {
             next();
@@ -157,7 +159,7 @@ export default function CardStories() {
       Animated.timing(progress, {
         toValue: 1,
         duration: 5000,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start(({ finished }) => {
         if (finished) {
           next();
@@ -188,32 +190,42 @@ export default function CardStories() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="black" barStyle="light-content" />
       {/* MODAL */}
       <Modal animationType="fade" transparent={false} visible={modalVisible}>
-        <View style={styles.containerModal}>
+        <SafeAreaView style={styles.containerModal}>
           <View style={styles.backgroundContainer}>
             {/* check the content type is video or an image */}
             {content[current].type === "video" ? (
-              <Video
+              // <Video
+              //   source={{
+              //     uri: content[current].content,
+              //   }}
+              //   rate={1.0}
+              //   volume={1.0}
+              //   resizeMode={ResizeMode.COVER}
+              //   shouldPlay
+              //   positionMillis={0}
+              //   onReadyForDisplay={() => play()}
+              //   onPlaybackStatusUpdate={(AVPlaybackStatus) => {
+              //     console.log(AVPlaybackStatus);
+              //     setLoad(AVPlaybackStatus.isLoaded);
+              //     if (AVPlaybackStatus.isLoaded) {
+              //       setEnd(AVPlaybackStatus.durationMillis || 0);
+              //     }
+              //   }}
+              //   style={{ height, width }}
+              // />
+              <Image
+                onLoadEnd={() => {
+                  progress.setValue(0);
+                  play();
+                }}
                 source={{
                   uri: content[current].content,
                 }}
-                rate={1.0}
-                volume={1.0}
-                resizeMode={ResizeMode.COVER}
-                shouldPlay
-                positionMillis={0}
-                onReadyForDisplay={() => play()}
-                onPlaybackStatusUpdate={(AVPlaybackStatus) => {
-                  console.log(AVPlaybackStatus);
-                  setLoad(AVPlaybackStatus.isLoaded);
-                  if (AVPlaybackStatus.isLoaded) {
-                    setEnd(AVPlaybackStatus.durationMillis || 0);
-                  }
-                }}
-                style={{ height, width }}
+                style={{ width, height, resizeMode: "cover" }}
               />
             ) : (
               <Image
@@ -336,7 +348,7 @@ export default function CardStories() {
             </View>
             {/* END OF THE HANDLE FOR PREVIOUS AND NEXT PRESS */}
           </View>
-        </View>
+        </SafeAreaView>
       </Modal>
       {/* END OF MODAL */}
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
@@ -377,6 +389,6 @@ export default function CardStories() {
       <Text style={{ fontWeight: "bold", color: "#D62976" }}>
         Click the image to open instagram story clone
       </Text>
-    </View>
+    </SafeAreaView>
   );
 }
