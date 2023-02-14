@@ -1,5 +1,5 @@
-import { View } from "react-native";
-import { useCallback, useEffect } from "react";
+import { FlatList, View } from "react-native";
+import { ReactElement, useCallback, useEffect } from "react";
 import { useImpact } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { Impact } from "@ribon.io/shared/types";
@@ -15,17 +15,24 @@ function NgoImpactCards(): JSX.Element {
     [userImpact],
   );
 
+  const renderItem = ({ item }: { item: any }): ReactElement<any, any> => (
+    <NgoImpactCard
+      key={item?.nonProfit.id}
+      description={`${item.impact} de ${item.nonProfit.impactDescription} para ${item.nonProfit.name}`}
+      name={item?.nonProfit.name}
+      icon={item?.nonProfit.logo}
+      onPress={() => { }}
+    />
+  );
+
   return (
     <View style={S.cardsContainer}>
-      {impactItems()?.map((item: Impact) => (
-        <NgoImpactCard
-          key={item?.nonProfit.id}
-          description={`${item.impact} de ${item.nonProfit.impactDescription} para ${item.nonProfit.name}`}
-          name={item?.nonProfit.name}
-          icon={item?.nonProfit.logo}
-          onPress={() => {}}
-        />
-      ))}
+      <FlatList
+        data={impactItems()}
+        renderItem={renderItem}
+        keyExtractor={(index) => index.toString()}
+        style={{ paddingHorizontal: 16, paddingVertical: 12 }}
+      />
     </View>
   );
 }
