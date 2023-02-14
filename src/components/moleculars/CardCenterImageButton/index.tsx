@@ -2,7 +2,7 @@ import Button from "components/atomics/buttons/Button";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import VerifiedBadge from "components/vectors/VerifiedBadge";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Image from "components/atomics/Image";
 import S from "./styles";
 
@@ -10,6 +10,7 @@ export type Props = {
   image: string;
   buttonText: string;
   onClickButton: () => void;
+  onImagePress?: () => void;
   imageDescription?: string;
   infoTextLeft?: string;
   infoTextRight?: string;
@@ -21,6 +22,7 @@ function CardCenterImageButton({
   buttonText,
   imageDescription,
   onClickButton,
+  onImagePress,
   infoTextLeft,
   infoTextRight,
   buttonDisabled = false,
@@ -29,7 +31,9 @@ function CardCenterImageButton({
     <View style={S.container}>
       <View style={S.cardWrapper}>
         <View style={S.containerImage}>
-          <Image style={S.cardImage} source={{ uri: image }} />
+          <TouchableOpacity onPress={onImagePress}>
+            <Image style={S.cardImage} source={{ uri: image }} />
+          </TouchableOpacity>
           <Text style={S.imageDescription}>{imageDescription}</Text>
           <LinearGradient
             colors={["transparent", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.7)"]}

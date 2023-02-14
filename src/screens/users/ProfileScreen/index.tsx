@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView } from "react-native";
 import { Text } from "react-native";
 import { useTranslation } from "react-i18next";
-import CardStories from "components/moleculars/CardStories";
 import S from "./styles";
 import ImpactCards from "./ImpactCards";
 import NgoImpactCards from "./NgoImpactCards";
@@ -11,8 +10,6 @@ function ProfileScreen() {
   const { t } = useTranslation("translation", {
     keyPrefix: "users.profileScreen",
   });
-
-  return <CardStories />;
 
   return (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
