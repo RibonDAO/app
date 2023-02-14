@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacingNative(16),
   },
   cardsSection: {
-    paddingHorizontal: theme.spacingNative(16)
+    paddingHorizontal: theme.spacingNative(16),
   },
 });
 

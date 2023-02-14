@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     paddingHorizontal: 16,
-    backgroundColor: theme.colors.neutral10
+    backgroundColor: theme.colors.neutral10,
   },
   containerTicket: {
     height: 350,

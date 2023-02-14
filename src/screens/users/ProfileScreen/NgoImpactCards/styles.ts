@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   cardsContainer: {
     height: "100%",
     marginBottom: theme.spacingNative(40),
-    marginTop: theme.spacingNative(20)
+    marginTop: theme.spacingNative(20),
   },
 });
 
