@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "flex-start",
     flexDirection: "row",
-    backgroundColor: theme.colors.gray10,
+    backgroundColor: theme.colors.neutral10,
     justifyContent: "space-between",
     padding: theme.spacingNative(16),
     paddingRight: theme.spacingNative(12),
