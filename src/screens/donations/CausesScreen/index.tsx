@@ -1,5 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useNonProfits, useCauses, useCanDonate } from "@ribon.io/shared/hooks";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useNonProfits,
+  useCauses,
+  useCanDonate,
+  useStories,
+} from "@ribon.io/shared/hooks";
 import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
@@ -11,6 +16,7 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
 import CardStories from "components/moleculars/CardStories";
+import { NonProfit, Story } from "@ribon.io/shared/types";
 import S from "./styles";
 import Placeholder from "./placeholder";
 
@@ -28,9 +34,14 @@ export default function CausesScreen() {
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const [ticketModalVisible, setTicketModalVisible] = useState(canDonate);
   const [storiesVisible, setStoriesVisible] = useState(false);
+  const [stories, setStories] = useState<Story[]>([]);
+  const [currentNonProfit, setCurrentNonProfit] = useState<NonProfit>(
+    {} as NonProfit,
+  );
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
   const scrollViewRef = useRef<any>(null);
+  const { fetchNonProfitStories } = useStories();
 
   useEffect(() => {
     logEvent("app_causes_page_view");
@@ -78,22 +89,38 @@ export default function CausesScreen() {
     return nonProfitsFiltered || [];
   };
 
+  const handleNonProfitImagePress = async (nonProfit: NonProfit) => {
+    setCurrentNonProfit(nonProfit);
+    try {
+      const nonProfitStories = await fetchNonProfitStories(nonProfit.id);
+      setStories(nonProfitStories);
+      setStoriesVisible(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const filteredStories = useCallback(
+    () =>
+      stories.map((story) => ({
+        url: story.image,
+        heading: story.title,
+        description: story.description,
+      })),
+    [stories],
+  );
+
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
     <View style={S.container}>
       <CardStories
-        stories={[
-          "https://i.pinimg.com/originals/cc/2e/3f/cc2e3fb50314af91a75e2b47c0cb29d5.jpg",
-          "https://media.istockphoto.com/id/502046948/photo/beautiful-sky-with-white-cloud-background.jpg?b=1&s=170667a&w=0&k=20&c=tXkuVSCByH-_PWLCrA33ZL-bLIYscr_XXbwrUPowJAQ=",
-        ]}
+        stories={filteredStories()}
         visible={storiesVisible}
         setVisible={setStoriesVisible}
-        avatar={nonProfitsFilter()[0].logo}
-        title={nonProfitsFilter()[0].name}
-        subtitle={nonProfitsFilter()[0].cause.name}
-        heading="Sobre"
-        description={nonProfitsFilter()[0].impactDescription}
+        avatar={currentNonProfit.logo}
+        title={currentNonProfit.name}
+        subtitle={currentNonProfit.cause?.name}
       />
       <BlankModal
         visible={ticketModalVisible}
@@ -130,7 +157,7 @@ export default function CausesScreen() {
               imageDescription={`${nonProfit.impactByTicket} ${nonProfit.impactDescription}`}
               buttonText={t("buttonText")}
               onImagePress={() => {
-                setStoriesVisible(true);
+                handleNonProfitImagePress(nonProfit);
               }}
               onClickButton={() => {
                 navigateTo("DonateScreen", { nonProfit });

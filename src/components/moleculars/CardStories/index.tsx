@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
@@ -9,7 +9,6 @@ import {
   View,
 } from "react-native";
 import Image from "components/atomics/Image";
-import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "components/atomics/Icon";
@@ -17,15 +16,19 @@ import S from "./styles";
 
 const { width, height } = Dimensions.get("window");
 
+type Story = {
+  url: string;
+  heading: string;
+  description: string;
+};
+
 type Props = {
-  stories: string[];
+  stories: Story[];
   visible: boolean;
   setVisible: (visible: boolean) => void;
   avatar?: string;
   title?: string;
   subtitle?: string;
-  heading?: string;
-  description?: string;
 };
 export default function CardStories({
   stories,
@@ -34,16 +37,20 @@ export default function CardStories({
   avatar,
   title,
   subtitle,
-  heading,
-  description,
 }: Props) {
-  const [content, setContent] = useState(
-    stories.map((story, idx) => ({
-      content: story,
-      finish: 0,
-      id: idx,
-    })),
-  );
+  const [content, setContent] = useState<any>([]);
+
+  useEffect(() => {
+    setContent(
+      stories.map((story, idx) => ({
+        content: story.url,
+        heading: story.heading,
+        description: story.description,
+        finish: 0,
+        id: idx,
+      })),
+    );
+  }, [JSON.stringify(stories)]);
 
   const [end] = useState(0);
   const [current, setCurrent] = useState(0);
@@ -97,7 +104,12 @@ export default function CardStories({
   }
 
   return (
-    <Modal animationType="fade" transparent={false} visible={visible}>
+    <Modal
+      animationType="fade"
+      presentationStyle="pageSheet"
+      transparent={false}
+      visible={visible}
+    >
       <SafeAreaView style={S.containerModal} edges={["top", "bottom"]}>
         <View style={S.backgroundContainer}>
           <Image
@@ -127,7 +139,7 @@ export default function CardStories({
               height: 100,
             }}
           />
-          <SafeAreaView
+          <View
             style={{
               flexDirection: "row",
               paddingTop: 10,
@@ -154,7 +166,7 @@ export default function CardStories({
                 />
               </View>
             ))}
-          </SafeAreaView>
+          </View>
           <View
             style={{
               height: 50,
@@ -186,8 +198,14 @@ export default function CardStories({
               }}
             />
             <View style={S.headingContainer}>
-              {heading && <Text style={S.heading}>{heading}</Text>}
-              {description && <Text style={S.description}>{description}</Text>}
+              {content[current]?.heading && (
+                <Text style={S.heading}>{content[current]?.heading}</Text>
+              )}
+              {content[current]?.description && (
+                <Text style={S.description}>
+                  {content[current]?.description}
+                </Text>
+              )}
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               {avatar && (

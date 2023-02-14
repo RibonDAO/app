@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
-    paddingBottom: 24,
-    paddingLeft: 16,
+    paddingBottom: 38,
+    paddingHorizontal: 16,
   },
   containerModal: {
-    flex: 1,
     backgroundColor: "#000",
+    flex: 1,
   },
   backgroundContainer: {
     position: "absolute",
