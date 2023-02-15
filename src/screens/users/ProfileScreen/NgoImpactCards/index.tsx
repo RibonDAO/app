@@ -22,7 +22,7 @@ function NgoImpactCards(): JSX.Element {
       description={`${item.impact} de ${item.nonProfit.impactDescription} para ${item.nonProfit.name}`}
       name={item?.nonProfit.name}
       icon={item?.nonProfit.logo}
-      onPress={() => { }}
+      onPress={() => {}}
     />
   );
 

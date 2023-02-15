@@ -4,8 +4,8 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: theme.colors.neutral10
-  }
+    backgroundColor: theme.colors.neutral10,
+  },
 });
 
 export default styles;

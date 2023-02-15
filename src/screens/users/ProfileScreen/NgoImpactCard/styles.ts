@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     height: "100%",
     marginLeft: theme.spacingNative(12),
     justifyContent: "center",
-  }
+  },
 });
 
 export default styles;

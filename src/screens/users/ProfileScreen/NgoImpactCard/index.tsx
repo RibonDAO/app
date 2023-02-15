@@ -15,7 +15,7 @@ function NgoImpactCard({
   icon,
   name,
   description,
-  onPress
+  onPress,
 }: Props): JSX.Element {
   return (
     <TouchableOpacity onPress={onPress} style={S.badgeContainer}>

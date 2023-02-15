@@ -11,16 +11,16 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     marginTop: theme.spacingNative(20),
-    paddingHorizontal: theme.spacingNative(20)
+    paddingHorizontal: theme.spacingNative(20),
   },
   zeroDonationsTitle: {
-    marginVertical: theme.spacingNative(16)
+    marginVertical: theme.spacingNative(16),
   },
   zeroDonationsDescription: {
     marginBottom: theme.spacingNative(16),
     color: theme.colors.gray30,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export default styles;

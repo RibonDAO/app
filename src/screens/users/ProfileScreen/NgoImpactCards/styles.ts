@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     height: "100%",
     marginBottom: theme.spacingNative(40),
     marginTop: theme.spacingNative(20),
-  }
+  },
 });
 
 export default styles;
