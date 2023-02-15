@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: theme.colors.gray20,
   },
+  tabStyle: {
+    width: 200
+  },
   tabBarTitle: {
     color: theme.colors.gray30,
     textAlign: "center",
@@ -23,7 +26,7 @@ const styles = StyleSheet.create({
   indicatorStyle: {
     backgroundColor: theme.colors.green30,
     padding: 1.5,
-    marginBottom: -2,
+    marginBottom: -2
   },
 });
 

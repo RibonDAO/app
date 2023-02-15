@@ -19,18 +19,22 @@ const renderTabBar = (props: any) => {
       {...props}
       renderLabel={({ focused, route }) => {
         return (
-          <Text
-            style={{
-              ...S.tabBarTitle,
-              color: focused ? theme.colors.green40 : theme.colors.gray30,
-            }}
-          >
-            {route.title}
-          </Text>
+          <View style={{ width: 2000 }}>
+            <Text
+              style={{
+                ...S.tabBarTitle,
+                color: focused ? theme.colors.green40 : theme.colors.gray30,
+              }}
+            >
+              {route.title}
+            </Text>
+          </View>
         );
       }}
       indicatorStyle={S.indicatorStyle}
       style={S.tabBar}
+      tabStyle={S.tabStyle}
+      scrollEnabled
     />
   );
 };

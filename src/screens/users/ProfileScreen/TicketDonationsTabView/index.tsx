@@ -1,10 +1,10 @@
 import { View } from "react-native";
-import { theme } from "@ribon.io/shared/styles";
 import NgoImpactCards from "../NgoImpactCards";
+import S from "./styles.ts";
 
 function TicketDonationsTabView(): JSX.Element {
   return (
-    <View style={{ height: "100%", backgroundColor: theme.colors.neutral10 }}>
+    <View style={S.container}>
       <NgoImpactCards />
     </View>
   );
