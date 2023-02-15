@@ -39,7 +39,7 @@
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#00DA93"
       },
       "package": "com.app.ribon",
       "versionCode": 294
@@ -59,7 +59,7 @@
       [
         "expo-notifications",
         {
-          "icon": "./src/assets/sounds/notificationicon.png",
+          "icon": "./src/assets/sounds/notification-icon.png",
           "color": "#ffffff",
           "sounds": ["./src/assets/sounds/notificationsound.wav"]
         }
