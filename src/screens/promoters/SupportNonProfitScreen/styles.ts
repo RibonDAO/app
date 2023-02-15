@@ -52,15 +52,15 @@ const styles = StyleSheet.create({
   CommunityAddButton: {
     marginTop: 8,
     padding: 4,
-    borderColor: theme.colors.red40,
+    borderColor: tertiary[800],
     fontSize: 11,
-    color: theme.colors.red40,
+    color: tertiary[800],
   },
   DonateButton: {
     borderColor: tertiary[200],
     fontWeight: "600",
     backgroundColor: tertiary[200],
-    color: theme.colors.red40,
+    color: tertiary[800],
   },
   BackgroundImage: {
     display: "none",

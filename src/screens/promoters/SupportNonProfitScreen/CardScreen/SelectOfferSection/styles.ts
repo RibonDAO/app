@@ -3,6 +3,8 @@ import { theme } from "@ribon.io/shared/styles";
 import { defaultBodyXsRegular } from "styles/typography/default";
 import { stylizedDisplayXs } from "styles/typography/stylized";
 
+const { tertiary } = theme.colors.brand;
+
 const styles = StyleSheet.create({
   title: {
     ...defaultBodyXsRegular,
@@ -11,12 +13,12 @@ const styles = StyleSheet.create({
   },
   inputText: {
     borderWidth: 1,
-    borderColor: theme.colors.red40,
+    borderColor: tertiary[800],
     height: 40,
     borderRadius: 4,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    color: theme.colors.red40,
+    color: tertiary[800],
     fontWeight: "bold",
     marginRight: 4,
     flex: 3,
@@ -30,15 +32,15 @@ const styles = StyleSheet.create({
   },
   dropdownContainerStyles: {
     width: 80,
-    borderColor: theme.colors.red40,
+    borderColor: tertiary[800],
   },
   dropdownTextStyles: {
-    color: theme.colors.red40,
+    color: tertiary[800],
   },
   valueText: {
     ...stylizedDisplayXs,
     marginRight: 8,
-    color: theme.colors.red40,
+    color: tertiary[800],
   },
   sliderStyle: { width: 180, marginTop: 8 },
 });

@@ -7,10 +7,12 @@ import {
 } from "styles/typography/default";
 import { stylizedDisplayXs } from "styles/typography/stylized";
 
+const { tertiary } = theme.colors.brand;
+
 const styles = StyleSheet.create({
   title: {
     ...defaultBodyMdBold,
-    color: theme.colors.red40,
+    color: tertiary[800],
     textAlign: "center",
   },
   inputText: {
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
   valueText: {
     ...stylizedDisplayXs,
     marginRight: 8,
-    color: theme.colors.red40,
+    color: theme.colors.brand.tertiary[800],
   },
   sliderStyle: { width: 180, marginTop: 8 },
   container: {
