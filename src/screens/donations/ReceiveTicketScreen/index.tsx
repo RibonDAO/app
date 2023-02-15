@@ -40,7 +40,11 @@ function ReceiveTicketScreen({ onTicketReceived }: Props): JSX.Element {
 
           <Text style={S.description}>{t("description")}</Text>
 
-          <Button text={t("buttonText")} onPress={openAnimation} />
+          <Button
+            customStyles={S.button}
+            text={t("buttonText")}
+            onPress={openAnimation}
+          />
         </>
       )}
     </View>
