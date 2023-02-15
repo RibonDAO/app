@@ -18,6 +18,7 @@ import { logEvent } from "services/analytics";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
+import { logError } from "services/crashReport";
 import S from "./styles";
 import Placeholder from "./placeholder";
 
@@ -99,7 +100,7 @@ export default function CausesScreen() {
       setStories(nonProfitStories);
       setStoriesVisible(true);
     } catch (e) {
-      console.log(e);
+      logError(e);
     }
   };
 
