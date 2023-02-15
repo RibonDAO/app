@@ -6,6 +6,7 @@ import {
   Keyboard,
 } from "react-native";
 import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
+import { theme } from "@ribon.io/shared/styles";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import Image from "components/atomics/Image";
@@ -87,7 +88,7 @@ function DonateScreen() {
         </View>
         <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
         <LinearGradient
-          colors={["rgb(140, 224, 190)", "transparent"]}
+          colors={[theme.colors.green40, "transparent"]}
           start={[0.0, 0.5]}
           end={[1.0, 0.5]}
           locations={[0.0, 1.0]}
