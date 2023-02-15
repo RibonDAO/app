@@ -91,7 +91,7 @@ function RootNavigator() {
           headerTintColor: theme.colors.orange40,
           headerTitle: "",
           headerBackTitleVisible: false,
-          headerStyle: { backgroundColor: theme.colors.gray10 },
+          headerStyle: { backgroundColor: theme.colors.neutral10 },
         }}
       />
 
@@ -177,7 +177,7 @@ const DefaultTheme: Theme = {
   dark: false,
   colors: {
     primary: theme.colors.green20,
-    background: theme.colors.gray10,
+    background: theme.colors.neutral10,
     card: theme.colors.neutral10,
     text: theme.colors.gray40,
     border: theme.colors.neutral10,

@@ -1,3 +1,4 @@
+import { theme } from "@ribon.io/shared";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
+    backgroundColor: theme.colors.neutral10,
     padding: 8,
   },
   collapsibleButton: {
@@ -23,6 +25,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: theme.colors.neutral10,
     height: 34,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
