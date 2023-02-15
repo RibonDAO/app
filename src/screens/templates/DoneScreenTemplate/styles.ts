@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   description: {
     color: theme.colors.gray30,
-    marginTop: theme.spacingNative(10),
+    marginTop: theme.spacingNative(16),
     marginBottom: theme.spacingNative(32),
   },
 });
