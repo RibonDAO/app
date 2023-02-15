@@ -1,6 +1,6 @@
 import React from "react";
-import { Text, ScrollView, View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { Text, ScrollView, View } from "react-native";
 import ImpactCards from "./ImpactCards";
 import TabViewSection from "./TabViewSection";
 import S from "./styles";
