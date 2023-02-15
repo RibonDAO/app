@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { defaultBodySmRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -78,6 +79,27 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
     flexDirection: "column",
+  },
+  label: {
+    ...defaultBodySmRegular,
+    color: theme.colors.neutral10,
+    marginLeft: 4,
+    lineHeight: 16,
+  },
+  labelContainer: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    height: 30,
+    backgroundColor: "rgba(48, 45, 39, 0.7)",
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "row",
+    zIndex: 1,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
   },
 });
 

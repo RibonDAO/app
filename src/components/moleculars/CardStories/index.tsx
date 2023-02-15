@@ -147,7 +147,7 @@ export default function CardStories({
               paddingHorizontal: 10,
             }}
           >
-            {content.map((index, key) => (
+            {content.map((index: any, key: number) => (
               <View
                 key={index.id}
                 style={{

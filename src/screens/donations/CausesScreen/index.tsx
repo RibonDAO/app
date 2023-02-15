@@ -161,6 +161,7 @@ export default function CausesScreen() {
                 navigateTo("DonateScreen", { nonProfit });
               }}
               buttonDisabled={!canDonate}
+              labelText={t("labelText") || ""}
             />
           </View>
         ))}

@@ -14,7 +14,8 @@
         "description": "Doubts, ideas, refunds. We're here!",
         "primaryButtonText": "Access support"
       },
-      "impactPrefix": "Donate"
+      "impactPrefix": "Donate",
+      "labelText": "Learn more"
     },
     "donateModal": {
       "nonProfitText": "You are donating to",

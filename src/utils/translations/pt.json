@@ -14,7 +14,8 @@
         "description": "Dúvidas, ideias, estornos. Estamos aqui!",
         "primaryButtonText": "Acesse o suporte"
       },
-      "impactPrefix": "Doe"
+      "impactPrefix": "Doe",
+      "labelText": "Saiba mais"
     },
     "donateModal": {
       "nonProfitText": "Você está doando para",
