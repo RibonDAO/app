@@ -1,10 +1,11 @@
 import { theme } from "@ribon.io/shared/styles";
 import { StyleSheet } from "react-native";
+import { defaultBodyXsRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: "#fff",
-    height: 72,
+    height: 64,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
   },
   tabBarLabel: {
-    fontSize: 14,
+    ...defaultBodyXsRegular,
   },
 });
 

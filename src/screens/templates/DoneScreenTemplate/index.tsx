@@ -8,6 +8,7 @@ type Props = {
   image?: string;
   title?: string;
   description?: string;
+  highlightedDescription?: string;
   buttonTitle?: string;
   onButtonPress?: () => void;
 };
@@ -16,6 +17,7 @@ export default function DoneScreenTemplate({
   title,
   buttonTitle,
   description,
+  highlightedDescription,
   onButtonPress,
 }: Props) {
   return (
@@ -24,7 +26,17 @@ export default function DoneScreenTemplate({
         {image && <Image style={S.cardImage} source={{ uri: image }} />}
       </View>
       {title && <Text style={S.title}>{title}</Text>}
-      {description && <Text style={S.description}>{description}</Text>}
+      {description && (
+        <Text style={S.description}>
+          {description}
+          {highlightedDescription && (
+            <Text style={S.highlightedDescription}>
+              {" "}
+              {highlightedDescription}
+            </Text>
+          )}
+        </Text>
+      )}
       {buttonTitle && (
         <Button
           onPress={onButtonPress}
