@@ -76,7 +76,7 @@ export default function CardStories({
   function start(n: number) {
     Animated.timing(progress, {
       toValue: 1,
-      duration: 55000,
+      duration: 8000,
       useNativeDriver: false,
     }).start(({ finished }) => {
       if (finished) {

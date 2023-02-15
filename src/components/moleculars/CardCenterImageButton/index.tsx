@@ -31,7 +31,7 @@ function CardCenterImageButton({
     <View style={S.container}>
       <View style={S.cardWrapper}>
         <View style={S.containerImage}>
-          <TouchableOpacity onPress={onImagePress}>
+          <TouchableOpacity onPress={onImagePress} activeOpacity={0.8}>
             <Image style={S.cardImage} source={{ uri: image }} />
           </TouchableOpacity>
           <Text style={S.imageDescription}>{imageDescription}</Text>

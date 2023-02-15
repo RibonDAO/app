@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   useNonProfits,
   useCauses,
@@ -15,8 +15,8 @@ import BlankModal from "components/moleculars/modals/BlankModal";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
-import CardStories from "components/moleculars/CardStories";
 import { NonProfit, Story } from "@ribon.io/shared/types";
+import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import S from "./styles";
 import Placeholder from "./placeholder";
 
@@ -93,6 +93,7 @@ export default function CausesScreen() {
     setCurrentNonProfit(nonProfit);
     try {
       const nonProfitStories = await fetchNonProfitStories(nonProfit.id);
+      if (nonProfitStories.length === 0) return;
       setStories(nonProfitStories);
       setStoriesVisible(true);
     } catch (e) {
@@ -100,27 +101,15 @@ export default function CausesScreen() {
     }
   };
 
-  const filteredStories = useCallback(
-    () =>
-      stories.map((story) => ({
-        url: story.image,
-        heading: story.title,
-        description: story.description,
-      })),
-    [stories],
-  );
-
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
     <View style={S.container}>
-      <CardStories
-        stories={filteredStories()}
-        visible={storiesVisible}
-        setVisible={setStoriesVisible}
-        avatar={currentNonProfit.logo}
-        title={currentNonProfit.name}
-        subtitle={currentNonProfit.cause?.name}
+      <StoriesSection
+        stories={stories}
+        nonProfit={currentNonProfit}
+        storiesVisible={storiesVisible}
+        setStoriesVisible={setStoriesVisible}
       />
       <BlankModal
         visible={ticketModalVisible}
