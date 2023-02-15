@@ -22,6 +22,25 @@ const styles = StyleSheet.create({
     paddingBottom: 38,
     paddingHorizontal: 16,
   },
+  innerContainer: {
+    flexDirection: "column",
+    flex: 1,
+  },
+  progressContainer: {
+    flexDirection: "row",
+    paddingTop: 10,
+    paddingHorizontal: 10,
+  },
+  topContainer: {
+    height: 50,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 15,
+  },
+  avatarContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   containerModal: {
     backgroundColor: "#000",
     flex: 1,
@@ -92,6 +111,13 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.green30,
     marginRight: 20,
     borderRadius: 10,
+  },
+  progressBar: {
+    height: 2,
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "rgba(117, 117, 117, 0.5)",
+    marginHorizontal: 2,
   },
 });
 

@@ -121,12 +121,7 @@ export default function CardStories({
             style={{ width, height, resizeMode: "cover" }}
           />
         </View>
-        <View
-          style={{
-            flexDirection: "column",
-            flex: 1,
-          }}
-        >
+        <View style={S.innerContainer}>
           <LinearGradient
             colors={["rgba(0,0,0,1)", "transparent"]}
             style={{
@@ -137,24 +132,9 @@ export default function CardStories({
               height: 100,
             }}
           />
-          <View
-            style={{
-              flexDirection: "row",
-              paddingTop: 10,
-              paddingHorizontal: 10,
-            }}
-          >
+          <View style={S.progressContainer}>
             {content.map((index: any, key: number) => (
-              <View
-                key={index.id}
-                style={{
-                  height: 2,
-                  flex: 1,
-                  flexDirection: "row",
-                  backgroundColor: "rgba(117, 117, 117, 0.5)",
-                  marginHorizontal: 2,
-                }}
-              >
+              <View key={index.id} style={S.progressBar}>
                 <Animated.View
                   style={{
                     flex: current === key ? progress : content[key].finish,
@@ -165,14 +145,7 @@ export default function CardStories({
               </View>
             ))}
           </View>
-          <View
-            style={{
-              height: 50,
-              flexDirection: "row",
-              justifyContent: "space-between",
-              paddingHorizontal: 15,
-            }}
-          >
+          <View style={S.topContainer}>
             <View />
             <TouchableOpacity
               onPress={() => {
@@ -208,7 +181,7 @@ export default function CardStories({
                 )}
               </View>
             </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={S.avatarContainer}>
               {avatar && (
                 <Image
                   style={S.avatar}
