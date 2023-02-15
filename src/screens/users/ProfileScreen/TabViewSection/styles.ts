@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   indicatorStyle: {
-    backgroundColor: theme.colors.green30,
+    backgroundColor: theme.colors.brand.primary[300],
     padding: 1.5,
     marginBottom: -2,
   },

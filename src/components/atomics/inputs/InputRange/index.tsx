@@ -24,7 +24,7 @@ function InputRange({
   step = 1,
   onChange,
   disabled = false,
-  color = theme.colors.green30,
+  color = theme.colors.brand.primary[300],
   minimumTrackTintColor = theme.colors.green40,
   maximumTrackTintColor = theme.colors.green20,
   sliderStyle,

@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacingNative(12),
     padding: theme.spacingNative(8),
     borderWidth: 1,
-    borderColor: theme.colors.green30,
+    borderColor: theme.colors.brand.primary[300],
     borderRadius: 8,
     height: 48,
   },

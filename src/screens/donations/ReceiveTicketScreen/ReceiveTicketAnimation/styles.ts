@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     position: "relative",
     zIndex: theme.zindex.above,
     overflow: "hidden",
-    backgroundColor: theme.colors.green30,
+    backgroundColor: theme.colors.brand.primary[300],
     transform: [{ scale: 0.8 }, { rotate: "-45deg" }],
     transformOrigin: "center",
   },
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: theme.spacingNative(20),
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
     fontWeight: "bold",
   },
 });

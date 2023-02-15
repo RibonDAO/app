@@ -122,14 +122,14 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const activeColor = theme.colors.green30;
+  const activeColor = theme.colors.brand.primary[300];
   const { t } = useTranslation();
 
   return (
     <BottomTab.Navigator
       initialRouteName="CausesScreen"
       screenOptions={{
-        tabBarActiveTintColor: theme.colors.green30,
+        tabBarActiveTintColor: theme.colors.brand.primary[300],
         tabBarStyle: { ...S.tabBar },
         tabBarLabelStyle: { ...S.tabBarLabel },
       }}
@@ -181,7 +181,7 @@ const DefaultTheme: Theme = {
     card: theme.colors.neutral10,
     text: theme.colors.gray40,
     border: theme.colors.neutral10,
-    notification: theme.colors.green30,
+    notification: theme.colors.brand.primary[300],
   },
 };
 

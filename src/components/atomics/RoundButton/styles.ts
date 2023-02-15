@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.neutral10,
     height: 30,
     borderRadius: 20,
-    borderColor: theme.colors.green30,
+    borderColor: theme.colors.brand.primary[300],
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   textGreen: {
     fontSize: 14,
     fontWeight: "600",
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
   },
 });
 

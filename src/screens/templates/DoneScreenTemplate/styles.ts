@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "45deg" }],
   },
   container: {
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
     width: "100%",
     height: "100%",
     display: "flex",
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...stylizedDisplayMd,
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
     marginTop: theme.spacingNative(10),
   },
   description: {

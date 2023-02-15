@@ -30,6 +30,8 @@ export type Props = {
   customTextStyles?: StyleProp<TextStyle>;
 };
 
+const { primary } = theme.colors.brand;
+
 export default function Button({
   text,
   onPress,
@@ -37,11 +39,11 @@ export default function Button({
   timeout = null,
   timeoutCallback = () => {},
   outline,
-  backgroundColor = theme.colors.green30,
+  backgroundColor = primary[300],
   backgroundColorOutline = theme.colors.neutral10,
-  borderColor = theme.colors.green30,
-  borderColorOutline = theme.colors.green30,
-  textColorOutline = theme.colors.green30,
+  borderColor = primary[300],
+  borderColorOutline = primary[300],
+  textColorOutline = primary[300],
   textColor = theme.colors.neutral10,
   customStyles = {},
   customTextStyles = {},

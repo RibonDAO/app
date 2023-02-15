@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   impact: {
     ...defaultBodyLgBold,
     marginTop: theme.spacingNative(8),
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
   },
   description: {
     ...defaultBodyXsRegular,

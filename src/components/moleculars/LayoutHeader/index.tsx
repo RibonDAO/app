@@ -31,7 +31,9 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { canDonate, refetch } = useCanDonate(RIBON_INTEGRATION_ID);
-  const ticketColor = canDonate ? theme.colors.green30 : theme.colors.gray30;
+  const ticketColor = canDonate
+    ? theme.colors.brand.primary[300]
+    : theme.colors.gray30;
   const ticketIcon = canDonate ? TicketIcon : GrayTicketIcon;
 
   function toggleModal() {

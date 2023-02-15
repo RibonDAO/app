@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     marginRight: theme.spacingNative(4),
     fontSize: 14,
     fontWeight: "bold",
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
   },
 });
 

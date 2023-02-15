@@ -29,7 +29,7 @@ export default function DoneScreenTemplate({
         <Button
           onPress={onButtonPress}
           title={buttonTitle}
-          color={theme.colors.green30}
+          color={theme.colors.brand.primary[300]}
         />
       )}
     </View>
