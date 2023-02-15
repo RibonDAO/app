@@ -34,7 +34,7 @@ function Main() {
           <SafeAreaProvider>
             <SafeAreaView
               edges={["top"]}
-              style={{ flex: 1, backgroundColor: theme.colors.gray10 }}
+              style={{ flex: 1, backgroundColor: theme.colors.neutral10 }}
             >
               <SafeAreaView
                 edges={["bottom"]}

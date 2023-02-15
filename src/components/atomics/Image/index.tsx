@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   ImageStyle,
   ImageRequireSource,
+  ImageProps,
 } from "react-native";
 import * as FileSystem from "expo-file-system";
 import {
@@ -13,11 +14,11 @@ import {
   hashFromString,
 } from "components/atomics/Image/helpers";
 
-type Props = {
+interface Props extends ImageProps {
   source: { uri: string } | ImageRequireSource;
   style?: ImageStyle;
-};
-function Image({ source, style }: Props) {
+}
+function Image({ source, style, ...rest }: Props) {
   if (typeof source === "number") {
     return <ReactNativeImageComponent source={source} style={style} />;
   }
@@ -55,7 +56,11 @@ function Image({ source, style }: Props) {
     };
   }, [cacheKey]);
   return imgUri ? (
-    <ReactNativeImageComponent source={{ uri: imgUri }} style={style} />
+    <ReactNativeImageComponent
+      source={{ uri: imgUri }}
+      style={style}
+      {...rest}
+    />
   ) : (
     <View style={{ ...style, alignItems: "center", justifyContent: "center" }}>
       <ActivityIndicator size={33} />

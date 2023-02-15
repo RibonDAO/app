@@ -13,7 +13,9 @@
         "title": "User support",
         "description": "Doubts, ideas, refunds. We're here!",
         "primaryButtonText": "Access support"
-      }
+      },
+      "impactPrefix": "Donate",
+      "labelText": "Learn more"
     },
     "donateModal": {
       "nonProfitText": "You are donating to",
@@ -120,6 +122,13 @@
         "totalDonated": "Donated money",
         "totalNonProfits": "Supported NGOs",
         "totalCauses": "Supporter causes"
+      },
+      "ngoImpactCards": {
+        "zeroDonationsSection": {
+          "title": "Your community donations will appear here.",
+          "description": "You have not made community donations yet, why not try your first one?",
+          "buttonText": "Donate in community"
+        }
       }
     }
   },

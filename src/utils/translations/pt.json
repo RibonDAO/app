@@ -13,7 +13,9 @@
         "title": "Suporte ao Usuário",
         "description": "Dúvidas, ideias, estornos. Estamos aqui!",
         "primaryButtonText": "Acesse o suporte"
-      }
+      },
+      "impactPrefix": "Doe",
+      "labelText": "Saiba mais"
     },
     "donateModal": {
       "nonProfitText": "Você está doando para",
@@ -119,6 +121,13 @@
         "totalDonated": "Dinheiro doado",
         "totalNonProfits": "ONGs auxiliadas",
         "totalCauses": "Causas auxiliadas"
+      },
+      "ngoImpactCards": {
+        "zeroDonationsSection": {
+          "title": "Suas doações em comunidade aparecerão aqui.",
+          "description": "Você não fez doações em comunidade ainda, que tal fazer sua primeira?",
+          "buttonText": "Doar em comunidade"
+        }
       }
     }
   },
