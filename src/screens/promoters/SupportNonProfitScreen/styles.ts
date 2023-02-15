@@ -9,6 +9,8 @@ import {
   stylizedDisplayXs,
 } from "styles/typography/stylized";
 
+const { tertiary } = theme.colors.brand;
+
 const styles = StyleSheet.create({
   Container: {
     width: "100%",
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
   },
   CommunityAddValue: {
     ...stylizedDisplayXs,
-    color: theme.colors.red20,
+    color: tertiary[200],
   },
   CommunityAddButton: {
     marginTop: 8,
@@ -55,9 +57,9 @@ const styles = StyleSheet.create({
     color: theme.colors.red40,
   },
   DonateButton: {
-    borderColor: theme.colors.red20,
+    borderColor: tertiary[200],
     fontWeight: "600",
-    backgroundColor: theme.colors.red20,
+    backgroundColor: tertiary[200],
     color: theme.colors.red40,
   },
   BackgroundImage: {

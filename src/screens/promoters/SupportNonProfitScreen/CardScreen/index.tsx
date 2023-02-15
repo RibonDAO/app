@@ -18,6 +18,7 @@ function CardScreen(): JSX.Element {
   const { cause, setCause, setOfferId, setFlow } = useCardPaymentInformation();
   const { nonProfits } = useNonProfits();
   const { causes } = useCauses();
+  const { tertiary } = theme.colors.brand;
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportNonProfitPage",
@@ -75,10 +76,10 @@ function CardScreen(): JSX.Element {
           onChange={handleCauseClick}
           indexSelected={0}
           nameExtractor={(element) => element.name}
-          backgroundColor={theme.colors.red40}
-          textColorOutline={theme.colors.red40}
-          borderColor={theme.colors.red40}
-          borderColorOutline={theme.colors.red20}
+          backgroundColor={tertiary[800]}
+          textColorOutline={tertiary[800]}
+          borderColor={tertiary[800]}
+          borderColorOutline={tertiary[200]}
         />
       </View>
 
