@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     paddingLeft: theme.spacingNative(16),
-    backgroundColor: theme.colors.green20,
+    backgroundColor: theme.colors.brand.primary[200],
     color: theme.colors.neutral10,
   },
   nonProfitText: {

@@ -37,6 +37,7 @@ const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
   <Header rightComponent={<LayoutHeader hideTicket />} />
 );
+const { primary } = theme.colors.brand;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
@@ -122,14 +123,14 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const activeColor = theme.colors.brand.primary[300];
+  const activeColor = primary[300];
   const { t } = useTranslation();
 
   return (
     <BottomTab.Navigator
       initialRouteName="CausesScreen"
       screenOptions={{
-        tabBarActiveTintColor: theme.colors.brand.primary[300],
+        tabBarActiveTintColor: primary[300],
         tabBarStyle: { ...S.tabBar },
         tabBarLabelStyle: { ...S.tabBarLabel },
       }}
@@ -176,12 +177,12 @@ function BottomTabNavigator() {
 const DefaultTheme: Theme = {
   dark: false,
   colors: {
-    primary: theme.colors.green20,
+    primary: primary[200],
     background: theme.colors.neutral10,
     card: theme.colors.neutral10,
     text: theme.colors.gray40,
     border: theme.colors.neutral10,
-    notification: theme.colors.brand.primary[300],
+    notification: primary[300],
   },
 };
 

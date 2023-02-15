@@ -28,7 +28,7 @@ function InputRange({
   disabled = false,
   color = primary[300],
   minimumTrackTintColor = primary[800],
-  maximumTrackTintColor = theme.colors.green20,
+  maximumTrackTintColor = primary[200],
   sliderStyle,
 }: Props): JSX.Element {
   return (

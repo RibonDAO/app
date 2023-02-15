@@ -1,6 +1,8 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
+const { primary } = theme.colors.brand;
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
     position: "relative",
     zIndex: theme.zindex.above,
     overflow: "hidden",
-    backgroundColor: theme.colors.brand.primary[300],
+    backgroundColor: primary[300],
     transform: [{ scale: 0.8 }, { rotate: "-45deg" }],
     transformOrigin: "center",
   },
@@ -50,11 +52,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
-    backgroundColor: theme.colors.green20,
+    backgroundColor: primary[200],
   },
   text: {
     marginTop: theme.spacingNative(20),
-    color: theme.colors.brand.primary[300],
+    color: primary[300],
     fontWeight: "bold",
   },
 });
