@@ -29,6 +29,7 @@ type Props = {
   avatar?: string;
   title?: string;
   subtitle?: string;
+  duration?: number;
 };
 export default function CardStories({
   stories,
@@ -37,9 +38,9 @@ export default function CardStories({
   avatar,
   title,
   subtitle,
+  duration = 8000,
 }: Props) {
   const [content, setContent] = useState<any>([]);
-  const [end] = useState(0);
   const [current, setCurrent] = useState(0);
   const progress = useRef(new Animated.Value(0)).current;
 
@@ -62,7 +63,6 @@ export default function CardStories({
   }
 
   function next() {
-    // check if the next content is not empty
     if (current !== content.length - 1) {
       const data = [...content];
       data[current].finish = 1;
@@ -70,14 +70,13 @@ export default function CardStories({
       setCurrent(current + 1);
       progress.setValue(0);
     } else {
-      // the next content is empty
       close();
     }
   }
-  function start(n: number) {
+  function start() {
     Animated.timing(progress, {
       toValue: 1,
-      duration: 8000,
+      duration,
       useNativeDriver: false,
     }).start(({ finished }) => {
       if (finished) {
@@ -87,11 +86,10 @@ export default function CardStories({
   }
 
   function play() {
-    start(end);
+    start();
   }
 
   function previous() {
-    // checking if the previous content is not empty
     if (current - 1 >= 0) {
       const data = [...content];
       data[current].finish = 0;
@@ -99,7 +97,6 @@ export default function CardStories({
       setCurrent(current - 1);
       progress.setValue(0);
     } else {
-      // the previous content is empty
       close();
     }
   }
