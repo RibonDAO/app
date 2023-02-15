@@ -4,6 +4,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Linking
 } from "react-native";
 import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { theme } from "@ribon.io/shared/styles";
@@ -22,10 +23,11 @@ import { useRouteParams } from "hooks/useRouteParams";
 import InputText from "components/atomics/inputs/InputText";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import Placeholder from "./placeholder";
+import { Link } from "@react-navigation/native";
 
 function DonateScreen() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.donateModal",
+    keyPrefix: "donations.donateScreen",
   });
   const [isDonating, setIsDonating] = useState(false);
   const [invalidInput, setInvalidInput] = useState(false);
@@ -79,6 +81,9 @@ function DonateScreen() {
     setEmail(text);
   };
 
+  const linkToPrivacyPolicy = () => {
+    Linking.openURL(t("privacyPolicyLink"));
+  };
   return (
     <View style={S.modalWrapper}>
       <View style={S.nonProfitContainer}>
@@ -132,8 +137,12 @@ function DonateScreen() {
                 customStyles={S.cancelButton}
                 outline
               />
+              <Text style={S.privacyPolicyText}>
+                {t("agreementText")}{" "}
+                <Text style={S.privacyPolicyLink} onPress={linkToPrivacyPolicy}>{t("privacyPolicyText")}</Text>
+              </Text>
             </View>
-          </View>
+          </View>                                                                                                                                                                                                                                                                    
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </View>

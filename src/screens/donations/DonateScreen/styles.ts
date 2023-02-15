@@ -87,6 +87,14 @@ const styles = StyleSheet.create({
     height: 88,
     width: 88,
   },
+  privacyPolicyText: {
+    ...defaultBodySmRegular,
+    color: theme.colors.gray20,
+    textAlign: "center",
+  },
+  privacyPolicyLink: {
+    color: theme.colors.green30,
+  }
 });
 
 export default styles;
