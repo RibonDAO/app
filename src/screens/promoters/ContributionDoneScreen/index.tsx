@@ -2,6 +2,7 @@ import DoneScreenTemplate from "screens/templates/DoneScreenTemplate";
 import { useRouteParams } from "hooks/useRouteParams";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
+import { useEffect } from "react";
 
 export default function ContributionDoneScreen(): JSX.Element {
   const {
@@ -12,15 +13,18 @@ export default function ContributionDoneScreen(): JSX.Element {
   });
   const { navigateTo } = useNavigation();
 
+  useEffect(() => {
+    setTimeout(() => {
+      navigateTo("PromotersScreen");
+    }, 5000);
+  }, []);
+
   return (
     <DoneScreenTemplate
       image={nonProfit?.mainImage || cause?.mainImage}
-      buttonTitle={t("buttonTitle") || ""}
       title={t("title") || ""}
-      description={`${t("description")} ${nonProfit?.name || cause?.name}`}
-      onButtonPress={() => {
-        navigateTo("PromotersScreen");
-      }}
+      description={`${t("description")}`}
+      highlightedDescription={nonProfit?.name || cause?.name}
     />
   );
 }

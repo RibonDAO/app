@@ -129,6 +129,7 @@ function UserInfoSection(): JSX.Element {
           onSelect={(selectedState) => {
             setState(selectedState.value);
           }}
+          textStyle={{ ...S.dropdownText, color: colorTheme.shade20 }}
         />
       </View>
       <InputText

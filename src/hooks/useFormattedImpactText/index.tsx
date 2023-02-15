@@ -30,9 +30,10 @@ export function useFormattedImpactText() {
           roundedImpact,
           normalizerTranslation,
         );
-        return normalizedImpact.join(" ");
+        return `${prefixText}${normalizedImpact.join(" ")}`;
       }
     }
+
     return isRoundedImpact && nonProfitImpact
       ? `${nonProfitImpact?.roundedImpact} ${nonProfit?.impactDescription}`
       : `${prefixText} ${
