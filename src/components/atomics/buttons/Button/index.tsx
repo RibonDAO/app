@@ -31,6 +31,7 @@ export type Props = {
 };
 
 const { primary } = theme.colors.brand;
+const { neutral } = theme.colors;
 
 export default function Button({
   text,
@@ -120,21 +121,21 @@ export default function Button({
   };
 
   function backgroundColorByState() {
-    if (disabled) return theme.colors.gray20;
+    if (disabled) return neutral[200];
     if (outline) return backgroundColorOutline;
 
     return backgroundColor;
   }
 
   function borderColorByState() {
-    if (disabled) return theme.colors.gray20;
+    if (disabled) return neutral[200];
     if (outline) return borderColorOutline;
 
     return borderColor;
   }
 
   function textColorByState() {
-    if (disabled) return theme.colors.gray30;
+    if (disabled) return neutral[500];
     if (outline) return textColorOutline;
 
     return textColor;

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     height: 53,
-    borderColor: theme.colors.gray20,
+    borderColor: theme.colors.neutral[200],
     borderBottomWidth: 2,
   },
   text: {

@@ -7,8 +7,8 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native";
-import S from "./styles";
 import { theme } from "@ribon.io/shared/styles";
+import S from "./styles";
 
 export interface Props extends Omit<TextInputProps, "placeholder"> {
   name: string;
@@ -40,7 +40,7 @@ function InputText({
       <TextInput
         ref={rest.ref}
         placeholder={placeholder || ""}
-        placeholderTextColor={theme.colors.gray20}
+        placeholderTextColor={theme.colors.neutral[200]}
         keyboardType={keyboardType}
         aria-label={name}
         value={value}

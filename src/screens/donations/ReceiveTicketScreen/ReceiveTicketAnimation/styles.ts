@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderStyle: "dotted",
     borderWidth: 3,
     borderRadius: 1,
-    borderColor: theme.colors.gray20,
+    borderColor: theme.colors.neutral[200],
     width: Dimensions.get("window").width - 270,
     marginBottom: theme.spacingNative(0),
   },

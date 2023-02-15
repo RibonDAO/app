@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { stylizedDisplaySm } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
@@ -13,7 +12,7 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: theme.colors.neutral10,
     borderBottomWidth: 1,
-    borderColor: theme.colors.gray20,
+    borderColor: theme.colors.neutral[200],
   },
   tabStyle: {
     width: 200,
