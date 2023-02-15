@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   UserBalanceTextHighlight: {
     ...defaultBodySmSemibold,
-    color: theme.colors.red30,
+    color: tertiary[400],
   },
   RefundText: {
     ...defaultBodyXsRegular,

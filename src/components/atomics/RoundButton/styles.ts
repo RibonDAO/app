@@ -1,12 +1,14 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
+const { primary, tertiary } = theme.colors.brand;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.neutral10,
     height: 30,
     borderRadius: 20,
-    borderColor: theme.colors.red30,
+    borderColor: tertiary[400],
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -15,7 +17,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.neutral10,
     height: 30,
     borderRadius: 20,
-    borderColor: theme.colors.brand.primary[300],
+    borderColor: primary[300],
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -23,12 +25,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     fontWeight: "600",
-    color: theme.colors.red30,
+    color: tertiary[400],
   },
   textGreen: {
     fontSize: 14,
     fontWeight: "600",
-    color: theme.colors.brand.primary[300],
+    color: primary[300],
   },
 });
 
