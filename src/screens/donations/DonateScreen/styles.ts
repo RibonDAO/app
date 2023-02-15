@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     ...defaultBodySmRegular,
     color: theme.colors.gray20,
     textAlign: "center",
+    marginTop: theme.spacingNative(16),
   },
   privacyPolicyLink: {
     color: theme.colors.green30,

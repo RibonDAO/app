@@ -131,12 +131,6 @@ function DonateScreen() {
                 disabled={isDonating || !isValidEmail(email)}
                 customStyles={S.button}
               />
-              <Button
-                text={t("cancel")}
-                onPress={() => popNavigation()}
-                customStyles={S.cancelButton}
-                outline
-              />
               <Text style={S.privacyPolicyText}>
                 {t("agreementText")}{" "}
                 <Text style={S.privacyPolicyLink} onPress={linkToPrivacyPolicy}>{t("privacyPolicyText")}</Text>
