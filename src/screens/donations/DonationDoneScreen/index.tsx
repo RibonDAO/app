@@ -17,7 +17,7 @@ export default function DonationDoneScreen({
 
   useEffect(() => {
     setTimeout(() => {
-      // popNavigation();
+      popNavigation();
     }, 5000);
   }, []);
 
