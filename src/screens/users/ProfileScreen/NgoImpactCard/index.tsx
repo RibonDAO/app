@@ -1,5 +1,3 @@
-import { theme } from "@ribon.io/shared";
-import Button from "components/atomics/buttons/Button";
 import { View, Text } from "react-native";
 import { Image, TouchableOpacity } from "react-native";
 import S from "./styles";

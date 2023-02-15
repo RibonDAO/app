@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RootStackScreenProps } from "types";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import DoneScreenTemplate from "screens/templates/DoneScreenTemplate";
+import useFormattedImpactText from "hooks/useFormattedImpactText";
 
 export default function DonationDoneScreen({
   route,
@@ -12,17 +13,25 @@ export default function DonationDoneScreen({
   });
   const { nonProfit } = route.params;
   const { popNavigation } = useNavigation();
+  const { formattedImpactText } = useFormattedImpactText();
+
+  useEffect(() => {
+    setTimeout(() => {
+      popNavigation();
+    }, 5000);
+  }, []);
 
   return (
     <DoneScreenTemplate
       image={nonProfit.mainImage}
       title={t("title") || ""}
-      description={`
-      ${t("description")} ${nonProfit.impactByTicket} ${
-        nonProfit.impactDescription
-      } to ${nonProfit.name}.`}
-      buttonTitle={t("buttonText") || ""}
-      onButtonPress={() => popNavigation()}
+      description={t("description") || ""}
+      highlightedDescription={formattedImpactText(
+        nonProfit,
+        undefined,
+        false,
+        false,
+      )}
     />
   );
 }
