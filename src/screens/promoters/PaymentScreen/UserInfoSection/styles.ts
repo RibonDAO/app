@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     marginLeft: theme.spacingNative(4),
     height: 48,
     borderRadius: 8,
+    paddingLeft: 8,
+  },
+  dropdownText: {
+    textAlign: "left",
   },
 });
 
