@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { stylizedDisplayMd } from "styles/typography/stylized";
+import { stylizedDisplayMd, } from "styles/typography/stylized";
+import { defaultBodyMdMedium } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    padding: theme.spacingNative(20)
   },
   cardImage: {
     width: "100%",
@@ -33,9 +35,11 @@ const styles = StyleSheet.create({
     marginTop: theme.spacingNative(10),
   },
   description: {
+    ...defaultBodyMdMedium,
     color: theme.colors.gray30,
     marginTop: theme.spacingNative(10),
     marginBottom: theme.spacingNative(32),
+    textAlign: "center"
   },
 });
 

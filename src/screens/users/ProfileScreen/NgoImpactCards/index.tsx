@@ -19,27 +19,25 @@ function NgoImpactCards(): JSX.Element {
   const renderItem = ({ item }: { item: any }): ReactElement<any, any> => (
     <NgoImpactCard
       key={item?.nonProfit.id}
-      description={`${item.impact} de ${item.nonProfit.impactDescription} para ${item.nonProfit.name}`}
+      description={`${item?.impact} de ${item?.nonProfit?.impactDescription} para ${item?.nonProfit?.name}`}
       name={item?.nonProfit.name}
       icon={item?.nonProfit.logo}
-      onPress={() => {}}
+      onPress={() => { }}
     />
   );
 
   const impactCardsList = () => (
-    <FlatList
-      data={impactItems()}
-      renderItem={renderItem}
-      keyExtractor={(index) => index.toString()}
-      style={{ paddingHorizontal: 16, paddingVertical: 12 }}
-    />
-  );
-
-  return (
     <View style={S.cardsContainer}>
-      {hasImpact ? impactCardsList() : <ZeroDonationsSection />}
+      <FlatList
+        data={impactItems()}
+        renderItem={renderItem}
+        keyExtractor={(index) => index?.nonProfit.name}
+        style={S.ngosListContainer}
+      />
     </View>
   );
+
+  return hasImpact ? impactCardsList() : <ZeroDonationsSection />;
 }
 
 export default NgoImpactCards;

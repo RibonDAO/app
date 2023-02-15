@@ -12,6 +12,7 @@ import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
 import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
 import BlankModal from "components/moleculars/modals/BlankModal";
+import UserSupportSection from "components/moleculars/UserSupportSection";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
@@ -20,6 +21,8 @@ import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import S from "./styles";
 import Placeholder from "./placeholder";
+import Icon from "components/atomics/Icon";
+import { theme } from "@ribon.io/shared";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
@@ -44,6 +47,18 @@ export default function CausesScreen() {
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+
+  function renderTooltip() {
+    return <BlankModal
+      visible={tooltipVisible}
+      setVisible={setTooltipVisible}
+      containerStyle={S.tooltip}
+      backdropOpacity={0.1}
+    >
+      <Text>Tickets are used to make donations and you get a new one everyday when you log in Ribon.</Text>
+    </BlankModal>
+  }
 
   useEffect(() => {
     logEvent("app_causes_page_view");
@@ -106,7 +121,7 @@ export default function CausesScreen() {
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
-    <View style={S.container}>
+    <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
       <StoriesSection
         stories={stories}
         nonProfit={currentNonProfit}
@@ -166,6 +181,15 @@ export default function CausesScreen() {
           </View>
         ))}
       </ScrollView>
-    </View>
+
+      <View style={S.ticketExplanationSection}>
+        <Icon type="rounded" name="help" size={20} color={theme.colors.gray30} />
+        <Text style={S.ticketText} onPress={() => setTooltipVisible(true)}>O que é um ticket?</Text>
+      </View>
+
+      {renderTooltip()}
+
+      <UserSupportSection />
+    </ScrollView>
   );
 }

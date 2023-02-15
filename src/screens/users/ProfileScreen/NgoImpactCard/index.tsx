@@ -1,5 +1,3 @@
-import { theme } from "@ribon.io/shared";
-import Button from "components/atomics/buttons/Button";
 import { View, Text } from "react-native";
 import { Image, TouchableOpacity } from "react-native";
 import S from "./styles";
@@ -18,12 +16,10 @@ function NgoImpactCard({
   onPress,
 }: Props): JSX.Element {
   return (
-    <TouchableOpacity onPress={onPress} style={S.badgeContainer}>
+    <TouchableOpacity onPress={onPress} style={S.container}>
       <View style={S.impactCardContainer}>
-        <View style={S.imageSection}>
-          <Image source={{ uri: icon }} style={S.image} />
-        </View>
         <View style={S.contentSection}>
+          <Image source={{ uri: icon }} style={S.image} />
           <Text style={S.impact}>{name}</Text>
           <Text style={S.description}>{description}</Text>
         </View>
