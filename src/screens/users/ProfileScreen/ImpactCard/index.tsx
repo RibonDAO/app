@@ -23,7 +23,7 @@ function ImpactCard({
         <Icon
           type="rounded"
           name={iconName}
-          color={theme.colors.green40}
+          color={theme.colors.brand.primary[800]}
           size={24}
         />
         <Text style={S.impact}>{impact}</Text>

@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   impact: {
     ...defaultBodyLgBold,
-    color: theme.colors.green40,
+    color: theme.colors.brand.primary[800],
   },
   description: {
     ...defaultBodyXsRegular,

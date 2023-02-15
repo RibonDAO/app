@@ -25,7 +25,7 @@ function InputRange({
   onChange,
   disabled = false,
   color = theme.colors.brand.primary[300],
-  minimumTrackTintColor = theme.colors.green40,
+  minimumTrackTintColor = theme.colors.brand.primary[800],
   maximumTrackTintColor = theme.colors.green20,
   sliderStyle,
 }: Props): JSX.Element {

@@ -28,7 +28,7 @@ function UserSupportSection(): JSX.Element {
               type="rounded"
               name="live_help"
               size={24}
-              color={theme.colors.green40}
+              color={theme.colors.brand.primary[800]}
             />
           </View>
           <Text style={S.title}>{t("title")}</Text>

@@ -24,7 +24,7 @@ function ZeroDonationsSection(): JSX.Element {
       <Button
         text={t("buttonText")}
         onPress={() => navigateToPromotersScreen()}
-        textColor={theme.colors.green40}
+        textColor={theme.colors.brand.primary[800]}
         customStyles={{ width: 200 }}
       />
     </View>
