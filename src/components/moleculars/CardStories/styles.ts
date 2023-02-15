@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
   },
   headingContainer: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
     marginBottom: 40,
   },
   heading: {
@@ -85,6 +85,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 50,
+  },
+  leftHeadingView: {
+    height: 120,
+    width: 4,
+    backgroundColor: theme.colors.green30,
+    marginRight: 20,
+    borderRadius: 10,
   },
 });
 

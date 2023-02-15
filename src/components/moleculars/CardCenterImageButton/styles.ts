@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     color: theme.colors.neutral10,
     fontWeight: "600",
     fontSize: 16,
+    lineHeight: 20,
   },
   containerText: {
     paddingTop: theme.spacingNative(8),

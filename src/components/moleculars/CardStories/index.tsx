@@ -39,6 +39,9 @@ export default function CardStories({
   subtitle,
 }: Props) {
   const [content, setContent] = useState<any>([]);
+  const [end] = useState(0);
+  const [current, setCurrent] = useState(0);
+  const progress = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     setContent(
@@ -50,11 +53,9 @@ export default function CardStories({
         id: idx,
       })),
     );
+    setCurrent(0);
   }, [JSON.stringify(stories)]);
 
-  const [end] = useState(0);
-  const [current, setCurrent] = useState(0);
-  const progress = useRef(new Animated.Value(0)).current;
   function close() {
     progress.setValue(0);
     setVisible(false);
@@ -198,14 +199,17 @@ export default function CardStories({
               }}
             />
             <View style={S.headingContainer}>
-              {content[current]?.heading && (
-                <Text style={S.heading}>{content[current]?.heading}</Text>
-              )}
-              {content[current]?.description && (
-                <Text style={S.description}>
-                  {content[current]?.description}
-                </Text>
-              )}
+              <View style={S.leftHeadingView} />
+              <View>
+                {content[current]?.heading && (
+                  <Text style={S.heading}>{content[current]?.heading}</Text>
+                )}
+                {content[current]?.description && (
+                  <Text style={S.description}>
+                    {content[current]?.description}
+                  </Text>
+                )}
+              </View>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               {avatar && (

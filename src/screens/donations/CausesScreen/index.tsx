@@ -17,6 +17,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
+import useFormattedImpactText from "hooks/useFormattedImpactText";
 import S from "./styles";
 import Placeholder from "./placeholder";
 
@@ -42,6 +43,7 @@ export default function CausesScreen() {
   const { currentUser } = useCurrentUser();
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
+  const { formattedImpactText } = useFormattedImpactText();
 
   useEffect(() => {
     logEvent("app_causes_page_view");
@@ -143,7 +145,14 @@ export default function CausesScreen() {
               image={nonProfit.mainImage}
               infoTextLeft={nonProfit.name}
               infoTextRight={nonProfit.cause.name}
-              imageDescription={`${nonProfit.impactByTicket} ${nonProfit.impactDescription}`}
+              imageDescription={formattedImpactText(
+                nonProfit,
+                undefined,
+                false,
+                false,
+                undefined,
+                t("impactPrefix") || "",
+              )}
               buttonText={t("buttonText")}
               onImagePress={() => {
                 handleNonProfitImagePress(nonProfit);

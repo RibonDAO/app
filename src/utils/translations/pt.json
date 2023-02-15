@@ -13,7 +13,8 @@
         "title": "Suporte ao Usuário",
         "description": "Dúvidas, ideias, estornos. Estamos aqui!",
         "primaryButtonText": "Acesse o suporte"
-      }
+      },
+      "impactPrefix": "Doe"
     },
     "donateModal": {
       "nonProfitText": "Você está doando para",
