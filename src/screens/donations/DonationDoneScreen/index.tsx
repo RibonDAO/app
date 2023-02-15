@@ -25,13 +25,12 @@ export default function DonationDoneScreen({
     <DoneScreenTemplate
       image={nonProfit.mainImage}
       title={t("title") || ""}
-      description={formattedImpactText(
+      description={t("description") || ""}
+      highlightedDescription={formattedImpactText(
         nonProfit,
         undefined,
         false,
         false,
-        undefined,
-        `${t("description")}`,
       )}
     />
   );
