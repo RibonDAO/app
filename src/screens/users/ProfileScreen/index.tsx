@@ -1,10 +1,9 @@
 import React from "react";
-import { ScrollView } from "react-native";
-import { Text } from "react-native";
 import { useTranslation } from "react-i18next";
-import S from "./styles";
+import { Text, ScrollView, View } from "react-native";
 import ImpactCards from "./ImpactCards";
-import NgoImpactCards from "./NgoImpactCards";
+import TabViewSection from "./TabViewSection";
+import S from "./styles";
 
 function ProfileScreen() {
   const { t } = useTranslation("translation", {
@@ -13,11 +12,12 @@ function ProfileScreen() {
 
   return (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
-      <Text style={S.title}>{t("title")}</Text>
+      <View style={S.cardsSection}>
+        <Text style={S.title}>{t("title")}</Text>
+        <ImpactCards />
+      </View>
 
-      <ImpactCards />
-
-      <NgoImpactCards />
+      <TabViewSection />
     </ScrollView>
   );
 }

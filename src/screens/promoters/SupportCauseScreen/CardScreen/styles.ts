@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: theme.spacingNative(16),
     paddingBottom: theme.spacingNative(24),
+    backgroundColor: theme.colors.neutral10,
   },
   contentContainer: {
     maxWidth: 472,

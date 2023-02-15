@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   Container: {
     width: "100%",
     paddingBottom: 50,
-    paddingHorizontal: 16,
+    backgroundColor: theme.colors.neutral10,
   },
   ContentContainer: {
     width: "100%",
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 8,
     objectFit: "cover",
-    backgroundColor: theme.colors.gray10,
+    backgroundColor: theme.colors.neutral10,
   },
   UserBalanceText: {
     ...defaultBodySmSemibold,
@@ -101,15 +101,19 @@ const styles = StyleSheet.create({
   },
   TitleContainer: {
     display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
+    paddingHorizontal: 16,
   },
   TooltipSection: {
     marginBottom: 30,
     display: "flex",
     justifyContent: "center",
   },
-  scrollContainer: {},
+  scrollContainer: {
+    backgroundColor: theme.colors.neutral10,
+    paddingHorizontal: 16,
+    paddingBottom: 20,
+  },
   cardWaveContainer: {
     marginRight: 8,
     width: Dimensions.get("window").width - 64,

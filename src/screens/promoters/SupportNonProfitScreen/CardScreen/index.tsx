@@ -11,7 +11,7 @@ import { FlatList, ScrollView, Text, View } from "react-native";
 import NonProfitCard from "screens/promoters/SupportNonProfitScreen/CardScreen/NonProfitCard";
 import S from "../styles";
 
-function CardPage(): JSX.Element {
+function CardScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
@@ -69,18 +69,19 @@ function CardPage(): JSX.Element {
     <ScrollView contentContainerStyle={S.Container}>
       <View style={S.TitleContainer}>
         <Text style={S.Title}>{t("title")}</Text>
+
+        <GroupButtons
+          elements={causesFilter()}
+          onChange={handleCauseClick}
+          indexSelected={0}
+          nameExtractor={(element) => element.name}
+          backgroundColor={theme.colors.red40}
+          textColorOutline={theme.colors.red40}
+          borderColor={theme.colors.red40}
+          borderColorOutline={theme.colors.red20}
+        />
       </View>
 
-      <GroupButtons
-        elements={causesFilter()}
-        onChange={handleCauseClick}
-        indexSelected={0}
-        nameExtractor={(element) => element.name}
-        backgroundColor={theme.colors.red40}
-        textColorOutline={theme.colors.red40}
-        borderColor={theme.colors.red40}
-        borderColorOutline={theme.colors.red20}
-      />
       <FlatList
         renderItem={({ item: nonProfit }) => (
           <NonProfitCard
@@ -103,4 +104,4 @@ function CardPage(): JSX.Element {
   );
 }
 
-export default CardPage;
+export default CardScreen;
