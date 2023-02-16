@@ -10,7 +10,7 @@ import { Text, View } from "react-native";
 import Dropdown from "components/moleculars/Dropdown";
 import S from "./styles";
 
-const { gray20 } = theme.colors;
+const { neutral } = theme.colors;
 const { tertiary } = theme.colors.brand;
 
 type Props = {
@@ -103,7 +103,7 @@ function SelectOfferSection({
         }}
         color={tertiary[400]}
         minimumTrackTintColor={tertiary[400]}
-        maximumTrackTintColor={gray20}
+        maximumTrackTintColor={neutral[200]}
         sliderStyle={S.sliderStyle}
       />
     </View>
