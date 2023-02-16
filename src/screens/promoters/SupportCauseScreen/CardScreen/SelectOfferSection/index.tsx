@@ -12,7 +12,7 @@ import Dropdown from "components/moleculars/Dropdown";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import styles from "./styles";
 
-const { secondary } = theme.colors;
+const { secondary } = theme.colors.brand;
 const { neutral } = theme.colors;
 
 type Props = {
