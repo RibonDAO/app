@@ -1,12 +1,12 @@
-import { Image, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { useCausesContext } from "contexts/causesContext";
-import Intersection from "components/vectors/Intersect";
 import S from "./styles";
 import { View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
+import { useTranslation } from "react-i18next";
+import Image from "components/atomics/Image";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
-import { useTranslation } from "react-i18next";
 
 type Props = {
   id: number;
