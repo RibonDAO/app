@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     width: 200,
   },
   tabBarTitle: {
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     textAlign: "center",
     fontSize: 16,
   },

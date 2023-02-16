@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   description: {
     ...defaultBodyMdMedium,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     marginTop: theme.spacingNative(16),
     marginBottom: theme.spacingNative(32),
   },

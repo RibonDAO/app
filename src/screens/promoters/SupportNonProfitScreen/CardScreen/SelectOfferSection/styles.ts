@@ -8,7 +8,7 @@ const { tertiary } = theme.colors.brand;
 const styles = StyleSheet.create({
   title: {
     ...defaultBodyXsRegular,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     textAlign: "center",
   },
   inputText: {

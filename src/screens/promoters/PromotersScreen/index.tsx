@@ -35,14 +35,14 @@ export default function PromotersScreen() {
                 type="rounded"
                 name="expand_more"
                 size={30}
-                color={theme.colors.gray30}
+                color={theme.colors.neutral[500]}
               />
             ) : (
               <Icon
                 type="rounded"
                 name="expand_less"
                 size={30}
-                color={theme.colors.gray30}
+                color={theme.colors.neutral[500]}
               />
             )}
           </TouchableOpacity>
@@ -56,15 +56,15 @@ export default function PromotersScreen() {
               }}
               backgroundColor={
                 isInCommunityDonationFlow
-                  ? theme.colors.gray40
+                  ? theme.colors.neutral[800]
                   : theme.colors.gray10
               }
               textColor={
                 isInCommunityDonationFlow
                   ? theme.colors.neutral10
-                  : theme.colors.gray40
+                  : theme.colors.neutral[800]
               }
-              borderColor={theme.colors.gray40}
+              borderColor={theme.colors.neutral[800]}
               customStyles={S.firstButton}
               customTextStyles={S.buttonText}
             />
@@ -76,13 +76,13 @@ export default function PromotersScreen() {
               backgroundColor={
                 isInCommunityDonationFlow
                   ? theme.colors.gray10
-                  : theme.colors.gray40
+                  : theme.colors.neutral[800]
               }
-              borderColor={theme.colors.gray40}
+              borderColor={theme.colors.neutral[800]}
               customStyles={S.secondButton}
               textColor={
                 isInCommunityDonationFlow
-                  ? theme.colors.gray40
+                  ? theme.colors.neutral[800]
                   : theme.colors.neutral10
               }
               customTextStyles={S.buttonText}

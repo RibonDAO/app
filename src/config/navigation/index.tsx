@@ -181,7 +181,7 @@ const DefaultTheme: Theme = {
     primary: primary[200],
     background: theme.colors.neutral10,
     card: theme.colors.neutral10,
-    text: theme.colors.gray40,
+    text: theme.colors.neutral[800],
     border: theme.colors.neutral10,
     notification: primary[300],
   },

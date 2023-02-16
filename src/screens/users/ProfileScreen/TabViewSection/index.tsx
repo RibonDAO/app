@@ -25,7 +25,7 @@ const renderTabBar = (props: any) => {
                 ...S.tabBarTitle,
                 color: focused
                   ? theme.colors.brand.primary[800]
-                  : theme.colors.gray30,
+                  : theme.colors.neutral[500],
               }}
             >
               {route.title}
@@ -60,7 +60,6 @@ function TabViewSection(): JSX.Element {
         onIndexChange={setIndex}
         initialLayout={{ width: layout.width }}
         style={{ backgroundColor: theme.colors.neutral10 }}
-
       />
     </View>
   );

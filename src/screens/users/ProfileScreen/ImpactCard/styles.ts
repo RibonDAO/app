@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   description: {
     ...defaultBodyXsRegular,
     marginTop: theme.spacingNative(4),
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     fontSize: 12,
   },
 });

@@ -37,7 +37,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   const { tickets, hasTickets } = useTickets();
   const ticketColor = hasTickets()
     ? theme.colors.brand.primary[300]
-    : theme.colors.gray30;
+    : theme.colors.neutral[500];
   const ticketIcon = hasTickets() ? TicketIcon : GrayTicketIcon;
 
   function toggleModal() {

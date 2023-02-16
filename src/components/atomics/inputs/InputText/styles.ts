@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     padding: theme.spacingNative(8),
     height: 48,
     borderWidth: 1,
-    borderColor: theme.colors.gray30,
+    borderColor: theme.colors.neutral[500],
     borderRadius: 8,
   },
 });

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     padding: 16,
     borderRadius: 8,
-    shadowColor: theme.colors.gray30,
+    shadowColor: theme.colors.neutral[500],
     shadowOffset: { width: 0, height: 16 },
     shadowOpacity: 0.32,
     shadowRadius: -2,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   CommunityAddText: {
     ...defaultBodyXsRegular,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   CommunityAddValue: {
     ...stylizedDisplayXs,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     ...stylizedDisplaySm,
     marginRight: "5%",
     marginBottom: 16,
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
   },
   SupportImage: {
     width: "100%",
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     ...defaultBodySmSemibold,
     marginBottom: 4,
     textAlign: "center",
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   UserBalanceTextHighlight: {
     ...defaultBodySmSemibold,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     ...defaultBodyXsRegular,
     marginTop: 4,
     textAlign: "center",
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   TitleContainer: {
     display: "flex",
@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
   },
   supportSection: {
     paddingHorizontal: 20,
-    paddingBottom: 50
-  }
+    paddingBottom: 50,
+  },
 });
 
 export default styles;

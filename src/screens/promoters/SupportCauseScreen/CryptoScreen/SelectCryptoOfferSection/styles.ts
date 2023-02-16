@@ -5,7 +5,7 @@ import { defaultBodyXsRegular } from "styles/typography/default";
 const styles = StyleSheet.create({
   title: {
     ...defaultBodyXsRegular,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     textAlign: "center",
   },
   inputText: {

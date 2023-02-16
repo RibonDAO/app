@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: theme.spacingNative(8),
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   description: {
     ...defaultBodyLgBold,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   privacyPolicyText: {
     ...defaultBodySmRegular,
-    color: theme.colors.gray20,
+    color: theme.colors.neutral[200],
     textAlign: "center",
     marginTop: theme.spacingNative(16),
   },

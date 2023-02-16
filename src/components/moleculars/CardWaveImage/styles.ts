@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     position: "relative",
     overflowX: "hidden",
-    shadowColor: theme.colors.gray40,
+    shadowColor: theme.colors.neutral[800],
     backgroundColor: theme.colors.neutral10,
     elevation: 2,
     shadowOffset: { width: -2, height: 4 },
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     ...defaultBodyXsRegular,
     fontSize: 14,
     lineHeight: 20,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   communityAddValue: {
     ...stylizedDisplayXs,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     ...defaultBodyXsRegular,
     marginBottom: 16,
     marginTop: 12,
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
     textAlign: "center",
     minHeight: 40,
   },
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 4,
     textAlign: "center",
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   userBalanceTextHighlight: {
     ...defaultBodySmSemibold,
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginTop: 4,
     textAlign: "center",
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
 });
 

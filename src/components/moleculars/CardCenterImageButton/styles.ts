@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
   },
   info: {
     textAlign: "center",
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
   },
   icon: {
     marginTop: theme.spacingNative(4),
