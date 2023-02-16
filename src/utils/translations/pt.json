@@ -17,7 +17,7 @@
       "impactPrefix": "Doe",
       "labelText": "Saiba mais"
     },
-    "donateModal": {
+    "donateScreen": {
       "nonProfitText": "Você está doando para",
       "description": "Insira seu e-mail para usar seu ticket de doação",
       "title": "Preencha seu email para doar",
@@ -26,7 +26,9 @@
       "safeDataText": "Os seus dados estão seguros com a gente",
       "donatingText": "Doando",
       "donateText": "Doar",
-      "cancel": "voltar"
+      "agreementText": "Ao inserir seu e-mail e se inscrever, você aceita a nossa",
+      "privacyPolicyText": "Política de Privacidade",
+      "privacyPolicyLink": "https://ribon.io/2021/06/01/politica-de-privacidade-e-retencao-de-dados-pessoais/"
     },
     "donationDoneScreen": {
       "title": "Parabéns!",

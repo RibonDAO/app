@@ -4,8 +4,10 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Linking
 } from "react-native";
 import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
+import { theme } from "@ribon.io/shared/styles";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import Image from "components/atomics/Image";
@@ -24,7 +26,7 @@ import Placeholder from "./placeholder";
 
 function DonateScreen() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.donateModal",
+    keyPrefix: "donations.donateScreen",
   });
   const [isDonating, setIsDonating] = useState(false);
   const [invalidInput, setInvalidInput] = useState(false);
@@ -78,6 +80,9 @@ function DonateScreen() {
     setEmail(text);
   };
 
+  const linkToPrivacyPolicy = () => {
+    Linking.openURL(t("privacyPolicyLink"));
+  };
   return (
     <View style={S.modalWrapper}>
       <View style={S.nonProfitContainer}>
@@ -87,7 +92,7 @@ function DonateScreen() {
         </View>
         <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
         <LinearGradient
-          colors={["rgb(140, 224, 190)", "transparent"]}
+          colors={[theme.colors.green40, "transparent"]}
           start={[0.0, 0.5]}
           end={[1.0, 0.5]}
           locations={[0.0, 1.0]}
@@ -125,14 +130,12 @@ function DonateScreen() {
                 disabled={isDonating || !isValidEmail(email)}
                 customStyles={S.button}
               />
-              <Button
-                text={t("cancel")}
-                onPress={() => popNavigation()}
-                customStyles={S.cancelButton}
-                outline
-              />
+              <Text style={S.privacyPolicyText}>
+                {t("agreementText")}{" "}
+                <Text style={S.privacyPolicyLink} onPress={linkToPrivacyPolicy}>{t("privacyPolicyText")}</Text>
+              </Text>
             </View>
-          </View>
+          </View>                                                                                                                                                                                                                                                                    
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </View>
