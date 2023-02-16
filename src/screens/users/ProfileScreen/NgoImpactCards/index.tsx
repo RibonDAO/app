@@ -25,8 +25,8 @@ function NgoImpactCards(): JSX.Element {
     keyPrefix: "users.profileScreen.ngoImpactCards.zeroDonationsSection",
   });
 
-  const navigateToPromotersScreen = () => {
-    navigateTo("PromotersScreen");
+  const navigateToCausesScreen = () => {
+    navigateTo("CausesScreen");
   };
 
   const impactCardsList = () => (
@@ -55,7 +55,7 @@ function NgoImpactCards(): JSX.Element {
   ) : (
     <ZeroDonationsSection
       title={t("ticket.title")}
-      onButtonPress={navigateToPromotersScreen}
+      onButtonPress={navigateToCausesScreen}
       description={t("ticket.description")}
       buttonText={t("ticket.buttonText")}
       image={<ImpactDonationsVector />}
