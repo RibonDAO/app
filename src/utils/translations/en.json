@@ -149,7 +149,7 @@
             "title": "Your direct donations will appear here.",
             "description": "You have not made direct donations  yet, why not try your first one?",
             "buttonText": "Donate directly"
-          },
+          }
         }
       },
       "communityDonationsTitle": "Community Donations",
