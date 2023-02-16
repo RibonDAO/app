@@ -21,7 +21,9 @@
         "primaryButtonText": "Acesse o suporte"
       },
       "impactPrefix": "Doe",
-      "labelText": "Saiba mais"
+      "labelText": "Saiba mais",
+      "whatIsATicket": "O que é um ticket?",
+      "ticketExplanation": "Os tickets são usados para fazer doações. Você ganha um novo todo dia quando loga na Ribon :)"
     },
     "donateModal": {
       "nonProfitText": "Você está doando para",

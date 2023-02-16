@@ -56,7 +56,7 @@ export default function CausesScreen() {
       containerStyle={S.tooltip}
       backdropOpacity={0.1}
     >
-      <Text>Tickets are used to make donations and you get a new one everyday when you log in Ribon.</Text>
+      <Text>{t("ticketExplanation")}</Text>
     </BlankModal>
   }
 
@@ -184,7 +184,7 @@ export default function CausesScreen() {
 
       <View style={S.ticketExplanationSection}>
         <Icon type="rounded" name="help" size={20} color={theme.colors.gray30} />
-        <Text style={S.ticketText} onPress={() => setTooltipVisible(true)}>O que é um ticket?</Text>
+        <Text style={S.ticketText} onPress={() => setTooltipVisible(true)}>{t("whatIsATicket")}</Text>
       </View>
 
       {renderTooltip()}

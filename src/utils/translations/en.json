@@ -21,7 +21,9 @@
         "primaryButtonText": "Access support"
       },
       "impactPrefix": "Donate",
-      "labelText": "Learn more"
+      "labelText": "Learn more",
+      "whatIsATicket": "What is a ticket?",
+      "ticketExplanation": "Tickets are used to make donations and you get a new one everyday when you log in Ribon."
     },
     "donateModal": {
       "nonProfitText": "You are donating to",
