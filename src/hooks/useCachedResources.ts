@@ -15,6 +15,7 @@ import * as Notifications from "expo-notifications";
 import SpaceMono from "../assets/fonts/SpaceMono-Regular.ttf";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter from "../assets/fonts/Inter.ttf";
+import initializeChat from "services/chat";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -29,6 +30,11 @@ export default function useCachedResources() {
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
   const [expoPushToken, setExpoPushToken] = useState("");
+
+  useEffect(() => {
+    initializeChat();
+  },[]);
+
 
   useEffect(() => {
     initializeApi({
