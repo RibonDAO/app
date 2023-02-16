@@ -102,7 +102,7 @@ function RootNavigator() {
         component={DonateScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.green40,
+          headerTintColor: theme.colors.brand.primary[800],
           headerTitle: "",
           headerBackTitleVisible: true,
         }}

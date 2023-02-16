@@ -25,7 +25,7 @@ function ZeroDonationsSection({
       <Button
         text={buttonText}
         onPress={onButtonPress}
-        textColor={theme.colors.green40}
+        textColor={theme.colors.brand.primary[400]}
         customStyles={{ width: 200 }}
       />
     </View>

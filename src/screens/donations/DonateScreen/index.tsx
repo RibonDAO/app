@@ -82,7 +82,7 @@ function DonateScreen() {
         </View>
         <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
         <LinearGradient
-          colors={[theme.colors.green40, "transparent"]}
+          colors={[theme.colors.brand.primary[800], "transparent"]}
           start={[0.0, 0.5]}
           end={[1.0, 0.5]}
           locations={[0.0, 1.0]}
