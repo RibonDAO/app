@@ -139,9 +139,21 @@
       },
       "ngoImpactCards": {
         "zeroDonationsSection": {
-          "title": "Suas doações em comunidade aparecerão aqui.",
-          "description": "Você não fez doações em comunidade ainda, que tal fazer sua primeira?",
-          "buttonText": "Doar em comunidade"
+          "community": {
+            "title": "Suas doações em comunidade aparecerão aqui.",
+            "description": "Você não fez doações em comunidade ainda, que tal fazer sua primeira?",
+            "buttonText": "Doar em comunidade"
+          },
+          "ticket": {
+            "title": "Suas doações de tickets aparecerão aqui.",
+            "description": "Você ainda não fez doações gratuitas com tickets ainda, que tal fazer a primeira?",
+            "buttonText": "Doar usando tickets"
+          },
+          "direct": {
+            "title": "Suas doações diretas aparecerão aqui.",
+            "description": "Você ainda não fez doações diretas, que tal fazer a sua primeira?",
+            "buttonText": "Doar diretamente"
+          }
         }
       },
       "communityDonationsTitle": "Doações em Comunidade",

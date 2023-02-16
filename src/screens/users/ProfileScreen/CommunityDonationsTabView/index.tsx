@@ -1,12 +1,14 @@
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import NgoImpactCards from "../NgoImpactCards";
+import CommunityDonationsImpactCards from "../CommunityDonationsImpactCards";
 
 function CommunityDonationsTabView(): JSX.Element {
   return (
-    <View style={{ height: "100%", backgroundColor: theme.colors.neutral10 }}>
-      <NgoImpactCards />
-    </View>
+    <ScrollView
+      style={{ height: "100%", backgroundColor: theme.colors.neutral10 }}
+    >
+      <CommunityDonationsImpactCards />
+    </ScrollView>
   );
 }
 

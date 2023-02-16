@@ -7,17 +7,11 @@ import {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "flex-start",
     marginBottom: theme.spacingNative(12),
   },
   impactCardContainer: {
-    display: "flex",
-    flexDirection: "row",
-    height: 140,
     borderRadius: 8,
     padding: theme.spacingNative(16),
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: theme.colors.neutral10,
     shadowColor: "rgba(40, 36, 28, 0.2)",
     shadowOffset: {
@@ -45,8 +39,6 @@ const styles = StyleSheet.create({
   },
   contentSection: {
     width: "100%",
-    height: "100%",
-    marginLeft: theme.spacingNative(12),
     justifyContent: "center",
   },
 });
