@@ -12,13 +12,12 @@ export default function DonationDoneScreen({
     keyPrefix: "donations.donationDoneScreen",
   });
   const { nonProfit } = route.params;
-  const { popNavigation, navigateTo } = useNavigation();
+  const { navigateTo } = useNavigation();
   const { formattedImpactText } = useFormattedImpactText();
 
   useEffect(() => {
     setTimeout(() => {
       navigateTo("ChooseCauseScreen");
-      // popNavigation();
     }, 5000);
   }, []);
 
