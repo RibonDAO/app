@@ -4,6 +4,12 @@
     "giving": "Doações",
     "profile": "Impacto"
   },
+  "layoutHeader": {
+    "exitButton": "Sair",
+    "support": "Suporte ao usuário",
+    "login": "Fazer login",
+    "language": "Alterar idioma"
+  },
   "donations": {
     "causesScreen": {
       "title": "Doe para um projeto",

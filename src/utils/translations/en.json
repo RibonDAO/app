@@ -4,6 +4,12 @@
     "giving": "Donations",
     "profile": "Impact"
   },
+  "layoutHeader": {
+    "exitButton": "Exit",
+    "support": "User Support",
+    "login": "Login",
+    "language": "Change language"
+  },
   "donations": {
     "causesScreen": {
       "title": "Donate to a Project",

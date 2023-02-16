@@ -20,6 +20,7 @@ import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import S from "./styles";
 import Icon from "components/atomics/Icon";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   hideTicket?: boolean;
@@ -34,6 +35,9 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   const { canDonate, refetch } = useCanDonate(RIBON_INTEGRATION_ID);
   const ticketColor = canDonate ? theme.colors.green30 : theme.colors.gray30;
   const ticketIcon = canDonate ? TicketIcon : GrayTicketIcon;
+  const { t } = useTranslation("translation", {
+    keyPrefix: "layoutHeader",
+  });
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
@@ -64,7 +68,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   function handleUserLogin() {
     return currentUser ? (
       <View style={{ width: 50 }}>
-        <RoundButton active={false} text="Sair" onPress={handleLogout} />
+        <RoundButton active={false} text={t("exitButton")} onPress={handleLogout} />
       </View>
     ) : (
       <Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={redirectToProfileScreen} />
@@ -128,19 +132,19 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
         <View style={S.supportContainer}>
           <ConfigItem
             icon={SupportIcon}
-            text="Suporte ao usuário"
+            text={t("support")}
             cta={<Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={linkToSupport} />}
           />
 
           <ConfigItem
             icon={LetterIcon}
-            text={currentUser ? currentUser?.email : "Fazer login"}
+            text={currentUser ? currentUser?.email : t("login")}
             cta={handleUserLogin()}
           />
 
           <ConfigItem
             icon={GlobeIcon}
-            text="Alterar idioma"
+            text={t("language")}
             linkIcon={ChangeLanguageItem}
           />
         </View>
