@@ -35,7 +35,9 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { tickets, hasTickets } = useTickets();
-  const ticketColor = hasTickets() ? theme.colors.brand.primary[300] : theme.colors.gray30;
+  const ticketColor = hasTickets()
+    ? theme.colors.brand.primary[300]
+    : theme.colors.gray30;
   const ticketIcon = hasTickets() ? TicketIcon : GrayTicketIcon;
 
   function toggleModal() {
@@ -56,10 +58,20 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   function handleUserLogin() {
     return currentUser ? (
       <View style={{ width: 50 }}>
-        <RoundButton active={false} text={t("exitButton")} onPress={handleLogout} />
+        <RoundButton
+          active={false}
+          text={t("exitButton")}
+          onPress={handleLogout}
+        />
       </View>
     ) : (
-      <Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={redirectToProfileScreen} />
+      <Icon
+        type="rounded"
+        size={20}
+        color={theme.colors.brand.primary[300]}
+        name="arrow_forward_ios"
+        onPress={redirectToProfileScreen}
+      />
     );
   }
 
@@ -121,7 +133,15 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
           <ConfigItem
             icon={SupportIcon}
             text={t("support")}
-            cta={<Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={linkToSupport} />}
+            cta={
+              <Icon
+                type="rounded"
+                size={20}
+                color={theme.colors.brand.primary[300]}
+                name="arrow_forward_ios"
+                onPress={linkToSupport}
+              />
+            }
           />
 
           <ConfigItem

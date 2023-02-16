@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
     marginTop: theme.spacingNative(16),
   },
   privacyPolicyLink: {
-    color: theme.colors.green30,
-  }
+    color: theme.colors.brand.primary[300],
+  },
 });
 
 export default styles;
