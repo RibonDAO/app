@@ -4,6 +4,12 @@
     "giving": "Donations",
     "profile": "Impact"
   },
+  "layoutHeader": {
+    "exitButton": "Exit",
+    "support": "User Support",
+    "login": "Login",
+    "language": "Change language"
+  },
   "donations": {
     "causesScreen": {
       "title": "Donate to a Project",
@@ -15,9 +21,11 @@
         "primaryButtonText": "Access support"
       },
       "impactPrefix": "Donate",
-      "labelText": "Learn more"
+      "labelText": "Learn more",
+      "whatIsATicket": "What is a ticket?",
+      "ticketExplanation": "Tickets are used to make donations and you get a new one everyday when you log in Ribon."
     },
-    "donateModal": {
+    "donateScreen": {
       "nonProfitText": "You are donating to",
       "description": "Enter your e-mail to use your donation ticket",
       "title": "Place your e-mail to donate",
@@ -26,7 +34,9 @@
       "safeDataText": "All your data is safe with us",
       "donatingText": "Donating",
       "donateText": "Donate",
-      "cancel": "go back"
+      "agreementText": "By signing up you agree to Ribon's",
+      "privacyPolicyText": "Privacy Policy",
+      "privacyPolicyLink": "https://ribon.io/2022/06/10/privacy-and-personal-data-retention-policy/"
     },
     "donationDoneScreen": {
       "title": "Congratulations!",

@@ -15,7 +15,7 @@ import { View, Text } from "react-native";
 import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
-import UserSupportSection from "components/moleculars/UserSupportItem";
+import UserSupportSection from "components/moleculars/UserSupportSection";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
 

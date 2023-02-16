@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     paddingHorizontal: 16,
-    backgroundColor: theme.colors.neutral10,
+    backgroundColor: theme.colors.neutral10
   },
   containerTicket: {
     height: 350,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     paddingTop: theme.spacingNative(16),
-    paddingBottom: theme.spacingNative(40),
+    paddingBottom: theme.spacingNative(20),
   },
   groupButtonsContainer: {
     paddingTop: theme.spacingNative(16),
@@ -31,6 +31,22 @@ const styles = StyleSheet.create({
     color: theme.colors.gray40,
     width: "100%",
   },
+  ticketExplanationSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: theme.spacingNative(12),
+  },
+  ticketText: {
+    textDecorationLine: "underline",
+    textDecorationStyle: "dotted",
+    color: theme.colors.gray30,
+    marginLeft: theme.spacingNative(4),
+  },
+  tooltip: {
+    position: "absolute",
+    backgroundColor: theme.colors.neutral10
+  }
 });
 
 export default styles;

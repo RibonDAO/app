@@ -4,10 +4,16 @@
     "giving": "Doações",
     "profile": "Impacto"
   },
+  "layoutHeader": {
+    "exitButton": "Sair",
+    "support": "Suporte ao usuário",
+    "login": "Fazer login",
+    "language": "Alterar idioma"
+  },
   "donations": {
     "causesScreen": {
       "title": "Doe para um projeto",
-      "buttonText": "Donate",
+      "buttonText": "Doar",
       "allCauses": "Todas",
       "userSupportSection": {
         "title": "Suporte ao Usuário",
@@ -15,9 +21,11 @@
         "primaryButtonText": "Acesse o suporte"
       },
       "impactPrefix": "Doe",
-      "labelText": "Saiba mais"
+      "labelText": "Saiba mais",
+      "whatIsATicket": "O que é um ticket?",
+      "ticketExplanation": "Os tickets são usados para fazer doações. Você ganha um novo todo dia quando loga na Ribon :)"
     },
-    "donateModal": {
+    "donateScreen": {
       "nonProfitText": "Você está doando para",
       "description": "Insira seu e-mail para usar seu ticket de doação",
       "title": "Preencha seu email para doar",
@@ -26,7 +34,9 @@
       "safeDataText": "Os seus dados estão seguros com a gente",
       "donatingText": "Doando",
       "donateText": "Doar",
-      "cancel": "voltar"
+      "agreementText": "Ao inserir seu e-mail e se inscrever, você aceita a nossa",
+      "privacyPolicyText": "Política de Privacidade",
+      "privacyPolicyLink": "https://ribon.io/2021/06/01/politica-de-privacidade-e-retencao-de-dados-pessoais/"
     },
     "donationDoneScreen": {
       "title": "Parabéns!",

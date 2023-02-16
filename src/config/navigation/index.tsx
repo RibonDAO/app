@@ -24,6 +24,7 @@ import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
+import TicketsProvider from "contexts/ticketsContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -100,10 +101,10 @@ function RootNavigator() {
         name="DonateScreen"
         component={DonateScreen}
         options={{
-          headerShown: false,
-          headerTintColor: theme.colors.orange40,
+          headerShown: true,
+          headerTintColor: theme.colors.green40,
           headerTitle: "",
-          headerBackTitleVisible: false,
+          headerBackTitleVisible: true,
         }}
       />
 
@@ -195,7 +196,9 @@ export default function Navigation() {
             <CryptoPaymentProvider>
               <CardPaymentInformationProvider>
                 <CausesProvider>
-                  <RootNavigator />
+                  <TicketsProvider>
+                    <RootNavigator />
+                  </TicketsProvider>
                 </CausesProvider>
               </CardPaymentInformationProvider>
             </CryptoPaymentProvider>

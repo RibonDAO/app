@@ -67,7 +67,7 @@ function CardScreen(): JSX.Element {
   );
 
   return (
-    <ScrollView contentContainerStyle={S.Container}>
+    <View style={S.Container}>
       <View style={S.TitleContainer}>
         <Text style={S.Title}>{t("title")}</Text>
 
@@ -96,12 +96,12 @@ function CardScreen(): JSX.Element {
           />
         )}
         data={filteredNonProfits()}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item?.id?.toString()}
         horizontal
         contentContainerStyle={S.scrollContainer}
         showsHorizontalScrollIndicator={false}
       />
-    </ScrollView>
+    </View>
   );
 }
 

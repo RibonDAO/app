@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    marginTop: 12,
+    marginVertical: 12,
   },
   imageBackground: {
     flex: 1,

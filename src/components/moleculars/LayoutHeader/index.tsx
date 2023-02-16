@@ -1,5 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -8,12 +8,13 @@ import LetterIcon from "components/vectors/LetterIcon";
 import { TouchableOpacity, Linking } from "react-native";
 import Modal from "react-native-modal";
 import RoundButton from "components/atomics/RoundButton";
-import { useCanDonate } from "@ribon.io/shared";
 import TicketIcon from "components/vectors/TicketIcon";
 import GrayTicketIcon from "components/vectors/GrayTicketIcon";
 import { useNavigation } from "hooks/useNavigation";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
+import { useTickets } from "contexts/ticketsContext";
+import Icon from "components/atomics/Icon";
+import { useTranslation } from "react-i18next";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
@@ -24,32 +25,22 @@ type Props = {
   hideTicket?: boolean;
 };
 function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "layoutHeader",
+  });
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [blockedDonationModalVisible, setBlockedDonationModalVisible] =
     useState(false);
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
-  const { canDonate, refetch } = useCanDonate(RIBON_INTEGRATION_ID);
-  const ticketColor = canDonate
-    ? theme.colors.brand.primary[300]
-    : theme.colors.gray30;
-  const ticketIcon = canDonate ? TicketIcon : GrayTicketIcon;
+  const { tickets, hasTickets } = useTickets();
+  const ticketColor = hasTickets() ? theme.colors.brand.primary[300] : theme.colors.gray30;
+  const ticketIcon = hasTickets() ? TicketIcon : GrayTicketIcon;
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      refetch();
-    }, 200);
-  }, [JSON.stringify(currentUser)]);
-
-  const renderTicketCounter = useCallback(
-    () => (canDonate ? 1 : 0),
-    [canDonate],
-  );
 
   function handleLogout() {
     logoutCurrentUser();
@@ -57,11 +48,18 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
     toggleModal();
   }
 
+  function redirectToProfileScreen() {
+    toggleModal();
+    navigateTo("ProfileScreen");
+  }
+
   function handleUserLogin() {
     return currentUser ? (
-      <RoundButton active={false} text="Sair" onPress={handleLogout} />
+      <View style={{ width: 50 }}>
+        <RoundButton active={false} text={t("exitButton")} onPress={handleLogout} />
+      </View>
     ) : (
-      <RoundButton text="Doar" onPress={toggleModal} />
+      <Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={redirectToProfileScreen} />
     );
   }
 
@@ -96,7 +94,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   }
 
   function handleTicketClick() {
-    if (canDonate) {
+    if (hasTickets()) {
       toggleTicketModal();
     } else {
       toggleBlockedDonationModal();
@@ -121,21 +119,21 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
       >
         <View style={S.supportContainer}>
           <ConfigItem
-            icon={GlobeIcon}
-            text="Alterar idioma"
-            linkIcon={ChangeLanguageItem}
-          />
-
-          <ConfigItem
             icon={SupportIcon}
-            text="Suporte ao Usuário"
-            cta={<RoundButton text="Suporte" onPress={linkToSupport} />}
+            text={t("support")}
+            cta={<Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={linkToSupport} />}
           />
 
           <ConfigItem
             icon={LetterIcon}
-            text={currentUser ? currentUser?.email : "Fazer login"}
+            text={currentUser ? currentUser?.email : t("login")}
             cta={handleUserLogin()}
+          />
+
+          <ConfigItem
+            icon={GlobeIcon}
+            text={t("language")}
+            linkIcon={ChangeLanguageItem}
           />
         </View>
       </Modal>
@@ -148,7 +146,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
         <TouchableOpacity style={S.container} onPress={handleTicketClick}>
           <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
             <Text style={{ ...S.ticketCounter, color: ticketColor }}>
-              {renderTicketCounter()}
+              {tickets}
             </Text>
             {ticketIcon()}
           </View>

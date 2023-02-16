@@ -15,7 +15,7 @@ function ChangeLanguageItem(): JSX.Element {
         leftText="PT"
         rightText="EN"
         onSwitch={() => handleSwitch()}
-        initialCheckState={currentLang === "en-US"}
+        initialCheckState={currentLang === "pt-BR"}
       />
     </View>
   );
