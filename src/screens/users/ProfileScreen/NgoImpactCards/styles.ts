@@ -7,9 +7,9 @@ const styles = StyleSheet.create({
     marginTop: theme.spacingNative(20),
   },
   ngosListContainer: {
-    paddingTop: 16,
-    paddingBottom: 24,
-    paddingHorizontal: 16,
+    paddingTop: theme.spacingNative(16),
+    paddingBottom: theme.spacingNative(24),
+    paddingHorizontal: theme.spacingNative(16),
   }
 });
 
