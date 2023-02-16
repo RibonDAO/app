@@ -23,7 +23,6 @@ import { useRouteParams } from "hooks/useRouteParams";
 import InputText from "components/atomics/inputs/InputText";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import Placeholder from "./placeholder";
-import { Link } from "@react-navigation/native";
 
 function DonateScreen() {
   const { t } = useTranslation("translation", {
