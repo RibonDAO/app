@@ -19,6 +19,7 @@ import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { logError } from "services/crashReport";
+import { useTickets } from "contexts/ticketsContext";
 import S from "./styles";
 import Placeholder from "./placeholder";
 
@@ -45,6 +46,7 @@ export default function CausesScreen() {
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
+  const { setTickets, hasTickets } = useTickets();
 
   useEffect(() => {
     logEvent("app_causes_page_view");
@@ -104,6 +106,10 @@ export default function CausesScreen() {
     }
   };
 
+  const handleTicketReceived = () => {
+    setTicketModalVisible(false);
+  };
+
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
@@ -118,12 +124,11 @@ export default function CausesScreen() {
         visible={ticketModalVisible}
         setVisible={setTicketModalVisible}
         containerStyle={S.containerTicket}
+        onModalHide={() => {
+          setTickets(1);
+        }}
       >
-        <ReceiveTicketScreen
-          onTicketReceived={() => {
-            setTicketModalVisible(false);
-          }}
-        />
+        <ReceiveTicketScreen onTicketReceived={handleTicketReceived} />
       </BlankModal>
       <Text style={S.title}>{t("title")}</Text>
       <View style={S.groupButtonsContainer}>
@@ -161,7 +166,7 @@ export default function CausesScreen() {
               onClickButton={() => {
                 navigateTo("DonateScreen", { nonProfit });
               }}
-              buttonDisabled={!canDonate}
+              buttonDisabled={!hasTickets()}
               labelText={t("labelText") || ""}
             />
           </View>
