@@ -50,9 +50,7 @@
       "title": "Donating together to change lives!",
       "description": "You have a ticket to receive :)",
       "buttonText": "Receive ticket",
-      "animationModal": {
-        "text": "Receiving ticket"
-      }
+      "animationText": "Receiving ticket"
     }
   },
   "contexts": {

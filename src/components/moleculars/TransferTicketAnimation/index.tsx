@@ -1,6 +1,4 @@
 import { Dimensions, View } from "react-native";
-import SupportersIcon from "components/vectors/SupportersIcon";
-import UserIcon from "components/vectors/UserIcon";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
 import * as Animatable from "react-native-animatable";
 import { useTranslation } from "react-i18next";
@@ -9,6 +7,9 @@ import S from "./styles";
 
 type Props = {
   onAnimationEnd: () => void;
+  senderIcon?: JSX.Element;
+  receiverIcon?: JSX.Element;
+  description?: string;
 };
 
 const boxAnimation = {
@@ -29,17 +30,13 @@ const fadeIn = {
   },
 };
 
-function TransferTicketAnimation({ onAnimationEnd }: Props): JSX.Element {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "donations.receiveTicketScreen.animationModal",
-  });
-
+function TransferTicketAnimation({ onAnimationEnd, senderIcon, receiverIcon, description }: Props): JSX.Element {
   return (
     <View style={S.containerColumn}>
       <View style={S.containerRow}>
         <View style={S.diamond}>
           <View style={S.diamondImage}>
-            <SupportersIcon />
+            {senderIcon}
           </View>
         </View>
 
@@ -57,7 +54,7 @@ function TransferTicketAnimation({ onAnimationEnd }: Props): JSX.Element {
 
         <View style={S.diamond}>
           <View style={S.diamondImage}>
-            <UserIcon />
+            {receiverIcon}
           </View>
         </View>
       </View>
@@ -68,7 +65,7 @@ function TransferTicketAnimation({ onAnimationEnd }: Props): JSX.Element {
         style={S.text}
         onAnimationEnd={onAnimationEnd}
       >
-        {t("text")}
+        {description}
       </Animatable.Text>
     </View>
   );
