@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     marginTop: theme.spacingNative(16),
   },
   imageContainer: {
-    width: 296,
+    width: 320,
     height: 136,
     position: "relative",
     display: "flex",

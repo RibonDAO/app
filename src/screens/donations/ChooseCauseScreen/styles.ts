@@ -5,13 +5,13 @@ import { stylizedDisplayMd } from "styles/typography/stylized";
 const styles = StyleSheet.create({
   container: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     width: "100%",
     height: "100%",
     resizeMode: "cover",
-    borderRadius: 4,
-    marginBottom: theme.spacingNative(16),
+    marginVertical: theme.spacingNative(20),
+    padding: theme.spacingNative(20)
   },
   text: {
     ...stylizedDisplayMd,
@@ -21,12 +21,8 @@ const styles = StyleSheet.create({
     lineHeight: 36,
   },
   imageContainer: {
-    display: "flex",
-    width: "90%",
-    height: 160,
-    resizeMode: "cover",
-    borderRadius: 16,
-    marginBottom: theme.spacingNative(16),
+    width: 96,
+    height: 96,
     shadowColor: "rgba(40, 36, 28, 0.2)",
     shadowOffset: {
       width: 0,
@@ -34,6 +30,7 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
+    marginBottom: theme.spacingNative(24)
   },
   imageBackground: {
     width: "100%",

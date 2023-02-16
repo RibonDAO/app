@@ -17,7 +17,7 @@ function CauseImage({ name, coverImage, id }: Props) {
 
   const handleClick = () => {
     setCurrentCauseId(id);
-    navigateTo("CausesScreen");
+    navigateTo("PromotersScreen");
   };
 
   return (
