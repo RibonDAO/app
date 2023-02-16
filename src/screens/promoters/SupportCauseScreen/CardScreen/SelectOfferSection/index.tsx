@@ -12,7 +12,7 @@ import Dropdown from "components/moleculars/Dropdown";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import styles from "./styles";
 
-const { brand.secondary[700] } = theme.colors;
+const { secondary } = theme.colors;
 const { neutral } = theme.colors;
 
 type Props = {
@@ -107,8 +107,8 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
           const changeValue = Array.isArray(value) ? value[0] : value;
           setCurrentOfferIndex(changeValue);
         }}
-        color={brand.secondary[700]}
-        minimumTrackTintColor={brand.secondary[700]}
+        color={secondary[700]}
+        minimumTrackTintColor={secondary[700]}
         maximumTrackTintColor={neutral[200]}
         sliderStyle={styles.sliderStyle}
       />
