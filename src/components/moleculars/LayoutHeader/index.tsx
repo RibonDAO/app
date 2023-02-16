@@ -1,5 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -8,12 +8,11 @@ import LetterIcon from "components/vectors/LetterIcon";
 import { TouchableOpacity, Linking } from "react-native";
 import Modal from "react-native-modal";
 import RoundButton from "components/atomics/RoundButton";
-import { useCanDonate } from "@ribon.io/shared";
 import TicketIcon from "components/vectors/TicketIcon";
 import GrayTicketIcon from "components/vectors/GrayTicketIcon";
 import { useNavigation } from "hooks/useNavigation";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
+import { useTickets } from "contexts/ticketsContext";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
@@ -30,24 +29,13 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
     useState(false);
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
-  const { canDonate, refetch } = useCanDonate(RIBON_INTEGRATION_ID);
-  const ticketColor = canDonate ? theme.colors.green30 : theme.colors.gray30;
-  const ticketIcon = canDonate ? TicketIcon : GrayTicketIcon;
+  const { tickets, hasTickets } = useTickets();
+  const ticketColor = hasTickets() ? theme.colors.green30 : theme.colors.gray30;
+  const ticketIcon = hasTickets() ? TicketIcon : GrayTicketIcon;
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      refetch();
-    }, 200);
-  }, [JSON.stringify(currentUser)]);
-
-  const renderTicketCounter = useCallback(
-    () => (canDonate ? 1 : 0),
-    [canDonate],
-  );
 
   function handleLogout() {
     logoutCurrentUser();
@@ -94,7 +82,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   }
 
   function handleTicketClick() {
-    if (canDonate) {
+    if (hasTickets()) {
       toggleTicketModal();
     } else {
       toggleBlockedDonationModal();
@@ -146,7 +134,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
         <TouchableOpacity style={S.container} onPress={handleTicketClick}>
           <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
             <Text style={{ ...S.ticketCounter, color: ticketColor }}>
-              {renderTicketCounter()}
+              {tickets}
             </Text>
             {ticketIcon()}
           </View>

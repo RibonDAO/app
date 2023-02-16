@@ -26,6 +26,10 @@ import CardPaymentInformationProvider, {
   CardPaymentInformationContext,
   ICardPaymentInformationContext,
 } from "contexts/cardPaymentInformationContext";
+import TicketsProvider, {
+  ITicketsContext,
+  TicketsContext,
+} from "contexts/ticketsContext";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -64,6 +68,7 @@ export type RenderComponentProps = {
   loadingOverlayValue?: Partial<ILoadingOverlayContext>;
   cryptoPaymentProviderValue?: Partial<ICryptoPaymentContext>;
   cardPaymentProviderValue?: Partial<ICardPaymentInformationContext>;
+  ticketsProviderValue?: Partial<ITicketsContext>;
 };
 
 function renderAllProviders(
@@ -74,6 +79,7 @@ function renderAllProviders(
     cryptoPaymentProviderValue = {},
     loadingOverlayValue = {},
     cardPaymentProviderValue = {},
+    ticketsProviderValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -102,7 +108,12 @@ function renderAllProviders(
                     CardPaymentInformationProvider,
                     CardPaymentInformationContext,
                     cardPaymentProviderValue,
-                    children,
+                    renderProvider(
+                      TicketsProvider,
+                      TicketsContext,
+                      ticketsProviderValue,
+                      children,
+                    ),
                   ),
                 ),
               ),
