@@ -143,7 +143,10 @@
           "description": "Você não fez doações em comunidade ainda, que tal fazer sua primeira?",
           "buttonText": "Doar em comunidade"
         }
-      }
+      },
+      "communityDonationsTitle": "Doações em Comunidade",
+      "ticketDonationsTitle": "Doações em Ticket",
+      "directDonationsTitle": "Doações Diretas"
     }
   },
   "impactNormalizer": {

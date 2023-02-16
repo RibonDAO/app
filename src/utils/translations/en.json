@@ -144,7 +144,10 @@
           "description": "You have not made community donations yet, why not try your first one?",
           "buttonText": "Donate in community"
         }
-      }
+      },
+      "communityDonationsTitle": "Community Donations",
+      "ticketDonationsTitle": "Ticket Donations",
+      "directDonationsTitle": "Direct Donations"
     }
   },
   "impactNormalizer": {

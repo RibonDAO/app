@@ -2,7 +2,7 @@ import { theme } from "@ribon.io/shared/styles";
 import { StyleSheet } from "react-native";
 import {
   defaultBodyLgBold,
-  defaultBodyXsRegular,
+  defaultBodySmRegular,
 } from "styles/typography/default";
 
 const styles = StyleSheet.create({
@@ -34,10 +34,9 @@ const styles = StyleSheet.create({
     color: theme.colors.green30,
   },
   description: {
-    ...defaultBodyXsRegular,
+    ...defaultBodySmRegular,
     marginTop: theme.spacingNative(4),
     color: theme.colors.gray30,
-    fontSize: 12,
   },
   image: {
     width: 60,
