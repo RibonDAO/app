@@ -1,11 +1,11 @@
-import { FlatList, Text, View } from "react-native";
-import { ReactElement, useCallback } from "react";
+import { View } from "react-native";
+import { useCallback } from "react";
 import { useImpact } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
+import useFormattedImpactText from "hooks/useFormattedImpactText";
 import NgoImpactCard from "../NgoImpactCard";
 import S from "./styles";
 import ZeroDonationsSection from "./ZeroDonationsSection";
-import useFormattedImpactText from "hooks/useFormattedImpactText";
 
 function NgoImpactCards(): JSX.Element {
   const { currentUser } = useCurrentUser();
@@ -16,31 +16,26 @@ function NgoImpactCards(): JSX.Element {
     () => userImpact?.filter((item) => item.impact.toString() !== "0"),
     [userImpact],
   );
-  const hasImpact = impactItems() && impactItems().length > 0;
-
-  const renderItem = ({ item }: { item: any }): ReactElement<any, any> => (
-    <NgoImpactCard
-      key={item?.nonProfit.id}
-      description={formattedImpactText(
-        item.nonProfit,
-        item.impact,
-        true,
-        true
-      )}
-      name={item?.nonProfit.name}
-      icon={item?.nonProfit.logo}
-      onPress={() => { }}
-    />
-  );
+  const hasImpact = impactItems() && impactItems()?.length > 0;
 
   const impactCardsList = () => (
     <View style={S.cardsContainer}>
-      <FlatList
-        data={impactItems()}
-        renderItem={renderItem}
-        keyExtractor={(index) => index?.nonProfit.name}
-        contentContainerStyle={S.ngosListContainer}
-      />
+      {impactItems()?.map((item) => (
+        <View key={item?.nonProfit?.id}>
+          <NgoImpactCard
+            key={item?.nonProfit.id}
+            description={formattedImpactText(
+              item.nonProfit,
+              Number(item.impact),
+              true,
+              true,
+            )}
+            name={item?.nonProfit.name}
+            icon={item?.nonProfit.logo}
+            onPress={() => {}}
+          />
+        </View>
+      ))}
     </View>
   );
 
