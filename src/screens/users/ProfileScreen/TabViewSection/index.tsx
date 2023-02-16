@@ -1,54 +1,55 @@
 import { useWindowDimensions, View, Text } from "react-native";
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { theme } from "@ribon.io/shared";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import TicketDonationsTabView from "../TicketDonationsTabView";
 import CommunityDonationsTabView from "../CommunityDonationsTabView";
 import DirectDonationsTabView from "../DirectDonationsTabView";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import { theme } from "@ribon.io/shared";
 import S from "./styles";
-import { useState } from "react";
 
 const renderScene = SceneMap({
-  TicketDonationsTabView: TicketDonationsTabView,
-  CommunityDonationsTabView: CommunityDonationsTabView,
-  DirectDonationsTabView: DirectDonationsTabView,
+  TicketDonationsTabView,
+  CommunityDonationsTabView,
+  DirectDonationsTabView,
 });
 
-const renderTabBar = (props: any) => {
-  return (
-    <TabBar
-      {...props}
-      renderLabel={({ focused, route }) => {
-        return (
-          <View style={{ width: 2000 }}>
-            <Text
-              style={{
-                ...S.tabBarTitle,
-                color: focused
-                  ? theme.colors.brand.primary[800]
-                  : theme.colors.neutral[500],
-              }}
-            >
-              {route.title}
-            </Text>
-          </View>
-        );
-      }}
-      indicatorStyle={S.indicatorStyle}
-      style={S.tabBar}
-      tabStyle={S.tabStyle}
-      scrollEnabled
-    />
-  );
-};
+const renderTabBar = (props: any) => (
+  <TabBar
+    {...props}
+    renderLabel={({ focused, route }) => (
+      <View style={{ width: 2000 }}>
+        <Text
+          style={{
+            ...S.tabBarTitle,
+            color: focused
+              ? theme.colors.brand.primary[800]
+              : theme.colors.neutral[500],
+          }}
+        >
+          {route.title}
+        </Text>
+      </View>
+    )}
+    indicatorStyle={S.indicatorStyle}
+    style={S.tabBar}
+    tabStyle={S.tabStyle}
+    scrollEnabled
+  />
+);
 
 function TabViewSection(): JSX.Element {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "users.profileScreen",
+  });
+
   const layout = useWindowDimensions();
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    { key: "TicketDonationsTabView", title: "Doações em Ticket" },
-    { key: "CommunityDonationsTabView", title: "Doações em Comunidade" },
-    { key: "DirectDonationsTabView", title: "Doações diretas" },
+    { key: "TicketDonationsTabView", title: t("ticketDonationsTitle") },
+    { key: "CommunityDonationsTabView", title: t("communityDonationsTitle") },
+    { key: "DirectDonationsTabView", title: t("directDonationsTitle") },
   ]);
 
   return (

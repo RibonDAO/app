@@ -16,7 +16,7 @@ function NgoImpactCard({
   onPress,
 }: Props): JSX.Element {
   return (
-    <TouchableOpacity onPress={onPress} style={S.container}>
+    <TouchableOpacity onPress={onPress} style={S.container} activeOpacity={1}>
       <View style={S.impactCardContainer}>
         <View style={S.contentSection}>
           <Image source={{ uri: icon }} style={S.image} />

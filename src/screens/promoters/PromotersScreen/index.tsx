@@ -6,15 +6,22 @@ import Icon from "components/atomics/Icon";
 import { useTranslation } from "react-i18next";
 import SupportNonProfitScreen from "screens/promoters/SupportNonProfitScreen";
 import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
+import { useRouteParams } from "hooks/useRouteParams";
 import S from "./styles";
 
 export default function PromotersScreen() {
+  const { params } = useRouteParams<"PromotersScreen">();
   const [submenuVisible, setSubmenuVisible] = useState(false);
-  const [isInCommunityDonationFlow, setIsInCommunityDonationFlow] =
-    useState(true);
+  const [isInCommunityDonationFlow, setIsInCommunityDonationFlow] = useState(
+    params?.isInCommunity ?? true,
+  );
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCauseScreen",
   });
+
+  useEffect(() => {
+    setIsInCommunityDonationFlow(params?.isInCommunity ?? true);
+  }, [params?.isInCommunity]);
 
   useEffect(() => {
     setSubmenuVisible(false);

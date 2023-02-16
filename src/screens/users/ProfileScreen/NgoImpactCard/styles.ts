@@ -2,22 +2,16 @@ import { theme } from "@ribon.io/shared/styles";
 import { StyleSheet } from "react-native";
 import {
   defaultBodyLgBold,
-  defaultBodyXsRegular,
+  defaultBodySmRegular,
 } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "flex-start",
     marginBottom: theme.spacingNative(12),
   },
   impactCardContainer: {
-    display: "flex",
-    flexDirection: "row",
-    height: 140,
     borderRadius: 8,
     padding: theme.spacingNative(16),
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: theme.colors.neutral10,
     shadowColor: "rgba(40, 36, 28, 0.2)",
     shadowOffset: {
@@ -34,7 +28,7 @@ const styles = StyleSheet.create({
     color: theme.colors.brand.primary[300],
   },
   description: {
-    ...defaultBodyXsRegular,
+    ...defaultBodySmRegular,
     marginTop: theme.spacingNative(4),
     color: theme.colors.neutral[500],
     fontSize: 12,
@@ -46,8 +40,6 @@ const styles = StyleSheet.create({
   },
   contentSection: {
     width: "100%",
-    height: "100%",
-    marginLeft: theme.spacingNative(12),
     justifyContent: "center",
   },
 });

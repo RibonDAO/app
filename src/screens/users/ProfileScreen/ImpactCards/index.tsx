@@ -3,6 +3,8 @@ import { useCallback } from "react";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useStatistics } from "@ribon.io/shared/hooks";
 import { useTranslation } from "react-i18next";
+import { formatPrice } from "lib/formatters/currencyFormatter";
+import { Currencies } from "@ribon.io/shared/types";
 import ImpactCard from "../ImpactCard";
 import S from "./styles";
 
@@ -23,7 +25,10 @@ function ImpactCards(): JSX.Element {
       },
       {
         name: t("totalDonated"),
-        impact: userStatistics?.totalDonated?.brl?.toFixed(2) ?? 0,
+        impact: formatPrice(
+          userStatistics?.totalDonated?.brl || 0,
+          Currencies.BRL,
+        ),
         iconName: "monetization_on",
       },
       {
@@ -51,7 +56,7 @@ function ImpactCards(): JSX.Element {
   }) => (
     <ImpactCard
       key={name}
-      onPress={() => { }}
+      onPress={() => {}}
       description={name}
       impact={impact}
       iconName={iconName}
