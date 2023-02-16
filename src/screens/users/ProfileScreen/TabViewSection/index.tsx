@@ -59,6 +59,7 @@ function TabViewSection(): JSX.Element {
         onIndexChange={setIndex}
         initialLayout={{ width: layout.width }}
         style={{ backgroundColor: theme.colors.neutral10 }}
+        sceneContainerStyle={{ paddingHorizontal: theme.spacingNative(16) }}
       />
     </View>
   );
