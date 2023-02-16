@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: theme.spacingNative(16),
+    shadowColor: theme.colors.gray40,
+    elevation: 4,
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   contentContainer: {
     paddingHorizontal: theme.spacingNative(24),
