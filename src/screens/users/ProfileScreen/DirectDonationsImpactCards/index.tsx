@@ -5,10 +5,10 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import ImpactDonationsVector from "./ZeroDonationsSection/ImpactDonationsVector";
+import ImpactDonationsVector from "./ImpactDonationsVector";
 import NgoImpactCard from "../NgoImpactCard";
 import S from "./styles";
-import ZeroDonationsSection from "./ZeroDonationsSection";
+import ZeroDonationsSection from "../ZeroDonationsSection";
 
 function DirectDonationsImpactCards(): JSX.Element {
   const { currentUser } = useCurrentUser();
