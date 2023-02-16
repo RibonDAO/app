@@ -35,10 +35,14 @@ export type PaymentPageList = {
   flow: string;
 };
 
+export type PromotersScreenParams = {
+  isInCommunity?: boolean;
+};
+
 export type RootTabParamList = {
   CausesScreen: undefined;
   ProfileScreen: undefined;
-  PromotersScreen: undefined;
+  PromotersScreen: PromotersScreenParams;
   ChooseCauseScreen: undefined;
 };
 
@@ -58,6 +62,7 @@ export type RootStackParamList = {
   CommunityAddModal: CommunityAddModalParamList;
   PaymentScreen: PaymentPageList;
   SupportNonProfitScreen: SupportNonProfitParamList;
+  PromotersScreen: PromotersScreenParams;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

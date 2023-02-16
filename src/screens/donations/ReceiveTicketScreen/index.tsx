@@ -3,7 +3,9 @@ import { Text, View } from "react-native";
 import RibonBackgroundLogo from "components/vectors/RibonBackgroundLogo";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ReceiveTicketAnimation from "./ReceiveTicketAnimation";
+import TransferTicketAnimation from "components/moleculars/TransferTicketAnimation";
+import SupportersIcon from "components/vectors/SupportersIcon";
+import UserIcon from "components/vectors/UserIcon";
 import S from "./styles";
 
 type Props = {
@@ -22,13 +24,16 @@ function ReceiveTicketScreen({ onTicketReceived }: Props): JSX.Element {
   return (
     <View style={S.container}>
       {animationVisible ? (
-        <ReceiveTicketAnimation
+        <TransferTicketAnimation
           onAnimationEnd={() => {
             setTimeout(() => {
               setAnimationVisible(false);
             }, 500);
             onTicketReceived();
           }}
+          senderIcon={<SupportersIcon />}
+          receiverIcon={<UserIcon />}
+          description={t("animationText").toString()}
         />
       ) : (
         <>

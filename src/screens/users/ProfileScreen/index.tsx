@@ -13,15 +13,17 @@ function ProfileScreen() {
   return (
     <ScrollView
       style={S.container}
-      contentContainerStyle={{ paddingBottom: 40 }}
+      nestedScrollEnabled
       showsVerticalScrollIndicator={false}
     >
-      <View style={S.cardsSection}>
-        <Text style={S.title}>{t("title")}</Text>
-        <ImpactCards />
-      </View>
+      <View style={{ paddingBottom: 40 }}>
+        <View style={S.cardsSection}>
+          <Text style={S.title}>{t("title")}</Text>
+          <ImpactCards />
+        </View>
 
-      <TabViewSection />
+        <TabViewSection />
+      </View>
     </ScrollView>
   );
 }
