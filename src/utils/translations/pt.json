@@ -44,7 +44,11 @@
       "description": "Você doou"
     },
     "chooseCauseScreen": {
-      "title": "Se quiser, você pode fazer mais"
+      "title": "Se quiser, você pode fazer mais",
+      "causeImage": {
+        "title": "Doe em comunidade para",
+        "labelTitle": "Doação impulsionada"
+      }
     },
     "receiveTicketScreen": {
       "title": "Doar juntos para mudar vidas!",
