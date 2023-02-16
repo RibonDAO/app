@@ -18,11 +18,16 @@ import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import S from "./styles";
+import Icon from "components/atomics/Icon";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   hideTicket?: boolean;
 };
 function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "layoutHeader",
+  });
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [blockedDonationModalVisible, setBlockedDonationModalVisible] =
@@ -43,11 +48,18 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
     toggleModal();
   }
 
+  function redirectToProfileScreen() {
+    toggleModal();
+    navigateTo("ProfileScreen");
+  }
+
   function handleUserLogin() {
     return currentUser ? (
-      <RoundButton active={false} text="Sair" onPress={handleLogout} />
+      <View style={{ width: 50 }}>
+        <RoundButton active={false} text={t("exitButton")} onPress={handleLogout} />
+      </View>
     ) : (
-      <RoundButton text="Doar" onPress={toggleModal} />
+      <Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={redirectToProfileScreen} />
     );
   }
 
@@ -107,21 +119,21 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
       >
         <View style={S.supportContainer}>
           <ConfigItem
-            icon={GlobeIcon}
-            text="Alterar idioma"
-            linkIcon={ChangeLanguageItem}
-          />
-
-          <ConfigItem
             icon={SupportIcon}
-            text="Suporte ao Usuário"
-            cta={<RoundButton text="Suporte" onPress={linkToSupport} />}
+            text={t("support")}
+            cta={<Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={linkToSupport} />}
           />
 
           <ConfigItem
             icon={LetterIcon}
-            text={currentUser ? currentUser?.email : "Fazer login"}
+            text={currentUser ? currentUser?.email : t("login")}
             cta={handleUserLogin()}
+          />
+
+          <ConfigItem
+            icon={GlobeIcon}
+            text={t("language")}
+            linkIcon={ChangeLanguageItem}
           />
         </View>
       </Modal>

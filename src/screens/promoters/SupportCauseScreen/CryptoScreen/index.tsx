@@ -18,7 +18,7 @@ import { logError } from "services/crashReport";
 import { useNavigation } from "hooks/useNavigation";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 import styles from "./styles";
-import UserSupportSection from "components/moleculars/UserSupportItem";
+import UserSupportSection from "components/moleculars/UserSupportSection";
 
 function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();

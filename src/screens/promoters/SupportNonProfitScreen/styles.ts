@@ -12,7 +12,6 @@ import {
 const styles = StyleSheet.create({
   Container: {
     width: "100%",
-    paddingBottom: 50,
     backgroundColor: theme.colors.neutral10,
   },
   ContentContainer: {
@@ -118,6 +117,10 @@ const styles = StyleSheet.create({
     marginRight: 8,
     width: Dimensions.get("window").width - 64,
   },
+  supportSection: {
+    paddingHorizontal: 20,
+    paddingBottom: 50
+  }
 });
 
 export default styles;

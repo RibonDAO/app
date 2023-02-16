@@ -51,7 +51,7 @@ function ImpactCards(): JSX.Element {
   }) => (
     <ImpactCard
       key={name}
-      onPress={() => {}}
+      onPress={() => { }}
       description={name}
       impact={impact}
       iconName={iconName}
@@ -60,7 +60,7 @@ function ImpactCards(): JSX.Element {
 
   return (
     <View style={S.cardsContainer}>
-      {impacts().map((impact) => renderItem(impact))}
+      {impacts().map((impact: any) => renderItem(impact))}
     </View>
   );
 }

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     paddingLeft: theme.spacingNative(16),
-    backgroundColor: theme.colors.green20,
+    backgroundColor: theme.colors.green40,
     color: theme.colors.neutral10,
   },
   nonProfitText: {
@@ -87,6 +87,15 @@ const styles = StyleSheet.create({
     height: 88,
     width: 88,
   },
+  privacyPolicyText: {
+    ...defaultBodySmRegular,
+    color: theme.colors.gray20,
+    textAlign: "center",
+    marginTop: theme.spacingNative(16),
+  },
+  privacyPolicyLink: {
+    color: theme.colors.green30,
+  }
 });
 
 export default styles;

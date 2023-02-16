@@ -18,7 +18,7 @@ export default function RoundButton({
   disabled = false,
   active = true,
   timeout = null,
-  timeoutCallback = () => {},
+  timeoutCallback = () => { },
 }: Props): JSX.Element {
   const counter = useRef(new Animated.Value(0)).current;
   const [running, setRunning] = useState(false);
