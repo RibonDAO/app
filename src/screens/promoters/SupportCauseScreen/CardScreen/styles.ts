@@ -66,20 +66,20 @@ export const styles = StyleSheet.create({
   },
   communityAddValue: {
     ...stylizedDisplayXs,
-    color: theme.colors.orange20,
+    color: theme.colors.brand.secondary[300],
   },
   communityAddButton: {
     marginTop: theme.spacingNative(8),
     padding: theme.spacingNative(4),
-    borderColor: theme.colors.orange40,
+    borderColor: theme.colors.brand.secondary[700],
     fontSize: 11,
-    color: theme.colors.orange40,
+    color: theme.colors.brand.secondary[700],
   },
   donateButton: {
-    borderColor: theme.colors.orange20,
+    borderColor: theme.colors.brand.secondary[300],
     fontWeight: "600",
-    backgroundColor: theme.colors.orange20,
-    color: theme.colors.orange40,
+    backgroundColor: theme.colors.brand.secondary[300],
+    color: theme.colors.brand.secondary[700],
   },
   backgroundImage: {
     display: "none",
@@ -116,7 +116,7 @@ export const styles = StyleSheet.create({
     ...defaultBodySmSemibold,
     fontSize: 18,
     lineHeight: 24,
-    color: theme.colors.orange30,
+    color: theme.colors.brand.secondary[400],
   },
   refundText: {
     ...defaultBodyXsRegular,

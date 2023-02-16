@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     position: "absolute",
     zIndex: 3,
-    color: theme.colors.orange40,
+    color: theme.colors.brand.secondary[700],
     bottom: 5,
     left: 30,
   },

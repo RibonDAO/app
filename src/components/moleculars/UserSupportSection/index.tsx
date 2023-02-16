@@ -36,7 +36,7 @@ function UserSupportSection(): JSX.Element {
 
         <Text style={S.description}>{t("description")}</Text>
         <Button
-          textColor={theme.colors.orange40}
+          textColor={theme.colors.brand.secondary[700]}
           customStyles={S.supportButton}
           text={t("primaryButtonText")}
           onPress={handleClick}

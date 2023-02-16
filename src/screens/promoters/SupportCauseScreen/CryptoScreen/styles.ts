@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   communityAddValue: {
     ...stylizedDisplayXs,
-    color: theme.colors.orange20,
+    color: theme.colors.brand.secondary[300],
   },
   userBalanceText: {
     ...defaultBodySmSemibold,

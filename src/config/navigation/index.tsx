@@ -90,7 +90,7 @@ function RootNavigator() {
         name="PaymentScreen"
         component={PaymentScreen}
         options={{
-          headerTintColor: theme.colors.orange40,
+          headerTintColor: theme.colors.brand.secondary[700],
           headerTitle: "",
           headerBackTitleVisible: false,
           headerStyle: { backgroundColor: theme.colors.neutral10 },

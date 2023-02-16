@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     height: 160,
     borderRadius: 16,
     flexDirection: "column",
-    backgroundColor: theme.colors.orange20,
+    backgroundColor: theme.colors.brand.secondary[300],
     shadowColor: theme.colors.defaultShadow,
     shadowOffset: {
       width: 0,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   description: {
     ...defaultBodyMdBold,
-    color: theme.colors.orange40,
+    color: theme.colors.brand.secondary[700],
     marginBottom: 12,
     marginTop: 8,
   },
