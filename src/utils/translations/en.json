@@ -45,7 +45,12 @@
       "description": "You donated"
     },
     "chooseCauseScreen": {
-      "title": "Choose a Cause"
+      "title": "If you want, you can do more",
+      "buttonText": "Donate later",
+      "causeImage": {
+        "title": "Donate in a community for",
+        "labelTitle": "Boosted donation"
+      }
     },
     "receiveTicketScreen": {
       "title": "Donating together to change lives!",
