@@ -84,15 +84,6 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="CausesScreen"
-        component={CausesScreen}
-        options={{
-          title: "Causes",
-          header,
-        }}
-      />
-
-      <Stack.Screen
         name="PaymentScreen"
         component={PaymentScreen}
         options={{
