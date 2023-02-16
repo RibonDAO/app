@@ -31,13 +31,18 @@ const styles = StyleSheet.create({
   },
   title: {
     ...stylizedDisplayMd,
-    color: theme.colors.green30,
+    color: theme.colors.green40,
     marginTop: theme.spacingNative(10),
   },
   description: {
     ...defaultBodyMdMedium,
     color: theme.colors.gray30,
-    marginTop: theme.spacingNative(10),
+    marginTop: theme.spacingNative(16),
+    marginBottom: theme.spacingNative(32),
+  },
+  highlightedDescription: {
+    color: theme.colors.green30,
+    marginTop: theme.spacingNative(16),
     marginBottom: theme.spacingNative(32),
     textAlign: "center"
   },
