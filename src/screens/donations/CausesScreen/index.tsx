@@ -193,10 +193,6 @@ export default function CausesScreen() {
         <Text style={S.ticketText} onPress={() => setTooltipVisible(true)}>{t("whatIsATicket")}</Text>
       </View>
 
-      <View style={S.ticketExplanationSection}>
-        <Text style={S.ticketText} onPress={() => navigateTo("ChooseCauseScreen")}>Tela de causas</Text>
-      </View>
-
       {renderTooltip()}
 
       <UserSupportSection />
