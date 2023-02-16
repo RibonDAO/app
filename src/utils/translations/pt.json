@@ -34,6 +34,7 @@
       "safeDataText": "Os seus dados estão seguros com a gente",
       "donatingText": "Doando",
       "donateText": "Doar",
+      "animationText": "Doando ticket",
       "agreementText": "Ao inserir seu e-mail e se inscrever, você aceita a nossa",
       "privacyPolicyText": "Política de Privacidade",
       "privacyPolicyLink": "https://ribon.io/2021/06/01/politica-de-privacidade-e-retencao-de-dados-pessoais/"
@@ -50,9 +51,7 @@
       "title": "Doar juntos para mudar vidas!",
       "description": "Você tem um ticket para receber :)",
       "buttonText": "Receber ticket",
-      "animationModal": {
-        "text": "Recebendo ticket"
-      }
+      "animationText": "Recebendo ticket"
     }
   },
   "contexts": {

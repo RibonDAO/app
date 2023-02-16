@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyLgBold,
@@ -13,11 +13,17 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 0,
   },
-  modalWrapper: {},
   container: {
     alignItems: "center",
     paddingHorizontal: theme.spacingNative(16),
     marginTop: theme.spacingNative(24),
+  },
+  animationContainer: {
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width
   },
   title: {
     fontSize: 20,
@@ -34,6 +40,10 @@ const styles = StyleSheet.create({
   logo: {
     width: "50%",
     height: "100%",
+  },
+  nonProfitLogo: {
+    width: 100,
+    height: 100,
   },
   inputEmailContainer: {
     width: "100%",
@@ -61,7 +71,6 @@ const styles = StyleSheet.create({
   nonProfitHighlight: {
     ...stylizedDisplaySm,
     color: theme.colors.neutral10,
-    textTransform: "uppercase",
     flexWrap: "wrap",
   },
   buttonContainer: {
