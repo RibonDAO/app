@@ -33,6 +33,7 @@ import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
+import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -72,18 +73,15 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="ContributionDoneScreen"
-        component={ContributionDoneScreen}
+        name="ChooseCauseScreen"
+        component={ChooseCauseScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
       <Stack.Screen
-        name="CausesScreen"
-        component={CausesScreen}
-        options={{
-          title: "Causes",
-          header,
-        }}
+        name="ContributionDoneScreen"
+        component={ContributionDoneScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
       <Stack.Screen
