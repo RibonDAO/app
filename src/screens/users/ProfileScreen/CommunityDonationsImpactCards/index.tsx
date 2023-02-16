@@ -10,7 +10,7 @@ import NgoImpactCard from "../NgoImpactCard";
 import S from "./styles";
 import ZeroDonationsSection from "./ZeroDonationsSection";
 
-function NgoImpactCards(): JSX.Element {
+function CommunityDonationsImpactCards(): JSX.Element {
   const { currentUser } = useCurrentUser();
   const { userImpact } = useImpact(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
@@ -54,13 +54,13 @@ function NgoImpactCards(): JSX.Element {
     impactCardsList()
   ) : (
     <ZeroDonationsSection
-      title={t("ticket.title")}
+      title={t("community.title")}
       onButtonPress={navigateToPromotersScreen}
-      description={t("ticket.description")}
-      buttonText={t("ticket.buttonText")}
+      description={t("community.description")}
+      buttonText={t("community.buttonText")}
       image={<ImpactDonationsVector />}
     />
   );
 }
 
-export default NgoImpactCards;
+export default CommunityDonationsImpactCards;
