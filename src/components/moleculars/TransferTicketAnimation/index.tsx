@@ -29,7 +29,7 @@ const fadeIn = {
   },
 };
 
-function ReceiveTicketAnimation({ onAnimationEnd }: Props): JSX.Element {
+function TransferTicketAnimation({ onAnimationEnd }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.receiveTicketScreen.animationModal",
   });
@@ -74,4 +74,4 @@ function ReceiveTicketAnimation({ onAnimationEnd }: Props): JSX.Element {
   );
 }
 
-export default ReceiveTicketAnimation;
+export default TransferTicketAnimation;
