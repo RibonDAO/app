@@ -40,7 +40,7 @@ function TransferTicketAnimation({ onAnimationEnd, senderIcon, receiverIcon, des
           </View>
         </View>
 
-        <View style={{ overflow: "hidden" }}>
+        <View style={{ overflow: "hidden", height: 2 }}>
           <View style={S.stripedLine} />
         </View>
 
