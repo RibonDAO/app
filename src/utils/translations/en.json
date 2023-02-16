@@ -34,6 +34,7 @@
       "safeDataText": "All your data is safe with us",
       "donatingText": "Donating",
       "donateText": "Donate",
+      "animationText": "Donating ticket",
       "agreementText": "By signing up you agree to Ribon's",
       "privacyPolicyText": "Privacy Policy",
       "privacyPolicyLink": "https://ribon.io/2022/06/10/privacy-and-personal-data-retention-policy/"
@@ -55,9 +56,7 @@
       "title": "Donating together to change lives!",
       "description": "You have a ticket to receive :)",
       "buttonText": "Receive ticket",
-      "animationModal": {
-        "text": "Receiving ticket"
-      }
+      "animationText": "Receiving ticket"
     }
   },
   "contexts": {
