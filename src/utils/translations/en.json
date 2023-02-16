@@ -45,6 +45,7 @@
     },
     "chooseCauseScreen": {
       "title": "If you want, you can do more",
+      "buttonText": "Donate later",
       "causeImage": {
         "title": "Donate in a community for",
         "labelTitle": "Boosted donation"

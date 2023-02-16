@@ -40,8 +40,8 @@ function ChooseCauseScreen(): JSX.Element {
 
         {causesList()}
 
-        <View style={{ width: "100%", position: "absolute", bottom: 60 }}>
-          <Button text="Doar depois" onPress={() => navigateTo("CausesScreen")} outline />
+        <View style={S.buttonContainer}>
+          <Button text={t("donateLater")} onPress={() => navigateTo("CausesScreen")} outline />
         </View>
       </View>
     );

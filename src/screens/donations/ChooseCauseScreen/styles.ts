@@ -37,6 +37,11 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 16,
   },
+  buttonContainer: {
+    width: "100%",
+    position: "absolute",
+    bottom: 60
+  }
 });
 
 export default styles;

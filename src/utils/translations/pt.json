@@ -45,6 +45,7 @@
     },
     "chooseCauseScreen": {
       "title": "Se quiser, você pode fazer mais",
+      "buttonText": "Doar depois",
       "causeImage": {
         "title": "Doe em comunidade para",
         "labelTitle": "Doação impulsionada"
