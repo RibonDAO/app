@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "45deg" }],
   },
   stripedLine: {
-    borderStyle: "dotted",
-    borderWidth: 3,
+    borderStyle: "dashed",
+    borderWidth: 2,
     borderRadius: 1,
     borderColor: theme.colors.gray20,
     width: Dimensions.get("window").width - 270,
