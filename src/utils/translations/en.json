@@ -4,6 +4,12 @@
     "giving": "Donations",
     "profile": "Impact"
   },
+  "layoutHeader": {
+    "exitButton": "Exit",
+    "support": "User Support",
+    "login": "Login",
+    "language": "Change language"
+  },
   "donations": {
     "causesScreen": {
       "title": "Donate to a Project",
@@ -15,7 +21,9 @@
         "primaryButtonText": "Access support"
       },
       "impactPrefix": "Donate",
-      "labelText": "Learn more"
+      "labelText": "Learn more",
+      "whatIsATicket": "What is a ticket?",
+      "ticketExplanation": "Tickets are used to make donations and you get a new one everyday when you log in Ribon."
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",

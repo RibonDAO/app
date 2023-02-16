@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   ctaContainer: {
     width: "30%",
     paddingRight: theme.spacingNative(8),
+    alignItems: "flex-end"
   },
   configContainer: {
     flexDirection: "row",

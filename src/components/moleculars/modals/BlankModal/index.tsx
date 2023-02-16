@@ -10,6 +10,8 @@ type Props = {
   onModalHide?: () => void;
   children: JSX.Element;
   containerStyle?: ViewStyle;
+  hasBackdrop?: boolean;
+  backdropOpacity?: number;
 };
 
 function BlankModal({
@@ -19,6 +21,8 @@ function BlankModal({
   children,
   onModalHide,
   containerStyle,
+  hasBackdrop = true,
+  backdropOpacity = 0.5,
 }: Props): JSX.Element {
   function toggleModal() {
     setVisible(!visible);
@@ -36,8 +40,8 @@ function BlankModal({
         isVisible={visible}
         animationIn="zoomIn"
         animationOut="zoomOut"
-        hasBackdrop
-        backdropOpacity={0.5}
+        hasBackdrop={hasBackdrop}
+        backdropOpacity={backdropOpacity}
         onBackdropPress={toggleModal}
         onModalHide={onModalHide}
         {...iosProps}
