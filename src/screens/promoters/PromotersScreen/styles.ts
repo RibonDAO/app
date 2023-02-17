@@ -26,9 +26,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: theme.colors.neutral10,
-    height: 34,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    height: 32,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    shadowColor: "rgba(40, 36, 28, 0.2)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowRadius: 10,
+    shadowOpacity: 0.8,
+    elevation: 2
   },
   firstButton: {
     flex: 1,
