@@ -6,6 +6,7 @@ function CommunityDonationsTabView(): JSX.Element {
   return (
     <ScrollView
       style={{ height: "100%", backgroundColor: theme.colors.neutral10 }}
+      nestedScrollEnabled
     >
       <CommunityDonationsImpactCards />
     </ScrollView>

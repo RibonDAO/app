@@ -4,7 +4,7 @@ import S from "./styles";
 
 function TicketDonationsTabView(): JSX.Element {
   return (
-    <ScrollView style={S.container}>
+    <ScrollView style={S.container} nestedScrollEnabled>
       <NgoImpactCards />
     </ScrollView>
   );

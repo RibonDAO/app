@@ -4,7 +4,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Linking
+  Linking,
 } from "react-native";
 import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { theme } from "@ribon.io/shared/styles";
@@ -24,6 +24,8 @@ import InputText from "components/atomics/inputs/InputText";
 import TransferTicketAnimation from "components/moleculars/TransferTicketAnimation";
 import UserIcon from "components/vectors/UserIcon";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
+import { useLanguage } from "contexts/languageContext";
+import { formattedLanguage } from "lib/formatters/languageFormatter";
 import Placeholder from "./placeholder";
 
 function DonateScreen() {
@@ -40,6 +42,7 @@ function DonateScreen() {
   const { donate } = useDonations(currentUser?.id);
   const { navigateTo } = useNavigation();
   const { refetch: refetchCanDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const { currentLang } = useLanguage();
 
   function handleButtonPress() {
     if (!isValidEmail(email)) {
@@ -52,7 +55,10 @@ function DonateScreen() {
   async function donateCallback() {
     if (email) {
       try {
-        const user = await findOrCreateUser(email);
+        const user = await findOrCreateUser(
+          email,
+          formattedLanguage(currentLang),
+        );
         setCurrentUser(user);
         await donate(RIBON_INTEGRATION_ID, nonProfit.id, email);
         refetchCanDonate();
@@ -60,7 +66,9 @@ function DonateScreen() {
       } catch (error: any) {
         showToast(error.response.data.formatted_message);
       } finally {
-        setIsDonating(false);
+        setTimeout(() => {
+          setIsDonating(false);
+        }, 500);
       }
     }
   }
@@ -91,55 +99,58 @@ function DonateScreen() {
       {isDonating ? (
         <View style={S.animationContainer}>
           <TransferTicketAnimation
-            onAnimationEnd={() => {
-              setTimeout(() => { }, 500);
-            }}
+            onAnimationEnd={() => {}}
             senderIcon={<UserIcon />}
-            receiverIcon={<Image style={S.nonProfitLogo} source={{ uri: nonProfit.logo }} />}
+            receiverIcon={
+              <Image style={S.nonProfitLogo} source={{ uri: nonProfit.logo }} />
+            }
             description={t("animationText").toString()}
           />
         </View>
       ) : (
-        <>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
-          >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <View style={S.container}>
-                <View style={S.inputEmailContainer}>
-                  <Text style={S.description}>{t("description")}</Text>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
+        >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={S.container}>
+              <View style={S.inputEmailContainer}>
+                <Text style={S.description}>{t("description")}</Text>
 
-                  <InputText
-                    name="email"
-                    placeholder={t("textInputPlaceholder") || ""}
-                    keyboardType="email-address"
-                    onChangeText={handleTextChange}
-                    value={email}
-                    autoCapitalize="none"
-                    textContentType="emailAddress"
-                    autoFocus
-                  />
-                </View>
-
-                <View style={S.buttonContainer}>
-                  <Button
-                    text={isDonating ? t("donatingText") : t("donateText")}
-                    onPress={handleButtonPress}
-                    timeout={isValidEmail(email) ? 2000 : null}
-                    timeoutCallback={donateCallback}
-                    disabled={isDonating || !isValidEmail(email)}
-                    customStyles={S.button}
-                  />
-                  <Text style={S.privacyPolicyText}>
-                    {t("agreementText")}{" "}
-                    <Text style={S.privacyPolicyLink} onPress={linkToPrivacyPolicy}>{t("privacyPolicyText")}</Text>
-                  </Text>
-                </View>
+                <InputText
+                  name="email"
+                  placeholder={t("textInputPlaceholder") || ""}
+                  keyboardType="email-address"
+                  onChangeText={handleTextChange}
+                  value={email}
+                  autoCapitalize="none"
+                  textContentType="emailAddress"
+                  autoFocus
+                />
               </View>
-            </TouchableWithoutFeedback>
-          </KeyboardAvoidingView>
-        </>
+
+              <View style={S.buttonContainer}>
+                <Button
+                  text={isDonating ? t("donatingText") : t("donateText")}
+                  onPress={handleButtonPress}
+                  timeout={isValidEmail(email) ? 2000 : null}
+                  timeoutCallback={donateCallback}
+                  disabled={isDonating || !isValidEmail(email)}
+                  customStyles={S.button}
+                />
+                <Text style={S.privacyPolicyText}>
+                  {t("agreementText")}{" "}
+                  <Text
+                    style={S.privacyPolicyLink}
+                    onPress={linkToPrivacyPolicy}
+                  >
+                    {t("privacyPolicyText")}
+                  </Text>
+                </Text>
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
       )}
     </View>
   );

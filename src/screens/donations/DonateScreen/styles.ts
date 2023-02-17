@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: Dimensions.get("window").height,
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width,
   },
   title: {
     fontSize: 20,
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     paddingLeft: theme.spacingNative(16),
-    backgroundColor: theme.colors.brand.primary[200],
+    backgroundColor: theme.colors.brand.primary[800],
     color: theme.colors.neutral10,
   },
   nonProfitText: {

@@ -6,6 +6,7 @@ function DirectDonationsTabView(): JSX.Element {
   return (
     <ScrollView
       style={{ height: "100%", backgroundColor: theme.colors.neutral10 }}
+      nestedScrollEnabled
     >
       <DirectDonationsImpactCards />
     </ScrollView>

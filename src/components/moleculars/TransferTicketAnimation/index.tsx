@@ -1,8 +1,8 @@
 import { Dimensions, View } from "react-native";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
 import * as Animatable from "react-native-animatable";
-import { useTranslation } from "react-i18next";
 
+import { useEffect } from "react";
 import S from "./styles";
 
 type Props = {
@@ -30,14 +30,25 @@ const fadeIn = {
   },
 };
 
-function TransferTicketAnimation({ onAnimationEnd, senderIcon, receiverIcon, description }: Props): JSX.Element {
+function TransferTicketAnimation({
+  onAnimationEnd,
+  senderIcon,
+  receiverIcon,
+  description,
+}: Props): JSX.Element {
+  const ANIMATION_TIME = 4000;
+
+  useEffect(() => {
+    setTimeout(() => {
+      onAnimationEnd();
+    }, ANIMATION_TIME);
+  }, []);
+
   return (
     <View style={S.containerColumn}>
       <View style={S.containerRow}>
         <View style={S.diamond}>
-          <View style={S.diamondImage}>
-            {senderIcon}
-          </View>
+          <View style={S.diamondImage}>{senderIcon}</View>
         </View>
 
         <View style={{ overflow: "hidden", height: 2 }}>
@@ -46,24 +57,21 @@ function TransferTicketAnimation({ onAnimationEnd, senderIcon, receiverIcon, des
 
         <Animatable.View
           animation={boxAnimation}
-          duration={4000}
+          duration={ANIMATION_TIME}
           style={S.ticketRoundBox}
         >
           <TicketWhiteIcon />
         </Animatable.View>
 
         <View style={S.diamond}>
-          <View style={S.diamondImage}>
-            {receiverIcon}
-          </View>
+          <View style={S.diamondImage}>{receiverIcon}</View>
         </View>
       </View>
 
       <Animatable.Text
         animation={fadeIn}
-        duration={4000}
+        duration={ANIMATION_TIME}
         style={S.text}
-        onAnimationEnd={onAnimationEnd}
       >
         {description}
       </Animatable.Text>
