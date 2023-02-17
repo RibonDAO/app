@@ -17,6 +17,8 @@ export type Props = {
   sliderStyle?: ViewStyle;
 };
 
+const { primary } = theme.colors.brand
+
 function InputRange({
   value,
   min,
@@ -24,9 +26,9 @@ function InputRange({
   step = 1,
   onChange,
   disabled = false,
-  color = theme.colors.green30,
-  minimumTrackTintColor = theme.colors.green40,
-  maximumTrackTintColor = theme.colors.green20,
+  color = primary[300],
+  minimumTrackTintColor = primary[800],
+  maximumTrackTintColor = primary[200],
   sliderStyle,
 }: Props): JSX.Element {
   return (

@@ -12,6 +12,9 @@ type Props = {
   onButtonClick: () => void;
   children?: JSX.Element | JSX.Element[];
 };
+
+const { tertiary } = theme.colors.brand;
+
 function CardWaveImage({
   image,
   subtitle,
@@ -33,9 +36,9 @@ function CardWaveImage({
         <Button
           text={buttonText}
           onPress={onButtonClick}
-          borderColor={theme.colors.red20}
-          backgroundColor={theme.colors.red20}
-          textColor={theme.colors.red40}
+          borderColor={tertiary[200]}
+          backgroundColor={tertiary[200]}
+          textColor={tertiary[800]}
           customTextStyles={{
             fontWeight: "600",
           }}

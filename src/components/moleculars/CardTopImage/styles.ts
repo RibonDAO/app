@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   text: {
     marginTop: theme.spacingNative(16),
     fontSize: 14,
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
   },
 });
 

@@ -103,8 +103,8 @@ function PaymentScreen(): JSX.Element {
             onPress={handleContinueClick}
             disabled={buttonDisabled}
             customStyles={styles.donateButton}
-            backgroundColor={theme.colors.orange20}
-            borderColor={theme.colors.orange20}
+            backgroundColor={theme.colors.brand.secondary[300]}
+            borderColor={theme.colors.brand.secondary[300]}
           />
         </View>
       )}

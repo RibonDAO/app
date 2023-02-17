@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     objectFit: "cover",
   },
   text: {
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
   },
   insideContainer: {
     display: "flex",

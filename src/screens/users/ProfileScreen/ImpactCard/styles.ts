@@ -29,12 +29,12 @@ const styles = StyleSheet.create({
   },
   impact: {
     ...defaultBodyLgBold,
-    color: theme.colors.green40,
+    color: theme.colors.brand.primary[800],
   },
   description: {
     ...defaultBodyXsRegular,
     marginTop: theme.spacingNative(4),
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     fontSize: 12,
   },
 });

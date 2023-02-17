@@ -10,14 +10,14 @@ const styles = StyleSheet.create({
     zIndex: 1,
     borderWidth: 1,
     borderRadius: 4,
-    borderColor: theme.colors.orange40,
+    borderColor: theme.colors.brand.secondary[700],
   },
   buttonText: {
     flex: 1,
     textAlign: "center",
     fontFamily: "Inter",
     fontWeight: "bold",
-    color: theme.colors.orange40,
+    color: theme.colors.brand.secondary[700],
   },
   icon: {
     marginRight: theme.spacingNative(12),

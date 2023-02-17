@@ -12,18 +12,18 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: theme.colors.neutral10,
     borderBottomWidth: 1,
-    borderColor: theme.colors.gray20,
+    borderColor: theme.colors.neutral[200],
   },
   tabStyle: {
     width: 200,
   },
   tabBarTitle: {
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     textAlign: "center",
     fontSize: 16,
   },
   indicatorStyle: {
-    backgroundColor: theme.colors.green30,
+    backgroundColor: theme.colors.brand.primary[300],
     padding: 1.5,
     marginBottom: -2,
   },

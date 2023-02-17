@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: theme.spacingNative(16),
-    shadowColor: theme.colors.gray40,
+    shadowColor: theme.colors.neutral[800],
     elevation: 4,
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
   },
   titleHighlight: {
     ...defaultBodyMdSemibold,
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
   },
   feeText: {
     ...defaultBodyXsRegular,
     textAlign: "center",
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   image: {
     width: "100%",

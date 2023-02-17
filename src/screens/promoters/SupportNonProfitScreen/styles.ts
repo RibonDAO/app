@@ -9,6 +9,8 @@ import {
   stylizedDisplayXs,
 } from "styles/typography/stylized";
 
+const { tertiary } = theme.colors.brand;
+
 const styles = StyleSheet.create({
   Container: {
     width: "100%",
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     padding: 16,
     borderRadius: 8,
-    shadowColor: theme.colors.gray30,
+    shadowColor: theme.colors.neutral[500],
     shadowOffset: { width: 0, height: 16 },
     shadowOpacity: 0.32,
     shadowRadius: -2,
@@ -40,24 +42,24 @@ const styles = StyleSheet.create({
   },
   CommunityAddText: {
     ...defaultBodyXsRegular,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   CommunityAddValue: {
     ...stylizedDisplayXs,
-    color: theme.colors.red20,
+    color: tertiary[200],
   },
   CommunityAddButton: {
     marginTop: 8,
     padding: 4,
-    borderColor: theme.colors.red40,
+    borderColor: tertiary[800],
     fontSize: 11,
-    color: theme.colors.red40,
+    color: tertiary[800],
   },
   DonateButton: {
-    borderColor: theme.colors.red20,
+    borderColor: tertiary[200],
     fontWeight: "600",
-    backgroundColor: theme.colors.red20,
-    color: theme.colors.red40,
+    backgroundColor: tertiary[200],
+    color: tertiary[800],
   },
   BackgroundImage: {
     display: "none",
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     ...stylizedDisplaySm,
     marginRight: "5%",
     marginBottom: 16,
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
   },
   SupportImage: {
     width: "100%",
@@ -86,17 +88,17 @@ const styles = StyleSheet.create({
     ...defaultBodySmSemibold,
     marginBottom: 4,
     textAlign: "center",
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   UserBalanceTextHighlight: {
     ...defaultBodySmSemibold,
-    color: theme.colors.red30,
+    color: tertiary[400],
   },
   RefundText: {
     ...defaultBodyXsRegular,
     marginTop: 4,
     textAlign: "center",
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   TitleContainer: {
     display: "flex",
@@ -119,8 +121,8 @@ const styles = StyleSheet.create({
   },
   supportSection: {
     paddingHorizontal: 20,
-    paddingBottom: 50
-  }
+    paddingBottom: 50,
+  },
 });
 
 export default styles;

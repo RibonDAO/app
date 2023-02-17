@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { stylizedDisplayMd, } from "styles/typography/stylized";
+import { stylizedDisplayMd } from "styles/typography/stylized";
 import { defaultBodyMdMedium } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "45deg" }],
   },
   container: {
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
     width: "100%",
     height: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: theme.spacingNative(20)
+    padding: theme.spacingNative(20),
   },
   cardImage: {
     width: "100%",
@@ -31,20 +31,20 @@ const styles = StyleSheet.create({
   },
   title: {
     ...stylizedDisplayMd,
-    color: theme.colors.green40,
+    color: theme.colors.brand.primary[300],
     marginTop: theme.spacingNative(10),
   },
   description: {
     ...defaultBodyMdMedium,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     marginTop: theme.spacingNative(16),
     marginBottom: theme.spacingNative(32),
   },
   highlightedDescription: {
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
     marginTop: theme.spacingNative(16),
     marginBottom: theme.spacingNative(32),
-    textAlign: "center"
+    textAlign: "center",
   },
 });
 
