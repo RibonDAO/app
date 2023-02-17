@@ -66,7 +66,9 @@ function DonateScreen() {
       } catch (error: any) {
         showToast(error.response.data.formatted_message);
       } finally {
-        setIsDonating(false);
+        setTimeout(() => {
+          setIsDonating(false);
+        }, 500);
       }
     }
   }
@@ -97,9 +99,7 @@ function DonateScreen() {
       {isDonating ? (
         <View style={S.animationContainer}>
           <TransferTicketAnimation
-            onAnimationEnd={() => {
-              setTimeout(() => {}, 500);
-            }}
+            onAnimationEnd={() => {}}
             senderIcon={<UserIcon />}
             receiverIcon={
               <Image style={S.nonProfitLogo} source={{ uri: nonProfit.logo }} />
