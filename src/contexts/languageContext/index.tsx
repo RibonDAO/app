@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Languages } from "types/enums/Languages";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ActivityIndicator, View } from "react-native";
+import { View } from "react-native";
 
 export const LANGUAGE_KEY = "LANGUAGE_KEY";
 export interface ILanguageContext {
@@ -65,9 +65,7 @@ function LanguageProvider({ children }: Props) {
             alignItems: "center",
             justifyContent: "center",
           }}
-        >
-          <ActivityIndicator />
-        </View>
+        />
       ) : (
         children
       )}
