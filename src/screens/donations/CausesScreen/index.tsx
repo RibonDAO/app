@@ -76,7 +76,7 @@ export default function CausesScreen() {
   useEffect(() => {
     setTimeout(() => {
       refetchCanDonate();
-    }, 800);
+    }, 500);
   }, [JSON.stringify(currentUser)]);
 
   const causesFilter = () => {
