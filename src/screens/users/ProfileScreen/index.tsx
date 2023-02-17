@@ -13,7 +13,6 @@ function ProfileScreen() {
   return (
     <ScrollView
       style={S.container}
-      nestedScrollEnabled
       showsVerticalScrollIndicator={false}
     >
       <View style={{ paddingBottom: 40 }}>
