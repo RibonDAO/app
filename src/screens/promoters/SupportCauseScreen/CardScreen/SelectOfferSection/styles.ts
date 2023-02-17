@@ -6,17 +6,17 @@ import { stylizedDisplayXs } from "styles/typography/stylized";
 const styles = StyleSheet.create({
   title: {
     ...defaultBodyXsRegular,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     textAlign: "center",
   },
   inputText: {
     borderWidth: 1,
-    borderColor: theme.colors.orange40,
+    borderColor: theme.colors.brand.secondary[700],
     height: 40,
     borderRadius: 4,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    color: theme.colors.orange40,
+    color: theme.colors.brand.secondary[700],
     fontWeight: "bold",
     marginRight: theme.spacingNative(4),
     flex: 3,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   valueText: {
     ...stylizedDisplayXs,
     marginRight: theme.spacingNative(8),
-    color: theme.colors.orange20,
+    color: theme.colors.brand.secondary[300],
   },
   sliderStyle: { width: 180, marginTop: 8 },
 });

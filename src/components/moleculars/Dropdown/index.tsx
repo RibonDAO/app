@@ -85,7 +85,11 @@ function Dropdown({
       <Text style={[S.buttonText, textStyle]}>
         {(selected && selected.label) || label}
       </Text>
-      <ArrowDown height={16} width={16} color={theme.colors.orange40} />
+      <ArrowDown
+        height={16}
+        width={16}
+        color={theme.colors.brand.secondary[700]}
+      />
     </TouchableOpacity>
   );
 }

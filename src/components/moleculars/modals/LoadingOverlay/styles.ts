@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   message: {
     ...defaultBodyMdRegular,
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
     fontSize: 24,
     textAlign: "center",
   },

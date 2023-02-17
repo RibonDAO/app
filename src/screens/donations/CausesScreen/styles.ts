@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     paddingHorizontal: 16,
-    backgroundColor: theme.colors.neutral10
+    backgroundColor: theme.colors.neutral10,
   },
   containerTicket: {
     height: 350,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...stylizedDisplaySm,
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
     width: "100%",
   },
   ticketExplanationSection: {
@@ -40,13 +40,13 @@ const styles = StyleSheet.create({
   ticketText: {
     textDecorationLine: "underline",
     textDecorationStyle: "dotted",
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     marginLeft: theme.spacingNative(4),
   },
   tooltip: {
     position: "absolute",
-    backgroundColor: theme.colors.neutral10
-  }
+    backgroundColor: theme.colors.neutral10,
+  },
 });
 
 export default styles;

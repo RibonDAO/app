@@ -96,10 +96,10 @@ function CardScreen(): JSX.Element {
         elements={causesFilter()}
         onChange={handleCauseClick}
         nameExtractor={(element) => element.name}
-        backgroundColor={theme.colors.orange40}
-        textColorOutline={theme.colors.orange40}
-        borderColor={theme.colors.orange40}
-        borderColorOutline={theme.colors.orange20}
+        backgroundColor={theme.colors.brand.secondary[700]}
+        textColorOutline={theme.colors.brand.secondary[700]}
+        borderColor={theme.colors.brand.secondary[700]}
+        borderColorOutline={theme.colors.brand.secondary[300]}
       />
       <View style={S.contentContainer}>
         <MaskedWaveCut imageStyles={S.supportImage} image={cause?.coverImage} />
@@ -120,7 +120,7 @@ function CardScreen(): JSX.Element {
                 onPress={handleCommunityAddClick}
                 outline
                 customStyles={{
-                  borderColor: theme.colors.orange40,
+                  borderColor: theme.colors.brand.secondary[700],
                   marginTop: theme.spacingNative(8),
                   paddingTop: theme.spacingNative(4),
                   paddingRight: theme.spacingNative(4),
@@ -128,7 +128,7 @@ function CardScreen(): JSX.Element {
                   paddingLeft: theme.spacingNative(4),
                 }}
                 customTextStyles={{
-                  color: theme.colors.orange40,
+                  color: theme.colors.brand.secondary[700],
                   fontSize: 11,
                 }}
               />
@@ -139,9 +139,9 @@ function CardScreen(): JSX.Element {
               value: removeInsignificantZeros(currentOffer.price),
             })}
             onPress={handleDonateClick}
-            borderColor={theme.colors.orange20}
-            backgroundColor={theme.colors.orange20}
-            textColor={theme.colors.orange40}
+            borderColor={theme.colors.brand.secondary[300]}
+            backgroundColor={theme.colors.brand.secondary[300]}
+            textColor={theme.colors.brand.secondary[700]}
             customTextStyles={{
               fontWeight: "600",
             }}

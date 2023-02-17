@@ -9,7 +9,7 @@ import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import styles from "./styles";
 
-const { gray20, orange40 } = theme.colors;
+const { secondary } = theme.colors.brand;
 
 type Props = {
   cause: Cause | undefined;
@@ -75,9 +75,9 @@ function SelectCryptoOfferSection({
           const changeValue = Array.isArray(value) ? value[0] : value;
           handleValueChange(changeValue.toString());
         }}
-        color={orange40}
-        minimumTrackTintColor={orange40}
-        maximumTrackTintColor={gray20}
+        color={secondary[700]}
+        minimumTrackTintColor={secondary[700]}
+        maximumTrackTintColor={theme.colors.neutral[200]}
         sliderStyle={styles.sliderStyle}
       />
     </View>

@@ -28,7 +28,7 @@ function UserSupportSection(): JSX.Element {
               type="rounded"
               name="live_help"
               size={24}
-              color={theme.colors.green40}
+              color={theme.colors.brand.primary[800]}
             />
           </View>
           <Text style={S.title}>{t("title")}</Text>
@@ -36,7 +36,7 @@ function UserSupportSection(): JSX.Element {
 
         <Text style={S.description}>{t("description")}</Text>
         <Button
-          textColor={theme.colors.orange40}
+          textColor={theme.colors.brand.secondary[700]}
           customStyles={S.supportButton}
           text={t("primaryButtonText")}
           onPress={handleClick}

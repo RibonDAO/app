@@ -53,14 +53,16 @@ export default function CausesScreen() {
   const { setTickets, hasTickets } = useTickets();
 
   function renderTooltip() {
-    return <BlankModal
-      visible={tooltipVisible}
-      setVisible={setTooltipVisible}
-      containerStyle={S.tooltip}
-      backdropOpacity={0.1}
-    >
-      <Text>{t("ticketExplanation")}</Text>
-    </BlankModal>
+    return (
+      <BlankModal
+        visible={tooltipVisible}
+        setVisible={setTooltipVisible}
+        containerStyle={S.tooltip}
+        backdropOpacity={0.1}
+      >
+        <Text>{t("ticketExplanation")}</Text>
+      </BlankModal>
+    );
   }
 
   useEffect(() => {
@@ -189,8 +191,15 @@ export default function CausesScreen() {
       </ScrollView>
 
       <View style={S.ticketExplanationSection}>
-        <Icon type="rounded" name="help" size={20} color={theme.colors.gray30} />
-        <Text style={S.ticketText} onPress={() => setTooltipVisible(true)}>{t("whatIsATicket")}</Text>
+        <Icon
+          type="rounded"
+          name="help"
+          size={20}
+          color={theme.colors.neutral[500]}
+        />
+        <Text style={S.ticketText} onPress={() => setTooltipVisible(true)}>
+          {t("whatIsATicket")}
+        </Text>
       </View>
 
       {renderTooltip()}

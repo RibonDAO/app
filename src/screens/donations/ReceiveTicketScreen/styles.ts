@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 28,
     marginBottom: theme.spacingNative(20),
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   button: {
     height: 48,

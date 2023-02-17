@@ -39,6 +39,7 @@ const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
   <Header rightComponent={<LayoutHeader hideTicket />} />
 );
+const { primary } = theme.colors.brand;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
@@ -87,7 +88,7 @@ function RootNavigator() {
         name="PaymentScreen"
         component={PaymentScreen}
         options={{
-          headerTintColor: theme.colors.orange40,
+          headerTintColor: theme.colors.brand.secondary[700],
           headerTitle: "",
           headerBackTitleVisible: false,
           headerStyle: { backgroundColor: theme.colors.neutral10 },
@@ -99,7 +100,7 @@ function RootNavigator() {
         component={DonateScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.green40,
+          headerTintColor: theme.colors.brand.primary[800],
           headerTitle: "",
           headerBackTitleVisible: true,
         }}
@@ -121,14 +122,14 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const activeColor = theme.colors.green30;
+  const activeColor = primary[300];
   const { t } = useTranslation();
 
   return (
     <BottomTab.Navigator
       initialRouteName="CausesScreen"
       screenOptions={{
-        tabBarActiveTintColor: theme.colors.green30,
+        tabBarActiveTintColor: primary[300],
         tabBarStyle: { ...S.tabBar },
         tabBarLabelStyle: { ...S.tabBarLabel },
       }}
@@ -175,12 +176,12 @@ function BottomTabNavigator() {
 const DefaultTheme: Theme = {
   dark: false,
   colors: {
-    primary: theme.colors.green20,
+    primary: primary[200],
     background: theme.colors.neutral10,
     card: theme.colors.neutral10,
-    text: theme.colors.gray40,
+    text: theme.colors.neutral[800],
     border: theme.colors.neutral10,
-    notification: theme.colors.green30,
+    notification: primary[300],
   },
 };
 

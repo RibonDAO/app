@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     marginHorizontal: 8,
-    color: theme.colors.gray20,
+    color: theme.colors.neutral[200],
   },
   insideContainer: {
     display: "flex",

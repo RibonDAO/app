@@ -12,7 +12,8 @@ import Dropdown from "components/moleculars/Dropdown";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import styles from "./styles";
 
-const { orange40, gray20 } = theme.colors;
+const { secondary } = theme.colors.brand;
+const { neutral } = theme.colors;
 
 type Props = {
   cause: Cause | undefined;
@@ -106,9 +107,9 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
           const changeValue = Array.isArray(value) ? value[0] : value;
           setCurrentOfferIndex(changeValue);
         }}
-        color={orange40}
-        minimumTrackTintColor={orange40}
-        maximumTrackTintColor={gray20}
+        color={secondary[700]}
+        minimumTrackTintColor={secondary[700]}
+        maximumTrackTintColor={neutral[200]}
         sliderStyle={styles.sliderStyle}
       />
     </View>

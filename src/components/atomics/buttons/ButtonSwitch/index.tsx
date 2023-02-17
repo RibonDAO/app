@@ -5,7 +5,8 @@ import { Text, View } from "react-native";
 import S from "./styles";
 
 const { colors } = theme;
-const { green30, neutral10 } = colors;
+const { neutral10 } = colors;
+const { primary } = theme.colors.brand;
 
 export type Props = {
   leftText: string;
@@ -35,7 +36,7 @@ function ButtonSwitch({
         onValueChange={() => handleChange()}
         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
         value={checked}
-        trackColor={{ false: green30, true: green30 }}
+        trackColor={{ false: primary[300], true: primary[300] }}
         thumbColor={checked ? neutral10 : neutral10}
       />
       <View style={S.boxIcon}>
