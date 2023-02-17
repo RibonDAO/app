@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     top: 12,
     left: 12,
     zIndex: 2,
-    backgroundColor: theme.colors.orange20,
     paddingHorizontal: 8,
     paddingBottom: 2,
     paddingTop: 4,
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 4,
     marginLeft: 4,
-    color: theme.colors.orange40
+    color: theme.colors.brand.secondary[700]
   },
   contentContainer: {
     position: "absolute",
@@ -52,8 +51,12 @@ const styles = StyleSheet.create({
   },
   causeName: {
     fontWeight: "bold",
+    position: "absolute",
+    zIndex: 3,
+    color: theme.colors.brand.secondary[700],
+    bottom: 5,
+    left: 30,
     fontSize: 20,
-    color: theme.colors.neutral10,
   },
   causeTitle: {
     fontSize: 14,
@@ -69,12 +72,12 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 320,
     height: 136,
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     top: 0,
     opacity: 0.6,
     elevation: 2,
-    backgroundColor: theme.colors.gray40,
+    backgroundColor: theme.colors.neutral[800],
   },
 });
 

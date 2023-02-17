@@ -22,12 +22,12 @@ function GroupButtons({
   onChange,
   nameExtractor,
   indexSelected,
-  backgroundColor = theme.colors.green40,
+  backgroundColor = theme.colors.brand.primary[800],
   backgroundColorOutline = "transparent",
   textColor = theme.colors.neutral10,
-  textColorOutline = theme.colors.green40,
-  borderColor = theme.colors.green40,
-  borderColorOutline = theme.colors.green40,
+  textColorOutline = theme.colors.brand.primary[800],
+  borderColor = theme.colors.brand.primary[800],
+  borderColorOutline = theme.colors.brand.primary[800],
 }: Props): JSX.Element {
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
 

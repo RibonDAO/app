@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     marginRight: theme.spacingNative(0),
     marginBottom: theme.spacingNative(16),
     marginLeft: theme.spacingNative(0),
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
   },
   contentContainer: {
     maxWidth: 472,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
     position: "relative",
-    shadowColor: theme.colors.gray40,
+    shadowColor: theme.colors.neutral[800],
     backgroundColor: theme.colors.neutral10,
     elevation: 4,
     shadowOffset: { width: -2, height: 4 },
@@ -78,21 +78,21 @@ const styles = StyleSheet.create({
   },
   communityAddText: {
     ...defaultBodyXsRegular,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
   },
   communityAddValue: {
     ...stylizedDisplayXs,
-    color: theme.colors.orange20,
+    color: theme.colors.brand.secondary[300],
   },
   userBalanceText: {
     ...defaultBodySmSemibold,
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
     marginBottom: theme.spacingNative(4),
     textAlign: "center",
   },
   refundText: {
     ...defaultBodyXsRegular,
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     marginTop: theme.spacingNative(4),
     textAlign: "center",
   },

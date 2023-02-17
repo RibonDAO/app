@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
   impact: {
     ...defaultBodyLgBold,
     marginTop: theme.spacingNative(8),
-    color: theme.colors.green30,
+    color: theme.colors.brand.primary[300],
   },
   description: {
     ...defaultBodySmRegular,
     marginTop: theme.spacingNative(4),
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
+    fontSize: 12,
   },
   image: {
     width: 60,

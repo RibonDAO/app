@@ -13,13 +13,13 @@ import GrayTicketIcon from "components/vectors/GrayTicketIcon";
 import { useNavigation } from "hooks/useNavigation";
 import { theme } from "@ribon.io/shared/styles";
 import { useTickets } from "contexts/ticketsContext";
+import Icon from "components/atomics/Icon";
+import { useTranslation } from "react-i18next";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import S from "./styles";
-import Icon from "components/atomics/Icon";
-import { useTranslation } from "react-i18next";
 
 type Props = {
   hideTicket?: boolean;
@@ -35,7 +35,9 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { tickets, hasTickets } = useTickets();
-  const ticketColor = hasTickets() ? theme.colors.green30 : theme.colors.gray30;
+  const ticketColor = hasTickets()
+    ? theme.colors.brand.primary[300]
+    : theme.colors.neutral[500];
   const ticketIcon = hasTickets() ? TicketIcon : GrayTicketIcon;
 
   function toggleModal() {
@@ -56,10 +58,20 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   function handleUserLogin() {
     return currentUser ? (
       <View style={{ width: 50 }}>
-        <RoundButton active={false} text={t("exitButton")} onPress={handleLogout} />
+        <RoundButton
+          active={false}
+          text={t("exitButton")}
+          onPress={handleLogout}
+        />
       </View>
     ) : (
-      <Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={redirectToProfileScreen} />
+      <Icon
+        type="rounded"
+        size={20}
+        color={theme.colors.brand.primary[300]}
+        name="arrow_forward_ios"
+        onPress={redirectToProfileScreen}
+      />
     );
   }
 
@@ -121,7 +133,15 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
           <ConfigItem
             icon={SupportIcon}
             text={t("support")}
-            cta={<Icon type="rounded" size={20} color={theme.colors.green30} name="arrow_forward_ios" onPress={linkToSupport} />}
+            cta={
+              <Icon
+                type="rounded"
+                size={20}
+                color={theme.colors.brand.primary[300]}
+                name="arrow_forward_ios"
+                onPress={linkToSupport}
+              />
+            }
           />
 
           <ConfigItem

@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   leftHeadingView: {
     height: 120,
     width: 4,
-    backgroundColor: theme.colors.green30,
+    backgroundColor: theme.colors.brand.primary[300],
     marginRight: 20,
     borderRadius: 10,
   },

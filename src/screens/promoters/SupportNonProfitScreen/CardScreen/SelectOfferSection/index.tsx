@@ -10,7 +10,8 @@ import { Text, View } from "react-native";
 import Dropdown from "components/moleculars/Dropdown";
 import S from "./styles";
 
-const { red30, gray20 } = theme.colors;
+const { neutral } = theme.colors;
+const { tertiary } = theme.colors.brand;
 
 type Props = {
   onOfferChange: (offer: Offer) => void;
@@ -100,9 +101,9 @@ function SelectOfferSection({
           const changeValue = Array.isArray(value) ? value[0] : value;
           setCurrentOfferIndex(changeValue);
         }}
-        color={red30}
-        minimumTrackTintColor={red30}
-        maximumTrackTintColor={gray20}
+        color={tertiary[400]}
+        minimumTrackTintColor={tertiary[400]}
+        maximumTrackTintColor={neutral[200]}
         sliderStyle={S.sliderStyle}
       />
     </View>

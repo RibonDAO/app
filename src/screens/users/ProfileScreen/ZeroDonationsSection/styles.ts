@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   zeroDonationsDescription: {
     ...defaultBodyMdRegular,
     marginBottom: theme.spacingNative(16),
-    color: theme.colors.gray30,
+    color: theme.colors.neutral[500],
     textAlign: "center",
   },
 });

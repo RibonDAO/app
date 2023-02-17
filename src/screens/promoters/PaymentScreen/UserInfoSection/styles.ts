@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: theme.spacingNative(20),
-    color: theme.colors.gray40,
+    color: theme.colors.neutral[800],
   },
   halfInputContainer: {
     display: "flex",

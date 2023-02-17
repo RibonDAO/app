@@ -22,7 +22,9 @@ const renderTabBar = (props: any) => (
         <Text
           style={{
             ...S.tabBarTitle,
-            color: focused ? theme.colors.green40 : theme.colors.gray30,
+            color: focused
+              ? theme.colors.brand.primary[800]
+              : theme.colors.neutral[500],
           }}
         >
           {route.title}
