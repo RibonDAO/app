@@ -1,8 +1,5 @@
 import { View } from "react-native";
-import { useCallback, useEffect } from "react";
-import { useImpact } from "@ribon.io/shared/hooks";
-import { useCurrentUser } from "contexts/currentUserContext";
-import useFormattedImpactText from "hooks/useFormattedImpactText";
+import { useCallback } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import usePersonPayments from "hooks/apiHooks/usePersonPayments";
@@ -10,19 +7,15 @@ import { formatDateTime } from "lib/formatters/dateFormatter";
 import CardImageText from "components/moleculars/CardImageText";
 import { theme } from "@ribon.io/shared/styles";
 import ImpactDonationsVector from "./ImpactDonationsVector";
-import NgoImpactCard from "../NgoImpactCard";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
 
 function CommunityDonationsImpactCards(): JSX.Element {
-  const { currentUser } = useCurrentUser();
-  const { userImpact } = useImpact(currentUser?.id);
-  const { formattedImpactText } = useFormattedImpactText();
   const { useCommunityPersonPayments } = usePersonPayments();
 
   const { data } = useCommunityPersonPayments(1, 6);
 
-  const impactItems = useCallback(() => data || [], [userImpact]);
+  const impactItems = useCallback(() => data || [], [data]);
   const hasImpact = impactItems() && impactItems()?.length > 0;
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
