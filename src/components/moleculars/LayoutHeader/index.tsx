@@ -20,6 +20,7 @@ import ChangeLanguageItem from "./ChangeLanguageItem";
 import S from "./styles";
 import Icon from "components/atomics/Icon";
 import { useTranslation } from "react-i18next";
+import { startChat } from "services/chat";
 
 type Props = {
   hideTicket?: boolean;
@@ -102,9 +103,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   }
 
   function linkToSupport() {
-    Linking.openURL(
-      "https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com",
-    );
+    startChat();
   }
 
   function renderConfigModal() {

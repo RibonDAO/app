@@ -1918,6 +1918,11 @@
     find-up "^5.0.0"
     js-yaml "^4.1.0"
 
+"@flashcoffee/react-native-zendesk-messaging@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@flashcoffee/react-native-zendesk-messaging/-/react-native-zendesk-messaging-1.0.4.tgz#013be93ba5c1af46e8571bc36a335cba54ad797b"
+  integrity sha512-jieJNxQe9OZ2CFLF8JJkSLokpd71Kwam3B8Arlx/MVOEm7iSC2nqPOdwxK7AINRUuo0PIm7Lpdd0mMo5sw631w==
+
 "@gar/promisify@^1.0.1":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
@@ -13219,6 +13224,11 @@ react-native-codegen@^0.70.6:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
+react-native-config@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.5.0.tgz#ff5a78fbbc2c2a0525788e5f3c86101110651ba4"
+  integrity sha512-slecooA/0tCwhb+RuWEbwLqtKirGh9vWPRpgDfH7uPAraCciqHNH2XjS9ylW+Spn4FUrHg5KWTqUGs9BdBADHg==
+
 react-native-country-picker-modal@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-country-picker-modal/-/react-native-country-picker-modal-2.0.0.tgz#005421303349a81fedf5975e465405bb4b7312d5"
@@ -13375,11 +13385,6 @@ react-native-webview@11.23.1:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
 
-react-native-zendesk-chat@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/react-native-zendesk-chat/-/react-native-zendesk-chat-0.4.1.tgz#e054d93a63504a46626894054fb4a4f4ab448e36"
-  integrity sha512-7ZwzEUYOGC3XzTvdofOwla67K3aS0yirXkUHXa6q3xgyBIP2Dao8jerrdSNzXwt7ZzGCG77cKwDxXG5uV82bow==
-
 react-native@0.70.5:
   version "0.70.5"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.70.5.tgz#f60540b21d338891086e0a834e331c124dd1f55c"
@@ -13448,13 +13453,6 @@ react-test-renderer@18.1.0, react-test-renderer@~18.1.0:
     react-is "^18.1.0"
     react-shallow-renderer "^16.15.0"
     scheduler "^0.22.0"
-
-react-zendesk@^0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/react-zendesk/-/react-zendesk-0.1.13.tgz#0b8eb76ea6642f563c948f03e84f34286368036c"
-  integrity sha512-9UNzzgdgC8nr2nZ13PNudspUClZZgsnS3FofnuGK1I7+yDPNAP8iDFD2WSQRJmYDAzH+mTlVB4K+G8lY1/0B+w==
-  dependencies:
-    prop-types "^15.7.2"
 
 react@18.1.0:
   version "18.1.0"

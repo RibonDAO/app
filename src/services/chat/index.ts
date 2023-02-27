@@ -1,11 +1,18 @@
-import ZendeskChat from "react-native-zendesk-chat";
+import { Platform } from 'react-native';
+import {
+  initialize,
+  showMessaging,
+} from '@flashcoffee/react-native-zendesk-messaging';
+import Config from 'react-native-config';
 
 export default function initializeChat() {
-  console.log(ZendeskChat);
-  ZendeskChat.init("vrDO3ZfAfTCukR1rtC4SGd0TkvUbOM0n");
+  initialize(
+    Platform.OS === 'android'
+      ? 'Config.CHANNEL_KEY_ANDROID'
+      : 'Config.CHANNEL_KEY_IOS'
+  );
+}
 
-  ZendeskChat.startChat({
-    name: "Nicholas",
-    email: "nicholas@ribon.io",
-  });
+export function startChat() {
+  showMessaging();
 }

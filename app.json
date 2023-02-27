@@ -28,7 +28,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
@@ -61,7 +63,9 @@
         {
           "icon": "./src/assets/sounds/notification-icon.png",
           "color": "#ffffff",
-          "sounds": ["./src/assets/sounds/notificationsound.wav"]
+          "sounds": [
+            "./src/assets/sounds/notificationsound.wav"
+          ]
         }
       ],
       "sentry-expo",
@@ -73,6 +77,7 @@
       "eas": {
         "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960"
       }
-    }
+    },
+    "owner": "ribon-app"
   }
 }
