@@ -45,7 +45,7 @@ export default function Button({
   borderColor = primary[300],
   borderColorOutline = primary[300],
   textColorOutline = primary[300],
-  textColor = theme.colors.neutral10,
+  textColor = primary[900],
   customStyles = {},
   customTextStyles = {},
 }: Props): JSX.Element {

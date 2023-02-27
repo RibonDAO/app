@@ -10,8 +10,6 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
-import BlankModal from "components/moleculars/modals/BlankModal";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
@@ -24,6 +22,7 @@ import { useTickets } from "contexts/ticketsContext";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import Tooltip from "components/atomics/Tooltip";
+import TicketSection from "screens/donations/CausesScreen/TicketSection";
 import S from "./styles";
 import Placeholder from "./placeholder";
 
@@ -39,7 +38,6 @@ export default function CausesScreen() {
     refetch: refetchCanDonate,
   } = useCanDonate(RIBON_INTEGRATION_ID);
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
-  const [ticketModalVisible, setTicketModalVisible] = useState(canDonate);
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
   const [currentNonProfit, setCurrentNonProfit] = useState<NonProfit>(
@@ -50,15 +48,11 @@ export default function CausesScreen() {
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
-  const { setTickets, hasTickets } = useTickets();
+  const { hasTickets } = useTickets();
 
   useEffect(() => {
     logEvent("app_causes_page_view");
   }, [logEvent]);
-
-  useEffect(() => {
-    setTicketModalVisible(canDonate);
-  }, [canDonate]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -110,10 +104,6 @@ export default function CausesScreen() {
     }
   };
 
-  const handleTicketReceived = () => {
-    setTicketModalVisible(false);
-  };
-
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
@@ -124,16 +114,7 @@ export default function CausesScreen() {
         storiesVisible={storiesVisible}
         setStoriesVisible={setStoriesVisible}
       />
-      <BlankModal
-        visible={ticketModalVisible}
-        setVisible={setTicketModalVisible}
-        containerStyle={S.containerTicket}
-        onModalHide={() => {
-          setTickets(1);
-        }}
-      >
-        <ReceiveTicketScreen onTicketReceived={handleTicketReceived} />
-      </BlankModal>
+      <TicketSection canDonate={canDonate} />
       <Text style={S.title}>{t("title")}</Text>
       <View style={S.groupButtonsContainer}>
         <GroupButtons
