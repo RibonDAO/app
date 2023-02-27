@@ -10,9 +10,16 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     backgroundColor: "#f2f2f2",
     borderRadius: 10,
-    marginTop: theme.spacingNative(64),
-    marginBottom: 60,
     transform: [{ rotate: "45deg" }],
+  },
+  diamondBackground: {
+    width: 360,
+    height: 360,
+    marginTop: theme.spacingNative(16),
+    marginBottom: theme.spacingNative(16),
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   container: {
     color: theme.colors.brand.primary[300],
