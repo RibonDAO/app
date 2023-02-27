@@ -6,7 +6,7 @@ import S from "./styles";
 export type Props = {
   name: string;
   icon: string;
-  description?: string;
+  description?: string | JSX.Element;
 };
 
 function NgoImpactCard({ icon, name, description }: Props): JSX.Element {

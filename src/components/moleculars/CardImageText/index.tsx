@@ -3,13 +3,13 @@ import Image from "components/atomics/Image";
 import S from "./styles";
 
 export type Props = {
-  title?: string;
+  title?: string | JSX.Element;
   titleStyle?: TextStyle;
-  subtitle?: string;
+  subtitle?: string | JSX.Element;
   subtitleStyle?: TextStyle;
-  text?: string;
+  text?: string | JSX.Element;
   textStyle?: TextStyle;
-  footerText?: string;
+  footerText?: string | JSX.Element;
   footerTextStyle?: TextStyle;
   image?: string;
 };
