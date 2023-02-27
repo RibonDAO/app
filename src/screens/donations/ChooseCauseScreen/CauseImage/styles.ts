@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     top: 12,
     left: 12,
     zIndex: 2,
+    backgroundColor: theme.colors.orange20,
     paddingHorizontal: 8,
     paddingBottom: 2,
     paddingTop: 4,
@@ -40,28 +41,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 4,
     marginLeft: 4,
-    color: theme.colors.brand.secondary[700]
+    color: theme.colors.brand.secondary[700],
   },
   contentContainer: {
     position: "absolute",
     bottom: 12,
     left: 20,
     elevation: 24,
-    zIndex: 2
+    zIndex: 2,
   },
   causeName: {
-    fontWeight: "bold",
-    position: "absolute",
-    zIndex: 3,
-    color: theme.colors.brand.secondary[700],
-    bottom: 5,
-    left: 30,
+    color: theme.colors.neutral[25],
     fontSize: 20,
   },
   causeTitle: {
     fontSize: 14,
     color: theme.colors.neutral10,
-    marginBottom: 4
+    marginBottom: 4,
   },
   intersection: {
     position: "absolute",

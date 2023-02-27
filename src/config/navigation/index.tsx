@@ -25,6 +25,7 @@ import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
 import TicketsProvider from "contexts/ticketsContext";
+import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -33,7 +34,6 @@ import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
-import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -103,6 +103,7 @@ function RootNavigator() {
           headerTintColor: theme.colors.brand.primary[800],
           headerTitle: "",
           headerBackTitleVisible: true,
+          headerBackTitle: "",
         }}
       />
 
