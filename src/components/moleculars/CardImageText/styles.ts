@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodySmRegular,
+  defaultBodyXsRegular,
   defaultHeadingXs,
 } from "styles/typography/default";
 
@@ -26,9 +27,12 @@ const styles = StyleSheet.create({
     objectFit: "cover",
   },
   text: {
-    color: theme.colors.neutral[800],
+    ...defaultBodySmRegular,
+    color: theme.colors.neutral[500],
+    marginBottom: theme.spacingNative(8),
   },
   footerText: {
+    ...defaultBodyXsRegular,
     color: theme.colors.neutral[500],
   },
   title: {
@@ -43,9 +47,10 @@ const styles = StyleSheet.create({
     display: "flex",
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 64,
+    height: 64,
     borderRadius: 50,
+    marginBottom: theme.spacingNative(8),
   },
 });
 

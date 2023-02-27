@@ -6,6 +6,7 @@ import usePersonPayments from "hooks/apiHooks/usePersonPayments";
 import { formatDateTime } from "lib/formatters/dateFormatter";
 import CardImageText from "components/moleculars/CardImageText";
 import { theme } from "@ribon.io/shared/styles";
+import { formatPrice } from "lib/formatters/currencyFormatter";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
@@ -33,7 +34,9 @@ function CommunityDonationsImpactCards(): JSX.Element {
           <CardImageText
             subtitle={item.receiver.name}
             title={
-              item.offer ? item.offer.price : `${item.amountCents / 100} USDC`
+              item.offer
+                ? formatPrice(item.offer.priceValue, item.offer.currency)
+                : `${item.amountCents / 100} USDC`
             }
             footerText={formatDateTime(item.paidDate)}
             subtitleStyle={S.subtitleStyle}
