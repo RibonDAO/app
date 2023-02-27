@@ -43,7 +43,6 @@ function NgoImpactCards(): JSX.Element {
             )}
             name={item?.nonProfit.name}
             icon={item?.nonProfit.logo}
-            onPress={() => {}}
           />
         </View>
       ))}
