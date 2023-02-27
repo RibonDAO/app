@@ -1,10 +1,14 @@
 import { View } from "react-native";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useImpact } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
+import usePersonPayments from "hooks/apiHooks/usePersonPayments";
+import { formatDateTime } from "lib/formatters/dateFormatter";
+import CardImageText from "components/moleculars/CardImageText";
+import { theme } from "@ribon.io/shared/styles";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import NgoImpactCard from "../NgoImpactCard";
 import S from "./styles";
@@ -14,11 +18,11 @@ function CommunityDonationsImpactCards(): JSX.Element {
   const { currentUser } = useCurrentUser();
   const { userImpact } = useImpact(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
+  const { useCommunityPersonPayments } = usePersonPayments();
 
-  const impactItems = useCallback(
-    () => userImpact?.filter((item) => item.impact.toString() !== "0") || [],
-    [userImpact],
-  );
+  const { data } = useCommunityPersonPayments(1, 6);
+
+  const impactItems = useCallback(() => data || [], [userImpact]);
   const hasImpact = impactItems() && impactItems()?.length > 0;
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
@@ -32,18 +36,15 @@ function CommunityDonationsImpactCards(): JSX.Element {
   const impactCardsList = () => (
     <View style={S.cardsContainer}>
       {impactItems()?.map((item) => (
-        <View key={item?.nonProfit?.id}>
-          <NgoImpactCard
-            key={item?.nonProfit.id}
-            description={formattedImpactText(
-              item.nonProfit,
-              Number(item.impact),
-              true,
-              true,
-            )}
-            name={item?.nonProfit.name}
-            icon={item?.nonProfit.logo}
-            onPress={() => {}}
+        <View key={item?.id} style={{ marginBottom: theme.spacingNative(12) }}>
+          <CardImageText
+            subtitle={item.receiver.name}
+            title={
+              item.offer ? item.offer.price : `${item.amountCents / 100} USDC`
+            }
+            footerText={formatDateTime(item.paidDate)}
+            subtitleStyle={S.subtitleStyle}
+            titleStyle={S.titleStyle}
           />
         </View>
       ))}
