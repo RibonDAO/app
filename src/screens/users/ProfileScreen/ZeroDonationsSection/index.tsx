@@ -1,4 +1,3 @@
-import { theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
 import { Text, View } from "react-native";
 import S from "./styles";
@@ -25,7 +24,6 @@ function ZeroDonationsSection({
       <Button
         text={buttonText}
         onPress={onButtonPress}
-        textColor={theme.colors.brand.primary[400]}
         customStyles={{ width: 200 }}
       />
     </View>

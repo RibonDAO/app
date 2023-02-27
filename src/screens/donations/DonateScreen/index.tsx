@@ -26,6 +26,8 @@ import UserIcon from "components/vectors/UserIcon";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import { useLanguage } from "contexts/languageContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
+import { setLocalStorageItem } from "lib/localStorage";
+import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import Placeholder from "./placeholder";
 
 function DonateScreen() {
@@ -62,6 +64,7 @@ function DonateScreen() {
         setCurrentUser(user);
         await donate(RIBON_INTEGRATION_ID, nonProfit.id, email);
         refetchCanDonate();
+        setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
         navigateTo("DonationDoneScreen", { nonProfit });
       } catch (error: any) {
         showToast(error.response.data.formatted_message);

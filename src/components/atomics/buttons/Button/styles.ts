@@ -3,7 +3,7 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.brand.primary[300],
+    backgroundColor: theme.colors.brand.primary[900],
     width: "100%",
     height: 40,
     borderRadius: 5,
