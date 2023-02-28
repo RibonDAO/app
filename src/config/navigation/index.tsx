@@ -34,6 +34,7 @@ import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
+import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -92,6 +93,14 @@ function RootNavigator() {
           headerTitle: "",
           headerBackTitleVisible: false,
           headerStyle: { backgroundColor: theme.colors.neutral10 },
+        }}
+      />
+
+      <Stack.Screen
+        name="OnboardingScreen"
+        component={OnboardingScreen}
+        options={{
+          headerShown: false
         }}
       />
 

@@ -1,5 +1,6 @@
 import CenteredModal from "components/moleculars/modals/CenteredModal";
 import Ticket from "components/vectors/Ticket";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   visible: boolean;
@@ -7,13 +8,17 @@ type Props = {
 };
 
 function TicketModal({ visible, setVisible }: Props): JSX.Element {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "layoutHeader.ticketModal",
+  });
+
   function renderModal() {
     return (
       <CenteredModal
-        title="Legal! Você tem 1 vale para doar :)"
+        title={t("title")}
         icon={<Ticket />}
-        buttonText="Vamos lá!"
-        description="Você pode destiná-lo para qualquer projeto"
+        buttonText={t("buttonText")}
+        description={t("description")}
         visible={visible}
         setVisible={setVisible}
         primaryButtonClick={() => setVisible(false)}

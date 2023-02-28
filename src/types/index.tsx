@@ -8,7 +8,7 @@ import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace ReactNavigation {}
+  namespace ReactNavigation { }
 }
 
 export type DonateScreenList = {
@@ -63,6 +63,7 @@ export type RootStackParamList = {
   PaymentScreen: PaymentPageList;
   SupportNonProfitScreen: SupportNonProfitParamList;
   PromotersScreen: PromotersScreenParams;
+  OnboardingScreen: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
