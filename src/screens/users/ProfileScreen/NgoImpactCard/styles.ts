@@ -23,9 +23,7 @@ const styles = StyleSheet.create({
     elevation: 18,
   },
   impact: {
-    ...defaultBodyLgBold,
-    marginTop: theme.spacingNative(8),
-    color: theme.colors.brand.primary[300],
+    color: theme.colors.brand.primary[800],
   },
   description: {
     ...defaultBodySmRegular,

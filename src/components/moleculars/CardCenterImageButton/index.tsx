@@ -13,7 +13,7 @@ export type Props = {
   buttonText: string;
   onClickButton: () => void;
   onImagePress?: () => void;
-  imageDescription?: string;
+  imageDescription?: string | JSX.Element;
   infoTextLeft?: string;
   infoTextRight?: string;
   buttonDisabled?: boolean;
