@@ -30,6 +30,10 @@ import TicketsProvider, {
   ITicketsContext,
   TicketsContext,
 } from "contexts/ticketsContext";
+import ScrollEnabledProvider, {
+  IScrollEnabledContext,
+  ScrollEnabledContext,
+} from "contexts/scrollEnabledContext";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -69,6 +73,7 @@ export type RenderComponentProps = {
   cryptoPaymentProviderValue?: Partial<ICryptoPaymentContext>;
   cardPaymentProviderValue?: Partial<ICardPaymentInformationContext>;
   ticketsProviderValue?: Partial<ITicketsContext>;
+  scrollEnabledProviderValue?: Partial<IScrollEnabledContext>;
 };
 
 function renderAllProviders(
@@ -80,6 +85,7 @@ function renderAllProviders(
     loadingOverlayValue = {},
     cardPaymentProviderValue = {},
     ticketsProviderValue = {},
+    scrollEnabledProviderValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -112,7 +118,12 @@ function renderAllProviders(
                       TicketsProvider,
                       TicketsContext,
                       ticketsProviderValue,
-                      children,
+                      renderProvider(
+                        ScrollEnabledProvider,
+                        ScrollEnabledContext,
+                        scrollEnabledProviderValue,
+                        children,
+                      ),
                     ),
                   ),
                 ),

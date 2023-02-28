@@ -2,6 +2,7 @@ import React from "react";
 import { theme } from "@ribon.io/shared/styles";
 import { Slider } from "@miblanchard/react-native-slider";
 import { View, ViewStyle } from "react-native";
+import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import styles from "./styles";
 
 export type Props = {
@@ -31,6 +32,8 @@ function InputRange({
   maximumTrackTintColor = primary[200],
   sliderStyle,
 }: Props): JSX.Element {
+  const { setScrollEnabled } = useScrollEnabled();
+
   return (
     <View style={styles.container}>
       <Slider
@@ -45,6 +48,8 @@ function InputRange({
         maximumTrackTintColor={maximumTrackTintColor}
         thumbTintColor={color}
         thumbStyle={styles.thumb}
+        onSlidingStart={() => setScrollEnabled(false)}
+        onSlidingComplete={() => setScrollEnabled(true)}
       />
     </View>
   );
