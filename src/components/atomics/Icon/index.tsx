@@ -1,7 +1,7 @@
 import { createIconSet } from "@expo/vector-icons";
-import MaterialIconsRoundedGlyphMap from "assets/fonts/MaterialSymbolsRounded.json";
-import MaterialIconsOutlineGlyphMap from "assets/fonts/MaterialSymbolsOutline.json";
-import MaterialIconsSharpGlyphMap from "assets/fonts/MaterialSymbolsSharp.json";
+import MaterialIconsRoundedGlyphMap from "assets/fonts/material/MaterialSymbolsRounded.json";
+import MaterialIconsOutlineGlyphMap from "assets/fonts/material/MaterialSymbolsOutline.json";
+import MaterialIconsSharpGlyphMap from "assets/fonts/material/MaterialSymbolsSharp.json";
 import { IconProps } from "@expo/vector-icons/build/createIconSet";
 
 const IconRounded = createIconSet(
