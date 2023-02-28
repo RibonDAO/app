@@ -22,7 +22,7 @@ function DirectDonationsImpactCards(): JSX.Element {
   });
 
   const navigateToPromotersScreen = () => {
-    navigateTo("PromotersScreen");
+    navigateTo("PromotersScreen", { isInCommunity: false });
   };
 
   const impactCardsList = () => (
