@@ -170,7 +170,7 @@ export default function CardStories({
             />
             <View style={S.headingContainer}>
               <View style={S.leftHeadingView} />
-              <View>
+              <View style={S.innerHeadingContainer}>
                 {content[current]?.heading && (
                   <Text style={S.heading}>{content[current]?.heading}</Text>
                 )}
