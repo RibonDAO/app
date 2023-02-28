@@ -1,11 +1,43 @@
 /* Inter */
-const inter = {
-  fontFamily: "Inter",
+const inter100 = {
+  fontFamily: "Inter100",
+};
+
+const inter200 = {
+  fontFamily: "Inter200",
+};
+
+const inter300 = {
+  fontFamily: "Inter300",
+};
+
+const inter400 = {
+  fontFamily: "Inter400",
+};
+
+const inter500 = {
+  fontFamily: "Inter500",
+};
+
+const inter600 = {
+  fontFamily: "Inter600",
+};
+
+const inter700 = {
+  fontFamily: "Inter700",
+};
+
+const inter800 = {
+  fontFamily: "Inter800",
+};
+
+const inter900 = {
+  fontFamily: "Inter900",
 };
 
 /* Heading */
 const defaultHeading = {
-  ...inter,
+  ...inter700,
   fontWeight: "700" as any,
 };
 
@@ -48,22 +80,22 @@ export const defaultHeadingXxs = {
 /* Body */
 const defaultBodyRegular = {
   fontWeight: "400" as any,
-  ...inter,
+  ...inter400,
 };
 
 const defaultBodyMedium = {
   fontWeight: "500" as any,
-  ...inter,
+  ...inter500,
 };
 
 const defaultBodySemibold = {
   fontWeight: "600" as any,
-  ...inter,
+  ...inter600,
 };
 
 const defaultBodyBold = {
   fontWeight: "700" as any,
-  ...inter,
+  ...inter700,
 };
 
 const defaultBodyLg = {
