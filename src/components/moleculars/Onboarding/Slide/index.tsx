@@ -4,14 +4,11 @@ import Image from "components/atomics/Image";
 import S from "./styles";
 
 function Slide({ item }: any) {
-  const { width } = Dimensions.get('window');
+  const { width } = Dimensions.get("window");
 
   return (
     <View style={S.container}>
-      <Image
-        source={item?.image}
-        style={{ ...S.image, width }}
-      />
+      <Image source={item?.image} style={{ ...S.image, width }} />
 
       <View style={{ width, alignItems: "center" }}>
         <Text style={S.title}>{item?.title}</Text>

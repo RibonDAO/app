@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    elevation: 2
+    elevation: 2,
   },
   firstButton: {
     flex: 1,

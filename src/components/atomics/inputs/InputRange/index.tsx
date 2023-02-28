@@ -17,7 +17,7 @@ export type Props = {
   sliderStyle?: ViewStyle;
 };
 
-const { primary } = theme.colors.brand
+const { primary } = theme.colors.brand;
 
 function InputRange({
   value,

@@ -3,27 +3,27 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center'
+    alignItems: "center",
   },
   subtitle: {
     color: theme.colors.green40,
     fontSize: 13,
     marginTop: 10,
-    maxWidth: '70%',
-    textAlign: 'center',
+    maxWidth: "70%",
+    textAlign: "center",
     lineHeight: 23,
   },
   title: {
     color: theme.colors.green40,
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   image: {
-    height: '75%',
-    resizeMode: 'contain'
-  }
+    height: "75%",
+    resizeMode: "contain",
+  },
 });
 
 export default styles;

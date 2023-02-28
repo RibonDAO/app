@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { Mask, Path, G } from "react-native-svg"
+import * as React from "react";
+import Svg, { Mask, Path, G } from "react-native-svg";
 
 function HandIcon(props: any) {
   return (
@@ -14,7 +14,7 @@ function HandIcon(props: any) {
       <Mask
         id="a"
         style={{
-          maskType: "alpha"
+          maskType: "alpha",
         }}
         maskUnits="userSpaceOnUse"
         x={0}
@@ -43,7 +43,7 @@ function HandIcon(props: any) {
         <Mask
           id="b"
           style={{
-            maskType: "alpha"
+            maskType: "alpha",
           }}
           maskUnits="userSpaceOnUse"
           x={20}
@@ -61,7 +61,7 @@ function HandIcon(props: any) {
         </G>
       </G>
     </Svg>
-  )
+  );
 }
 
 export default HandIcon;

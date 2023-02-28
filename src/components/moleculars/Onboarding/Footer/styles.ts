@@ -3,14 +3,14 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   image: {
-    height: '100%',
-    width: '100%',
-    resizeMode: 'contain',
+    height: "100%",
+    width: "100%",
+    resizeMode: "contain",
   },
   indicator: {
     height: 2.5,
     width: 10,
-    backgroundColor: 'grey',
+    backgroundColor: "grey",
     marginHorizontal: 3,
     borderRadius: 2,
   },
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
     backgroundColor: theme.colors.green40,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

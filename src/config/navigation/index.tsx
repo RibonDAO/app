@@ -100,7 +100,7 @@ function RootNavigator() {
         name="OnboardingScreen"
         component={OnboardingScreen}
         options={{
-          headerShown: false
+          headerShown: false,
         }}
       />
 

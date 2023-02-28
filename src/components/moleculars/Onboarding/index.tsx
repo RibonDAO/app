@@ -1,46 +1,42 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  FlatList,
-  StatusBar,
-  Dimensions,
-} from 'react-native';
+import React from "react";
+import { SafeAreaView, FlatList, StatusBar, Dimensions } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import Slide from './Slide';
-import Footer from './Footer';
+import Slide from "./Slide";
+import Footer from "./Footer";
 
 type SlideProp = {
   id: string;
   image: any;
   title: string;
   subtitle: string;
-}
+};
 
 const slides: SlideProp[] = [
   {
-    id: '1',
-    image: require('./assets/image1.png'),
-    title: 'Receba vales',
-    subtitle: 'Todo dia você recebe um vale para fazer uma doação.',
+    id: "1",
+    image: require("./assets/image1.png"),
+    title: "Receba vales",
+    subtitle: "Todo dia você recebe um vale para fazer uma doação.",
   },
   {
-    id: '2',
-    image: require('./assets/image2.png'),
-    title: 'Doe vales',
-    subtitle: 'Com um vale, você pode doar para qualquer entidade cadastrada!',
+    id: "2",
+    image: require("./assets/image2.png"),
+    title: "Doe vales",
+    subtitle: "Com um vale, você pode doar para qualquer entidade cadastrada!",
   },
   {
-    id: '3',
-    image: require('./assets/image3.png'),
-    title: 'Gere vales',
-    subtitle: 'Quando contribui com dinheiro, você gera vales para as outras pessoas doarem!',
+    id: "3",
+    image: require("./assets/image3.png"),
+    title: "Gere vales",
+    subtitle:
+      "Quando contribui com dinheiro, você gera vales para as outras pessoas doarem!",
   },
 ];
 
 const Onboarding = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
   const ref = React.useRef<any>();
-  const { width, height } = Dimensions.get('window');
+  const { width, height } = Dimensions.get("window");
 
   const updateCurrentSlideIndex = (e: any) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
