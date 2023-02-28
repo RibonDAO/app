@@ -16,6 +16,7 @@ import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import UserSupportSection from "components/moleculars/UserSupportSection";
+import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
 
@@ -35,6 +36,8 @@ function CardScreen(): JSX.Element {
     useCardPaymentInformation();
 
   const { causes } = useCauses();
+
+  const { scrollEnabled } = useScrollEnabled();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCauseScreen",
@@ -90,7 +93,7 @@ function CardScreen(): JSX.Element {
   if (!currentOffer || loading) return <View />;
 
   return (
-    <ScrollView contentContainerStyle={S.container}>
+    <ScrollView contentContainerStyle={S.container} scrollEnabled={scrollEnabled}>
       <Text style={S.title}>{t("title")}</Text>
       <GroupButtons
         elements={causesFilter()}

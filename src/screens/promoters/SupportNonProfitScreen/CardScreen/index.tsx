@@ -7,8 +7,9 @@ import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { FlatList, ScrollView, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import NonProfitCard from "screens/promoters/SupportNonProfitScreen/CardScreen/NonProfitCard";
+import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import S from "../styles";
 
 function CardScreen(): JSX.Element {
@@ -19,6 +20,7 @@ function CardScreen(): JSX.Element {
   const { nonProfits } = useNonProfits();
   const { causes } = useCauses();
   const { tertiary } = theme.colors.brand;
+  const { scrollEnabled } = useScrollEnabled();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportNonProfitPage",
@@ -100,6 +102,7 @@ function CardScreen(): JSX.Element {
         horizontal
         contentContainerStyle={S.scrollContainer}
         showsHorizontalScrollIndicator={false}
+        scrollEnabled={scrollEnabled}
       />
     </View>
   );
