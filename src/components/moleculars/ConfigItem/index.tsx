@@ -9,7 +9,13 @@ type Props = {
   onPress?: () => void;
 };
 
-function ConfigItem({ icon, text, cta, linkIcon, onPress }: Props): JSX.Element {
+function ConfigItem({
+  icon,
+  text,
+  cta,
+  linkIcon,
+  onPress,
+}: Props): JSX.Element {
   return (
     <TouchableOpacity style={S.configItem} onPress={onPress && onPress}>
       <View style={S.iconContainer}>{icon()}</View>
