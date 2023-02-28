@@ -71,7 +71,7 @@ function CardScreen(): JSX.Element {
 
   const handleCommunityAddClick = () => {
     navigateTo("CommunityAddModal", {
-      amount: currentOffer?.price,
+      amount: formatPrice(currentOffer?.priceValue, currentOffer?.currency),
     });
   };
 

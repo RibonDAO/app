@@ -3,11 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useLanguage } from "contexts/languageContext";
 import { Languages } from "types/enums/Languages";
 import { Text, View } from "react-native";
+import { Image } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { RootStackScreenProps } from "types";
 import styles from "./styles";
-import CommunityAddCycle from "./assets/community-add-cycle";
-import CommunityAddCyclePt from "./assets/community-add-cycle-pt";
+import CommunityAddCycle from "./assets/community-add-cycle.png";
+import CommunityAddCyclePT from "./assets/community-add-cycle-pt.png";
 
 function CommunityAddScreen({
   route,
@@ -21,14 +22,14 @@ function CommunityAddScreen({
 
   function communityAddImage() {
     return currentLang === Languages.EN
-      ? <CommunityAddCycle />
-      : <CommunityAddCyclePt />;
+      ? CommunityAddCycle
+      : CommunityAddCyclePT;
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{t("title", { value: amount })}</Text>
-      {communityAddImage()}
+      <Image source={communityAddImage()} style={styles.image} />
       <Button
         text={t("button", { value: amount })}
         onPress={popNavigation}
