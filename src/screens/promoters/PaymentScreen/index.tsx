@@ -6,7 +6,7 @@ import { useCardPaymentInformation } from "contexts/cardPaymentInformationContex
 import getThemeByFlow from "lib/themeByFlow";
 import { useRouteParams } from "hooks/useRouteParams";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
-import { Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
@@ -61,14 +61,18 @@ function PaymentScreen(): JSX.Element {
   const highlightText = () => nonProfit?.name || cause?.name;
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
+    >
       <ScrollView contentContainerStyle={styles.mainContainer}>
         <View style={styles.innerContainer}>
           <MaskedWaveCut
             image={nonProfit?.mainImage || cause?.mainImage}
             imageStyles={styles.image}
           />
-          <KeyboardAvoidingView style={styles.contentContainer}>
+          <View style={styles.contentContainer}>
             <Text style={styles.title}>
               {t("title")}{" "}
               <Text
@@ -93,7 +97,7 @@ function PaymentScreen(): JSX.Element {
               </Text>
             )}
             {renderCurrentSection()}
-          </KeyboardAvoidingView>
+          </View>
         </View>
       </ScrollView>
       {!isKeyboardVisible && (
@@ -108,7 +112,7 @@ function PaymentScreen(): JSX.Element {
           />
         </View>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 export default withPlaceholder(PaymentScreen, PaymentScreenPlaceholder);

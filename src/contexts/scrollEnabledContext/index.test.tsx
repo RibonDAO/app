@@ -1,10 +1,10 @@
-import { renderComponent } from "../../../../ribon-interface/src/config/testUtils";
-import { expectTextToBeInTheDocument } from "../../../../ribon-interface/src/config/testUtils/expects";
-import { useScrollEnabled } from "./index";
+import { renderComponent } from "config/testUtils/renders";
+import { expectTextToBeInTheDocument } from "config/testUtils/expects";
+import { useScrollEnabled } from ".";
 
-function ScrollEnabledTestPage(){
+function ScrollEnabledTestPage() {
   useScrollEnabled();
-  return <div>ScrollEnabled</div>
+  return <div>ScrollEnabled</div>;
 }
 
 describe("useScrollEnabled", () => {
