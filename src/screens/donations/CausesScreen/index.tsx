@@ -166,7 +166,11 @@ export default function CausesScreen() {
             size={20}
             color={theme.colors.gray30}
           />
-          <Text style={S.ticketText}>{t("whatIsATicket")}</Text>
+          <View style={{ overflow: "hidden" }}>
+            <View style={S.ticketTextContainer}>
+              <Text style={S.ticketText}>{t("whatIsATicket")}</Text>
+            </View>
+          </View>
         </View>
       </Tooltip>
 
