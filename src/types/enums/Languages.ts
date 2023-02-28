@@ -4,4 +4,6 @@ export enum Languages {
   PT = "pt-BR",
   // eslint-disable-next-line no-unused-vars
   EN = "en-US",
+  en = "en",
+  pt = "pt",
 }
