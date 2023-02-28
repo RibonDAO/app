@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   title: {
     ...stylizedDisplayXs,
     textAlign: "center",
+    marginBottom: theme.spacingNative(64)
   },
   image: {
     width: "100%",
