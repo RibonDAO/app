@@ -9,7 +9,7 @@ type Props = {
   image?: string;
   title?: string;
   description?: string;
-  highlightedDescription?: string;
+  highlightedDescription?: string | JSX.Element;
   buttonTitle?: string;
   onButtonPress?: () => void;
 };

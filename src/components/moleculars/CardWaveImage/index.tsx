@@ -7,7 +7,7 @@ import S from "./styles";
 type Props = {
   image: string;
   title?: string;
-  subtitle?: string;
+  subtitle?: string | JSX.Element;
   buttonText: string;
   onButtonClick: () => void;
   children?: JSX.Element | JSX.Element[];
