@@ -14,7 +14,9 @@ export function useFormattedImpactText() {
       {normalizedImpact.map((slice: any, index: any) => (
         <Fragment key={index.toString()}>
           {index % 2 === 0 ? (
-            <Text style={{ fontWeight: "bold", fontFamily: "Inter700" }}>{slice}</Text>
+            <Text style={{ fontWeight: "bold", fontFamily: "Inter700" }}>
+              {slice}
+            </Text>
           ) : (
             slice
           )}{" "}

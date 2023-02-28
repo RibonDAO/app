@@ -40,9 +40,9 @@ function LanguageProvider({ children }: Props) {
   }, [currentLang, i18n]);
 
   function handleSwitchLanguage() {
-    if (currentLang === Languages.EN) {
+    if (currentLang === Languages.EN || currentLang === Languages.en) {
       setCurrentLang(Languages.PT);
-    } else if (currentLang === Languages.PT) {
+    } else if (currentLang === Languages.PT || currentLang === Languages.pt) {
       setCurrentLang(Languages.EN);
     }
   }

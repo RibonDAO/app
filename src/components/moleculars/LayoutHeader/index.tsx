@@ -70,7 +70,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
         size={20}
         color={theme.colors.brand.primary[300]}
         name="arrow_forward_ios"
-        onPress={redirectToProfileScreen}
+        onPress={toggleModal}
       />
     );
   }
@@ -133,6 +133,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
           <ConfigItem
             icon={SupportIcon}
             text={t("support")}
+            onPress={linkToSupport}
             cta={
               <Icon
                 type="rounded"
@@ -147,6 +148,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
           <ConfigItem
             icon={LetterIcon}
             text={currentUser ? currentUser?.email : t("login")}
+            onPress={currentUser ? handleLogout : toggleModal}
             cta={handleUserLogin()}
           />
 
