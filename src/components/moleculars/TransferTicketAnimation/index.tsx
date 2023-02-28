@@ -1,7 +1,6 @@
 import { Dimensions, View } from "react-native";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
 import * as Animatable from "react-native-animatable";
-
 import { useEffect } from "react";
 import S from "./styles";
 

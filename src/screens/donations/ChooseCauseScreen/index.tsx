@@ -45,7 +45,11 @@ function ChooseCauseScreen(): JSX.Element {
         {causesList()}
 
         <View style={S.buttonContainer}>
-          <Button text={t("buttonText")} onPress={navigateToCausesScreen} outline />
+          <Button
+            text={t("buttonText")}
+            onPress={navigateToCausesScreen}
+            outline
+          />
         </View>
       </View>
     );

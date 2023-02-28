@@ -8,7 +8,12 @@
     "exitButton": "Sair",
     "support": "Suporte ao usuário",
     "login": "Fazer login",
-    "language": "Alterar idioma"
+    "language": "Alterar idioma",
+    "ticketModal": {
+      "title": "Legal! Você tem 1 vale para doar :)",
+      "description": "Você pode destiná-lo para qualquer projeto",
+      "buttonText": "Vamos lá!"
+    }
   },
   "donations": {
     "causesScreen": {
