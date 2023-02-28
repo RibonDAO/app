@@ -14,7 +14,15 @@ import { formattedLanguage } from "lib/formatters/languageFormatter";
 import * as Notifications from "expo-notifications";
 import SpaceMono from "../assets/fonts/SpaceMono-Regular.ttf";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
-import Inter from "../assets/fonts/Inter.ttf";
+import Inter400 from "../assets/fonts/inter/Inter-Regular.ttf";
+import Inter900 from "../assets/fonts/inter/Inter-Black.ttf";
+import Inter700 from "../assets/fonts/inter/Inter-Bold.ttf";
+import Inter800 from "../assets/fonts/inter/Inter-ExtraBold.ttf";
+import Inter200 from "../assets/fonts/inter/Inter-ExtraLight.ttf";
+import Inter300 from "../assets/fonts/inter/Inter-Light.ttf";
+import Inter500 from "../assets/fonts/inter/Inter-Medium.ttf";
+import Inter600 from "../assets/fonts/inter/Inter-SemiBold.ttf";
+import Inter100 from "../assets/fonts/inter/Inter-Thin.ttf";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -62,7 +70,15 @@ export default function useCachedResources() {
           ...FontAwesome.font,
           "space-mono": SpaceMono,
           "Gambarino-Regular": GambarinoRegular,
-          Inter,
+          Inter400,
+          Inter900,
+          Inter700,
+          Inter800,
+          Inter200,
+          Inter300,
+          Inter500,
+          Inter600,
+          Inter100,
           MaterialSymbolsRounded,
           MaterialSymbolsOutlined,
           MaterialSymbolsSharp,

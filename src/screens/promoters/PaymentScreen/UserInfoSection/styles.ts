@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingLeft: theme.spacingNative(4),
   },
   countryInputTheme: {
-    fontFamily: "Inter",
+    fontFamily: "Inter400",
     fontSize: 14,
   },
   dropdownContainer: {

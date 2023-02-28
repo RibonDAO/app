@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   buttonText: {
     flex: 1,
     textAlign: "center",
-    fontFamily: "Inter",
+    fontFamily: "Inter400",
     fontWeight: "bold",
     color: theme.colors.brand.secondary[700],
   },
