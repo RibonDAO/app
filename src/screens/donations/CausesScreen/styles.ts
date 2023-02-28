@@ -38,10 +38,16 @@ const styles = StyleSheet.create({
     marginVertical: theme.spacingNative(12),
   },
   ticketText: {
-    textDecorationLine: "underline",
-    textDecorationStyle: "dotted",
     color: theme.colors.neutral[500],
     marginLeft: theme.spacingNative(4),
+    lineHeight: 22,
+  },
+  ticketTextContainer: {
+    borderStyle: "dashed",
+    borderWidth: 1,
+    borderColor: theme.colors.neutral[300],
+    margin: -2,
+    marginBottom: 0,
   },
   tooltip: {
     position: "absolute",
