@@ -8,6 +8,7 @@ import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "@ribon.io/shared/styles";
+import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
@@ -54,11 +55,13 @@ function Main() {
 export default function App() {
   return (
     <Suspense fallback={<View />}>
-      <CurrentUserProvider>
-        <LanguageProvider>
-          <Main />
-        </LanguageProvider>
-      </CurrentUserProvider>
+      <ScrollEnabledProvider>
+        <CurrentUserProvider>
+          <LanguageProvider>
+            <Main />
+          </LanguageProvider>
+        </CurrentUserProvider>
+      </ScrollEnabledProvider>
     </Suspense>
   );
 }
