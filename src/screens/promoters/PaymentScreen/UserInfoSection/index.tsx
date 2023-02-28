@@ -122,14 +122,13 @@ function UserInfoSection(): JSX.Element {
           containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
           autoFocus
         />
-        <Dropdown
-          label={state || t("state")}
-          items={federationStates()}
-          containerStyle={S.dropdownContainer}
-          onSelect={(selectedState) => {
-            setState(selectedState.value);
-          }}
-          textStyle={{ ...S.dropdownText, color: colorTheme.shade20 }}
+        <InputText
+          style={inputStyles}
+          name={state}
+          placeholder={t("state")}
+          value={state}
+          onChangeText={(value) => setState(value)}
+          containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
         />
       </View>
       <InputText
