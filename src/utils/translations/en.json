@@ -8,7 +8,12 @@
     "exitButton": "Exit",
     "support": "User Support",
     "login": "Login",
-    "language": "Change language"
+    "language": "Change language",
+    "ticketModal": {
+      "title": "Cool! You have 1 ticket to donate :)",
+      "description": "You can use to donate to any project",
+      "buttonText": "Let's go!"
+    }
   },
   "donations": {
     "causesScreen": {

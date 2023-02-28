@@ -31,7 +31,12 @@ function CauseImage({ name, coverImage, id }: Props) {
       <Image style={S.imageContainer} source={{ uri: coverImage }} />
 
       <View style={S.label}>
-        <Icon type="rounded" name="rocket_launch" size={16} color={theme.colors.brand.secondary[700]} />
+        <Icon
+          type="rounded"
+          name="rocket_launch"
+          size={16}
+          color={theme.colors.brand.secondary[700]}
+        />
         <Text style={S.labelTitle}>{t("labelTitle")}</Text>
       </View>
 

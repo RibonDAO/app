@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "cover",
     marginVertical: theme.spacingNative(20),
-    padding: theme.spacingNative(20)
+    padding: theme.spacingNative(20),
   },
   text: {
     ...stylizedDisplayMd,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    marginBottom: theme.spacingNative(24)
+    marginBottom: theme.spacingNative(24),
   },
   imageBackground: {
     width: "100%",
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
     position: "absolute",
-    bottom: 60
-  }
+    bottom: 60,
+  },
 });
 
 export default styles;
