@@ -56,8 +56,6 @@ export default function useCachedResources() {
     registerForPushNotificationsAsync().then((token: any) =>
       setExpoPushToken(token),
     );
-
-    console.log(expoPushToken);
   }, []);
 
   useEffect(() => {
