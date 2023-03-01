@@ -1,11 +1,11 @@
 import { screen, fireEvent } from "@testing-library/react-native";
-import { renderComponent } from "config/testUtils/renders";
+import { renderComponentAsync } from "config/testUtils/renders";
 import { expectDisplayValueToBeInTheDocument } from "config/testUtils/expects";
 import UserInfoSection from ".";
 
 describe("UserInfoSection", () => {
-  it("should fill billing information form", () => {
-    renderComponent(<UserInfoSection />, {
+  it("should fill billing information form", async () => {
+    await renderComponentAsync(<UserInfoSection />, {
       cardPaymentProviderValue: {
         country: "Brazil",
       },

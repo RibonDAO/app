@@ -1,13 +1,13 @@
-import { renderComponent } from "config/testUtils/renders";
-import Button from ".";
+import { renderComponentAsync } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { clickOn } from "config/testUtils";
+import Button from ".";
 
 describe("Button", () => {
   const mockFn = jest.fn();
 
-  beforeEach(() => {
-    renderComponent(<Button text="text" onPress={mockFn} />);
+  beforeEach(async () => {
+    await renderComponentAsync(<Button text="text" onPress={mockFn} />);
   });
 
   it("renders without error", () => {
