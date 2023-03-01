@@ -34,6 +34,7 @@ import ScrollEnabledProvider, {
   IScrollEnabledContext,
   ScrollEnabledContext,
 } from "contexts/scrollEnabledContext";
+import { waitForPromises } from "config/testUtils";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -147,6 +148,14 @@ export function renderComponent(
   return {
     component: render(componentWithProviders),
   };
+}
+
+export async function renderComponentAsync(
+  component: JSX.Element,
+  renderComponentProps: RenderComponentProps = {},
+) {
+  renderComponent(component, renderComponentProps);
+  await waitForPromises();
 }
 
 type RenderHookReturn = {

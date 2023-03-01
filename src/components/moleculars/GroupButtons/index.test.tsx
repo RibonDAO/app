@@ -1,10 +1,10 @@
-import GroupButtons from ".";
-import { renderComponent } from "config/testUtils/renders";
+import { renderComponentAsync } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
+import GroupButtons from ".";
 
 describe("GroupButtons", () => {
-  it("renders without error", () => {
-    renderComponent(
+  it("renders without error", async () => {
+    await renderComponentAsync(
       <GroupButtons
         elements={[{ name: "button 1" }, { name: "button 2" }]}
         nameExtractor={(element) => element.name}
