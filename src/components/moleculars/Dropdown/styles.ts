@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { defaultBodySmRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   button: {
@@ -47,8 +48,16 @@ const styles = StyleSheet.create({
   item: {
     paddingHorizontal: 10,
     paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderColor: theme.colors.gray10,
+  },
+  labelText: {
+    ...defaultBodySmRegular,
+  },
+  innerDropdownContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingRight: theme.spacingNative(8),
   },
 });
 
