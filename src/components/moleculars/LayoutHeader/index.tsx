@@ -38,7 +38,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   const ticketColor = hasTickets()
     ? theme.colors.brand.primary[600]
     : theme.colors.neutral[500];
-  const ticketIcon = hasTickets() ? TicketIcon : GrayTicketIcon;
+  const ticketIcon = hasTickets() ? <TicketIcon /> : <GrayTicketIcon />;
 
   function toggleModal() {
     setMenuVisible(!menuVisible);
@@ -170,7 +170,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
             <Text style={{ ...S.ticketCounter, color: ticketColor }}>
               {tickets}
             </Text>
-            {ticketIcon()}
+            {ticketIcon}
           </View>
         </TouchableOpacity>
       )}
