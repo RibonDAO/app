@@ -16,8 +16,8 @@ if (typeof global.self === "undefined") {
 
 if (Platform.OS !== "web") {
   LogBox.ignoreLogs([
-    "Warning: The provided value 'ms-stream' is not a valid 'responseType'.",
-    "Warning: The provided value 'moz-chunked-arraybuffer' is not a valid 'responseType'.",
+    "The provided value 'ms-stream' is not a valid 'responseType'.",
+    "The provided value 'moz-chunked-arraybuffer' is not a valid 'responseType'.",
   ]);
   require("react-native-get-random-values");
   require("@ethersproject/shims");
