@@ -1,10 +1,10 @@
-import { renderComponent } from "config/testUtils/renders";
+import { renderComponentAsync } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import SupportWithCommunityPage from ".";
 
 describe("SupportWithCommunityPage", () => {
-  it("should render without error", () => {
-    renderComponent(
+  it("should render without error", async () => {
+    await renderComponentAsync(
       <SupportWithCommunityPage
         navigation={{} as any}
         route={{

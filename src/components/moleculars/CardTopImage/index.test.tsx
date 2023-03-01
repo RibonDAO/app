@@ -1,10 +1,10 @@
-import CardTopImage from ".";
-import { renderComponent } from "config/testUtils/renders";
+import { renderComponentAsync } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
+import CardTopImage from ".";
 
 describe("CardTopImage", () => {
-  it("should render without error", () => {
-    renderComponent(<CardTopImage imageUrl="" text="text" />);
+  it("should render without error", async () => {
+    await renderComponentAsync(<CardTopImage imageUrl="" text="text" />);
 
     expectTextToBeInTheDocument("text");
   });
