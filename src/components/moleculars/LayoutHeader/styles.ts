@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { defaultBodyXsSemibold } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -70,6 +71,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
     color: theme.colors.brand.primary[300],
+  },
+  walletContainer: {
+    paddingVertical: 5,
+    paddingHorizontal: 7,
+    borderRadius: 4,
+    borderWidth: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: theme.spacingNative(12),
+  },
+  walletText: {
+    ...defaultBodyXsSemibold,
+    marginRight: theme.spacingNative(4),
+    color: theme.colors.brand.primary[600],
+    textAlign: "center",
+    lineHeight: 16,
   },
 });
 

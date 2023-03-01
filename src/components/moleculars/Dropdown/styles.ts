@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingRight: theme.spacingNative(8),
+    paddingHorizontal: theme.spacingNative(4),
   },
 });
 
