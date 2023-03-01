@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   configContainer: {
     flexDirection: "row",
     alignItems: "center",
+    height: 24,
   },
   ticketSection: {
     paddingVertical: 5,

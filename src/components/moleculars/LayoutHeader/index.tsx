@@ -36,7 +36,7 @@ function LayoutHeader({ hideTicket = false }: Props): JSX.Element {
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { tickets, hasTickets } = useTickets();
   const ticketColor = hasTickets()
-    ? theme.colors.brand.primary[300]
+    ? theme.colors.brand.primary[600]
     : theme.colors.neutral[500];
   const ticketIcon = hasTickets() ? TicketIcon : GrayTicketIcon;
 
