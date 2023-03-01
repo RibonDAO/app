@@ -1,13 +1,11 @@
 import { screen, fireEvent } from "@testing-library/react-native";
-import { renderComponent } from "config/testUtils/renders";
+import { renderComponentAsync } from "config/testUtils/renders";
 import { expectDisplayValueToBeInTheDocument } from "config/testUtils/expects";
-import { waitForPromises } from "config/testUtils";
 import PaymentInformation from ".";
 
 describe("CardInfoSection", () => {
   it("should fill payment methods form", async () => {
-    renderComponent(<PaymentInformation />);
-    await waitForPromises();
+    await renderComponentAsync(<PaymentInformation />);
 
     fireEvent.changeText(
       screen.getByPlaceholderText("E-mail"),

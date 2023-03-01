@@ -1,5 +1,5 @@
-import { clickOn, waitForPromises } from "config/testUtils";
-import { renderComponent } from "config/testUtils/renders";
+import { clickOn } from "config/testUtils";
+import { renderComponentAsync } from "config/testUtils/renders";
 import {
   expectTextNotToBeInTheDocument,
   expectTextToBeInTheDocument,
@@ -20,8 +20,7 @@ function LoadingOverlayTestPage() {
 
 describe("useLoadingOverlay", () => {
   beforeEach(async () => {
-    renderComponent(<LoadingOverlayTestPage />);
-    await waitForPromises();
+    await renderComponentAsync(<LoadingOverlayTestPage />);
   });
 
   it("renders without error", () => {
