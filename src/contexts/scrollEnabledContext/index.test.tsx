@@ -1,7 +1,7 @@
 import { renderComponent } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { Button, Text, View } from "react-native";
-import { clickOn } from "config/testUtils";
+import { clickOn, waitForPromises } from "config/testUtils";
 import { useScrollEnabled } from ".";
 
 function ScrollEnabledTestPage() {
@@ -20,13 +20,16 @@ function ScrollEnabledTestPage() {
 }
 
 describe("useScrollEnabled", () => {
-  it("starts enabled", () => {
+  beforeEach(async () => {
     renderComponent(<ScrollEnabledTestPage />);
+    await waitForPromises();
+  });
+
+  it("starts enabled", () => {
     expectTextToBeInTheDocument("Scroll Enabled");
   });
 
   it("sets the scroll to disabled when the function is called", () => {
-    renderComponent(<ScrollEnabledTestPage />);
     clickOn("Disable Scroll");
 
     expectTextToBeInTheDocument("Scroll Disabled");

@@ -23,6 +23,7 @@ function setupMocks() {
     __esModule: true,
     default: () => true,
   }));
+  jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
 }
 
 setupMocks();
