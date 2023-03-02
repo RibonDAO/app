@@ -3,17 +3,21 @@ import {
   Animated,
   Dimensions,
   Modal,
+  Platform,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  StatusBar,
 } from "react-native";
 import Image from "components/atomics/Image";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "components/atomics/Icon";
+import Constants from "expo-constants";
 import S from "./styles";
 
+const { statusBarHeight } = Constants;
 const { width, height } = Dimensions.get("window");
 
 type Story = {
@@ -31,6 +35,7 @@ type Props = {
   subtitle?: string;
   duration?: number;
 };
+
 export default function CardStories({
   stories,
   visible,
@@ -43,6 +48,7 @@ export default function CardStories({
   const [content, setContent] = useState<any>([]);
   const [current, setCurrent] = useState(0);
   const progress = useRef(new Animated.Value(0)).current;
+  const offsetTop = Platform.OS === "ios" ? statusBarHeight : 0;
 
   useEffect(() => {
     setContent(
@@ -101,15 +107,25 @@ export default function CardStories({
     }
   }
 
+  useEffect(() => {
+    if (visible) {
+      if (Platform.OS === "android") StatusBar.setBackgroundColor("#000000");
+    } else if (Platform.OS === "android")
+      StatusBar.setBackgroundColor("#ffffff");
+  }, [visible]);
+
   return (
     <Modal
       animationType="fade"
-      presentationStyle="pageSheet"
       transparent={false}
       visible={visible}
+      style={{ margin: 0 }}
     >
-      <SafeAreaView style={S.containerModal} edges={["top", "bottom"]}>
-        <View style={S.backgroundContainer}>
+      <SafeAreaView
+        style={[S.containerModal, { paddingTop: offsetTop }]}
+        edges={["top", "bottom"]}
+      >
+        <View style={[S.backgroundContainer, { top: offsetTop }]}>
           <Image
             onLoadEnd={() => {
               progress.setValue(0);

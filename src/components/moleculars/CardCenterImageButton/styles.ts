@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    marginRight: theme.spacingNative(12),
     borderRadius: 12,
     backgroundColor: theme.colors.neutral10,
   },
