@@ -5,7 +5,6 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    // paddingHorizontal: 16,
     backgroundColor: theme.colors.neutral10,
   },
   containerPadding: {
