@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Audio, AVPlaybackSource } from 'expo-av';
+import { Audio, AVPlaybackSource } from "expo-av";
 
 function useSound() {
   const [sound, setSound] = useState<any>();
@@ -14,13 +14,13 @@ function useSound() {
   useEffect(() => {
     return sound
       ? () => {
-        sound.unloadAsync();
-      }
+          sound.unloadAsync();
+        }
       : undefined;
   }, [sound]);
 
   return {
-    playSound
+    playSound,
   };
 }
 

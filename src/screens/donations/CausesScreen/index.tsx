@@ -179,7 +179,6 @@ export default function CausesScreen() {
       <View style={S.containerPadding}>
         <UserSupportSection />
       </View>
-
     </ScrollView>
   );
 }

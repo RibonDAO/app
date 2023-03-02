@@ -93,7 +93,10 @@ function CardScreen(): JSX.Element {
   if (!currentOffer || loading) return <View />;
 
   return (
-    <ScrollView contentContainerStyle={S.container} scrollEnabled={scrollEnabled}>
+    <ScrollView
+      contentContainerStyle={S.container}
+      scrollEnabled={scrollEnabled}
+    >
       <Text style={S.title}>{t("title")}</Text>
       <GroupButtons
         elements={causesFilter()}
