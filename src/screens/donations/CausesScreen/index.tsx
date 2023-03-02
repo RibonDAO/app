@@ -108,20 +108,22 @@ export default function CausesScreen() {
     <Placeholder />
   ) : (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
-      <StoriesSection
-        stories={stories}
-        nonProfit={currentNonProfit}
-        storiesVisible={storiesVisible}
-        setStoriesVisible={setStoriesVisible}
-      />
-      <TicketSection canDonate={canDonate} />
-      <Text style={S.title}>{t("title")}</Text>
-      <View style={S.groupButtonsContainer}>
-        <GroupButtons
-          elements={causesFilter()}
-          onChange={handleCauseChange}
-          nameExtractor={(cause) => cause.name}
+      <View style={S.containerPadding}>
+        <StoriesSection
+          stories={stories}
+          nonProfit={currentNonProfit}
+          storiesVisible={storiesVisible}
+          setStoriesVisible={setStoriesVisible}
         />
+        <TicketSection canDonate={canDonate} />
+        <Text style={S.title}>{t("title")}</Text>
+        <View style={S.groupButtonsContainer}>
+          <GroupButtons
+            elements={causesFilter()}
+            onChange={handleCauseChange}
+            nameExtractor={(cause) => cause.name}
+          />
+        </View>
       </View>
 
       <ScrollView
@@ -174,7 +176,10 @@ export default function CausesScreen() {
         </View>
       </Tooltip>
 
-      <UserSupportSection />
+      <View style={S.containerPadding}>
+        <UserSupportSection />
+      </View>
+
     </ScrollView>
   );
 }

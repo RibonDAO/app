@@ -21,9 +21,9 @@
       "buttonText": "Donate",
       "allCauses": "All",
       "userSupportSection": {
-        "title": "User support",
+        "title": "Ribon Support",
         "description": "Doubts, ideas, refunds. We're here!",
-        "primaryButtonText": "Access support"
+        "primaryButtonText": "Access user support"
       },
       "impactPrefix": "Donate",
       "labelText": "Learn more",
