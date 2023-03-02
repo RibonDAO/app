@@ -11,7 +11,7 @@ import S from "./styles";
 
 export default function PromotersScreen() {
   const { params } = useRouteParams<"PromotersScreen">();
-  const [submenuVisible, setSubmenuVisible] = useState(false);
+  const [submenuVisible, setSubmenuVisible] = useState(true);
   const [isInCommunityDonationFlow, setIsInCommunityDonationFlow] = useState(
     params?.isInCommunity ?? true,
   );
@@ -22,10 +22,6 @@ export default function PromotersScreen() {
   useEffect(() => {
     setIsInCommunityDonationFlow(params?.isInCommunity ?? true);
   }, [params?.isInCommunity]);
-
-  useEffect(() => {
-    setSubmenuVisible(false);
-  }, [isInCommunityDonationFlow]);
 
   return (
     <View>
@@ -60,6 +56,7 @@ export default function PromotersScreen() {
               text={t("firstButtonText")}
               onPress={() => {
                 setIsInCommunityDonationFlow(true);
+                setSubmenuVisible(false);
               }}
               backgroundColor={
                 isInCommunityDonationFlow
@@ -79,6 +76,7 @@ export default function PromotersScreen() {
               text={t("secondButtonText")}
               onPress={() => {
                 setIsInCommunityDonationFlow(false);
+                setSubmenuVisible(false);
               }}
               backgroundColor={
                 isInCommunityDonationFlow

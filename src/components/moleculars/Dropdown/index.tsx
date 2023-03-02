@@ -57,7 +57,7 @@ function Dropdown({
 
   const renderItem = ({ item }: { item: ItemType }): ReactElement<any, any> => (
     <TouchableOpacity style={S.item} onPress={() => onItemPress(item)}>
-      <Text>{item.label}</Text>
+      <Text style={S.labelText}>{item.label}</Text>
     </TouchableOpacity>
   );
 
@@ -82,14 +82,16 @@ function Dropdown({
       onPress={toggleDropdown}
     >
       {renderDropdown()}
-      <Text style={[S.buttonText, textStyle]}>
-        {(selected && selected.label) || label}
-      </Text>
-      <ArrowDown
-        height={16}
-        width={16}
-        color={theme.colors.brand.secondary[700]}
-      />
+      <View style={S.innerDropdownContainer}>
+        <Text style={[S.buttonText, textStyle]}>
+          {(selected && selected.label) || label}
+        </Text>
+        <ArrowDown
+          height={16}
+          width={16}
+          color={theme.colors.brand.secondary[700]}
+        />
+      </View>
     </TouchableOpacity>
   );
 }
