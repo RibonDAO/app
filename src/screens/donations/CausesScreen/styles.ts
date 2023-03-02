@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   causesCardContainer: {
     height: "auto",
     width: 256,
+    marginRight: theme.spacingNative(8),
   },
   causesContainer: {
     display: "flex",

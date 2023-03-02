@@ -26,6 +26,7 @@ import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
 import TicketsProvider from "contexts/ticketsContext";
 import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
+import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -34,11 +35,13 @@ import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
-import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
   <Header rightComponent={<LayoutHeader hideTicket />} />
+);
+const headerWithWallet = () => (
+  <Header rightComponent={<LayoutHeader hideTicket hideWallet={false} />} />
 );
 const { primary } = theme.colors.brand;
 
@@ -163,7 +166,7 @@ function BottomTabNavigator() {
           title: t("tabs.giving") || "Donations",
           tabBarIcon: ({ color }: any) =>
             color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
-          header: headerWithoutTicket,
+          header: headerWithWallet,
           lazy: false,
         }}
       />

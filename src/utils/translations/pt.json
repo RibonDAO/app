@@ -9,6 +9,7 @@
     "support": "Suporte ao usuário",
     "login": "Fazer login",
     "language": "Alterar idioma",
+    "connectWallet": "Conectar",
     "ticketModal": {
       "title": "Legal! Você tem 1 vale para doar :)",
       "description": "Você pode destiná-lo para qualquer projeto",
