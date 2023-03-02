@@ -1,8 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
-  defaultBodyLgBold,
-  defaultBodyMdBold,
+  defaultBodySmBold,
   defaultHeadingXs,
 } from "styles/typography/default";
 
@@ -37,17 +36,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 50,
-    width: 36,
-    height: 36,
+    width: 32,
+    height: 32,
     backgroundColor: theme.colors.neutral10,
   },
   title: {
     ...defaultHeadingXs,
     color: theme.colors.neutral10,
-    marginLeft: 8,
+    marginLeft: 12,
   },
   description: {
-    ...defaultBodyMdBold,
+    ...defaultBodySmBold,
     color: theme.colors.brand.secondary[700],
     marginBottom: 12,
     marginTop: 8,

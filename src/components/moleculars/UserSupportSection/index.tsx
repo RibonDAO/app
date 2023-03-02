@@ -27,8 +27,8 @@ function UserSupportSection(): JSX.Element {
             <Icon
               type="rounded"
               name="live_help"
-              size={24}
-              color={theme.colors.brand.primary[800]}
+              size={20}
+              color={theme.colors.brand.secondary[700]}
             />
           </View>
           <Text style={S.title}>{t("title")}</Text>
