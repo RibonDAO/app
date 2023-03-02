@@ -6,5 +6,5 @@
     "sourceMap": true,
     "sourceRoot": "/"
   },
-  "include": ["src"]
+  "include": ["src", "images.d.ts", "sounds.d.ts"]
 }

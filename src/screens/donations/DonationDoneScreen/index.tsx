@@ -4,6 +4,8 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import DoneScreenTemplate from "screens/templates/DoneScreenTemplate";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
+import useSound from "hooks/useSound";
+import donationDoneSound from "./assets/donation-done.mp3";
 
 export default function DonationDoneScreen({
   route,
@@ -14,11 +16,16 @@ export default function DonationDoneScreen({
   const { nonProfit } = route.params;
   const { navigateTo } = useNavigation();
   const { formattedImpactText } = useFormattedImpactText();
+  const { playSound } = useSound();
 
   useEffect(() => {
     setTimeout(() => {
       navigateTo("ChooseCauseScreen");
-    }, 5000);
+    }, 4000);
+  }, []);
+
+  useEffect(() => {
+    playSound(donationDoneSound);
   }, []);
 
   return (
