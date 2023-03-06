@@ -167,7 +167,7 @@ function BottomTabNavigator() {
         name="ForYouScreen"
         component={ForYouScreen}
         options={{
-          title: t("tabs.foryou") || "",
+          title: t("tabs.foryou") || "For you",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <ForYouIconOn /> : <ForYouIconOff />,
           lazy: false,
