@@ -170,8 +170,8 @@ function BottomTabNavigator() {
           title: t("tabs.foryou") || "For you",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <ForYouIconOn /> : <ForYouIconOff />,
-          header,
           lazy: false,
+          header: () => <></>,
         }}
       />
 
