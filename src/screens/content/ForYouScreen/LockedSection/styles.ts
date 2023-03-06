@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.brand.primary[800],
     width: 320,
     height: 50,
+    borderWidth: 0,
   },
   buttonText: {
     color: theme.colors.neutral10,
