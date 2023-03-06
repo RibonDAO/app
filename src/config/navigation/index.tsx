@@ -47,6 +47,7 @@ const headerWithWallet = () => (
   <Header rightComponent={<LayoutHeader hideTicket hideWallet={false} />} />
 );
 const { primary } = theme.colors.brand;
+const { neutral } = theme.colors;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
@@ -138,14 +139,14 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const activeColor = primary[300];
+  const activeColor = neutral[900];
   const { t } = useTranslation();
 
   return (
     <BottomTab.Navigator
       initialRouteName="CausesScreen"
       screenOptions={{
-        tabBarActiveTintColor: primary[300],
+        tabBarActiveTintColor: neutral[900],
         tabBarStyle: { ...S.tabBar },
         tabBarLabelStyle: { ...S.tabBarLabel },
       }}
