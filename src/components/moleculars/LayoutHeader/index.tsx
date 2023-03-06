@@ -22,6 +22,7 @@ import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
+import { openInWebViewer } from "lib/linkOpener";
 import S from "./styles";
 
 type Props = {
@@ -119,7 +120,7 @@ function LayoutHeader({
   };
 
   const linkToSupport = () => {
-    Linking.openURL(
+    openInWebViewer(
       "https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com",
     );
   };
