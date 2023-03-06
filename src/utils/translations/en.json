@@ -66,6 +66,15 @@
       "animationText": "Receiving ticket"
     }
   },
+  "content": {
+    "forYouScreen": {
+      "lockedSection": {
+        "title": "A Ribon for you",
+        "subtitle": "Donate your ticket to see what's new at Ribon and our selection of good news!",
+        "cta": "Donate now"
+      }
+    }
+  },
   "contexts": {
     "walletContext": {
       "walletConnectionErrorMessage": "Error connecting wallet"

@@ -66,6 +66,15 @@
       "animationText": "Recebendo ticket"
     }
   },
+  "content": {
+    "forYouScreen": {
+      "lockedSection": {
+        "title": "Uma Ribon pra você",
+        "subtitle": "Doe seu ticket para ver as novidades da Ribon e nossa seleção de boas notícias!",
+        "cta": "Doar agora"
+      }
+    }
+  },
   "contexts": {
     "walletContext": {
       "walletConnectionErrorMessage": "Erro ao conectar carteira"
