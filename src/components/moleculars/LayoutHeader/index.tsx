@@ -5,7 +5,7 @@ import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
 import SupportIcon from "components/vectors/SupportIcon";
 import LetterIcon from "components/vectors/LetterIcon";
-import { TouchableOpacity, Linking } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
 import RoundButton from "components/atomics/RoundButton";
 import TicketIcon from "components/vectors/TicketIcon";
