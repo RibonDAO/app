@@ -35,6 +35,9 @@ import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
+import ForYouIconOn from "./assets/ForYouIconOn";
+import ForYouIconOff from "./assets/ForYouIconOff";
+import ForYouScreen from "screens/content/ForYouScreen";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -154,6 +157,18 @@ function BottomTabNavigator() {
           title: t("tabs.causes") || "Tickets",
           tabBarIcon: ({ color }) =>
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
+          header,
+          lazy: false,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="ForYouScreen"
+        component={ForYouScreen}
+        options={{
+          title: t("tabs.foryou") || "For you",
+          tabBarIcon: ({ color }) =>
+            color === activeColor ? <ForYouIconOn /> : <ForYouIconOff />,
           header,
           lazy: false,
         }}
