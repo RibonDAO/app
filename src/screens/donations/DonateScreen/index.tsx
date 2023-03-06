@@ -4,7 +4,6 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Linking,
 } from "react-native";
 import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { theme } from "@ribon.io/shared/styles";
@@ -28,6 +27,7 @@ import { useLanguage } from "contexts/languageContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
 import { setLocalStorageItem } from "lib/localStorage";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
+import { openInWebViewer } from "lib/linkOpener";
 import Placeholder from "./placeholder";
 
 function DonateScreen() {
@@ -81,7 +81,7 @@ function DonateScreen() {
   };
 
   const linkToPrivacyPolicy = () => {
-    Linking.openURL(t("privacyPolicyLink"));
+    openInWebViewer(t("privacyPolicyLink"));
   };
   return (
     <View>

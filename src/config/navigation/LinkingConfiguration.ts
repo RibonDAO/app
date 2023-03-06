@@ -22,6 +22,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               DonationDonePage: "donation-done",
             },
           },
+          ForYouScreen: {
+            screens: {
+              NewsScreen: "news",
+            },
+          },
           ProfileScreen: {
             screens: {
               ProfileScreen: "profile",

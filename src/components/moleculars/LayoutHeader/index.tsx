@@ -5,7 +5,7 @@ import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
 import SupportIcon from "components/vectors/SupportIcon";
 import LetterIcon from "components/vectors/LetterIcon";
-import { TouchableOpacity, Linking } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
 import RoundButton from "components/atomics/RoundButton";
 import TicketIcon from "components/vectors/TicketIcon";
@@ -22,6 +22,7 @@ import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
+import { openInWebViewer } from "lib/linkOpener";
 import S from "./styles";
 
 type Props = {
@@ -119,7 +120,7 @@ function LayoutHeader({
   };
 
   const linkToSupport = () => {
-    Linking.openURL(
+    openInWebViewer(
       "https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com",
     );
   };
