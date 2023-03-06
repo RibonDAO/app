@@ -41,6 +41,7 @@ export type PromotersScreenParams = {
 
 export type RootTabParamList = {
   CausesScreen: undefined;
+  ForYouScreen: undefined;
   ProfileScreen: undefined;
   PromotersScreen: PromotersScreenParams;
   ChooseCauseScreen: undefined;
@@ -58,6 +59,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   ReceiveTicketScreen: undefined;
   CausesScreen: undefined;
+  ForYouScreen: undefined;
   ChooseCauseScreen: undefined;
   CommunityAddModal: CommunityAddModalParamList;
   PaymentScreen: PaymentPageList;
