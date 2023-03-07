@@ -18,22 +18,24 @@ export default function LockedSection() {
   };
 
   return (
-    <>
+    <View style={styles.outerContainer}>
       <View style={styles.abstractFormContainer}>
         <AbstractForm />
       </View>
-      <View style={styles.container}>
-        <CellPhone />
-        <Text style={styles.title}>{t("title")}</Text>
-        <Text style={styles.subtitle}>{t("subtitle")}</Text>
-        <Button
-          text={t("cta")}
-          onPress={handleButtonClick}
-          customStyles={styles.button}
-          customTextStyles={styles.buttonText}
-          outline={false}
-        />
+      <View>
+        <View style={styles.container}>
+          <CellPhone />
+          <Text style={styles.title}>{t("title")}</Text>
+          <Text style={styles.subtitle}>{t("subtitle")}</Text>
+          <Button
+            text={t("cta")}
+            onPress={handleButtonClick}
+            customStyles={styles.button}
+            customTextStyles={styles.buttonText}
+            outline={false}
+          />
+        </View>
       </View>
-    </>
+    </View>
   );
 }
