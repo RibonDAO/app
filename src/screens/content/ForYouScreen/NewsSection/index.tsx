@@ -5,7 +5,11 @@ import ArticleSection from "components/moleculars/ArticleSection";
 import ForYouScreenPlaceholder from "./placeholder";
 import { RibonOnboarding } from "utils/constants/Articles";
 import { useTranslation } from "react-i18next";
+import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
+import { useCurrentUser } from "contexts/currentUserContext";
 import styles from "./styles";
+
+const IS_USER_ONBOARDING = "IS_USER_ONBOARDING";
 
 export default function NewsSection() {
   const { t } = useTranslation("translation", {
@@ -13,6 +17,8 @@ export default function NewsSection() {
   });
 
   const [articles, setArticles] = useState<Article[]>([]);
+  const [isOnboarding, setIsOnboarding] = useState(false);
+  const { currentUser } = useCurrentUser();
 
   const { getArticles } = useArticles();
 
@@ -23,6 +29,26 @@ export default function NewsSection() {
     };
 
     fetchArticles();
+  }, []);
+
+  useEffect(() => {
+    const fetchFirstTimeSeeingOnboarding = async () => {
+      const firstTimeSeeingOnboarding = await getLocalStorageItem(
+        `${IS_USER_ONBOARDING}_${currentUser?.id}`,
+      );
+
+      if (firstTimeSeeingOnboarding === null) {
+        await setLocalStorageItem(
+          `${IS_USER_ONBOARDING}_${currentUser?.id}`,
+          "true",
+        );
+        setIsOnboarding(true);
+      } else {
+        setIsOnboarding(false);
+      }
+    };
+
+    fetchFirstTimeSeeingOnboarding();
   }, []);
 
   const renderOnboarding = () => {
@@ -46,7 +72,7 @@ export default function NewsSection() {
         <Text style={styles.title}>{t("title")}</Text>
       </View>
       <View style={styles.articlesContainer}>
-        {renderOnboarding()}
+        {isOnboarding && renderOnboarding()}
         {articles &&
           articles.map((article, index) => (
             <>
