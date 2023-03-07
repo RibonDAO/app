@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    borderRadius: 12,
+    borderRadius: theme.spacingNative(4),
     backgroundColor: theme.colors.neutral10,
   },
   containerImage: {
     position: "relative",
-    borderRadius: 12,
+    borderRadius: theme.spacingNative(4),
   },
   darkStroke: {
     height: 100,
@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
   },
   cardWrapper: {
     flexDirection: "column",
-    borderRadius: 12,
+    borderRadius: theme.spacingNative(4),
     height: "auto",
     width: "100%",
   },
   cardImage: {
     width: "100%",
     aspectRatio: 1.1,
-    borderRadius: 12,
+    borderRadius: theme.spacingNative(4),
   },
   infoContainer: {
     width: "100%",
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     right: 10,
     height: 30,
     backgroundColor: "rgba(48, 45, 39, 0.7)",
-    borderRadius: 15,
+    borderRadius: theme.spacingNative(4),
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
