@@ -38,6 +38,9 @@ import CausesIconOn from "./assets/CausesIconOn";
 import ForYouIconOn from "./assets/ForYouIconOn";
 import ForYouIconOff from "./assets/ForYouIconOff";
 import ForYouScreen from "screens/content/ForYouScreen";
+import { useCanDonate } from "@ribon.io/shared";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useCurrentUser } from "contexts/currentUserContext";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -142,6 +145,17 @@ function BottomTabNavigator() {
   const activeColor = neutral[900];
   const { t } = useTranslation();
 
+  const { currentUser } = useCurrentUser();
+
+  const { canDonate, refetch: refetchCanDonate } =
+    useCanDonate(RIBON_INTEGRATION_ID);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      refetchCanDonate();
+    }, 500);
+  }, [JSON.stringify(currentUser)]);
+
   return (
     <BottomTab.Navigator
       initialRouteName="CausesScreen"
@@ -171,7 +185,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) =>
             color === activeColor ? <ForYouIconOn /> : <ForYouIconOff />,
           lazy: false,
-          header: () => <></>,
+          header: () => (canDonate ? <></> : headerWithoutTicket()),
         }}
       />
 
