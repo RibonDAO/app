@@ -17,6 +17,8 @@ export type Props = {
 };
 
 export default function ArticleSection({ article, readMoreText }: Props) {
+  const hasLink = Boolean(article?.link);
+
   const renderIcon = () => {
     const { name } = article.author;
 
@@ -60,8 +62,11 @@ export default function ArticleSection({ article, readMoreText }: Props) {
         <Text style={styles.title}>{article.title}</Text>
 
         <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{ uri: article.imageUrl }} />
-          {article?.link && renderContentFooter()}
+          <Image
+            style={{ ...styles.image, ...(!hasLink && styles.singleImage) }}
+            source={{ uri: article.imageUrl }}
+          />
+          {hasLink && renderContentFooter()}
         </View>
       </TouchableOpacity>
     </View>
