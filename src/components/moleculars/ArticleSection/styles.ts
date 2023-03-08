@@ -3,6 +3,7 @@ import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyMdRegular,
   defaultBodySmBold,
+  defaultBodySmMedium,
   defaultBodySmRegular,
 } from "styles/typography/default";
 
@@ -23,14 +24,34 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: theme.spacingNative(12),
   },
-  image: {
+  imageContainer: {
     width: "100%",
-    height: 200,
-    resizeMode: "cover",
-    backgroundColor: theme.colors.neutral[200],
-    borderRadius: theme.spacingNative(8),
+    height: 216,
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: theme.spacingNative(4),
     borderColor: theme.colors.neutral[100],
     borderWidth: 1,
+    backgroundColor: theme.colors.neutral[200],
+  },
+  image: {
+    width: "100%",
+    flexGrow: 1,
+    resizeMode: "cover",
+  },
+  imageFooter: {
+    width: "100%",
+    height: 44,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: theme.spacingNative(16),
+    backgroundColor: theme.colors.brand.secondary[100],
+  },
+  imageFooterText: {
+    ...defaultBodySmMedium,
+    color: theme.colors.brand.secondary[900],
   },
   greenText: {
     ...defaultBodySmBold,

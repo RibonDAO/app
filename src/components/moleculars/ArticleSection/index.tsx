@@ -3,6 +3,7 @@ import { Article } from "@ribon.io/shared";
 import Image from "components/atomics/Image";
 import VendorIcon from "./assets/VendorIcon";
 import NewsPaper from "./assets/NewsPaper";
+import ArrowLeft from "./assets/ArrowLeft";
 import { openInWebViewer } from "lib/linkOpener";
 import styles from "./styles";
 
@@ -12,44 +13,56 @@ const PROTOCOL_REGEX = /^(http|https):\/\//;
 
 export type Props = {
   article: Article;
+  readMoreText: string;
 };
 
-export default function ArticleSection({ article }: Props) {
-  const renderAuthor = () => {
-    if (article.author.name === VENDOR) {
-      return (
-        <>
-          <VendorIcon />
-          <Text style={styles.greenText}>{VENDOR}</Text>
-        </>
-      );
-    }
+export default function ArticleSection({ article, readMoreText }: Props) {
+  const renderIcon = () => {
+    const { name } = article.author;
 
-    return (
-      <>
-        <NewsPaper />
-        <Text style={styles.orangeText}>{article.author.name}</Text>
-      </>
-    );
+    return name === VENDOR ? <VendorIcon /> : <NewsPaper />;
+  };
+
+  const renderAuthorName = () => {
+    const { name } = article.author;
+    const style = name === VENDOR ? styles.greenText : styles.orangeText;
+
+    return <Text style={style}>{name}</Text>;
   };
 
   const handlePress = () => {
-    let link = article.link;
-    if (!link.match(PROTOCOL_REGEX)) link = `https://${link}`;
+    let link = article?.link;
 
-    return openInWebViewer(link);
+    if (link) {
+      if (!PROTOCOL_REGEX.test(link)) link = `https://${link}`;
+      return openInWebViewer(link);
+    }
+  };
+
+  const renderContentFooter = () => {
+    return (
+      <View style={styles.imageFooter}>
+        <Text style={styles.imageFooterText}>{readMoreText}</Text>
+        <ArrowLeft />
+      </View>
+    );
   };
 
   return (
     <View>
       <TouchableOpacity onPress={handlePress}>
         <View style={styles.header}>
-          {renderAuthor()}
+          {renderIcon()}
+          {renderAuthorName()}
           <Text style={styles.textDivider}>·</Text>
           <Text style={styles.textSecondary}>{article.publishedAtInWords}</Text>
         </View>
         <Text style={styles.title}>{article.title}</Text>
-        <Image style={styles.image} source={{ uri: article.imageUrl }} />
+
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={{ uri: article.imageUrl }} />
+          {article?.link && renderContentFooter()}
+        </View>
       </TouchableOpacity>
     </View>
   );
