@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import {defaultBodyLgBold, defaultBodySmRegular} from "styles/typography/default";
 
 const styles = StyleSheet.create({
   MainContainer: {
@@ -52,15 +53,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   Title: {
-    fontWeight: "bold",
+    ...defaultBodyLgBold,
     fontSize: 24,
     color: theme.colors.neutral10,
     textAlign: "center",
   },
   Subtitle: {
-    fontSize: 14,
+    ...defaultBodySmRegular,
     color: theme.colors.neutral10,
     textAlign: "center",
+    width: 50,
   },
 });
 

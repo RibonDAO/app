@@ -36,7 +36,9 @@ function BadgesScreen() {
               },
             ]}
           >
-              {item.image && <Lottie source={{uri: item.image}} style={S.BadgeImage}/>}
+            {item.image && (
+              <Lottie source={{ uri: item.image }} style={S.BadgeImage} />
+            )}
           </View>
           <Text style={S.BadgeText}>{item.name}</Text>
         </View>
@@ -60,25 +62,47 @@ function BadgesScreen() {
     <View
       style={{
         flex: 1,
-        backgroundColor: theme.colors.brand.primary[300],
+        backgroundColor: theme.colors.brand.primary[200],
         width: "100%",
       }}
     >
+        <View style={{
+            shadowColor: theme.colors.brand.secondary[600],
+            shadowOffset: { width: 0, height: 25 },
+            shadowOpacity: 0.8,
+            shadowRadius: 40,
+            elevation: 40,
+            borderRadius: 40,
+            padding: 5,
+        }}>
+      <View style={{height: 100, marginTop: 50, display: "flex", alignItems: "center", justifyContent: "center"}}>
+        <Image
+          source={{
+            uri: "https://conteudo.imguol.com.br/c/entretenimento/80/2017/04/25/a-atriz-zoe-saldana-como-neytiri-em-avatar-1493136439818_v2_4x3.jpg",
+          }}
+          style={{ width: 90, height: 90, borderRadius: 50 }}
+        />
+      </View>
+        </View>
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-around",
           height: 100,
-          marginTop: 50,
+            marginTop: 15,
         }}
       >
+        <View>
+          <Text style={S.Title}>{userPoints?.level}</Text>
+          <Text style={S.Subtitle}>rank</Text>
+        </View>
         <View>
           <Text style={S.Title}>{userPoints?.level}</Text>
           <Text style={S.Subtitle}>level</Text>
         </View>
         <View>
           <Text style={S.Title}>{userPoints?.points}</Text>
-          <Text style={S.Subtitle}>ripoints</Text>
+          <Text style={S.Subtitle}>points</Text>
         </View>
       </View>
       <View
