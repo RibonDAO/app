@@ -30,7 +30,7 @@ function BadgesScreen() {
               S.BadgeCard,
               {
                 borderColor: item.claimed
-                  ? theme.colors.brand.primary[300]
+                  ? theme.colors.brand.primary[800]
                   : theme.colors.neutral[300],
                 borderStyle: item.claimed ? "solid" : "dashed",
               },
@@ -62,12 +62,12 @@ function BadgesScreen() {
     <View
       style={{
         flex: 1,
-        backgroundColor: theme.colors.brand.primary[200],
+        backgroundColor: theme.colors.brand.primary[800],
         width: "100%",
       }}
     >
         <View style={{
-            shadowColor: theme.colors.brand.secondary[600],
+            shadowColor: theme.colors.brand.secondary[200],
             shadowOffset: { width: 0, height: 25 },
             shadowOpacity: 0.8,
             shadowRadius: 40,
@@ -75,12 +75,12 @@ function BadgesScreen() {
             borderRadius: 40,
             padding: 5,
         }}>
-      <View style={{height: 100, marginTop: 50, display: "flex", alignItems: "center", justifyContent: "center"}}>
+      <View style={{height: 130, marginTop: 50, display: "flex", alignItems: "center", justifyContent: "center"}}>
         <Image
           source={{
             uri: "https://conteudo.imguol.com.br/c/entretenimento/80/2017/04/25/a-atriz-zoe-saldana-como-neytiri-em-avatar-1493136439818_v2_4x3.jpg",
           }}
-          style={{ width: 90, height: 90, borderRadius: 50 }}
+          style={{ width: 120, height: 120, borderRadius: 80 }}
         />
       </View>
         </View>

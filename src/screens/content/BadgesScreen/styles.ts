@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   Title: {
     ...defaultBodyLgBold,
-    fontSize: 24,
+    fontSize: 28,
     color: theme.colors.neutral10,
     textAlign: "center",
   },
