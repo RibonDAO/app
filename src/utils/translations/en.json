@@ -70,11 +70,10 @@
     "forYouScreen": {
       "newsSection": {
         "title": "For you",
-        "firstPost": {
-          "date": "Now"
-        },
+        "openPostButtonText": "Open post",
         "onboarding": {
-          "content": "Welcome! Here you'll find what's new at Ribon and the good news that we selected to warm your heart."
+          "publishedAt": "Now",
+          "title": "Welcome! Here you'll find what's new at Ribon and the good news that we selected to warm your heart."
         }
       },
       "lockedSection": {
