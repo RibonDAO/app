@@ -72,7 +72,7 @@ export default function NewsSection() {
         <Text style={styles.title}>{t("title")}</Text>
       </View>
       <View style={styles.articlesContainer}>
-        {renderOnboarding()}
+        {isOnboarding && renderOnboarding()}
         {articles &&
           articles.map((article, index) => (
             <>
