@@ -1,10 +1,9 @@
 import { Text, TouchableOpacity, View } from "react-native";
-import { Article } from "@ribon.io/shared";
+import { Article, theme } from "@ribon.io/shared";
 import Image from "components/atomics/Image";
 import VendorIcon from "./assets/VendorIcon";
-import NewsPaper from "./assets/NewsPaper";
-import ArrowLeft from "./assets/ArrowLeft";
 import { openInWebViewer } from "lib/linkOpener";
+import Icon from "components/atomics/Icon";
 import styles from "./styles";
 
 const VENDOR = "Ribon";
@@ -19,10 +18,16 @@ export type Props = {
 export default function ArticleSection({ article, readMoreText }: Props) {
   const hasLink = Boolean(article?.link);
 
+  const { secondary } = theme.colors.brand;
+
   const renderIcon = () => {
     const { name } = article.author;
 
-    return name === VENDOR ? <VendorIcon /> : <NewsPaper />;
+    return name === VENDOR ? (
+      <VendorIcon />
+    ) : (
+      <Icon type="outlined" name="newspaper" size={24} color={secondary[400]} />
+    );
   };
 
   const renderAuthorName = () => {
@@ -45,7 +50,12 @@ export default function ArticleSection({ article, readMoreText }: Props) {
     return (
       <View style={styles.imageFooter}>
         <Text style={styles.imageFooterText}>{readMoreText}</Text>
-        <ArrowLeft />
+        <Icon
+          type="outlined"
+          name="arrow_right_alt"
+          size={20}
+          color={secondary[900]}
+        />
       </View>
     );
   };
