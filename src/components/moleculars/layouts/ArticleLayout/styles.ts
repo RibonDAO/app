@@ -30,8 +30,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     borderRadius: 4,
-    borderColor: theme.colors.neutral[100],
-    borderWidth: 1,
     position: "relative",
     overflowX: "hidden",
     shadowColor: theme.colors.neutral[800],
