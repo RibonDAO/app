@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
-    borderRadius: theme.spacingNative(4),
+    borderRadius: 4,
   },
   containerImage: {
     position: "relative",
-    borderRadius: theme.spacingNative(4),
+    borderRadius: 4,
   },
   darkStroke: {
     height: 100,
@@ -25,14 +25,14 @@ const styles = StyleSheet.create({
   },
   cardWrapper: {
     flexDirection: "column",
-    borderRadius: theme.spacingNative(4),
+    borderRadius: 4,
     height: "auto",
     width: "100%",
   },
   cardImage: {
     width: "100%",
     aspectRatio: 1.1,
-    borderRadius: theme.spacingNative(4),
+    borderRadius: 4,
   },
   infoContainer: {
     width: "100%",
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     right: 10,
     height: 30,
     backgroundColor: "rgba(48, 45, 39, 0.7)",
-    borderRadius: theme.spacingNative(4),
+    borderRadius: 4,
     alignItems: "center",
     justifyContent: "center",
     display: "flex",

@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     height: 216,
     display: "flex",
     flexDirection: "column",
-    borderRadius: theme.spacingNative(4),
+    borderRadius: 4,
     borderColor: theme.colors.neutral[100],
     borderWidth: 1,
     position: "relative",
