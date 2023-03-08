@@ -4,15 +4,14 @@ import { defaultBodySmRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
-    shadowColor: "rgba(40, 36, 28, 0.2)",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowRadius: 10,
-    shadowOpacity: 0.8,
-    borderRadius: theme.spacingNative(4),
+    position: "relative",
+    shadowColor: theme.colors.neutral[800],
     backgroundColor: theme.colors.neutral10,
+    elevation: 5,
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    borderRadius: theme.spacingNative(4),
   },
   containerImage: {
     position: "relative",
