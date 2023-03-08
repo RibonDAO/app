@@ -7,6 +7,7 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import styles from "./styles";
 import { useEffect } from "react";
+import BadgesScreen from "screens/content/BadgesScreen";
 
 export default function ForYouScreen({
   navigation,
@@ -26,6 +27,8 @@ export default function ForYouScreen({
     if (canDonate) {
       return <LockedSection />;
     }
+
+    return <BadgesScreen />
 
     return <ForYouScreenPlaceholder />;
   };
