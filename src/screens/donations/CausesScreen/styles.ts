@@ -17,14 +17,13 @@ const styles = StyleSheet.create({
   },
   causesCardContainer: {
     width: 320,
-    marginRight: theme.spacingNative(8),
+    marginHorizontal: theme.spacingNative(4),
+    marginBottom: theme.spacingNative(16),
   },
   causesContainer: {
     display: "flex",
     flexDirection: "row",
     paddingTop: theme.spacingNative(16),
-    paddingHorizontal: theme.spacingNative(16),
-    paddingBottom: theme.spacingNative(20),
   },
   groupButtonsContainer: {
     paddingTop: theme.spacingNative(16),
