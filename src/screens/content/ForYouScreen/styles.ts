@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
-    padding: theme.spacingNative(20),
+    // padding: theme.spacingNative(20),
   },
   title: {
     fontSize: 20,

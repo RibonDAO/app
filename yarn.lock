@@ -2557,6 +2557,11 @@
   resolved "https://registry.yarnpkg.com/@react-native/normalize-color/-/normalize-color-2.0.0.tgz#da955909432474a9a0fe1cbffc66576a0447f567"
   integrity sha512-Wip/xsc5lw8vsBlmY2MO/gFLp3MvuZ2baBZjDeTjjndMgM0h5sxz7AZR62RDPGgstp8Np7JzjvVqVT7tpFZqsw==
 
+"@react-native/normalize-colors@*":
+  version "0.72.0"
+  resolved "https://registry.yarnpkg.com/@react-native/normalize-colors/-/normalize-colors-0.72.0.tgz#14294b7ed3c1d92176d2a00df48456e8d7d62212"
+  integrity sha512-285lfdqSXaqKuBbbtP9qL2tDrfxdOFtIMvkKadtleRQkdOxx+uzGvFr82KHmc/sSiMtfXGp7JnFYWVh4sFl7Yw==
+
 "@react-native/polyfills@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@react-native/polyfills/-/polyfills-2.0.0.tgz#4c40b74655c83982c8cf47530ee7dc13d957b6aa"
@@ -2993,6 +2998,21 @@
   version "6.9.7"
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
   integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
+
+"@types/react-native-flip-card@^3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native-flip-card/-/react-native-flip-card-3.5.2.tgz#bea7fb2128c628ed1112684b0f3d226cc23525e3"
+  integrity sha512-xrV4IAzuP1Yzbw8ZE9u/byrHZc2yTy6KF/EPlwkHWQZBb4pq+OHLcde+W0FqO/DLr0fr0WKl8rjP1ak2eaUEZg==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-native@*":
+  version "0.71.3"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.71.3.tgz#537f669ed6b38b5ae47444bd9d253c4cff23bed7"
+  integrity sha512-0Uqw1YZ0qbVla0MMWFTANFm6W8KYWNvGQmYfucdecbXivLMcQ2v4PovuYFKr7bE6Bc5nDCUEaga962Y8gcDF7A==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-native@~0.70.6":
   version "0.70.8"
@@ -6068,6 +6088,15 @@ deprecated-react-native-prop-types@^2.3.0:
   integrity sha512-pWD0voFtNYxrVqvBMYf5gq3NA2GCpfodS1yNynTPc93AYA/KEMGeWDqqeUB6R2Z9ZofVhks2aeJXiuQqKNpesA==
   dependencies:
     "@react-native/normalize-color" "*"
+    invariant "*"
+    prop-types "*"
+
+deprecated-react-native-prop-types@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/deprecated-react-native-prop-types/-/deprecated-react-native-prop-types-4.0.0.tgz#544845e32f3220bc676f18c0b846d673399c45cb"
+  integrity sha512-q0kk77qFPC4adlnZH7cv9lfbHALeaTkl7wT1uNERc+e0Os3KcBKKy1rVliTE8sfey6TP6OPzoIXpr9OPidvvHw==
+  dependencies:
+    "@react-native/normalize-colors" "*"
     invariant "*"
     prop-types "*"
 
@@ -13240,6 +13269,14 @@ react-native-dropdown-picker@^5.4.4:
   version "5.4.4"
   resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.4.tgz#59da1ecd4bc6d1fb698ed57f4ce615adf3944e90"
   integrity sha512-MGsFc3Oi6Rc94WoJk3oOGfPe6IVscCrWn1DRCUDB508U4Wmd2b+EYONpsgiXQ89ESoBcOE3qQR6gkY2CVxoC+Q==
+
+react-native-flip-card@^3.5.7:
+  version "3.5.7"
+  resolved "https://registry.yarnpkg.com/react-native-flip-card/-/react-native-flip-card-3.5.7.tgz#b9c0d5d85e0be41199cb5583227b0fd5b58ad42f"
+  integrity sha512-++ePtVn+4vICWaBUhNpVMa/g6ZdLFl77vabWAFqfO7yyVmpyhs4CEZvkZUBxs30IRShqWsqSpmhgVCmP5AYfQw==
+  dependencies:
+    deprecated-react-native-prop-types "^4.0.0"
+    prop-types "^15.8.1"
 
 react-native-gesture-handler@~2.8.0:
   version "2.8.0"
