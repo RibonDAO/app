@@ -64,6 +64,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: 50,
   },
+  userText: {
+    ...defaultBodySmRegular,
+    marginTop: 10,
+    color: theme.colors.neutral10,
+  }
 });
 
 export default styles;
