@@ -28,10 +28,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   BadgeImage: {
-    height: 50,
-    width: 50,
+    height: 60,
+    width: 60,
     borderRadius: 70,
-    marginVertical: 5,
     resizeMode: "contain",
   },
   BadgeCard: {

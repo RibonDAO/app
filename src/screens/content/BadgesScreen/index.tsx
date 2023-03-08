@@ -1,17 +1,24 @@
 import useBadges from "hooks/apiHooks/useBadges";
 import { FlatList, Text, View } from "react-native";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import FlipCard from "react-native-flip-card";
 import { theme } from "@ribon.io/shared/styles";
 import Image from "components/atomics/Image";
+import usePoints from "hooks/apiHooks/usePoints";
+import { useFocusEffect } from "@react-navigation/native";
+import Lottie from "lottie-react-native";
 import S from "./styles";
 
 function BadgesScreen() {
-  const { userBadges } = useBadges();
+  const { userBadges, refetch } = useBadges();
+  const { userPoints, refetch: refetchPoints } = usePoints();
 
-  useEffect(() => {
-    console.log(userBadges);
-  }, [userBadges]);
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+      refetchPoints();
+    }, []),
+  );
 
   const renderBadgeItem = ({ item }: any) => (
     <FlipCard style={{ marginBottom: 40 }}>
@@ -29,7 +36,7 @@ function BadgesScreen() {
               },
             ]}
           >
-            <Image style={S.BadgeImage} source={{ uri: item.image }} />
+              {item.image && <Lottie source={{uri: item.image}} style={S.BadgeImage}/>}
           </View>
           <Text style={S.BadgeText}>{item.name}</Text>
         </View>
@@ -66,12 +73,12 @@ function BadgesScreen() {
         }}
       >
         <View>
-          <Text style={S.Title}>5</Text>
-          <Text style={S.Subtitle}>badges</Text>
+          <Text style={S.Title}>{userPoints?.level}</Text>
+          <Text style={S.Subtitle}>level</Text>
         </View>
         <View>
-          <Text style={S.Title}>800</Text>
-          <Text style={S.Subtitle}>ribons</Text>
+          <Text style={S.Title}>{userPoints?.points}</Text>
+          <Text style={S.Subtitle}>ripoints</Text>
         </View>
       </View>
       <View

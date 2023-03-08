@@ -24,11 +24,11 @@ export default function ForYouScreen({
   }, [JSON.stringify(currentUser)]);
 
   const renderSection = () => {
+    return <BadgesScreen />
+
     if (canDonate) {
       return <LockedSection />;
     }
-
-    return <BadgesScreen />
 
     return <ForYouScreenPlaceholder />;
   };
