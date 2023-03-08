@@ -57,7 +57,7 @@ export default function NewsSection() {
     return (
       <View>
         <View style={styles.paddingContainer}>
-          <ArticleSection article={article} />
+          <ArticleSection article={article} readMoreText="Ler agora" />
         </View>
         <View style={styles.articleDivider} />
       </View>
@@ -72,12 +72,15 @@ export default function NewsSection() {
         <Text style={styles.title}>{t("title")}</Text>
       </View>
       <View style={styles.articlesContainer}>
-        {isOnboarding && renderOnboarding()}
+        {renderOnboarding()}
         {articles &&
           articles.map((article, index) => (
             <>
               <View style={styles.paddingContainer}>
-                <ArticleSection article={article} />
+                <ArticleSection
+                  article={article}
+                  readMoreText={t("openPostButtonText")}
+                />
               </View>
               {index !== articles.length - 1 && (
                 <View style={styles.articleDivider} />

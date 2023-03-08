@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   articleDivider: {
     marginVertical: theme.spacingNative(24),
     height: 1,
-    backgroundColor: theme.colors.neutral[200],
+    backgroundColor: theme.colors.neutral[100],
   },
   paddingContainer: {
     paddingHorizontal: theme.spacingNative(16),
