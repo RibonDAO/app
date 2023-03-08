@@ -14,11 +14,18 @@ const getScaleBasedOnWidth = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  outerContainer: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexGrow: 2,
+  },
+  container: {
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     padding: theme.spacingNative(20),
     maxWidth: 450,
   },

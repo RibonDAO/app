@@ -1,12 +1,12 @@
 import { View } from "react-native";
 import { RootStackScreenProps } from "types";
-import ForYouScreenPlaceholder from "./placeholder";
 import LockedSection from "./LockedSection";
 import { useCanDonate } from "@ribon.io/shared";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import styles from "./styles";
 import { useEffect } from "react";
+import NewsSection from "./NewsSection";
 
 export default function ForYouScreen({
   navigation,
@@ -23,11 +23,9 @@ export default function ForYouScreen({
   }, [JSON.stringify(currentUser)]);
 
   const renderSection = () => {
-    if (canDonate) {
-      return <LockedSection />;
-    }
+    if (canDonate) return <LockedSection />;
 
-    return <ForYouScreenPlaceholder />;
+    return <NewsSection />;
   };
 
   return <View style={styles.container}>{renderSection()}</View>;

@@ -4,19 +4,18 @@ import { defaultBodySmRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
-    shadowColor: "rgba(40, 36, 28, 0.2)",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowRadius: 10,
-    shadowOpacity: 0.8,
-    borderRadius: 12,
+    position: "relative",
+    shadowColor: theme.colors.neutral[800],
     backgroundColor: theme.colors.neutral10,
+    elevation: 5,
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    borderRadius: 4,
   },
   containerImage: {
     position: "relative",
-    borderRadius: 12,
+    borderRadius: 4,
   },
   darkStroke: {
     height: 100,
@@ -26,14 +25,14 @@ const styles = StyleSheet.create({
   },
   cardWrapper: {
     flexDirection: "column",
-    borderRadius: 12,
+    borderRadius: 4,
     height: "auto",
     width: "100%",
   },
   cardImage: {
     width: "100%",
     aspectRatio: 1.1,
-    borderRadius: 12,
+    borderRadius: 4,
   },
   infoContainer: {
     width: "100%",
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     right: 10,
     height: 30,
     backgroundColor: "rgba(48, 45, 39, 0.7)",
-    borderRadius: 15,
+    borderRadius: 4,
     alignItems: "center",
     justifyContent: "center",
     display: "flex",

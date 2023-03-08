@@ -104,6 +104,17 @@ export default function CausesScreen() {
     }
   };
 
+  const nonProfitStylesFor = (index: number) => {
+    const isFirst = index === 0;
+    const isLast = index === nonProfitsFilter().length - 1;
+
+    return {
+      marginLeft: isFirst ? 16 : 4,
+      marginRight: isLast ? 16 : 4,
+      ...S.causesCardContainer,
+    };
+  };
+
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
@@ -132,8 +143,8 @@ export default function CausesScreen() {
         showsHorizontalScrollIndicator={false}
         ref={scrollViewRef}
       >
-        {nonProfitsFilter()?.map((nonProfit) => (
-          <View style={S.causesCardContainer} key={nonProfit.id}>
+        {nonProfitsFilter()?.map((nonProfit, index) => (
+          <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
             <CardCenterImageButton
               image={nonProfit.mainImage}
               infoTextLeft={nonProfit.name}
