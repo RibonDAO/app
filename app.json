@@ -2,7 +2,7 @@
   "expo": {
     "name": "Ribon",
     "slug": "app",
-    "version": "4.0.4",
+    "version": "4.0.5",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
@@ -33,7 +33,7 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
-      "buildNumber": "297"
+      "buildNumber": "298"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -42,7 +42,7 @@
         "backgroundColor": "#00DA93"
       },
       "package": "com.app.ribon",
-      "versionCode": 295
+      "versionCode": 296
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
