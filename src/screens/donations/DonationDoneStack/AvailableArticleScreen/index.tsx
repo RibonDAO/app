@@ -54,6 +54,7 @@ export default function AvailableArticleScreen() {
         <ImageWithInfoLayout
           title={t("title") || ""}
           description={t("subtitle") || ""}
+          imageHeight={128}
         />
       </View>
 
