@@ -13,13 +13,11 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "45deg" }],
   },
   diamondBackground: {
-    width: 360,
-    height: 360,
-    marginTop: theme.spacingNative(16),
-    marginBottom: theme.spacingNative(16),
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    position: "absolute",
+    overflow: "hidden",
+    borderRadius: 50,
+    width: 320,
+    height: 320,
   },
   container: {
     color: theme.colors.brand.primary[300],
@@ -53,6 +51,12 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacingNative(32),
     textAlign: "center",
   },
+  animationContainer: {
+    marginBottom: 80,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }
 });
 
 export default styles;
