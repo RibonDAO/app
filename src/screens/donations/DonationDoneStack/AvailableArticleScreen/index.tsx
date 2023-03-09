@@ -6,9 +6,10 @@ import Image from "components/atomics/Image";
 import { theme, useArticles } from "@ribon.io/shared";
 import ImageWithInfoLayout from "components/moleculars/layouts/ImageWithInfoLayout";
 import { useTranslation } from "react-i18next";
-import S from "./styles";
 import NewsPlaceholder from "./placeholder";
 import { useUnsafeAreaContext } from "contexts/unsafeAreaContext";
+import { defaultBodyMdSemibold } from "styles/typography/default";
+import S from "./styles";
 
 export default function AvailableArticleScreen() {
   const { navigateTo } = useNavigation();
@@ -79,13 +80,19 @@ export default function AvailableArticleScreen() {
         <Button
           text={t("seeAllPosts")}
           customStyles={S.buttonPrimary}
-          customTextStyles={{ color: theme.colors.neutral10 }}
+          customTextStyles={{
+            color: theme.colors.neutral10,
+            ...defaultBodyMdSemibold,
+          }}
           onPress={navigateToForYouScreen}
           backgroundColor={primary[100]}
         />
         <Button
           customStyles={S.buttonSecondary}
-          customTextStyles={{ color: primary[600] }}
+          customTextStyles={{
+            color: primary[600],
+            ...defaultBodyMdSemibold,
+          }}
           text={t("continue")}
           onPress={navigateToCausesScreen}
           outline

@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
+  defaultBodyMdRegular,
   defaultBodyMdSemibold,
   defaultBodyXsBold,
   defaultBodyXsRegular,
