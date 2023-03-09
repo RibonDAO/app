@@ -5,8 +5,10 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    paddingHorizontal: 16,
     backgroundColor: theme.colors.neutral10,
+  },
+  containerPadding: {
+    paddingHorizontal: 16,
   },
   containerTicket: {
     height: 350,
@@ -14,15 +16,14 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   causesCardContainer: {
-    height: "auto",
-    width: 300,
-    marginRight: theme.spacingNative(8),
+    width: 320,
+    marginHorizontal: theme.spacingNative(4),
+    marginBottom: theme.spacingNative(16),
   },
   causesContainer: {
     display: "flex",
     flexDirection: "row",
     paddingTop: theme.spacingNative(16),
-    paddingBottom: theme.spacingNative(20),
   },
   groupButtonsContainer: {
     paddingTop: theme.spacingNative(16),

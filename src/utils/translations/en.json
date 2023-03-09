@@ -1,6 +1,7 @@
 {
   "tabs": {
     "causes": "Tickets",
+    "foryou": "For you",
     "giving": "Donations",
     "profile": "Impact"
   },
@@ -22,9 +23,9 @@
       "buttonText": "Donate",
       "allCauses": "All",
       "userSupportSection": {
-        "title": "User support",
+        "title": "Ribon Support",
         "description": "Doubts, ideas, refunds. We're here!",
-        "primaryButtonText": "Access support"
+        "primaryButtonText": "Access user support"
       },
       "impactPrefix": "Donate",
       "labelText": "Learn more",
@@ -63,6 +64,23 @@
       "description": "You have a ticket to receive :)",
       "buttonText": "Receive ticket",
       "animationText": "Receiving ticket"
+    }
+  },
+  "content": {
+    "forYouScreen": {
+      "newsSection": {
+        "title": "For you",
+        "openPostButtonText": "Open post",
+        "onboarding": {
+          "publishedAt": "Now",
+          "title": "Welcome! Here you'll find what's new at Ribon and the good news that we selected to warm your heart."
+        }
+      },
+      "lockedSection": {
+        "title": "A Ribon for you",
+        "subtitle": "Donate your ticket to see what's new at Ribon and our selection of good news!",
+        "cta": "Donate now"
+      }
     }
   },
   "contexts": {

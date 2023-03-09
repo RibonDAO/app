@@ -35,6 +35,12 @@ import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
+import ForYouIconOn from "./assets/ForYouIconOn";
+import ForYouIconOff from "./assets/ForYouIconOff";
+import ForYouScreen from "screens/content/ForYouScreen";
+import { useCanDonate } from "@ribon.io/shared";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useCurrentUser } from "contexts/currentUserContext";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -44,6 +50,7 @@ const headerWithWallet = () => (
   <Header rightComponent={<LayoutHeader hideTicket hideWallet={false} />} />
 );
 const { primary } = theme.colors.brand;
+const { neutral } = theme.colors;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
@@ -135,14 +142,25 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const activeColor = primary[300];
+  const activeColor = neutral[900];
   const { t } = useTranslation();
+
+  const { currentUser } = useCurrentUser();
+
+  const { canDonate, refetch: refetchCanDonate } =
+    useCanDonate(RIBON_INTEGRATION_ID);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      refetchCanDonate();
+    }, 500);
+  }, [JSON.stringify(currentUser)]);
 
   return (
     <BottomTab.Navigator
       initialRouteName="CausesScreen"
       screenOptions={{
-        tabBarActiveTintColor: primary[300],
+        tabBarActiveTintColor: neutral[900],
         tabBarStyle: { ...S.tabBar },
         tabBarLabelStyle: { ...S.tabBarLabel },
       }}
@@ -156,6 +174,18 @@ function BottomTabNavigator() {
             color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
           header,
           lazy: false,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="ForYouScreen"
+        component={ForYouScreen}
+        options={{
+          title: t("tabs.foryou") || "For you",
+          tabBarIcon: ({ color }) =>
+            color === activeColor ? <ForYouIconOn /> : <ForYouIconOff />,
+          lazy: false,
+          header: () => (canDonate ? <></> : headerWithoutTicket()),
         }}
       />
 

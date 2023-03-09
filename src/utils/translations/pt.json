@@ -1,6 +1,7 @@
 {
   "tabs": {
     "causes": "Tickets",
+    "foryou": "Para você",
     "giving": "Doações",
     "profile": "Impacto"
   },
@@ -63,6 +64,23 @@
       "description": "Você tem um ticket para receber :)",
       "buttonText": "Receber ticket",
       "animationText": "Recebendo ticket"
+    }
+  },
+  "content": {
+    "forYouScreen": {
+      "newsSection": {
+        "title": "Para você",
+        "openPostButtonText": "Ver publicação",
+        "onboarding": {
+          "publishedAt": "Agora",
+          "title": "Seja bem vindo! Aqui você vê as novidades da Ribon e boas notícias escolhidas pra aquecer seu coração."
+        }
+      },
+      "lockedSection": {
+        "title": "Uma Ribon pra você",
+        "subtitle": "Doe seu ticket para ver as novidades da Ribon e nossa seleção de boas notícias!",
+        "cta": "Doar agora"
+      }
     }
   },
   "contexts": {

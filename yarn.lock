@@ -2613,10 +2613,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.0.36":
-  version "1.0.36"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.36.tgz#fa74866597e703cfb565d6472be90c4b8734c027"
-  integrity sha512-yfqiWWFM/t91YSpGfuLIisOKL4fXGvPdz5aFk3tPOwc893jzPm4ySl+qYPYhGS2Gwrx1ezJ4kcn+1xVVdKL9MA==
+"@ribon.io/shared@1.0.41":
+  version "1.0.41"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.41.tgz#9e9122d23a0dad4c44c8afa7e951ed2861a33d4e"
+  integrity sha512-YHgfKLSPe2PtIcIxaMAFIZ/07vXiV1IGE4Fnig+MHEcmUotuK8KtEwMrKDeDQ8RKZNWpM546b5wEWb6xfQzWCA==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -7233,6 +7233,11 @@ expo-asset@~8.7.0:
     md5-file "^3.2.3"
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
+
+expo-av@~13.0.3:
+  version "13.0.3"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-13.0.3.tgz#b624757f3c4f8c35ca83d0485bb20b79b2f9e13d"
+  integrity sha512-9SpXOjY2MUK+jCIL68EUro/aHBlbZ3B4cY1nRr2aTPfv/dLD3bXRZNTTtSwOgsHbuKO6XwjHgCoYbd9T0GcE4A==
 
 expo-build-properties@^0.4.1:
   version "0.4.1"

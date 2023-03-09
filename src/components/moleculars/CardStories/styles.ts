@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 40,
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   innerHeadingContainer: {
-    width: "100%"
+    width: "100%",
   },
   heading: {
     ...defaultBodyLgBold,

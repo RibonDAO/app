@@ -104,24 +104,37 @@ export default function CausesScreen() {
     }
   };
 
+  const nonProfitStylesFor = (index: number) => {
+    const isFirst = index === 0;
+    const isLast = index === nonProfitsFilter().length - 1;
+
+    return {
+      marginLeft: isFirst ? 16 : 4,
+      marginRight: isLast ? 16 : 4,
+      ...S.causesCardContainer,
+    };
+  };
+
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
-      <StoriesSection
-        stories={stories}
-        nonProfit={currentNonProfit}
-        storiesVisible={storiesVisible}
-        setStoriesVisible={setStoriesVisible}
-      />
-      <TicketSection canDonate={canDonate} />
-      <Text style={S.title}>{t("title")}</Text>
-      <View style={S.groupButtonsContainer}>
-        <GroupButtons
-          elements={causesFilter()}
-          onChange={handleCauseChange}
-          nameExtractor={(cause) => cause.name}
+      <View style={S.containerPadding}>
+        <StoriesSection
+          stories={stories}
+          nonProfit={currentNonProfit}
+          storiesVisible={storiesVisible}
+          setStoriesVisible={setStoriesVisible}
         />
+        <TicketSection canDonate={canDonate} />
+        <Text style={S.title}>{t("title")}</Text>
+        <View style={S.groupButtonsContainer}>
+          <GroupButtons
+            elements={causesFilter()}
+            onChange={handleCauseChange}
+            nameExtractor={(cause) => cause.name}
+          />
+        </View>
       </View>
 
       <ScrollView
@@ -130,8 +143,8 @@ export default function CausesScreen() {
         showsHorizontalScrollIndicator={false}
         ref={scrollViewRef}
       >
-        {nonProfitsFilter()?.map((nonProfit) => (
-          <View style={S.causesCardContainer} key={nonProfit.id}>
+        {nonProfitsFilter()?.map((nonProfit, index) => (
+          <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
             <CardCenterImageButton
               image={nonProfit.mainImage}
               infoTextLeft={nonProfit.name}
@@ -174,7 +187,9 @@ export default function CausesScreen() {
         </View>
       </Tooltip>
 
-      <UserSupportSection />
+      <View style={S.containerPadding}>
+        <UserSupportSection />
+      </View>
     </ScrollView>
   );
 }

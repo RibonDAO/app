@@ -5,6 +5,7 @@ import S from "./styles";
 import { ImageBackground, Linking, Text, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import cardBackground from "./assets/cardBackground.png";
+import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared";
 
 function UserSupportSection(): JSX.Element {
@@ -14,7 +15,7 @@ function UserSupportSection(): JSX.Element {
 
   const handleClick = () => {
     logEvent("UserSupportBtn_Click");
-    Linking.openURL(
+    openInWebViewer(
       "https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com",
     );
   };
@@ -27,8 +28,8 @@ function UserSupportSection(): JSX.Element {
             <Icon
               type="rounded"
               name="live_help"
-              size={24}
-              color={theme.colors.brand.primary[800]}
+              size={20}
+              color={theme.colors.brand.secondary[700]}
             />
           </View>
           <Text style={S.title}>{t("title")}</Text>
