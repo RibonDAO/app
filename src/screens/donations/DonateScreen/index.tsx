@@ -90,6 +90,7 @@ function DonateScreen() {
           <Text style={S.nonProfitText}>{t("nonProfitText")}</Text>
           <Text style={S.nonProfitHighlight}>{nonProfit.name}</Text>
         </View>
+        <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
 
         <LinearGradient
           colors={[theme.colors.brand.primary[800], "transparent"]}
