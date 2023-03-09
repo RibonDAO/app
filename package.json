@@ -67,6 +67,7 @@
     "react-dom": "18.1.0",
     "react-i18next": "^12.1.4",
     "react-native": "0.70.5",
+    "react-native-collapsible-tab-view": "^6.0.1",
     "react-native-country-picker-modal": "^2.0.0",
     "react-native-dropdown-picker": "^5.4.4",
     "react-native-gesture-handler": "~2.8.0",
