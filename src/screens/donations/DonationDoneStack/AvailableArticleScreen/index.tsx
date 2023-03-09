@@ -8,11 +8,13 @@ import ImageWithInfoLayout from "components/moleculars/layouts/ImageWithInfoLayo
 import { useTranslation } from "react-i18next";
 import S from "./styles";
 import NewsPlaceholder from "./placeholder";
+import { useUnsafeAreaContext } from "contexts/unsafeAreaContext";
 
 export default function AvailableArticleScreen() {
   const { navigateTo } = useNavigation();
   const { getArticles } = useArticles();
   const [article, setArticle] = React.useState<any>();
+  const { setBottomBackgroundColor } = useUnsafeAreaContext();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "content.availableArticleScreen",
@@ -36,6 +38,14 @@ export default function AvailableArticleScreen() {
   const navigateToForYouScreen = () => {
     navigateTo("ForYouScreen");
   };
+
+  useEffect(() => {
+    setBottomBackgroundColor(primary[50]);
+
+    return () => {
+      setBottomBackgroundColor("white");
+    };
+  }, []);
 
   return (
     <View style={S.container}>
