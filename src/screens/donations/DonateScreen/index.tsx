@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { useCanDonate, useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { theme } from "@ribon.io/shared/styles";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import Image from "components/atomics/Image";
 import Button from "components/atomics/buttons/Button";
@@ -62,7 +62,7 @@ function DonateScreen() {
           formattedLanguage(currentLang),
         );
         setCurrentUser(user);
-        await donate(RIBON_INTEGRATION_ID, nonProfit.id, email);
+        await donate(RIBON_INTEGRATION_ID, nonProfit.id, email, PLATFORM);
         refetchCanDonate();
         setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
         navigateTo("DonationDoneScreen", { nonProfit });
@@ -90,7 +90,7 @@ function DonateScreen() {
           <Text style={S.nonProfitText}>{t("nonProfitText")}</Text>
           <Text style={S.nonProfitHighlight}>{nonProfit.name}</Text>
         </View>
-        <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
+
         <LinearGradient
           colors={[theme.colors.brand.primary[800], "transparent"]}
           start={[0.0, 0.5]}
