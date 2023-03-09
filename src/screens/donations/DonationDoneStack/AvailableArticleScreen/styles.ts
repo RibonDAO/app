@@ -63,10 +63,11 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   articleContent: {
-    height: 128,
     flexDirection: "column",
     flexShrink: 1,
     paddingHorizontal: theme.spacingNative(8),
+    alignItems: "flex-start",
+    justifyContent: "center",
   },
   textSecondary: {
     ...defaultBodyXsRegular,
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 48,
     borderColor: theme.colors.brand.primary[600],
+    backgroundColor: "transparent",
   },
 });
 
