@@ -15,7 +15,9 @@ import { RootStackParamList, RootTabParamList } from "types";
 import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
 import LayoutHeader from "components/moleculars/LayoutHeader";
-import DonationDoneScreen from "screens/donations/DonationDoneScreen";
+import DonationDoneScreen from "screens/donations/DonationDoneStack/DonationDoneScreen";
+import ChooseCauseScreen from "screens/donations/DonationDoneStack/ChooseCauseScreen";
+import AvailableArticleScreen from "screens/donations/DonationDoneStack/AvailableArticleScreen";
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
@@ -25,7 +27,6 @@ import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
 import TicketsProvider from "contexts/ticketsContext";
-import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -86,6 +87,12 @@ function RootNavigator() {
       <Stack.Screen
         name="ChooseCauseScreen"
         component={ChooseCauseScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="AvailableArticleScreen"
+        component={AvailableArticleScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 

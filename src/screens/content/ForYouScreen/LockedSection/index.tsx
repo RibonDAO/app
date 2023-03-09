@@ -1,10 +1,10 @@
-import { View, Text } from "react-native";
-import styles from "./styles";
-import CellPhone from "./assets/CellPhone";
+import { View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import AbstractForm from "./assets/AbstractForm";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
+import ImageWithInfoLayout from "components/moleculars/layouts/ImageWithInfoLayout";
+import styles from "./styles";
 
 export default function LockedSection() {
   const { t } = useTranslation("translation", {
@@ -24,9 +24,10 @@ export default function LockedSection() {
       </View>
       <View>
         <View style={styles.container}>
-          <CellPhone />
-          <Text style={styles.title}>{t("title")}</Text>
-          <Text style={styles.subtitle}>{t("subtitle")}</Text>
+          <ImageWithInfoLayout
+            title={t("title") || ""}
+            description={t("subtitle") || ""}
+          />
           <Button
             text={t("cta")}
             onPress={handleButtonClick}

@@ -1,7 +1,7 @@
 import { Text, ScrollView, View } from "react-native";
 import { useEffect, useState } from "react";
 import { Article, useArticles } from "@ribon.io/shared";
-import ArticleSection from "components/moleculars/ArticleSection";
+import ArticleLayout from "components/moleculars/layouts/ArticleLayout";
 import ForYouScreenPlaceholder from "./placeholder";
 import { RibonOnboarding } from "utils/constants/Articles";
 import { useTranslation } from "react-i18next";
@@ -57,7 +57,7 @@ export default function NewsSection() {
     return (
       <View>
         <View style={styles.paddingContainer}>
-          <ArticleSection article={article} readMoreText="Ler agora" />
+          <ArticleLayout article={article} readMoreText="Ler agora" />
         </View>
         <View style={styles.articleDivider} />
       </View>
@@ -77,7 +77,7 @@ export default function NewsSection() {
           articles.map((article, index) => (
             <>
               <View style={styles.paddingContainer}>
-                <ArticleSection
+                <ArticleLayout
                   article={article}
                   readMoreText={t("openPostButtonText")}
                 />
