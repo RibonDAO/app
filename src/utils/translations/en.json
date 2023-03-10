@@ -67,6 +67,12 @@
     }
   },
   "content": {
+    "availableArticleScreen": {
+      "title": "A Ribon for you",
+      "subtitle": "Now you can see what's new at Ribon and good news selected to warm your heart!",
+      "seeAllPosts": "See all posts",
+      "continue": "Continue"
+    },
     "forYouScreen": {
       "newsSection": {
         "title": "For you",

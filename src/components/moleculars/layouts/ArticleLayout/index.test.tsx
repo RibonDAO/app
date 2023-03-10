@@ -1,6 +1,6 @@
 import React from "react";
 import { screen, render } from "@testing-library/react-native";
-import ArticleSection from ".";
+import ArticleLayout from ".";
 import { RibonOnboarding } from "utils/constants/Articles";
 
 describe("CardCenterImageButton", () => {
@@ -20,7 +20,7 @@ describe("CardCenterImageButton", () => {
       createdAt: "2021-01-01",
       updatedAt: "2021-01-01",
     };
-    render(<ArticleSection article={article} readMoreText="Read now" />);
+    render(<ArticleLayout article={article} readMoreText="Read now" />);
     expect(screen.getByText("Read now")).toBeDefined();
   });
 });

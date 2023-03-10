@@ -14,10 +14,14 @@ import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
 import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
+import UnsafeAreaProvider, {
+  useUnsafeAreaContext,
+} from "./src/contexts/unsafeAreaContext";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
 
   if (!isLoadingComplete) {
     return null;
@@ -35,11 +39,11 @@ function Main() {
           <SafeAreaProvider>
             <SafeAreaView
               edges={["top"]}
-              style={{ flex: 1, backgroundColor: theme.colors.neutral10 }}
+              style={{ flex: 1, backgroundColor: topBackgroundColor }}
             >
               <SafeAreaView
                 edges={["bottom"]}
-                style={{ flex: 1, backgroundColor: theme.colors.neutral10 }}
+                style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
               >
                 <Navigation colorScheme={colorScheme} />
                 <StatusBar style="dark" />
@@ -58,7 +62,9 @@ export default function App() {
       <ScrollEnabledProvider>
         <CurrentUserProvider>
           <LanguageProvider>
-            <Main />
+            <UnsafeAreaProvider>
+              <Main />
+            </UnsafeAreaProvider>
           </LanguageProvider>
         </CurrentUserProvider>
       </ScrollEnabledProvider>

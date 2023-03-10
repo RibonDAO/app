@@ -15,7 +15,7 @@ export type Props = {
   readMoreText: string;
 };
 
-export default function ArticleSection({ article, readMoreText }: Props) {
+export default function ArticleLayout({ article, readMoreText }: Props) {
   const hasLink = Boolean(article?.link);
 
   const { secondary } = theme.colors.brand;
@@ -48,7 +48,11 @@ export default function ArticleSection({ article, readMoreText }: Props) {
 
   const renderContentFooter = () => {
     return (
-      <View style={styles.imageFooter}>
+      <TouchableOpacity
+        style={styles.imageFooter}
+        onPress={handlePress}
+        activeOpacity={0.5}
+      >
         <Text style={styles.imageFooterText}>{readMoreText}</Text>
         <Icon
           type="outlined"
@@ -56,13 +60,13 @@ export default function ArticleSection({ article, readMoreText }: Props) {
           size={20}
           color={secondary[900]}
         />
-      </View>
+      </TouchableOpacity>
     );
   };
 
   return (
     <View>
-      <TouchableOpacity onPress={handlePress}>
+      <TouchableOpacity onPress={handlePress} activeOpacity={1}>
         <View style={styles.header}>
           {renderIcon()}
           {renderAuthorName()}

@@ -67,6 +67,12 @@
     }
   },
   "content": {
+    "availableArticleScreen": {
+      "title": "Uma Ribon pra você",
+      "subtitle": "Você doou e agora pode ver novidades da Ribon e notícias pra aquecer seu coração!",
+      "seeAllPosts": "Ver publicações",
+      "continue": "Continuar"
+    },
     "forYouScreen": {
       "newsSection": {
         "title": "Para você",
