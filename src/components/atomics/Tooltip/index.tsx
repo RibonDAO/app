@@ -25,7 +25,7 @@ function Tooltip({ tooltipText, children }: Props) {
       ) => {
         setTooltipPosition({
           top: pageY - height - 40,
-          left: pageX,
+          left: pageX + 10,
         });
         setShowTooltip(true);
       },
