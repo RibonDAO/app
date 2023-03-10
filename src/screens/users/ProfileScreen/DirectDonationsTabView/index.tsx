@@ -1,15 +1,11 @@
-import { ScrollView } from "react-native";
-import { theme } from "@ribon.io/shared/styles";
+import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
 import DirectDonationsImpactCards from "../DirectDonationsImpactCards";
 
 function DirectDonationsTabView(): JSX.Element {
   return (
-    <ScrollView
-      style={{ height: "100%", backgroundColor: theme.colors.neutral10 }}
-      nestedScrollEnabled
-    >
+    <ParallaxTabViewContainer routeKey="DirectDonationsTabView">
       <DirectDonationsImpactCards />
-    </ScrollView>
+    </ParallaxTabViewContainer>
   );
 }
 

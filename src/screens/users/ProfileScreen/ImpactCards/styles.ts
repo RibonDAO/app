@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   cardsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
+    paddingHorizontal: 8,
   },
 });
 
