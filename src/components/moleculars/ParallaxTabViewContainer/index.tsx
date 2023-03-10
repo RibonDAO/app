@@ -7,9 +7,19 @@ const ParallaxTabViewContainer: React.FC<{
   children: JSX.Element;
 }> = ({ routeKey, children }) => {
   const scrollPropsAndRef = useCollapsibleScene(routeKey);
+  const {contentContainerStyle } = scrollPropsAndRef;
 
   return (
-    <Animated.ScrollView {...scrollPropsAndRef}>{children}</Animated.ScrollView>
+    <Animated.ScrollView
+      {...scrollPropsAndRef}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{
+        ...contentContainerStyle,
+        minHeight: 670
+      }}
+    >
+      {children}
+    </Animated.ScrollView>
   );
 };
 
