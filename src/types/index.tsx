@@ -56,6 +56,7 @@ export type RootStackParamList = {
   DonateScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;
   ContributionDoneScreen: ContributionDoneParamsList;
+  AvailableArticleScreen: undefined;
   NotFound: undefined;
   ReceiveTicketScreen: undefined;
   CausesScreen: undefined;

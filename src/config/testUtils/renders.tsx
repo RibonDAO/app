@@ -34,6 +34,11 @@ import ScrollEnabledProvider, {
   IScrollEnabledContext,
   ScrollEnabledContext,
 } from "contexts/scrollEnabledContext";
+import UnsafeAreaProvider, {
+  UnsafeAreaContext,
+  IUnsafeAreaContext,
+} from "contexts/unsafeAreaContext";
+
 import { waitForPromises } from "config/testUtils";
 import i18n from "../../../i18n-test";
 
@@ -75,6 +80,7 @@ export type RenderComponentProps = {
   cardPaymentProviderValue?: Partial<ICardPaymentInformationContext>;
   ticketsProviderValue?: Partial<ITicketsContext>;
   scrollEnabledProviderValue?: Partial<IScrollEnabledContext>;
+  unsafeAreaProviderValue?: Partial<IUnsafeAreaContext>;
 };
 
 function renderAllProviders(
@@ -87,6 +93,7 @@ function renderAllProviders(
     cardPaymentProviderValue = {},
     ticketsProviderValue = {},
     scrollEnabledProviderValue = {},
+    unsafeAreaProviderValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -108,22 +115,27 @@ function renderAllProviders(
                 NetworkContext,
                 networkProviderValue,
                 renderProvider(
-                  CryptoPaymentProvider,
-                  CryptoPaymentContext,
-                  cryptoPaymentProviderValue,
+                  UnsafeAreaProvider,
+                  UnsafeAreaContext,
+                  unsafeAreaProviderValue,
                   renderProvider(
-                    CardPaymentInformationProvider,
-                    CardPaymentInformationContext,
-                    cardPaymentProviderValue,
+                    CryptoPaymentProvider,
+                    CryptoPaymentContext,
+                    cryptoPaymentProviderValue,
                     renderProvider(
-                      TicketsProvider,
-                      TicketsContext,
-                      ticketsProviderValue,
+                      CardPaymentInformationProvider,
+                      CardPaymentInformationContext,
+                      cardPaymentProviderValue,
                       renderProvider(
-                        ScrollEnabledProvider,
-                        ScrollEnabledContext,
-                        scrollEnabledProviderValue,
-                        children,
+                        TicketsProvider,
+                        TicketsContext,
+                        ticketsProviderValue,
+                        renderProvider(
+                          ScrollEnabledProvider,
+                          ScrollEnabledContext,
+                          scrollEnabledProviderValue,
+                          children,
+                        ),
                       ),
                     ),
                   ),

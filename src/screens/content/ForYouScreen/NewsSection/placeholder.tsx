@@ -9,7 +9,7 @@ import {
 
 function ForYouScreenPlaceholder() {
   return (
-    <View>
+    <View style={{ paddingHorizontal: 16 }}>
       <Placeholder Animation={Fade}>
         <PlaceholderLine height={32} noMargin style={{ borderRadius: 5 }} />
 

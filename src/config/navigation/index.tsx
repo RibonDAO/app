@@ -15,7 +15,9 @@ import { RootStackParamList, RootTabParamList } from "types";
 import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
 import LayoutHeader from "components/moleculars/LayoutHeader";
-import DonationDoneScreen from "screens/donations/DonationDoneScreen";
+import DonationDoneScreen from "screens/donations/DonationDoneStack/DonationDoneScreen";
+import ChooseCauseScreen from "screens/donations/DonationDoneStack/ChooseCauseScreen";
+import AvailableArticleScreen from "screens/donations/DonationDoneStack/AvailableArticleScreen";
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
@@ -25,7 +27,6 @@ import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
 import TicketsProvider from "contexts/ticketsContext";
-import ChooseCauseScreen from "screens/donations/ChooseCauseScreen";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -38,6 +39,9 @@ import CausesIconOn from "./assets/CausesIconOn";
 import ForYouIconOn from "./assets/ForYouIconOn";
 import ForYouIconOff from "./assets/ForYouIconOff";
 import ForYouScreen from "screens/content/ForYouScreen";
+import { useCanDonate } from "@ribon.io/shared";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useCurrentUser } from "contexts/currentUserContext";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -83,6 +87,12 @@ function RootNavigator() {
       <Stack.Screen
         name="ChooseCauseScreen"
         component={ChooseCauseScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="AvailableArticleScreen"
+        component={AvailableArticleScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
@@ -142,6 +152,17 @@ function BottomTabNavigator() {
   const activeColor = neutral[900];
   const { t } = useTranslation();
 
+  const { currentUser } = useCurrentUser();
+
+  const { canDonate, refetch: refetchCanDonate } =
+    useCanDonate(RIBON_INTEGRATION_ID);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      refetchCanDonate();
+    }, 500);
+  }, [JSON.stringify(currentUser)]);
+
   return (
     <BottomTab.Navigator
       initialRouteName="CausesScreen"
@@ -171,7 +192,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) =>
             color === activeColor ? <ForYouIconOn /> : <ForYouIconOff />,
           lazy: false,
-          header: () => <></>,
+          header: () => (canDonate ? <></> : headerWithoutTicket()),
         }}
       />
 

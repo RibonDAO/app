@@ -1,9 +1,13 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 
-function CellPhone() {
+export type Props = {
+  height?: number;
+};
+
+function CellPhone({ height }: Props) {
   return (
-    <Svg width={151} height={256} viewBox="0 0 151 256" fill="none">
+    <Svg width={151} height={height || 256} viewBox="0 0 151 256" fill="none">
       <Path
         d="M124.799 196.226c-2.309 4.94-63.955 15.467-74.999 14.191-6.41-.74-23.952-116.681-20.737-120.112 4.825-5.148 67.904-20.117 74.276-15.783 5.896 4.01 24.906 114.328 21.46 121.704z"
         fill="#E5FBED"

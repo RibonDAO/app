@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: theme.spacingNative(24),
     resizeMode: "contain",
+    height: 400,
   },
   donateButton: {
     marginTop: theme.spacingNative(24),

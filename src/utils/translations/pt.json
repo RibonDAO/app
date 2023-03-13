@@ -67,7 +67,21 @@
     }
   },
   "content": {
+    "availableArticleScreen": {
+      "title": "Uma Ribon pra você",
+      "subtitle": "Você doou e agora pode ver novidades da Ribon e notícias pra aquecer seu coração!",
+      "seeAllPosts": "Ver publicações",
+      "continue": "Continuar"
+    },
     "forYouScreen": {
+      "newsSection": {
+        "title": "Para você",
+        "openPostButtonText": "Ver publicação",
+        "onboarding": {
+          "publishedAt": "Agora",
+          "title": "Seja bem vindo! Aqui você vê as novidades da Ribon e boas notícias escolhidas pra aquecer seu coração."
+        }
+      },
       "lockedSection": {
         "title": "Uma Ribon pra você",
         "subtitle": "Doe seu ticket para ver as novidades da Ribon e nossa seleção de boas notícias!",

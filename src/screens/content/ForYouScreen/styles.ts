@@ -1,10 +1,5 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-// import {
-//   defaultBodyLgBold,
-//   defaultBodySmRegular,
-// } from "styles/typography/default";
-// import { stylizedDisplaySm } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,6 +19,8 @@ const styles = StyleSheet.create({
   linkText: {
     fontSize: 14,
     color: "#2e78b7",
+    width: "100%",
+    height: "100%",
   },
 });
 

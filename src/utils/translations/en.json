@@ -67,7 +67,21 @@
     }
   },
   "content": {
+    "availableArticleScreen": {
+      "title": "A Ribon for you",
+      "subtitle": "Now you can see what's new at Ribon and good news selected to warm your heart!",
+      "seeAllPosts": "See all posts",
+      "continue": "Continue"
+    },
     "forYouScreen": {
+      "newsSection": {
+        "title": "For you",
+        "openPostButtonText": "Open post",
+        "onboarding": {
+          "publishedAt": "Now",
+          "title": "Welcome! Here you'll find what's new at Ribon and the good news that we selected to warm your heart."
+        }
+      },
       "lockedSection": {
         "title": "A Ribon for you",
         "subtitle": "Donate your ticket to see what's new at Ribon and our selection of good news!",

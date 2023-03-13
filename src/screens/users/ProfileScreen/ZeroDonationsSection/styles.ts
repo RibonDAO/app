@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     marginTop: theme.spacingNative(20),
   },
   zeroDonationsSection: {
-    height: "100%",
     alignItems: "center",
     marginTop: theme.spacingNative(20),
     paddingHorizontal: theme.spacingNative(20),

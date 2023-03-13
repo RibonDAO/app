@@ -1,13 +1,13 @@
 import { View } from "react-native";
 import { RootStackScreenProps } from "types";
-import ForYouScreenPlaceholder from "./placeholder";
-import LockedSection from "./LockedSection";
-import { useCanDonate } from "@ribon.io/shared";
+import { useCanDonate } from "@ribon.io/shared/hooks";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
-import styles from "./styles";
 import { useEffect } from "react";
 import BadgesScreen from "screens/content/BadgesScreen";
+import styles from "./styles";
+import LockedSection from "./LockedSection";
+import NewsSection from "./NewsSection";
 
 export default function ForYouScreen({
   navigation,
@@ -29,8 +29,9 @@ export default function ForYouScreen({
     if (canDonate) {
       return <LockedSection />;
     }
+    if (canDonate) return <LockedSection />;
 
-    return <ForYouScreenPlaceholder />;
+    return <NewsSection />;
   };
 
   return <View style={styles.container}>{renderSection()}</View>;

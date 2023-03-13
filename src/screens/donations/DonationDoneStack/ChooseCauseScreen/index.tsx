@@ -16,8 +16,8 @@ function ChooseCauseScreen(): JSX.Element {
   const { activeCauses } = useCausesContext();
   const { navigateTo } = useNavigation();
 
-  function navigateToCausesScreen() {
-    return navigateTo("CausesScreen");
+  function navigateToAvailableArticleScreen() {
+    return navigateTo("AvailableArticleScreen");
   }
 
   const causesList = useCallback(
@@ -47,7 +47,7 @@ function ChooseCauseScreen(): JSX.Element {
         <View style={S.buttonContainer}>
           <Button
             text={t("buttonText")}
-            onPress={navigateToCausesScreen}
+            onPress={navigateToAvailableArticleScreen}
             outline
           />
         </View>
