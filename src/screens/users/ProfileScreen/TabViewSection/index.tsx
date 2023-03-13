@@ -1,12 +1,20 @@
 import { useWindowDimensions, View, Text } from "react-native";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import { theme } from "@ribon.io/shared";
+import { SceneMap, TabBar } from "react-native-tab-view";
+import { theme } from "@ribon.io/shared/styles";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { CollapsibleTabView } from "react-native-collapsible-tab-view";
+import * as React from "react";
+import ImpactCards from "screens/users/ProfileScreen/ImpactCards";
 import TicketDonationsTabView from "../TicketDonationsTabView";
 import CommunityDonationsTabView from "../CommunityDonationsTabView";
 import DirectDonationsTabView from "../DirectDonationsTabView";
 import S from "./styles";
+
+type Route = {
+  key: string;
+  title: string;
+};
 
 const renderScene = SceneMap({
   TicketDonationsTabView,
@@ -54,13 +62,18 @@ function TabViewSection(): JSX.Element {
 
   return (
     <View style={S.tabViewSection}>
-      <TabView
-        renderTabBar={renderTabBar}
+      <CollapsibleTabView<Route>
         navigationState={{ index, routes }}
         renderScene={renderScene}
         onIndexChange={setIndex}
-        initialLayout={{ width: layout.width }}
+        renderHeader={() => <ImpactCards />}
+        disableSnap
+        tabBarProps={{
+          scrollEnabled: true,
+        }}
         style={{ backgroundColor: theme.colors.neutral10 }}
+        initialLayout={{ width: layout.width }}
+        renderTabBar={renderTabBar}
       />
     </View>
   );
