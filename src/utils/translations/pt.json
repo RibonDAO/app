@@ -67,6 +67,8 @@
     }
   },
   "content": {
+    "newsSectionTitle": "Publicações",
+    "tasksSectionTitle": "Tarefas",
     "availableArticleScreen": {
       "title": "Uma Ribon pra você",
       "subtitle": "Você doou e agora pode ver novidades da Ribon e notícias pra aquecer seu coração!",

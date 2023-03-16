@@ -67,6 +67,8 @@
     }
   },
   "content": {
+    "newsSectionTitle": "Posts",
+    "tasksSectionTitle": "Tasks",
     "availableArticleScreen": {
       "title": "A Ribon for you",
       "subtitle": "Now you can see what's new at Ribon and good news selected to warm your heart!",

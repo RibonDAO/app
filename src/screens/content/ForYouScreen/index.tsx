@@ -6,7 +6,7 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import styles from "./styles";
 import { useEffect } from "react";
-import NewsSection from "./NewsSection";
+import TabViewSection from "./TabViewSection";
 
 export default function ForYouScreen({
   navigation,
@@ -25,7 +25,7 @@ export default function ForYouScreen({
   const renderSection = () => {
     if (canDonate) return <LockedSection />;
 
-    return <NewsSection />;
+    return <TabViewSection />;
   };
 
   return <View style={styles.container}>{renderSection()}</View>;
