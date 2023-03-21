@@ -12,7 +12,7 @@
       "channel": "development-simulator",
       "env": {
         "REACT_APP_RIBON_API": "https://dapp-dev-api.ribon.io/",
-        "REACT_APP_RIBON_INTEGRATION_ID": 3
+        "REACT_APP_RIBON_INTEGRATION_ID": "3"
       }
     },
     "preview": {
@@ -27,7 +27,7 @@
       "channel": "preview",
       "env": {
         "REACT_APP_RIBON_API": "https://dapp-api.ribon.io/",
-        "REACT_APP_RIBON_INTEGRATION_ID": 1
+        "REACT_APP_RIBON_INTEGRATION_ID": "1"
       }
     },
     "production": {
@@ -38,7 +38,7 @@
       "channel": "production",
       "env": {
         "REACT_APP_RIBON_API": "https://dapp-api.ribon.io/",
-        "REACT_APP_RIBON_INTEGRATION_ID": 1
+        "REACT_APP_RIBON_INTEGRATION_ID": "1"
       }
     }
   },
