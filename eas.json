@@ -9,7 +9,11 @@
       "ios": {
         "simulator": true
       },
-      "channel": "development-simulator"
+      "channel": "development-simulator",
+      "env": {
+        "REACT_APP_RIBON_API": "https://dapp-dev-api.ribon.io/",
+        "REACT_APP_RIBON_INTEGRATION_ID": 3
+      }
     },
     "preview": {
       "distribution": "internal",
@@ -20,14 +24,22 @@
       "android": {
         "buildType": "apk"
       },
-      "channel": "preview"
+      "channel": "preview",
+      "env": {
+        "REACT_APP_RIBON_API": "https://dapp-api.ribon.io/",
+        "REACT_APP_RIBON_INTEGRATION_ID": 1
+      }
     },
     "production": {
       "ios": {
         "resourceClass": "m1-medium",
         "enterpriseProvisioning": "universal"
       },
-      "channel": "production"
+      "channel": "production",
+      "env": {
+        "REACT_APP_RIBON_API": "https://dapp-api.ribon.io/",
+        "REACT_APP_RIBON_INTEGRATION_ID": 1
+      }
     }
   },
   "submit": {
