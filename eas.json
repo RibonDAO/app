@@ -30,6 +30,20 @@
         "REACT_APP_RIBON_INTEGRATION_ID": "1"
       }
     },
+    "staging": {
+      "ios": {
+        "resourceClass": "m1-medium",
+        "enterpriseProvisioning": "universal"
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "channel": "staging",
+      "env": {
+        "REACT_APP_RIBON_API": "https://dapp-api.ribon.io/",
+        "REACT_APP_RIBON_INTEGRATION_ID": "1"
+      }
+    },
     "production": {
       "ios": {
         "resourceClass": "m1-medium",
