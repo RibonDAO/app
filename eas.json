@@ -8,7 +8,8 @@
       "distribution": "internal",
       "ios": {
         "simulator": true
-      }
+      },
+      "channel": "development-simulator"
     },
     "preview": {
       "distribution": "internal",
@@ -18,13 +19,15 @@
       },
       "android": {
         "buildType": "apk"
-      }
+      },
+      "channel": "preview"
     },
     "production": {
       "ios": {
         "resourceClass": "m1-medium",
         "enterpriseProvisioning": "universal"
-      }
+      },
+      "channel": "production"
     }
   },
   "submit": {
