@@ -24,7 +24,7 @@ export async function sendPushNotification(expoPushToken: any) {
 
 export async function registerForPushNotificationsAsync() {
   let token;
-  const appConfig = require("../../../app.json");
+  const appConfig = require("../../../app.config.js");
   const projectId = appConfig?.expo?.extra?.eas?.projectId;
 
   if (Platform.OS === "android") {
