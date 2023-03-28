@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodySmRegular } from "styles/typography/default";
+import { defaultBodySmRegular, defaultBodySmSemibold } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   darkStroke: {
-    height: 100,
+    height: 256,
     width: "100%",
     position: "absolute",
     bottom: 0,
@@ -59,15 +59,13 @@ const styles = StyleSheet.create({
     marginLeft: theme.spacingNative(4),
   },
   imageDescription: {
+    ...defaultBodySmSemibold,
     padding: theme.spacingNative(16),
     position: "absolute",
     bottom: 0,
     left: 0,
     zIndex: 1,
     color: theme.colors.neutral10,
-    fontWeight: "600",
-    fontSize: 16,
-    lineHeight: 20,
   },
   containerText: {
     paddingTop: theme.spacingNative(8),
@@ -99,6 +97,9 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 8,
   },
+  button: {
+    height: 48,
+  }
 });
 
 export default styles;
