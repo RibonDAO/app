@@ -20,7 +20,7 @@
   "donations": {
     "causesScreen": {
       "title": "Doe para um projeto",
-      "buttonText": "Doar",
+      "buttonText": "Doar ticket",
       "allCauses": "Todas",
       "userSupportSection": {
         "title": "Suporte ao Usuário",
