@@ -30,7 +30,7 @@
       "impactPrefix": "Doe",
       "labelText": "Saiba mais",
       "whatIsATicket": "O que é um ticket?",
-      "ticketExplanation": "Os tickets são usados para fazer doações. Você ganha um novo todo dia quando loga na Ribon :)"
+      "ticketExplanation": "Os tickets servem para fazer doações e você recebe um a cada dia que entrar aqui na Ribon"
     },
     "donateScreen": {
       "nonProfitText": "Você está doando para",
@@ -42,9 +42,12 @@
       "donatingText": "Doando",
       "donateText": "Doar",
       "animationText": "Doando ticket",
-      "agreementText": "Ao inserir seu e-mail e se inscrever, você aceita a nossa",
+      "agreementText": "Ao clicar em Confirmar, eu concordo com os",
+      "termsText": "Termos",
+      "termsLink": "https://ribon.io/privacy-policy/#termos",
       "privacyPolicyText": "Política de Privacidade",
-      "privacyPolicyLink": "https://ribon.io/2021/06/01/politica-de-privacidade-e-retencao-de-dados-pessoais/"
+      "privacyPolicyLink": "https://ribon.io/privacy-policy/#pol%C3%ADtica",
+      "and": " e a"
     },
     "donationDoneScreen": {
       "title": "Parabéns!",

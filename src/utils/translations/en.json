@@ -42,9 +42,12 @@
       "donatingText": "Donating",
       "donateText": "Donate",
       "animationText": "Donating ticket",
-      "agreementText": "By signing up you agree to Ribon's",
+      "agreementText": "By clicking Confirm I agree on Ribon’s",
+      "termsText": "Terms",
+      "termsLink": "https://ribon.io/en/privacy-policy/#terms",
       "privacyPolicyText": "Privacy Policy",
-      "privacyPolicyLink": "https://ribon.io/2022/06/10/privacy-and-personal-data-retention-policy/"
+      "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
+      "and": " and"
     },
     "donationDoneScreen": {
       "title": "Congratulations!",

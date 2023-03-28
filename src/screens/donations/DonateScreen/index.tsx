@@ -83,6 +83,10 @@ function DonateScreen() {
   const linkToPrivacyPolicy = () => {
     openInWebViewer(t("privacyPolicyLink"));
   };
+
+  const linkToTerms = () => {
+    openInWebViewer(t("terms"));
+  };
   return (
     <View>
       <View style={S.nonProfitContainer}>
@@ -144,6 +148,10 @@ function DonateScreen() {
                 />
                 <Text style={S.privacyPolicyText}>
                   {t("agreementText")}{" "}
+                  <Text style={S.privacyPolicyLink} onPress={linkToTerms}>
+                    {t("termsText")}
+                  </Text>
+                  {t("and")}{" "}
                   <Text
                     style={S.privacyPolicyLink}
                     onPress={linkToPrivacyPolicy}
