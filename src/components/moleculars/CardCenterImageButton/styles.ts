@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   darkStroke: {
-    height: 256,
+    height: 120,
     width: "100%",
     position: "absolute",
     bottom: 0,

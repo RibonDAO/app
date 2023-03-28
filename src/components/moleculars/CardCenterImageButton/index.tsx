@@ -51,7 +51,7 @@ function CardCenterImageButton({
           </TouchableOpacity>
           <Text style={S.imageDescription}>{imageDescription}</Text>
           <LinearGradient
-            colors={["transparent", "rgba(40, 36, 28, 0.1)", "rgba(40, 36, 28, 0.8)"]}
+            colors={["transparent", "rgba(40, 36, 28, 0.4)", "rgba(40, 36, 28, 0.8)"]}
             style={S.darkStroke}
           />
         </View>
