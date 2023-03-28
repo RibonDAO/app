@@ -144,7 +144,7 @@ export default function CausesScreen() {
         ref={scrollViewRef}
       >
         {nonProfitsFilter()?.map((nonProfit, index) => (
-          <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
+          <View style={[nonProfitStylesFor(index), { width: 256 }]} key={nonProfit.id}>
             <CardCenterImageButton
               image={nonProfit.mainImage}
               infoTextLeft={nonProfit.name}

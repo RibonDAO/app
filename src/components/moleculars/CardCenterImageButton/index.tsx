@@ -77,6 +77,9 @@ function CardCenterImageButton({
             onPress={onClickButton}
             text={buttonText}
             disabled={buttonDisabled}
+            customStyles={{
+              height: 48
+            }}
           />
         </View>
       </View>
