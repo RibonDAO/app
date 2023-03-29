@@ -18,11 +18,11 @@ import { useTranslation } from "react-i18next";
 import { useWalletContext } from "contexts/walletContext";
 import WalletIcon from "components/vectors/WalletIcon";
 import { walletTruncate } from "lib/formatters/walletTruncate";
+import { openInWebViewer } from "lib/linkOpener";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
-import { openInWebViewer } from "lib/linkOpener";
 import S from "./styles";
 
 type Props = {
@@ -120,9 +120,7 @@ function LayoutHeader({
   };
 
   const linkToSupport = () => {
-    openInWebViewer(
-      "https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com",
-    );
+    openInWebViewer(t("supportLink"));
   };
 
   const renderConfigModal = () => (
