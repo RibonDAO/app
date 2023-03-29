@@ -16,13 +16,13 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     shadowOpacity: 0.8,
-    marginVertical: 12,
+    marginVertical: 16,
   },
   imageBackground: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-    paddingVertical: 20,
+    paddingVertical: 16,
     paddingHorizontal: 16,
   },
   iconText: {
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   supportButton: {
     backgroundColor: theme.colors.neutral10,
     borderWidth: 0,
+    height: 48,
   },
 });
 

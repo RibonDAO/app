@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
   containerPadding: {
     paddingHorizontal: 16,
   },
+  supportContainer: {
+    paddingHorizontal: 24,
+  },
   containerTicket: {
     height: 350,
     width: "100%",
