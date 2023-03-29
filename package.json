@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "test": "jest --watchAll",
+    "start": "REACT_APP_RIBON_API=https://dapp-dev-api.ribon.io/ REACT_APP_RIBON_INTEGRATION_ID=3 expo start",
+    "android": "yarn start --android",
+    "ios": "yarn start --ios",
+    "web": "yarn start --web",
+    "test": "REACT_APP_RIBON_API=https://dapp-dev-api.ribon.io/ REACT_APP_RIBON_INTEGRATION_ID=3 jest --watchAll",
     "testCoverage": "jest --coverage --watchAll=false",
     "lint": "eslint src/**/*.ts src/**/*.tsx && prettier --check src/**/*.ts src/**/*.tsx"
   },
