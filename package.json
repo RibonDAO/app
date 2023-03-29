@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "test": "jest --watchAll",
+    "dev-env": "REACT_APP_RIBON_API=https://dapp-dev-api.ribon.io/ REACT_APP_RIBON_INTEGRATION_ID=3",
+    "prod-env": "REACT_APP_RIBON_API=https://dapp-api.ribon.io/ REACT_APP_RIBON_INTEGRATION_ID=1",
+    "start": "yarn dev-env expo start",
+    "android": "yarn start --android",
+    "ios": "yarn start --ios",
+    "web": "yarn start --web",
+    "test": "yarn dev-env jest --watchAll",
     "testCoverage": "jest --coverage --watchAll=false",
-    "lint": "eslint src/**/*.ts src/**/*.tsx && prettier --check src/**/*.ts src/**/*.tsx"
+    "lint": "eslint src/**/*.ts src/**/*.tsx && prettier --check src/**/*.ts src/**/*.tsx",
+    "eas-update-production": "yarn prod-env eas update --branch production"
   },
   "jest": {
     "preset": "jest-expo",
