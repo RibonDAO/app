@@ -10,7 +10,6 @@ import { initializeHooks } from "@ribon.io/shared/hooks";
 import { REACT_APP_RIBON_API } from "utils/constants/Application";
 
 const RIBON_API = "https://dapp-api.ribon.io/";
-console.log("api env", REACT_APP_RIBON_API);
 export const baseURL = REACT_APP_RIBON_API || RIBON_API;
 
 type initializeApiProps = {
