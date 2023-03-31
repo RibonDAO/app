@@ -24,6 +24,8 @@ import { showToast } from "lib/Toast";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { useNavigation } from "hooks/useNavigation";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
+import { normalizedLanguage } from "lib/currentLanguage";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -127,6 +129,10 @@ function CardPaymentInformationProvider({ children }: Props) {
 
   // const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
+  const { findOrCreateUser } = useUsers();
+  const { signedIn, setCurrentUser } = useCurrentUser();
+  const { integration } = useIntegration(integrationId);
+  const { createSource } = useSources();
 
   const resetStates = () => {
     setCountry("");
@@ -138,6 +144,16 @@ function CardPaymentInformationProvider({ children }: Props) {
     setExpirationDate("");
     setCvv("");
     setButtonDisabled(false);
+  };
+
+  const login = async () => {
+    if (!signedIn) {
+      const user = await findOrCreateUser(email, await normalizedLanguage());
+      if (integration) {
+        createSource(user.id, integration.id);
+      }
+      setCurrentUser(user);
+    }
   };
 
   const handleSubmit = async () => {
@@ -167,6 +183,7 @@ function CardPaymentInformationProvider({ children }: Props) {
 
     try {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
+      login();
       navigateTo("ContributionDoneScreen", {
         cause,
         nonProfit,
