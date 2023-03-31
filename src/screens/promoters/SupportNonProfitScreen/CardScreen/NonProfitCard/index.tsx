@@ -52,7 +52,7 @@ export default function NonProfitCard({
         )}
         image={nonProfit.mainImage}
         buttonText={t("donateButtonText", {
-          value: "",
+          value: currentOffer?.price,
         })}
         onButtonClick={() => handleDonateClick(nonProfit)}
       >
