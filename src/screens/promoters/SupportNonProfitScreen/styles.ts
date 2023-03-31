@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   cardWaveContainer: {
     marginRight: theme.spacingNative(8),
-    width: Dimensions.get("window").width - 64,
+    width: 296,
   },
   supportSection: {
     paddingHorizontal: 20,
