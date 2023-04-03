@@ -88,6 +88,14 @@
         "title": "Uma Ribon pra você",
         "subtitle": "Doe seu ticket para ver as novidades da Ribon e nossa seleção de boas notícias!",
         "cta": "Doar agora"
+      },
+      "tasksSection": {
+        "title": "Tarefas",
+        "tasks": {
+          "donate_ticket": "Doar ticket",
+          "check_daily_news": "Conferir publicações diárias",
+          "see_more_ngo_infos": "Ver mais informações sobre uma ONG"
+        }
       }
     }
   },
