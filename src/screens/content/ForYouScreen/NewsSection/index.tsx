@@ -54,11 +54,13 @@ export default function NewsSection() {
   const renderOnboarding = () => {
     const article = RibonOnboarding(t);
 
-    // FIXME - ADD I18N TO THIS TEXT
     return (
       <View>
         <View style={styles.paddingContainer}>
-          <ArticleLayout article={article} readMoreText="Ler agora" />
+          <ArticleLayout
+            article={article}
+            readMoreText={t("openPostButtonText")}
+          />
         </View>
         <View style={styles.articleDivider} />
       </View>
