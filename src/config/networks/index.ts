@@ -46,7 +46,7 @@ export const networks = [
 
 export const defaultNetwork = networks[0];
 
-export const validNetworkId = (networkId: number) => {
+export const validNetwork = (networkId: number) => {
   const validNetworkIds = [137]; // polygon,
 
   return validNetworkIds.includes(networkId);

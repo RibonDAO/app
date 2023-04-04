@@ -19,7 +19,7 @@ import { useNavigation } from "hooks/useNavigation";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { showToast } from "lib/Toast";
 import { useNetworkContext } from "contexts/networkContext";
-import { defaultNetwork, validNetworkId } from "config/networks";
+import { defaultNetwork, validNetwork } from "config/networks";
 import { useFocusEffect } from "@react-navigation/native";
 import styles from "./styles";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
@@ -53,7 +53,7 @@ function CryptoScreen(): JSX.Element {
     logEvent("causeSupportScreen_view");
   }, []);
 
-  const invalidNetwork = () => !validNetworkId(currentNetwork.chainId);
+  const invalidNetwork = () => !validNetwork(currentNetwork.chainId);
 
   useFocusEffect(
     useCallback(() => {

@@ -99,6 +99,7 @@ function CryptoPaymentProvider({ children }: Props) {
     contract?.functions.addPoolBalance(
       currentPool,
       formatToDecimals(amount, tokenDecimals).toString(),
+      { gasLimit: 50000 },
     );
 
   const fetchUsdcUserBalance = useCallback(async () => {
