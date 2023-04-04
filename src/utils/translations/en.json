@@ -145,7 +145,8 @@
           "brazilName": "Brazil",
           "searchCountryPlaceholder": "Search country"
         }
-      }
+      },
+      "invalidNetwork": "Invalid network, please change to {{network}}"
     },
     "contributionDoneScreen": {
       "title": "Thank you!",

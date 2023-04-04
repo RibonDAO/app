@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
 import { useCauses } from "@ribon.io/shared/hooks";
 import { Cause } from "@ribon.io/shared/types";
@@ -16,12 +16,17 @@ import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { logError } from "services/crashReport";
 import { useNavigation } from "hooks/useNavigation";
-import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
-import styles from "./styles";
 import UserSupportSection from "components/moleculars/UserSupportSection";
+import { showToast } from "lib/Toast";
+import { useNetworkContext } from "contexts/networkContext";
+import { defaultNetwork, validNetworkId } from "config/networks";
+import { useFocusEffect } from "@react-navigation/native";
+import styles from "./styles";
+import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 
 function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();
+  const { currentNetwork } = useNetworkContext();
   const {
     cause,
     setCause,
@@ -47,6 +52,17 @@ function CryptoScreen(): JSX.Element {
   useEffect(() => {
     logEvent("causeSupportScreen_view");
   }, []);
+
+  const invalidNetwork = () => !validNetworkId(currentNetwork.chainId);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (invalidNetwork())
+        showToast(
+          `${t("invalidNetwork", { network: defaultNetwork.chainName })}`,
+        );
+    }, [currentNetwork.chainId]),
+  );
 
   const causesFilter = () => {
     const causesApi = causes.filter((currentCause) => currentCause.active);
@@ -120,6 +136,8 @@ function CryptoScreen(): JSX.Element {
   };
 
   const donateButtonText = () => {
+    if (invalidNetwork())
+      return t("invalidNetwork", { network: defaultNetwork.chainName });
     if (loadingCryptoPayment) return "...";
     if (wallet)
       return t("donateButtonText", { value: `${amount} ${tokenSymbol}` });
@@ -182,7 +200,7 @@ function CryptoScreen(): JSX.Element {
               />
             </View>
           </View>
-          {wallet && (
+          {wallet && !invalidNetwork() && (
             <Text style={styles.userBalanceText}>
               {t("userBalanceText")}
               {userBalance} {tokenSymbol}
@@ -191,7 +209,7 @@ function CryptoScreen(): JSX.Element {
           <Button
             text={donateButtonText()}
             onPress={handleDonateClick}
-            disabled={disableButton()}
+            disabled={disableButton() || invalidNetwork()}
             borderColor={theme.colors.brand.secondary[300]}
             backgroundColor={theme.colors.brand.secondary[300]}
             textColor={theme.colors.brand.secondary[700]}
