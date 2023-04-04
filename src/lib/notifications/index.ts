@@ -1,12 +1,12 @@
 import messaging from '@react-native-firebase/messaging';
 
 export default async function requestUserPermissionForNotifications() {
-  const authStatus = await messaging().requestPermission();
+  const permissionStatus = await messaging().requestPermission();
   const enabled =
-    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+    permissionStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    permissionStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
   if (enabled) {
-    console.log('Authorization status:', authStatus);
+    console.log('Authorization status:', permissionStatus);
   }
 }
