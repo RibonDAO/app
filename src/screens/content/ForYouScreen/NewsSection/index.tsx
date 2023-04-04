@@ -74,7 +74,7 @@ export default function NewsSection() {
       {isOnboarding && renderOnboarding()}
       {articles &&
         articles.map((article, index) => (
-          <>
+          <View key={article.id}>
             <View style={styles.paddingContainer}>
               <ArticleLayout
                 article={article}
@@ -84,7 +84,7 @@ export default function NewsSection() {
             {index !== articles.length - 1 && (
               <View style={styles.articleDivider} />
             )}
-          </>
+          </View>
         ))}
     </View>
   );
