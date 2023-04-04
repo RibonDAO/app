@@ -7,7 +7,6 @@ import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { theme } from "@ribon.io/shared/styles";
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
@@ -17,6 +16,7 @@ import useCachedResources from "./src/hooks/useCachedResources";
 import UnsafeAreaProvider, {
   useUnsafeAreaContext,
 } from "./src/contexts/unsafeAreaContext";
+import TasksProvider from "./src/contexts/tasksContext";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
@@ -62,9 +62,11 @@ export default function App() {
       <ScrollEnabledProvider>
         <CurrentUserProvider>
           <LanguageProvider>
-            <UnsafeAreaProvider>
-              <Main />
-            </UnsafeAreaProvider>
+            <TasksProvider>
+              <UnsafeAreaProvider>
+                <Main />
+              </UnsafeAreaProvider>
+            </TasksProvider>
           </LanguageProvider>
         </CurrentUserProvider>
       </ScrollEnabledProvider>
