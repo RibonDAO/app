@@ -17,8 +17,10 @@ import useCachedResources from "./src/hooks/useCachedResources";
 import UnsafeAreaProvider, {
   useUnsafeAreaContext,
 } from "./src/contexts/unsafeAreaContext";
+import requestUserPermissionForNotifications from "./src/lib/notifications";
 
 function Main() {
+  requestUserPermissionForNotifications();
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();

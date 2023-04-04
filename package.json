@@ -31,7 +31,7 @@
     "@miblanchard/react-native-slider": "^2.2.0",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-firebase/analytics": "^17.0.0",
-    "@react-native-firebase/app": "^17.0.0",
+    "@react-native-firebase/app": "^17.4.1",
     "@react-native-firebase/crashlytics": "^17.0.0",
     "@react-native-firebase/perf": "^17.0.0",
     "@react-native-masked-view/masked-view": "0.2.8",

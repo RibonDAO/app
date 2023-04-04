@@ -15,6 +15,14 @@
         "REACT_APP_RIBON_INTEGRATION_ID": "3"
       }
     },
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "REACT_APP_RIBON_API": "https://dapp-dev-api.ribon.io/",
+        "REACT_APP_RIBON_INTEGRATION_ID": "3"
+      }
+    },
     "preview": {
       "distribution": "internal",
       "developmentClient": true,
