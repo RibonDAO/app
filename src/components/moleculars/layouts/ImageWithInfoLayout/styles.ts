@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: theme.colors.neutral[500],
     marginTop: theme.spacingNative(12),
+    marginHorizontal: theme.spacingNative(16),
   },
 });
 
