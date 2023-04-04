@@ -1,5 +1,5 @@
 import { theme } from "@ribon.io/shared/styles";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import Icon from "components/atomics/Icon";
 import styles from "./styles";
@@ -10,6 +10,8 @@ export type Props = {
   sectionStyle?: any;
   lineThroughOnChecked?: boolean;
   navigationCallback?: string;
+  disabled?: boolean;
+  checked?: boolean;
 };
 
 function CheckBox({
@@ -17,15 +19,23 @@ function CheckBox({
   lineThroughOnChecked = false,
   sectionStyle = {},
   navigationCallback,
+  disabled,
+  checked = false,
 }: Props): JSX.Element {
-  const [isChecked, setChecked] = useState(false);
+  const [isChecked, setChecked] = useState(checked);
 
   const { navigateTo } = useNavigation();
+
+  const onPressHandler = () => {
+    if (!disabled) {
+      setChecked(!isChecked);
+    }
+  };
 
   return (
     <View style={{ ...styles.container, ...sectionStyle }}>
       <TouchableOpacity
-        onPress={() => setChecked(!isChecked)}
+        onPress={onPressHandler}
         activeOpacity={1}
         style={styles.checkboxContainer}
       >
