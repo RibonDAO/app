@@ -1,6 +1,6 @@
 import { theme } from "@ribon.io/shared/styles";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "components/atomics/Icon";
 import styles from "./styles";
 import { useNavigation } from "hooks/useNavigation";
@@ -32,6 +32,13 @@ function CheckBox({
     }
   };
 
+  useEffect(() => {
+    setChecked(checked);
+  }, [checked]);
+
+  const { primary } = theme.colors.brand;
+  const { neutral10 } = theme.colors;
+
   return (
     <View style={{ ...styles.container, ...sectionStyle }}>
       <TouchableOpacity
@@ -39,14 +46,20 @@ function CheckBox({
         activeOpacity={1}
         style={styles.checkboxContainer}
       >
-        <View style={styles.checkbox}>
+        <View
+          style={{
+            ...styles.checkbox,
+            backgroundColor: isChecked ? primary[900] : neutral10,
+            borderColor: isChecked ? primary[900] : primary[300],
+          }}
+        >
           {isChecked && (
             <Icon
               type="outlined"
               name="check"
               size={20}
               style={{ marginTop: -3, marginLeft: -1 }}
-              color={theme.colors.brand.primary[300]}
+              color={isChecked ? neutral10 : primary[300]}
             />
           )}
         </View>
