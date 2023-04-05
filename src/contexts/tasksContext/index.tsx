@@ -26,7 +26,7 @@ export const TasksContext = createContext<ITasksContext>({} as ITasksContext);
 function TasksProvider({ children }: any) {
   const [tasksState, setTasksState] = useState<any[]>([]);
   const { findCompletedTasks, completeTask } = useCompletedTasks();
-  const { currentUser } = useCurrentUser();
+  const { currentUser, signedIn } = useCurrentUser();
 
   const buildTasksState = () => {
     findCompletedTasks().then((completedTasks) => {
@@ -74,10 +74,13 @@ function TasksProvider({ children }: any) {
   };
 
   useEffect(() => {
-    buildTasksState();
-  }, [currentUser]);
+    if (currentUser && signedIn && currentUser.email) buildTasksState();
+  }, [currentUser, signedIn]);
 
   const registerAction = (action: string) => {
+    if (!currentUser && !signedIn) return;
+    if (tasksState.length === 0) return;
+
     const newState = tasksState.map((task) => {
       const currentTask = TASKS.find((t) => t.id === task.id);
 
