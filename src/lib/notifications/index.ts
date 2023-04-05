@@ -7,8 +7,6 @@ export default async function requestUserPermissionForNotifications() {
     permissionStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
   if (enabled) {
-    const token = await messaging().getToken();
-    console.log('token:', token);
     console.log('Authorization status:', permissionStatus);
   }
 }
@@ -17,4 +15,9 @@ export async function setBackgroundMessageHandler() {
   messaging().setBackgroundMessageHandler(async remoteMessage => {
     console.log('Message handled in the background!', remoteMessage);
   });
+}
+
+export async function getNotificationToken() {
+  const token = await messaging().getToken();
+  console.log('token:', token);
 }
