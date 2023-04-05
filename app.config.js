@@ -1,5 +1,6 @@
 export default () => ({
   "expo": {
+    "owner": "ribon-app",
     "name": "Ribon",
     "slug": "app",
     "version": "4.0.7",
@@ -34,8 +35,8 @@ export default () => ({
     ],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
-      infoPlist: {
-         UIBackgroundModes: [
+      "infoPlist": {
+         "UIBackgroundModes": [
            "fetch",
            "remote-notification"
          ]
