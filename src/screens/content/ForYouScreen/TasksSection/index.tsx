@@ -6,7 +6,6 @@ import { theme } from "@ribon.io/shared";
 import ProgressBar from "components/atomics/ProgressBar";
 import { useTranslation } from "react-i18next";
 import { useTasksContext } from "contexts/tasksContext";
-import { useCountdown } from "hooks/useCoutdown";
 import S from "./styles";
 
 export default function TasksSection() {
@@ -26,18 +25,6 @@ export default function TasksSection() {
             max={dailyTasks.length}
           />
         </View>
-        {!tasksState.filter((obj) => obj.done === false).length && (
-          <View style={S.timerWrapper}>
-            <Text style={S.countdown}>
-              {useCountdown(new Date(tasksState[0].expiresAt))
-                .toString()
-                .split(",")
-                .map((part) => part.trim().padStart(2, "0"))
-                .join(":")}
-            </Text>
-            <Text>{t("countdown")}</Text>
-          </View>
-        )}
         <View style={S.titleContainer}>
           <Icon
             type="outlined"

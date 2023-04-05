@@ -49,15 +49,14 @@ function TasksProvider({ children }: any) {
 
   const isDone = (task: CompletedTask | undefined) => {
     if (!task) return false;
-    const lastCompletedAt = new Date(task.lastCompletedAt);
     const taskObject = TASKS.find((t) => t.id === task.taskIdentifier);
-
     const baseDate =
       taskObject?.type === "daily"
         ? beginningOfToday()
         : beginningOfThisMonth();
 
-    if (baseDate > lastCompletedAt) return false;
+    const parsedLastCompletedAt = new Date(task.lastCompletedAt.slice(0, 19));
+    if (baseDate > parsedLastCompletedAt) return false;
 
     return true;
   };
