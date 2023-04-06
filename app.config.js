@@ -1,5 +1,6 @@
 export default () => ({
   "expo": {
+    "owner": "ribon-app",
     "name": "Ribon",
     "slug": "app",
     "version": "4.0.7",
@@ -34,6 +35,12 @@ export default () => ({
     ],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+         "UIBackgroundModes": [
+           "fetch",
+           "remote-notification"
+         ]
+      },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
       "buildNumber": "300"
@@ -57,16 +64,6 @@ export default () => ({
           "ios": {
             "useFrameworks": "static"
           }
-        }
-      ],
-      [
-        "expo-notifications",
-        {
-          "icon": "./src/assets/sounds/notification-icon.png",
-          "color": "#ffffff",
-          "sounds": [
-            "./src/assets/sounds/notificationsound.wav"
-          ]
         }
       ],
       "sentry-expo",
