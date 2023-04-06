@@ -16,6 +16,9 @@ export function useProvider({ onChainChanged }: Props = {}) {
 
   async function fetchProvider() {
     try {
+      // TODO: This is a temporary fix for the issue with WalletConnect
+      // If there is no nodeUrl for the current wallet chain the app will crash
+      // We are mapping the most popular chains here so that doesn't happen
       const networkNodes = networks.reduce((obj: any, network) => {
         obj[network.chainId] = network.nodeUrl;
         return obj;
