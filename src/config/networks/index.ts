@@ -42,6 +42,37 @@ export const networks = [
     defaultPoolAddress: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
     subgraphUrl: "http://localhost:8020/",
   },
+  {
+    chainName: "Ethereum Mainnet",
+    nodeUrl:
+      "https://eth-mainnet.g.alchemy.com/v2/jPnTOZhApzMEjDyir7EK9A9nGtJEFBQh",
+    chainId: 1,
+  },
+  {
+    chainName: "Binance Smart Chain",
+    nodeUrl: "https://bsc-dataseed.binance.org/",
+    chainId: 56,
+  },
+  {
+    chainName: "Avalanche Mainnet",
+    nodeUrl: "https://api.avax.network/ext/bc/C/rpc",
+    chainId: 43114,
+  },
+  {
+    chainName: "Fantom Opera",
+    nodeUrl: "https://rpcapi.fantom.network",
+    chainId: 250,
+  },
+  {
+    chainName: "Optimism",
+    nodeUrl: "https://mainnet.optimism.io",
+    chainId: 10,
+  },
+  {
+    chainName: "Harmony Mainnet",
+    nodeUrl: "https://api.harmony.one",
+    chainId: 1666600000,
+  },
 ];
 
 export const defaultNetwork = networks[0];

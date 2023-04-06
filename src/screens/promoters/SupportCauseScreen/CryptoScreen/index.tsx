@@ -132,9 +132,9 @@ function CryptoScreen(): JSX.Element {
   const communityAddText = () => {
     const PERCENTAGE_OF_INCREASE = 0.2;
 
-    return `+ ${(Number(amount) * PERCENTAGE_OF_INCREASE).toFixed(
-      2,
-    )} ${tokenSymbol}`;
+    return `+ ${(Number(amount) * PERCENTAGE_OF_INCREASE).toFixed(2)} ${
+      tokenSymbol || ""
+    }`;
   };
 
   const donateButtonText = () => {
@@ -143,7 +143,7 @@ function CryptoScreen(): JSX.Element {
       if (invalidNetwork())
         return t("invalidNetwork", { network: defaultNetwork.chainName });
 
-      return t("donateButtonText", { value: `${amount} ${tokenSymbol}` });
+      return t("donateButtonText", { value: `${amount} ${tokenSymbol || ""}` });
     }
 
     return t("connectWalletButtonText");
@@ -207,7 +207,7 @@ function CryptoScreen(): JSX.Element {
           {wallet && !invalidNetwork() && (
             <Text style={styles.userBalanceText}>
               {t("userBalanceText")}
-              {userBalance} {tokenSymbol}
+              {userBalance} {tokenSymbol || ""}
             </Text>
           )}
           <Button

@@ -6,7 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { networks } from "config/networks";
+import { networks, validNetwork } from "config/networks";
 import { logError } from "services/crashReport";
 import { useProvider } from "hooks/useProvider";
 import { CurrentNetwork } from "@ribon.io/shared/types";
@@ -32,21 +32,22 @@ function NetworkProvider({ children }: Props) {
   const [currentNetwork, setCurrentNetwork] = useState(networks[0]);
   const [isValidNetwork, setIsValidNetwork] = useState(false);
 
-  useEffect(() => {
-    console.log("isValidNetwork", isValidNetwork);
-  }, [currentNetwork, isValidNetwork]);
   const onChainChanged = (chainId: number) => {
-    const newNetwork = networks.filter(
-      (network) => network.chainId.toString() === chainId.toString(),
-    )[0];
-    if (newNetwork) {
-      setCurrentNetwork(newNetwork);
-      setIsValidNetwork(true);
+    if (validNetwork(chainId)) {
+      const newNetwork = networks.find(
+        (network) => network.chainId.toString() === chainId.toString(),
+      );
+      if (newNetwork) {
+        setCurrentNetwork(newNetwork);
+        setIsValidNetwork(true);
+      } else {
+        setCurrentNetwork(networks[0]);
+        setIsValidNetwork(false);
+      }
     } else {
       setCurrentNetwork(networks[0]);
       setIsValidNetwork(false);
     }
-    console.log("chainChanged", newNetwork);
   };
   const provider = useProvider({ onChainChanged });
 
@@ -63,7 +64,6 @@ function NetworkProvider({ children }: Props) {
           (network) => providerNetwork.chainId === network.chainId,
         );
         if (permittedNetworks.length > 0) {
-          console.log("baloteli", permittedNetworks[0], providerNetwork);
           setCurrentNetwork(permittedNetworks[0]);
           setIsValidNetwork(true);
         } else {

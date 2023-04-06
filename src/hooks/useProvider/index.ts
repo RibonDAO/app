@@ -16,12 +16,13 @@ export function useProvider({ onChainChanged }: Props = {}) {
 
   async function fetchProvider() {
     try {
+      const networkNodes = networks.reduce((obj: any, network) => {
+        obj[network.chainId] = network.nodeUrl;
+        return obj;
+      }, {});
+
       const walletConnectProvider = new WalletConnectProvider({
-        rpc: {
-          [networks[0].chainId]: networks[0].nodeUrl,
-          [networks[1].chainId]: networks[1].nodeUrl,
-          [networks[2].chainId]: networks[2].nodeUrl,
-        },
+        rpc: networkNodes,
         connector,
         qrcode: false,
       });
