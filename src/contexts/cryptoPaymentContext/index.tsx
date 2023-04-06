@@ -61,7 +61,7 @@ export const CryptoPaymentContext = createContext<ICryptoPaymentContext>(
 export const INITIAL_AMOUNT = "5";
 function CryptoPaymentProvider({ children }: Props) {
   const [isInCryptoPage, setIsInCryptoPage] = useState(false);
-  const { currentNetwork } = useNetworkContext();
+  const { currentNetwork, isValidNetwork } = useNetworkContext();
   const [amount, setAmount] = useState(INITIAL_AMOUNT);
   const [loading, setLoading] = useState(false);
   const [userBalance, setUserBalance] = useState("");

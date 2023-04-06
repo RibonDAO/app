@@ -4,7 +4,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { providers } from "ethers";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { useWalletContext } from "contexts/walletContext";
-import { networks } from "config/networks";
+import { networks, validNetwork } from "config/networks";
 
 type Props = {
   onChainChanged?: (chainId: number) => void;
@@ -28,9 +28,6 @@ export function useProvider({ onChainChanged }: Props = {}) {
 
       await walletConnectProvider.enable();
       const web3Provider = new providers.Web3Provider(walletConnectProvider);
-      walletConnectProvider.on("chainChanged", (chainId: number) => {
-        if (onChainChanged) onChainChanged(chainId);
-      });
       setProvider(web3Provider);
     } catch (e) {
       logError(e);
@@ -38,10 +35,25 @@ export function useProvider({ onChainChanged }: Props = {}) {
   }
 
   useEffect(() => {
-    if (wallet) {
+    connector.on("session_update", (error, payload) => {
+      if (error) {
+        logError(error);
+      }
+      const chainId = payload?.params[0].chainId;
+      if (validNetwork(chainId)) {
+        fetchProvider();
+      } else {
+        setProvider(null);
+      }
+      if (onChainChanged) onChainChanged(chainId);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (wallet && validNetwork(connector.chainId)) {
       fetchProvider();
     }
-  }, [wallet]);
+  }, [wallet, connector.chainId]);
 
   return provider;
 }

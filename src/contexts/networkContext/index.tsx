@@ -15,6 +15,7 @@ import { showToast } from "lib/Toast";
 
 export interface INetworkContext {
   isValidNetwork: boolean;
+  setIsValidNetwork: (isValidNetwork: boolean) => void;
   currentNetwork: CurrentNetwork;
   getCurrentNetwork: () => void;
 }
@@ -31,12 +32,21 @@ function NetworkProvider({ children }: Props) {
   const [currentNetwork, setCurrentNetwork] = useState(networks[0]);
   const [isValidNetwork, setIsValidNetwork] = useState(false);
 
+  useEffect(() => {
+    console.log("isValidNetwork", isValidNetwork);
+  }, [currentNetwork, isValidNetwork]);
   const onChainChanged = (chainId: number) => {
-    setCurrentNetwork(
-      networks.filter(
-        (network) => network.chainId.toString() === chainId.toString(),
-      )[0],
-    );
+    const newNetwork = networks.filter(
+      (network) => network.chainId.toString() === chainId.toString(),
+    )[0];
+    if (newNetwork) {
+      setCurrentNetwork(newNetwork);
+      setIsValidNetwork(true);
+    } else {
+      setCurrentNetwork(networks[0]);
+      setIsValidNetwork(false);
+    }
+    console.log("chainChanged", newNetwork);
   };
   const provider = useProvider({ onChainChanged });
 
@@ -53,9 +63,11 @@ function NetworkProvider({ children }: Props) {
           (network) => providerNetwork.chainId === network.chainId,
         );
         if (permittedNetworks.length > 0) {
+          console.log("baloteli", permittedNetworks[0], providerNetwork);
           setCurrentNetwork(permittedNetworks[0]);
           setIsValidNetwork(true);
         } else {
+          setCurrentNetwork(networks[0]);
           setIsValidNetwork(false);
           showToast(t("invalidNetworkMessage"));
         }
@@ -74,6 +86,7 @@ function NetworkProvider({ children }: Props) {
       currentNetwork,
       isValidNetwork,
       getCurrentNetwork,
+      setIsValidNetwork,
     }),
     [currentNetwork, isValidNetwork],
   );

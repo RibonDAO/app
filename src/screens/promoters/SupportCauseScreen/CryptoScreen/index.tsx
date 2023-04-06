@@ -19,14 +19,14 @@ import { useNavigation } from "hooks/useNavigation";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { showToast } from "lib/Toast";
 import { useNetworkContext } from "contexts/networkContext";
-import { defaultNetwork, validNetwork } from "config/networks";
+import { defaultNetwork } from "config/networks";
 import { useFocusEffect } from "@react-navigation/native";
 import styles from "./styles";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 
 function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();
-  const { currentNetwork } = useNetworkContext();
+  const { currentNetwork, isValidNetwork } = useNetworkContext();
   const {
     cause,
     setCause,
@@ -53,7 +53,9 @@ function CryptoScreen(): JSX.Element {
     logEvent("causeSupportScreen_view");
   }, []);
 
-  const invalidNetwork = () => !validNetwork(currentNetwork.chainId);
+  const invalidNetwork = () => !isValidNetwork;
+  const donateButtonDisabled = () =>
+    disableButton() || (invalidNetwork() && !!wallet);
 
   useFocusEffect(
     useCallback(() => {
@@ -136,11 +138,13 @@ function CryptoScreen(): JSX.Element {
   };
 
   const donateButtonText = () => {
-    if (invalidNetwork())
-      return t("invalidNetwork", { network: defaultNetwork.chainName });
     if (loadingCryptoPayment) return "...";
-    if (wallet)
+    if (wallet) {
+      if (invalidNetwork())
+        return t("invalidNetwork", { network: defaultNetwork.chainName });
+
       return t("donateButtonText", { value: `${amount} ${tokenSymbol}` });
+    }
 
     return t("connectWalletButtonText");
   };
@@ -209,7 +213,7 @@ function CryptoScreen(): JSX.Element {
           <Button
             text={donateButtonText()}
             onPress={handleDonateClick}
-            disabled={disableButton() || invalidNetwork()}
+            disabled={donateButtonDisabled()}
             borderColor={theme.colors.brand.secondary[300]}
             backgroundColor={theme.colors.brand.secondary[300]}
             textColor={theme.colors.brand.secondary[700]}
