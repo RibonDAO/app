@@ -18,14 +18,8 @@ import UnsafeAreaProvider, {
   useUnsafeAreaContext,
 } from "./src/contexts/unsafeAreaContext";
 import requestUserPermissionForNotifications from "./src/lib/notifications";
-import messaging from '@react-native-firebase/messaging';
-
-messaging().setBackgroundMessageHandler(async remoteMessage => {
-  console.log('Message handled in the background!', remoteMessage);
-});
 
 function Main() {
-  requestUserPermissionForNotifications();
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
