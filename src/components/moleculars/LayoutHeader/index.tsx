@@ -1,6 +1,6 @@
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
 import SupportIcon from "components/vectors/SupportIcon";
@@ -47,9 +47,15 @@ function LayoutHeader({
     ? theme.colors.brand.primary[600]
     : theme.colors.neutral[500];
   const ticketIcon = hasTickets() ? <TicketIcon /> : <GrayTicketIcon />;
-  const { connectWallet, wallet } = useWalletContext();
+  const { connectWallet, wallet, killSession } = useWalletContext();
 
   const handleWalletButtonClick = () => {
+    if (wallet) {
+      Alert.alert("", t("disconnectWallet") || "", [
+        { text: t("cancel") || "", style: "cancel" },
+        { text: t("confirm") || "", onPress: () => killSession() },
+      ]);
+    }
     if (!wallet) connectWallet();
   };
   const toggleModal = () => {

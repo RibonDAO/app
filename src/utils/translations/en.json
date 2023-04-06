@@ -16,7 +16,10 @@
       "title": "Cool! You have 1 ticket to donate :)",
       "description": "You can use to donate to any project",
       "buttonText": "Let's go!"
-    }
+    },
+    "disconnectWallet": "Disconnect wallet",
+    "cancel": "cancel",
+    "confirm": "confirm"
   },
   "donations": {
     "causesScreen": {

@@ -17,16 +17,14 @@ import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { logError } from "services/crashReport";
 import { useNavigation } from "hooks/useNavigation";
 import UserSupportSection from "components/moleculars/UserSupportSection";
-import { showToast } from "lib/Toast";
 import { useNetworkContext } from "contexts/networkContext";
 import { defaultNetwork } from "config/networks";
-import { useFocusEffect } from "@react-navigation/native";
 import styles from "./styles";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 
 function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();
-  const { currentNetwork, isValidNetwork } = useNetworkContext();
+  const { isValidNetwork, getCurrentNetwork } = useNetworkContext();
   const {
     cause,
     setCause,
@@ -53,17 +51,10 @@ function CryptoScreen(): JSX.Element {
     logEvent("causeSupportScreen_view");
   }, []);
 
-  const invalidNetwork = () => !isValidNetwork;
-  const donateButtonDisabled = () =>
-    disableButton() || (invalidNetwork() && !!wallet);
-
-  useFocusEffect(
-    useCallback(() => {
-      if (invalidNetwork())
-        showToast(
-          `${t("invalidNetwork", { network: defaultNetwork.chainName })}`,
-        );
-    }, [currentNetwork.chainId]),
+  const invalidNetwork = useCallback(() => !isValidNetwork, [isValidNetwork]);
+  const donateButtonDisabled = useCallback(
+    () => disableButton() || (invalidNetwork() && !!wallet),
+    [wallet, invalidNetwork],
   );
 
   const causesFilter = () => {
@@ -84,6 +75,7 @@ function CryptoScreen(): JSX.Element {
     async function reset() {
       try {
         setRefreshing(true);
+        getCurrentNetwork();
         await refetchCauses();
         setAmount(INITIAL_AMOUNT);
         setLoading(false);

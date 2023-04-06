@@ -51,6 +51,7 @@ function NetworkProvider({ children }: Props) {
   });
 
   const getCurrentNetwork = useCallback(async () => {
+    console.log("getCurrentNetwork", currentNetwork);
     try {
       const providerNetwork = await provider?.getNetwork();
 
@@ -64,7 +65,6 @@ function NetworkProvider({ children }: Props) {
         } else {
           setCurrentNetwork(networks[0]);
           setIsValidNetwork(false);
-          showToast(t("invalidNetworkMessage"));
         }
       }
     } catch (e) {
