@@ -37,16 +37,15 @@ export function useProvider({ onChainChanged }: Props = {}) {
 
   useEffect(() => {
     connector.on("session_update", (error, payload) => {
-      if (error) {
-        logError(error);
-      }
+      if (error) logError(error);
+
       const chainId = payload?.params[0].chainId;
+      if (onChainChanged) onChainChanged(chainId);
       if (validNetwork(chainId)) {
         fetchProvider();
       } else {
         setProvider(null);
       }
-      if (onChainChanged) onChainChanged(chainId);
     });
   }, []);
 

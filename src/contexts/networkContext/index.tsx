@@ -37,13 +37,8 @@ function NetworkProvider({ children }: Props) {
       const newNetwork = networks.find(
         (network) => network.chainId.toString() === chainId.toString(),
       );
-      if (newNetwork) {
-        setCurrentNetwork(newNetwork);
-        setIsValidNetwork(true);
-      } else {
-        setCurrentNetwork(networks[0]);
-        setIsValidNetwork(false);
-      }
+      setCurrentNetwork(newNetwork || networks[0]);
+      setIsValidNetwork(true);
     } else {
       setCurrentNetwork(networks[0]);
       setIsValidNetwork(false);
@@ -83,7 +78,7 @@ function NetworkProvider({ children }: Props) {
 
   const networkObject: INetworkContext = useMemo(
     () => ({
-      currentNetwork,
+      currentNetwork: currentNetwork as CurrentNetwork,
       isValidNetwork,
       getCurrentNetwork,
       setIsValidNetwork,
