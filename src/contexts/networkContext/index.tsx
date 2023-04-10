@@ -10,8 +10,6 @@ import { networks, validNetwork } from "config/networks";
 import { logError } from "services/crashReport";
 import { useProvider } from "hooks/useProvider";
 import { CurrentNetwork } from "@ribon.io/shared/types";
-import { useTranslation } from "react-i18next";
-import { showToast } from "lib/Toast";
 
 export interface INetworkContext {
   isValidNetwork: boolean;
@@ -46,12 +44,7 @@ function NetworkProvider({ children }: Props) {
   };
   const provider = useProvider({ onChainChanged });
 
-  const { t } = useTranslation("translation", {
-    keyPrefix: "contexts.networkContext",
-  });
-
   const getCurrentNetwork = useCallback(async () => {
-    console.log("getCurrentNetwork", currentNetwork);
     try {
       const providerNetwork = await provider?.getNetwork();
 
