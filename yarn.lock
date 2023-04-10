@@ -2508,10 +2508,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-17.0.0.tgz#475a09fa71dc05b440fa51274f1b23dab7945766"
   integrity sha512-3OqjBJXA9QAlrlC20V2EgpdXb4XDmieRoNOW0w3yi94egsWhGBw+J1RH6zcxTwspExEkZ+bgW0KRkx8Yj0lh3g==
 
-"@react-native-firebase/app@^17.0.0":
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-17.0.0.tgz#c5fe15702181af7e42280b6c4def3e2b2787c478"
-  integrity sha512-CRMDrqaaC7XSZe5NFczP1gEUfABGWgMmu27rP0mO2CA5zWaZX3FZ42XLsbscem7hpttdGeUBIvHpsLRDg1qANw==
+"@react-native-firebase/app@^17.4.1":
+  version "17.4.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-17.4.1.tgz#ad0151344348a8890c98a64bc287756db5895c5a"
+  integrity sha512-Fv4ArGXXeLPKikHpGt0t821Sd/fpNEsN+akcXEzrrfSx5wxYTBWd74IS3Pq2gHjHl9DS0fzXPJIfevQT8aXKzw==
   dependencies:
     "@expo/config-plugins" "^5.0.4"
     opencollective-postinstall "^2.0.1"
@@ -2524,6 +2524,18 @@
   dependencies:
     "@expo/config-plugins" "^5.0.4"
     stacktrace-js "^2.0.0"
+
+"@react-native-firebase/dynamic-links@^17.4.2":
+  version "17.4.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-17.4.2.tgz#b390cc854c39f3b1e86590a6668957ef1817533f"
+  integrity sha512-htllTe2MSdH8MdXZAZ6R4CCXuX3rCKWPDkZcbgy9XQMNfJkL6ekn64C8/lAix5Z76wRkQs+nDhzWh2fxX3QN4A==
+  dependencies:
+    "@expo/config-plugins" "^5.0.4"
+
+"@react-native-firebase/messaging@^17.4.1":
+  version "17.4.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-17.4.1.tgz#11ed73db7eb5b026204a46760e1a1d3a3e8b2499"
+  integrity sha512-Sn4YVD2yOqAZfrY5KMeIFoh2f+JaQX/V/I7dSQX5vZ8RjP9cWVPJlA/CdLdORCe0DhusZMBJJfsJzCteQi8iiw==
 
 "@react-native-firebase/perf@^17.0.0":
   version "17.0.0"
@@ -2621,10 +2633,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.0.43":
-  version "1.0.43"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.43.tgz#ab6eabed07d97371209d49d56a281fef856f155d"
-  integrity sha512-2WXRvKZyiP12xyjDspyg4lT9ANDzkj/6EtrRbRYeuOwVZ0OfcNZxEx0HQN1lqRx/Uqi8DL+B+PWgxR846N5UIA==
+"@ribon.io/shared@1.0.45":
+  version "1.0.45"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.45.tgz#04fe7eebd9940b5a77c143d42f277c76d6d3c6ff"
+  integrity sha512-r+DDVVWu3H5kqvRfqhmixsZRj2ah/FixU1G10Cbo5p+SBq3Vw7xJArHdv2eMk4p+p+63qOHXQxUEPBxPbe5+bw==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"

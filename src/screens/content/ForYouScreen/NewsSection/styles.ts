@@ -5,12 +5,7 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   articlesContainer: {
     paddingBottom: theme.spacingNative(16),
-  },
-  title: {
-    ...stylizedDisplaySm,
-    color: theme.colors.neutral[800],
-    width: "100%",
-    marginBottom: theme.spacingNative(16),
+    paddingVertical: theme.spacingNative(16),
   },
   articleDivider: {
     marginVertical: theme.spacingNative(24),
@@ -19,6 +14,7 @@ const styles = StyleSheet.create({
   },
   paddingContainer: {
     paddingHorizontal: theme.spacingNative(16),
+    backgroundColor: theme.colors.neutral10,
   },
 });
 
