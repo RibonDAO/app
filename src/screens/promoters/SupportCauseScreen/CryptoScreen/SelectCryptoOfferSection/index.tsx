@@ -1,8 +1,7 @@
 import { theme } from "@ribon.io/shared/styles";
 import { Cause, Currencies } from "@ribon.io/shared/types";
-import { Text, View } from "react-native";
+import { Dimensions, Text, TextInput, View } from "react-native";
 import InputRange from "components/atomics/inputs/InputRange";
-import { Dimensions, TextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import Dropdown from "components/moleculars/Dropdown";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
@@ -52,7 +51,10 @@ function SelectCryptoOfferSection({
         />
         <Dropdown
           items={[
-            { label: tokenSymbol, value: tokenSymbol },
+            {
+              label: tokenSymbol || Currencies.USDC,
+              value: tokenSymbol || Currencies.USDC,
+            },
             { label: Currencies.USD, value: Currencies.USD },
             { label: Currencies.BRL, value: Currencies.BRL },
           ]}
@@ -62,7 +64,7 @@ function SelectCryptoOfferSection({
               setCurrentCoin(value as Currencies);
             }
           }}
-          label={tokenSymbol}
+          label={tokenSymbol || Currencies.USDC}
           containerStyle={styles.dropdownContainerStyles}
         />
       </View>

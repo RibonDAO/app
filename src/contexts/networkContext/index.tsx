@@ -6,7 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { networks } from "config/networks";
+import { networks, validNetwork } from "config/networks";
 import { logError } from "services/crashReport";
 import { useProvider } from "hooks/useProvider";
 import { CurrentNetwork } from "@ribon.io/shared/types";
@@ -15,6 +15,7 @@ import { showToast } from "lib/Toast";
 
 export interface INetworkContext {
   isValidNetwork: boolean;
+  setIsValidNetwork: (isValidNetwork: boolean) => void;
   currentNetwork: CurrentNetwork;
   getCurrentNetwork: () => void;
 }
@@ -32,11 +33,16 @@ function NetworkProvider({ children }: Props) {
   const [isValidNetwork, setIsValidNetwork] = useState(false);
 
   const onChainChanged = (chainId: number) => {
-    setCurrentNetwork(
-      networks.filter(
+    if (validNetwork(chainId)) {
+      const newNetwork = networks.find(
         (network) => network.chainId.toString() === chainId.toString(),
-      )[0],
-    );
+      );
+      setCurrentNetwork(newNetwork || networks[0]);
+      setIsValidNetwork(true);
+    } else {
+      setCurrentNetwork(networks[0]);
+      setIsValidNetwork(false);
+    }
   };
   const provider = useProvider({ onChainChanged });
 
@@ -45,6 +51,7 @@ function NetworkProvider({ children }: Props) {
   });
 
   const getCurrentNetwork = useCallback(async () => {
+    console.log("getCurrentNetwork", currentNetwork);
     try {
       const providerNetwork = await provider?.getNetwork();
 
@@ -56,8 +63,8 @@ function NetworkProvider({ children }: Props) {
           setCurrentNetwork(permittedNetworks[0]);
           setIsValidNetwork(true);
         } else {
+          setCurrentNetwork(networks[0]);
           setIsValidNetwork(false);
-          showToast(t("invalidNetworkMessage"));
         }
       }
     } catch (e) {
@@ -71,9 +78,10 @@ function NetworkProvider({ children }: Props) {
 
   const networkObject: INetworkContext = useMemo(
     () => ({
-      currentNetwork,
+      currentNetwork: currentNetwork as CurrentNetwork,
       isValidNetwork,
       getCurrentNetwork,
+      setIsValidNetwork,
     }),
     [currentNetwork, isValidNetwork],
   );

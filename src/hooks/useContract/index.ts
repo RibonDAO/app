@@ -16,10 +16,11 @@ export function useContract<T extends Contract = Contract>({
   ABI,
 }: Props): T | null {
   const provider = useProvider();
-  const { currentNetwork } = useNetworkContext();
+  const { currentNetwork, isValidNetwork } = useNetworkContext();
 
   return useMemo(() => {
     if (!address || !ABI) return null;
+    if (!isValidNetwork) return null;
     try {
       if (provider) return getContract(address, ABI, provider.getSigner());
 
@@ -30,5 +31,5 @@ export function useContract<T extends Contract = Contract>({
       logError(error);
       return null;
     }
-  }, [address, ABI, provider, currentNetwork?.chainId]) as T;
+  }, [address, ABI, provider, currentNetwork?.chainId, isValidNetwork]) as T;
 }

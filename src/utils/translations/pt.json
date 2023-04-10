@@ -16,7 +16,10 @@
       "title": "Legal! Você tem 1 vale para doar :)",
       "description": "Você pode destiná-lo para qualquer projeto",
       "buttonText": "Vamos lá!"
-    }
+    },
+    "disconnectWallet": "Desconectar carteira",
+    "cancel": "cancelar",
+    "confirm": "confirmar"
   },
   "donations": {
     "causesScreen": {
@@ -155,7 +158,8 @@
           "brazilName": "Brasil",
           "searchCountryPlaceholder": "Procurar país"
         }
-      }
+      },
+      "invalidNetwork": "Rede inválida. Por favor troque para {{network}}"
     },
     "contributionDoneScreen": {
       "title": "Obrigado!",

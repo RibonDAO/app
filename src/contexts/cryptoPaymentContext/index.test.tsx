@@ -101,8 +101,8 @@ describe("useCryptoPayment", () => {
   });
 
   describe("#handleDonateToContract", () => {
-    const RIBON_CONTRACT_ADDRESS = "0x348eA4886c5F0926d7A6Ad6C5CF6dFA4F88CA9Bf";
-    const DEFAULT_POOL_ADDRESS = "0xDE5dD6864A8aE4e5D93E24e24Fee9D42320753B6";
+    const RIBON_CONTRACT_ADDRESS = "0x4Ef236DA69ac23a9246cd1d8866264f1A95601C0";
+    const DEFAULT_POOL_ADDRESS = "0x1E7aF4A35E33E8CfA97e12237509623a8037632C";
     const amount = 5000000000000000000;
 
     it("calls the approve function with correct params", async () => {
@@ -131,6 +131,7 @@ describe("useCryptoPayment", () => {
       expect(addPoolBalanceSpy).toHaveBeenCalledWith(
         DEFAULT_POOL_ADDRESS,
         amount.toString(),
+        { gasLimit: 50000 },
       );
       addPoolBalanceSpy.mockRestore();
     });
