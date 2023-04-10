@@ -72,6 +72,8 @@
     }
   },
   "content": {
+    "newsSectionTitle": "Posts",
+    "tasksSectionTitle": "Tasks",
     "availableArticleScreen": {
       "title": "A Ribon for you",
       "subtitle": "Now you can see what's new at Ribon and good news selected to warm your heart!",
@@ -91,6 +93,15 @@
         "title": "A Ribon for you",
         "subtitle": "Donate your ticket to see what's new at Ribon and our selection of good news!",
         "cta": "Donate now"
+      },
+      "tasksSection": {
+        "title": "Tasks",
+        "tasks": {
+          "donate_ticket": "Donate a ticket",
+          "check_daily_news": "Check daily posts",
+          "see_more_ngo_infos": "See more info about an NGO"
+        },
+        "countdown": "until task reset"
       }
     }
   },

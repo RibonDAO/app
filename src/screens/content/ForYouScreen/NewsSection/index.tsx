@@ -57,7 +57,10 @@ export default function NewsSection() {
     return (
       <View>
         <View style={styles.paddingContainer}>
-          <ArticleLayout article={article} readMoreText="Ler agora" />
+          <ArticleLayout
+            article={article}
+            readMoreText={t("openPostButtonText")}
+          />
         </View>
         <View style={styles.articleDivider} />
       </View>
@@ -67,27 +70,22 @@ export default function NewsSection() {
   return !articles ? (
     <ForYouScreenPlaceholder />
   ) : (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.paddingContainer}>
-        <Text style={styles.title}>{t("title")}</Text>
-      </View>
-      <View style={styles.articlesContainer}>
-        {isOnboarding && renderOnboarding()}
-        {articles &&
-          articles.map((article, index) => (
-            <>
-              <View style={styles.paddingContainer}>
-                <ArticleLayout
-                  article={article}
-                  readMoreText={t("openPostButtonText")}
-                />
-              </View>
-              {index !== articles.length - 1 && (
-                <View style={styles.articleDivider} />
-              )}
-            </>
-          ))}
-      </View>
-    </ScrollView>
+    <View style={styles.articlesContainer}>
+      {isOnboarding && renderOnboarding()}
+      {articles &&
+        articles.map((article, index) => (
+          <View key={article.id}>
+            <View style={styles.paddingContainer}>
+              <ArticleLayout
+                article={article}
+                readMoreText={t("openPostButtonText")}
+              />
+            </View>
+            {index !== articles.length - 1 && (
+              <View style={styles.articleDivider} />
+            )}
+          </View>
+        ))}
+    </View>
   );
 }

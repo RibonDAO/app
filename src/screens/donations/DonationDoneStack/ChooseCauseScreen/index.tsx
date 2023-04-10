@@ -1,6 +1,6 @@
 import { Cause } from "@ribon.io/shared/types";
 import { Text, View } from "react-native";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import CauseImage from "./CauseImage";
 import HandIcon from "components/vectors/HandIcon";
 import S from "./styles";
@@ -8,6 +8,7 @@ import { useCausesContext } from "contexts/causesContext";
 import { useTranslation } from "react-i18next";
 import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
+import { useTasksContext } from "contexts/tasksContext";
 
 function ChooseCauseScreen(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -19,6 +20,12 @@ function ChooseCauseScreen(): JSX.Element {
   function navigateToAvailableArticleScreen() {
     return navigateTo("AvailableArticleScreen");
   }
+
+  const { registerAction } = useTasksContext();
+
+  useEffect(() => {
+    registerAction("donation_done_page_view");
+  }, []);
 
   const causesList = useCallback(
     () =>
