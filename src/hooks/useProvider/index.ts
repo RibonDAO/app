@@ -4,7 +4,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { providers } from "ethers";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { useWalletContext } from "contexts/walletContext";
-import { networks } from "config/networks";
+import { networks, validNetwork } from "config/networks";
 
 type Props = {
   onChainChanged?: (chainId: number) => void;
@@ -16,21 +16,22 @@ export function useProvider({ onChainChanged }: Props = {}) {
 
   async function fetchProvider() {
     try {
+      // TODO: This is a temporary fix for the issue with WalletConnect
+      // If there is no nodeUrl for the current wallet chain the app will crash
+      // We are mapping the most popular chains here so that doesn't happen
+      const networkNodes = networks.reduce((obj: any, network) => {
+        obj[network.chainId] = network.nodeUrl;
+        return obj;
+      }, {});
+
       const walletConnectProvider = new WalletConnectProvider({
-        rpc: {
-          [networks[0].chainId]: networks[0].nodeUrl,
-          [networks[1].chainId]: networks[1].nodeUrl,
-          [networks[2].chainId]: networks[2].nodeUrl,
-        },
+        rpc: networkNodes,
         connector,
         qrcode: false,
       });
 
       await walletConnectProvider.enable();
       const web3Provider = new providers.Web3Provider(walletConnectProvider);
-      walletConnectProvider.on("chainChanged", (chainId: number) => {
-        if (onChainChanged) onChainChanged(chainId);
-      });
       setProvider(web3Provider);
     } catch (e) {
       logError(e);
@@ -38,10 +39,24 @@ export function useProvider({ onChainChanged }: Props = {}) {
   }
 
   useEffect(() => {
-    if (wallet) {
+    connector.on("session_update", (error, payload) => {
+      if (error) logError(error);
+
+      const chainId = payload?.params[0].chainId;
+      if (onChainChanged) onChainChanged(chainId);
+      if (validNetwork(chainId)) {
+        fetchProvider();
+      } else {
+        setProvider(null);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (wallet && validNetwork(connector.chainId)) {
       fetchProvider();
     }
-  }, [wallet]);
+  }, [wallet, connector.chainId]);
 
   return provider;
 }

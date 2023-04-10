@@ -1,20 +1,5 @@
 export const networks = [
   {
-    chainName: "Mumbai Testnet",
-    ribonContractAddress: "0x348eA4886c5F0926d7A6Ad6C5CF6dFA4F88CA9Bf",
-    donationTokenContractAddress: "0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1",
-    chainId: 0x13881,
-    rpcUrls: "https://rpc-mumbai.maticvigil.com",
-    nodeUrl:
-      "https://polygon-mumbai.g.alchemy.com/v2/1fEWpdSHuohPveNBGvlozE6qv9P1uAks",
-    symbolName: "MATIC",
-    currencyName: "Matic",
-    blockExplorerUrls: "https://mumbai.polygonscan.com/",
-    defaultPoolAddress: "0xDE5dD6864A8aE4e5D93E24e24Fee9D42320753B6",
-    subgraphUrl:
-      "https://api.thegraph.com/subgraphs/name/ribondao/ribonsubgraph",
-  },
-  {
     chainName: "Polygon",
     ribonContractAddress: "0x4Ef236DA69ac23a9246cd1d8866264f1A95601C0",
     donationTokenContractAddress: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
@@ -30,6 +15,21 @@ export const networks = [
       "https://api.thegraph.com/subgraphs/name/ribondao/subgraphribon",
   },
   {
+    chainName: "Mumbai Testnet",
+    ribonContractAddress: "0x348eA4886c5F0926d7A6Ad6C5CF6dFA4F88CA9Bf",
+    donationTokenContractAddress: "0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1",
+    chainId: 0x13881,
+    rpcUrls: "https://rpc-mumbai.maticvigil.com",
+    nodeUrl:
+      "https://polygon-mumbai.g.alchemy.com/v2/1fEWpdSHuohPveNBGvlozE6qv9P1uAks",
+    symbolName: "MATIC",
+    currencyName: "Matic",
+    blockExplorerUrls: "https://mumbai.polygonscan.com/",
+    defaultPoolAddress: "0xDE5dD6864A8aE4e5D93E24e24Fee9D42320753B6",
+    subgraphUrl:
+      "https://api.thegraph.com/subgraphs/name/ribondao/ribonsubgraph",
+  },
+  {
     chainName: "Localhost 8545",
     ribonContractAddress: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
     donationTokenContractAddress: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
@@ -42,4 +42,43 @@ export const networks = [
     defaultPoolAddress: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
     subgraphUrl: "http://localhost:8020/",
   },
+  {
+    chainName: "Ethereum Mainnet",
+    nodeUrl:
+      "https://eth-mainnet.g.alchemy.com/v2/jPnTOZhApzMEjDyir7EK9A9nGtJEFBQh",
+    chainId: 1,
+  },
+  {
+    chainName: "Binance Smart Chain",
+    nodeUrl: "https://bsc-dataseed.binance.org/",
+    chainId: 56,
+  },
+  {
+    chainName: "Avalanche Mainnet",
+    nodeUrl: "https://api.avax.network/ext/bc/C/rpc",
+    chainId: 43114,
+  },
+  {
+    chainName: "Fantom Opera",
+    nodeUrl: "https://rpcapi.fantom.network",
+    chainId: 250,
+  },
+  {
+    chainName: "Optimism",
+    nodeUrl: "https://mainnet.optimism.io",
+    chainId: 10,
+  },
+  {
+    chainName: "Harmony Mainnet",
+    nodeUrl: "https://api.harmony.one",
+    chainId: 1666600000,
+  },
 ];
+
+export const defaultNetwork = networks[0];
+
+export const validNetwork = (networkId: number) => {
+  const validNetworkIds = [137]; // polygon,
+
+  return validNetworkIds.includes(networkId);
+};

@@ -49,7 +49,10 @@ function WalletProvider({ children }: Props) {
     }
   }, [connector]);
 
-  const killSession = useCallback(() => connector.killSession(), [connector]);
+  const killSession = useCallback(async () => {
+    await connector.killSession();
+    setWallet(null);
+  }, [connector]);
 
   const walletObject: IWalletContext = useMemo(
     () => ({

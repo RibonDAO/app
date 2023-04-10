@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
 import { useCauses } from "@ribon.io/shared/hooks";
 import { Cause } from "@ribon.io/shared/types";
@@ -16,12 +16,15 @@ import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { logError } from "services/crashReport";
 import { useNavigation } from "hooks/useNavigation";
-import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
-import styles from "./styles";
 import UserSupportSection from "components/moleculars/UserSupportSection";
+import { useNetworkContext } from "contexts/networkContext";
+import { defaultNetwork } from "config/networks";
+import styles from "./styles";
+import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 
 function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();
+  const { isValidNetwork, getCurrentNetwork } = useNetworkContext();
   const {
     cause,
     setCause,
@@ -48,6 +51,12 @@ function CryptoScreen(): JSX.Element {
     logEvent("causeSupportScreen_view");
   }, []);
 
+  const invalidNetwork = useCallback(() => !isValidNetwork, [isValidNetwork]);
+  const donateButtonDisabled = useCallback(
+    () => disableButton() || (invalidNetwork() && !!wallet),
+    [wallet, invalidNetwork],
+  );
+
   const causesFilter = () => {
     const causesApi = causes.filter((currentCause) => currentCause.active);
     return causesApi || [];
@@ -66,6 +75,7 @@ function CryptoScreen(): JSX.Element {
     async function reset() {
       try {
         setRefreshing(true);
+        getCurrentNetwork();
         await refetchCauses();
         setAmount(INITIAL_AMOUNT);
         setLoading(false);
@@ -114,15 +124,19 @@ function CryptoScreen(): JSX.Element {
   const communityAddText = () => {
     const PERCENTAGE_OF_INCREASE = 0.2;
 
-    return `+ ${(Number(amount) * PERCENTAGE_OF_INCREASE).toFixed(
-      2,
-    )} ${tokenSymbol}`;
+    return `+ ${(Number(amount) * PERCENTAGE_OF_INCREASE).toFixed(2)} ${
+      tokenSymbol || ""
+    }`;
   };
 
   const donateButtonText = () => {
     if (loadingCryptoPayment) return "...";
-    if (wallet)
-      return t("donateButtonText", { value: `${amount} ${tokenSymbol}` });
+    if (wallet) {
+      if (invalidNetwork())
+        return t("invalidNetwork", { network: defaultNetwork.chainName });
+
+      return t("donateButtonText", { value: `${amount} ${tokenSymbol || ""}` });
+    }
 
     return t("connectWalletButtonText");
   };
@@ -182,16 +196,16 @@ function CryptoScreen(): JSX.Element {
               />
             </View>
           </View>
-          {wallet && (
+          {wallet && !invalidNetwork() && (
             <Text style={styles.userBalanceText}>
               {t("userBalanceText")}
-              {userBalance} {tokenSymbol}
+              {userBalance} {tokenSymbol || ""}
             </Text>
           )}
           <Button
             text={donateButtonText()}
             onPress={handleDonateClick}
-            disabled={disableButton()}
+            disabled={donateButtonDisabled()}
             borderColor={theme.colors.brand.secondary[300]}
             backgroundColor={theme.colors.brand.secondary[300]}
             textColor={theme.colors.brand.secondary[700]}
