@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "414713406954",
-    "project_id": "ribon-app-6b996",
-    "storage_bucket": "ribon-app-6b996.appspot.com"
+    "project_number": "243531812303",
+    "project_id": "ribon-dapp",
+    "storage_bucket": "ribon-dapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:414713406954:android:afb51e12828fb81b89be93",
+        "mobilesdk_app_id": "1:243531812303:android:4adf95b9bb4f9ddaf856ba",
         "android_client_info": {
           "package_name": "com.app.ribon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "414713406954-vmqmc4uspuntpjju3h87ur54d8gcef0s.apps.googleusercontent.com",
+          "client_id": "243531812303-om91fji80r7lsh54hhcsv2rbgtr0k6fu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDV2qtVVZLcQAFIMrHJ4_JbRCSA4GuHTaA"
+          "current_key": "AIzaSyBqRnpVUbMPwuLuH-yEKgDK_O91kLEcblY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "414713406954-vmqmc4uspuntpjju3h87ur54d8gcef0s.apps.googleusercontent.com",
+              "client_id": "243531812303-om91fji80r7lsh54hhcsv2rbgtr0k6fu.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "243531812303-n2ngbrrqnd1708d5hhu56stlv3j8k546.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Ribon"
+              }
             }
           ]
         }

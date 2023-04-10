@@ -3,6 +3,7 @@ import { TouchableOpacity, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
+import HeaderPlaceholder from "components/moleculars/Header/placeholder";
 import S from "./styles";
 
 export type Props = {
@@ -65,4 +66,4 @@ function Header({
     </View>
   );
 }
-export default withPlaceholder(Header);
+export default withPlaceholder(Header, HeaderPlaceholder);

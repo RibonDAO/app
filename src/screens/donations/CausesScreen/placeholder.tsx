@@ -1,25 +1,44 @@
-import { theme } from "@ribon.io/shared/styles";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import {
   Placeholder,
   PlaceholderMedia,
   PlaceholderLine,
   Fade,
 } from "rn-placeholder";
-import styles from "./styles";
+import S from "./styles";
 
 function PaymentScreenPlaceholder() {
   return (
-    <View style={[styles.container, { paddingTop: 28 }]}>
+    <View style={[S.container, { paddingTop: 28, paddingHorizontal: 16 }]}>
       <Placeholder Animation={Fade}>
-        <PlaceholderLine height={28} />
-        <PlaceholderLine height={28} />
+        <PlaceholderLine height={22} />
+        <PlaceholderLine height={22} />
+        <ScrollView horizontal style={S.causesContainer}>
+          <PlaceholderMedia
+            style={[
+              S.causesCardContainer,
+              {
+                marginRight: 16,
+                height: 288,
+              },
+            ]}
+          />
+          <PlaceholderMedia
+            style={[
+              S.causesCardContainer,
+              {
+                marginRight: 16,
+                height: 288,
+              },
+            ]}
+          />
+        </ScrollView>
+
         <PlaceholderMedia
           style={{
+            marginTop: 14,
             width: "100%",
-            height: 288,
-            borderRadius: 14,
-            marginBottom: theme.spacingNative(24),
+            height: 160,
           }}
         />
       </Placeholder>

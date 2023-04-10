@@ -187,7 +187,7 @@ export default function CausesScreen() {
         </View>
       </Tooltip>
 
-      <View style={S.containerPadding}>
+      <View style={S.supportContainer}>
         <UserSupportSection />
       </View>
     </ScrollView>

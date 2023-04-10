@@ -17,6 +17,7 @@ import UnsafeAreaProvider, {
   useUnsafeAreaContext,
 } from "./src/contexts/unsafeAreaContext";
 import TasksProvider from "./src/contexts/tasksContext";
+import requestUserPermissionForNotifications from "./src/lib/notifications";
 
 function Main() {
   const isLoadingComplete = useCachedResources();

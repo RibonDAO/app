@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import Icon from "components/atomics/Icon";
 import { logEvent } from "services/analytics";
-import S from "./styles";
 import { ImageBackground, Linking, Text, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
-import cardBackground from "./assets/cardBackground.png";
 import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared";
+import S from "./styles";
+import cardBackground from "./assets/cardBackground.png";
 
 function UserSupportSection(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -15,9 +15,7 @@ function UserSupportSection(): JSX.Element {
 
   const handleClick = () => {
     logEvent("UserSupportBtn_Click");
-    openInWebViewer(
-      "https://static.zdassets.com/web_widget/latest/liveChat.html?v=10#key=ribonapp.zendesk.com",
-    );
+    openInWebViewer(t("link"));
   };
 
   return (

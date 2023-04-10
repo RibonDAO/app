@@ -8,6 +8,7 @@
   "layoutHeader": {
     "exitButton": "Exit",
     "support": "User Support",
+    "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0",
     "login": "Login",
     "language": "Change language",
     "connectWallet": "Connect",
@@ -25,7 +26,8 @@
       "userSupportSection": {
         "title": "Ribon Support",
         "description": "Doubts, ideas, refunds. We're here!",
-        "primaryButtonText": "Access user support"
+        "primaryButtonText": "Contact us",
+        "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0"
       },
       "impactPrefix": "Donate",
       "labelText": "Learn more",
@@ -42,9 +44,12 @@
       "donatingText": "Donating",
       "donateText": "Donate",
       "animationText": "Donating ticket",
-      "agreementText": "By signing up you agree to Ribon's",
+      "agreementText": "By clicking Confirm I agree on Ribon’s",
+      "termsText": "Terms",
+      "termsLink": "https://ribon.io/en/privacy-policy/#terms",
       "privacyPolicyText": "Privacy Policy",
-      "privacyPolicyLink": "https://ribon.io/2022/06/10/privacy-and-personal-data-retention-policy/"
+      "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
+      "and": " and"
     },
     "donationDoneScreen": {
       "title": "Congratulations!",

@@ -1,8 +1,9 @@
-{
+export default () => ({
   "expo": {
+    "owner": "ribon-app",
     "name": "Ribon",
     "slug": "app",
-    "version": "4.0.6",
+    "version": "4.0.7",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
@@ -26,14 +27,23 @@
       ]
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/5f34ae47-0c00-49ae-9893-125f3bea2960"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+         "UIBackgroundModes": [
+           "fetch",
+           "remote-notification"
+         ]
+      },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
-      "buildNumber": "299"
+      "buildNumber": "300"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -42,7 +52,7 @@
         "backgroundColor": "#00DA93"
       },
       "package": "com.app.ribon",
-      "versionCode": 297
+      "versionCode": 298
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
@@ -56,14 +66,6 @@
           }
         }
       ],
-      [
-        "expo-notifications",
-        {
-          "icon": "./src/assets/sounds/notification-icon.png",
-          "color": "#ffffff",
-          "sounds": ["./src/assets/sounds/notificationsound.wav"]
-        }
-      ],
       "sentry-expo",
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
@@ -72,7 +74,12 @@
     "extra": {
       "eas": {
         "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960"
-      }
+      },
+      "REACT_APP_RIBON_API": process.env.REACT_APP_RIBON_API,
+      "REACT_APP_RIBON_INTEGRATION_ID": process.env.REACT_APP_RIBON_INTEGRATION_ID,
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
-}
+});

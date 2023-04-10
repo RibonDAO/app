@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>414713406954-oq8vbrdeuicl21u1ruqn4kf2cr2970lg.apps.googleusercontent.com</string>
+	<string>243531812303-n2ngbrrqnd1708d5hhu56stlv3j8k546.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.414713406954-oq8vbrdeuicl21u1ruqn4kf2cr2970lg</string>
+	<string>com.googleusercontent.apps.243531812303-n2ngbrrqnd1708d5hhu56stlv3j8k546</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDOoClfQ0IRknGJfqJXDLhovjqQ7kUj-1s</string>
+	<string>AIzaSyBXwGjeKBOWl-ADmvFNZnaobHLmYKE962g</string>
 	<key>GCM_SENDER_ID</key>
-	<string>414713406954</string>
+	<string>243531812303</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>org.reactjs.native.example.Ribon</string>
 	<key>PROJECT_ID</key>
-	<string>ribon-app-6b996</string>
+	<string>ribon-dapp</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ribon-app-6b996.appspot.com</string>
+	<string>ribon-dapp.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:414713406954:ios:27c43961fdc6a72489be93</string>
+	<string>1:243531812303:ios:cbd2d57db868e696f856ba</string>
 </dict>
 </plist>

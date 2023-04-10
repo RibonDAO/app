@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyLgBold,
+  defaultBodyLgRegular,
   defaultBodySmRegular,
 } from "styles/typography/default";
 import { stylizedDisplaySm } from "styles/typography/stylized";
@@ -33,6 +34,12 @@ const styles = StyleSheet.create({
   },
   description: {
     ...defaultBodyLgBold,
+    marginBottom: theme.spacingNative(16),
+    fontSize: 20,
+    textAlign: "center",
+  },
+  impactDescription: {
+    ...defaultBodyLgRegular,
     marginBottom: theme.spacingNative(16),
     fontSize: 20,
     textAlign: "center",
@@ -74,6 +81,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   buttonContainer: {
+    marginTop: theme.spacingNative(8),
     width: "100%",
     height: "100%",
   },

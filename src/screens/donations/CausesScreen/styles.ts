@@ -10,13 +10,16 @@ const styles = StyleSheet.create({
   containerPadding: {
     paddingHorizontal: 16,
   },
+  supportContainer: {
+    paddingHorizontal: 24,
+  },
   containerTicket: {
     height: 350,
     width: "100%",
     margin: 0,
   },
   causesCardContainer: {
-    width: 320,
+    width: 256,
     marginHorizontal: theme.spacingNative(4),
     marginBottom: theme.spacingNative(16),
   },

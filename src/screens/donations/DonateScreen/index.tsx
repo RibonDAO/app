@@ -28,6 +28,7 @@ import { formattedLanguage } from "lib/formatters/languageFormatter";
 import { setLocalStorageItem } from "lib/localStorage";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { openInWebViewer } from "lib/linkOpener";
+import useFormattedImpactText from "hooks/useFormattedImpactText";
 import Placeholder from "./placeholder";
 
 function DonateScreen() {
@@ -35,6 +36,7 @@ function DonateScreen() {
     keyPrefix: "donations.donateScreen",
   });
   const [isDonating, setIsDonating] = useState(false);
+  const { formattedImpactText } = useFormattedImpactText();
   const {
     params: { nonProfit },
   } = useRouteParams<"DonateScreen">();
@@ -42,7 +44,7 @@ function DonateScreen() {
   const { setCurrentUser, currentUser } = useCurrentUser();
   const [email, setEmail] = useState(currentUser?.email || "");
   const { donate } = useDonations(currentUser?.id);
-  const { navigateTo } = useNavigation();
+  const { navigateTo, popNavigation } = useNavigation();
   const { refetch: refetchCanDonate } = useCanDonate(RIBON_INTEGRATION_ID);
   const { currentLang } = useLanguage();
 
@@ -68,6 +70,7 @@ function DonateScreen() {
         navigateTo("DonationDoneScreen", { nonProfit });
       } catch (error: any) {
         showToast(error.response.data.formatted_message);
+        popNavigation();
       } finally {
         setTimeout(() => {
           setIsDonating(false);
@@ -83,6 +86,31 @@ function DonateScreen() {
   const linkToPrivacyPolicy = () => {
     openInWebViewer(t("privacyPolicyLink"));
   };
+
+  const linkToTerms = () => {
+    openInWebViewer(t("terms"));
+  };
+
+  const emailFilled = () => currentUser?.email && email;
+  const renderInputText = () => {
+    if (emailFilled()) {
+      return <View />;
+    }
+
+    return (
+      <InputText
+        name="email"
+        placeholder={t("textInputPlaceholder") || ""}
+        keyboardType="email-address"
+        onChangeText={handleTextChange}
+        value={email}
+        autoCapitalize="none"
+        textContentType="emailAddress"
+        autoFocus
+      />
+    );
+  };
+
   return (
     <View>
       <View style={S.nonProfitContainer}>
@@ -119,18 +147,15 @@ function DonateScreen() {
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={S.container}>
               <View style={S.inputEmailContainer}>
-                <Text style={S.description}>{t("description")}</Text>
+                {emailFilled() ? (
+                  <Text style={S.impactDescription}>
+                    {formattedImpactText(nonProfit, undefined, false, true)}
+                  </Text>
+                ) : (
+                  <Text style={S.description}>{t("description")}</Text>
+                )}
 
-                <InputText
-                  name="email"
-                  placeholder={t("textInputPlaceholder") || ""}
-                  keyboardType="email-address"
-                  onChangeText={handleTextChange}
-                  value={email}
-                  autoCapitalize="none"
-                  textContentType="emailAddress"
-                  autoFocus
-                />
+                {renderInputText()}
               </View>
 
               <View style={S.buttonContainer}>
@@ -144,6 +169,10 @@ function DonateScreen() {
                 />
                 <Text style={S.privacyPolicyText}>
                   {t("agreementText")}{" "}
+                  <Text style={S.privacyPolicyLink} onPress={linkToTerms}>
+                    {t("termsText")}
+                  </Text>
+                  {t("and")}{" "}
                   <Text
                     style={S.privacyPolicyLink}
                     onPress={linkToPrivacyPolicy}

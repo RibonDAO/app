@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     ...defaultBodySmRegular,
     marginTop: theme.spacingNative(4),
     color: theme.colors.neutral[500],
-    fontSize: 12,
   },
   image: {
     width: 60,
