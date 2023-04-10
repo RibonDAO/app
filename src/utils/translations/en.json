@@ -35,7 +35,12 @@
       "impactPrefix": "Donate",
       "labelText": "Learn more",
       "whatIsATicket": "What is a ticket?",
-      "ticketExplanation": "Tickets are used to make donations and you get a new one everyday when you log in Ribon."
+      "ticketExplanation": "Tickets are used to make donations and you get a new one everyday when you log in Ribon.",
+      "noCauses": {
+        "title": "No Causes available",
+        "text": "But you can make a contribution",
+        "button": "Donate in community"
+      } 
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",

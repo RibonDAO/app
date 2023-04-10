@@ -28,6 +28,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingTop: theme.spacingNative(16),
   },
+  noCausesContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: theme.spacingNative(16),
+  },
   groupButtonsContainer: {
     paddingTop: theme.spacingNative(16),
   },
