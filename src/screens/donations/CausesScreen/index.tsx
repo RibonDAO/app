@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  useNonProfits,
-  useCauses,
+  useFreeDonationNonProfits,
+  useFreeDonationCauses,
   useCanDonate,
   useStories,
 } from "@ribon.io/shared/hooks";
@@ -23,6 +23,8 @@ import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import Tooltip from "components/atomics/Tooltip";
 import TicketSection from "screens/donations/CausesScreen/TicketSection";
+import ImpactDonationsVector from "screens/users/ProfileScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
+import ZeroDonationsSection from "screens/users/ProfileScreen/ZeroDonationsSection";
 import S from "./styles";
 import Placeholder from "./placeholder";
 
@@ -30,8 +32,8 @@ export default function CausesScreen() {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
-  const { nonProfits, isLoading } = useNonProfits();
-  const { causes } = useCauses();
+  const { nonProfits, isLoading } = useFreeDonationNonProfits();
+  const { causes } = useFreeDonationCauses();
   const {
     canDonate,
     isLoading: loadingCanDonate,
@@ -115,17 +117,23 @@ export default function CausesScreen() {
     };
   };
 
+  const navigateToPromotersScreen = () => {
+    navigateTo("PromotersScreen");
+  };
+
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
       <View style={S.containerPadding}>
-        <StoriesSection
-          stories={stories}
-          nonProfit={currentNonProfit}
-          storiesVisible={storiesVisible}
-          setStoriesVisible={setStoriesVisible}
-        />
+        {currentNonProfit && (
+          <StoriesSection
+            stories={stories}
+            nonProfit={currentNonProfit}
+            storiesVisible={storiesVisible}
+            setStoriesVisible={setStoriesVisible}
+          />
+        )}
         <TicketSection canDonate={canDonate} />
         <Text style={S.title}>{t("title")}</Text>
         <View style={S.groupButtonsContainer}>
@@ -137,39 +145,51 @@ export default function CausesScreen() {
         </View>
       </View>
 
-      <ScrollView
-        style={S.causesContainer}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        ref={scrollViewRef}
-      >
-        {nonProfitsFilter()?.map((nonProfit, index) => (
-          <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
-            <CardCenterImageButton
-              image={nonProfit.mainImage}
-              infoTextLeft={nonProfit.name}
-              infoTextRight={nonProfit.cause.name}
-              imageDescription={formattedImpactText(
-                nonProfit,
-                undefined,
-                false,
-                false,
-                undefined,
-                t("impactPrefix") || "",
-              )}
-              buttonText={t("buttonText")}
-              onImagePress={() => {
-                handleNonProfitImagePress(nonProfit);
-              }}
-              onClickButton={() => {
-                navigateTo("DonateScreen", { nonProfit });
-              }}
-              buttonDisabled={!hasTickets()}
-              labelText={t("labelText") || ""}
-            />
-          </View>
-        ))}
-      </ScrollView>
+      {nonProfitsFilter()?.length > 0 ? (
+        <ScrollView
+          style={S.causesContainer}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ref={scrollViewRef}
+        >
+          {nonProfitsFilter()?.map((nonProfit, index) => (
+            <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
+              <CardCenterImageButton
+                image={nonProfit.mainImage}
+                infoTextLeft={nonProfit.name}
+                infoTextRight={nonProfit.cause.name}
+                imageDescription={formattedImpactText(
+                  nonProfit,
+                  undefined,
+                  false,
+                  false,
+                  undefined,
+                  t("impactPrefix") || "",
+                )}
+                buttonText={t("buttonText")}
+                onImagePress={() => {
+                  handleNonProfitImagePress(nonProfit);
+                }}
+                onClickButton={() => {
+                  navigateTo("DonateScreen", { nonProfit });
+                }}
+                buttonDisabled={!hasTickets()}
+                labelText={t("labelText") || ""}
+              />
+            </View>
+          ))}
+        </ScrollView>
+      ) : (
+        <View style={S.noCausesContainer}>
+          <ZeroDonationsSection
+            title={t("noCauses.title")}
+            onButtonPress={navigateToPromotersScreen}
+            description={t("noCauses.text")}
+            buttonText={t("noCauses.button")}
+            image={<ImpactDonationsVector />}
+          />
+        </View>
+      )}
 
       <Tooltip tooltipText={t("ticketExplanation")}>
         <View style={S.ticketExplanationSection}>
