@@ -43,7 +43,16 @@ export default () => ({
       },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
-      "buildNumber": "301"
+      "buildNumber": "301",
+      "config": {
+        "branch": {
+          "apiKey": "key_live_psjoynwxXPk14LioRerHjhggEvgKd6Bh"
+        }
+      },
+      "associatedDomains": [
+        "donation.app.link",
+        "donation-alternate.app.link"
+      ],
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -52,7 +61,38 @@ export default () => ({
         "backgroundColor": "#00DA93"
       },
       "package": "com.app.ribon",
-      "versionCode": 299
+      "versionCode": 299,
+      "config": {
+        "branch": {
+          "apiKey": "key_live_psjoynwxXPk14LioRerHjhggEvgKd6Bh"
+        }
+      },
+      "intentFilters": [
+        {
+          "autoVerify": true,
+          "action": "VIEW",
+          "data": {
+            "scheme": "https",
+            "host": "*donation.app.link"
+          },
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        },
+        {
+          "autoVerify": true,
+          "action": "VIEW",
+          "data": {
+            "scheme": "https",
+            "host": "*donation-alternate.app.link"
+          },
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ],
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
@@ -69,7 +109,14 @@ export default () => ({
       "sentry-expo",
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
-      "@react-native-firebase/crashlytics"
+      "@react-native-firebase/crashlytics",
+      [
+        "@config-plugins/react-native-branch",
+        {
+          "apiKey": "key_live_psjoynwxXPk14LioRerHjhggEvgKd6Bh",
+          "iosAppDomain": "donation-alternate.app.link"
+        }
+      ],
     ],
     "extra": {
       "eas": {
