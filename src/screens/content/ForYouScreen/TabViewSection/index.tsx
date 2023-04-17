@@ -5,10 +5,13 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CollapsibleTabView } from "react-native-collapsible-tab-view";
 import * as React from "react";
-import NewsSection from "../NewsSection";
-import TasksSection from "../TasksSection";
 import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
+import { useCanDonate } from "@ribon.io/shared";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import TasksSection from "../TasksSection";
+import NewsSection from "../NewsSection";
 import S from "./styles";
+import LockedSection from "../LockedSection";
 
 type Route = {
   key: string;
@@ -16,9 +19,10 @@ type Route = {
 };
 
 function NewsSectionTabView(): JSX.Element {
+  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
   return (
     <ParallaxTabViewContainer routeKey="NewsSectionTabView">
-      <NewsSection />
+      {canDonate ? <LockedSection /> : <NewsSection />}
     </ParallaxTabViewContainer>
   );
 }
