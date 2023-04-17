@@ -192,7 +192,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       resetStates();
     } catch (error) {
       logError(error);
-      showToast(t("onErrorMessage"));
+      showToast(t("onErrorMessage", "error"));
 
       logEvent("toastNotification_view", {
         status: "transactionFailed",

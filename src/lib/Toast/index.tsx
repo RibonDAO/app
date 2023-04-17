@@ -74,6 +74,7 @@ export const showToast = (
     backgroundColor={backgroundColor || backgroundColorToast[type || "info"]}
     textColor={textColor || textColorToast(type || "info")}
     shadow={false}
+    animation={false}
     hideOnPress
   >
     {message}
