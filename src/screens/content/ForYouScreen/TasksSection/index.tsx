@@ -34,23 +34,22 @@ export default function TasksSection() {
           />
           <Text style={S.title}>{t("title")}</Text>
         </View>
-        {tasksState.map((task) => {
-          const currentTask = TASKS.find((t) => t.id === task.id);
-
-          return (
+        {tasksState &&
+          dailyTasks.map((task) => (
             <CheckBox
               key={task.id}
-              text={t(`tasks.${currentTask?.title}`)}
+              text={t(`tasks.${task?.title}`)}
               sectionStyle={{ marginBottom: 8, paddingLeft: 4 }}
-              lineThroughOnChecked={true}
+              lineThroughOnChecked
               navigationCallback={
-                !task.done ? currentTask?.navigationCallback : undefined
+                !tasksState.find((obj) => obj.id === task.id)?.done
+                  ? task?.navigationCallback
+                  : undefined
               }
-              disabled={true}
-              checked={task.done}
+              disabled
+              checked={tasksState.find((obj) => obj.id === task.id)?.done}
             />
-          );
-        })}
+          ))}
       </View>
     </View>
   );

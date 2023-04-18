@@ -4,14 +4,15 @@ import { theme } from "@ribon.io/shared/styles";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CollapsibleTabView } from "react-native-collapsible-tab-view";
-import * as React from "react";
+import React, { useEffect } from "react";
 import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
 import { useCanDonate } from "@ribon.io/shared";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import TasksSection from "../TasksSection";
+import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
 import S from "./styles";
-import LockedSection from "../LockedSection";
+import { useTasksContext } from "contexts/tasksContext";
 
 type Route = {
   key: string;
@@ -70,6 +71,8 @@ function TabViewSection(): JSX.Element {
   });
 
   const layout = useWindowDimensions();
+  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const { registerAction } = useTasksContext();
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
@@ -82,6 +85,12 @@ function TabViewSection(): JSX.Element {
       <Text style={S.title}>{t("forYouScreen.newsSection.title")}</Text>
     </View>
   );
+
+  useEffect(() => {
+    if (index === 1 && !canDonate) {
+      registerAction("for_you_news_tab_view");
+    }
+  }, [index]);
 
   return (
     <View style={S.tabViewSection}>
