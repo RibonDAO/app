@@ -23,7 +23,7 @@ export default function TasksSection() {
     (obj) => obj.title === "donate_ticket",
   );
 
-  const { integration } = useIntegration(1);
+  const { integration } = useIntegration(RIBON_INTEGRATION_ID);
 
   const linkToTerms = () => {
     openInWebViewer(integration?.integrationTask.linkAddress ?? "");
