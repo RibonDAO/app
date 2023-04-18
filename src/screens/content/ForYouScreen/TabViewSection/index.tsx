@@ -7,7 +7,7 @@ import { CollapsibleTabView } from "react-native-collapsible-tab-view";
 import * as React from "react";
 import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
 import { useCanDonate } from "@ribon.io/shared";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import TasksSection from "../TasksSection";
 import NewsSection from "../NewsSection";
 import S from "./styles";
@@ -19,7 +19,7 @@ type Route = {
 };
 
 function NewsSectionTabView(): JSX.Element {
-  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
   return (
     <ParallaxTabViewContainer routeKey="NewsSectionTabView">
       {canDonate ? <LockedSection /> : <NewsSection />}
