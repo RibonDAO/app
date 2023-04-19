@@ -19,6 +19,7 @@ export type TaskStateItem = {
 export interface ITasksContext {
   tasksState: TaskStateItem[];
   registerAction: (action: string) => void;
+  reload: () => void;
 }
 
 export const TasksContext = createContext<ITasksContext>({} as ITasksContext);
@@ -46,6 +47,8 @@ function TasksProvider({ children }: any) {
       setTasksState(state);
     });
   };
+
+  const reload = () => buildTasksState();
 
   const isDone = (task: CompletedTask | undefined) => {
     if (!task) return false;
@@ -113,6 +116,7 @@ function TasksProvider({ children }: any) {
     () => ({
       tasksState,
       registerAction,
+      reload,
     }),
     [tasksState],
   );

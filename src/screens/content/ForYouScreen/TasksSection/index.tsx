@@ -1,11 +1,13 @@
 import { Text, View } from "react-native";
-import { TASKS, useTasks } from "utils/constants/Tasks";
+import { useTasks } from "utils/constants/Tasks";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import ProgressBar from "components/atomics/ProgressBar";
 import { useTranslation } from "react-i18next";
 import { useTasksContext } from "contexts/tasksContext";
+import { useCountdown } from "hooks/useCountdown";
+import { nextDay } from "lib/dateUtils";
 import S from "./styles";
 
 export default function TasksSection() {
@@ -13,7 +15,31 @@ export default function TasksSection() {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const dailyTasks = useTasks("daily");
-  const { tasksState } = useTasksContext();
+  const { tasksState, reload } = useTasksContext();
+
+  const renderCountdown = () => {
+    const countdown = useCountdown(nextDay(), reload);
+
+    const parseCountdown = (count: number[]) => {
+      return count
+        .toString()
+        .split(",")
+        .map((part) => part.trim().padStart(2, "0"))
+        .join(":");
+    };
+
+    if (!tasksState) return;
+    if (!tasksState.length) return;
+    if (tasksState.filter((obj) => obj.done === false).length) return;
+    if (countdown.reduce((a, b) => a + b, 0) <= 0) return;
+
+    return (
+      <View style={S.timerWrapper}>
+        <Text style={S.countdown}>{parseCountdown(countdown)}</Text>
+        <Text>{t("countdown")}</Text>
+      </View>
+    );
+  };
 
   return (
     <View style={S.container}>
@@ -25,6 +51,7 @@ export default function TasksSection() {
             max={dailyTasks.length}
           />
         </View>
+        {renderCountdown()}
         <View style={S.titleContainer}>
           <Icon
             type="outlined"
