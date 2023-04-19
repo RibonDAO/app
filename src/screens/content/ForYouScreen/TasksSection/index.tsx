@@ -8,14 +8,20 @@ import { useTranslation } from "react-i18next";
 import { useTasksContext } from "contexts/tasksContext";
 import { useCountdown } from "hooks/useCountdown";
 import { nextDay } from "lib/dateUtils";
+import { useNavigation } from "hooks/useNavigation";
+import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import S from "./styles";
 
 export default function TasksSection() {
+  const CURRENT_PAGE = "ForYouScreen";
+
   const { t } = useTranslation("translation", {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const dailyTasks = useTasks("daily");
   const { tasksState, reload } = useTasksContext();
+  const { navigateTo } = useNavigation();
+  const { setIndex } = useForYouTabsContext();
 
   const renderCountdown = () => {
     const countdown = useCountdown(nextDay(), reload);
@@ -62,21 +68,28 @@ export default function TasksSection() {
           <Text style={S.title}>{t("title")}</Text>
         </View>
         {tasksState &&
-          dailyTasks.map((task) => (
-            <CheckBox
-              key={task.id}
-              text={t(`tasks.${task?.title}`)}
-              sectionStyle={{ marginBottom: 8, paddingLeft: 4 }}
-              lineThroughOnChecked
-              navigationCallback={
-                !tasksState.find((obj) => obj.id === task.id)?.done
-                  ? task?.navigationCallback
-                  : undefined
-              }
-              disabled
-              checked={tasksState.find((obj) => obj.id === task.id)?.done}
-            />
-          ))}
+          dailyTasks.map((task) => {
+            const taskDone = tasksState.find((obj) => obj.id === task.id)?.done;
+            const navigateToTask = task.navigationCallback;
+            const isCurrentPage = navigateToTask === CURRENT_PAGE;
+            const navigationCallback = taskDone
+              ? undefined
+              : isCurrentPage
+              ? () => setIndex(1)
+              : () => navigateTo(navigateToTask);
+
+            return (
+              <CheckBox
+                key={task.id}
+                text={t(`tasks.${task?.title}`)}
+                sectionStyle={{ marginBottom: 8, paddingLeft: 4 }}
+                navigationCallback={navigationCallback}
+                checked={taskDone}
+                lineThroughOnChecked
+                disabled
+              />
+            );
+          })}
       </View>
     </View>
   );

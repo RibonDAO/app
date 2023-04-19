@@ -11,8 +11,9 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import TasksSection from "../TasksSection";
 import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
-import S from "./styles";
 import { useTasksContext } from "contexts/tasksContext";
+import { useForYouTabsContext } from "contexts/forYouTabsContext";
+import S from "./styles";
 
 type Route = {
   key: string;
@@ -74,7 +75,8 @@ function TabViewSection(): JSX.Element {
   const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
   const { registerAction } = useTasksContext();
 
-  const [index, setIndex] = useState(0);
+  const { index, setIndex } = useForYouTabsContext();
+
   const [routes] = useState([
     { key: "TasksSectionTabView", title: t("tasksSectionTitle") },
     { key: "NewsSectionTabView", title: t("newsSectionTitle") },
