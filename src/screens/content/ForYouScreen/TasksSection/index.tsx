@@ -10,6 +10,8 @@ import { useCountdown } from "hooks/useCountdown";
 import { nextDay } from "lib/dateUtils";
 import { useNavigation } from "hooks/useNavigation";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
+import { formatCountdown } from "lib/formatters/countdownFormatter";
+
 import S from "./styles";
 
 export default function TasksSection() {
@@ -26,14 +28,6 @@ export default function TasksSection() {
   const renderCountdown = () => {
     const countdown = useCountdown(nextDay(), reload);
 
-    const parseCountdown = (count: number[]) => {
-      return count
-        .toString()
-        .split(",")
-        .map((part) => part.trim().padStart(2, "0"))
-        .join(":");
-    };
-
     if (!tasksState) return;
     if (!tasksState.length) return;
     if (tasksState.filter((obj) => obj.done === false).length) return;
@@ -41,7 +35,7 @@ export default function TasksSection() {
 
     return (
       <View style={S.timerWrapper}>
-        <Text style={S.countdown}>{parseCountdown(countdown)}</Text>
+        <Text style={S.countdown}>{formatCountdown(countdown)}</Text>
         <Text>{t("countdown")}</Text>
       </View>
     );
