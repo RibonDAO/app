@@ -19,10 +19,6 @@ export const ForYouTabsContext = createContext<IForYouTabsContext>(
 function ForYouTabsProvider({ children }: any) {
   const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    console.log("index", index);
-  }, [index]);
-
   const tabsObject: IForYouTabsContext = useMemo(
     () => ({
       index,
