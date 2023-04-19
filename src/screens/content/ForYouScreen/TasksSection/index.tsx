@@ -25,7 +25,7 @@ export default function TasksSection() {
 
   const { integration } = useIntegration(RIBON_INTEGRATION_ID);
 
-  const linkToTerms = () => {
+  const linkToIntegration = () => {
     openInWebViewer(integration?.integrationTask.linkAddress ?? "");
   };
 
@@ -65,7 +65,7 @@ export default function TasksSection() {
             />
           );
         })}
-        {integration?.integrationTask.description &&
+        {integration?.integrationTask &&
           tasksState.find((obj) => obj.id === donateTicketTask?.id)?.done && (
             <View style={S.integrationContainer}>
               <View style={S.integrationLeftSection}>
@@ -80,7 +80,7 @@ export default function TasksSection() {
                 <Text style={S.integrationTitle}>
                   {integration?.integrationTask.description}
                 </Text>
-                <Text style={S.integrationLink} onPress={linkToTerms}>
+                <Text style={S.integrationLink} onPress={linkToIntegration}>
                   {integration?.integrationTask.link}
                 </Text>
               </View>
