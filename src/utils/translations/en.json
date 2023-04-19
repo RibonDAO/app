@@ -40,7 +40,7 @@
         "title": "No causes available",
         "text": "But you can contribute donating in community for a cause",
         "button": "Donate in community"
-      } 
+      }
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",
@@ -213,7 +213,12 @@
       },
       "communityDonationsTitle": "Community Donations",
       "ticketDonationsTitle": "Ticket Donations",
-      "directDonationsTitle": "Direct Donations"
+      "directDonationsTitle": "Direct Donations",
+      "impactNotification": {
+        "title": "Your impact was migrated!",
+        "description": "Your history of donations made on the old platform is in the \"ticket donations\" tab.",
+        "link": "Do not show again"
+      }
     }
   },
   "impactNormalizer": {
