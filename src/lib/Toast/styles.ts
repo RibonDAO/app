@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodySmMedium } from "styles/typography/default";
+import {
+  defaultBodySmBold,
+  defaultBodySmMedium,
+} from "styles/typography/default";
 
 const styles = StyleSheet.create({
   toastContainer: {
@@ -24,6 +27,7 @@ const styles = StyleSheet.create({
     marginRight: theme.spacingNative(8),
   },
   link: {
+    ...defaultBodySmBold,
     color: theme.colors.neutral10,
     marginRight: theme.spacingNative(24),
     textDecorationLine: "underline",
