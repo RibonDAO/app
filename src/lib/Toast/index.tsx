@@ -1,6 +1,22 @@
 import { theme } from "@ribon.io/shared/styles";
-import Toast from "react-native-root-toast";
+import { IconRounded } from "components/atomics/Icon";
+import React from "react";
+import { View, Text } from "react-native";
+import Toast from "react-native-toast-message";
+import S from "./styles";
 
+type NotificationProps = {
+  message: string;
+  type: "success" | "error" | "warning" | "info";
+  link?: string;
+  linkMessage?: string;
+  icon?: any;
+  iconColor?: string;
+  backgroundColor?: string;
+  textColor?: string;
+  // eslint-disable-next-line react/no-unused-prop-types
+  position?: "top" | "bottom";
+};
 const iconToast = (type?: string) => {
   switch (type) {
     case "success":
@@ -31,17 +47,6 @@ const iconColorToast = (type?: string) => {
   }
 };
 
-const positionToast = (position?: string) => {
-  switch (position) {
-    case "top":
-      return Toast.positions.TOP;
-    case "bottom":
-      return Toast.positions.BOTTOM;
-    default:
-      return Toast.positions.BOTTOM;
-  }
-};
-
 const backgroundColorToast = {
   success: theme.colors.brand.primary[600],
   error: theme.colors.feedback.error[600],
@@ -57,26 +62,84 @@ const textColorToast = (type: string) => {
       return theme.colors.neutral10;
   }
 };
+function CustomToast({
+  type,
+  message,
+  backgroundColor,
+  textColor,
+  icon,
+  iconColor,
+  linkMessage,
+  link,
+}: NotificationProps) {
+  return (
+    <View
+      style={[
+        S.toastContainer,
+        {
+          backgroundColor:
+            backgroundColor || backgroundColorToast[type ?? "info"],
+        },
+      ]}
+    >
+      <IconRounded
+        style={S.icon}
+        name={icon || iconToast(type)}
+        size={24}
+        color={iconColor || iconColorToast(type)}
+      />
+      <Text style={[S.message, { color: textColor || textColorToast(type) }]}>
+        {message}
+      </Text>
+      <View style={S.wrapper}>
+        {link && <Text style={S.link}>{linkMessage}</Text>}
+        <IconRounded
+          name="close"
+          size={24}
+          color={textColor || textColorToast(type)}
+          onPress={() => Toast.hide()}
+        />
+      </View>
+    </View>
+  );
+}
+export const toastConfig = {
+  success: ({ text1, props }: any) => (
+    <CustomToast message={text1} {...props} />
+  ),
+  error: ({ text1, props }: any) => <CustomToast message={text1} {...props} />,
+  warning: ({ text1, props }: any) => (
+    <CustomToast message={text1} {...props} />
+  ),
+  info: ({ text1, props }: any) => <CustomToast message={text1} {...props} />,
+  custom: ({ text1, props }: any) => <CustomToast message={text1} {...props} />,
+};
 
-export const showToast = (
-  message: string,
-  type?: "error" | "success" | "warning" | "info",
-  backgroundColor?: string,
-  textColor?: string,
-  position?: string,
-  visible = true,
-  duration = Toast.durations.LONG,
-) => (
-  <Toast
-    visible={visible}
-    position={positionToast(position)}
-    duration={duration}
-    backgroundColor={backgroundColor || backgroundColorToast[type || "info"]}
-    textColor={textColor || textColorToast(type || "info")}
-    shadow={false}
-    animation={false}
-    hideOnPress
-  >
-    {message}
-  </Toast>
-);
+export const showToast = ({
+  type,
+  message,
+  position,
+  icon,
+  iconColor,
+  backgroundColor,
+  textColor,
+  link,
+  linkMessage,
+}: NotificationProps) =>
+  Toast.show({
+    type: type || "info",
+    text1: message,
+    position,
+    visibilityTime: 5000,
+    autoHide: true,
+    props: {
+      icon,
+      iconColor,
+      backgroundColor,
+      textColor,
+      link,
+      linkMessage,
+      type,
+      position,
+    },
+  });

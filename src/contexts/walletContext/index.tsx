@@ -45,7 +45,10 @@ function WalletProvider({ children }: Props) {
       const connectorRequest = await connector.connect();
       setWallet(connectorRequest.accounts[0]);
     } catch (error) {
-      showToast(t("walletConnectionErrorMessage", "error"));
+      showToast({
+        type: "error",
+        message: t("walletConnectionErrorMessage", "error"),
+      });
     }
   }, [connector]);
 
