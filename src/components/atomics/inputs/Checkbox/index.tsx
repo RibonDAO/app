@@ -3,13 +3,12 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import Icon from "components/atomics/Icon";
 import styles from "./styles";
-import { useNavigation } from "hooks/useNavigation";
 
 export type Props = {
   text: string;
   sectionStyle?: any;
   lineThroughOnChecked?: boolean;
-  navigationCallback?: string;
+  navigationCallback?: () => void;
   disabled?: boolean;
   checked?: boolean;
 };
@@ -23,8 +22,6 @@ function CheckBox({
   checked = false,
 }: Props): JSX.Element {
   const [isChecked, setChecked] = useState(checked);
-
-  const { navigateTo } = useNavigation();
 
   const onPressHandler = () => {
     if (!disabled) {
@@ -75,7 +72,7 @@ function CheckBox({
       </TouchableOpacity>
       {navigationCallback && (
         <TouchableOpacity
-          onPress={() => navigateTo(navigationCallback)}
+          onPress={() => navigationCallback()}
           activeOpacity={0.5}
           style={styles.navigationButton}
         >
