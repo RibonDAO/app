@@ -86,7 +86,7 @@ function InlineNotification({
       </View>
       <View style={S.rightContainer}>
         <TouchableOpacity onPress={handleCloseIconClick}>
-          <Icon type="sharp" name="close" size={24} />
+          <Icon accessibilityHint="close-icon" type="sharp" name="close" size={24} />
         </TouchableOpacity>
       </View>
     </View>
