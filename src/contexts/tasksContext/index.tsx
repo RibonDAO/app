@@ -1,4 +1,4 @@
-import { CompletedTask, useCompletedTasks } from "@ribon.io/shared";
+import { CompletedTask, theme, useCompletedTasks } from "@ribon.io/shared";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { TASKS } from "utils/constants/Tasks";
 import {
@@ -8,6 +8,7 @@ import {
   nextMonth,
 } from "lib/dateUtils";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { showToast } from "lib/Toast";
 
 export type TaskStateItem = {
   id: string;
@@ -28,6 +29,10 @@ function TasksProvider({ children }: any) {
   const { findCompletedTasks, completeTask } = useCompletedTasks();
   const { currentUser, signedIn } = useCurrentUser();
 
+  function allDone(tasks: any) {
+    return tasks.every((task: any) => task.done === true);
+  }
+
   const buildTasksState = () => {
     findCompletedTasks().then((completedTasks) => {
       const state = TASKS.map((task) => {
@@ -44,6 +49,19 @@ function TasksProvider({ children }: any) {
       });
 
       setTasksState(state);
+      if (allDone(state)) {
+        showToast({
+          type: "custom",
+          backgroundColor: theme.colors.feedback.success[50],
+          borderColor: theme.colors.brand.primary[500],
+          textColor: theme.colors.brand.primary[900],
+          icon: "celebration",
+          iconColor: theme.colors.brand.primary[500],
+          message: "You've completed all tasks",
+          closeButton: false,
+          position: "bottom",
+        });
+      }
     });
   };
 
