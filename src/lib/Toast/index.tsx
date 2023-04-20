@@ -13,6 +13,7 @@ type NotificationProps = {
   icon?: any;
   iconColor?: string;
   backgroundColor?: string;
+  borderColor?: string;
   textColor?: string;
   // eslint-disable-next-line react/no-unused-prop-types
   position?: "top" | "bottom";
@@ -66,6 +67,7 @@ function CustomToast({
   type,
   message,
   backgroundColor,
+  borderColor,
   textColor,
   icon,
   iconColor,
@@ -79,6 +81,7 @@ function CustomToast({
         {
           backgroundColor:
             backgroundColor || backgroundColorToast[type ?? "info"],
+          borderColor: borderColor || backgroundColorToast[type ?? "info"],
         },
       ]}
     >
@@ -122,6 +125,7 @@ export const showToast = ({
   icon,
   iconColor,
   backgroundColor,
+  borderColor,
   textColor,
   link,
   linkMessage,
@@ -136,6 +140,7 @@ export const showToast = ({
       icon,
       iconColor,
       backgroundColor,
+      borderColor,
       textColor,
       link,
       linkMessage,

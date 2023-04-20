@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "hidden",
     color: theme.colors.neutral10,
+    borderColor: theme.colors.neutral10,
+    borderWidth: 1,
   },
   message: {
     marginRight: theme.spacingNative(8),
