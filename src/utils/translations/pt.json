@@ -207,7 +207,8 @@
             "title": "Suas doações diretas aparecerão aqui.",
             "description": "Você ainda não fez doações diretas, que tal fazer a sua primeira?",
             "buttonText": "Doar diretamente"
-          }
+          },
+          "migrated": "Migrado"
         }
       },
       "communityDonationsTitle": "Doações em Comunidade",
