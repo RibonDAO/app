@@ -94,27 +94,28 @@ function CustomToast({
         },
       ]}
     >
-      <IconRounded
-        style={S.icon}
-        name={icon || iconToast(type)}
-        size={24}
-        color={iconColor || iconColorToast(type)}
-      />
       <View style={S.textContainer}>
+        <IconRounded
+          style={S.icon}
+          name={icon || iconToast(type)}
+          size={24}
+          color={iconColor || iconColorToast(type)}
+        />
         <Text style={[S.message, { color: textColor || textColorToast(type) }]}>
           {message}
         </Text>
-        {link && <Text style={S.link}>{linkMessage}</Text>}
+
+        {closeButton && (
+          <IconRounded
+            name="close"
+            style={S.closeIcon}
+            size={24}
+            color={textColor || textColorToast(type)}
+            onPress={() => Toast.hide()}
+          />
+        )}
       </View>
-      {closeButton && (
-        <IconRounded
-          name="close"
-          style={S.closeIcon}
-          size={24}
-          color={textColor || textColorToast(type)}
-          onPress={() => Toast.hide()}
-        />
-      )}
+      {link && <Text style={S.link}>{linkMessage}</Text>}
     </View>
   );
 }
@@ -133,7 +134,7 @@ export const toastConfig = {
 export const showToast = ({
   type,
   message,
-  position,
+  position = "top",
   icon,
   iconColor,
   backgroundColor,

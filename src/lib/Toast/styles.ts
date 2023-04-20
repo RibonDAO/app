@@ -9,11 +9,10 @@ const styles = StyleSheet.create({
   toastContainer: {
     ...defaultBodySmMedium,
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     width: 328,
     borderRadius: 4,
     padding: theme.spacingNative(20),
-    alignItems: "center",
     overflow: "hidden",
     color: theme.colors.neutral10,
     borderColor: theme.colors.neutral10,
@@ -21,25 +20,24 @@ const styles = StyleSheet.create({
   },
   message: {
     width: 224,
-    marginBottom: theme.spacingNative(8),
     wordBreak: "break-word",
   },
   icon: {
     marginRight: theme.spacingNative(8),
-    alignSelf: "flex-start",
   },
   link: {
     ...defaultBodySmBold,
     color: theme.colors.neutral10,
     textDecorationLine: "underline",
+    marginLeft: theme.spacingNative(32),
   },
   textContainer: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
+    alignItems: "center",
   },
   closeIcon: {
     marginLeft: "auto",
-    alignSelf: "flex-start",
   },
 });
 
