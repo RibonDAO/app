@@ -14,6 +14,7 @@ export type TaskStateItem = {
   nextAction: string;
   done: boolean;
   expiresAt: string;
+  timesCompleted: number;
 };
 
 export interface ITasksContext {
@@ -39,6 +40,7 @@ function TasksProvider({ children }: any) {
         return {
           id: task.id,
           nextAction: task.actions[0],
+          timesCompleted: currentTask?.timesCompleted || 0,
           done: isDone(currentTask),
           expiresAt: isExpired(currentTask),
         };
@@ -101,6 +103,7 @@ function TasksProvider({ children }: any) {
           return {
             ...task,
             done: true,
+            timesCompleted: task.timesCompleted + 1,
             expiresAt: currentTask.type === "daily" ? nextDay() : nextMonth(),
           };
         }

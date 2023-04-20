@@ -106,6 +106,7 @@
         "title": "Tarefas",
         "tasks": {
           "donate_ticket": "Doar ticket",
+          "donate_ticket_on_native": "Baixar o app e doar um ticket",
           "check_daily_news": "Conferir publicações diárias",
           "see_more_ngo_infos": "Ver mais informações sobre uma ONG"
         },
