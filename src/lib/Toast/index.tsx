@@ -7,7 +7,7 @@ import S from "./styles";
 
 type NotificationProps = {
   message: string;
-  type: "success" | "error" | "warning" | "info";
+  type: "success" | "error" | "warning" | "info" | "custom";
   link?: string;
   linkMessage?: string;
   icon?: any;
@@ -15,6 +15,7 @@ type NotificationProps = {
   backgroundColor?: string;
   borderColor?: string;
   textColor?: string;
+  closeButton?: boolean;
   // eslint-disable-next-line react/no-unused-prop-types
   position?: "top" | "bottom";
 };
@@ -48,11 +49,19 @@ const iconColorToast = (type?: string) => {
   }
 };
 
-const backgroundColorToast = {
-  success: theme.colors.brand.primary[600],
-  error: theme.colors.feedback.error[600],
-  warning: theme.colors.brand.quaternary[200],
-  info: theme.colors.feedback.informational[500],
+const backgroundColorToast = (type: string) => {
+  switch (type) {
+    case "success":
+      return theme.colors.brand.primary[600];
+    case "error":
+      return theme.colors.feedback.error[600];
+    case "warning":
+      return theme.colors.brand.quaternary[200];
+    case "info":
+      return theme.colors.feedback.informational[500];
+    default:
+      return theme.colors.feedback.informational[500];
+  }
 };
 
 const textColorToast = (type: string) => {
@@ -73,15 +82,15 @@ function CustomToast({
   iconColor,
   linkMessage,
   link,
+  closeButton,
 }: NotificationProps) {
   return (
     <View
       style={[
         S.toastContainer,
         {
-          backgroundColor:
-            backgroundColor || backgroundColorToast[type ?? "info"],
-          borderColor: borderColor || backgroundColorToast[type ?? "info"],
+          backgroundColor: backgroundColor || backgroundColorToast(type),
+          borderColor: borderColor || backgroundColorToast(type),
         },
       ]}
     >
@@ -91,18 +100,21 @@ function CustomToast({
         size={24}
         color={iconColor || iconColorToast(type)}
       />
-      <Text style={[S.message, { color: textColor || textColorToast(type) }]}>
-        {message}
-      </Text>
-      <View style={S.wrapper}>
+      <View style={S.textContainer}>
+        <Text style={[S.message, { color: textColor || textColorToast(type) }]}>
+          {message}
+        </Text>
         {link && <Text style={S.link}>{linkMessage}</Text>}
+      </View>
+      {closeButton && (
         <IconRounded
           name="close"
+          style={S.closeIcon}
           size={24}
           color={textColor || textColorToast(type)}
           onPress={() => Toast.hide()}
         />
-      </View>
+      )}
     </View>
   );
 }
@@ -129,6 +141,7 @@ export const showToast = ({
   textColor,
   link,
   linkMessage,
+  closeButton = true,
 }: NotificationProps) =>
   Toast.show({
     type: type || "info",
@@ -146,5 +159,6 @@ export const showToast = ({
       linkMessage,
       type,
       position,
+      closeButton,
     },
   });

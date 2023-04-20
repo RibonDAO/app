@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     ...defaultBodySmMedium,
     display: "flex",
     flexDirection: "row",
-    width: 336,
+    width: 328,
     borderRadius: 4,
     padding: theme.spacingNative(20),
     alignItems: "center",
@@ -20,25 +20,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   message: {
-    marginRight: theme.spacingNative(8),
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
+    width: 224,
+    marginBottom: theme.spacingNative(8),
+    wordBreak: "break-word",
   },
   icon: {
     marginRight: theme.spacingNative(8),
+    alignSelf: "flex-start",
   },
   link: {
     ...defaultBodySmBold,
     color: theme.colors.neutral10,
-    marginRight: theme.spacingNative(24),
     textDecorationLine: "underline",
   },
-  wrapper: {
-    marginLeft: "auto",
+  textContainer: {
     display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
+  },
+  closeIcon: {
+    marginLeft: "auto",
+    alignSelf: "flex-start",
   },
 });
 
