@@ -51,7 +51,7 @@ function NgoImpactCards(): JSX.Element {
         <View key={item?.legacyNonProfit?.id}>
           <NgoImpactCard
             key={item?.legacyNonProfit.id}
-            description={`${item.totalImpact} ${item.legacyNonProfit.impactDescription}`}
+            description={item.totalImpact}
             name={item?.legacyNonProfit.name}
             icon={item?.legacyNonProfit.logoUrl}
             label={t("migrated") || undefined}
