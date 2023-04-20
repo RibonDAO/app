@@ -42,7 +42,7 @@ const iconColorToast = (type?: string) => {
     case "warning":
       return theme.colors.feedback.warning[600];
     case "info":
-      return theme.colors.feedback.informational[500];
+      return theme.colors.feedback.informational[300];
     default:
       return theme.colors.feedback.informational[300];
   }
