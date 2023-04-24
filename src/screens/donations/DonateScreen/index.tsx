@@ -72,7 +72,10 @@ function DonateScreen() {
         setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
         navigateTo("DonationDoneScreen", { nonProfit });
       } catch (error: any) {
-        showToast(error.response.data.formatted_message);
+        showToast({
+          type: "error",
+          message: error.response.data.formatted_message,
+        });
         popNavigation();
       } finally {
         setTimeout(() => {
