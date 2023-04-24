@@ -4,10 +4,15 @@ import { theme } from "@ribon.io/shared/styles";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CollapsibleTabView } from "react-native-collapsible-tab-view";
-import * as React from "react";
-import NewsSection from "../NewsSection";
-import TasksSection from "../TasksSection";
+import React, { useEffect } from "react";
 import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
+import { useCanDonate } from "@ribon.io/shared";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import TasksSection from "../TasksSection";
+import LockedSection from "../LockedSection";
+import NewsSection from "../NewsSection";
+import { useTasksContext } from "contexts/tasksContext";
+import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import S from "./styles";
 
 type Route = {
@@ -16,9 +21,10 @@ type Route = {
 };
 
 function NewsSectionTabView(): JSX.Element {
+  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
   return (
     <ParallaxTabViewContainer routeKey="NewsSectionTabView">
-      <NewsSection />
+      {canDonate ? <LockedSection /> : <NewsSection />}
     </ParallaxTabViewContainer>
   );
 }
@@ -66,8 +72,11 @@ function TabViewSection(): JSX.Element {
   });
 
   const layout = useWindowDimensions();
+  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const { registerAction } = useTasksContext();
 
-  const [index, setIndex] = useState(0);
+  const { index, setIndex } = useForYouTabsContext();
+
   const [routes] = useState([
     { key: "TasksSectionTabView", title: t("tasksSectionTitle") },
     { key: "NewsSectionTabView", title: t("newsSectionTitle") },
@@ -78,6 +87,12 @@ function TabViewSection(): JSX.Element {
       <Text style={S.title}>{t("forYouScreen.newsSection.title")}</Text>
     </View>
   );
+
+  useEffect(() => {
+    if (index === 1 && !canDonate) {
+      registerAction("for_you_news_tab_view");
+    }
+  }, [index]);
 
   return (
     <View style={S.tabViewSection}>
