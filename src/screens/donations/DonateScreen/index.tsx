@@ -45,7 +45,10 @@ function DonateScreen() {
   const [email, setEmail] = useState(currentUser?.email || "");
   const { donate } = useDonations(currentUser?.id);
   const { navigateTo, popNavigation } = useNavigation();
-  const { refetch: refetchCanDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const { refetch: refetchCanDonate } = useCanDonate(
+    RIBON_INTEGRATION_ID,
+    PLATFORM,
+  );
   const { currentLang } = useLanguage();
 
   function handleButtonPress() {
@@ -118,7 +121,6 @@ function DonateScreen() {
           <Text style={S.nonProfitText}>{t("nonProfitText")}</Text>
           <Text style={S.nonProfitHighlight}>{nonProfit.name}</Text>
         </View>
-        <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
 
         <LinearGradient
           colors={[theme.colors.brand.primary[800], "transparent"]}
