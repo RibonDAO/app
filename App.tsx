@@ -7,6 +7,7 @@ import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
@@ -18,6 +19,7 @@ import UnsafeAreaProvider, {
 } from "./src/contexts/unsafeAreaContext";
 import TasksProvider from "./src/contexts/tasksContext";
 import requestUserPermissionForNotifications from "./src/lib/notifications";
+import { toastConfig } from "./src/lib/Toast";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
@@ -48,6 +50,7 @@ function Main() {
               >
                 <Navigation colorScheme={colorScheme} />
                 <StatusBar style="dark" />
+                <Toast config={toastConfig} />
               </SafeAreaView>
             </SafeAreaView>
           </SafeAreaProvider>
