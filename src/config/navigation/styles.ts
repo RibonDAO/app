@@ -22,11 +22,6 @@ const styles = StyleSheet.create({
   tabBarLabel: {
     ...defaultBodyXsRegular,
   },
-  sparkles: {
-    zIndex: -1,
-    bottom: 0,
-    position: "absolute",
-  },
 });
 
 export default styles;

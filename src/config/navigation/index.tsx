@@ -28,8 +28,6 @@ import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
 import TicketsProvider from "contexts/ticketsContext";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
-import { useTasksContext } from "contexts/tasksContext";
-import sparklesAnimation from "assets/animations/sparkle.json";
 import ForYouScreen from "screens/content/ForYouScreen";
 import { useCanDonate } from "@ribon.io/shared";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
@@ -44,8 +42,6 @@ import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import ForYouIconOn from "./assets/ForYouIconOn";
 import ForYouIconOff from "./assets/ForYouIconOff";
-import { Dimensions, View } from "react-native";
-import LottieAnimation from "components/atomics/LottieAnimation";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -167,80 +163,63 @@ function BottomTabNavigator() {
     }, 500);
   }, [JSON.stringify(currentUser)]);
 
-  const { hasCompletedATask } = useTasksContext();
-
   return (
-    <>
-      <BottomTab.Navigator
-        initialRouteName="CausesScreen"
-        screenOptions={{
-          tabBarActiveTintColor: neutral[900],
-          tabBarStyle: { ...S.tabBar },
-          tabBarLabelStyle: { ...S.tabBarLabel },
+    <BottomTab.Navigator
+      initialRouteName="CausesScreen"
+      screenOptions={{
+        tabBarActiveTintColor: neutral[900],
+        tabBarStyle: { ...S.tabBar },
+        tabBarLabelStyle: { ...S.tabBarLabel },
+      }}
+    >
+      <BottomTab.Screen
+        name="CausesScreen"
+        component={CausesScreen}
+        options={{
+          title: t("tabs.causes") || "Tickets",
+          tabBarIcon: ({ color }) =>
+            color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
+          header,
+          lazy: false,
         }}
-      >
-        <BottomTab.Screen
-          name="CausesScreen"
-          component={CausesScreen}
-          options={{
-            title: t("tabs.causes") || "Tickets",
-            tabBarIcon: ({ color }) =>
-              color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
-            header,
-            lazy: false,
-          }}
-        />
+      />
 
-        <BottomTab.Screen
-          name="ForYouScreen"
-          component={ForYouScreen}
-          options={{
-            title: t("tabs.foryou") || "For you",
-            tabBarIcon: ({ color }) =>
-              color === activeColor ? <ForYouIconOn /> : <ForYouIconOff />,
-            lazy: false,
-            header: () => (canDonate ? <></> : headerWithoutTicket()),
-          }}
-        />
+      <BottomTab.Screen
+        name="ForYouScreen"
+        component={ForYouScreen}
+        options={{
+          title: t("tabs.foryou") || "For you",
+          tabBarIcon: ({ color }) =>
+            color === activeColor ? <ForYouIconOn /> : <ForYouIconOff />,
+          lazy: false,
+          header: () => (canDonate ? <></> : headerWithoutTicket()),
+        }}
+      />
 
-        <BottomTab.Screen
-          name="PromotersScreen"
-          component={PromotersScreen}
-          options={{
-            title: t("tabs.giving") || "Donations",
-            tabBarIcon: ({ color }: any) =>
-              color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
-            header: headerWithWallet,
-            lazy: false,
-          }}
-        />
+      <BottomTab.Screen
+        name="PromotersScreen"
+        component={PromotersScreen}
+        options={{
+          title: t("tabs.giving") || "Donations",
+          tabBarIcon: ({ color }: any) =>
+            color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
+          header: headerWithWallet,
+          lazy: false,
+        }}
+      />
 
-        <BottomTab.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
-          options={{
-            title: t("tabs.profile") || "Impact",
-            tabBarIcon: ({ color }: any) =>
-              color === activeColor ? <ImpactIconOn /> : <ImpactIconOff />,
-            header: headerWithoutTicket,
-            lazy: false,
-          }}
-        />
-      </BottomTab.Navigator>
-      <View style={S.sparkles}>
-        <LottieAnimation
-          animationData={sparklesAnimation}
-          width={Dimensions.get("window").width}
-          loop
-          style={{
-            position: "absolute",
-            bottom: 0,
-            zIndex: -1,
-            mixBlendMode: "multiply",
-          }}
-        />
-      </View>
-    </>
+      <BottomTab.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{
+          title: t("tabs.profile") || "Impact",
+          tabBarIcon: ({ color }: any) =>
+            color === activeColor ? <ImpactIconOn /> : <ImpactIconOff />,
+          header: headerWithoutTicket,
+          lazy: false,
+        }}
+      />
+    </BottomTab.Navigator>
   );
 }
 

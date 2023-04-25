@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     marginTop: theme.spacingNative(112),
   },
   redBall: {
-    position: "absolute",
     width: 8,
     height: 8,
     backgroundColor: theme.colors.feedback.error[500],
@@ -49,12 +48,8 @@ const styles = StyleSheet.create({
     top: 0,
   },
   tabContainer: {
-    width: 2000,
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    flexDirection: "column",
-    zIndex: 1,
+    paddingLeft: theme.spacingNative(2),
+    marginBottom: theme.spacingNative(8),
   },
 });
 

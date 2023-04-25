@@ -74,20 +74,23 @@ function TabViewSection(): JSX.Element {
     <TabBar
       {...props}
       renderLabel={({ focused, route }) => (
-        <View style={S.tabContainer}>
+        <View>
           <Text
             style={{
               ...S.tabBarTitle,
               color: focused
                 ? theme.colors.brand.primary[800]
                 : theme.colors.neutral[500],
+              top: 0,
             }}
           >
             {route.title}
+            {hasCompletedATask && route.title === t("tasksSectionTitle") && (
+              <View style={S.tabContainer}>
+                <View style={S.redBall} />
+              </View>
+            )}
           </Text>
-          {route.title === "teste" && hasCompletedATask && (
-            <View style={S.redBall} />
-          )}
         </View>
       )}
       indicatorStyle={S.indicatorStyle}
