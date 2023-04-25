@@ -30,7 +30,7 @@ import TicketsProvider from "contexts/ticketsContext";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 import ForYouScreen from "screens/content/ForYouScreen";
 import { useCanDonate } from "@ribon.io/shared";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -154,8 +154,10 @@ function BottomTabNavigator() {
 
   const { currentUser } = useCurrentUser();
 
-  const { canDonate, refetch: refetchCanDonate } =
-    useCanDonate(RIBON_INTEGRATION_ID);
+  const { canDonate, refetch: refetchCanDonate } = useCanDonate(
+    RIBON_INTEGRATION_ID,
+    PLATFORM,
+  );
 
   React.useEffect(() => {
     setTimeout(() => {

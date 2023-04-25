@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import Button from "components/atomics/buttons/Button";
-import AbstractForm from "./assets/AbstractForm";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
 import ImageWithInfoLayout from "components/moleculars/layouts/ImageWithInfoLayout";
@@ -19,9 +18,6 @@ export default function LockedSection() {
 
   return (
     <View style={styles.outerContainer}>
-      <View style={styles.abstractFormContainer}>
-        <AbstractForm />
-      </View>
       <View>
         <View style={styles.container}>
           <ImageWithInfoLayout

@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { RootStackScreenProps } from "types";
 import { useCanDonate } from "@ribon.io/shared";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
 import TabViewSection from "./TabViewSection";
@@ -13,7 +13,10 @@ export default function ForYouScreen({
 }: RootStackScreenProps<"ForYouScreen">) {
   const { currentUser } = useCurrentUser();
 
-  const { refetch: refetchCanDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const { refetch: refetchCanDonate } = useCanDonate(
+    RIBON_INTEGRATION_ID,
+    PLATFORM,
+  );
 
   useEffect(() => {
     setTimeout(() => {

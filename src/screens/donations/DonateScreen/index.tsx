@@ -45,7 +45,10 @@ function DonateScreen() {
   const [email, setEmail] = useState(currentUser?.email || "");
   const { donate } = useDonations(currentUser?.id);
   const { navigateTo, popNavigation } = useNavigation();
-  const { refetch: refetchCanDonate } = useCanDonate(RIBON_INTEGRATION_ID);
+  const { refetch: refetchCanDonate } = useCanDonate(
+    RIBON_INTEGRATION_ID,
+    PLATFORM,
+  );
   const { currentLang } = useLanguage();
 
   function handleButtonPress() {
@@ -69,7 +72,10 @@ function DonateScreen() {
         setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
         navigateTo("DonationDoneScreen", { nonProfit });
       } catch (error: any) {
-        showToast(error.response.data.formatted_message);
+        showToast({
+          type: "error",
+          message: error.response.data.formatted_message,
+        });
         popNavigation();
       } finally {
         setTimeout(() => {
@@ -118,7 +124,6 @@ function DonateScreen() {
           <Text style={S.nonProfitText}>{t("nonProfitText")}</Text>
           <Text style={S.nonProfitHighlight}>{nonProfit.name}</Text>
         </View>
-        <Image style={S.logo} source={{ uri: nonProfit.mainImage }} />
 
         <LinearGradient
           colors={[theme.colors.brand.primary[800], "transparent"]}
