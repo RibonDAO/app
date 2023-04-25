@@ -40,6 +40,22 @@ const styles = StyleSheet.create({
   tabViewContainer: {
     marginTop: theme.spacingNative(112),
   },
+  redBall: {
+    position: "absolute",
+    width: 8,
+    height: 8,
+    backgroundColor: theme.colors.feedback.error[500],
+    borderRadius: 100,
+    top: 0,
+  },
+  tabContainer: {
+    width: 2000,
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    flexDirection: "column",
+    zIndex: 1,
+  },
 });
 
 export default styles;

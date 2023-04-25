@@ -1,7 +1,12 @@
+import { useTasksContext } from "contexts/tasksContext";
 import * as React from "react";
+import { View } from "react-native";
 import Svg, { Mask, Path, G } from "react-native-svg";
+import S from "./styles";
 
 function ForYouIconOff() {
+  const { hasCompletedATask } = useTasksContext();
+
   return (
     <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
       <Mask
@@ -23,6 +28,7 @@ function ForYouIconOff() {
           fill="#BFBCB5"
         />
       </G>
+      {hasCompletedATask && <View style={S.redBall} />}
     </Svg>
   );
 }

@@ -11,7 +11,9 @@ import { nextDay } from "lib/dateUtils";
 import { useNavigation } from "hooks/useNavigation";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import { formatCountdown } from "lib/formatters/countdownFormatter";
+import { useFocusEffect } from "@react-navigation/native";
 
+import { useCallback } from "react";
 import S from "./styles";
 
 export default function TasksSection() {
@@ -21,9 +23,19 @@ export default function TasksSection() {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const dailyTasks = useTasks("daily");
-  const { tasksState, reload } = useTasksContext();
+  const { tasksState, reload, setHasCompletedATask, hasCompletedATask } =
+    useTasksContext();
   const { navigateTo } = useNavigation();
-  const { setIndex } = useForYouTabsContext();
+
+  const { setIndex, index } = useForYouTabsContext();
+
+  useFocusEffect(
+    useCallback(() => {
+      if (hasCompletedATask === true && index === 0) {
+        setHasCompletedATask(false);
+      }
+    }, [hasCompletedATask, index, setHasCompletedATask]),
+  );
 
   const renderCountdown = () => {
     const countdown = useCountdown(nextDay(), reload);

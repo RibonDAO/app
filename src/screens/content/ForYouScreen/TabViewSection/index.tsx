@@ -8,11 +8,11 @@ import React, { useEffect } from "react";
 import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
 import { useCanDonate } from "@ribon.io/shared";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useForYouTabsContext } from "contexts/forYouTabsContext";
+import { useTasksContext } from "contexts/tasksContext";
 import TasksSection from "../TasksSection";
 import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
-import { useTasksContext } from "contexts/tasksContext";
-import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import S from "./styles";
 
 type Route = {
@@ -42,30 +42,6 @@ const renderScene = SceneMap({
   NewsSectionTabView,
 });
 
-const renderTabBar = (props: any) => (
-  <TabBar
-    {...props}
-    renderLabel={({ focused, route }) => (
-      <View style={{ width: 2000 }}>
-        <Text
-          style={{
-            ...S.tabBarTitle,
-            color: focused
-              ? theme.colors.brand.primary[800]
-              : theme.colors.neutral[500],
-          }}
-        >
-          {route.title}
-        </Text>
-      </View>
-    )}
-    indicatorStyle={S.indicatorStyle}
-    style={S.tabBar}
-    tabStyle={S.tabStyle}
-    scrollEnabled
-  />
-);
-
 function TabViewSection(): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "content",
@@ -73,7 +49,7 @@ function TabViewSection(): JSX.Element {
 
   const layout = useWindowDimensions();
   const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
-  const { registerAction } = useTasksContext();
+  const { registerAction, hasCompletedATask } = useTasksContext();
 
   const { index, setIndex } = useForYouTabsContext();
 
@@ -93,6 +69,33 @@ function TabViewSection(): JSX.Element {
       registerAction("for_you_news_tab_view");
     }
   }, [index]);
+
+  const renderTabBar = (props: any) => (
+    <TabBar
+      {...props}
+      renderLabel={({ focused, route }) => (
+        <View style={S.tabContainer}>
+          <Text
+            style={{
+              ...S.tabBarTitle,
+              color: focused
+                ? theme.colors.brand.primary[800]
+                : theme.colors.neutral[500],
+            }}
+          >
+            {route.title}
+          </Text>
+          {route.title === "teste" && hasCompletedATask && (
+            <View style={S.redBall} />
+          )}
+        </View>
+      )}
+      indicatorStyle={S.indicatorStyle}
+      style={S.tabBar}
+      tabStyle={S.tabStyle}
+      scrollEnabled
+    />
+  );
 
   return (
     <View style={S.tabViewSection}>
