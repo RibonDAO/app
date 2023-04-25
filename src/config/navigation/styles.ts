@@ -4,7 +4,6 @@ import { defaultBodyXsRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   tabBar: {
-    zIndex: 1,
     backgroundColor: "#fff",
     height: 64,
     display: "flex",
