@@ -49,19 +49,6 @@ function TasksProvider({ children }: any) {
       });
 
       setTasksState(state);
-      if (allDone(state)) {
-        showToast({
-          type: "custom",
-          backgroundColor: theme.colors.feedback.success[50],
-          borderColor: theme.colors.brand.primary[500],
-          textColor: theme.colors.brand.primary[900],
-          icon: "celebration",
-          iconColor: theme.colors.brand.primary[500],
-          message: "You've completed all tasks",
-          closeButton: false,
-          position: "bottom",
-        });
-      }
     });
   };
 
@@ -125,6 +112,19 @@ function TasksProvider({ children }: any) {
     });
 
     setTasksState(newState);
+    if (allDone(newState)) {
+      showToast({
+        type: "custom",
+        backgroundColor: theme.colors.feedback.success[50],
+        borderColor: theme.colors.brand.primary[500],
+        textColor: theme.colors.brand.primary[900],
+        icon: "celebration",
+        iconColor: theme.colors.brand.primary[500],
+        message: "You've completed all tasks",
+        closeButton: false,
+        position: "top",
+      });
+    }
   };
 
   const tasksObject: ITasksContext = useMemo(

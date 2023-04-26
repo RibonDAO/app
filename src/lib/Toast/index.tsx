@@ -1,7 +1,8 @@
 import { theme } from "@ribon.io/shared/styles";
 import { IconRounded } from "components/atomics/Icon";
+import { useNavigation } from "hooks/useNavigation";
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import Toast from "react-native-toast-message";
 import S from "./styles";
 
@@ -18,7 +19,9 @@ type NotificationProps = {
   closeButton?: boolean;
   // eslint-disable-next-line react/no-unused-prop-types
   position?: "top" | "bottom";
+  navigate?: string;
 };
+
 const iconToast = (type?: string) => {
   switch (type) {
     case "success":
@@ -83,9 +86,11 @@ function CustomToast({
   linkMessage,
   link,
   closeButton,
+  navigate,
 }: NotificationProps) {
+  const { navigateTo } = useNavigation();
   return (
-    <View
+    <TouchableOpacity
       style={[
         S.toastContainer,
         {
@@ -93,6 +98,7 @@ function CustomToast({
           borderColor: borderColor || backgroundColorToast(type),
         },
       ]}
+      onPress={() => navigateTo(navigate ?? "ForYouScreen")}
     >
       <View style={S.textContainer}>
         <IconRounded
@@ -116,7 +122,7 @@ function CustomToast({
         )}
       </View>
       {link && <Text style={S.link}>{linkMessage}</Text>}
-    </View>
+    </TouchableOpacity>
   );
 }
 export const toastConfig = {
@@ -142,6 +148,7 @@ export const showToast = ({
   textColor,
   link,
   linkMessage,
+  navigate,
   closeButton = true,
 }: NotificationProps) =>
   Toast.show({
@@ -161,5 +168,6 @@ export const showToast = ({
       type,
       position,
       closeButton,
+      navigate,
     },
   });

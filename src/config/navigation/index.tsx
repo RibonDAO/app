@@ -28,6 +28,12 @@ import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
 import TicketsProvider from "contexts/ticketsContext";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
+import ForYouScreen from "screens/content/ForYouScreen";
+import { useCanDonate } from "@ribon.io/shared";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useCurrentUser } from "contexts/currentUserContext";
+import Toast from "react-native-toast-message";
+import { toastConfig } from "lib/Toast";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -38,10 +44,6 @@ import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import ForYouIconOn from "./assets/ForYouIconOn";
 import ForYouIconOff from "./assets/ForYouIconOff";
-import ForYouScreen from "screens/content/ForYouScreen";
-import { useCanDonate } from "@ribon.io/shared";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
-import { useCurrentUser } from "contexts/currentUserContext";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -246,6 +248,7 @@ export default function Navigation() {
                 <CausesProvider>
                   <TicketsProvider>
                     <RootNavigator />
+                    <Toast config={toastConfig} />
                   </TicketsProvider>
                 </CausesProvider>
               </CardPaymentInformationProvider>
