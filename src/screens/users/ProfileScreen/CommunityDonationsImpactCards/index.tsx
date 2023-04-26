@@ -24,6 +24,7 @@ function CommunityDonationsImpactCards(): JSX.Element {
   });
 
   const navigateToPromotersScreen = () => {
+    logEvent("giveCauseCard_click", { from: "impactEmptystate"});
     navigateTo("PromotersScreen");
   };
 
