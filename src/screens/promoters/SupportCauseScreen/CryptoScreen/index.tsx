@@ -98,8 +98,10 @@ function CryptoScreen(): JSX.Element {
   };
 
   const onDonationToContractSuccess = () => {
-    logEvent("toastNotification_view", {
-      status: "transactionProcessed",
+    logEvent("giveCauseBtn_start", {
+      from: "giveCauseCrypto_page",
+      causeId: cause?.id,
+      currency: tokenSymbol,
     });
     resetScreen();
     navigateTo("ContributionDoneScreen", {
