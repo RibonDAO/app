@@ -1,3 +1,4 @@
+import React, { useCallback } from "react";
 import { Text, View } from "react-native";
 import { useTasks } from "utils/constants/Tasks";
 import CheckBox from "components/atomics/inputs/Checkbox";
@@ -15,19 +16,18 @@ import { useNavigation } from "hooks/useNavigation";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import { formatCountdown } from "lib/formatters/countdownFormatter";
 import { useFocusEffect } from "@react-navigation/native";
-
-import { useCallback } from "react";
 import S from "./styles";
 
-export default function TasksSection() {
-  const CURRENT_PAGE = "ForYouScreen";
+const CURRENT_PAGE = "ForYouScreen";
 
+export default function TasksSection() {
   const { t } = useTranslation("translation", {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const dailyTasks = useTasks("daily");
   const { tasksState, reload, setHasCompletedATask, hasCompletedATask } =
     useTasksContext();
+
   const { navigateTo } = useNavigation();
 
   const { setIndex, index } = useForYouTabsContext();
@@ -39,6 +39,14 @@ export default function TasksSection() {
       }
     }, [hasCompletedATask, index, setHasCompletedATask]),
   );
+
+  const tasksCount = useCallback(() => {
+    if (!tasksState) return;
+    if (!tasksState.length) return;
+
+    return dailyTasks.filter((task) => task.isVisible({ state: tasksState }))
+      .length;
+  }, [tasksState]);
 
   const renderCountdown = () => {
     const countdown = useCountdown(nextDay(), reload);
@@ -73,7 +81,7 @@ export default function TasksSection() {
           <ProgressBar
             value={tasksState.filter((obj) => obj.done === true).length}
             min={0}
-            max={dailyTasks.length}
+            max={tasksCount() || dailyTasks.length}
           />
         </View>
         {renderCountdown()}
@@ -86,50 +94,54 @@ export default function TasksSection() {
           />
           <Text style={S.title}>{t("title")}</Text>
         </View>
-        {tasksState &&
-          dailyTasks.map((task) => {
-            const taskDone = tasksState.find((obj) => obj.id === task.id)?.done;
-            const navigateToTask = task.navigationCallback;
-            const isCurrentPage = navigateToTask === CURRENT_PAGE;
-            const navigationCallback = taskDone
-              ? undefined
-              : isCurrentPage
-              ? () => setIndex(1)
-              : () => navigateTo(navigateToTask);
+        <View>
+          {tasksState &&
+            dailyTasks.map((task) => {
+              const taskDone = tasksState.find(
+                (obj) => obj.id === task.id,
+              )?.done;
+              const navigateToTask = task.navigationCallback;
+              const isCurrentPage = navigateToTask === CURRENT_PAGE;
+              const navigationCallback = taskDone
+                ? undefined
+                : isCurrentPage
+                ? () => setIndex(1)
+                : () => navigateTo(navigateToTask);
 
-            return (
-              <CheckBox
-                key={task.id}
-                text={t(`tasks.${task?.title}`)}
-                sectionStyle={{ marginBottom: 8, paddingLeft: 4 }}
-                navigationCallback={navigationCallback}
-                checked={taskDone}
-                lineThroughOnChecked
-                disabled
-              />
-            );
-          })}
-        {integration?.integrationTask &&
-          tasksState.find((obj) => obj.id === donateTicketTask?.id)?.done && (
-            <View style={S.integrationContainer}>
-              <View style={S.integrationLeftSection}>
-                <View style={S.integrationIconContainer}>
-                  <Image
-                    style={S.integrationIcon}
-                    source={{ uri: integration?.logo ?? "" }}
-                  />
+              return (
+                <CheckBox
+                  key={task.id}
+                  text={t(`tasks.${task?.title}`)}
+                  sectionStyle={{ marginBottom: 8, paddingLeft: 4 }}
+                  navigationCallback={navigationCallback}
+                  checked={taskDone}
+                  lineThroughOnChecked
+                  disabled
+                />
+              );
+            })}
+          {integration?.integrationTask &&
+            tasksState.find((obj) => obj.id === donateTicketTask?.id)?.done && (
+              <View style={S.integrationContainer}>
+                <View style={S.integrationLeftSection}>
+                  <View style={S.integrationIconContainer}>
+                    <Image
+                      style={S.integrationIcon}
+                      source={{ uri: integration?.logo ?? "" }}
+                    />
+                  </View>
+                </View>
+                <View style={S.integrationRightSection}>
+                  <Text style={S.integrationTitle}>
+                    {integration?.integrationTask.description}
+                  </Text>
+                  <Text style={S.integrationLink} onPress={linkToIntegration}>
+                    {integration?.integrationTask.link}
+                  </Text>
                 </View>
               </View>
-              <View style={S.integrationRightSection}>
-                <Text style={S.integrationTitle}>
-                  {integration?.integrationTask.description}
-                </Text>
-                <Text style={S.integrationLink} onPress={linkToIntegration}>
-                  {integration?.integrationTask.link}
-                </Text>
-              </View>
-            </View>
-          )}
+            )}
+        </View>
       </View>
     </View>
   );

@@ -16,6 +16,7 @@ export type TaskStateItem = {
   nextAction: string;
   done: boolean;
   expiresAt: string;
+  timesCompleted: number;
 };
 
 export interface ITasksContext {
@@ -44,7 +45,9 @@ function TasksProvider({ children }: any) {
 
   const isDone = (task: CompletedTask | undefined) => {
     if (!task) return false;
-    const taskObject = TASKS.find((t) => t.id === task.taskIdentifier);
+    const taskObject = TASKS.find(
+      (filterTask) => filterTask.id === task.taskIdentifier,
+    );
     const baseDate =
       taskObject?.type === "daily"
         ? beginningOfToday()
@@ -59,7 +62,9 @@ function TasksProvider({ children }: any) {
   const isExpired = (task: CompletedTask | undefined) => {
     if (!task) return false;
 
-    const taskObject = TASKS.find((t) => t.id === task.taskIdentifier);
+    const taskObject = TASKS.find(
+      (filterTask) => filterTask.id === task.taskIdentifier,
+    );
 
     if (isDone(task)) {
       return taskObject?.type === "daily" ? nextDay() : nextMonth();
@@ -72,7 +77,7 @@ function TasksProvider({ children }: any) {
     findCompletedTasks().then((completedTasks) => {
       const state = TASKS.map((task) => {
         const currentTask = completedTasks.find(
-          (t) => t.taskIdentifier === task.id,
+          (filterTask) => filterTask.taskIdentifier === task.id,
         );
 
         return {
@@ -98,7 +103,7 @@ function TasksProvider({ children }: any) {
     if (tasksState.length === 0) return;
 
     const newState = tasksState.map((task) => {
-      const currentTask = TASKS.find((t) => t.id === task.id);
+      const currentTask = TASKS.find((filterTask) => filterTask.id === task.id);
 
       if (task.nextAction === action && currentTask) {
         const nextActionIndex = currentTask.actions.indexOf(action) + 1;
@@ -115,6 +120,7 @@ function TasksProvider({ children }: any) {
           return {
             ...task,
             done: true,
+            timesCompleted: task.timesCompleted + 1,
             expiresAt: currentTask.type === "daily" ? nextDay() : nextMonth(),
           };
         }
