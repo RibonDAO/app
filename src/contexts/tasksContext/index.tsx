@@ -9,6 +9,7 @@ import {
 } from "lib/dateUtils";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { showToast } from "lib/Toast";
+import { useTranslation } from "react-i18next";
 
 export type TaskStateItem = {
   id: string;
@@ -28,6 +29,10 @@ function TasksProvider({ children }: any) {
   const [tasksState, setTasksState] = useState<any[]>([]);
   const { findCompletedTasks, completeTask } = useCompletedTasks();
   const { currentUser, signedIn } = useCurrentUser();
+
+  const { t } = useTranslation("translation", {
+    keyPrefix: "contexts.tasksContext",
+  });
 
   function allDone(tasks: any) {
     return tasks.every((task: any) => task.done === true);
@@ -120,9 +125,9 @@ function TasksProvider({ children }: any) {
         textColor: theme.colors.brand.primary[900],
         icon: "celebration",
         iconColor: theme.colors.brand.primary[500],
-        message: "You've completed all tasks",
+        message: t("allTasksCompleted"),
         closeButton: false,
-        position: "top",
+        position: "bottom",
       });
     }
   };
