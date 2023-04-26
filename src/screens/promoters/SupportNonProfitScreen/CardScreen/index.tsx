@@ -48,7 +48,14 @@ function CardScreen(): JSX.Element {
 
   const handleDonateClick = (nonProfit: NonProfit) => {
     setFlow("nonProfit");
-    logEvent("nonProfitComCicleBtn_click");
+    logEvent("giveNgoBtn_start",
+      {
+        from: "giveNonProfit_page",
+        nonprofitId: nonProfit.id,
+        price: currentOffer?.priceValue,
+        currency: currentOffer?.currency
+      }
+    );
     navigateTo("PaymentScreen", {
       offer: currentOffer,
       flow: "nonProfit",
