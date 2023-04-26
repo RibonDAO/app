@@ -157,7 +157,6 @@ function CardPaymentInformationProvider({ children }: Props) {
   };
 
   const handleSubmit = async () => {
-    logEvent("treasureSupportConfirmBtn_click");
     showLoadingOverlay();
 
     const expiration = expirationDate.split("/");
@@ -184,18 +183,34 @@ function CardPaymentInformationProvider({ children }: Props) {
     try {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
       login();
+      if(flow === "nonProfit") {
+        logEvent("ngoGave_end",
+          {
+            causeId: cause?.id,
+            offerId: offerId
+          }
+        );
+      } 
+      else {
+        logEvent("causeGave_end",
+          {
+            causeId: cause?.id,
+            offerId: offerId
+          }
+        );
+      }
+      
       navigateTo("ContributionDoneScreen", {
         cause,
         nonProfit,
       });
-      logEvent("treasureGivingConfirmMdl_view");
       resetStates();
     } catch (error) {
       logError(error);
       showToast(t("onErrorMessage"));
 
-      logEvent("toastNotification_view", {
-        status: "transactionFailed",
+      logEvent("paymentError_view", {
+        email: email,
       });
     } finally {
       hideLoadingOverlay();

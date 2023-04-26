@@ -98,8 +98,7 @@ function CryptoScreen(): JSX.Element {
   };
 
   const onDonationToContractSuccess = () => {
-    logEvent("giveCauseBtn_start", {
-      from: "giveCauseCrypto_page",
+    logEvent("causeGave_end", {
       causeId: cause?.id,
       currency: tokenSymbol,
     });
@@ -116,7 +115,11 @@ function CryptoScreen(): JSX.Element {
     }
 
     connectWallet();
-    logEvent("treasureComCicleBtn_click");
+    logEvent("giveCauseBtn_start", {
+      from: "giveCauseCrypto_page",
+      causeId: cause?.id,
+      currency: tokenSymbol,
+    });
   };
 
   const handleCommunityAddClick = () => {
