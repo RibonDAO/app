@@ -19,7 +19,7 @@ export const TASKS = [
     actions: ["donation_done_page_view"],
     type: "daily",
     navigationCallback: "CausesScreen",
-    isVisible(this: Task, params?: any) {
+    isVisible(this: Task) {
       return true;
     },
   },
@@ -49,7 +49,7 @@ export const TASKS = [
     actions: ["for_you_news_tab_view"],
     type: "daily",
     navigationCallback: "ForYouScreen",
-    isVisible(this: Task, params?: any) {
+    isVisible(this: Task) {
       return true;
     },
   },
