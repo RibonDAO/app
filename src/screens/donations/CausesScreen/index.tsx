@@ -171,6 +171,7 @@ export default function CausesScreen() {
                   handleNonProfitImagePress(nonProfit);
                 }}
                 onClickButton={() => {
+                  logEvent("donateTicketBtn_start", {nonProfitId: nonProfit.id, from: "nonprofitCard"});
                   navigateTo("DonateScreen", { nonProfit });
                 }}
                 buttonDisabled={!hasTickets()}

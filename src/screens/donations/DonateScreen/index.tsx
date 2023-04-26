@@ -30,6 +30,7 @@ import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/Tick
 import { openInWebViewer } from "lib/linkOpener";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import Placeholder from "./placeholder";
+import { logEvent } from "services/analytics";
 
 function DonateScreen() {
   const { t } = useTranslation("translation", {
@@ -53,6 +54,7 @@ function DonateScreen() {
       setIsDonating(false);
     } else {
       setIsDonating(true);
+      logEvent('P12_continueBtn_click', { nonProfitId: nonProfit.id });
     }
   }
 
@@ -67,6 +69,7 @@ function DonateScreen() {
         await donate(RIBON_INTEGRATION_ID, nonProfit.id, email, PLATFORM);
         refetchCanDonate();
         setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
+        logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
         navigateTo("DonationDoneScreen", { nonProfit });
       } catch (error: any) {
         showToast(error.response.data.formatted_message);

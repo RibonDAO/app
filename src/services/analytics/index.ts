@@ -1,5 +1,6 @@
 import analytics from "@react-native-firebase/analytics";
 
 export async function logEvent(eventName: string, params?: Record<any, any>) {
-  await analytics().logEvent(eventName, params);
+  const newParams = {...params, ...{platform: 'app'}}
+  await analytics().logEvent(eventName, newParams);
 }

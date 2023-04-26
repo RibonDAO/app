@@ -6,6 +6,7 @@ import DoneScreenTemplate from "screens/templates/DoneScreenTemplate";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import useSound from "hooks/useSound";
 import donationDoneSound from "./assets/donation-done.mp3";
+import { logEvent } from "services/analytics";
 
 export default function DonationDoneScreen({
   route,
