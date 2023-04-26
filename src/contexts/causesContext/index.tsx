@@ -34,7 +34,7 @@ function CausesProvider({ children }: any) {
       setActiveCauses(causesFilter());
       setCurrentCauseId(activeCauses[0]?.id);
     }
-  }, [causes, isLoading]);
+  }, [JSON.stringify(causes), isLoading]);
 
   const causesObject: ICausesContext = useMemo(
     () => ({
