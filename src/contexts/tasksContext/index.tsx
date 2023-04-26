@@ -19,8 +19,11 @@ export type TaskStateItem = {
 };
 
 export interface ITasksContext {
+  hasCompletedATask: boolean;
+  setHasCompletedATask: (value: boolean) => void;
   tasksState: TaskStateItem[];
   registerAction: (action: string) => void;
+  reload: () => void;
 }
 
 export const TasksContext = createContext<ITasksContext>({} as ITasksContext);
@@ -28,6 +31,7 @@ export const TasksContext = createContext<ITasksContext>({} as ITasksContext);
 function TasksProvider({ children }: any) {
   const [tasksState, setTasksState] = useState<any[]>([]);
   const { findCompletedTasks, completeTask } = useCompletedTasks();
+  const [hasCompletedATask, setHasCompletedATask] = useState(false);
   const { currentUser, signedIn } = useCurrentUser();
 
   const { t } = useTranslation("translation", {
@@ -37,25 +41,6 @@ function TasksProvider({ children }: any) {
   function allDone(tasks: any) {
     return tasks.every((task: any) => task.done === true);
   }
-
-  const buildTasksState = () => {
-    findCompletedTasks().then((completedTasks) => {
-      const state = TASKS.map((task) => {
-        const currentTask = completedTasks.find(
-          (t) => t.taskIdentifier === task.id,
-        );
-
-        return {
-          id: task.id,
-          nextAction: task.actions[0],
-          done: isDone(currentTask),
-          expiresAt: isExpired(currentTask),
-        };
-      });
-
-      setTasksState(state);
-    });
-  };
 
   const isDone = (task: CompletedTask | undefined) => {
     if (!task) return false;
@@ -83,6 +68,27 @@ function TasksProvider({ children }: any) {
     }
   };
 
+  const buildTasksState = () => {
+    findCompletedTasks().then((completedTasks) => {
+      const state = TASKS.map((task) => {
+        const currentTask = completedTasks.find(
+          (t) => t.taskIdentifier === task.id,
+        );
+
+        return {
+          id: task.id,
+          nextAction: task.actions[0],
+          done: isDone(currentTask),
+          expiresAt: isExpired(currentTask),
+        };
+      });
+
+      setTasksState(state);
+    });
+  };
+
+  const reload = () => buildTasksState();
+
   useEffect(() => {
     if (currentUser && signedIn && currentUser.email) buildTasksState();
   }, [currentUser, signedIn]);
@@ -105,6 +111,7 @@ function TasksProvider({ children }: any) {
           };
         } else {
           completeTask(task.id);
+          if (!task.done) setHasCompletedATask(true);
           return {
             ...task,
             done: true,
@@ -134,10 +141,13 @@ function TasksProvider({ children }: any) {
 
   const tasksObject: ITasksContext = useMemo(
     () => ({
+      hasCompletedATask,
+      setHasCompletedATask,
       tasksState,
       registerAction,
+      reload,
     }),
-    [tasksState],
+    [tasksState, hasCompletedATask],
   );
 
   return (
