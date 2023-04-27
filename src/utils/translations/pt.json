@@ -212,7 +212,12 @@
       },
       "communityDonationsTitle": "Doações em Comunidade",
       "ticketDonationsTitle": "Doações em Ticket",
-      "directDonationsTitle": "Doações Diretas"
+      "directDonationsTitle": "Doações Diretas",
+      "impactNotification": {
+        "title": "Vamos importar o seu impacto em breve!",
+        "description": "Suas doações em ribons da plataforma antiga irão ser importados em breve para o seu perfil.",
+        "link": "Não mostrar novamente"
+      }
     }
   },
   "impactNormalizer": {

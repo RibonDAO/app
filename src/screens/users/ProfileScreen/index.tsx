@@ -7,6 +7,7 @@ import { useImpact, useStatistics } from "@ribon.io/shared/hooks";
 import ImpactCards from "./ImpactCards";
 import TabViewSection from "./TabViewSection";
 import S from "./styles";
+import ImpactMigrationNotification from "screens/users/ProfileScreen/ImpactMigrationNotification";
 
 function ProfileScreen() {
   const { t } = useTranslation("translation", {
@@ -28,6 +29,7 @@ function ProfileScreen() {
   return (
     <View style={S.container}>
       <View style={{ paddingBottom: 40 }}>
+        <ImpactMigrationNotification />
         <TabViewSection />
       </View>
     </View>
