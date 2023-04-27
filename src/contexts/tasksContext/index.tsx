@@ -84,7 +84,9 @@ function TasksProvider({ children }: any) {
           id: task.id,
           nextAction: task.actions[0],
           done: isDone(currentTask),
+          timesCompleted: currentTask?.timesCompleted || 0,
           expiresAt: isExpired(currentTask),
+          lastCompletedAt: currentTask?.lastCompletedAt,
         };
       });
 

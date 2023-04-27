@@ -41,8 +41,8 @@ export default function TasksSection() {
   );
 
   const tasksCount = useCallback(() => {
-    if (!tasksState) return;
-    if (!tasksState.length) return;
+    if (!tasksState) return 0;
+    if (!tasksState.length) return 0;
 
     return dailyTasks.filter((task) => task.isVisible({ state: tasksState }))
       .length;
@@ -51,10 +51,10 @@ export default function TasksSection() {
   const renderCountdown = () => {
     const countdown = useCountdown(nextDay(), reload);
 
-    if (!tasksState) return;
-    if (!tasksState.length) return;
-    if (tasksState.filter((obj) => obj.done === false).length) return;
-    if (countdown.reduce((a, b) => a + b, 0) <= 0) return;
+    if (!tasksState) return 0;
+    if (!tasksState.length) return 0;
+    if (tasksState.filter((obj) => obj.done === false).length) return 0;
+    if (countdown.reduce((a, b) => a + b, 0) <= 0) return 0;
 
     return (
       <View style={S.timerWrapper}>
@@ -68,6 +68,18 @@ export default function TasksSection() {
     (obj) => obj.title === "donate_ticket",
   );
 
+  const progressBarValue = () => {
+    const tasks = dailyTasks.map((visibleTask: any) => {
+      const completedTasks = tasksState.find(
+        (completedTask: any) => completedTask.id === visibleTask.id,
+      );
+      return { ...visibleTask, ...completedTasks };
+    });
+    return tasks.filter(
+      (task: any) => task.done && task.isVisible({ state: tasksState }),
+    );
+  };
+
   const { integration } = useIntegration(RIBON_INTEGRATION_ID);
 
   const linkToIntegration = () => {
@@ -79,7 +91,7 @@ export default function TasksSection() {
       <View style={S.paddingContainer}>
         <View style={S.progressBar}>
           <ProgressBar
-            value={tasksState.filter((obj) => obj.done === true).length}
+            value={progressBarValue().length}
             min={0}
             max={tasksCount() || dailyTasks.length}
           />
@@ -107,6 +119,10 @@ export default function TasksSection() {
                 : isCurrentPage
                 ? () => setIndex(1)
                 : () => navigateTo(navigateToTask);
+
+              if (!task.isVisible({ state: tasksState })) {
+                return null;
+              }
 
               return (
                 <CheckBox

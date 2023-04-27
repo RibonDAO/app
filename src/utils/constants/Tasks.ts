@@ -3,6 +3,8 @@
  * is completed. This will help us to split tasks or not between clients, and give us more freedom to set callbacks and more.
  */
 
+import { beginningOfToday } from "lib/dateUtils";
+
 interface Task {
   id: string;
   title: string;
@@ -33,10 +35,14 @@ export const TASKS = [
       const taskState = params?.state.find((obj: any) => obj.id === this.id);
       const timesCompleted = taskState?.timesCompleted || 0;
       const taskDone = taskState?.done;
+      const lastCompletedAt = new Date(
+        taskState?.lastCompletedAt?.slice(0, 19),
+      );
+      const completedDay = lastCompletedAt < beginningOfToday();
 
       if (timesCompleted === 0 && !taskDone) {
         return true;
-      } else if (timesCompleted === 1 && taskDone) {
+      } else if (timesCompleted === 1 && taskDone && !completedDay) {
         return true;
       }
 
