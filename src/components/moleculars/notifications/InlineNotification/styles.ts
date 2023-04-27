@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   leftContainer: {
     display: "flex",
     flexDirection: "row",
+    width: "85%"
   },
   rightContainer: {
     height: "100%",
