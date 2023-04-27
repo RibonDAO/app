@@ -30,6 +30,8 @@ import TicketsProvider from "contexts/ticketsContext";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 import ForYouScreen from "screens/content/ForYouScreen";
 import { useCanDonate } from "@ribon.io/shared";
+import Toast from "react-native-toast-message";
+import { toastConfig } from "lib/Toast";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import S from "./styles";
@@ -248,6 +250,7 @@ export default function Navigation() {
                 <CausesProvider>
                   <TicketsProvider>
                     <RootNavigator />
+                    <Toast config={toastConfig} />
                   </TicketsProvider>
                 </CausesProvider>
               </CardPaymentInformationProvider>
