@@ -12,6 +12,7 @@ export type Props = {
   footerText?: string | JSX.Element;
   footerTextStyle?: TextStyle;
   image?: string;
+  label?: string;
 };
 
 function CardImageText({
@@ -20,6 +21,7 @@ function CardImageText({
   footerText,
   image,
   subtitle,
+  label,
   subtitleStyle,
   textStyle,
   titleStyle,
@@ -34,6 +36,11 @@ function CardImageText({
         )}
         {title && <Text style={[S.title, titleStyle]}>{title}</Text>}
         {text && <Text style={[S.text, textStyle]}>{text}</Text>}
+        {label && (
+          <View style={S.labelContainer}>
+            <Text style={S.label}>{label}</Text>
+          </View>
+        )}
       </View>
       {footerText && (
         <Text style={[S.footerText, footerTextStyle]}>{footerText}</Text>

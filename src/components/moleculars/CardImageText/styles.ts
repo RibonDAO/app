@@ -52,6 +52,17 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginBottom: theme.spacingNative(8),
   },
+  labelContainer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    padding: theme.spacingNative(8),
+    backgroundColor: theme.colors.brand.primary[50],
+    borderRadius: 30,
+  },
+  label: {
+    color: theme.colors.brand.primary[800],
+  },
 });
 
 export default styles;
