@@ -116,9 +116,9 @@ function TasksProvider({ children }: any) {
             ...task,
             nextAction,
           };
-        } else {
+        } else if (!task.done) {
           completeTask(task.id);
-          if (!task.done) setHasCompletedATask(true);
+          setHasCompletedATask(true);
           return {
             ...task,
             done: true,
