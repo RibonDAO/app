@@ -36,7 +36,7 @@
       "labelText": "Saiba mais",
       "whatIsATicket": "O que é um ticket?",
       "ticketExplanation": "Os tickets servem para fazer doações e você recebe um a cada dia que entrar aqui na Ribon",
-      "noCauses":{
+      "noCauses": {
         "title": "Nenhuma causa disponível",
         "text": "Mas você pode contribuir doando em comunidade para uma causa",
         "button": "Doe em comunidade"
@@ -106,6 +106,7 @@
         "title": "Tarefas",
         "tasks": {
           "donate_ticket": "Doar ticket",
+          "donate_ticket_on_native": "Baixar o app e doar um ticket",
           "check_daily_news": "Conferir publicações diárias",
           "see_more_ngo_infos": "Ver mais informações sobre uma ONG"
         },
@@ -119,6 +120,9 @@
     },
     "cardPaymentInformation": {
       "successMessage": "Você doou com sucesso para a causa!"
+    },
+    "tasksContext": {
+      "allTasksCompleted": "Você completou todas as tarefas!"
     }
   },
   "promoters": {

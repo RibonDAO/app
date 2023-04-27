@@ -40,6 +40,14 @@ export default function TasksSection() {
     }, [hasCompletedATask, index, setHasCompletedATask]),
   );
 
+  const tasksCount = useCallback(() => {
+    if (!tasksState) return 0;
+    if (!tasksState.length) return 0;
+
+    return dailyTasks.filter((task) => task.isVisible({ state: tasksState }))
+      .length;
+  }, [tasksState]);
+
   const renderCountdown = () => {
     const countdown = useCountdown(nextDay(), reload);
 
@@ -60,6 +68,18 @@ export default function TasksSection() {
     (obj) => obj.title === "donate_ticket",
   );
 
+  const progressBarValue = () => {
+    const tasks = dailyTasks.map((visibleTask: any) => {
+      const completedTasks = tasksState.find(
+        (completedTask: any) => completedTask.id === visibleTask.id,
+      );
+      return { ...visibleTask, ...completedTasks };
+    });
+    return tasks.filter(
+      (task: any) => task.done && task.isVisible({ state: tasksState }),
+    );
+  };
+
   const { integration } = useIntegration(RIBON_INTEGRATION_ID);
 
   const linkToIntegration = () => {
@@ -71,9 +91,9 @@ export default function TasksSection() {
       <View style={S.paddingContainer}>
         <View style={S.progressBar}>
           <ProgressBar
-            value={tasksState.filter((obj) => obj.done === true).length}
+            value={progressBarValue().length}
             min={0}
-            max={dailyTasks.length}
+            max={tasksCount() || dailyTasks.length}
           />
         </View>
         {renderCountdown()}

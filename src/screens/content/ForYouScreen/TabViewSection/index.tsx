@@ -10,6 +10,7 @@ import { useCanDonate } from "@ribon.io/shared";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import { useTasksContext } from "contexts/tasksContext";
+import { TASKS } from "utils/constants/Tasks";
 import TasksSection from "../TasksSection";
 import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
@@ -48,8 +49,8 @@ function TabViewSection(): JSX.Element {
   });
 
   const layout = useWindowDimensions();
-  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID);
-  const { registerAction, hasCompletedATask } = useTasksContext();
+  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
+  const { registerAction, hasCompletedATask, tasksState } = useTasksContext();
 
   const { index, setIndex } = useForYouTabsContext();
 
@@ -65,7 +66,14 @@ function TabViewSection(): JSX.Element {
   );
 
   useEffect(() => {
-    if (index === 1 && !canDonate) {
+    const taskDownloadApp = TASKS.filter(
+      (task) => task.title === "check_daily_news",
+    )[0];
+
+    const done = tasksState?.find(
+      (task) => task.id === taskDownloadApp.id,
+    )?.done;
+    if (index === 1 && !canDonate && !done) {
       registerAction("for_you_news_tab_view");
     }
   }, [index]);
