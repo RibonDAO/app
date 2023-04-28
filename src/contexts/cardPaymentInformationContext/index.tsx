@@ -207,7 +207,10 @@ function CardPaymentInformationProvider({ children }: Props) {
       resetStates();
     } catch (error) {
       logError(error);
-      showToast(t("onErrorMessage"));
+      showToast({
+        type: "error",
+        message: t("onErrorMessage", "error"),
+      });
 
       logEvent("paymentError_view", {
         email: email,

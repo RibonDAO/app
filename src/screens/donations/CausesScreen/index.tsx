@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
 import UserSupportSection from "components/moleculars/UserSupportSection";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
 import { NonProfit, Story } from "@ribon.io/shared/types";
@@ -38,7 +38,7 @@ export default function CausesScreen() {
     canDonate,
     isLoading: loadingCanDonate,
     refetch: refetchCanDonate,
-  } = useCanDonate(RIBON_INTEGRATION_ID);
+  } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);

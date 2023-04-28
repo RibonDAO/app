@@ -43,19 +43,13 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: theme.spacingNative(32),
-    backgroundColor: theme.colors.brand.primary[800],
+    backgroundColor: theme.colors.brand.primary[300],
     width: 320,
     height: 50,
     borderWidth: 0,
   },
   buttonText: {
-    color: theme.colors.neutral10,
-  },
-  abstractFormContainer: {
-    position: "absolute",
-    top: -250,
-    zIndex: 1,
-    transform: [{ scale: getScaleBasedOnWidth() }],
+    color: theme.colors.brand.primary[800],
   },
 });
 
