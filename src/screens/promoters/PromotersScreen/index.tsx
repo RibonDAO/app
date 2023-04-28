@@ -21,7 +21,6 @@ export default function PromotersScreen() {
   });
 
   useEffect(() => {
-    logEvent("P2_view");
     setIsInCommunityDonationFlow(params?.isInCommunity ?? true);
   }, [params?.isInCommunity]);
 

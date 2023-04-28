@@ -8,7 +8,7 @@ import { logEvent } from "services/analytics";
 
 function SupportCauseScreen() {
   useEffect(() => {
-    logEvent("P5_view");
+    logEvent("P2_view");
   }, []);
   const { isInCryptoPage } = useCryptoPayment();
 

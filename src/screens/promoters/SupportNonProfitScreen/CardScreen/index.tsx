@@ -26,10 +26,6 @@ function CardScreen(): JSX.Element {
     keyPrefix: "promoters.supportNonProfitPage",
   });
 
-  useEffect(() => {
-    logEvent("nonProfitSupportScreen_view");
-  }, []);
-
   const causesFilter = () => {
     const causesApi = causes.filter((currentCause) => currentCause.active);
     return causesApi || [];
@@ -40,9 +36,6 @@ function CardScreen(): JSX.Element {
   }, [causes]);
 
   const handleCauseClick = (causeClicked: Cause) => {
-    logEvent("nonProfitCauseSelection_click", {
-      id: causeClicked?.id,
-    });
     setCause(causeClicked);
   };
 

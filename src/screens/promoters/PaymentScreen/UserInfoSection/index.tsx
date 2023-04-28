@@ -80,10 +80,6 @@ function UserInfoSection(): JSX.Element {
     setButtonDisabled(!(state && city && taxId.length === maxTaxIdLength()));
   }, [state, city, taxId]);
 
-  useEffect(() => {
-    logEvent("treasureSupportBillingInfo_view");
-  });
-
   const inputStyles = {
     borderColor: colorTheme.shade40,
     color: colorTheme.shade20,
