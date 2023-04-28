@@ -24,7 +24,7 @@ function ChooseCauseScreen(): JSX.Element {
   const { registerAction } = useTasksContext();
 
   useEffect(() => {
-    registerAction("donation_done_page_view");
+    registerAction("P8_view");
   }, []);
 
   const causesList = useCallback(

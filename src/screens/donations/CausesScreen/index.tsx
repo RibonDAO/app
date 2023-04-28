@@ -53,8 +53,8 @@ export default function CausesScreen() {
   const { hasTickets } = useTickets();
 
   useEffect(() => {
-    logEvent("app_causes_page_view");
-  }, [logEvent]);
+    logEvent("P1_view");
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
