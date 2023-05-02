@@ -8,6 +8,7 @@ import DirectDonationCard from "screens/users/ProfileScreen/DirectDonationsImpac
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
+import { logEvent } from "services/analytics";
 
 function DirectDonationsImpactCards(): JSX.Element {
   const { useDirectPersonPayments } = usePersonPayments();
@@ -22,6 +23,7 @@ function DirectDonationsImpactCards(): JSX.Element {
   });
 
   const navigateToPromotersScreen = () => {
+    logEvent("giveNonProfitCard_click", { from: "impactEmptystate"});
     navigateTo("PromotersScreen", { isInCommunity: false });
   };
 

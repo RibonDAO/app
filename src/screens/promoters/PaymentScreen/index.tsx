@@ -16,6 +16,7 @@ import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholde
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
+import { logEvent } from "services/analytics";
 
 function PaymentScreen(): JSX.Element {
   const { params } = useRouteParams<"PaymentScreen">();
@@ -33,6 +34,23 @@ function PaymentScreen(): JSX.Element {
 
   const colorTheme = getThemeByFlow(flow);
   const { isKeyboardVisible } = useKeyboardVisibility();
+
+  useEffect(() => {
+    if(flow == "cause") {
+      logEvent("P5_view", {
+        causeId: cause?.id,
+        price: offer.priceValue,
+        currency: offer.currency,
+      });
+    }
+    if(flow == "nonProfit") {
+      logEvent("P6_view", {
+        nonprofitId: nonProfit?.id,
+        price: offer.priceValue,
+        currency: offer.currency,
+      });
+    }
+  }, []);
 
   useEffect(() => {
     setCause(cause);
@@ -53,8 +71,22 @@ function PaymentScreen(): JSX.Element {
 
   const handleContinueClick = () => {
     if (isUserSection()) {
+      logEvent("continuePaymentFormBtn_click", {
+        flow: flow,
+        causeId: cause?.id,
+        nonprofitId: nonProfit?.id,
+        price: offer.priceValue,
+        currency: offer.currency,
+      });
       setCurrentSection("card");
     } else if (isCardSection()) {
+      logEvent("sendPaymentFormBtn_click", {
+        flow: flow,
+        causeId: cause?.id,
+        nonprofitId: nonProfit?.id,
+        price: offer.priceValue,
+        currency: offer.currency,
+      });
       handleSubmit();
     }
   };
