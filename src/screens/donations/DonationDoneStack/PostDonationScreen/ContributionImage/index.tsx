@@ -10,39 +10,51 @@ import { theme } from "@ribon.io/shared";
 
 type Props = {
   id: number;
+  idNonProfit?: number;
   name: string;
   coverImage?: string;
+  isCause?: boolean;
 };
 
-function CauseImage({ name, coverImage, id }: Props) {
+function ContributionImage({
+  name,
+  coverImage,
+  id,
+  idNonProfit,
+  isCause = false,
+}: Props) {
   const { setCurrentCauseId } = useCausesContext();
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.chooseCauseScreen.causeImage",
+    keyPrefix: "donations.postDonationScreen.contributionImage",
   });
 
   const handleClick = () => {
     setCurrentCauseId(id);
-    navigateTo("PromotersScreen");
+    navigateTo("PromotersScreen", { isInCommunity: !!isCause });
   };
 
   return (
     <TouchableOpacity style={S.container} onPress={handleClick} key={name}>
       <Image style={S.imageContainer} source={{ uri: coverImage }} />
 
-      <View style={S.label}>
-        <Icon
-          type="rounded"
-          name="rocket_launch"
-          size={16}
-          color={theme.colors.brand.secondary[700]}
-        />
-        <Text style={S.labelTitle}>{t("labelTitle")}</Text>
-      </View>
+      {isCause && (
+        <View style={S.label}>
+          <Icon
+            type="rounded"
+            name="rocket_launch"
+            size={16}
+            color={theme.colors.brand.secondary[700]}
+          />
+          <Text style={S.labelTitle}>{t("labelTitle")}</Text>
+        </View>
+      )}
 
       <View style={S.contentContainer}>
-        <Text style={S.causeTitle}>{t("title")}</Text>
-        <Text style={S.causeName}>{name}</Text>
+        <Text style={S.title}>
+          {isCause ? t("donateAsCommunity") : t("donateDirectly")}
+        </Text>
+        <Text style={S.name}>{name}</Text>
       </View>
 
       <View style={S.overlay} />
@@ -50,4 +62,4 @@ function CauseImage({ name, coverImage, id }: Props) {
   );
 }
 
-export default CauseImage;
+export default ContributionImage;

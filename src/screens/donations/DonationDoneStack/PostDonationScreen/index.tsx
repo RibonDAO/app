@@ -1,22 +1,23 @@
-import { Cause } from "@ribon.io/shared/types";
 import { Text, View } from "react-native";
 import { useCallback, useEffect } from "react";
 import HandIcon from "components/vectors/HandIcon";
-import { useCausesContext } from "contexts/causesContext";
 import { useTranslation } from "react-i18next";
 import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
 import { useTasksContext } from "contexts/tasksContext";
 import { theme } from "@ribon.io/shared";
+import { RootStackScreenProps } from "types";
 import S from "./styles";
-import CauseImage from "./CauseImage";
+import ContributionImage from "./ContributionImage";
 
-function ChooseCauseScreen(): JSX.Element {
+function PostDonationScreen({
+  route,
+}: RootStackScreenProps<"PostDonationScreen">) {
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.chooseCauseScreen",
+    keyPrefix: "donations.postDonationScreen",
   });
-  const { activeCauses } = useCausesContext();
   const { navigateTo } = useNavigation();
+  const { nonProfit, cause } = route.params;
 
   function navigateToAvailableArticleScreen() {
     return navigateTo("AvailableArticleScreen");
@@ -28,20 +29,29 @@ function ChooseCauseScreen(): JSX.Element {
     registerAction("P8_view");
   }, []);
 
-  const causesList = useCallback(
-    () =>
-      activeCauses?.map((cause: Cause) => (
-        <CauseImage
+  const contributionList = useCallback(
+    () => (
+      <>
+        <ContributionImage
           key={cause.id}
           id={cause.id}
           name={cause.name}
           coverImage={cause.coverImage}
+          isCause
         />
-      )),
-    [activeCauses],
+        <ContributionImage
+          key={nonProfit.id}
+          id={nonProfit.cause.id}
+          idNonProfit={nonProfit.id}
+          name={nonProfit.name}
+          coverImage={nonProfit.mainImage}
+        />
+      </>
+    ),
+    [nonProfit, cause],
   );
 
-  function renderCauses() {
+  function renderContributionCards() {
     return (
       <View style={S.container}>
         <View style={S.imageContainer}>
@@ -50,7 +60,7 @@ function ChooseCauseScreen(): JSX.Element {
 
         <Text style={S.text}>{t("title")}</Text>
 
-        {causesList()}
+        {contributionList()}
 
         <View style={S.buttonContainer}>
           <Button
@@ -67,7 +77,7 @@ function ChooseCauseScreen(): JSX.Element {
     );
   }
 
-  return renderCauses();
+  return renderContributionCards();
 }
 
-export default ChooseCauseScreen;
+export default PostDonationScreen;
