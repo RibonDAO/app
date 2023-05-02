@@ -34,15 +34,14 @@ function PostDonationScreen({
       <>
         <ContributionImage
           key={cause.id}
-          id={cause.id}
+          idCause={cause.id}
           name={cause.name}
           coverImage={cause.coverImage}
           isCause
         />
         <ContributionImage
           key={nonProfit.id}
-          id={nonProfit.cause.id}
-          idNonProfit={nonProfit.id}
+          idCause={nonProfit.cause.id}
           name={nonProfit.name}
           coverImage={nonProfit.mainImage}
         />

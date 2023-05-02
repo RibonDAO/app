@@ -9,8 +9,7 @@ import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 
 type Props = {
-  id: number;
-  idNonProfit?: number;
+  idCause: number;
   name: string;
   coverImage?: string;
   isCause?: boolean;
@@ -19,8 +18,7 @@ type Props = {
 function ContributionImage({
   name,
   coverImage,
-  id,
-  idNonProfit,
+  idCause,
   isCause = false,
 }: Props) {
   const { setCurrentCauseId } = useCausesContext();
@@ -30,7 +28,7 @@ function ContributionImage({
   });
 
   const handleClick = () => {
-    setCurrentCauseId(id);
+    setCurrentCauseId(idCause);
     navigateTo("PromotersScreen", { isInCommunity: !!isCause });
   };
 
