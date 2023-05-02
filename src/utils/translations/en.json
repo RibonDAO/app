@@ -64,12 +64,13 @@
       "buttonText": "Close",
       "description": "You donated"
     },
-    "chooseCauseScreen": {
+    "postDonationScreen": {
       "title": "If you want, you can do more",
       "buttonText": "Donate later",
-      "causeImage": {
-        "title": "Donate in a community for",
-        "labelTitle": "Boosted donation"
+      "contributionImage": {
+        "donateAsCommunity": "Donate in a community for",
+        "labelTitle": "Boosted donation",
+        "donateDirectly": "Donate directly to"
       }
     },
     "receiveTicketScreen": {

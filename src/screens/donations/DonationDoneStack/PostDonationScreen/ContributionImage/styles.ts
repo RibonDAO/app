@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
     elevation: 24,
     zIndex: 2,
   },
-  causeName: {
+  name: {
     color: theme.colors.neutral[25],
     fontSize: 20,
   },
-  causeTitle: {
+  title: {
     fontSize: 14,
     color: theme.colors.neutral10,
     marginBottom: 4,
