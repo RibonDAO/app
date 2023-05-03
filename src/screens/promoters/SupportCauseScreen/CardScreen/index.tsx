@@ -53,9 +53,6 @@ function CardScreen(): JSX.Element {
   }, [causes]);
 
   const handleCauseClick = (causeClicked: Cause) => {
-    logEvent("treasureCauseSelection_click", {
-      id: causeClicked?.id,
-    });
     setCause(causeClicked);
   };
 

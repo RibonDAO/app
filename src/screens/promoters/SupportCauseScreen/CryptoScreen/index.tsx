@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
-import { logEvent } from "services/analytics";
 import { useCauses } from "@ribon.io/shared/hooks";
 import { Cause } from "@ribon.io/shared/types";
 import { useWalletContext } from "contexts/walletContext";
@@ -47,10 +46,6 @@ function CryptoScreen(): JSX.Element {
     keyPrefix: "promoters.supportCauseScreen",
   });
 
-  useEffect(() => {
-    logEvent("causeSupportScreen_view");
-  }, []);
-
   const invalidNetwork = useCallback(() => !isValidNetwork, [isValidNetwork]);
   const donateButtonDisabled = useCallback(
     () => disableButton() || (invalidNetwork() && !!wallet),
@@ -90,18 +85,10 @@ function CryptoScreen(): JSX.Element {
   };
 
   const handleCauseClick = (causeClicked: Cause) => {
-    logEvent("supportCauseSelection_click", {
-      id: causeClicked?.id,
-    });
-
     setCause(causeClicked);
   };
 
   const onDonationToContractSuccess = () => {
-    logEvent("causeGave_end", {
-      causeId: cause?.id,
-      currency: tokenSymbol,
-    });
     resetScreen();
     navigateTo("ContributionDoneScreen", {
       cause,
@@ -115,11 +102,6 @@ function CryptoScreen(): JSX.Element {
     }
 
     connectWallet();
-    logEvent("giveCauseBtn_start", {
-      from: "giveCauseCrypto_page",
-      causeId: cause?.id,
-      currency: tokenSymbol,
-    });
   };
 
   const handleCommunityAddClick = () => {
