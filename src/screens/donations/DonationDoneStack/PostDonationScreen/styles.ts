@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "cover",
     marginVertical: theme.spacingNative(20),
-    padding: theme.spacingNative(20),
+    padding: theme.spacingNative(16),
   },
   text: {
     ...stylizedDisplayMd,
@@ -40,7 +40,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
     position: "absolute",
-    bottom: 60,
+    bottom: 24,
+    paddingBottom: theme.spacingNative(16),
+  },
+  button: {
+    borderColor: theme.colors.brand.primary[600],
+    borderRadius: 4,
   },
 });
 

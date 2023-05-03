@@ -4,18 +4,19 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   container: {
     marginBottom: theme.spacingNative(16),
+    width: "100%",
     borderRadius: 4,
     overflow: "hidden",
     shadowColor: "#282428",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
-    shadowRadius: 12,
+    shadowRadius: 14,
   },
   firstChildContainer: {
     marginTop: theme.spacingNative(16),
   },
   imageContainer: {
-    width: 320,
+    width: "100%",
     height: 136,
     position: "relative",
     display: "flex",
@@ -50,11 +51,11 @@ const styles = StyleSheet.create({
     elevation: 24,
     zIndex: 2,
   },
-  causeName: {
+  name: {
     color: theme.colors.neutral[25],
     fontSize: 20,
   },
-  causeTitle: {
+  title: {
     fontSize: 14,
     color: theme.colors.neutral10,
     marginBottom: 4,
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    width: 320,
+    width: "100%",
     height: 136,
     position: "absolute",
     left: 0,

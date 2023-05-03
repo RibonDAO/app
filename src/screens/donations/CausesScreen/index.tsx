@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
 import UserSupportSection from "components/moleculars/UserSupportSection";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
@@ -26,6 +26,7 @@ import ImpactDonationsVector from "screens/users/ProfileScreen/CommunityDonation
 import ZeroDonationsSection from "screens/users/ProfileScreen/ZeroDonationsSection";
 import S from "./styles";
 import Placeholder from "./placeholder";
+import { logEvent } from "services/analytics";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
@@ -37,7 +38,7 @@ export default function CausesScreen() {
     canDonate,
     isLoading: loadingCanDonate,
     refetch: refetchCanDonate,
-  } = useCanDonate(RIBON_INTEGRATION_ID);
+  } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
@@ -50,6 +51,10 @@ export default function CausesScreen() {
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets } = useTickets();
+
+  useEffect(() => {
+    logEvent("P1_view");
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -166,6 +171,7 @@ export default function CausesScreen() {
                   handleNonProfitImagePress(nonProfit);
                 }}
                 onClickButton={() => {
+                  logEvent("donateTicketBtn_start", {nonProfitId: nonProfit.id, from: "nonprofitCard"});
                   navigateTo("DonateScreen", { nonProfit });
                 }}
                 buttonDisabled={!hasTickets()}

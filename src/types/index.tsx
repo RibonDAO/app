@@ -39,12 +39,17 @@ export type PromotersScreenParams = {
   isInCommunity?: boolean;
 };
 
+export type PostDonationScreenParams = {
+  nonProfit: NonProfit;
+  cause: Cause;
+};
+
 export type RootTabParamList = {
   CausesScreen: undefined;
   ForYouScreen: undefined;
   ProfileScreen: undefined;
   PromotersScreen: PromotersScreenParams;
-  ChooseCauseScreen: undefined;
+  PostDonationScreen: PostDonationScreenParams;
 };
 
 export type SupportNonProfitParamList = {
@@ -61,7 +66,7 @@ export type RootStackParamList = {
   ReceiveTicketScreen: undefined;
   CausesScreen: undefined;
   ForYouScreen: undefined;
-  ChooseCauseScreen: undefined;
+  PostDonationScreen: PostDonationScreenParams;
   CommunityAddModal: CommunityAddModalParamList;
   PaymentScreen: PaymentPageList;
   SupportNonProfitScreen: SupportNonProfitParamList;

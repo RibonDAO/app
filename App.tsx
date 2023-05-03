@@ -7,6 +7,7 @@ import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
@@ -17,7 +18,6 @@ import UnsafeAreaProvider, {
   useUnsafeAreaContext,
 } from "./src/contexts/unsafeAreaContext";
 import TasksProvider from "./src/contexts/tasksContext";
-import requestUserPermissionForNotifications from "./src/lib/notifications";
 
 function Main() {
   const isLoadingComplete = useCachedResources();

@@ -25,6 +25,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { normalizedLanguage } from "lib/currentLanguage";
+import { logEvent } from "services/analytics";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -126,7 +127,6 @@ function CardPaymentInformationProvider({ children }: Props) {
     keyPrefix: "contexts.cardPaymentInformation",
   });
 
-  // const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const { findOrCreateUser } = useUsers();
   const { signedIn, setCurrentUser } = useCurrentUser();
@@ -182,6 +182,23 @@ function CardPaymentInformationProvider({ children }: Props) {
     try {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
       login();
+      if(flow === "nonProfit") {
+        logEvent("ngoGave_end",
+          {
+            causeId: cause?.id,
+            offerId: offerId
+          }
+        );
+      } 
+      else {
+        logEvent("causeGave_end",
+          {
+            causeId: cause?.id,
+            offerId: offerId
+          }
+        );
+      }
+      
       navigateTo("ContributionDoneScreen", {
         cause,
         nonProfit,
@@ -189,7 +206,10 @@ function CardPaymentInformationProvider({ children }: Props) {
       resetStates();
     } catch (error) {
       logError(error);
-      showToast(t("onErrorMessage"));
+      showToast({
+        type: "error",
+        message: t("onErrorMessage", "error"),
+      });
     } finally {
       hideLoadingOverlay();
     }

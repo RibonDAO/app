@@ -40,7 +40,7 @@ describe("SupportNonProfitScreen", () => {
   });
 
   it("logs the nonProfitSupportScreen_view event", () => {
-    expectLogEventToHaveBeenCalledWith("nonProfitSupportScreen_view");
+    expectLogEventToHaveBeenCalledWith("P4_view");
   });
 
   it("shows only the non profits for that cause", () => {
@@ -49,14 +49,6 @@ describe("SupportNonProfitScreen", () => {
   });
 
   describe("when the button option is clicked", () => {
-    it("logs the nonProfitCauseSelection_click event", () => {
-      clickOn(mockCause2.name);
-
-      expectLogEventToHaveBeenCalledWith("nonProfitCauseSelection_click", {
-        id: 2,
-      });
-    });
-
     it("shows the non profits for that cause", () => {
       clickOn(mockCause.name);
 

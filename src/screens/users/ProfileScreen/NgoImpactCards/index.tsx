@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { useCallback } from "react";
-import { useImpact } from "@ribon.io/shared/hooks";
+import { useImpact, useLegacyImpact } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useNavigation } from "hooks/useNavigation";
@@ -13,6 +13,7 @@ import ZeroDonationsSection from "../ZeroDonationsSection";
 function NgoImpactCards(): JSX.Element {
   const { currentUser } = useCurrentUser();
   const { userImpact } = useImpact(currentUser?.id);
+  const { legacyUserImpact } = useLegacyImpact(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
 
   const impactItems = useCallback(
@@ -43,6 +44,17 @@ function NgoImpactCards(): JSX.Element {
             )}
             name={item?.nonProfit.name}
             icon={item?.nonProfit.logo}
+          />
+        </View>
+      ))}
+      {legacyUserImpact?.map((item) => (
+        <View key={item?.legacyNonProfit?.id}>
+          <NgoImpactCard
+            key={item?.legacyNonProfit.id}
+            description={item.totalImpact}
+            name={item?.legacyNonProfit.name}
+            icon={item?.legacyNonProfit.logoUrl}
+            label={t("migrated") || undefined}
           />
         </View>
       ))}

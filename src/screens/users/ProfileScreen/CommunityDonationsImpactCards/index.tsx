@@ -10,6 +10,7 @@ import { formatPrice } from "lib/formatters/currencyFormatter";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
+import { logEvent } from "services/analytics";
 
 function CommunityDonationsImpactCards(): JSX.Element {
   const { useCommunityPersonPayments } = usePersonPayments();
@@ -24,6 +25,7 @@ function CommunityDonationsImpactCards(): JSX.Element {
   });
 
   const navigateToPromotersScreen = () => {
+    logEvent("giveCauseCard_click", { from: "impactEmptystate"});
     navigateTo("PromotersScreen");
   };
 

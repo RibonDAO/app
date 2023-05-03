@@ -2602,10 +2602,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@1.0.46":
-  version "1.0.46"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.46.tgz#bb074c7ff8cdec2f781887ac349e2606ffbe89f1"
-  integrity sha512-xq9DblG7Cj3JCJ+4sOSjVVFmZhxTLZiZhyszHZVXiwIkULATHQX5ygRitMtK8YmUJM7FwatmsANzyWOwLIu26A==
+"@ribon.io/shared@1.0.50":
+  version "1.0.50"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.50.tgz#ac5a23c2b92bdfc35b6887df14655f8cc0d10881"
+  integrity sha512-wgfutvS4fa1ud1QaDxiOnmaSZrHOr6Zg7Hp8yUtrvM6ITuTEYICv075UkhWgohOCRl1kIYxMfIbbGioyueBKmQ==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -13359,6 +13359,11 @@ react-native-tcp@^4.0.0:
     ip-regex "^1.0.3"
     process "^0.11.9"
     util "^0.10.3"
+
+react-native-toast-message@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-2.1.6.tgz#322827c66901fa22cb3db614c7383cc717f5bbe2"
+  integrity sha512-VctXuq20vmRa9AE13acaNZhrLcS3FaBS2zEevS3+vhBsnVZYG0FIlWIis9tVnpnNxUb3ART+BWtwQjzSttXTng==
 
 react-native-web@~0.18.9:
   version "0.18.10"

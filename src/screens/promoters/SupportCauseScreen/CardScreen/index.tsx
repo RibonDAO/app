@@ -53,15 +53,19 @@ function CardScreen(): JSX.Element {
   }, [causes]);
 
   const handleCauseClick = (causeClicked: Cause) => {
-    logEvent("treasureCauseSelection_click", {
-      id: causeClicked?.id,
-    });
     setCause(causeClicked);
   };
 
   const handleDonateClick = () => {
     setFlow("cause");
-    logEvent("treasureComCicleBtn_click");
+    logEvent("giveCauseBtn_start",
+      {
+        from: "giveCauseCC_page",
+        causeId: cause?.id,
+        price: currentOffer.priceValue,
+        currency: currentOffer.currency,
+      }
+    );
     navigateTo("PaymentScreen", {
       offer: currentOffer,
       flow: "cause",

@@ -26,10 +26,6 @@ function CardScreen(): JSX.Element {
     keyPrefix: "promoters.supportNonProfitPage",
   });
 
-  useEffect(() => {
-    logEvent("nonProfitSupportScreen_view");
-  }, []);
-
   const causesFilter = () => {
     const causesApi = causes.filter((currentCause) => currentCause.active);
     return causesApi || [];
@@ -40,15 +36,19 @@ function CardScreen(): JSX.Element {
   }, [causes]);
 
   const handleCauseClick = (causeClicked: Cause) => {
-    logEvent("nonProfitCauseSelection_click", {
-      id: causeClicked?.id,
-    });
     setCause(causeClicked);
   };
 
   const handleDonateClick = (nonProfit: NonProfit) => {
     setFlow("nonProfit");
-    logEvent("nonProfitComCicleBtn_click");
+    logEvent("giveNgoBtn_start",
+      {
+        from: "giveNonProfit_page",
+        nonprofitId: nonProfit.id,
+        price: currentOffer?.priceValue,
+        currency: currentOffer?.currency
+      }
+    );
     navigateTo("PaymentScreen", {
       offer: currentOffer,
       flow: "nonProfit",
