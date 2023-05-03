@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useLanguage } from "contexts/languageContext";
 import { maskForTaxId } from "@ribon.io/shared/lib";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
-import { logEvent } from "services/analytics";
 import getThemeByFlow from "lib/themeByFlow";
 import InputText from "components/atomics/inputs/InputText";
 import { View } from "react-native";
@@ -17,7 +16,6 @@ import {
   countryCodeByLanguage,
 } from "lib/countryByLanguage";
 import { Languages } from "types/enums/Languages";
-import Dropdown from "components/moleculars/Dropdown";
 import {
   BRstates,
   USAstates,
@@ -79,10 +77,6 @@ function UserInfoSection(): JSX.Element {
   useEffect(() => {
     setButtonDisabled(!(state && city && taxId.length === maxTaxIdLength()));
   }, [state, city, taxId]);
-
-  useEffect(() => {
-    logEvent("treasureSupportBillingInfo_view");
-  });
 
   const inputStyles = {
     borderColor: colorTheme.shade40,

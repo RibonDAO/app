@@ -13,7 +13,6 @@ import GroupButtons from "components/moleculars/GroupButtons";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { logEvent } from "services/analytics";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
@@ -51,10 +50,6 @@ export default function CausesScreen() {
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets } = useTickets();
-
-  useEffect(() => {
-    logEvent("app_causes_page_view");
-  }, [logEvent]);
 
   useEffect(() => {
     setTimeout(() => {

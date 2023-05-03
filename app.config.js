@@ -43,7 +43,7 @@ export default () => ({
       },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
-      "buildNumber": "302"
+      "buildNumber": "305"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -52,7 +52,7 @@ export default () => ({
         "backgroundColor": "#00DA93"
       },
       "package": "com.app.ribon",
-      "versionCode": 302
+      "versionCode": 305
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"

@@ -98,9 +98,6 @@ function CryptoScreen(): JSX.Element {
   };
 
   const onDonationToContractSuccess = () => {
-    logEvent("toastNotification_view", {
-      status: "transactionProcessed",
-    });
     resetScreen();
     navigateTo("ContributionDoneScreen", {
       cause,
@@ -114,7 +111,6 @@ function CryptoScreen(): JSX.Element {
     }
 
     connectWallet();
-    logEvent("treasureComCicleBtn_click");
   };
 
   const handleCommunityAddClick = () => {

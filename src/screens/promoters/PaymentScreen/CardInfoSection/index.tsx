@@ -5,7 +5,6 @@ import { maskToCreditCard, maskToExpirationDate } from "@ribon.io/shared/lib";
 import getThemeByFlow from "lib/themeByFlow";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { logEvent } from "services/analytics";
 import { View } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
@@ -32,10 +31,6 @@ function CardInfoSection() {
   } = useCardPaymentInformation();
 
   const { currentUser } = useCurrentUser();
-
-  useEffect(() => {
-    logEvent("treasureSupportPayment_view");
-  }, []);
 
   const maskExpiration = (value: string) => {
     setExpirationDate(maskToExpirationDate(value));

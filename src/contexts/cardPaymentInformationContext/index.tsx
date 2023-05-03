@@ -10,7 +10,6 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { logEvent } from "services/analytics";
 import { logError } from "services/crashReport";
 import { creditCardPaymentApi } from "@ribon.io/shared/services";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
@@ -157,7 +156,6 @@ function CardPaymentInformationProvider({ children }: Props) {
   };
 
   const handleSubmit = async () => {
-    logEvent("treasureSupportConfirmBtn_click");
     showLoadingOverlay();
 
     const expiration = expirationDate.split("/");
@@ -188,15 +186,10 @@ function CardPaymentInformationProvider({ children }: Props) {
         cause,
         nonProfit,
       });
-      logEvent("treasureGivingConfirmMdl_view");
       resetStates();
     } catch (error) {
       logError(error);
       showToast(t("onErrorMessage"));
-
-      logEvent("toastNotification_view", {
-        status: "transactionFailed",
-      });
     } finally {
       hideLoadingOverlay();
     }
