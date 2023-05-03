@@ -18,7 +18,7 @@ export const TASKS = [
   {
     id: "af13a631-3d3d-4709-8f90-06a938f4cef6",
     title: "donate_ticket",
-    actions: ["donation_done_page_view"],
+    actions: ["P8_view"],
     type: "daily",
     navigationCallback: "CausesScreen",
     isVisible(this: Task) {
@@ -28,7 +28,7 @@ export const TASKS = [
   {
     id: "94bec4ad-ab60-41b8-b5f7-65f4b9ff8537",
     title: "donate_ticket_on_native",
-    actions: ["donation_done_page_view"],
+    actions: ["P8_view"],
     type: "daily",
     navigationCallback: "CausesScreen",
     isVisible(this: Task, params?: any) {

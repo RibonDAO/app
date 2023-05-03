@@ -7,6 +7,7 @@ import { formatPrice } from "lib/formatters/currencyFormatter";
 import { Currencies } from "@ribon.io/shared/types";
 import ImpactCard from "../ImpactCard";
 import S from "./styles";
+import ImpactMigrationNotification from "../ImpactMigrationNotification";
 
 function ImpactCards(): JSX.Element {
   const { currentUser } = useCurrentUser();
@@ -65,6 +66,7 @@ function ImpactCards(): JSX.Element {
 
   return (
     <View style={S.cardsContainer}>
+      <ImpactMigrationNotification />
       {impacts().map((impact: any) => renderItem(impact))}
     </View>
   );
