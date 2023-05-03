@@ -61,7 +61,14 @@ function CardScreen(): JSX.Element {
 
   const handleDonateClick = () => {
     setFlow("cause");
-    logEvent("treasureComCicleBtn_click");
+    logEvent("giveCauseBtn_start",
+      {
+        from: "giveCauseCC_page",
+        causeId: cause?.id,
+        price: currentOffer.priceValue,
+        currency: currentOffer.currency,
+      }
+    );
     navigateTo("PaymentScreen", {
       offer: currentOffer,
       flow: "cause",

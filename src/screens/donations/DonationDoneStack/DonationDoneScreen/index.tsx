@@ -20,7 +20,10 @@ export default function DonationDoneScreen({
 
   useEffect(() => {
     setTimeout(() => {
-      navigateTo("ChooseCauseScreen");
+      navigateTo("PostDonationScreen", {
+        nonProfit,
+        cause: nonProfit.cause,
+      });
     }, 4000);
   }, []);
 

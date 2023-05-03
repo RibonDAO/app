@@ -53,8 +53,8 @@ export default function CausesScreen() {
   const { hasTickets } = useTickets();
 
   useEffect(() => {
-    logEvent("app_causes_page_view");
-  }, [logEvent]);
+    logEvent("P1_view");
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -171,6 +171,7 @@ export default function CausesScreen() {
                   handleNonProfitImagePress(nonProfit);
                 }}
                 onClickButton={() => {
+                  logEvent("donateTicketBtn_start", {nonProfitId: nonProfit.id, from: "nonprofitCard"});
                   navigateTo("DonateScreen", { nonProfit });
                 }}
                 buttonDisabled={!hasTickets()}

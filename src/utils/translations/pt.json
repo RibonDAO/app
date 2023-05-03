@@ -64,12 +64,13 @@
       "buttonText": "Fechar",
       "description": "Você doou"
     },
-    "chooseCauseScreen": {
+    "postDonationScreen": {
       "title": "Se quiser, você pode fazer mais",
       "buttonText": "Doar depois",
-      "causeImage": {
-        "title": "Doe em comunidade para",
-        "labelTitle": "Doação impulsionada"
+      "contributionImage": {
+        "donateAsCommunity": "Doe em comunidade para",
+        "labelTitle": "Doação impulsionada",
+        "donateDirectly": "Doar diretamente para"
       }
     },
     "receiveTicketScreen": {

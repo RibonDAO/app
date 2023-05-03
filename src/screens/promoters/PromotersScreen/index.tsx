@@ -8,6 +8,7 @@ import SupportNonProfitScreen from "screens/promoters/SupportNonProfitScreen";
 import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
 import { useRouteParams } from "hooks/useRouteParams";
 import S from "./styles";
+import { logEvent } from "services/analytics";
 
 export default function PromotersScreen() {
   const { params } = useRouteParams<"PromotersScreen">();

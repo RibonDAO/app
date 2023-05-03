@@ -1,23 +1,24 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, ScrollView, View } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useImpact, useStatistics } from "@ribon.io/shared/hooks";
-import ImpactCards from "./ImpactCards";
 import TabViewSection from "./TabViewSection";
 import S from "./styles";
+import { logEvent } from "services/analytics";
 import ImpactMigrationNotification from "screens/users/ProfileScreen/ImpactMigrationNotification";
 
 function ProfileScreen() {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "users.profileScreen",
-  });
   const { currentUser } = useCurrentUser();
   const { refetch: refetchImpact } = useImpact(currentUser?.id);
   const { refetch: refetchStatistics } = useStatistics({
     userId: currentUser?.id,
   });
+
+  useEffect(() => {
+    logEvent("P9_view");
+  }, []);
 
   useFocusEffect(
     useCallback(() => {

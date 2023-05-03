@@ -16,7 +16,7 @@ import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
 import LayoutHeader from "components/moleculars/LayoutHeader";
 import DonationDoneScreen from "screens/donations/DonationDoneStack/DonationDoneScreen";
-import ChooseCauseScreen from "screens/donations/DonationDoneStack/ChooseCauseScreen";
+import PostDonationScreen from "screens/donations/DonationDoneStack/PostDonationScreen";
 import AvailableArticleScreen from "screens/donations/DonationDoneStack/AvailableArticleScreen";
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
@@ -87,8 +87,8 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="ChooseCauseScreen"
-        component={ChooseCauseScreen}
+        name="PostDonationScreen"
+        component={PostDonationScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 

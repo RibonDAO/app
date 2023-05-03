@@ -3,7 +3,7 @@ export default () => ({
     "owner": "ribon-app",
     "name": "Ribon",
     "slug": "app",
-    "version": "4.0.8",
+    "version": "5.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
@@ -43,7 +43,7 @@ export default () => ({
       },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
-      "buildNumber": "301"
+      "buildNumber": "302"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -52,7 +52,7 @@ export default () => ({
         "backgroundColor": "#00DA93"
       },
       "package": "com.app.ribon",
-      "versionCode": 299
+      "versionCode": 302
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
