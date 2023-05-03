@@ -13,7 +13,6 @@ import GroupButtons from "components/moleculars/GroupButtons";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { logEvent } from "services/analytics";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
@@ -27,6 +26,7 @@ import ImpactDonationsVector from "screens/users/ProfileScreen/CommunityDonation
 import ZeroDonationsSection from "screens/users/ProfileScreen/ZeroDonationsSection";
 import S from "./styles";
 import Placeholder from "./placeholder";
+import { logEvent } from "services/analytics";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {

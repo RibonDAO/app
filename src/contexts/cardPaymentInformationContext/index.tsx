@@ -10,7 +10,6 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { logEvent } from "services/analytics";
 import { logError } from "services/crashReport";
 import { creditCardPaymentApi } from "@ribon.io/shared/services";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
@@ -26,6 +25,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { normalizedLanguage } from "lib/currentLanguage";
+import { logEvent } from "services/analytics";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -127,7 +127,6 @@ function CardPaymentInformationProvider({ children }: Props) {
     keyPrefix: "contexts.cardPaymentInformation",
   });
 
-  // const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const { findOrCreateUser } = useUsers();
   const { signedIn, setCurrentUser } = useCurrentUser();
@@ -210,10 +209,6 @@ function CardPaymentInformationProvider({ children }: Props) {
       showToast({
         type: "error",
         message: t("onErrorMessage", "error"),
-      });
-
-      logEvent("paymentError_view", {
-        email: email,
       });
     } finally {
       hideLoadingOverlay();

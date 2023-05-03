@@ -7,7 +7,6 @@ import {
   useState,
 } from "react";
 import { logError } from "services/crashReport";
-import { logEvent } from "services/analytics";
 import { Cause } from "@ribon.io/shared/types";
 import { useNetworkContext } from "contexts/networkContext";
 import RibonAbi from "utils/abis/RibonAbi.json";
@@ -143,9 +142,6 @@ function CryptoPaymentProvider({ children }: Props) {
 
       if (onSuccess) onSuccess(hash, timestamp, utils.parseEther(amount));
     } catch (error) {
-      logEvent("toastNotification_view", {
-        status: "transactionFailed",
-      });
       logError(error);
     } finally {
       hideLoadingOverlay();
