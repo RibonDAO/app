@@ -1,4 +1,4 @@
-import { Text, ScrollView, View } from "react-native";
+import { View } from "react-native";
 import { useEffect, useState } from "react";
 import { Article, useArticles } from "@ribon.io/shared";
 import ArticleLayout from "components/moleculars/layouts/ArticleLayout";
@@ -37,10 +37,13 @@ export default function NewsSection() {
         `${IS_USER_ONBOARDING}_${currentUser?.id}`,
       );
 
-      if (firstTimeSeeingOnboarding === null) {
+      if (
+        firstTimeSeeingOnboarding === null ||
+        Number(firstTimeSeeingOnboarding) < 3
+      ) {
         await setLocalStorageItem(
           `${IS_USER_ONBOARDING}_${currentUser?.id}`,
-          "true",
+          String(Number(firstTimeSeeingOnboarding) + 1),
         );
         setIsOnboarding(true);
       } else {

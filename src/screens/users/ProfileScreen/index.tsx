@@ -7,7 +7,6 @@ import { useImpact, useStatistics } from "@ribon.io/shared/hooks";
 import TabViewSection from "./TabViewSection";
 import S from "./styles";
 import { logEvent } from "services/analytics";
-import ImpactMigrationNotification from "screens/users/ProfileScreen/ImpactMigrationNotification";
 
 function ProfileScreen() {
   const { currentUser } = useCurrentUser();
@@ -30,7 +29,6 @@ function ProfileScreen() {
   return (
     <View style={S.container}>
       <View style={{ paddingBottom: 40 }}>
-        <ImpactMigrationNotification />
         <TabViewSection />
       </View>
     </View>
