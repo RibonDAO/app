@@ -25,8 +25,13 @@ export default function TasksSection() {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const dailyTasks = useTasks("daily");
-  const { tasksState, reload, setHasCompletedATask, hasCompletedATask } =
-    useTasksContext();
+  const {
+    tasksState,
+    reload,
+    setHasCompletedATask,
+    hasCompletedATask,
+    tasksStatistics,
+  } = useTasksContext();
 
   const { index } = useForYouTabsContext();
 
@@ -78,6 +83,18 @@ export default function TasksSection() {
     );
   };
 
+  const showMonthlyTasks = useCallback(() => {
+    if (!tasksStatistics) return false;
+    if (tasksStatistics.hasContribution) {
+      registerAction("contribution_done_screen_view");
+      return true;
+    }
+
+    if (tasksStatistics.firstCompletedAllTasksAt) return true;
+
+    return false;
+  }, [tasksStatistics]);
+
   const { integration } = useIntegration(RIBON_INTEGRATION_ID);
 
   const linkToIntegration = () => {
@@ -96,7 +113,7 @@ export default function TasksSection() {
         </View>
         {renderCountdown()}
         <DailyTasksSection />
-        <MonthlyTasksSection />
+        {showMonthlyTasks() && <MonthlyTasksSection />}
 
         {integration?.integrationTask &&
           tasksState.find((obj) => obj.id === donateTicketTask?.id)?.done && (

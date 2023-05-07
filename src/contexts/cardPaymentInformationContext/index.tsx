@@ -26,6 +26,7 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { normalizedLanguage } from "lib/currentLanguage";
 import { logEvent } from "services/analytics";
+import { useTasksContext } from "contexts/tasksContext";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -78,6 +79,7 @@ export const CURRENT_COIN_KEY = "CURRENT_COIN_KEY";
 function CardPaymentInformationProvider({ children }: Props) {
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
+  const { registerAction } = useTasksContext();
   const [loading, setLoading] = useState(false);
   const [currentCoin, setCurrentCoin] = useState<Currencies>();
   const defaultCoin = async () =>
@@ -182,23 +184,19 @@ function CardPaymentInformationProvider({ children }: Props) {
     try {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
       login();
-      if(flow === "nonProfit") {
-        logEvent("ngoGave_end",
-          {
-            causeId: cause?.id,
-            offerId: offerId
-          }
-        );
-      } 
-      else {
-        logEvent("causeGave_end",
-          {
-            causeId: cause?.id,
-            offerId: offerId
-          }
-        );
+      if (flow === "nonProfit") {
+        logEvent("ngoGave_end", {
+          causeId: cause?.id,
+          offerId,
+        });
+      } else {
+        logEvent("causeGave_end", {
+          causeId: cause?.id,
+          offerId,
+        });
       }
-      
+      registerAction("contribution_done_screen_view");
+
       navigateTo("ContributionDoneScreen", {
         cause,
         nonProfit,

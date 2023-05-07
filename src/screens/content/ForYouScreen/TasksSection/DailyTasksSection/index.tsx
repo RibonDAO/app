@@ -47,6 +47,10 @@ export default function DailyTasksSection() {
             ? () => setIndex(1)
             : () => navigateTo(navigateToTask);
 
+          if (!task.isVisible({ state: tasksState })) {
+            return null;
+          }
+
           return (
             <CheckBox
               key={task.id}

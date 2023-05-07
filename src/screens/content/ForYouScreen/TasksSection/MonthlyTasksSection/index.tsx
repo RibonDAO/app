@@ -11,6 +11,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
 
 import Tag from "components/atomics/Tag";
+import { beginningOfToday } from "lib/dateUtils";
 import S from "./styles";
 
 export default function MonthlyTasksSection() {
@@ -20,10 +21,20 @@ export default function MonthlyTasksSection() {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const monthlyTasks = useTasks("monthly");
-  const { tasksState } = useTasksContext();
+  const { tasksState, tasksStatistics } = useTasksContext();
   const { navigateTo } = useNavigation();
 
   const { setIndex } = useForYouTabsContext();
+
+  const showTagNew = () => {
+    if (
+      new Date(tasksStatistics?.firstCompletedAllTasksAt ?? "") <
+      beginningOfToday()
+    )
+      return true;
+
+    return false;
+  };
 
   return (
     <View style={S.container}>
@@ -37,11 +48,13 @@ export default function MonthlyTasksSection() {
           />
           <Text style={S.title}>{t("titleSuperTasks")}</Text>
         </View>
-        <Tag
-          text="New"
-          textColor={theme.colors.brand.primary[900]}
-          backgroundColor={theme.colors.brand.primary[50]}
-        />
+        {showTagNew() && (
+          <Tag
+            text="New"
+            textColor={theme.colors.brand.primary[900]}
+            backgroundColor={theme.colors.brand.primary[50]}
+          />
+        )}
       </View>
 
       {tasksState &&
@@ -54,6 +67,10 @@ export default function MonthlyTasksSection() {
             : isCurrentPage
             ? () => setIndex(1)
             : () => navigateTo(navigateToTask);
+
+          if (!task.isVisible({ state: tasksState })) {
+            return null;
+          }
 
           return (
             <CheckBox
