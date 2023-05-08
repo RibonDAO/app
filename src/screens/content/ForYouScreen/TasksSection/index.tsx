@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import { useTasks } from "utils/constants/Tasks";
-import { useIntegration } from "@ribon.io/shared";
+import { useIntegration, useTasksStatistics } from "@ribon.io/shared";
 import ProgressBar from "components/atomics/ProgressBar";
 import { useTranslation } from "react-i18next";
 import { useTasksContext } from "contexts/tasksContext";
@@ -14,7 +14,7 @@ import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import { formatCountdown } from "lib/formatters/countdownFormatter";
 import { useFocusEffect } from "@react-navigation/native";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import S from "./styles";
 import MonthlyTasksSection from "./MonthlyTasksSection";
@@ -32,6 +32,7 @@ export default function TasksSection() {
     hasCompletedATask,
     tasksStatistics,
   } = useTasksContext();
+  const [showMonthlyTasks, setShowMonthlyTasks] = useState(false);
 
   const { index } = useForYouTabsContext();
 
@@ -83,17 +84,15 @@ export default function TasksSection() {
     );
   };
 
-  const showMonthlyTasks = useCallback(() => {
-    if (!tasksStatistics) return false;
-    if (tasksStatistics.hasContribution) {
-      registerAction("contribution_done_screen_view");
-      return true;
-    }
-
-    if (tasksStatistics.firstCompletedAllTasksAt) return true;
-
-    return false;
-  }, [tasksStatistics]);
+  useFocusEffect(
+    useCallback(() => {
+      if (tasksStatistics) {
+        if (tasksStatistics?.hasContribution) setShowMonthlyTasks(true);
+        if (tasksStatistics?.firstCompletedAllTasksAt)
+          setShowMonthlyTasks(true);
+      }
+    }, []),
+  );
 
   const { integration } = useIntegration(RIBON_INTEGRATION_ID);
 
@@ -113,7 +112,7 @@ export default function TasksSection() {
         </View>
         {renderCountdown()}
         <DailyTasksSection />
-        {showMonthlyTasks() && <MonthlyTasksSection />}
+        {showMonthlyTasks && <MonthlyTasksSection />}
 
         {integration?.integrationTask &&
           tasksState.find((obj) => obj.id === donateTicketTask?.id)?.done && (

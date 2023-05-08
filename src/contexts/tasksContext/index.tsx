@@ -1,5 +1,9 @@
-import { CompletedTask, theme, useCompletedTasks } from "@ribon.io/shared";
-import { useTasksStatistics } from "@ribon.io/shared/hooks";
+import {
+  CompletedTask,
+  theme,
+  useCompletedTasks,
+  useTasksStatistics,
+} from "@ribon.io/shared";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { TASKS } from "utils/constants/Tasks";
 import {
@@ -33,9 +37,9 @@ export interface ITasksContext {
 export const TasksContext = createContext<ITasksContext>({} as ITasksContext);
 
 function TasksProvider({ children }: any) {
+  const { tasksStatistics, completeAllTasks } = useTasksStatistics();
   const [tasksState, setTasksState] = useState<any[]>([]);
   const { findCompletedTasks, completeTask } = useCompletedTasks();
-  const { tasksStatistics, completeAllTasks } = useTasksStatistics();
   const [hasCompletedATask, setHasCompletedATask] = useState(false);
   const { currentUser, signedIn } = useCurrentUser();
 
@@ -44,12 +48,8 @@ function TasksProvider({ children }: any) {
   });
 
   function allDone(tasks: any) {
-    if (tasksStatistics?.firstCompletedAllTasksAt === null) {
-      completeAllTasks(new Date());
-    }
-    return tasks.every(
-      (task: any) => task.done === true && task.type === "daily",
-    );
+    const dailyTasks = tasks.filter((task: any) => task.type === "daily");
+    return dailyTasks.every((task: any) => task.done === true);
   }
 
   const isDone = (task: CompletedTask | undefined) => {
@@ -165,6 +165,12 @@ function TasksProvider({ children }: any) {
       });
     }
   };
+
+  useEffect(() => {
+    if (tasksStatistics?.firstCompletedAllTasksAt === null) {
+      completeAllTasks();
+    }
+  }, [buildTasksState]);
 
   const tasksObject: ITasksContext = useMemo(
     () => ({

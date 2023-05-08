@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { useTasks } from "utils/constants/Tasks";
+import { TASKS, useTasks } from "utils/constants/Tasks";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
@@ -12,6 +12,7 @@ import { useForYouTabsContext } from "contexts/forYouTabsContext";
 
 import Tag from "components/atomics/Tag";
 import { beginningOfToday } from "lib/dateUtils";
+import { useEffect } from "react";
 import S from "./styles";
 
 export default function MonthlyTasksSection() {
@@ -21,20 +22,33 @@ export default function MonthlyTasksSection() {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const monthlyTasks = useTasks("monthly");
-  const { tasksState, tasksStatistics } = useTasksContext();
+  const { tasksState, tasksStatistics, registerAction } = useTasksContext();
   const { navigateTo } = useNavigation();
 
   const { setIndex } = useForYouTabsContext();
 
-  const showTagNew = () => {
-    if (
+  const showTagNew = () =>
+    !(
       new Date(tasksStatistics?.firstCompletedAllTasksAt ?? "") <
       beginningOfToday()
-    )
-      return true;
+    );
 
-    return false;
-  };
+  useEffect(() => {
+    const taskContribution = TASKS.filter(
+      (task: any) => task.title === "make_contribution",
+    )[0];
+
+    const taskStatus = tasksState?.find(
+      (task) => task.id === taskContribution.id,
+    );
+    if (
+      tasksStatistics?.hasContribution &&
+      !taskStatus?.done &&
+      taskStatus?.timesCompleted === 0
+    ) {
+      registerAction("contribution_done_page_view");
+    }
+  }, []);
 
   return (
     <View style={S.container}>

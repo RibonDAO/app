@@ -61,7 +61,7 @@ export const TASKS = [
   },
   {
     id: "ed180aa8-e8e7-11ed-a05b-0242ac120003",
-    title: "paid_donation",
+    title: "make_contribution",
     actions: ["contribution_done_screen_view"],
     type: "monthly",
     navigationCallback: "CausesScreen",

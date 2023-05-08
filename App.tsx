@@ -37,20 +37,22 @@ function Main() {
         }}
       >
         <QueryClientComponent>
-          <SafeAreaProvider>
-            <SafeAreaView
-              edges={["top"]}
-              style={{ flex: 1, backgroundColor: topBackgroundColor }}
-            >
+          <TasksProvider>
+            <SafeAreaProvider>
               <SafeAreaView
-                edges={["bottom"]}
-                style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
+                edges={["top"]}
+                style={{ flex: 1, backgroundColor: topBackgroundColor }}
               >
-                <Navigation colorScheme={colorScheme} />
-                <StatusBar style="dark" />
+                <SafeAreaView
+                  edges={["bottom"]}
+                  style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
+                >
+                  <Navigation colorScheme={colorScheme} />
+                  <StatusBar style="dark" />
+                </SafeAreaView>
               </SafeAreaView>
-            </SafeAreaView>
-          </SafeAreaProvider>
+            </SafeAreaProvider>
+          </TasksProvider>
         </QueryClientComponent>
       </WalletConnectProvider>
     );
@@ -63,11 +65,9 @@ export default function App() {
       <ScrollEnabledProvider>
         <CurrentUserProvider>
           <LanguageProvider>
-            <TasksProvider>
-              <UnsafeAreaProvider>
-                <Main />
-              </UnsafeAreaProvider>
-            </TasksProvider>
+            <UnsafeAreaProvider>
+              <Main />
+            </UnsafeAreaProvider>
           </LanguageProvider>
         </CurrentUserProvider>
       </ScrollEnabledProvider>
