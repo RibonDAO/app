@@ -19,6 +19,7 @@ import { useCallback, useState } from "react";
 import S from "./styles";
 import MonthlyTasksSection from "./MonthlyTasksSection";
 import DailyTasksSection from "./DailyTasksSection";
+import StatisticsCardsSection from "./StatisticsCardsSection";
 
 export default function TasksSection() {
   const { t } = useTranslation("translation", {
@@ -32,6 +33,7 @@ export default function TasksSection() {
     hasCompletedATask,
     tasksStatistics,
   } = useTasksContext();
+  const { refetchTasksStatistics } = useTasksStatistics();
   const [showMonthlyTasks, setShowMonthlyTasks] = useState(false);
 
   const { index } = useForYouTabsContext();
@@ -86,11 +88,18 @@ export default function TasksSection() {
 
   useFocusEffect(
     useCallback(() => {
+      refetchTasksStatistics();
       if (tasksStatistics) {
-        if (tasksStatistics?.hasContribution) setShowMonthlyTasks(true);
+        if (tasksStatistics?.contributor) setShowMonthlyTasks(true);
         if (tasksStatistics?.firstCompletedAllTasksAt)
           setShowMonthlyTasks(true);
       }
+    }, [tasksStatistics, refetchTasksStatistics]),
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      reload();
     }, []),
   );
 
@@ -136,6 +145,7 @@ export default function TasksSection() {
             </View>
           )}
       </View>
+      <StatisticsCardsSection />
     </View>
   );
 }

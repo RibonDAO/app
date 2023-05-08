@@ -14,10 +14,12 @@ import {
 } from "lib/dateUtils";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { showToast } from "lib/Toast";
+import { logError } from "services/crashReport";
 import { useTranslation } from "react-i18next";
 import TasksStatistics from "@ribon.io/shared/types/apiResponses/TasksStatistics";
 
 export type TaskStateItem = {
+  type: string;
   id: string;
   nextAction: string;
   done: boolean;
@@ -37,7 +39,8 @@ export interface ITasksContext {
 export const TasksContext = createContext<ITasksContext>({} as ITasksContext);
 
 function TasksProvider({ children }: any) {
-  const { tasksStatistics, completeAllTasks } = useTasksStatistics();
+  const { tasksStatistics, completeAllTasks, updateStreak } =
+    useTasksStatistics();
   const [tasksState, setTasksState] = useState<any[]>([]);
   const { findCompletedTasks, completeTask } = useCompletedTasks();
   const [hasCompletedATask, setHasCompletedATask] = useState(false);
@@ -169,6 +172,16 @@ function TasksProvider({ children }: any) {
   useEffect(() => {
     if (tasksStatistics?.firstCompletedAllTasksAt === null) {
       completeAllTasks();
+    }
+  }, [buildTasksState]);
+
+  useEffect(() => {
+    if (currentUser) {
+      try {
+        updateStreak();
+      } catch (error) {
+        logError(error);
+      }
     }
   }, [buildTasksState]);
 

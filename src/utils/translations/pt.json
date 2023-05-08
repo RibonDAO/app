@@ -113,6 +113,11 @@
           "see_more_ngo_infos": "Ver mais informações sobre uma ONG",
           "make_contribution": "Fazer uma doação paga"
         },
+        "statisticsCardsSection": {
+          "dailyTasksTitle": "tarefas diárias completas",
+          "superTasksTitle": "super tarefas completas",
+          "streakTitle": "dias seguidos completando tarefas"
+        },
         "countdown": "até reiniciar tarefas"
       }
     }

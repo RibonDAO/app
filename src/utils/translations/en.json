@@ -113,6 +113,11 @@
           "see_more_ngo_infos": "See more info about an NGO",
           "make_contribution": "Make a paid donation"
         },
+        "statisticsCardsSection": {
+          "dailyTasksTitle": "daily tasks completed",
+          "superTasksTitle": "super tasks completed",
+          "streakTitle": "days in a row completing tasks"
+        },
         "countdown": "until task reset"
       }
     }

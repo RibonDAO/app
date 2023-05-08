@@ -42,7 +42,7 @@ export default function MonthlyTasksSection() {
       (task) => task.id === taskContribution.id,
     );
     if (
-      tasksStatistics?.hasContribution &&
+      tasksStatistics?.contributor &&
       !taskStatus?.done &&
       taskStatus?.timesCompleted === 0
     ) {
