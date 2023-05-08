@@ -6,7 +6,7 @@ export const RIBON_INTEGRATION_ID =
 export const REACT_APP_RIBON_API =
   Constants.expoConfig?.extra?.REACT_APP_RIBON_API;
 
-export const MIXPANEL_TOKEN =
-  Constants.expoConfig?.extra?.MIXPANEL_TOKEN;
+export const REACT_APP_MIXPANEL_TOKEN =
+  Constants.expoConfig?.extra?.REACT_APP_MIXPANEL_TOKEN;
 
 export const PLATFORM = "app";

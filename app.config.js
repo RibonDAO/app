@@ -80,7 +80,7 @@ export default () => ({
       },
       "REACT_APP_RIBON_API": process.env.REACT_APP_RIBON_API,
       "REACT_APP_RIBON_INTEGRATION_ID": process.env.REACT_APP_RIBON_INTEGRATION_ID,
-      "MIXPANEL_TOKEN": process.env.MIXPANEL_TOKEN,
+      "REACT_APP_MIXPANEL_TOKEN": process.env.REACT_APP_MIXPANEL_TOKEN,
     },
     "runtimeVersion": {
       "policy": "appVersion"
