@@ -105,11 +105,18 @@
       },
       "tasksSection": {
         "title": "Tarefas",
+        "titleSuperTasks": "Super tarefas",
         "tasks": {
           "donate_ticket": "Doar ticket",
           "donate_ticket_on_native": "Baixar o app e doar um ticket",
           "check_daily_news": "Conferir publicações diárias",
-          "see_more_ngo_infos": "Ver mais informações sobre uma ONG"
+          "see_more_ngo_infos": "Ver mais informações sobre uma ONG",
+          "make_contribution": "Fazer uma doação paga"
+        },
+        "statisticsCardsSection": {
+          "dailyTasksTitle": "tarefas diárias completas",
+          "superTasksTitle": "super tarefas completas",
+          "streakTitle": "dias seguidos completando tarefas"
         },
         "countdown": "até reiniciar tarefas"
       }
