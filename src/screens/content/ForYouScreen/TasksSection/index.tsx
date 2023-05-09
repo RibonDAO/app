@@ -34,7 +34,7 @@ export default function TasksSection() {
     tasksStatistics,
   } = useTasksContext();
   const { refetchTasksStatistics } = useTasksStatistics();
-  const [showMonthlyTasks, setShowMonthlyTasks] = useState(false);
+  const [showMonthlyTasks, setShowMonthlyTasks] = useState();
 
   const { index } = useForYouTabsContext();
 
@@ -94,7 +94,7 @@ export default function TasksSection() {
         if (tasksStatistics?.firstCompletedAllTasksAt)
           setShowMonthlyTasks(true);
       }
-    }, [tasksStatistics, refetchTasksStatistics]),
+    }, [tasksStatistics, refetchTasksStatistics, setShowMonthlyTasks]),
   );
 
   useFocusEffect(

@@ -39,8 +39,12 @@ export interface ITasksContext {
 export const TasksContext = createContext<ITasksContext>({} as ITasksContext);
 
 function TasksProvider({ children }: any) {
-  const { tasksStatistics, completeAllTasks, updateStreak } =
-    useTasksStatistics();
+  const {
+    tasksStatistics,
+    completeAllTasks,
+    updateStreak,
+    refetchTasksStatistics,
+  } = useTasksStatistics();
   const [tasksState, setTasksState] = useState<any[]>([]);
   const { findCompletedTasks, completeTask } = useCompletedTasks();
   const [hasCompletedATask, setHasCompletedATask] = useState(false);
@@ -170,10 +174,14 @@ function TasksProvider({ children }: any) {
   };
 
   useEffect(() => {
-    if (tasksStatistics?.firstCompletedAllTasksAt === null) {
+    if (
+      tasksStatistics?.firstCompletedAllTasksAt === null &&
+      allDone(tasksState)
+    ) {
       completeAllTasks();
+      refetchTasksStatistics();
     }
-  }, [buildTasksState]);
+  }, [buildTasksState, tasksState]);
 
   useEffect(() => {
     if (currentUser) {
