@@ -14,6 +14,7 @@ import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import { logEvent } from "services/analytics";
+
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
@@ -29,7 +30,7 @@ function PaymentScreen(): JSX.Element {
     offer.priceValue,
     offer.currency.toUpperCase() as Currencies,
   );
-  const { buttonDisabled, handleSubmit, setCause, setNonProfit } =
+  const { buttonDisabled, handleSubmit, setCause, setNonProfit, resetStates } =
     useCardPaymentInformation();
 
   const colorTheme = getThemeByFlow(flow);
@@ -60,6 +61,9 @@ function PaymentScreen(): JSX.Element {
     setNonProfit(nonProfit);
   }, [nonProfit]);
 
+  useEffect(() => {
+    resetStates();
+  }, []);
   const isUserSection = () => currentSection === "user";
   const isCardSection = () => currentSection === "card";
 

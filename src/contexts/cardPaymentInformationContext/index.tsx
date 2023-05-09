@@ -34,7 +34,7 @@ export interface ICardPaymentInformationContext {
   setState: (value: SetStateAction<string>) => void;
   setCity: (value: SetStateAction<string>) => void;
   setTaxId: (value: SetStateAction<string>) => void;
-  setEmail: (value: SetStateAction<string>) => void;
+  setEmail: (value: SetStateAction<string | undefined>) => void;
   setNumber: (value: SetStateAction<string>) => void;
   setName: (value: SetStateAction<string>) => void;
   setExpirationDate: (value: SetStateAction<string>) => void;
@@ -49,7 +49,7 @@ export interface ICardPaymentInformationContext {
   state: string;
   city: string;
   taxId: string;
-  email: string;
+  email: string | undefined;
   number: string;
   name: string;
   expirationDate: string;
@@ -63,6 +63,7 @@ export interface ICardPaymentInformationContext {
   nonProfit: NonProfit | undefined;
   setNonProfit: (value: SetStateAction<NonProfit | undefined>) => void;
   loading: boolean;
+  resetStates: () => void;
 }
 
 export type Props = {
@@ -112,7 +113,7 @@ function CardPaymentInformationProvider({ children }: Props) {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [taxId, setTaxId] = useState("");
-  const [email, setEmail] = useState(currentUser?.email ?? "");
+  const [email, setEmail] = useState(currentUser?.email ?? undefined);
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
@@ -137,6 +138,7 @@ function CardPaymentInformationProvider({ children }: Props) {
 
   const resetStates = () => {
     setCountry("");
+    setEmail(currentUser?.email ?? undefined);
     setState("");
     setCity("");
     setTaxId("");
@@ -149,7 +151,10 @@ function CardPaymentInformationProvider({ children }: Props) {
 
   const login = async () => {
     if (!signedIn) {
-      const user = await findOrCreateUser(email, await normalizedLanguage());
+      const user = await findOrCreateUser(
+        email ?? "",
+        await normalizedLanguage(),
+      );
       if (integration) {
         createSource(user.id, integration.id);
       }
@@ -163,7 +168,7 @@ function CardPaymentInformationProvider({ children }: Props) {
     const expiration = expirationDate.split("/");
 
     const paymentInformation = {
-      email,
+      email: email ?? "",
       country,
       state,
       city,
@@ -249,6 +254,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       flow,
       setFlow,
       loading,
+      resetStates,
     }),
     [
       currentCoin,
