@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { Text, ScrollView, View } from "react-native";
+import { View } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useImpact, useStatistics } from "@ribon.io/shared/hooks";
+import { logEvent } from "services/analytics";
 import TabViewSection from "./TabViewSection";
 import S from "./styles";
-import { logEvent } from "services/analytics";
 
 function ProfileScreen() {
   const { currentUser } = useCurrentUser();
