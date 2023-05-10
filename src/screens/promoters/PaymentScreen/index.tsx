@@ -13,10 +13,11 @@ import { theme } from "@ribon.io/shared/styles";
 import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
+import { logEvent } from "services/analytics";
+
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
-import { logEvent } from "services/analytics";
 
 function PaymentScreen(): JSX.Element {
   const { params } = useRouteParams<"PaymentScreen">();
@@ -29,21 +30,21 @@ function PaymentScreen(): JSX.Element {
     offer.priceValue,
     offer.currency.toUpperCase() as Currencies,
   );
-  const { buttonDisabled, handleSubmit, setCause, setNonProfit } =
+  const { buttonDisabled, handleSubmit, setCause, setNonProfit, resetStates } =
     useCardPaymentInformation();
 
   const colorTheme = getThemeByFlow(flow);
   const { isKeyboardVisible } = useKeyboardVisibility();
 
   useEffect(() => {
-    if(flow == "cause") {
+    if (flow === "cause") {
       logEvent("P5_view", {
         causeId: cause?.id,
         price: offer.priceValue,
         currency: offer.currency,
       });
     }
-    if(flow == "nonProfit") {
+    if (flow === "nonProfit") {
       logEvent("P6_view", {
         nonprofitId: nonProfit?.id,
         price: offer.priceValue,
@@ -60,6 +61,9 @@ function PaymentScreen(): JSX.Element {
     setNonProfit(nonProfit);
   }, [nonProfit]);
 
+  useEffect(() => {
+    resetStates();
+  }, []);
   const isUserSection = () => currentSection === "user";
   const isCardSection = () => currentSection === "card";
 
@@ -72,7 +76,7 @@ function PaymentScreen(): JSX.Element {
   const handleContinueClick = () => {
     if (isUserSection()) {
       logEvent("continuePaymentFormBtn_click", {
-        flow: flow,
+        flow,
         causeId: cause?.id,
         nonprofitId: nonProfit?.id,
         price: offer.priceValue,
@@ -81,7 +85,7 @@ function PaymentScreen(): JSX.Element {
       setCurrentSection("card");
     } else if (isCardSection()) {
       logEvent("sendPaymentFormBtn_click", {
-        flow: flow,
+        flow,
         causeId: cause?.id,
         nonprofitId: nonProfit?.id,
         price: offer.priceValue,

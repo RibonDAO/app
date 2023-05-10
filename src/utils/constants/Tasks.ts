@@ -59,6 +59,16 @@ export const TASKS = [
       return true;
     },
   },
+  {
+    id: "ed180aa8-e8e7-11ed-a05b-0242ac120003",
+    title: "make_contribution",
+    actions: ["contribution_done_screen_view"],
+    type: "monthly",
+    navigationCallback: "CausesScreen",
+    isVisible(this: Task) {
+      return true;
+    },
+  },
 ];
 
 export const useTasks = (type: string) => {

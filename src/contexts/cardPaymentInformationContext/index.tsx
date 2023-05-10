@@ -26,6 +26,7 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { normalizedLanguage } from "lib/currentLanguage";
 import { logEvent } from "services/analytics";
+import { useTasksContext } from "contexts/tasksContext";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -33,7 +34,7 @@ export interface ICardPaymentInformationContext {
   setState: (value: SetStateAction<string>) => void;
   setCity: (value: SetStateAction<string>) => void;
   setTaxId: (value: SetStateAction<string>) => void;
-  setEmail: (value: SetStateAction<string>) => void;
+  setEmail: (value: SetStateAction<string | undefined>) => void;
   setNumber: (value: SetStateAction<string>) => void;
   setName: (value: SetStateAction<string>) => void;
   setExpirationDate: (value: SetStateAction<string>) => void;
@@ -48,7 +49,7 @@ export interface ICardPaymentInformationContext {
   state: string;
   city: string;
   taxId: string;
-  email: string;
+  email: string | undefined;
   number: string;
   name: string;
   expirationDate: string;
@@ -62,6 +63,7 @@ export interface ICardPaymentInformationContext {
   nonProfit: NonProfit | undefined;
   setNonProfit: (value: SetStateAction<NonProfit | undefined>) => void;
   loading: boolean;
+  resetStates: () => void;
 }
 
 export type Props = {
@@ -78,6 +80,7 @@ export const CURRENT_COIN_KEY = "CURRENT_COIN_KEY";
 function CardPaymentInformationProvider({ children }: Props) {
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
+  const { registerAction } = useTasksContext();
   const [loading, setLoading] = useState(false);
   const [currentCoin, setCurrentCoin] = useState<Currencies>();
   const defaultCoin = async () =>
@@ -110,14 +113,14 @@ function CardPaymentInformationProvider({ children }: Props) {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [taxId, setTaxId] = useState("");
-  const [email, setEmail] = useState(currentUser?.email ?? "");
+  const [email, setEmail] = useState(currentUser?.email ?? undefined);
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [cvv, setCvv] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [cryptoGiving, setCryptoGiving] = useState("");
-  const [offerId, setOfferId] = useState(0);
+  const [offerId, setOfferId] = useState(1);
   const [cause, setCause] = useState<Cause>();
   const [nonProfit, setNonProfit] = useState<NonProfit>();
   const [flow, setFlow] = useState<"nonProfit" | "cause">("nonProfit");
@@ -135,6 +138,7 @@ function CardPaymentInformationProvider({ children }: Props) {
 
   const resetStates = () => {
     setCountry("");
+    setEmail(currentUser?.email ?? undefined);
     setState("");
     setCity("");
     setTaxId("");
@@ -147,7 +151,10 @@ function CardPaymentInformationProvider({ children }: Props) {
 
   const login = async () => {
     if (!signedIn) {
-      const user = await findOrCreateUser(email, await normalizedLanguage());
+      const user = await findOrCreateUser(
+        email ?? "",
+        await normalizedLanguage(),
+      );
       if (integration) {
         createSource(user.id, integration.id);
       }
@@ -161,7 +168,7 @@ function CardPaymentInformationProvider({ children }: Props) {
     const expiration = expirationDate.split("/");
 
     const paymentInformation = {
-      email,
+      email: email ?? "",
       country,
       state,
       city,
@@ -182,23 +189,19 @@ function CardPaymentInformationProvider({ children }: Props) {
     try {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
       login();
-      if(flow === "nonProfit") {
-        logEvent("ngoGave_end",
-          {
-            causeId: cause?.id,
-            offerId: offerId
-          }
-        );
-      } 
-      else {
-        logEvent("causeGave_end",
-          {
-            causeId: cause?.id,
-            offerId: offerId
-          }
-        );
+      if (flow === "nonProfit") {
+        logEvent("ngoGave_end", {
+          causeId: cause?.id,
+          offerId,
+        });
+      } else {
+        logEvent("causeGave_end", {
+          causeId: cause?.id,
+          offerId,
+        });
       }
-      
+      registerAction("contribution_done_screen_view");
+
       navigateTo("ContributionDoneScreen", {
         cause,
         nonProfit,
@@ -251,6 +254,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       flow,
       setFlow,
       loading,
+      resetStates,
     }),
     [
       currentCoin,

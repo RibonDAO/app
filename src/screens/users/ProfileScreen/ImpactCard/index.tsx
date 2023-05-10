@@ -9,6 +9,7 @@ export type Props = {
   iconName?: string;
   onPress?: () => void;
   description: string;
+  color?: string;
 };
 
 function ImpactCard({
@@ -16,18 +17,14 @@ function ImpactCard({
   impact,
   description,
   onPress,
+  color = theme.colors.brand.primary[800],
 }: Props): JSX.Element {
   return (
     <TouchableOpacity onPress={onPress} style={S.badgeContainer}>
       <View style={S.badgeRoundContainer}>
-        <Icon
-          type="rounded"
-          name={iconName}
-          color={theme.colors.brand.primary[800]}
-          size={24}
-        />
-        <Text style={S.impact}>{impact}</Text>
-        <Text style={S.description}>{description}</Text>
+        <Icon type="rounded" name={iconName} color={color} size={24} />
+        <Text style={[S.impact, { color }]}>{impact}</Text>
+        <Text style={[S.description, { color }]}>{description}</Text>
       </View>
     </TouchableOpacity>
   );

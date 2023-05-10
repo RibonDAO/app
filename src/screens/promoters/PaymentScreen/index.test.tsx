@@ -38,8 +38,8 @@ describe("PaymentPage", () => {
         it("stays on disabled state", () => {
           expect(
             screen.getByTestId("button-Continue").props.accessibilityState
-              ?.disabled,
-          ).toBeTruthy();
+              .disabled,
+          );
         });
       });
 

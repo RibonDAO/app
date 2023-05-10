@@ -1,9 +1,12 @@
+const version = "5.0.4";
+const buildNumber = 309;
+
 export default () => ({
   "expo": {
     "owner": "ribon-app",
     "name": "Ribon",
     "slug": "app",
-    "version": "5.0.1",
+    "version": version,
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
@@ -43,7 +46,7 @@ export default () => ({
       },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
-      "buildNumber": "306"
+      "buildNumber": buildNumber.toString(),
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -52,7 +55,7 @@ export default () => ({
         "backgroundColor": "#00DA93"
       },
       "package": "com.app.ribon",
-      "versionCode": 306
+      "versionCode": buildNumber,
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
@@ -77,6 +80,7 @@ export default () => ({
       },
       "REACT_APP_RIBON_API": process.env.REACT_APP_RIBON_API,
       "REACT_APP_RIBON_INTEGRATION_ID": process.env.REACT_APP_RIBON_INTEGRATION_ID,
+      "REACT_APP_MIXPANEL_TOKEN": process.env.REACT_APP_MIXPANEL_TOKEN,
     },
     "runtimeVersion": {
       "policy": "appVersion"
