@@ -5,15 +5,22 @@ import { useTranslation } from "react-i18next";
 import usePersonPayments from "hooks/apiHooks/usePersonPayments";
 import { theme } from "@ribon.io/shared/styles";
 import DirectDonationCard from "screens/users/ProfileScreen/DirectDonationsImpactCards/DirectDonationCard";
+import { logEvent } from "services/analytics";
+import { useFocusEffect } from "@react-navigation/native";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
-import { logEvent } from "services/analytics";
 
 function DirectDonationsImpactCards(): JSX.Element {
   const { useDirectPersonPayments } = usePersonPayments();
 
-  const { data } = useDirectPersonPayments(1, 6);
+  const { data, refetch } = useDirectPersonPayments(1, 6);
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, []),
+  );
 
   const impactItems = useCallback(() => data || [], [data]);
   const hasImpact = impactItems() && impactItems()?.length > 0;
@@ -23,7 +30,7 @@ function DirectDonationsImpactCards(): JSX.Element {
   });
 
   const navigateToPromotersScreen = () => {
-    logEvent("giveNonProfitCard_click", { from: "impactEmptystate"});
+    logEvent("giveNonProfitCard_click", { from: "impactEmptystate" });
     navigateTo("PromotersScreen", { isInCommunity: false });
   };
 
