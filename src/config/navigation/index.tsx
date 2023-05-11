@@ -55,6 +55,93 @@ const headerWithWallet = () => (
 const { primary } = theme.colors.brand;
 const { neutral } = theme.colors;
 
+const BottomTab = createBottomTabNavigator<RootTabParamList>();
+
+function BottomTabNavigator() {
+  const activeColor = neutral[900];
+  const { t } = useTranslation();
+
+  const { currentUser } = useCurrentUser();
+
+  const { canDonate, refetch: refetchCanDonate } = useCanDonate(
+    RIBON_INTEGRATION_ID,
+    PLATFORM,
+  );
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      refetchCanDonate();
+    }, 500);
+  }, [JSON.stringify(currentUser)]);
+
+  function renderTabBarIcon(color: any, iconOn: any, iconOff: any) {
+    return color === activeColor ? iconOn : iconOff;
+  }
+
+  function renderForYouScreenHeader() {
+    return canDonate ? null : headerWithoutTicket();
+  }
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName="CausesScreen"
+      screenOptions={{
+        tabBarActiveTintColor: neutral[900],
+        tabBarStyle: { ...S.tabBar },
+        tabBarLabelStyle: { ...S.tabBarLabel },
+      }}
+    >
+      <BottomTab.Screen
+        name="CausesScreen"
+        component={CausesScreen}
+        options={{
+          title: t("tabs.causes") || "Tickets",
+          tabBarIcon: ({ color }) =>
+            renderTabBarIcon(color, <CausesIconOn />, <CausesIconOff />),
+          header,
+          lazy: false,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="ForYouScreen"
+        component={ForYouScreen}
+        options={{
+          title: t("tabs.foryou") || "For you",
+          tabBarIcon: ({ color }) =>
+            renderTabBarIcon(color, <ForYouIconOn />, <ForYouIconOff />),
+          lazy: false,
+          header: () => renderForYouScreenHeader(),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="PromotersScreen"
+        component={PromotersScreen}
+        options={{
+          title: t("tabs.giving") || "Donations",
+          tabBarIcon: ({ color }: any) =>
+            renderTabBarIcon(color, <GivingIconOn />, <GivingIconOff />),
+          header: headerWithWallet,
+          lazy: false,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{
+          title: t("tabs.profile") || "Impact",
+          tabBarIcon: ({ color }: any) =>
+            renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
+          header: headerWithoutTicket,
+          lazy: false,
+        }}
+      />
+    </BottomTab.Navigator>
+  );
+}
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
@@ -73,7 +160,7 @@ function RootNavigator() {
 
       <Stack.Screen
         name="ReceiveTicketScreen"
-        component={ReceiveTicketScreen}
+        component={ReceiveTicketScreen as any}
         options={{
           title: "ReceiveTicketScreen",
           headerShown: false,
@@ -145,85 +232,6 @@ function RootNavigator() {
         />
       </Stack.Group>
     </Stack.Navigator>
-  );
-}
-
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
-
-function BottomTabNavigator() {
-  const activeColor = neutral[900];
-  const { t } = useTranslation();
-
-  const { currentUser } = useCurrentUser();
-
-  const { canDonate, refetch: refetchCanDonate } = useCanDonate(
-    RIBON_INTEGRATION_ID,
-    PLATFORM,
-  );
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      refetchCanDonate();
-    }, 500);
-  }, [JSON.stringify(currentUser)]);
-
-  return (
-    <BottomTab.Navigator
-      initialRouteName="CausesScreen"
-      screenOptions={{
-        tabBarActiveTintColor: neutral[900],
-        tabBarStyle: { ...S.tabBar },
-        tabBarLabelStyle: { ...S.tabBarLabel },
-      }}
-    >
-      <BottomTab.Screen
-        name="CausesScreen"
-        component={CausesScreen}
-        options={{
-          title: t("tabs.causes") || "Tickets",
-          tabBarIcon: ({ color }) =>
-            color === activeColor ? <CausesIconOn /> : <CausesIconOff />,
-          header,
-          lazy: false,
-        }}
-      />
-
-      <BottomTab.Screen
-        name="ForYouScreen"
-        component={ForYouScreen}
-        options={{
-          title: t("tabs.foryou") || "For you",
-          tabBarIcon: ({ color }) =>
-            color === activeColor ? <ForYouIconOn /> : <ForYouIconOff />,
-          lazy: false,
-          header: () => (canDonate ? <></> : headerWithoutTicket()),
-        }}
-      />
-
-      <BottomTab.Screen
-        name="PromotersScreen"
-        component={PromotersScreen}
-        options={{
-          title: t("tabs.giving") || "Donations",
-          tabBarIcon: ({ color }: any) =>
-            color === activeColor ? <GivingIconOn /> : <GivingIconOff />,
-          header: headerWithWallet,
-          lazy: false,
-        }}
-      />
-
-      <BottomTab.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={{
-          title: t("tabs.profile") || "Impact",
-          tabBarIcon: ({ color }: any) =>
-            color === activeColor ? <ImpactIconOn /> : <ImpactIconOff />,
-          header: headerWithoutTicket,
-          lazy: false,
-        }}
-      />
-    </BottomTab.Navigator>
   );
 }
 

@@ -8,7 +8,7 @@ type Props = {
   image?: string;
   imageStyles?: ImageStyle;
 };
-function MaskedWaveCut({ image, imageStyles }: Props) {
+function MaskedWaveCut({ image = "", imageStyles }: Props) {
   return (
     <MaskedView
       maskElement={

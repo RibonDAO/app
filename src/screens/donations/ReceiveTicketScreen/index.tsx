@@ -11,6 +11,7 @@ import S from "./styles";
 type Props = {
   onTicketReceived: () => void;
 };
+
 function ReceiveTicketScreen({ onTicketReceived }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.receiveTicketScreen",
