@@ -1,12 +1,12 @@
 import { Text, TouchableOpacity } from "react-native";
 import { useCausesContext } from "contexts/causesContext";
-import S from "./styles";
 import { View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import Image from "components/atomics/Image";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
+import S from "./styles";
 
 type Props = {
   idCause: number;
@@ -17,7 +17,7 @@ type Props = {
 
 function ContributionImage({
   name,
-  coverImage,
+  coverImage = "",
   idCause,
   isCause = false,
 }: Props) {

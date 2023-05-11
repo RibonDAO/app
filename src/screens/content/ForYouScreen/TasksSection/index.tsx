@@ -34,7 +34,7 @@ export default function TasksSection() {
     tasksStatistics,
   } = useTasksContext();
   const { refetchTasksStatistics } = useTasksStatistics();
-  const [showMonthlyTasks, setShowMonthlyTasks] = useState();
+  const [showMonthlyTasks, setShowMonthlyTasks] = useState<boolean>();
 
   const { index } = useForYouTabsContext();
 
@@ -54,13 +54,17 @@ export default function TasksSection() {
       .length;
   }, [tasksState]);
 
-  const renderCountdown = () => {
+  function renderCountdown() {
     const countdown = useCountdown(nextDay(), reload);
 
-    if (!tasksState) return;
-    if (!tasksState.length) return;
-    if (tasksState.filter((obj) => obj.done === false).length) return;
-    if (countdown.reduce((a, b) => a + b, 0) <= 0) return;
+    if (
+      !tasksState ||
+      !tasksState.length ||
+      tasksState.filter((obj) => obj.done === false).length ||
+      countdown.reduce((a, b) => a + b, 0) <= 0
+    ) {
+      return null;
+    }
 
     return (
       <View style={S.timerWrapper}>
@@ -68,7 +72,7 @@ export default function TasksSection() {
         <Text>{t("countdown")}</Text>
       </View>
     );
-  };
+  }
 
   const donateTicketTask = dailyTasks.find(
     (obj) => obj.title === "donate_ticket",

@@ -11,9 +11,6 @@ function ForYouIconOff() {
     <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
       <Mask
         id="a"
-        style={{
-          maskType: "alpha",
-        }}
         maskUnits="userSpaceOnUse"
         x={0}
         y={0}
