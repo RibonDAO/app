@@ -24,9 +24,10 @@ import Tooltip from "components/atomics/Tooltip";
 import TicketSection from "screens/donations/CausesScreen/TicketSection";
 import ImpactDonationsVector from "screens/users/ProfileScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ProfileScreen/ZeroDonationsSection";
+import { logEvent } from "services/analytics";
+import { Image } from "expo-image";
 import S from "./styles";
 import Placeholder from "./placeholder";
-import { logEvent } from "services/analytics";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
@@ -98,6 +99,7 @@ export default function CausesScreen() {
     setCurrentNonProfit(nonProfit);
     try {
       const nonProfitStories = await fetchNonProfitStories(nonProfit.id);
+      Image.prefetch(nonProfitStories.map((story) => story.image));
       if (nonProfitStories.length === 0) return;
       setStories(nonProfitStories);
       setStoriesVisible(true);
@@ -171,7 +173,10 @@ export default function CausesScreen() {
                   handleNonProfitImagePress(nonProfit);
                 }}
                 onClickButton={() => {
-                  logEvent("donateTicketBtn_start", {nonProfitId: nonProfit.id, from: "nonprofitCard"});
+                  logEvent("donateTicketBtn_start", {
+                    nonProfitId: nonProfit.id,
+                    from: "nonprofitCard",
+                  });
                   navigateTo("DonateScreen", { nonProfit });
                 }}
                 buttonDisabled={!hasTickets()}
