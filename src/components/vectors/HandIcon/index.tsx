@@ -3,19 +3,9 @@ import Svg, { Mask, Path, G } from "react-native-svg";
 
 function HandIcon(props: any) {
   return (
-    <Svg
-      width={96}
-      height={96}
-      viewBox="0 0 96 96"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <Svg width={96} height={96} viewBox="0 0 96 96" fill="none" {...props}>
       <Mask
         id="a"
-        style={{
-          maskType: "alpha",
-        }}
         maskUnits="userSpaceOnUse"
         x={0}
         y={0}
@@ -42,9 +32,6 @@ function HandIcon(props: any) {
         />
         <Mask
           id="b"
-          style={{
-            maskType: "alpha",
-          }}
           maskUnits="userSpaceOnUse"
           x={20}
           y={20}

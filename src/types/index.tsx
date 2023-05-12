@@ -72,6 +72,7 @@ export type RootStackParamList = {
   SupportNonProfitScreen: SupportNonProfitParamList;
   PromotersScreen: PromotersScreenParams;
   OnboardingScreen: undefined;
+  DonateModal: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

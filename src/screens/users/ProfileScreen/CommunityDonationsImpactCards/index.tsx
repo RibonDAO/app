@@ -7,15 +7,22 @@ import { formatDateTime } from "lib/formatters/dateFormatter";
 import CardImageText from "components/moleculars/CardImageText";
 import { theme } from "@ribon.io/shared/styles";
 import { formatPrice } from "lib/formatters/currencyFormatter";
+import { logEvent } from "services/analytics";
+import { useFocusEffect } from "@react-navigation/native";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
-import { logEvent } from "services/analytics";
 
 function CommunityDonationsImpactCards(): JSX.Element {
   const { useCommunityPersonPayments } = usePersonPayments();
 
-  const { data } = useCommunityPersonPayments(1, 6);
+  const { data, refetch } = useCommunityPersonPayments(1, 6);
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, []),
+  );
 
   const impactItems = useCallback(() => data || [], [data]);
   const hasImpact = impactItems() && impactItems()?.length > 0;
@@ -25,7 +32,7 @@ function CommunityDonationsImpactCards(): JSX.Element {
   });
 
   const navigateToPromotersScreen = () => {
-    logEvent("giveCauseCard_click", { from: "impactEmptystate"});
+    logEvent("giveCauseCard_click", { from: "impactEmptystate" });
     navigateTo("PromotersScreen");
   };
 
