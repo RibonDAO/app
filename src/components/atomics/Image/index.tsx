@@ -15,7 +15,9 @@ interface Props extends ImageProps {
 }
 function Image({ source, style, ...rest }: Props) {
   if (typeof source === "number") {
-    return <ReactNativeImageComponent source={source} style={style} />;
+    return (
+      <ReactNativeImageComponent source={source} style={style} {...rest} />
+    );
   }
 
   return (
