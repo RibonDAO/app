@@ -13,6 +13,7 @@ type Props = {
   highlightedDescription?: string | JSX.Element;
   buttonTitle?: string;
   onButtonPress?: () => void;
+  children?: JSX.Element | JSX.Element[];
 };
 export default function DoneScreenTemplate({
   image,
@@ -21,12 +22,11 @@ export default function DoneScreenTemplate({
   description,
   highlightedDescription,
   onButtonPress,
+  children,
 }: Props) {
   return (
     <View style={S.container}>
-      <View
-        style={S.animationContainer}
-      >
+      <View style={S.animationContainer}>
         <View style={S.diamondBackground}>
           <LottieAnimation
             animationData={BackgroundAnimation}
@@ -51,6 +51,7 @@ export default function DoneScreenTemplate({
           )}
         </Text>
       )}
+      {children}
       {buttonTitle && (
         <Button
           onPress={onButtonPress}

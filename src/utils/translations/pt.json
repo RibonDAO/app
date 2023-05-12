@@ -61,6 +61,7 @@
     },
     "donationDoneScreen": {
       "title": "Parabéns!",
+      "buttonContinueText": "Continuar",
       "buttonText": "Fechar",
       "description": "Você doou"
     },

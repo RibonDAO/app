@@ -61,6 +61,7 @@
     },
     "donationDoneScreen": {
       "title": "Congratulations!",
+      "buttonContinueText": "Continue",
       "buttonText": "Close",
       "description": "You donated"
     },
