@@ -12,8 +12,9 @@ const blurhash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4";
 interface Props extends ImageProps {
   source: { uri: string } | ImageRequireSource;
   style?: ImageStyle;
+  transition?: number;
 }
-function Image({ source, style, ...rest }: Props) {
+function Image({ source, style, transition = 800, ...rest }: Props) {
   if (typeof source === "number") {
     return (
       <ReactNativeImageComponent source={source} style={style} {...rest} />
@@ -26,7 +27,7 @@ function Image({ source, style, ...rest }: Props) {
       source={{ uri: source.uri }}
       placeholder={blurhash}
       contentFit="cover"
-      transition={800}
+      transition={transition}
     />
   );
 }
