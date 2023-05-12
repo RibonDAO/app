@@ -42,7 +42,8 @@ export default () => ({
          "UIBackgroundModes": [
            "fetch",
            "remote-notification"
-         ]
+         ],
+        "NSPhotoLibraryAddUsageDescription": "Our application needs permission to write photos to share your impact"
       },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
