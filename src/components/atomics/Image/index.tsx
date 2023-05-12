@@ -26,7 +26,7 @@ function Image({ source, style, ...rest }: Props) {
       source={{ uri: source.uri }}
       placeholder={blurhash}
       contentFit="cover"
-      transition={1000}
+      transition={800}
     />
   );
 }
