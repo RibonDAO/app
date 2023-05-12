@@ -31,7 +31,7 @@ function ProfileScreen() {
       "https://media.discordapp.net/attachments/1008571091616276541/1106679413854187630/nicknish_people_happy_drinking_potable_water_cartoon_like_futur_078c80a5-7617-4b7f-8fa9-3a0e46882e3b.png?width=619&height=619";
 
     try {
-      await shareSocial(imageUrl, SocialTypes.INSTAGRAM_STORIES);
+      await shareSocial(imageUrl, SocialTypes.TWITTER);
     } catch (error) {
       console.log(error);
     }

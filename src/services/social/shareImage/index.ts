@@ -9,12 +9,12 @@ export const shareSocial = async (imageUrl: string, social: Social) => {
     message: "Donate with us",
     type: "image/jpeg",
     social,
-    appId: "123",
   };
 
   const shareOptions: any = { ...commonShareOptions };
   if (social === Share.Social.INSTAGRAM_STORIES) {
     shareOptions.stickerImage = `data:image/png;base64,${base64}`;
+    shareOptions.appId = "123";
   } else {
     shareOptions.url = `data:image/png;base64,${base64}`;
   }
