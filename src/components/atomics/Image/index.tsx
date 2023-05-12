@@ -28,6 +28,7 @@ function Image({ source, style, transition = 800, ...rest }: Props) {
       placeholder={blurhash}
       contentFit="cover"
       transition={transition}
+      {...(rest as any)}
     />
   );
 }
