@@ -24,6 +24,7 @@
     ]
   },
   "dependencies": {
+    "@config-plugins/react-native-branch": "^5.0.0",
     "@ethersproject/shims": "^5.7.0",
     "@expo/config-plugins": "^5.0.2",
     "@expo/vector-icons": "^13.0.0",
@@ -73,6 +74,7 @@
     "react-dom": "18.1.0",
     "react-i18next": "^12.1.4",
     "react-native": "0.70.8",
+    "react-native-branch": "^5.4.0",
     "react-native-collapsible-tab-view": "2.0.2",
     "react-native-country-picker-modal": "^2.0.0",
     "react-native-dropdown-picker": "^5.4.4",
