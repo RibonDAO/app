@@ -65,6 +65,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: theme.colors.neutral10,
   },
+  notificationWrapper: {
+    marginBottom: theme.spacingNative(16),
+  },
 });
 
 export default styles;

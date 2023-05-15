@@ -14,12 +14,19 @@ import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import { formatCountdown } from "lib/formatters/countdownFormatter";
 import { useFocusEffect } from "@react-navigation/native";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import S from "./styles";
-import MonthlyTasksSection from "./MonthlyTasksSection";
-import DailyTasksSection from "./DailyTasksSection";
+import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
+import requestUserPermissionForNotifications from "lib/notifications";
+import { showToast } from "lib/Toast";
+import { logError } from "services/crashReport";
+import InlineNotification from "components/moleculars/notifications/InlineNotification";
 import StatisticsCardsSection from "./StatisticsCardsSection";
+import DailyTasksSection from "./DailyTasksSection";
+import MonthlyTasksSection from "./MonthlyTasksSection";
+import S from "./styles";
+
+const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
 export default function TasksSection() {
   const { t } = useTranslation("translation", {
@@ -35,6 +42,8 @@ export default function TasksSection() {
   } = useTasksContext();
   const { refetchTasksStatistics } = useTasksStatistics();
   const [showMonthlyTasks, setShowMonthlyTasks] = useState<boolean>();
+  const [isNotificationCardVisible, setNotificationCardVisible] =
+    useState(false);
 
   const { index } = useForYouTabsContext();
 
@@ -46,6 +55,17 @@ export default function TasksSection() {
     }, [hasCompletedATask, index, setHasCompletedATask]),
   );
 
+  useEffect(() => {
+    const notificationCardVisible = async () => {
+      const value = await getLocalStorageItem(NOTIFICATION_CARD_VISIBLE_KEY);
+      return value === "true" || value === null;
+    };
+
+    notificationCardVisible().then((visible) => {
+      setNotificationCardVisible(visible);
+    });
+  }, []);
+
   const tasksCount = useCallback(() => {
     if (!tasksState) return 0;
     if (!tasksState.length) return 0;
@@ -53,26 +73,6 @@ export default function TasksSection() {
     return dailyTasks.filter((task) => task.isVisible({ state: tasksState }))
       .length;
   }, [tasksState]);
-
-  function renderCountdown() {
-    const countdown = useCountdown(nextDay(), reload);
-
-    if (
-      !tasksState ||
-      !tasksState.length ||
-      tasksState.filter((obj) => obj.done === false).length ||
-      countdown.reduce((a, b) => a + b, 0) <= 0
-    ) {
-      return null;
-    }
-
-    return (
-      <View style={S.timerWrapper}>
-        <Text style={S.countdown}>{formatCountdown(countdown)}</Text>
-        <Text>{t("countdown")}</Text>
-      </View>
-    );
-  }
 
   const donateTicketTask = dailyTasks.find(
     (obj) => obj.title === "donate_ticket",
@@ -112,6 +112,69 @@ export default function TasksSection() {
   const linkToIntegration = () => {
     openInWebViewer(integration?.integrationTask.linkAddress ?? "");
   };
+
+  const handleHideNotificationClick = async () => {
+    const hideAlert = () => {
+      setLocalStorageItem(NOTIFICATION_CARD_VISIBLE_KEY, "false");
+      setNotificationCardVisible(false);
+    };
+
+    try {
+      const enabled = await requestUserPermissionForNotifications();
+      if (enabled) {
+        showToast({
+          type: "success",
+          message: t("enableNotification.successToastMessage"),
+        });
+        hideAlert();
+      }
+    } catch (e) {
+      logError(e);
+      showToast({
+        type: "error",
+        message: t("enableNotification.errorToastMessage"),
+      });
+      hideAlert();
+    }
+  };
+
+  const renderNotificationCard = () => (
+      isNotificationCardVisible && (
+        <View style={{ paddingBottom: 16 }}>
+          <InlineNotification
+            title={t("enableNotification.title")}
+            type="warning"
+            customIcon="notifications"
+            firstLink={t("enableNotification.link") || ""}
+            onFirstLinkClick={handleHideNotificationClick}
+          />
+        </View>
+      )
+    );
+
+  function renderCountdown() {
+    const countdown = useCountdown(nextDay(), reload);
+
+    if (
+      !tasksState ||
+      !tasksState.length ||
+      tasksState.filter((obj) => obj.done === false).length ||
+      countdown.reduce((a, b) => a + b, 0) <= 0
+    ) {
+      return null;
+    }
+
+    return (
+      <View>
+        <View style={S.timerWrapper}>
+          <Text style={S.countdown}>{formatCountdown(countdown)}</Text>
+          <Text>{t("countdown")}</Text>
+        </View>
+
+        {renderNotificationCard()}
+      </View>
+    );
+  }
 
   return (
     <View style={S.container}>
