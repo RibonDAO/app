@@ -165,6 +165,20 @@ export default function CausesScreen() {
     }
   };
 
+  const renderNotificationCard = () => (
+      isNotificationCardVisible && (
+        <View style={{ paddingBottom: 16 }}>
+          <InlineNotification
+            title={t("enableNotification.title")}
+            type="warning"
+            customIcon="notifications"
+            firstLink={t("enableNotification.link") || ""}
+            onFirstLinkClick={handleHideNotificationClick}
+          />
+        </View>
+      )
+    );
+
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
@@ -179,18 +193,7 @@ export default function CausesScreen() {
           />
         )}
         <TicketSection canDonate={canDonate} />
-        {isNotificationCardVisible && (
-          <View style={S.notificationWrapper}>
-            <InlineNotification
-              title={t("enableNotification.title")}
-              type="warning"
-              customIcon="notifications"
-              firstLink={t("enableNotification.link") || ""}
-              onFirstLinkClick={handleHideNotificationClick}
-            />
-          </View>
-        )}
-
+        {renderNotificationCard()}
         <Text style={S.title}>{t("title")}</Text>
         <View style={S.groupButtonsContainer}>
           <GroupButtons
