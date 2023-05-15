@@ -110,7 +110,7 @@ export default function TasksSection() {
   const { integration } = useIntegration(RIBON_INTEGRATION_ID);
 
   const linkToIntegration = () => {
-    openInWebViewer(integration?.integrationTask.linkAddress ?? "");
+    openInWebViewer(integration?.integrationTask?.linkAddress ?? "");
   };
 
   const handleHideNotificationClick = async () => {

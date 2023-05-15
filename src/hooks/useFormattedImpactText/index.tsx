@@ -1,8 +1,9 @@
 import { impactNormalizer } from "@ribon.io/shared/lib";
 import { useTranslation } from "react-i18next";
-import { NonProfit, NonProfitImpact } from "@ribon.io/shared/types";
+import { NonProfit } from "@ribon.io/shared/types";
 import { Fragment } from "react";
 import { Text } from "react-native";
+import { NonProfitImpactResponse } from "@ribon.io/shared";
 
 export function useFormattedImpactText() {
   const { t: normalizerTranslation } = useTranslation("translation", {
@@ -12,6 +13,7 @@ export function useFormattedImpactText() {
   const highlightedImpact = (normalizedImpact: any) => (
     <>
       {normalizedImpact.map((slice: any, index: any) => (
+        // eslint-disable-next-line react/no-array-index-key
         <Fragment key={index.toString()}>
           {index % 2 === 0 ? (
             <Text style={{ fontWeight: "bold", fontFamily: "Inter700" }}>
@@ -30,7 +32,7 @@ export function useFormattedImpactText() {
     impact?: number,
     isRoundedImpact?: boolean,
     isHighlighted?: boolean,
-    nonProfitImpact?: NonProfitImpact,
+    nonProfitImpact?: NonProfitImpactResponse,
     prefix?: string,
   ): string | JSX.Element {
     if (!nonProfit) return "";
