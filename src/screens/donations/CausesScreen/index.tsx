@@ -28,11 +28,11 @@ import { logEvent } from "services/analytics";
 import InlineNotification from "components/moleculars/notifications/InlineNotification";
 import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
+import { showToast } from "lib/Toast";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
-const NOTIFICATION_CARD_VISIBLE_ON_CAUSES_SCREEN_KEY =
-  "NOTIFICATION_CARD_VISIBLE_ON_CAUSES_SCREEN_KEY";
+const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
@@ -72,9 +72,7 @@ export default function CausesScreen() {
 
   useEffect(() => {
     const notificationCardVisible = async () => {
-      const value = await getLocalStorageItem(
-        NOTIFICATION_CARD_VISIBLE_ON_CAUSES_SCREEN_KEY,
-      );
+      const value = await getLocalStorageItem(NOTIFICATION_CARD_VISIBLE_KEY);
       return value === "true" || value === null;
     };
 
@@ -142,13 +140,29 @@ export default function CausesScreen() {
     navigateTo("PromotersScreen");
   };
 
-  const handleHideNotificationClick = () => {
-    setLocalStorageItem(
-      NOTIFICATION_CARD_VISIBLE_ON_CAUSES_SCREEN_KEY,
-      "false",
-    );
-    setNotificationCardVisible(false);
-    requestUserPermissionForNotifications();
+  const handleHideNotificationClick = async () => {
+    const hideAlert = () => {
+      setLocalStorageItem(NOTIFICATION_CARD_VISIBLE_KEY, "false");
+      setNotificationCardVisible(false);
+    };
+
+    try {
+      const enabled = await requestUserPermissionForNotifications();
+      if (enabled) {
+        showToast({
+          type: "success",
+          message: t("enableNotification.successToastMessage"),
+        });
+        hideAlert();
+      }
+    } catch (e) {
+      logError(e);
+      showToast({
+        type: "error",
+        message: t("enableNotification.errorToastMessage"),
+      });
+      hideAlert();
+    }
   };
 
   return isLoading || loadingCanDonate ? (

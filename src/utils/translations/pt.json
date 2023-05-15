@@ -28,7 +28,9 @@
       "allCauses": "Todas",
       "enableNotification": {
         "title": "Não perca seu ticket diário!",
-        "link": "Ligar notificações"
+        "link": "Ligar notificações",
+        "successToastMessage": "Notificações ligadas",
+        "errorToastMessage": "Erro ao ligar notificações"
       },
       "userSupportSection": {
         "title": "Suporte ao Usuário",
@@ -110,6 +112,12 @@
       "tasksSection": {
         "title": "Tarefas",
         "titleSuperTasks": "Super tarefas",
+        "enableNotification": {
+          "title": "Receba o alerta de tarefas!",
+          "link": "Ligar notificações",
+          "successToastMessage": "Notificações ligadas",
+          "errorToastMessage": "Erro ao ligar notificações"
+        },
         "tasks": {
           "donate_ticket": "Doar ticket",
           "donate_ticket_on_native": "Baixar o app e doar um ticket",
