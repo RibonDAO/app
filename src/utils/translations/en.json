@@ -113,6 +113,9 @@
           "see_more_ngo_infos": "See more info about an NGO",
           "make_contribution": "Make a paid donation"
         },
+        "notificationTitle": "Get the task reset notification!",
+        "notificantionDescription": "Turn on notifications",
+        "toastNotificationOnSuccess": "Notifications turned on",
         "statisticsCardsSection": {
           "dailyTasksTitle": "daily tasks completed",
           "superTasksTitle": "super tasks completed",

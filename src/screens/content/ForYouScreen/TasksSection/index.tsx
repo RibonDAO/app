@@ -1,6 +1,11 @@
 import { Text, View } from "react-native";
 import { useTasks } from "utils/constants/Tasks";
-import { useIntegration, useTasksStatistics } from "@ribon.io/shared";
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+  useIntegration,
+  useTasksStatistics,
+} from "@ribon.io/shared";
 import ProgressBar from "components/atomics/ProgressBar";
 import { useTranslation } from "react-i18next";
 import { useTasksContext } from "contexts/tasksContext";
@@ -16,10 +21,17 @@ import { useFocusEffect } from "@react-navigation/native";
 
 import { useCallback, useState } from "react";
 
+import { showToast } from "lib/Toast";
+import InlineNotification from "components/moleculars/notifications/InlineNotification";
+import requestUserPermissionForNotifications from "lib/notifications";
+import { logError } from "services/crashReport";
 import S from "./styles";
 import MonthlyTasksSection from "./MonthlyTasksSection";
 import DailyTasksSection from "./DailyTasksSection";
 import StatisticsCardsSection from "./StatisticsCardsSection";
+
+export const HAS_SHOWED_ENABLE_NOTIFICATIONS =
+  "HAS_SHOWED_ENABLE_NOTIFICATIONS";
 
 export default function TasksSection() {
   const { t } = useTranslation("translation", {
@@ -113,6 +125,25 @@ export default function TasksSection() {
     openInWebViewer(integration?.integrationTask.linkAddress ?? "");
   };
 
+  const handleNotificationClick = () => async () => {
+    try {
+      const enabled = await requestUserPermissionForNotifications();
+      if (enabled) {
+        showToast({
+          type: "success",
+          message: t("toastNotificationOnSuccess"),
+        });
+      }
+    } catch (e) {
+      logError(e);
+    }
+
+    setLocalStorageItem(HAS_SHOWED_ENABLE_NOTIFICATIONS, "true");
+  };
+
+  const showNotification =
+    getLocalStorageItem(HAS_SHOWED_ENABLE_NOTIFICATIONS) !== "true";
+
   return (
     <View style={S.container}>
       <View style={S.paddingContainer}>
@@ -123,6 +154,17 @@ export default function TasksSection() {
             max={tasksCount() || dailyTasks.length}
           />
         </View>
+        {showNotification && (
+          <View style={S.container}>
+            <InlineNotification
+              title={t("notificationTitle")}
+              firstLink={t("notificantionDescription") as string}
+              onFirstLinkClick={handleNotificationClick()}
+              type="alert"
+            />
+          </View>
+        )}
+
         {renderCountdown()}
         <DailyTasksSection />
         {showMonthlyTasks && <MonthlyTasksSection />}

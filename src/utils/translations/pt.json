@@ -113,6 +113,9 @@
           "see_more_ngo_infos": "Ver mais informações sobre uma ONG",
           "make_contribution": "Fazer uma doação paga"
         },
+        "notificationTitle": "Receba o alerta de tarefas!",
+        "notificantionDescription": "Ligar notificações",
+        "toastNotificationOnSuccess": "Notificações ligadas",
         "statisticsCardsSection": {
           "dailyTasksTitle": "tarefas diárias completas",
           "superTasksTitle": "super tarefas completas",

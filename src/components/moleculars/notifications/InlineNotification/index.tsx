@@ -6,12 +6,12 @@ import S from "./styles";
 
 export type Props = {
   title: string;
-  description: string;
+  description?: string;
   firstLink?: string;
   onFirstLinkClick?: (setVisible: Dispatch<boolean>) => void;
   secondLink?: string;
   onSecondLinkClick?: (setVisible: Dispatch<boolean>) => void;
-  type: "success" | "warning" | "error" | "informational";
+  type: "success" | "warning" | "error" | "informational" | "alert";
   onCloseClick?: () => void;
 };
 function InlineNotification({
@@ -49,6 +49,8 @@ function InlineNotification({
         return "dangerous";
       case "informational":
         return "info";
+      case "alert":
+        return "notifications_active";
       default:
         return "info";
     }
@@ -64,6 +66,8 @@ function InlineNotification({
         return theme.colors.feedback.error[600];
       case "informational":
         return theme.colors.feedback.informational[600];
+      case "alert":
+        return theme.colors.brand.secondary[500];
       default:
         return "info";
     }
@@ -79,6 +83,7 @@ function InlineNotification({
         type === "warning" && S.warning,
         type === "error" && S.error,
         type === "informational" && S.informational,
+        type === "alert" && S.alert,
       ]}
     >
       <View style={S.leftContainer}>
@@ -90,7 +95,7 @@ function InlineNotification({
         />
         <View style={S.textContainer}>
           <Text style={S.title}>{title}</Text>
-          <Text style={S.description}>{description}</Text>
+          {description && <Text style={S.description}>{description}</Text>}
           <View style={S.links}>
             {firstLink && (
               <TouchableOpacity onPress={handleFirstLinkClick}>

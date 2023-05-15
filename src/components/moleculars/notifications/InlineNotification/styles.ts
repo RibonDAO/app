@@ -35,13 +35,17 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.feedback.informational[400],
     backgroundColor: theme.colors.feedback.informational[50],
   },
+  alert: {
+    borderColor: theme.colors.brand.secondary[500],
+    backgroundColor: theme.colors.brand.secondary[50],
+  },
   textContainer: {
     marginLeft: theme.spacingNative(16),
   },
   leftContainer: {
     display: "flex",
     flexDirection: "row",
-    width: "85%"
+    width: "85%",
   },
   rightContainer: {
     height: "100%",

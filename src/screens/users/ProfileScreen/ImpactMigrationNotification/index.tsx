@@ -48,7 +48,7 @@ function ImpactMigrationNotification() {
     <View style={S.container}>
       <InlineNotification
         title={t("impactNotification.title")}
-        description={t("impactNotification.description")}
+        description={t("impactNotification.description") || ""}
         type="success"
         firstLink={t("impactNotification.link") || ""}
         onFirstLinkClick={handleHideNotificationClick}
