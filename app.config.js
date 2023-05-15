@@ -76,7 +76,7 @@ export default () => ({
       [
         "@config-plugins/react-native-branch",
         {
-          "apiKey": process.env.REACT_APP_BRANCH_TOKEN,
+          "apiKey": "key_live_psjoynwxXPk14LioRerHjhggEvgKd6Bh",
           "iosAppDomain": "donation.app.link"
         }
       ],
