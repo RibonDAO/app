@@ -138,18 +138,17 @@ export default function TasksSection() {
     }
   };
 
-  const renderNotificationCard = () => (
-      isNotificationCardVisible && (
-        <View style={{ paddingBottom: 16 }}>
-          <InlineNotification
-            title={t("enableNotification.title")}
-            type="warning"
-            customIcon="notifications"
-            firstLink={t("enableNotification.link") || ""}
-            onFirstLinkClick={handleHideNotificationClick}
-          />
-        </View>
-      )
+  const renderNotificationCard = () =>
+    isNotificationCardVisible && (
+      <View style={{ paddingBottom: 16 }}>
+        <InlineNotification
+          title={t("enableNotification.title")}
+          type="warning"
+          customIcon="notifications"
+          firstLink={t("enableNotification.link") || ""}
+          onFirstLinkClick={handleHideNotificationClick}
+        />
+      </View>
     );
 
   function renderCountdown() {
