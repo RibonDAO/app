@@ -135,6 +135,7 @@ export default function CardStories({
               uri: content[current]?.content,
             }}
             style={{ width, height, resizeMode: "cover" }}
+            transition={current === 0 ? 800 : 0}
           />
         </View>
         <View style={S.innerContainer}>
