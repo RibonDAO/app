@@ -24,9 +24,15 @@ import Tooltip from "components/atomics/Tooltip";
 import TicketSection from "screens/donations/CausesScreen/TicketSection";
 import ImpactDonationsVector from "screens/users/ProfileScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ProfileScreen/ZeroDonationsSection";
-import S from "./styles";
-import Placeholder from "./placeholder";
 import { logEvent } from "services/analytics";
+import InlineNotification from "components/moleculars/notifications/InlineNotification";
+import requestUserPermissionForNotifications from "lib/notifications";
+import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
+import Placeholder from "./placeholder";
+import S from "./styles";
+
+const NOTIFICATION_CARD_VISIBLE_ON_CAUSES_SCREEN_KEY =
+  "NOTIFICATION_CARD_VISIBLE_ON_CAUSES_SCREEN_KEY";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
@@ -51,6 +57,8 @@ export default function CausesScreen() {
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets } = useTickets();
+  const [isNotificationCardVisible, setNotificationCardVisible] =
+    useState(false);
 
   useEffect(() => {
     logEvent("P1_view");
@@ -61,6 +69,19 @@ export default function CausesScreen() {
       refetchCanDonate();
     }, 500);
   }, [JSON.stringify(currentUser)]);
+
+  useEffect(() => {
+    const notificationCardVisible = async () => {
+      const value = await getLocalStorageItem(
+        NOTIFICATION_CARD_VISIBLE_ON_CAUSES_SCREEN_KEY,
+      );
+      return value === "true" || value === null;
+    };
+
+    notificationCardVisible().then((visible) => {
+      setNotificationCardVisible(visible);
+    });
+  }, []);
 
   const causesFilter = () => {
     const causesApi = causes.filter((cause) => cause.active);
@@ -121,6 +142,15 @@ export default function CausesScreen() {
     navigateTo("PromotersScreen");
   };
 
+  const handleHideNotificationClick = () => {
+    setLocalStorageItem(
+      NOTIFICATION_CARD_VISIBLE_ON_CAUSES_SCREEN_KEY,
+      "false",
+    );
+    setNotificationCardVisible(false);
+    requestUserPermissionForNotifications();
+  };
+
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
@@ -135,6 +165,18 @@ export default function CausesScreen() {
           />
         )}
         <TicketSection canDonate={canDonate} />
+        {isNotificationCardVisible && (
+          <View style={S.notificationWrapper}>
+            <InlineNotification
+              title={t("enableNotification.title")}
+              type="warning"
+              customIcon="notifications"
+              firstLink={t("enableNotification.link") || ""}
+              onFirstLinkClick={handleHideNotificationClick}
+            />
+          </View>
+        )}
+
         <Text style={S.title}>{t("title")}</Text>
         <View style={S.groupButtonsContainer}>
           <GroupButtons
@@ -171,7 +213,10 @@ export default function CausesScreen() {
                   handleNonProfitImagePress(nonProfit);
                 }}
                 onClickButton={() => {
-                  logEvent("donateTicketBtn_start", {nonProfitId: nonProfit.id, from: "nonprofitCard"});
+                  logEvent("donateTicketBtn_start", {
+                    nonProfitId: nonProfit.id,
+                    from: "nonprofitCard",
+                  });
                   navigateTo("DonateScreen", { nonProfit });
                 }}
                 buttonDisabled={!hasTickets()}
