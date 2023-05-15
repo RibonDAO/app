@@ -15,7 +15,9 @@ function MaskedWaveCut({ image = "", imageStyles }: Props) {
         <WaveCut width={imageStyles?.width} height={imageStyles?.height} />
       }
     >
-      <Image source={{ uri: image }} style={imageStyles} />
+      {image && (
+        <Image source={{ uri: image }} style={imageStyles} transition={0} />
+      )}
     </MaskedView>
   );
 }
