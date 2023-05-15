@@ -28,8 +28,8 @@ export function initializeDeeplink(navigateTo: (path: string) => void) {
             return;
         }
         if (params) {
-          if(params['$deeplink_path']) {
-            navigateTo(params['$deeplink_path'] as string);
+          if(params['navigate']) {
+            navigateTo(params['navigate'] as string);
           }
         }
     },
