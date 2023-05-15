@@ -150,7 +150,7 @@ function RootNavigator() {
   
   const { navigateTo } = useNavigation();
   useEffect(() => {
-    const deepLinkPath = initializeDeeplink(navigateTo);
+    initializeDeeplink(navigateTo);
   }, []);
 
   return (
