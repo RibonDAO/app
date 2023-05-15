@@ -26,6 +26,10 @@
       "title": "Doe para um projeto",
       "buttonText": "Doar ticket",
       "allCauses": "Todas",
+      "enableNotification": {
+        "title": "Não perca seu ticket diário!",
+        "link": "Ligar notificações"
+      },
       "userSupportSection": {
         "title": "Suporte ao Usuário",
         "description": "Dúvidas, ideias, estornos. Estamos aqui!",

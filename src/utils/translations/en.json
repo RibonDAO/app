@@ -26,6 +26,10 @@
       "title": "Donate to a Project",
       "buttonText": "Donate",
       "allCauses": "All",
+      "enableNotification": {
+        "title": "Don't miss your daily ticket!",
+        "link": "Enable notifications"
+      },
       "userSupportSection": {
         "title": "Ribon Support",
         "description": "Doubts, ideas, refunds. We're here!",
