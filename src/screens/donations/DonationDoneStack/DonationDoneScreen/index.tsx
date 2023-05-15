@@ -36,9 +36,9 @@ export default function DonationDoneScreen({
 
   const imageUrl =
     "https://media.discordapp.net/attachments/1008571091616276541/1106679413854187630/nicknish_people_happy_drinking_potable_water_cartoon_like_futur_078c80a5-7617-4b7f-8fa9-3a0e46882e3b.png?width=619&height=619";
-  const shareTwitter = async () => {
+  const share = async (socialType: any) => {
     try {
-      await shareSocial(imageUrl, SocialTypes.TWITTER);
+      await shareSocial(imageUrl, socialType);
     } catch (e) {
       console.log(e);
     }
@@ -68,13 +68,15 @@ export default function DonationDoneScreen({
             marginBottom: 20,
           }}
         >
-          <TouchableOpacity onPress={shareTwitter}>
+          <TouchableOpacity onPress={() => share(SocialTypes.TWITTER)}>
             <TwitterLogo />
           </TouchableOpacity>
-          <TouchableOpacity onPress={shareTwitter}>
+          <TouchableOpacity
+            onPress={() => share(SocialTypes.INSTAGRAM_STORIES)}
+          >
             <InstagramLogo />
           </TouchableOpacity>
-          <TouchableOpacity onPress={shareTwitter}>
+          <TouchableOpacity onPress={() => share(SocialTypes.WHATSAPP)}>
             <WhatsappLogo />
           </TouchableOpacity>
         </View>
