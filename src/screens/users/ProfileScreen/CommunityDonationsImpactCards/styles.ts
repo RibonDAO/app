@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
   titleStyle: {
     color: theme.colors.brand.secondary[400],
   },
+  showMoreButtonContainer: {
+    width: "100%",
+    marginVertical: theme.spacingNative(32),
+    justifyContent: "center",
+  },
 });
 
 export default styles;

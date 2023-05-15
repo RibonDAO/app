@@ -14,12 +14,19 @@ import ZeroDonationsSection from "../ZeroDonationsSection";
 
 function DirectDonationsImpactCards(): JSX.Element {
   const { useDirectPersonPayments } = usePersonPayments();
+  const per = 6;
   const [page, setPage] = useState(1);
-  const per = 2;
   const [showMoreDisabled, setShowMoreDisabled] = useState(false);
   const [showMoreVisible, setShowMoreVisible] = useState(true);
   const { data, refetch } = useDirectPersonPayments(page, per);
   const [impactCards, setImpactCards] = useState<any>([]);
+
+  const impactItems = useCallback(() => data || [], [data]);
+  const hasImpact = impactItems() && impactItems()?.length > 0;
+  const { navigateTo } = useNavigation();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "users.profileScreen.ngoImpactCards.zeroDonationsSection",
+  });
 
   const hasDuplicatedIds = (items: any[]) => {
     const existentIds = new Set(impactCards.map((obj: any) => obj.id));
@@ -50,13 +57,6 @@ function DirectDonationsImpactCards(): JSX.Element {
     }, [data, page]),
   );
 
-  const impactItems = useCallback(() => data || [], [data]);
-  const hasImpact = impactItems() && impactItems()?.length > 0;
-  const { navigateTo } = useNavigation();
-  const { t } = useTranslation("translation", {
-    keyPrefix: "users.profileScreen.ngoImpactCards.zeroDonationsSection",
-  });
-
   const navigateToPromotersScreen = () => {
     logEvent("giveNonProfitCard_click", { from: "impactEmptyState" });
     navigateTo("PromotersScreen", { isInCommunity: false });
@@ -74,6 +74,7 @@ function DirectDonationsImpactCards(): JSX.Element {
           <DirectDonationCard personPayment={item} />
         </View>
       ))}
+
       {showMoreVisible && (
         <View style={S.showMoreButtonContainer}>
           <Button
