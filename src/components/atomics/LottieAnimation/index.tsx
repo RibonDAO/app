@@ -5,6 +5,7 @@ export type Props = {
   animationData: string | AnimationObject;
   width: number;
   height: number;
+  speed?: number;
   style?: StyleProp<any>;
 };
 
@@ -13,6 +14,7 @@ function LottieAnimation({
   width,
   height,
   style,
+  speed,
 }: Props): JSX.Element {
   return (
     <Lottie
@@ -21,6 +23,7 @@ function LottieAnimation({
       source={animationData}
       style={{ width, height, ...style }}
       testID="loader"
+      speed={speed}
     />
   );
 }
