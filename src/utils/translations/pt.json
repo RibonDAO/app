@@ -232,7 +232,8 @@
             "description": "Você ainda não fez doações diretas, que tal fazer a sua primeira?",
             "buttonText": "Doar diretamente"
           },
-          "migrated": "Migrado"
+          "migrated": "Migrado",
+          "generalReceiver": "Geral"
         }
       },
       "communityDonationsTitle": "Doações em Comunidade",
