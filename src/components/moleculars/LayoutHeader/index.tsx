@@ -1,5 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -108,11 +108,13 @@ function LayoutHeader({
     setBlockedDonationModalVisible(!ticketModalVisible);
   };
 
-  useFocusEffect(() => {
-    isNotificationsEnabled().then((enabled) =>
-      setNotificationsEnabled(Boolean(enabled)),
-    );
-  });
+  useFocusEffect(
+    useCallback(() => {
+      isNotificationsEnabled().then((enabled) =>
+        setNotificationsEnabled(Boolean(enabled)),
+      );
+    }, []),
+  );
 
   const renderTicketModal = () => {
     if (hideTicket) return <View />;
