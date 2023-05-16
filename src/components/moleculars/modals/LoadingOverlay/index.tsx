@@ -1,7 +1,7 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
 import Modal from "react-native-modal";
 import { View, Text } from "react-native";
+import LoaderAnimated from "components/atomics/LoaderAnimated";
 import styles from "./styles";
 
 export type Props = {
@@ -13,7 +13,7 @@ function LoadingOverlay({ text, visible = false }: Props): JSX.Element {
     <View style={styles.container}>
       <Modal isVisible={visible} animationIn="slideInUp" backdropOpacity={0.75}>
         <View style={styles.centerDiv}>
-          <ActivityIndicator size={40} />
+          <LoaderAnimated width={160} height={160} />
           {text && <Text style={styles.message}>{text}</Text>}
         </View>
       </Modal>

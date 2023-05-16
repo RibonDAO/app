@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     marginVertical: theme.spacingNative(32),
     justifyContent: "center",
   },
+  loaderContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 
 export default styles;
