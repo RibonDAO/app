@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodySmBold,
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     ...defaultBodySmMedium,
     display: "flex",
     flexDirection: "column",
-    width: 328,
+    width: Dimensions.get("window").width - theme.spacingNative(32),
     borderRadius: 4,
     padding: theme.spacingNative(20),
     overflow: "hidden",

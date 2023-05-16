@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   button: {
     borderColor: theme.colors.brand.primary[600],
     borderRadius: 4,
+    height: 48,
   },
 });
 

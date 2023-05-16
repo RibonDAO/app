@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     color: theme.colors.neutral[500],
     fontSize: 12,
   },
+  icon: {
+    marginLeft: -5,
+  },
 });
 
 export default styles;

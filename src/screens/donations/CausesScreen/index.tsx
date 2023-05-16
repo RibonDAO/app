@@ -196,13 +196,17 @@ export default function CausesScreen() {
         <TicketSection canDonate={canDonate} />
         {renderNotificationCard()}
         <Text style={S.title}>{t("title")}</Text>
-        <View style={S.groupButtonsContainer}>
+        <ScrollView
+          style={S.groupButtonsContainer}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >
           <GroupButtons
             elements={causesFilter()}
             onChange={handleCauseChange}
             nameExtractor={(cause) => cause.name}
           />
-        </View>
+        </ScrollView>
       </View>
 
       {nonProfitsFilter()?.length > 0 ? (
