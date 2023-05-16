@@ -10,6 +10,7 @@
     "support": "Suporte ao usuário",
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0",
     "login": "Fazer login",
+    "notifications": "Ativar notificações",
     "language": "Alterar idioma",
     "connectWallet": "Conectar",
     "ticketModal": {
@@ -161,6 +162,7 @@
       "refundText": "*Pagamentos em criptomoeda não são estornáveis",
       "tokenAmountTransferMessage": "Aprovando quantidade de tokens pra transação...",
       "contractTransferMessage": "Transferindo pro contrato...",
+      "successDonationMessage": "Você doou {{amount}} {{tokenSymbol}} com sucesso!",
       "communityAddScreen": {
         "title": "Como a comunidade aumenta a sua doação de {{value}}?",
         "button": "Doar {{value}}"
@@ -233,6 +235,7 @@
             "buttonText": "Doar diretamente"
           },
           "migrated": "Migrado",
+          "showMore": "Mostrar mais",
           "generalReceiver": "Geral"
         }
       },

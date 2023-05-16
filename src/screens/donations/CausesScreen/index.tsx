@@ -154,6 +154,7 @@ export default function CausesScreen() {
         showToast({
           type: "success",
           message: t("enableNotification.successToastMessage"),
+          position: "bottom",
         });
         hideAlert();
       }
@@ -162,6 +163,7 @@ export default function CausesScreen() {
       showToast({
         type: "error",
         message: t("enableNotification.errorToastMessage"),
+        position: "bottom",
       });
       hideAlert();
     }
