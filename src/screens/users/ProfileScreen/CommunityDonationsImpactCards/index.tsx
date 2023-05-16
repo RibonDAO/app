@@ -9,6 +9,8 @@ import { theme } from "@ribon.io/shared/styles";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { useLegacyContributions } from "@ribon.io/shared/hooks";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
@@ -17,6 +19,8 @@ function CommunityDonationsImpactCards(): JSX.Element {
   const { useCommunityPersonPayments } = usePersonPayments();
 
   const { data, refetch } = useCommunityPersonPayments(1, 6);
+  const { currentUser } = useCurrentUser();
+  const { legacyContributions } = useLegacyContributions(currentUser?.id);
 
   useFocusEffect(
     useCallback(() => {
@@ -25,7 +29,9 @@ function CommunityDonationsImpactCards(): JSX.Element {
   );
 
   const impactItems = useCallback(() => data || [], [data]);
-  const hasImpact = impactItems() && impactItems()?.length > 0;
+  const hasImpact =
+    (impactItems() && impactItems()?.length > 0) ||
+    (legacyContributions && legacyContributions?.length > 0);
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
     keyPrefix: "users.profileScreen.ngoImpactCards.zeroDonationsSection",
@@ -48,6 +54,18 @@ function CommunityDonationsImpactCards(): JSX.Element {
                 : `${item.amountCents / 100} USDC`
             }
             footerText={formatDateTime(item.paidDate)}
+            subtitleStyle={S.subtitleStyle}
+            titleStyle={S.titleStyle}
+          />
+        </View>
+      ))}
+      {legacyContributions?.map((item) => (
+        <View key={item?.id} style={{ marginBottom: theme.spacingNative(12) }}>
+          <CardImageText
+            subtitle={t("generalReceiver") || ""}
+            label={t("migrated") || ""}
+            title={item.value}
+            footerText={formatDateTime(item.day || "")}
             subtitleStyle={S.subtitleStyle}
             titleStyle={S.titleStyle}
           />
