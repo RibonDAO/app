@@ -1,39 +1,27 @@
-import {
-  CompletedTask,
-  theme,
-  useCompletedTasks,
-  useTasksStatistics,
-} from "@ribon.io/shared";
+import { theme, useCompletedTasks, useTasksStatistics } from "@ribon.io/shared";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { TASKS } from "utils/constants/Tasks";
-import {
-  beginningOfThisMonth,
-  beginningOfToday,
-  nextDay,
-  nextMonth,
-} from "lib/dateUtils";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { showToast } from "lib/Toast";
-import { logError } from "services/crashReport";
 import { useTranslation } from "react-i18next";
 import TasksStatistics from "@ribon.io/shared/types/apiResponses/TasksStatistics";
 
-export type TaskStateItem = {
-  type: string;
+export type TaskState = {
   id: string;
-  nextAction: string;
   done: boolean;
-  expiresAt: string;
-  timesCompleted: number;
+  expiresAt: any | null;
+  timesCompleted: any;
+  lastCompletedAt: string | null;
+  type?: string;
 };
 
 export interface ITasksContext {
-  hasCompletedATask: boolean;
-  setHasCompletedATask: (value: boolean) => void;
-  tasksState: TaskStateItem[];
-  registerAction: (action: string) => void;
-  reload: () => void;
+  tasksState: TaskState[];
   tasksStatistics?: TasksStatistics;
+  hasCompletedATask: boolean;
+  finishTask: (taskTitle: string) => void;
+  reload: () => void;
+  setHasCompletedATask: (value: boolean) => void;
 }
 
 export const TasksContext = createContext<ITasksContext>({} as ITasksContext);
@@ -45,65 +33,43 @@ function TasksProvider({ children }: any) {
     updateStreak,
     refetchTasksStatistics,
   } = useTasksStatistics();
-  const [tasksState, setTasksState] = useState<any[]>([]);
-  const { findCompletedTasks, completeTask } = useCompletedTasks();
-  const [hasCompletedATask, setHasCompletedATask] = useState(false);
-  const { currentUser, signedIn } = useCurrentUser();
 
+  const { findCompletedTasks, completeTask } = useCompletedTasks();
+  const { currentUser, signedIn } = useCurrentUser();
   const { t } = useTranslation("translation", {
     keyPrefix: "contexts.tasksContext",
   });
 
-  function allDone(tasks: any) {
-    const dailyTasks = tasks.filter((task: any) => task.type === "daily");
-    return dailyTasks.every((task: any) => task.done === true);
-  }
+  const [hasCompletedATask, setHasCompletedATask] = useState<boolean>(false);
+  const [tasksState, setTasksState] = useState<TaskState[]>([]);
+  const [showedCompletedTasksToast, setShowedCompletedTasksToast] =
+    useState<boolean>(false);
 
-  const isDone = (task: CompletedTask | undefined) => {
-    if (!task) return false;
-    const taskObject = TASKS.find(
-      (filterTask) => filterTask.id === task.taskIdentifier,
-    );
-    const baseDate =
-      taskObject?.type === "daily"
-        ? beginningOfToday()
-        : beginningOfThisMonth();
+  const hasUser = currentUser && signedIn && currentUser.email;
 
-    const parsedLastCompletedAt = new Date(task.lastCompletedAt.slice(0, 19));
-    if (baseDate > parsedLastCompletedAt) return false;
-
-    return true;
-  };
-
-  const isExpired = (task: CompletedTask | undefined) => {
-    if (!task) return false;
-
-    const taskObject = TASKS.find(
-      (filterTask) => filterTask.id === task.taskIdentifier,
-    );
-
-    if (isDone(task)) {
-      return taskObject?.type === "daily" ? nextDay() : nextMonth();
-    } else {
-      return null;
-    }
-  };
-
-  const buildTasksState = () => {
-    findCompletedTasks().then((completedTasks) => {
+  /**
+   * Refetch the /user/completed-tasks endpoint and update the tasksState
+   * with the new data.
+   *
+   * This function is called when the user completes a task or when the
+   * component mounts.
+   *
+   * @returns void
+   */
+  const reload = async () => {
+    await findCompletedTasks().then((completedTasks) => {
       const state = TASKS.map((task) => {
         const currentTask = completedTasks.find(
-          (filterTask) => filterTask.taskIdentifier === task.id,
+          (ts) => ts.taskIdentifier === task.id,
         );
 
         return {
           id: task.id,
-          nextAction: task.actions[0],
-          done: isDone(currentTask),
-          type: task.type,
+          done: currentTask?.done || false,
           timesCompleted: currentTask?.timesCompleted || 0,
-          expiresAt: isExpired(currentTask),
-          lastCompletedAt: currentTask?.lastCompletedAt,
+          lastCompletedAt: currentTask?.lastCompletedAt || null,
+          expiresAt: currentTask?.expiresAt || null,
+          type: task.id.split("-")[0],
         };
       });
 
@@ -111,96 +77,89 @@ function TasksProvider({ children }: any) {
     });
   };
 
-  const reload = () => buildTasksState();
+  /**
+   * Mark a task as completed and update the tasksState. This function also shows
+   * a toast when all daily tasks are completed.
+   * @param taskTitle string
+   * @returns void
+   */
+  const finishTask = async (taskTitle: string) => {
+    if (!hasUser) return;
 
-  useEffect(() => {
-    if (currentUser && signedIn && currentUser.email) buildTasksState();
-  }, [currentUser, signedIn]);
+    const currentTask = TASKS.find((task) => task.title === taskTitle);
 
-  const registerAction = (action: string) => {
-    if (!currentUser && !signedIn) return;
-    if (tasksState.length === 0) return;
+    if (tasksState.filter((task) => task.id === currentTask?.id)[0].done)
+      return;
 
-    const newState = tasksState.map((task) => {
-      const currentTask = TASKS.find((filterTask) => filterTask.id === task.id);
-
-      if (task.nextAction === action && currentTask) {
-        const nextActionIndex = currentTask.actions.indexOf(action) + 1;
-        const nextAction = currentTask.actions[nextActionIndex];
-
-        if (nextAction) {
-          return {
-            ...task,
-            nextAction,
-          };
-        } else if (!task.done) {
-          completeTask(task.id);
-          setHasCompletedATask(true);
-          return {
-            ...task,
-            done: true,
-            type: currentTask.type,
-            timesCompleted: task.timesCompleted + 1,
-            expiresAt: currentTask.type === "daily" ? nextDay() : nextMonth(),
-          };
-        }
-      }
-
-      return task;
-    });
-
-    setTasksState(newState);
-
-    const justDailyTasks = newState.filter((tasks) => {
-      const currentTask = TASKS.find(
-        (filterTask) => filterTask.id === tasks.id,
-      );
-      return currentTask?.type === "daily";
-    });
-
-    if (allDone(justDailyTasks)) {
-      showToast({
-        type: "custom",
-        backgroundColor: theme.colors.feedback.success[50],
-        borderColor: theme.colors.brand.primary[500],
-        textColor: theme.colors.brand.primary[900],
-        icon: "celebration",
-        iconColor: theme.colors.brand.primary[500],
-        message: t("allTasksCompleted"),
-        closeButton: false,
-        position: "bottom",
-      });
+    if (currentTask) {
+      setHasCompletedATask(true);
+      await completeTask(currentTask.id);
+      await reload();
     }
   };
 
-  useEffect(() => {
-    if (
-      tasksStatistics?.firstCompletedAllTasksAt === null &&
-      allDone(tasksState)
-    ) {
-      completeAllTasks();
-      refetchTasksStatistics();
-    }
-  }, [buildTasksState, tasksState]);
+  /**
+   * Check if all daily tasks are done.
+   *
+   * @returns boolean
+   */
+  const allDailyTasksAreDone = () => {
+    if (!tasksState) return false;
+    const taskIsDaily = (task: any) => task.id.split("-")[0] === "daily";
+
+    const dailyTaskObject = TASKS.filter((task) => taskIsDaily(task));
+    const dailyTaskState = tasksState.filter(
+      (task) => taskIsDaily(task) && task.done,
+    );
+
+    return dailyTaskObject.length === dailyTaskState.length;
+  };
+
+  /*
+   * Show a toast when all daily tasks are completed.
+   *
+   * @returns void
+   */
+  const showAllDoneToast = () => {
+    showToast({
+      type: "custom",
+      backgroundColor: theme.colors.feedback.success[50],
+      borderColor: theme.colors.brand.primary[500],
+      textColor: theme.colors.brand.primary[900],
+      icon: "celebration",
+      iconColor: theme.colors.brand.primary[500],
+      message: t("allTasksCompleted"),
+      closeButton: false,
+      position: "bottom",
+    });
+  };
 
   useEffect(() => {
-    if (currentUser) {
-      try {
-        updateStreak();
-      } catch (error) {
-        logError(error);
+    if (hasUser) reload();
+  }, [currentUser, signedIn]);
+
+  useEffect(() => {
+    updateStreak();
+
+    if (allDailyTasksAreDone()) {
+      if (!showedCompletedTasksToast) {
+        showAllDoneToast();
+        setShowedCompletedTasksToast(true);
       }
+
+      refetchTasksStatistics();
+      completeAllTasks();
     }
-  }, [buildTasksState]);
+  }, [tasksState]);
 
   const tasksObject: ITasksContext = useMemo(
     () => ({
-      hasCompletedATask,
-      setHasCompletedATask,
       tasksState,
-      registerAction,
-      reload,
       tasksStatistics,
+      hasCompletedATask,
+      reload,
+      finishTask,
+      setHasCompletedATask,
     }),
     [tasksState, hasCompletedATask],
   );
