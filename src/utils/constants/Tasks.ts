@@ -5,31 +5,25 @@
 
 import { beginningOfToday } from "lib/dateUtils";
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
-  actions: string[];
-  type: string;
   navigationCallback: string;
   isVisible: (params?: any) => boolean;
 }
 
 export const TASKS = [
   {
-    id: "af13a631-3d3d-4709-8f90-06a938f4cef6",
+    id: "daily-af13a631-3d3d-4709-8f90-06a938f4cef6",
     title: "donate_ticket",
-    actions: ["P8_view"],
-    type: "daily",
     navigationCallback: "CausesScreen",
     isVisible(this: Task) {
       return true;
     },
   },
   {
-    id: "94bec4ad-ab60-41b8-b5f7-65f4b9ff8537",
+    id: "daily-94bec4ad-ab60-41b8-b5f7-65f4b9ff8537",
     title: "donate_ticket_on_native",
-    actions: ["P8_view"],
-    type: "daily",
     navigationCallback: "CausesScreen",
     isVisible(this: Task, params?: any) {
       const taskState = params?.state.find((obj: any) => obj.id === this.id);
@@ -50,20 +44,16 @@ export const TASKS = [
     },
   },
   {
-    id: "ee397e16-de1b-11ed-b5ea-0242ac120002",
+    id: "daily-ee397e16-de1b-11ed-b5ea-0242ac120002",
     title: "check_daily_news",
-    actions: ["for_you_news_tab_view"],
-    type: "daily",
     navigationCallback: "ForYouScreen",
     isVisible(this: Task) {
       return true;
     },
   },
   {
-    id: "ed180aa8-e8e7-11ed-a05b-0242ac120003",
+    id: "monthly-ed180aa8-e8e7-11ed-a05b-0242ac120003",
     title: "make_contribution",
-    actions: ["contribution_done_screen_view"],
-    type: "monthly",
     navigationCallback: "PromotersScreen",
     isVisible(this: Task) {
       return true;
@@ -72,6 +62,6 @@ export const TASKS = [
 ];
 
 export const useTasks = (type: string) => {
-  const tasks = TASKS.filter((task) => task.type === type);
+  const tasks = TASKS.filter((task) => task.id.split("-")[0] === type);
   return tasks;
 };
