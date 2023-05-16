@@ -22,7 +22,13 @@ function ImpactCard({
   return (
     <TouchableOpacity onPress={onPress} style={S.badgeContainer}>
       <View style={S.badgeRoundContainer}>
-        <Icon type="rounded" name={iconName} color={color} size={24} />
+        <Icon
+          style={S.icon}
+          type="rounded"
+          name={iconName}
+          color={color}
+          size={24}
+        />
         <Text style={[S.impact, { color }]}>{impact}</Text>
         <Text style={[S.description, { color }]}>{description}</Text>
       </View>

@@ -2614,10 +2614,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.0.53":
-  version "1.0.54"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.54.tgz#80f8d86df6ed78450605d71089ffaece6965a00d"
-  integrity sha512-ZTF8qHgfKfz03v1OaXcwt5Gjb6y//8eiTZ6TJWzLY7IYUG+miDQjz8WyU+MwF2L+x+wHMKDQDd8fXrYyCoNdDQ==
+"@ribon.io/shared@^1.0.56":
+  version "1.0.56"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.56.tgz#18b6d6781d87943ba242e5a13213b59911a168e3"
+  integrity sha512-9dXt6L7vYjLpDVP2ndkBsRoFvSthH501aFzImQOA5sRXL7TxPQN1o9ruZW9AYt1oFXobvulDMpY1w1aj9aHwpg==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -7501,6 +7501,11 @@ expo-font@~11.0.1:
   integrity sha512-LGAIluWZfru0J0n87dzb6pwAB6TVMTEiLcsd/ktozzbn4DlN7SeQy40+ruU6bvAKCOGrnRneYbKSIOGkrd7oNg==
   dependencies:
     fontfaceobserver "^2.1.0"
+
+expo-image@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/expo-image/-/expo-image-1.2.2.tgz#a06dbee2e2ff2366016c927dc03ddc079756867a"
+  integrity sha512-jaVObx0ZEerJWfV2j63wSpwTqujRJKtzrE8EXSNc0Nb4OcZF/8OwmHdCZ+PGe+2n/XlJgsOzwyKvqOkxhN7irQ==
 
 expo-json-utils@~0.4.0:
   version "0.4.0"
@@ -13580,6 +13585,11 @@ react-native-screens@~3.18.0:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-share@^8.2.2:
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-8.2.2.tgz#987d6f164afe57b089950dca42e0555f19045d27"
+  integrity sha512-kVCI/cT0GnuYUTXe6mAimrjrnt4VWoRfrWqJZjFeoYFqAyOEfos84RC4eZlZnOT5eVtmTXRIkor5vgSkKOlZhw==
 
 react-native-svg@13.4.0, react-native-svg@9.6.4:
   version "13.4.0"

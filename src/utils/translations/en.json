@@ -26,6 +26,12 @@
       "title": "Donate to a Project",
       "buttonText": "Donate",
       "allCauses": "All",
+      "enableNotification": {
+        "title": "Don't miss your daily ticket!",
+        "link": "Enable notifications",
+        "successToastMessage": "Notifications turned on",
+        "errorToastMessage": "Error turning on notifications"
+      },
       "userSupportSection": {
         "title": "Ribon Support",
         "description": "Doubts, ideas, refunds. We're here!",
@@ -106,6 +112,12 @@
       "tasksSection": {
         "title": "Tasks",
         "titleSuperTasks": "Super tasks",
+        "enableNotification": {
+          "title": "Get the task reset notification!",
+          "link": "Enable notifications",
+          "successToastMessage": "Notifications turned on",
+          "errorToastMessage": "Error turning on notifications"
+        },
         "tasks": {
           "donate_ticket": "Donate a ticket",
           "donate_ticket_on_native": "Get the app and donate a ticket",
@@ -222,7 +234,8 @@
             "buttonText": "Donate directly"
           },
           "migrated": "Migrated",
-          "showMore": "Show more"
+          "showMore": "Show more",
+          "generalReceiver": "General"
         }
       },
       "communityDonationsTitle": "Community Donations",

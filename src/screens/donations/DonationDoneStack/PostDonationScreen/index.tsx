@@ -19,9 +19,8 @@ function PostDonationScreen({
   const { navigateTo } = useNavigation();
   const { nonProfit, cause } = route.params;
 
-  function navigateToAvailableArticleScreen() {
-    return navigateTo("AvailableArticleScreen");
-  }
+  const navigateToAvailableArticleScreen = () =>
+    navigateTo("AvailableArticleScreen");
 
   const { registerAction } = useTasksContext();
 
@@ -33,14 +32,14 @@ function PostDonationScreen({
     () => (
       <>
         <ContributionImage
-          key={cause.id}
+          key={1}
           idCause={cause.id}
           name={cause.name}
           coverImage={cause.coverImage}
           isCause
         />
         <ContributionImage
-          key={nonProfit.id}
+          key={2}
           idCause={nonProfit.cause.id}
           name={nonProfit.name}
           coverImage={nonProfit.mainImage}

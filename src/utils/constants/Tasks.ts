@@ -64,7 +64,7 @@ export const TASKS = [
     title: "make_contribution",
     actions: ["contribution_done_screen_view"],
     type: "monthly",
-    navigationCallback: "CausesScreen",
+    navigationCallback: "PromotersScreen",
     isVisible(this: Task) {
       return true;
     },

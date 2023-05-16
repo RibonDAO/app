@@ -11,22 +11,28 @@ import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
 import Button from "components/atomics/buttons/Button";
 import LoaderAnimated from "components/atomics/LoaderAnimated";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { useLegacyContributions } from "@ribon.io/shared/hooks";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import ZeroDonationsSection from "../ZeroDonationsSection";
 import S from "./styles";
 
 function CommunityDonationsImpactCards(): JSX.Element {
   const { useCommunityPersonPayments } = usePersonPayments();
-  const per = 2;
+  const per = 6;
   const [page, setPage] = useState(1);
   const [showMoreDisabled, setShowMoreDisabled] = useState(false);
   const [showMoreVisible, setShowMoreVisible] = useState(true);
   const { data, refetch } = useCommunityPersonPayments(page, per);
   const [impactCards, setImpactCards] = useState<any>([]);
   const [loading, setLoading] = useState(false);
+  const { currentUser } = useCurrentUser();
+  const { legacyContributions } = useLegacyContributions(currentUser?.id);
 
   const impactItems = useCallback(() => data || [], [data]);
-  const hasImpact = impactItems() && impactItems()?.length > 0;
+  const hasImpact =
+    (impactItems() && impactItems()?.length > 0) ||
+    (legacyContributions && legacyContributions?.length > 0);
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
     keyPrefix: "users.profileScreen.ngoImpactCards.zeroDonationsSection",
@@ -106,7 +112,7 @@ function CommunityDonationsImpactCards(): JSX.Element {
       renderLoadingAnimation()
     ) : (
       <View style={S.cardsContainer}>
-        {impactCards?.map((item: any) => (
+        {impactItems()?.map((item) => (
           <View
             key={item?.id}
             style={{ marginBottom: theme.spacingNative(12) }}
@@ -119,6 +125,21 @@ function CommunityDonationsImpactCards(): JSX.Element {
                   : `${item.amountCents / 100} USDC`
               }
               footerText={formatDateTime(item.paidDate)}
+              subtitleStyle={S.subtitleStyle}
+              titleStyle={S.titleStyle}
+            />
+          </View>
+        ))}
+        {legacyContributions?.map((item: any) => (
+          <View
+            key={item?.id}
+            style={{ marginBottom: theme.spacingNative(12) }}
+          >
+            <CardImageText
+              subtitle={t("generalReceiver") || ""}
+              label={t("migrated") || ""}
+              title={item.value}
+              footerText={formatDateTime(item.day || "")}
               subtitleStyle={S.subtitleStyle}
               titleStyle={S.titleStyle}
             />

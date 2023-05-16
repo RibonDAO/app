@@ -15,7 +15,7 @@ import ZeroDonationsSection from "../ZeroDonationsSection";
 
 function DirectDonationsImpactCards(): JSX.Element {
   const { useDirectPersonPayments } = usePersonPayments();
-  const per = 2;
+  const per = 6;
   const [page, setPage] = useState(1);
   const [showMoreDisabled, setShowMoreDisabled] = useState(false);
   const [showMoreVisible, setShowMoreVisible] = useState(true);

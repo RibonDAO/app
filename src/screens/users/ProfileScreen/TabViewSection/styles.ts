@@ -1,11 +1,10 @@
-import { StyleSheet} from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   tabViewSection: {
-    minHeight: "100%",
-    marginTop: theme.spacingNative(20),
-    paddingBottom: theme.spacingNative(80),
+    minHeight: Dimensions.get("window").height,
+    paddingBottom: theme.spacingNative(80) - theme.spacingNative(112),
   },
   pagerView: {
     flex: 1,
