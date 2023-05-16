@@ -147,8 +147,8 @@ function TasksProvider({ children }: any) {
         setShowedCompletedTasksToast(true);
       }
 
-      refetchTasksStatistics();
       completeAllTasks();
+      refetchTasksStatistics();
     }
   }, [tasksState]);
 
