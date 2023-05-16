@@ -50,7 +50,7 @@ function TabViewSection(): JSX.Element {
 
   const layout = useWindowDimensions();
   const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
-  const { registerAction, hasCompletedATask, tasksState } = useTasksContext();
+  const { finishTask, hasCompletedATask, tasksState } = useTasksContext();
 
   const { index, setIndex } = useForYouTabsContext();
 
@@ -74,7 +74,7 @@ function TabViewSection(): JSX.Element {
       (task) => task.id === taskDownloadApp.id,
     )?.done;
     if (index === 1 && !canDonate && !done) {
-      registerAction("for_you_news_tab_view");
+      finishTask("check_daily_news");
     }
   }, [index]);
 

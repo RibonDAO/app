@@ -80,7 +80,7 @@ export const CURRENT_COIN_KEY = "CURRENT_COIN_KEY";
 function CardPaymentInformationProvider({ children }: Props) {
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
-  const { registerAction } = useTasksContext();
+  const { finishTask } = useTasksContext();
   const [loading, setLoading] = useState(false);
   const [currentCoin, setCurrentCoin] = useState<Currencies>();
   const defaultCoin = async () =>
@@ -200,7 +200,7 @@ function CardPaymentInformationProvider({ children }: Props) {
           offerId,
         });
       }
-      registerAction("contribution_done_screen_view");
+      finishTask("make_contribution");
 
       navigateTo("ContributionDoneScreen", {
         cause,

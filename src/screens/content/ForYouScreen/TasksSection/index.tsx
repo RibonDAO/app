@@ -159,7 +159,8 @@ export default function TasksSection() {
     if (
       !tasksState ||
       !tasksState.length ||
-      tasksState.filter((obj) => obj.done === false).length ||
+      tasksState.filter((obj) => obj.type === "daily" && obj.done === false)
+        .length ||
       countdown.reduce((a, b) => a + b, 0) <= 0
     ) {
       return null;

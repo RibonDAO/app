@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import { useTasksContext } from "contexts/tasksContext";
 
 import { useNavigation } from "hooks/useNavigation";
-import { useForYouTabsContext } from "contexts/forYouTabsContext";
 
 import Tag from "components/atomics/Tag";
 import { beginningOfToday } from "lib/dateUtils";
@@ -16,16 +15,12 @@ import { useEffect } from "react";
 import S from "./styles";
 
 export default function MonthlyTasksSection() {
-  const CURRENT_PAGE = "ForYouScreen";
-
   const { t } = useTranslation("translation", {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const monthlyTasks = useTasks("monthly");
-  const { tasksState, tasksStatistics, registerAction } = useTasksContext();
+  const { tasksState, tasksStatistics, finishTask } = useTasksContext();
   const { navigateTo } = useNavigation();
-
-  const { setIndex } = useForYouTabsContext();
 
   const showTagNew = () =>
     !(
@@ -46,7 +41,7 @@ export default function MonthlyTasksSection() {
       !taskStatus?.done &&
       taskStatus?.timesCompleted === 0
     ) {
-      registerAction("contribution_done_page_view");
+      finishTask("make_contribution");
     }
   }, []);
 
@@ -75,11 +70,8 @@ export default function MonthlyTasksSection() {
         monthlyTasks.map((task) => {
           const taskDone = tasksState.find((obj) => obj.id === task.id)?.done;
           const navigateToTask = task.navigationCallback;
-          const isCurrentPage = navigateToTask === CURRENT_PAGE;
           const navigationCallback = taskDone
             ? undefined
-            : isCurrentPage
-            ? () => setIndex(1)
             : () => navigateTo(navigateToTask);
 
           if (!task.isVisible({ state: tasksState })) {

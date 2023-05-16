@@ -7,8 +7,8 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTasksContext } from "contexts/tasksContext";
 import { theme } from "@ribon.io/shared";
 import { RootStackScreenProps } from "types";
-import S from "./styles";
 import ContributionImage from "./ContributionImage";
+import S from "./styles";
 
 function PostDonationScreen({
   route,
@@ -22,10 +22,13 @@ function PostDonationScreen({
   const navigateToAvailableArticleScreen = () =>
     navigateTo("AvailableArticleScreen");
 
-  const { registerAction } = useTasksContext();
+  const { finishTask } = useTasksContext();
 
   useEffect(() => {
-    registerAction("P8_view");
+    finishTask("donate_ticket");
+    setTimeout(() => {
+      finishTask("donate_ticket_on_native");
+    }, 1000);
   }, []);
 
   const contributionList = useCallback(

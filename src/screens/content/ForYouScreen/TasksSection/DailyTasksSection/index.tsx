@@ -10,6 +10,9 @@ import { useTasksContext } from "contexts/tasksContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
 
+import { useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+
 import S from "./styles";
 
 export default function DailyTasksSection() {
@@ -19,10 +22,21 @@ export default function DailyTasksSection() {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const dailyTasks = useTasks("daily");
-  const { tasksState } = useTasksContext();
+  const { tasksState, reload } = useTasksContext();
   const { navigateTo } = useNavigation();
 
   const { setIndex } = useForYouTabsContext();
+
+  const isTaskDone = useCallback(
+    (task: any) => tasksState?.find((obj) => obj.id === task.id)?.done,
+    [tasksState],
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      reload();
+    }, []),
+  );
 
   return (
     <View style={S.container}>
@@ -38,14 +52,13 @@ export default function DailyTasksSection() {
 
       {tasksState &&
         dailyTasks.map((task) => {
-          const taskDone = tasksState.find((obj) => obj.id === task.id)?.done;
+          const taskDone = isTaskDone(task);
           const navigateToTask = task.navigationCallback;
           const isCurrentPage = navigateToTask === CURRENT_PAGE;
-          const navigationCallback = taskDone
-            ? undefined
-            : isCurrentPage
+          const callback = isCurrentPage
             ? () => setIndex(1)
             : () => navigateTo(navigateToTask);
+          const navigationCallback = taskDone ? undefined : callback;
 
           if (!task.isVisible({ state: tasksState })) {
             return null;
