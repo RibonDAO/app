@@ -233,7 +233,8 @@
             "description": "You have not made direct donations  yet, why not try your first one?",
             "buttonText": "Donate directly"
           },
-          "migrated": "Migrated"
+          "migrated": "Migrated",
+          "generalReceiver": "General"
         }
       },
       "communityDonationsTitle": "Community Donations",
