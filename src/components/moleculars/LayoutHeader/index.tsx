@@ -1,5 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -19,6 +19,10 @@ import { useWalletContext } from "contexts/walletContext";
 import WalletIcon from "components/vectors/WalletIcon";
 import { walletTruncate } from "lib/formatters/walletTruncate";
 import { openInWebViewer } from "lib/linkOpener";
+import { Linking, Platform } from "react-native";
+import ButtonSwitch from "components/atomics/buttons/ButtonSwitch";
+import { isNotificationsEnabled } from "lib/notifications";
+import { useFocusEffect } from "@react-navigation/native";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
@@ -40,6 +44,7 @@ function LayoutHeader({
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [blockedDonationModalVisible, setBlockedDonationModalVisible] =
     useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
   const { tickets, hasTickets } = useTickets();
@@ -68,6 +73,14 @@ function LayoutHeader({
     toggleModal();
   };
 
+  const handleOpenSettings = () => {
+    if (Platform.OS === "ios") {
+      Linking.openURL("app-settings:");
+    } else {
+      Linking.openSettings();
+    }
+  };
+
   const handleUserLogin = () =>
     currentUser ? (
       <View style={{ width: 50 }}>
@@ -94,6 +107,14 @@ function LayoutHeader({
   const toggleBlockedDonationModal = () => {
     setBlockedDonationModalVisible(!ticketModalVisible);
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      isNotificationsEnabled().then((enabled) =>
+        setNotificationsEnabled(Boolean(enabled)),
+      );
+    }, []),
+  );
 
   const renderTicketModal = () => {
     if (hideTicket) return <View />;
@@ -129,6 +150,24 @@ function LayoutHeader({
     openInWebViewer(t("supportLink"));
   };
 
+  const notificationsSwitch = () => (
+    <ButtonSwitch
+      leftText=""
+      rightText=""
+      onSwitch={() => handleOpenSettings()}
+      initialCheckState={notificationsEnabled || false}
+    />
+  );
+
+  const notificationsIcon = () => (
+    <Icon
+      type="rounded"
+      size={25}
+      color={theme.colors.brand.primary[300]}
+      name="notifications"
+    />
+  );
+
   const renderConfigModal = () => (
     <Modal
       isVisible={menuVisible}
@@ -139,6 +178,12 @@ function LayoutHeader({
       onBackdropPress={toggleModal}
     >
       <View style={S.supportContainer}>
+        <ConfigItem
+          icon={notificationsIcon}
+          text={t("notifications")}
+          linkIcon={notificationsSwitch}
+        />
+
         <ConfigItem
           icon={SupportIcon}
           text={t("support")}

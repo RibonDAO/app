@@ -8,6 +8,7 @@
   "layoutHeader": {
     "exitButton": "Exit",
     "support": "User Support",
+    "notifications": "Allow notifications",
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0",
     "login": "Login",
     "language": "Change language",
@@ -233,7 +234,9 @@
             "description": "You have not made direct donations  yet, why not try your first one?",
             "buttonText": "Donate directly"
           },
-          "migrated": "Migrated"
+          "migrated": "Migrated",
+          "showMore": "Show more",
+          "generalReceiver": "General"
         }
       },
       "communityDonationsTitle": "Community Donations",
