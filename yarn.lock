@@ -13576,11 +13576,6 @@ react-native-root-toast@^3.3.1:
     prop-types "^15.5.10"
     react-native-root-siblings "^4.0.0"
 
-react-native-safari-view@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-safari-view/-/react-native-safari-view-2.1.0.tgz#1e0cd12c62bce79bc1759c7e281646b08b61c959"
-  integrity sha512-FbmAXcjEDcOh+ymYDiiDa+5zhDdVkQN1wI1/1pMeRNXXe40ZZssRF1R6LZg6oocQxPVAbIJ/9+W6s0luiVO7KA==
-
 react-native-safe-area-context@4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-4.4.1.tgz#239c60b8a9a80eac70a38a822b04c0f1d15ffc01"
