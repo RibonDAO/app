@@ -44,6 +44,9 @@ import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import ForYouIconOn from "./assets/ForYouIconOn";
 import ForYouIconOff from "./assets/ForYouIconOff";
+import { useEffect } from "react";
+import { useNavigation } from "hooks/useNavigation";
+import { initializeDeeplink } from "../../services/deepLink";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
 const headerWithoutTicket = () => (
@@ -144,6 +147,12 @@ function BottomTabNavigator() {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
+  
+  const { navigateTo } = useNavigation();
+  useEffect(() => {
+    initializeDeeplink(navigateTo);
+  }, []);
+
   return (
     <Stack.Navigator>
       <Stack.Screen
