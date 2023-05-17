@@ -5,7 +5,7 @@ import {
   useCanDonate,
   useStories,
 } from "@ribon.io/shared/hooks";
-import { ScrollView, Text, View } from "react-native";
+import { Linking, Platform, ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
@@ -237,6 +237,9 @@ export default function CausesScreen() {
                   handleNonProfitImagePress(nonProfit);
                 }}
                 onClickButton={() => {
+                  if (Platform.OS === "ios") {
+                    Linking.openURL("https://dapp.ribon.io/");
+                  }
                   logEvent("donateTicketBtn_start", {
                     nonProfitId: nonProfit.id,
                     from: "nonprofitCard",

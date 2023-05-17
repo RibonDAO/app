@@ -7507,10 +7507,10 @@ expo-font@~11.0.1:
   dependencies:
     fontfaceobserver "^2.1.0"
 
-expo-image@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/expo-image/-/expo-image-1.2.2.tgz#a06dbee2e2ff2366016c927dc03ddc079756867a"
-  integrity sha512-jaVObx0ZEerJWfV2j63wSpwTqujRJKtzrE8EXSNc0Nb4OcZF/8OwmHdCZ+PGe+2n/XlJgsOzwyKvqOkxhN7irQ==
+expo-image@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/expo-image/-/expo-image-1.2.3.tgz#f3582d725ffb7437f8ce946ad44fe33f0aa0603d"
+  integrity sha512-+Mnx6rcneWSUGfHkUDV3cQ3R4lVwoIDFs/tcXVqnlxyNJdNxpW2cge9pS2Hpj3UDoZVhZPLR8LHS8E9wEaC0NA==
 
 expo-json-utils@~0.4.0:
   version "0.4.0"
@@ -13575,6 +13575,11 @@ react-native-root-toast@^3.3.1:
     deprecated-react-native-prop-types "^2.3.0"
     prop-types "^15.5.10"
     react-native-root-siblings "^4.0.0"
+
+react-native-safari-view@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-safari-view/-/react-native-safari-view-2.1.0.tgz#1e0cd12c62bce79bc1759c7e281646b08b61c959"
+  integrity sha512-FbmAXcjEDcOh+ymYDiiDa+5zhDdVkQN1wI1/1pMeRNXXe40ZZssRF1R6LZg6oocQxPVAbIJ/9+W6s0luiVO7KA==
 
 react-native-safe-area-context@4.4.1:
   version "4.4.1"

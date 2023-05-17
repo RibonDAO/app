@@ -11,7 +11,7 @@ import {
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
-import { View, Text } from "react-native";
+import { View, Text, Platform, Linking } from "react-native";
 import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
@@ -57,20 +57,23 @@ function CardScreen(): JSX.Element {
   };
 
   const handleDonateClick = () => {
-    setFlow("cause");
-    logEvent("giveCauseBtn_start",
-      {
+    if (Platform.OS === "ios") {
+      Linking.openURL("https://dapp.ribon.io/promoters/support-cause");
+    } else {
+      setFlow("cause");
+      logEvent("giveCauseBtn_start", {
         from: "giveCauseCC_page",
         causeId: cause?.id,
         price: currentOffer.priceValue,
         currency: currentOffer.currency,
-      }
-    );
-    navigateTo("PaymentScreen", {
-      offer: currentOffer,
-      flow: "cause",
-      cause,
-    });
+      });
+
+      navigateTo("PaymentScreen", {
+        offer: currentOffer,
+        flow: "cause",
+        cause,
+      });
+    }
   };
 
   const handleCommunityAddClick = () => {
