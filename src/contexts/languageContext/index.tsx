@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Languages } from "types/enums/Languages";
+import analytics from "@react-native-firebase/analytics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View } from "react-native";
 
@@ -37,6 +38,7 @@ function LanguageProvider({ children }: Props) {
     AsyncStorage.setItem(LANGUAGE_KEY, currentLang).finally(() => {
       setLoadingLanguage(false);
     });
+    analytics().setUserProperty("language", currentLang);
   }, [currentLang, i18n]);
 
   function handleSwitchLanguage() {
