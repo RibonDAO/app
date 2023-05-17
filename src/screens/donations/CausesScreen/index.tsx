@@ -239,12 +239,13 @@ export default function CausesScreen() {
                 onClickButton={() => {
                   if (Platform.OS === "ios") {
                     Linking.openURL("https://dapp.ribon.io/");
+                  } else {
+                    logEvent("donateTicketBtn_start", {
+                      nonProfitId: nonProfit.id,
+                      from: "nonprofitCard",
+                    });
+                    navigateTo("DonateScreen", { nonProfit });
                   }
-                  logEvent("donateTicketBtn_start", {
-                    nonProfitId: nonProfit.id,
-                    from: "nonprofitCard",
-                  });
-                  navigateTo("DonateScreen", { nonProfit });
                 }}
                 buttonDisabled={!hasTickets()}
                 labelText={t("labelText") || ""}
