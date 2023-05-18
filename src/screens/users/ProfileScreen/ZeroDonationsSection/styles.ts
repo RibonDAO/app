@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: theme.spacingNative(20),
     paddingHorizontal: theme.spacingNative(20),
+    paddingBottom: theme.spacingNative(20),
   },
   zeroDonationsTitle: {
     ...defaultBodyMdBold,
