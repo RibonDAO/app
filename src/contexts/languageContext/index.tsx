@@ -4,6 +4,7 @@ import { Languages } from "types/enums/Languages";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View } from "react-native";
 import { setUserProperty } from "services/analytics";
+import { formattedShortLanguage } from "lib/currentLanguage";
 
 export const LANGUAGE_KEY = "LANGUAGE_KEY";
 export interface ILanguageContext {
@@ -22,15 +23,9 @@ export const LanguageContext = createContext<ILanguageContext>(
 function LanguageProvider({ children }: Props) {
   const { i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState<Languages>(
-    i18n.language as Languages,
+    formattedShortLanguage(i18n.resolvedLanguage),
   );
   const [loadingLanguage, setLoadingLanguage] = useState(false);
-
-  useEffect(() => {
-    AsyncStorage.getItem(LANGUAGE_KEY).then((lang) => {
-      if (lang) setCurrentLang(lang as Languages);
-    });
-  }, []);
 
   useEffect(() => {
     setLoadingLanguage(true);
