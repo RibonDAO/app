@@ -25,6 +25,7 @@ import TicketSection from "screens/donations/CausesScreen/TicketSection";
 import ImpactDonationsVector from "screens/users/ProfileScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ProfileScreen/ZeroDonationsSection";
 import { logEvent } from "services/analytics";
+import { Image } from "expo-image";
 import InlineNotification from "components/moleculars/notifications/InlineNotification";
 import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
@@ -117,6 +118,7 @@ export default function CausesScreen() {
     setCurrentNonProfit(nonProfit);
     try {
       const nonProfitStories = await fetchNonProfitStories(nonProfit.id);
+      Image.prefetch(nonProfitStories.map((story) => story.image));
       if (nonProfitStories.length === 0) return;
       setStories(nonProfitStories);
       setStoriesVisible(true);
@@ -152,6 +154,7 @@ export default function CausesScreen() {
         showToast({
           type: "success",
           message: t("enableNotification.successToastMessage"),
+          position: "bottom",
         });
         hideAlert();
       }
@@ -160,23 +163,23 @@ export default function CausesScreen() {
       showToast({
         type: "error",
         message: t("enableNotification.errorToastMessage"),
+        position: "bottom",
       });
       hideAlert();
     }
   };
 
-  const renderNotificationCard = () => (
-      isNotificationCardVisible && (
-        <View style={{ paddingBottom: 16 }}>
-          <InlineNotification
-            title={t("enableNotification.title")}
-            type="warning"
-            customIcon="notifications"
-            firstLink={t("enableNotification.link") || ""}
-            onFirstLinkClick={handleHideNotificationClick}
-          />
-        </View>
-      )
+  const renderNotificationCard = () =>
+    isNotificationCardVisible && (
+      <View style={{ paddingBottom: 16 }}>
+        <InlineNotification
+          title={t("enableNotification.title")}
+          type="warning"
+          customIcon="notifications"
+          firstLink={t("enableNotification.link") || ""}
+          onFirstLinkClick={handleHideNotificationClick}
+        />
+      </View>
     );
 
   return isLoading || loadingCanDonate ? (
@@ -195,13 +198,17 @@ export default function CausesScreen() {
         <TicketSection canDonate={canDonate} />
         {renderNotificationCard()}
         <Text style={S.title}>{t("title")}</Text>
-        <View style={S.groupButtonsContainer}>
+        <ScrollView
+          style={S.groupButtonsContainer}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >
           <GroupButtons
             elements={causesFilter()}
             onChange={handleCauseChange}
             nameExtractor={(cause) => cause.name}
           />
-        </View>
+        </ScrollView>
       </View>
 
       {nonProfitsFilter()?.length > 0 ? (

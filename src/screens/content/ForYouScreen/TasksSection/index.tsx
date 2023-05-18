@@ -110,7 +110,7 @@ export default function TasksSection() {
   const { integration } = useIntegration(RIBON_INTEGRATION_ID);
 
   const linkToIntegration = () => {
-    openInWebViewer(integration?.integrationTask.linkAddress ?? "");
+    openInWebViewer(integration?.integrationTask?.linkAddress ?? "");
   };
 
   const handleHideNotificationClick = async () => {
@@ -125,6 +125,7 @@ export default function TasksSection() {
         showToast({
           type: "success",
           message: t("enableNotification.successToastMessage"),
+          position: "bottom",
         });
         hideAlert();
       }
@@ -133,23 +134,23 @@ export default function TasksSection() {
       showToast({
         type: "error",
         message: t("enableNotification.errorToastMessage"),
+        position: "bottom",
       });
       hideAlert();
     }
   };
 
-  const renderNotificationCard = () => (
-      isNotificationCardVisible && (
-        <View style={{ paddingBottom: 16 }}>
-          <InlineNotification
-            title={t("enableNotification.title")}
-            type="warning"
-            customIcon="notifications"
-            firstLink={t("enableNotification.link") || ""}
-            onFirstLinkClick={handleHideNotificationClick}
-          />
-        </View>
-      )
+  const renderNotificationCard = () =>
+    isNotificationCardVisible && (
+      <View style={{ paddingBottom: 16 }}>
+        <InlineNotification
+          title={t("enableNotification.title")}
+          type="warning"
+          customIcon="notifications"
+          firstLink={t("enableNotification.link") || ""}
+          onFirstLinkClick={handleHideNotificationClick}
+        />
+      </View>
     );
 
   function renderCountdown() {

@@ -9,8 +9,8 @@ const { neutral10 } = colors;
 const { primary } = theme.colors.brand;
 
 export type Props = {
-  leftText: string;
-  rightText: string;
+  leftText?: string;
+  rightText?: string;
   onSwitch?: (checked: boolean) => void;
   initialCheckState?: boolean;
 };
@@ -29,9 +29,11 @@ function ButtonSwitch({
 
   return (
     <View style={S.container}>
-      <View style={S.boxIcon}>
-        <Text>{leftText}</Text>
-      </View>
+      {leftText && (
+        <View style={S.boxIcon}>
+          <Text>{leftText}</Text>
+        </View>
+      )}
       <Switch
         onValueChange={() => handleChange()}
         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
@@ -39,9 +41,11 @@ function ButtonSwitch({
         trackColor={{ false: primary[300], true: primary[300] }}
         thumbColor={checked ? neutral10 : neutral10}
       />
-      <View style={S.boxIcon}>
-        <Text style={S.text}>{rightText}</Text>
-      </View>
+      {rightText && (
+        <View style={S.boxIcon}>
+          <Text style={S.text}>{rightText}</Text>
+        </View>
+      )}
     </View>
   );
 }

@@ -13,6 +13,11 @@ export default async function requestUserPermissionForNotifications() {
   return enabled;
 }
 
+export async function isNotificationsEnabled() {
+  const enabled = await messaging().hasPermission();
+  return enabled;
+}
+
 export async function setBackgroundMessageHandler() {
   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
     console.log("Message handled in the background!", remoteMessage);

@@ -4,8 +4,7 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.neutral10,
-    minHeight: "100%",
+    backgroundColor: theme.colors.neutral[100],
   },
   title: {
     ...stylizedDisplaySm,
