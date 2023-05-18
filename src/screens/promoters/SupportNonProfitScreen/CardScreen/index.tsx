@@ -7,7 +7,7 @@ import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Linking, Platform, Text, View } from "react-native";
 import NonProfitCard from "screens/promoters/SupportNonProfitScreen/CardScreen/NonProfitCard";
 import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import S from "../styles";
@@ -40,21 +40,23 @@ function CardScreen(): JSX.Element {
   };
 
   const handleDonateClick = (nonProfit: NonProfit) => {
-    setFlow("nonProfit");
-    logEvent("giveNgoBtn_start",
-      {
+    if (Platform.OS === "ios") {
+      Linking.openURL("https://dapp.ribon.io/promoters/support-cause");
+    } else {
+      setFlow("nonProfit");
+      logEvent("giveNgoBtn_start", {
         from: "giveNonProfit_page",
         nonprofitId: nonProfit.id,
         price: currentOffer?.priceValue,
-        currency: currentOffer?.currency
-      }
-    );
-    navigateTo("PaymentScreen", {
-      offer: currentOffer,
-      flow: "nonProfit",
-      cause,
-      nonProfit,
-    });
+        currency: currentOffer?.currency,
+      });
+      navigateTo("PaymentScreen", {
+        offer: currentOffer,
+        flow: "nonProfit",
+        cause,
+        nonProfit,
+      });
+    }
   };
 
   const handleOfferChange = (offer: Offer) => {

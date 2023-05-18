@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Languages } from "types/enums/Languages";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View } from "react-native";
+import { setUserProperty } from "services/analytics";
 
 export const LANGUAGE_KEY = "LANGUAGE_KEY";
 export interface ILanguageContext {
@@ -37,6 +38,7 @@ function LanguageProvider({ children }: Props) {
     AsyncStorage.setItem(LANGUAGE_KEY, currentLang).finally(() => {
       setLoadingLanguage(false);
     });
+    setUserProperty("language", currentLang);
   }, [currentLang, i18n]);
 
   function handleSwitchLanguage() {
