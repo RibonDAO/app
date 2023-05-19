@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import "./global";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -7,22 +7,24 @@ import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
-import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
 import UnsafeAreaProvider, {
   useUnsafeAreaContext,
 } from "./src/contexts/unsafeAreaContext";
 import TasksProvider from "./src/contexts/tasksContext";
+import startScreenRecording from "./src/services/screenRecording";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
   const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
+
+  useEffect(() => {
+    startScreenRecording();
+  }, []);
 
   if (!isLoadingComplete) {
     return null;
@@ -47,8 +49,8 @@ function Main() {
                   edges={["bottom"]}
                   style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
                 >
-                  <Navigation colorScheme={colorScheme} />
-                  <StatusBar style="dark" />
+                  <Navigation />
+                  <StatusBar />
                 </SafeAreaView>
               </SafeAreaView>
             </SafeAreaProvider>
