@@ -10,7 +10,8 @@
     "plugin:@typescript-eslint/recommended",
     "airbnb",
     "prettier",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:react-native-a11y/all"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
