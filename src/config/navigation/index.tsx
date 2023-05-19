@@ -34,6 +34,8 @@ import Toast from "react-native-toast-message";
 import { toastConfig } from "lib/Toast";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { useEffect } from "react";
+import { useNavigation } from "hooks/useNavigation";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -44,8 +46,6 @@ import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import ForYouIconOn from "./assets/ForYouIconOn";
 import ForYouIconOff from "./assets/ForYouIconOff";
-import { useEffect } from "react";
-import { useNavigation } from "hooks/useNavigation";
 import { initializeDeeplink } from "../../services/deepLink";
 
 const header = () => <Header rightComponent={<LayoutHeader />} />;
@@ -147,7 +147,6 @@ function BottomTabNavigator() {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
-  
   const { navigateTo } = useNavigation();
   useEffect(() => {
     initializeDeeplink(navigateTo);
