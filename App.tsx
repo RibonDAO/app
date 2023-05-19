@@ -8,11 +8,11 @@ import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { StripeProvider } from "@stripe/stripe-react-native";
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
-import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
 import UnsafeAreaProvider, {
   useUnsafeAreaContext,
@@ -21,7 +21,6 @@ import TasksProvider from "./src/contexts/tasksContext";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
   const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
 
   if (!isLoadingComplete) {
@@ -47,8 +46,14 @@ function Main() {
                   edges={["bottom"]}
                   style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
                 >
-                  <Navigation colorScheme={colorScheme} />
-                  <StatusBar style="dark" />
+                  <StripeProvider
+                    publishableKey="stripe_key"
+                    urlScheme="ribon" // required for 3D Secure and bank redirects
+                    merchantIdentifier="merchant.com.ribon" // required for Apple Pay
+                  >
+                    <Navigation />
+                    <StatusBar />
+                  </StripeProvider>
                 </SafeAreaView>
               </SafeAreaView>
             </SafeAreaProvider>
