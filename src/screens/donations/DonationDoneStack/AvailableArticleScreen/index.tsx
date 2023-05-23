@@ -6,9 +6,9 @@ import Image from "components/atomics/Image";
 import { theme, useArticles } from "@ribon.io/shared";
 import ImageWithInfoLayout from "components/moleculars/layouts/ImageWithInfoLayout";
 import { useTranslation } from "react-i18next";
-import NewsPlaceholder from "./placeholder";
 import { useUnsafeAreaContext } from "contexts/unsafeAreaContext";
 import { defaultBodyMdSemibold } from "styles/typography/default";
+import NewsPlaceholder from "./placeholder";
 import S from "./styles";
 
 export default function AvailableArticleScreen() {
@@ -25,19 +25,19 @@ export default function AvailableArticleScreen() {
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const article = await getArticles();
-      setArticle(article[0]);
+      const fetchedArticles = await getArticles();
+      setArticle(fetchedArticles[0]);
     };
 
     fetchArticles();
   }, []);
 
-  const navigateToCausesScreen = () => {
-    navigateTo("CausesScreen");
+  const navigateToNewsTab = () => {
+    navigateTo("ForYouScreen", { currentTab: 1 });
   };
 
-  const navigateToForYouScreen = () => {
-    navigateTo("ForYouScreen");
+  const navigateToTasksTab = () => {
+    navigateTo("ForYouScreen", { currentTab: 0 });
   };
 
   useEffect(() => {
@@ -67,6 +67,7 @@ export default function AvailableArticleScreen() {
               <Image
                 style={S.articleImage}
                 source={{ uri: article.imageUrl }}
+                accessibilityIgnoresInvertColors={false}
               />
             </View>
             <View style={S.articleContent}>
@@ -85,7 +86,7 @@ export default function AvailableArticleScreen() {
             color: theme.colors.neutral10,
             ...defaultBodyMdSemibold,
           }}
-          onPress={navigateToForYouScreen}
+          onPress={navigateToNewsTab}
           backgroundColor={primary[100]}
         />
         <Button
@@ -95,7 +96,7 @@ export default function AvailableArticleScreen() {
             ...defaultBodyMdSemibold,
           }}
           text={t("continue")}
-          onPress={navigateToCausesScreen}
+          onPress={navigateToTasksTab}
           outline
         />
       </View>
