@@ -73,6 +73,8 @@ function PaymentScreen(): JSX.Element {
   const isUserSection = () => currentSection === "user";
   const isCardSection = () => currentSection === "card";
 
+  const shouldShowOptions = () => isUserSection();
+
   const renderCurrentSection = () => {
     if (paymentMethod === "googlePay") return null;
     if (isUserSection()) return <UserInfoSection />;
@@ -139,20 +141,22 @@ function PaymentScreen(): JSX.Element {
                 {t("serviceFeesText")} {cardGivingFees.serviceFees}
               </Text>
             )}
-            <RadioButton
-              options={[
-                { name: "Card", value: "card", id: 1, icon: CardIcon },
-                {
-                  name: "Google Pay",
-                  value: "googlePay",
-                  id: 2,
-                  icon: GooglePayIcon,
-                },
-              ]}
-              onOptionChanged={(option) => {
-                setPaymentMethod(option.value as any);
-              }}
-            />
+            {shouldShowOptions() && (
+              <RadioButton
+                options={[
+                  { name: "Card", value: "card", id: 1, icon: CardIcon },
+                  {
+                    name: "Google Pay",
+                    value: "googlePay",
+                    id: 2,
+                    icon: GooglePayIcon,
+                  },
+                ]}
+                onOptionChanged={(option) => {
+                  setPaymentMethod(option.value as any);
+                }}
+              />
+            )}
             {renderCurrentSection()}
           </View>
         </View>
