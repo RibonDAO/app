@@ -18,12 +18,15 @@ import { useNavigation } from "hooks/useNavigation";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { useNetworkContext } from "contexts/networkContext";
 import { defaultNetwork } from "config/networks";
+import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import styles from "./styles";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 
 function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();
   const { isValidNetwork, getCurrentNetwork } = useNetworkContext();
+  const { cause: causeCard } = useCardPaymentInformation();
+
   const {
     cause,
     setCause,
@@ -58,7 +61,7 @@ function CryptoScreen(): JSX.Element {
   };
 
   useEffect(() => {
-    setCause(causesFilter()[0]);
+    setCause(causeCard || causesFilter()[0]);
   }, [JSON.stringify(causes)]);
 
   useEffect(() => {
@@ -87,6 +90,10 @@ function CryptoScreen(): JSX.Element {
   const handleCauseClick = (causeClicked: Cause) => {
     setCause(causeClicked);
   };
+
+  useEffect(() => {
+    setCause(causeCard || causesFilter()[0]);
+  }, [causes]);
 
   const onDonationToContractSuccess = () => {
     resetScreen();
@@ -128,6 +135,8 @@ function CryptoScreen(): JSX.Element {
     return t("connectWalletButtonText");
   };
 
+  const preSelectedIndex = () => cause ? causesFilter().findIndex((c) => c.id === cause?.id) : 0;
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -140,11 +149,11 @@ function CryptoScreen(): JSX.Element {
         elements={causesFilter()}
         onChange={handleCauseClick}
         nameExtractor={(element) => element.name}
+        indexSelected={preSelectedIndex()}
         backgroundColor={theme.colors.brand.secondary[700]}
         textColorOutline={theme.colors.brand.secondary[700]}
         borderColor={theme.colors.brand.secondary[700]}
         borderColorOutline={theme.colors.brand.secondary[300]}
-        indexSelected={0}
       />
       <View style={styles.contentContainer}>
         <MaskedWaveCut
