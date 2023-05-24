@@ -17,6 +17,7 @@ import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { useScrollEnabled } from "contexts/scrollEnabledContext";
+import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
 
@@ -36,7 +37,7 @@ function CardScreen(): JSX.Element {
     useCardPaymentInformation();
 
   const { causes } = useCauses();
-
+  const { cause: causeCrypto } = useCryptoPayment();
   const { scrollEnabled } = useScrollEnabled();
 
   const { t } = useTranslation("translation", {
@@ -49,7 +50,7 @@ function CardScreen(): JSX.Element {
   };
 
   useEffect(() => {
-    setCause(causesFilter()[0]);
+    setCause(causeCrypto || causesFilter()[0]);
   }, [causes]);
 
   const handleCauseClick = (causeClicked: Cause) => {
@@ -99,6 +100,10 @@ function CardScreen(): JSX.Element {
 
   if (!currentOffer || loading) return <View />;
 
+  const preSelectedIndex = () => causeCrypto
+      ? causesFilter().findIndex((c) => c.id === causeCrypto?.id)
+      : 0;
+
   return (
     <ScrollView
       contentContainerStyle={S.container}
@@ -108,6 +113,7 @@ function CardScreen(): JSX.Element {
       <GroupButtons
         elements={causesFilter()}
         onChange={handleCauseClick}
+        indexSelected={preSelectedIndex()}
         nameExtractor={(element) => element.name}
         backgroundColor={theme.colors.brand.secondary[700]}
         textColorOutline={theme.colors.brand.secondary[700]}
