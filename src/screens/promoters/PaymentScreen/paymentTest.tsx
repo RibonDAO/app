@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GooglePayButton, useGooglePay } from "@stripe/stripe-react-native";
 import { Alert, StyleSheet, View } from "react-native";
+import { apiPost } from "@ribon.io/shared/services";
 
 const styles = StyleSheet.create({
   row: {
@@ -91,8 +92,8 @@ export default function GooglePayScreen() {
   */
   const createPaymentMethod = async () => {
     const { error, paymentMethod } = await createGooglePayPaymentMethod({
-      amount: 12,
-      currencyCode: "USD",
+      amount: 500,
+      currencyCode: "BRL",
     });
 
     if (error) {
@@ -100,10 +101,35 @@ export default function GooglePayScreen() {
       Alert.alert(error.code, error.message);
       return;
     } else if (paymentMethod) {
-      Alert.alert(
-        "Success",
-        `The payment method was created successfully. paymentMethodId: ${paymentMethod.id}`,
-      );
+      console.log("payment method", paymentMethod);
+
+      const offerId = 7;
+      const paymentMethodId = paymentMethod.id;
+      const { email } = paymentMethod.billingDetails;
+      const { name } = paymentMethod.billingDetails;
+      const country = paymentMethod.billingDetails?.address?.country;
+      const city = paymentMethod.billingDetails?.address?.city;
+      const state = paymentMethod.billingDetails?.address?.state;
+      const integrationId = 3;
+      const causeId = 1;
+
+      apiPost("/payments/google_pay", {
+        offerId,
+        paymentMethodId,
+        email,
+        name,
+        country,
+        city,
+        state,
+        integrationId,
+        causeId,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     setInitialized(false);
   };
