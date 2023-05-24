@@ -2,12 +2,13 @@ import { View } from "react-native";
 import { useEffect, useState } from "react";
 import { Article, useArticles } from "@ribon.io/shared";
 import ArticleLayout from "components/moleculars/layouts/ArticleLayout";
-import ForYouScreenPlaceholder from "./placeholder";
 import { RibonOnboarding } from "utils/constants/Articles";
 import { useTranslation } from "react-i18next";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { logEvent } from "services/analytics";
 import styles from "./styles";
+import ForYouScreenPlaceholder from "./placeholder";
 
 const IS_USER_ONBOARDING = "IS_USER_ONBOARDING";
 
@@ -23,9 +24,13 @@ export default function NewsSection() {
   const { getArticles } = useArticles();
 
   useEffect(() => {
+    logEvent("P20_view");
+  }, []);
+
+  useEffect(() => {
     const fetchArticles = async () => {
-      const articles = await getArticles();
-      setArticles(articles);
+      const currentArticles = await getArticles();
+      setArticles(currentArticles);
     };
 
     fetchArticles();
@@ -56,6 +61,8 @@ export default function NewsSection() {
 
   const renderOnboarding = () => {
     const article = RibonOnboarding(t);
+
+    logEvent("P20_onboardingPost_view");
 
     return (
       <View>

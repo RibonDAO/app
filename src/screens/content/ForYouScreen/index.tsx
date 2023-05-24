@@ -1,16 +1,16 @@
 import { View } from "react-native";
-import { RootStackScreenProps } from "types";
 import { useCanDonate } from "@ribon.io/shared";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
-import TabViewSection from "./TabViewSection";
 import ForYouTabsProvider from "contexts/forYouTabsContext";
+import { useRouteParams } from "hooks/useRouteParams";
+import TabViewSection from "./TabViewSection";
 import styles from "./styles";
 
-export default function ForYouScreen({
-  navigation,
-}: RootStackScreenProps<"ForYouScreen">) {
+export default function ForYouScreen(): JSX.Element {
+  const { params } = useRouteParams<"ForYouScreen">();
+
   const { currentUser } = useCurrentUser();
 
   const { refetch: refetchCanDonate } = useCanDonate(
@@ -24,11 +24,11 @@ export default function ForYouScreen({
     }, 500);
   }, [JSON.stringify(currentUser)]);
 
-  const renderSection = () => <TabViewSection />;
-
   return (
     <ForYouTabsProvider>
-      <View style={styles.container}>{renderSection()}</View>
+      <View style={styles.container}>
+        <TabViewSection initialTabIndex={params?.currentTab || 0} />
+      </View>
     </ForYouTabsProvider>
   );
 }
