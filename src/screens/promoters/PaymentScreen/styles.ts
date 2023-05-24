@@ -4,6 +4,7 @@ import {
   defaultBodyMdRegular,
   defaultBodyXsRegular,
   defaultBodyMdSemibold,
+  defaultBodySmMedium,
 } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
@@ -65,6 +66,11 @@ const styles = StyleSheet.create({
   },
   donateButton: {
     height: 48,
+  },
+  paymentMethodText: {
+    ...defaultBodySmMedium,
+    color: theme.colors.neutral[700],
+    marginBottom: theme.spacingNative(4),
   },
 });
 

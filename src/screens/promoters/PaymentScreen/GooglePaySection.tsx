@@ -11,7 +11,6 @@ import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 const styles = StyleSheet.create({
   row: {
     marginTop: 30,
-    padding: 16,
   },
   payButton: {
     marginTop: 30,

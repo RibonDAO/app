@@ -188,7 +188,8 @@
           "taxId": "Tax ID",
           "brazilName": "Brazil",
           "searchCountryPlaceholder": "Search country"
-        }
+        },
+        "paymentMethodText": "Payment method"
       },
       "invalidNetwork": "Invalid network, please change to {{network}}"
     },

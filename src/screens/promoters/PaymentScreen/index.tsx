@@ -76,7 +76,10 @@ function PaymentScreen(): JSX.Element {
   const shouldShowOptions = () => isUserSection();
 
   const renderCurrentSection = () => {
-    if (paymentMethod === "googlePay") return null;
+    if (paymentMethod === "googlePay")
+      return (
+        <GooglePaySection offer={offer} cause={cause} nonProfit={nonProfit} />
+      );
     if (isUserSection()) return <UserInfoSection />;
 
     return <CardInfoSection />;
@@ -142,20 +145,25 @@ function PaymentScreen(): JSX.Element {
               </Text>
             )}
             {shouldShowOptions() && (
-              <RadioButton
-                options={[
-                  { name: "Card", value: "card", id: 1, icon: CardIcon },
-                  {
-                    name: "Google Pay",
-                    value: "googlePay",
-                    id: 2,
-                    icon: GooglePayIcon,
-                  },
-                ]}
-                onOptionChanged={(option) => {
-                  setPaymentMethod(option.value as any);
-                }}
-              />
+              <>
+                <Text style={styles.paymentMethodText}>
+                  {t("paymentMethodText")}
+                </Text>
+                <RadioButton
+                  options={[
+                    { name: "Card", value: "card", id: 1, icon: CardIcon },
+                    {
+                      name: "Google Pay",
+                      value: "googlePay",
+                      id: 2,
+                      icon: GooglePayIcon,
+                    },
+                  ]}
+                  onOptionChanged={(option) => {
+                    setPaymentMethod(option.value as any);
+                  }}
+                />
+              </>
             )}
             {renderCurrentSection()}
           </View>
@@ -172,9 +180,6 @@ function PaymentScreen(): JSX.Element {
             borderColor={theme.colors.brand.secondary[300]}
           />
         </View>
-      )}
-      {paymentMethod === "googlePay" && (
-        <GooglePaySection offer={offer} cause={cause} nonProfit={nonProfit} />
       )}
     </KeyboardAvoidingView>
   );

@@ -188,7 +188,8 @@
           "taxId": "CPF",
           "brazilName": "Brasil",
           "searchCountryPlaceholder": "Procurar país"
-        }
+        },
+        "paymentMethodText": "Forma de pagamento"
       },
       "invalidNetwork": "Rede inválida. Por favor troque para {{network}}"
     },
