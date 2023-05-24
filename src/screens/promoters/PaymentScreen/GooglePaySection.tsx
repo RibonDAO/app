@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GooglePayButton, useGooglePay } from "@stripe/stripe-react-native";
+import { useGooglePay } from "@stripe/stripe-react-native";
 import { Alert, StyleSheet, View } from "react-native";
 import { apiPost } from "@ribon.io/shared/services";
 import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
@@ -7,6 +7,11 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useTasksContext } from "contexts/tasksContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
+import Button from "components/atomics/buttons/Button";
+import { useTranslation } from "react-i18next";
+import GooglePayLogo from "assets/images/payments/google-pay-logo.png";
+import { theme } from "@ribon.io/shared/styles";
+import { defaultBodyLgBold } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   row: {
@@ -20,6 +25,11 @@ const styles = StyleSheet.create({
   standardButton: {
     width: "100%",
     height: 50,
+    backgroundColor: "#000",
+    borderColor: theme.colors.neutral[100],
+  },
+  standardButtonText: {
+    ...defaultBodyLgBold,
   },
   addToWalletButton: {
     marginTop: 30,
@@ -44,6 +54,9 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
     createGooglePayPaymentMethod,
   } = useGooglePay();
   const [initialized, setInitialized] = useState(false);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "promoters.supportCauseScreen.paymentScreen",
+  });
 
   // 1. Initialize Google Pay
   const initialize = async () => {
@@ -138,11 +151,15 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   return (
     <View>
       <View style={styles.row}>
-        <GooglePayButton
-          disabled={!initialized || loading}
-          style={styles.standardButton}
-          type="pay"
+        <Button
+          text={t("payWithGooglePay")}
           onPress={createPaymentMethod}
+          disabled={!initialized || loading}
+          customStyles={styles.standardButton}
+          textColorOutline={theme.colors.neutral[500]}
+          customTextStyles={styles.standardButtonText}
+          outline
+          icon={GooglePayLogo}
         />
       </View>
     </View>

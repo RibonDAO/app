@@ -4,6 +4,7 @@ import {
   StyleProp,
   TextStyle,
   TouchableOpacity,
+  Image,
   ViewStyle,
   Animated,
   StyleSheet,
@@ -28,6 +29,7 @@ export type Props = {
   textColor?: string;
   customStyles?: StyleProp<ViewStyle>;
   customTextStyles?: StyleProp<TextStyle>;
+  icon?: any;
 };
 
 const { primary } = theme.colors.brand;
@@ -48,6 +50,7 @@ export default function Button({
   textColor = primary[900],
   customStyles = {},
   customTextStyles = {},
+  icon,
 }: Props): JSX.Element {
   const counter = useRef(new Animated.Value(0)).current;
   const [running, setRunning] = useState(false);
@@ -168,9 +171,12 @@ export default function Button({
           }}
         />
       </View>
-      <Text style={[S.text, { color: textColorByState() }, customTextStyles]}>
-        {text}
-      </Text>
+      <View style={S.textContainer}>
+        <Text style={[S.text, { color: textColorByState() }, customTextStyles]}>
+          {text}
+        </Text>
+        {icon && <Image source={icon} style={S.icon} />}
+      </View>
     </TouchableOpacity>
   );
 }

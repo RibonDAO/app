@@ -189,7 +189,8 @@
           "brazilName": "Brazil",
           "searchCountryPlaceholder": "Search country"
         },
-        "paymentMethodText": "Payment method"
+        "paymentMethodText": "Payment method",
+        "payWithGooglePay": "Pay with"
       },
       "invalidNetwork": "Invalid network, please change to {{network}}"
     },
