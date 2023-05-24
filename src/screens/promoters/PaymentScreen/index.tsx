@@ -15,6 +15,7 @@ import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import { logEvent } from "services/analytics";
 
+import GooglePaySection from "screens/promoters/PaymentScreen/GooglePaySection";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
@@ -35,6 +36,9 @@ function PaymentScreen(): JSX.Element {
 
   const colorTheme = getThemeByFlow(flow);
   const { isKeyboardVisible } = useKeyboardVisibility();
+  const [paymentMethod] = useState<"card" | "googlePay" | "applePay">(
+    "googlePay",
+  );
 
   useEffect(() => {
     if (flow === "cause") {
@@ -68,6 +72,10 @@ function PaymentScreen(): JSX.Element {
   const isCardSection = () => currentSection === "card";
 
   const renderCurrentSection = () => {
+    if (paymentMethod === "googlePay")
+      return (
+        <GooglePaySection offer={offer} cause={cause} nonProfit={nonProfit} />
+      );
     if (isUserSection()) return <UserInfoSection />;
 
     return <CardInfoSection />;

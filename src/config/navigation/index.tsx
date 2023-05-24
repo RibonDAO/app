@@ -21,7 +21,7 @@ import AvailableArticleScreen from "screens/donations/DonationDoneStack/Availabl
 import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
-import PaymentScreen from "screens/promoters/PaymentScreen/paymentTest";
+import PaymentScreen from "screens/promoters/PaymentScreen";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
