@@ -10,7 +10,6 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   mainContainer: {
     width: "100%",
-    paddingHorizontal: 16,
     borderRadius: 8,
   },
   innerContainer: {
@@ -20,7 +19,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginTop: theme.spacingNative(16),
     shadowColor: theme.colors.neutral[800],
     elevation: 4,
     shadowOffset: { width: -2, height: 4 },

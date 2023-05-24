@@ -11,6 +11,7 @@ import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 const styles = StyleSheet.create({
   row: {
     marginTop: 30,
+    padding: 16,
   },
   payButton: {
     marginTop: 30,
@@ -18,8 +19,8 @@ const styles = StyleSheet.create({
     height: 48,
   },
   standardButton: {
-    width: 90,
-    height: 40,
+    width: "100%",
+    height: 50,
   },
   addToWalletButton: {
     marginTop: 30,
@@ -141,7 +142,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         <GooglePayButton
           disabled={!initialized || loading}
           style={styles.standardButton}
-          type="standard"
+          type="pay"
           onPress={createPaymentMethod}
         />
       </View>

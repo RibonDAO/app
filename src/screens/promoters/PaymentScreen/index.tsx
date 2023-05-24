@@ -14,8 +14,10 @@ import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import { logEvent } from "services/analytics";
-
+import GooglePayIcon from "assets/images/payments/google-pay-icon.png";
+import CardIcon from "assets/images/payments/card-icon.png";
 import GooglePaySection from "screens/promoters/PaymentScreen/GooglePaySection";
+import RadioButton from "components/moleculars/RadioButton";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
@@ -36,9 +38,9 @@ function PaymentScreen(): JSX.Element {
 
   const colorTheme = getThemeByFlow(flow);
   const { isKeyboardVisible } = useKeyboardVisibility();
-  const [paymentMethod] = useState<"card" | "googlePay" | "applePay">(
-    "googlePay",
-  );
+  const [paymentMethod, setPaymentMethod] = useState<
+    "card" | "googlePay" | "applePay"
+  >("card");
 
   useEffect(() => {
     if (flow === "cause") {
@@ -72,10 +74,7 @@ function PaymentScreen(): JSX.Element {
   const isCardSection = () => currentSection === "card";
 
   const renderCurrentSection = () => {
-    if (paymentMethod === "googlePay")
-      return (
-        <GooglePaySection offer={offer} cause={cause} nonProfit={nonProfit} />
-      );
+    if (paymentMethod === "googlePay") return null;
     if (isUserSection()) return <UserInfoSection />;
 
     return <CardInfoSection />;
@@ -140,11 +139,25 @@ function PaymentScreen(): JSX.Element {
                 {t("serviceFeesText")} {cardGivingFees.serviceFees}
               </Text>
             )}
+            <RadioButton
+              options={[
+                { name: "Card", value: "card", id: 1, icon: CardIcon },
+                {
+                  name: "Google Pay",
+                  value: "googlePay",
+                  id: 2,
+                  icon: GooglePayIcon,
+                },
+              ]}
+              onOptionChanged={(option) => {
+                setPaymentMethod(option.value as any);
+              }}
+            />
             {renderCurrentSection()}
           </View>
         </View>
       </ScrollView>
-      {!isKeyboardVisible && (
+      {!isKeyboardVisible && paymentMethod === "card" && (
         <View style={styles.donateButtonContainer}>
           <Button
             text={t("button")}
@@ -155,6 +168,9 @@ function PaymentScreen(): JSX.Element {
             borderColor={theme.colors.brand.secondary[300]}
           />
         </View>
+      )}
+      {paymentMethod === "googlePay" && (
+        <GooglePaySection offer={offer} cause={cause} nonProfit={nonProfit} />
       )}
     </KeyboardAvoidingView>
   );

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "contexts/languageContext";
 import { maskForTaxId } from "@ribon.io/shared/lib";
@@ -16,10 +16,6 @@ import {
   countryCodeByLanguage,
 } from "lib/countryByLanguage";
 import { Languages } from "types/enums/Languages";
-import {
-  BRstates,
-  USAstates,
-} from "screens/promoters/PaymentScreen/UserInfoSection/federationStates";
 import { theme } from "@ribon.io/shared/styles";
 
 function UserInfoSection(): JSX.Element {
@@ -29,7 +25,6 @@ function UserInfoSection(): JSX.Element {
   });
   const { currentLang } = useLanguage();
   const {
-    country,
     setCountry,
     state,
     setState,
@@ -67,12 +62,6 @@ function UserInfoSection(): JSX.Element {
     setCurrentCountryCode(selectedCountry.cca2);
     setBrazilFormatForTaxId(isBrazil(selectedCountry.name as string));
   };
-
-  const federationStates = useCallback(() => {
-    if (isBrazil(country)) return BRstates;
-
-    return USAstates;
-  }, [country]);
 
   useEffect(() => {
     setButtonDisabled(!(state && city && taxId.length === maxTaxIdLength()));
@@ -114,7 +103,6 @@ function UserInfoSection(): JSX.Element {
           value={city}
           onChangeText={(value) => setCity(value)}
           containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
-          autoFocus
         />
         <InputText
           style={inputStyles}
