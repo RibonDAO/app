@@ -8,6 +8,7 @@ import ImageWithInfoLayout from "components/moleculars/layouts/ImageWithInfoLayo
 import { useTranslation } from "react-i18next";
 import { useUnsafeAreaContext } from "contexts/unsafeAreaContext";
 import { defaultBodyMdSemibold } from "styles/typography/default";
+import { logEvent } from "services/analytics";
 import NewsPlaceholder from "./placeholder";
 import S from "./styles";
 
@@ -33,12 +34,17 @@ export default function AvailableArticleScreen() {
   }, []);
 
   const navigateToNewsTab = () => {
+    logEvent("checkpostCard_Click");
     navigateTo("ForYouScreen", { currentTab: 1 });
   };
 
   const navigateToTasksTab = () => {
     navigateTo("ForYouScreen", { currentTab: 0 });
   };
+
+  useEffect(() => {
+    logEvent("P19_view");
+  }, []);
 
   useEffect(() => {
     setBottomBackgroundColor(primary[50]);

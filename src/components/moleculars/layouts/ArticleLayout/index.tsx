@@ -1,9 +1,11 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { Article, theme } from "@ribon.io/shared";
 import Image from "components/atomics/Image";
-import VendorIcon from "./assets/VendorIcon";
 import { openInWebViewer } from "lib/linkOpener";
 import Icon from "components/atomics/Icon";
+import { logEvent } from "services/analytics";
+import { useEffect } from "react";
+import VendorIcon from "./assets/VendorIcon";
 import styles from "./styles";
 
 const VENDOR = "Ribon";
@@ -38,35 +40,46 @@ export default function ArticleLayout({ article, readMoreText }: Props) {
   };
 
   const handlePress = () => {
+    logEvent("P20_postBtn_click", { idPost: article.id });
+
     let link = article?.link;
 
     if (link) {
       if (!PROTOCOL_REGEX.test(link)) link = `https://${link}`;
       return openInWebViewer(link);
     }
+
+    return null;
   };
 
-  const renderContentFooter = () => {
-    return (
-      <TouchableOpacity
-        style={styles.imageFooter}
-        onPress={handlePress}
-        activeOpacity={0.5}
-      >
-        <Text style={styles.imageFooterText}>{readMoreText}</Text>
-        <Icon
-          type="outlined"
-          name="arrow_right_alt"
-          size={20}
-          color={secondary[900]}
-        />
-      </TouchableOpacity>
-    );
-  };
+  useEffect(() => {
+    logEvent("P20_post_view", { idPost: article.id });
+  }, []);
+
+  const renderContentFooter = () => (
+    <TouchableOpacity
+      accessibilityRole="button"
+      style={styles.imageFooter}
+      onPress={handlePress}
+      activeOpacity={0.5}
+    >
+      <Text style={styles.imageFooterText}>{readMoreText}</Text>
+      <Icon
+        type="outlined"
+        name="arrow_right_alt"
+        size={20}
+        color={secondary[900]}
+      />
+    </TouchableOpacity>
+  );
 
   return (
     <View>
-      <TouchableOpacity onPress={handlePress} activeOpacity={1}>
+      <TouchableOpacity
+        accessibilityRole="button"
+        onPress={handlePress}
+        activeOpacity={1}
+      >
         <View style={styles.header}>
           {renderIcon()}
           {renderAuthorName()}
@@ -77,6 +90,7 @@ export default function ArticleLayout({ article, readMoreText }: Props) {
 
         <View style={styles.imageContainer}>
           <Image
+            accessibilityIgnoresInvertColors
             style={{ ...styles.image, ...(!hasLink && styles.singleImage) }}
             source={{ uri: article.imageUrl }}
           />
