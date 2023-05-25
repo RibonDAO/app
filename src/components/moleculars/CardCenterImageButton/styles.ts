@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodySmRegular, defaultBodySmSemibold } from "styles/typography/default";
+import {
+  defaultBodySmRegular,
+  defaultBodySmSemibold,
+} from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -99,7 +102,12 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 48,
-  }
+  },
+  disabledButton: {
+    backgroundColor: "transparent",
+    borderColor: theme.colors.neutral[100],
+    borderWidth: 1,
+  },
 });
 
 export default styles;
