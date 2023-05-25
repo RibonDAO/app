@@ -1,4 +1,4 @@
-import { renderComponent } from "config/testUtils/renders";
+import { renderComponentAsync } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { Text, View } from "react-native";
 import { useStripe } from ".";
@@ -13,8 +13,8 @@ function StripeTestPage() {
 }
 
 describe("useStripe", () => {
-  it("renders without error", () => {
-    renderComponent(<StripeTestPage />);
+  it("renders without error", async () => {
+    await renderComponentAsync(<StripeTestPage />);
     expectTextToBeInTheDocument("Stripe");
   });
 });

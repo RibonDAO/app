@@ -1,5 +1,5 @@
 import { clickOn, fillByPlaceholder, waitForPromises } from "config/testUtils";
-import { renderComponent } from "config/testUtils/renders";
+import { renderComponentAsync } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { offerFactory, causeFactory } from "@ribon.io/shared/config";
 import { screen } from "@testing-library/react-native";
@@ -13,11 +13,22 @@ jest.mock("hooks/useRouteParams", () => ({
     params: { offer: mockOffer, cause: mockCause, flow: "cause" },
   }),
 }));
+
+jest.mock("@ribon.io/shared/hooks", () => ({
+  __esModule: true,
+  ...jest.requireActual("@ribon.io/shared/hooks"),
+  useCardGivingFees: () => ({
+    cardGivingFees: {
+      netGiving: 10,
+      serviceFees: 10,
+    },
+  }),
+}));
 describe("PaymentPage", () => {
   const mockHandleSubmit = jest.fn();
 
   beforeEach(async () => {
-    renderComponent(<PaymentPage />, {
+    await renderComponentAsync(<PaymentPage />, {
       cardPaymentProviderValue: {
         country: "Brazil",
         state: "DF",
