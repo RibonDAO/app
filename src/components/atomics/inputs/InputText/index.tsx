@@ -6,6 +6,7 @@ import {
   TextInputProps,
   TextStyle,
   ViewStyle,
+  Text,
 } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
@@ -37,6 +38,7 @@ function InputText({
 }: Props): JSX.Element {
   return (
     <View style={[S.container, containerStyle]}>
+      <Text>{placeholder}</Text>
       <TextInput
         ref={rest.ref}
         placeholder={placeholder || ""}
