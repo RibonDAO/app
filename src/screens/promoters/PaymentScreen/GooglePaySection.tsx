@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useGooglePay } from "@stripe/stripe-react-native";
-import { Alert, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { apiPost } from "@ribon.io/shared/services";
 import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import GooglePayLogo from "assets/images/payments/google-pay-logo.png";
 import { theme } from "@ribon.io/shared/styles";
 import { defaultBodyLgBold } from "styles/typography/default";
+import { logError } from "services/crashReport";
 
 const styles = StyleSheet.create({
   row: {
@@ -58,32 +59,29 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
     keyPrefix: "promoters.supportCauseScreen.paymentScreen",
   });
 
-  // 1. Initialize Google Pay
   const initialize = async () => {
-    if (!(await isGooglePaySupported({ testEnv: true }))) {
-      Alert.alert("Google Pay is not supported.");
-      return;
-    }
+    if (!(await isGooglePaySupported({ testEnv: true }))) return;
 
     const { error } = await initGooglePay({
       testEnv: true,
-      merchantName: "Test",
+      merchantName: "Ribon",
       countryCode: "BR",
       billingAddressConfig: {
         format: "FULL",
-        isPhoneNumberRequired: true,
-        isRequired: false,
+        isPhoneNumberRequired: false,
+        isRequired: true,
       },
       existingPaymentMethodRequired: false,
       isEmailRequired: true,
     });
 
     if (error) {
-      Alert.alert(error.code, error.message);
+      logError(error);
       return;
     }
     setInitialized(true);
   };
+
   useEffect(() => {
     initialize();
   }, []);
@@ -96,20 +94,16 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
     });
 
     if (error) {
-      console.log("payment method error", error);
-      Alert.alert(error.code, error.message);
+      logError(error);
       hideLoadingOverlay();
       return;
     } else if (paymentMethod) {
-      console.log("payment method", paymentMethod);
-
       const offerId = offer.id;
       const paymentMethodId = paymentMethod.id;
-      const { email } = paymentMethod.billingDetails;
-      const { name } = paymentMethod.billingDetails;
-      const country = paymentMethod.billingDetails?.address?.country;
-      const city = paymentMethod.billingDetails?.address?.city;
-      const state = paymentMethod.billingDetails?.address?.state;
+      const { email, name, address } = paymentMethod.billingDetails;
+      const country = address?.country;
+      const city = address?.city;
+      const state = address?.state;
       const integrationId = RIBON_INTEGRATION_ID;
       const causeId = cause?.id;
       const nonProfitId = nonProfit?.id;
@@ -127,23 +121,19 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         nonProfitId,
       };
 
-      console.log("data", data);
-      apiPost("/payments/google_pay", data)
-        .then((res) => {
-          registerAction("contribution_done_screen_view");
+      try {
+        await apiPost("/payments/google_pay", data);
+        registerAction("contribution_done_screen_view");
 
-          navigateTo("ContributionDoneScreen", {
-            cause,
-            nonProfit,
-          });
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          hideLoadingOverlay();
+        navigateTo("ContributionDoneScreen", {
+          cause,
+          nonProfit,
         });
+      } catch (e) {
+        logError(e);
+      } finally {
+        hideLoadingOverlay();
+      }
     }
     setInitialized(false);
   };
