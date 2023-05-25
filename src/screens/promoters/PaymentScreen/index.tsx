@@ -14,10 +14,8 @@ import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import { logEvent } from "services/analytics";
-import GooglePayIcon from "assets/images/payments/google-pay-icon.png";
-import CardIcon from "assets/images/payments/card-icon.png";
 import GooglePaySection from "screens/promoters/PaymentScreen/GooglePaySection";
-import RadioButton from "components/moleculars/RadioButton";
+import SelectPaymentMethodSection from "screens/promoters/PaymentScreen/SelectPaymentMethodSection";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
@@ -145,25 +143,11 @@ function PaymentScreen(): JSX.Element {
               </Text>
             )}
             {shouldShowOptions() && (
-              <>
-                <Text style={styles.paymentMethodText}>
-                  {t("paymentMethodText")}
-                </Text>
-                <RadioButton
-                  options={[
-                    { name: "Card", value: "card", id: 1, icon: CardIcon },
-                    {
-                      name: "Google Pay",
-                      value: "googlePay",
-                      id: 2,
-                      icon: GooglePayIcon,
-                    },
-                  ]}
-                  onOptionChanged={(option) => {
-                    setPaymentMethod(option.value as any);
-                  }}
-                />
-              </>
+              <SelectPaymentMethodSection
+                onOptionChanged={(option) => {
+                  setPaymentMethod(option.value);
+                }}
+              />
             )}
             {renderCurrentSection()}
           </View>
