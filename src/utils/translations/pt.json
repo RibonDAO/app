@@ -26,6 +26,7 @@
     "causesScreen": {
       "title": "Doe para um projeto",
       "buttonText": "Doar ticket",
+      "noTickets": "Sem tickets",
       "allCauses": "Todas",
       "enableNotification": {
         "title": "Não perca seu ticket diário!",
