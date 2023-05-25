@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useGooglePay } from "@stripe/stripe-react-native";
 import { StyleSheet, View } from "react-native";
-import { apiPost } from "@ribon.io/shared/services";
 import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useTasksContext } from "contexts/tasksContext";
@@ -13,6 +12,7 @@ import GooglePayLogo from "assets/images/payments/google-pay-logo.png";
 import { theme } from "@ribon.io/shared/styles";
 import { defaultBodyLgBold } from "styles/typography/default";
 import { logError } from "services/crashReport";
+import googlePayApi from "services/api/googlePayApi";
 
 const styles = StyleSheet.create({
   row: {
@@ -58,12 +58,13 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCauseScreen.paymentScreen",
   });
+  const testEnv = true;
 
   const initialize = async () => {
-    if (!(await isGooglePaySupported({ testEnv: true }))) return;
+    if (!(await isGooglePaySupported({ testEnv }))) return;
 
     const { error } = await initGooglePay({
-      testEnv: true,
+      testEnv,
       merchantName: "Ribon",
       countryCode: "BR",
       billingAddressConfig: {
@@ -98,31 +99,24 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
       hideLoadingOverlay();
       return;
     } else if (paymentMethod) {
-      const offerId = offer.id;
-      const paymentMethodId = paymentMethod.id;
       const { email, name, address } = paymentMethod.billingDetails;
-      const country = address?.country;
-      const city = address?.city;
-      const state = address?.state;
       const integrationId = RIBON_INTEGRATION_ID;
-      const causeId = cause?.id;
-      const nonProfitId = nonProfit?.id;
 
       const data = {
-        offerId,
-        paymentMethodId,
+        offerId: offer.id,
+        paymentMethodId: paymentMethod.id,
         email,
         name,
-        country,
-        city,
-        state,
+        country: address?.country,
+        city: address?.city,
+        state: address?.state,
         integrationId,
-        causeId,
-        nonProfitId,
+        causeId: cause?.id,
+        nonProfitId: nonProfit?.id,
       };
 
       try {
-        await apiPost("/payments/google_pay", data);
+        await googlePayApi.postGooglePay(data);
         registerAction("contribution_done_screen_view");
 
         navigateTo("ContributionDoneScreen", {
