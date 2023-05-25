@@ -192,7 +192,7 @@
         "paymentMethodText": "Forma de pagamento",
         "payWithGooglePay": "Pagar com"
       },
-      "invalidNetwork": "Rede inválida. Por favor troque para {{network}}",
+      "invalidNetwork": "Rede inválida. Por favor troque para {{network}}"
     },
     "contributionDoneScreen": {
       "title": "Obrigado!",

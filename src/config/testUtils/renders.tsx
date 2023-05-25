@@ -40,6 +40,10 @@ import UnsafeAreaProvider, {
 } from "contexts/unsafeAreaContext";
 
 import { waitForPromises } from "config/testUtils";
+import StripeProvider, {
+  IStripeContext,
+  StripeContext,
+} from "contexts/stripeContext";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -81,6 +85,7 @@ export type RenderComponentProps = {
   ticketsProviderValue?: Partial<ITicketsContext>;
   scrollEnabledProviderValue?: Partial<IScrollEnabledContext>;
   unsafeAreaProviderValue?: Partial<IUnsafeAreaContext>;
+  stripeValue?: Partial<IStripeContext>;
 };
 
 function renderAllProviders(
@@ -94,6 +99,7 @@ function renderAllProviders(
     ticketsProviderValue = {},
     scrollEnabledProviderValue = {},
     unsafeAreaProviderValue = {},
+    stripeValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -134,7 +140,12 @@ function renderAllProviders(
                           ScrollEnabledProvider,
                           ScrollEnabledContext,
                           scrollEnabledProviderValue,
-                          children,
+                          renderProvider(
+                            StripeProvider,
+                            StripeContext,
+                            stripeValue,
+                            children,
+                          ),
                         ),
                       ),
                     ),

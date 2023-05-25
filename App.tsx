@@ -7,8 +7,7 @@ import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import { StripeProvider } from "@stripe/stripe-react-native";
+import StripeProvider from "./src/contexts/stripeContext";
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
@@ -46,11 +45,7 @@ function Main() {
                   edges={["bottom"]}
                   style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
                 >
-                  <StripeProvider
-                    publishableKey="pk_test_51JRgaRJuOnwQq9Qx2RrybIhE1vRgC5tNd32EJkINCTmgGZYSr3QXne9y5CAdEq36WULJPmWv2VvZZ0xA5MNTrY7C00KL9rq6Op"
-                    urlScheme="ribon" // required for 3D Secure and bank redirects
-                    merchantIdentifier="merchant.com.ribon" // required for Apple Pay
-                  >
+                  <StripeProvider>
                     <Navigation />
                     <StatusBar />
                   </StripeProvider>
