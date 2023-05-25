@@ -86,7 +86,7 @@ export default () => ({
         }
       ],
       [
-        "@stripe/stripe-react-native.ts",
+        "@stripe/stripe-react-native",
         {
           "merchantIdentifier": "",
           "enableGooglePay": true
