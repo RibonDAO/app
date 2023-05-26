@@ -57,7 +57,7 @@ function DonateScreen() {
       setIsDonating(false);
     } else {
       setIsDonating(true);
-      logEvent('P12_continueBtn_click', { nonProfitId: nonProfit.id });
+      logEvent("P12_continueBtn_click", { nonProfitId: nonProfit.id });
     }
   }
 
@@ -175,7 +175,7 @@ function DonateScreen() {
                   disabled={isDonating || !isValidEmail(email)}
                   customStyles={S.button}
                 />
-                <Text style={S.privacyPolicyText}>
+                <Text style={S.privacyPolicyText} testID="privacy-policy">
                   {t("agreementText")}{" "}
                   <Text style={S.privacyPolicyLink} onPress={linkToTerms}>
                     {t("termsText")}
