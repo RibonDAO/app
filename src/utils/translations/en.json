@@ -3,7 +3,7 @@
     "causes": "Tickets",
     "foryou": "For you",
     "giving": "Donations",
-    "profile": "Impact"
+    "impact": "Impact"
   },
   "layoutHeader": {
     "exitButton": "Exit",
@@ -196,7 +196,7 @@
     }
   },
   "users": {
-    "profileScreen": {
+    "impactScreen": {
       "title": "My Impact",
       "impactCards": {
         "totalTickets": "Donated tickets",
@@ -229,7 +229,7 @@
       "directDonationsTitle": "Direct Donations",
       "impactNotification": {
         "title": "We will be importing your impact soon!",
-        "description": "Your ribons donations from the old platform will soon be imported into your profile.",
+        "description": "Your ribons donations from the old platform will soon be imported into your impact.",
         "link": "Do not show again"
       }
     }

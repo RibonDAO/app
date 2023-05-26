@@ -22,11 +22,11 @@ import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import Tooltip from "components/atomics/Tooltip";
 import TicketSection from "screens/donations/CausesScreen/TicketSection";
-import ImpactDonationsVector from "screens/users/ProfileScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
-import ZeroDonationsSection from "screens/users/ProfileScreen/ZeroDonationsSection";
+import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
+import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 import Placeholder from "./placeholder";
-import { logEvent } from "services/analytics";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
@@ -171,7 +171,10 @@ export default function CausesScreen() {
                   handleNonProfitImagePress(nonProfit);
                 }}
                 onClickButton={() => {
-                  logEvent("donateTicketBtn_start", {nonProfitId: nonProfit.id, from: "nonprofitCard"});
+                  logEvent("donateTicketBtn_start", {
+                    nonProfitId: nonProfit.id,
+                    from: "nonprofitCard",
+                  });
                   navigateTo("DonateScreen", { nonProfit });
                 }}
                 buttonDisabled={!hasTickets()}

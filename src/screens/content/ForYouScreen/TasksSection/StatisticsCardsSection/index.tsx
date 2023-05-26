@@ -3,7 +3,7 @@ import { theme, useTasksStatistics } from "@ribon.io/shared";
 import { useTranslation } from "react-i18next";
 import { useTasksContext } from "contexts/tasksContext";
 import { useCallback, useEffect, useState } from "react";
-import ImpactCard from "screens/users/ProfileScreen/ImpactCard";
+import ImpactCard from "screens/users/ImpactScreen/ImpactCard";
 import { useFocusEffect } from "@react-navigation/native";
 import S from "./styles";
 

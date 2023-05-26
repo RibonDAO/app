@@ -10,7 +10,7 @@ export const IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT_KEY =
 function ImpactMigrationNotification() {
   const [hideNotification, setHideNotification] = useState(false);
   const { t } = useTranslation("translation", {
-    keyPrefix: "users.profileScreen",
+    keyPrefix: "users.impactScreen",
   });
 
   const currentNotificationSeenCount = async () =>

@@ -3,18 +3,20 @@ import { useCallback } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import usePersonPayments from "hooks/apiHooks/usePersonPayments";
+import { formatDateTime } from "lib/formatters/dateFormatter";
+import CardImageText from "components/moleculars/CardImageText";
 import { theme } from "@ribon.io/shared/styles";
-import DirectDonationCard from "screens/users/ProfileScreen/DirectDonationsImpactCards/DirectDonationCard";
+import { formatPrice } from "lib/formatters/currencyFormatter";
 import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
 
-function DirectDonationsImpactCards(): JSX.Element {
-  const { useDirectPersonPayments } = usePersonPayments();
+function CommunityDonationsImpactCards(): JSX.Element {
+  const { useCommunityPersonPayments } = usePersonPayments();
 
-  const { data, refetch } = useDirectPersonPayments(1, 6);
+  const { data, refetch } = useCommunityPersonPayments(1, 6);
 
   useFocusEffect(
     useCallback(() => {
@@ -26,19 +28,29 @@ function DirectDonationsImpactCards(): JSX.Element {
   const hasImpact = impactItems() && impactItems()?.length > 0;
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
-    keyPrefix: "users.profileScreen.ngoImpactCards.zeroDonationsSection",
+    keyPrefix: "users.impactScreen.ngoImpactCards.zeroDonationsSection",
   });
 
   const navigateToPromotersScreen = () => {
-    logEvent("giveNonProfitCard_click", { from: "impactEmptystate" });
-    navigateTo("PromotersScreen", { isInCommunity: false });
+    logEvent("giveCauseCard_click", { from: "impactEmptystate" });
+    navigateTo("PromotersScreen");
   };
 
   const impactCardsList = () => (
     <View style={S.cardsContainer}>
       {impactItems()?.map((item) => (
         <View key={item?.id} style={{ marginBottom: theme.spacingNative(12) }}>
-          <DirectDonationCard personPayment={item} />
+          <CardImageText
+            subtitle={item.receiver.name}
+            title={
+              item.offer
+                ? formatPrice(item.offer.priceValue, item.offer.currency)
+                : `${item.amountCents / 100} USDC`
+            }
+            footerText={formatDateTime(item.paidDate)}
+            subtitleStyle={S.subtitleStyle}
+            titleStyle={S.titleStyle}
+          />
         </View>
       ))}
     </View>
@@ -48,13 +60,13 @@ function DirectDonationsImpactCards(): JSX.Element {
     impactCardsList()
   ) : (
     <ZeroDonationsSection
-      title={t("direct.title")}
+      title={t("community.title")}
       onButtonPress={navigateToPromotersScreen}
-      description={t("direct.description")}
-      buttonText={t("direct.buttonText")}
+      description={t("community.description")}
+      buttonText={t("community.buttonText")}
       image={<ImpactDonationsVector />}
     />
   );
 }
 
-export default DirectDonationsImpactCards;
+export default CommunityDonationsImpactCards;

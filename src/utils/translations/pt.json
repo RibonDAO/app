@@ -3,7 +3,7 @@
     "causes": "Tickets",
     "foryou": "Para você",
     "giving": "Doações",
-    "profile": "Impacto"
+    "impact": "Impacto"
   },
   "layoutHeader": {
     "exitButton": "Sair",
@@ -195,7 +195,7 @@
     }
   },
   "users": {
-    "profileScreen": {
+    "impactScreen": {
       "title": "Meu Impacto",
       "impactCards": {
         "totalTickets": "Tickets doados",
