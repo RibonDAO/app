@@ -81,25 +81,6 @@ function LayoutHeader({
     }
   };
 
-  const handleUserLogin = () =>
-    currentUser ? (
-      <View style={{ width: 50 }}>
-        <RoundButton
-          active={false}
-          text={t("exitButton")}
-          onPress={handleLogout}
-        />
-      </View>
-    ) : (
-      <Icon
-        type="rounded"
-        size={20}
-        color={theme.colors.brand.primary[300]}
-        name="arrow_forward_ios"
-        onPress={toggleModal}
-      />
-    );
-
   const toggleTicketModal = () => {
     setTicketModalVisible(!ticketModalVisible);
   };
@@ -199,12 +180,22 @@ function LayoutHeader({
           }
         />
 
-        <ConfigItem
-          icon={LetterIcon}
-          text={currentUser ? currentUser?.email : t("login")}
-          onPress={currentUser ? handleLogout : toggleModal}
-          cta={handleUserLogin()}
-        />
+        {currentUser && (
+          <ConfigItem
+            icon={LetterIcon}
+            text={currentUser.email}
+            onPress={handleLogout}
+            cta={
+              <View style={{ width: 50 }}>
+                <RoundButton
+                  active={false}
+                  text={t("exitButton")}
+                  onPress={handleLogout}
+                />
+              </View>
+            }
+          />
+        )}
 
         <ConfigItem
           icon={GlobeIcon}
