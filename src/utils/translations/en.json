@@ -27,6 +27,7 @@
       "title": "Donate to a Project",
       "buttonText": "Donate",
       "allCauses": "All",
+      "noTickets": "No tickets",
       "enableNotification": {
         "title": "Don't miss your daily ticket!",
         "link": "Enable notifications",
