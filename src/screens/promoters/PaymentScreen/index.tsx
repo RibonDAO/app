@@ -14,6 +14,7 @@ import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import { logEvent } from "services/analytics";
 import GooglePaySection from "screens/promoters/PaymentScreen/GooglePaySection";
+import ApplePaySection from "screens/promoters/PaymentScreen/ApplePaySection";
 import SelectPaymentMethodSection from "screens/promoters/PaymentScreen/SelectPaymentMethodSection";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
@@ -76,6 +77,10 @@ function PaymentScreen(): JSX.Element {
     if (paymentMethod === "googlePay")
       return (
         <GooglePaySection offer={offer} cause={cause} nonProfit={nonProfit} />
+      );
+    if (paymentMethod === "applePay")
+      return (
+        <ApplePaySection offer={offer} cause={cause} nonProfit={nonProfit} />
       );
     if (isUserSection()) return <UserInfoSection />;
 

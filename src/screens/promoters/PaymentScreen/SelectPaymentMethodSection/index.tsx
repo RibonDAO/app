@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import RadioButton from "components/moleculars/RadioButton";
 import CardIcon from "assets/images/payments/card-icon.png";
 import GooglePayIcon from "assets/images/payments/google-pay-icon.png";
+import ApplePayIcon from "assets/images/payments/apple-pay-icon.png";
 import { useTranslation } from "react-i18next";
 import styles from "../styles";
 
@@ -20,6 +21,12 @@ function SelectPaymentMethodSection({ onOptionChanged }: Props) {
       value: "googlePay",
       id: 2,
       icon: GooglePayIcon,
+    },
+    {
+      name: "Apple Pay",
+      value: "applePay",
+      id: 2,
+      icon: ApplePayIcon,
     },
   ];
 

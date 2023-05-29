@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import {
   ApplePayButton,
   useApplePay,
@@ -44,7 +44,8 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
     });
 
     if (error) {
-      console.log(error.code, error.message);
+      console.log("error,", error.code, error.message);
+      hideLoadingOverlay();
     } else if (paymentMethod) {
       const { email, name, address } = paymentMethod.billingDetails;
       const integrationId = RIBON_INTEGRATION_ID;
@@ -80,14 +81,11 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
 
   return (
     <View>
-      <View>
-        <Text>{JSON.stringify(cart, null, 2)}</Text>
-      </View>
       {isApplePaySupported && (
         <View>
           <ApplePayButton
             onPress={pay}
-            type="plain"
+            type="donate"
             buttonStyle="black"
             borderRadius={4}
             style={S.payButton}

@@ -58,7 +58,7 @@ function CardScreen(): JSX.Element {
   };
 
   const handleDonateClick = () => {
-    if (Platform.OS === "ios") {
+    if (Platform.OS === "ios" && false) {
       Linking.openURL("https://dapp.ribon.io/promoters/support-cause");
     } else {
       setFlow("cause");
@@ -100,9 +100,8 @@ function CardScreen(): JSX.Element {
 
   if (!currentOffer || loading) return <View />;
 
-  const preSelectedIndex = () => causeCrypto
-      ? causesFilter().findIndex((c) => c.id === causeCrypto?.id)
-      : 0;
+  const preSelectedIndex = () =>
+    causeCrypto ? causesFilter().findIndex((c) => c.id === causeCrypto?.id) : 0;
 
   return (
     <ScrollView
