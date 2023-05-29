@@ -107,6 +107,12 @@ export default function TasksSection() {
     }, []),
   );
 
+  useEffect(() => {
+    if (index === 0) {
+      reload();
+    }
+  }, [index]);
+
   const { integration } = useIntegration(RIBON_INTEGRATION_ID);
 
   const linkToIntegration = () => {
@@ -199,6 +205,7 @@ export default function TasksSection() {
                   <Image
                     style={S.integrationIcon}
                     source={{ uri: integration?.logo ?? "" }}
+                    accessibilityIgnoresInvertColors={false}
                   />
                 </View>
               </View>

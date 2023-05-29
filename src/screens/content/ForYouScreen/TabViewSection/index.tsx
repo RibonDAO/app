@@ -43,7 +43,11 @@ const renderScene = SceneMap({
   NewsSectionTabView,
 });
 
-function TabViewSection(): JSX.Element {
+export type TabViewSectionProps = {
+  initialTabIndex?: number;
+};
+
+function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "content",
   });
@@ -53,6 +57,14 @@ function TabViewSection(): JSX.Element {
   const { registerAction, hasCompletedATask, tasksState } = useTasksContext();
 
   const { index, setIndex } = useForYouTabsContext();
+
+  useEffect(() => {
+    if (initialTabIndex) {
+      setTimeout(() => {
+        setIndex(initialTabIndex);
+      }, 500);
+    }
+  }, [initialTabIndex]);
 
   const [routes] = useState([
     { key: "TasksSectionTabView", title: t("tasksSectionTitle") },
