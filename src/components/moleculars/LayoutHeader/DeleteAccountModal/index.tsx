@@ -12,7 +12,6 @@ type Props = {
 
 function DeleteAccountModal({ visible, setVisible }: Props): JSX.Element {
   const [emailSent, setEmailSent] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { logoutCurrentUser } = useCurrentUser();
   const { sendDeleteAccountEmail } = useUsers();
 
@@ -30,12 +29,9 @@ function DeleteAccountModal({ visible, setVisible }: Props): JSX.Element {
   };
 
   const sendEmail = () => {
-    setLoading(true);
-    sendDeleteAccountEmail().then(() => {
-      setEmailSent(true);
-      setLoading(false);
-      logoutCurrentUser();
-    });
+    setEmailSent(true);
+    logoutCurrentUser();
+    sendDeleteAccountEmail();
   };
 
   const { t } = useTranslation("translation", {
@@ -50,7 +46,6 @@ function DeleteAccountModal({ visible, setVisible }: Props): JSX.Element {
     primaryButton: {
       text: t("confirm"),
       onPress: sendEmail,
-      disabled: loading,
     },
     secondaryButton: {
       text: t("cancel"),
