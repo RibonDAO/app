@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button, {
   Props as ButtonProps,
 } from "components/atomics/buttons/Button";
@@ -9,7 +9,8 @@ import Modal from "react-native-modal";
 import * as S from "./styles";
 
 export type Props = {
-  visible?: boolean;
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
   type?: string | null;
   title?: string | null;
   description?: string | JSX.Element | null;
@@ -21,7 +22,8 @@ export type Props = {
 };
 
 function ModalDialog({
-  visible = true,
+  visible,
+  setVisible,
   title = null,
   description = null,
   children = null,
@@ -31,18 +33,18 @@ function ModalDialog({
   icon,
   iconColor,
 }: Props): JSX.Element {
-  const [isVisible, setIsVisible] = useState(visible);
-
   const handleCloseModal = () => {
-    setIsVisible(false);
+    setVisible(false);
   };
 
   const iosProps =
     Platform.OS === "ios"
-      ? { animationInTiming: 200, animationOutTiming: 200 }
+      ? { animationInTiming: 500, animationOutTiming: 500 }
       : {};
 
   const modalIcon = () => {
+    if (icon) return icon;
+
     switch (type) {
       case "error":
         return "report";
@@ -106,9 +108,11 @@ function ModalDialog({
 
   return (
     <Modal
-      isVisible={isVisible}
-      animationIn="zoomIn"
-      animationOut="zoomOut"
+      isVisible={visible}
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
+      hasBackdrop
+      backdropOpacity={0.5}
       style={{ margin: 0, justifyContent: "flex-end" }}
       {...iosProps}
     >
@@ -154,6 +158,7 @@ function ModalDialog({
             backgroundColor={theme.colors.neutral10}
             onPress={secondaryButton.onPress}
             borderColor={theme.colors.neutral[600]}
+            customStyles={S.default.button}
           />
         )}
 
