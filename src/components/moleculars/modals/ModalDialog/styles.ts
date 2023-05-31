@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: theme.spacingNative(8),
+    height: 48,
   },
 });
 
