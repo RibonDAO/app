@@ -26,7 +26,7 @@
       "close": "Close",
       "confirm": "Receive e-mail",
       "emailSentTitle": "E-mail sent!",
-      "emailSentDescription": "We sent you an e-mail with instructions to delete your account."
+      "emailSentDescription": "We sent you an e-mail with instructions to delete your account. If you don't receive it, please check your promotions/spam folder."
     },
     "disconnectWallet": "Disconnect wallet",
     "cancel": "cancel",

@@ -26,7 +26,7 @@
       "close": "Fechar",
       "confirm": "Receber e-mail",
       "emailSentTitle": "E-mail enviado",
-      "emailSentDescription": "Você receberá um e-mail com o link para excluir sua conta em breve."
+      "emailSentDescription": "Você receberá um e-mail com o link para excluir sua conta em breve. Se você não receber, por favor, verifique sua caixa de promoções/spam."
     },
     "disconnectWallet": "Desconectar carteira",
     "cancel": "cancelar",

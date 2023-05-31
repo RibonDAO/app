@@ -3,7 +3,6 @@ import ModalDialog from "components/moleculars/modals/ModalDialog";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { DevSettings } from "react-native";
 
 type Props = {
   visible: boolean;
@@ -15,17 +14,12 @@ function DeleteAccountModal({ visible, setVisible }: Props): JSX.Element {
   const { logoutCurrentUser } = useCurrentUser();
   const { sendDeleteAccountEmail } = useUsers();
 
-  const restartApp = () => {
-    DevSettings.reload();
-  };
-
   const dispose = () => {
     setVisible(false);
   };
 
   const disposeAndLogout = () => {
     dispose();
-    restartApp();
   };
 
   const sendEmail = () => {
