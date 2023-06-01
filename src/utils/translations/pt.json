@@ -12,11 +12,21 @@
     "login": "Fazer login",
     "notifications": "Ativar notificações",
     "language": "Alterar idioma",
+    "deleteAccount": "Excluir conta",
     "connectWallet": "Conectar",
     "ticketModal": {
       "title": "Legal! Você tem 1 vale para doar :)",
       "description": "Você pode destiná-lo para qualquer projeto",
       "buttonText": "Vamos lá!"
+    },
+    "deleteAccountModal": {
+      "title": "Confirmar exclusão de conta",
+      "description": "Você sairá do app automaticamente e receberá um e-mail de exclusão de conta para continuar com o processo.",
+      "cancel": "Cancelar",
+      "close": "Fechar",
+      "confirm": "Receber e-mail",
+      "emailSentTitle": "E-mail enviado",
+      "emailSentDescription": "Você receberá um e-mail com o link para excluir sua conta em breve. Se você não receber, por favor, verifique sua caixa de promoções/spam."
     },
     "disconnectWallet": "Desconectar carteira",
     "cancel": "cancelar",

@@ -12,11 +12,21 @@
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0",
     "login": "Login",
     "language": "Change language",
+    "deleteAccount": "Delete account",
     "connectWallet": "Connect",
     "ticketModal": {
       "title": "Cool! You have 1 ticket to donate :)",
       "description": "You can use to donate to any project",
       "buttonText": "Let's go!"
+    },
+    "deleteAccountModal": {
+      "title": "Confirm account deletion",
+      "description": "You will be signed out automatically and receive an account deletion e-mail to proceed with your request.",
+      "cancel": "Cancel",
+      "close": "Close",
+      "confirm": "Receive e-mail",
+      "emailSentTitle": "E-mail sent!",
+      "emailSentDescription": "We sent you an e-mail with instructions to delete your account. If you don't receive it, please check your promotions/spam folder."
     },
     "disconnectWallet": "Disconnect wallet",
     "cancel": "cancel",
