@@ -104,7 +104,7 @@ function PaymentScreen(): JSX.Element {
       <ScrollView contentContainerStyle={styles.mainContainer}>
         <View style={styles.innerContainer}>
           <MaskedWaveCut
-            image={nonProfit?.mainImage || cause?.mainImage}
+            image={nonProfit?.backgroundImage || cause?.coverImage}
             imageStyles={styles.image}
           />
           <View style={styles.contentContainer}>

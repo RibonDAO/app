@@ -21,7 +21,10 @@ export default function ContributionDoneScreen(): JSX.Element {
 
   return (
     <DoneScreenTemplate
-      image={nonProfit?.mainImage || cause?.mainImage}
+      image={nonProfit?.confirmationImageDescription || cause?.mainImage}
+      imageDescription={
+        nonProfit?.confirmationImageDescription || cause?.mainImageDescription
+      }
       title={t("title") || ""}
       description={`${t("description")}`}
       highlightedDescription={nonProfit?.name || cause?.name}
