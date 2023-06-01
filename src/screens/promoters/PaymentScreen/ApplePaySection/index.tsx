@@ -24,10 +24,11 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
     {
       label: "Total",
       amount: offer.priceValue.toString(),
-      isPending: true,
+      isPending: false,
       paymentType: "Immediate",
     },
   ]);
+
   const { registerAction } = useTasksContext();
   const { presentApplePay, isApplePaySupported } = useApplePay();
   const { navigateTo } = useNavigation();

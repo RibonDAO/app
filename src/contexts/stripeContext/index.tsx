@@ -18,7 +18,7 @@ function StripeProvider({ children }: Props) {
   const publishableKey =
     "pk_test_51JRgaRJuOnwQq9Qx2RrybIhE1vRgC5tNd32EJkINCTmgGZYSr3QXne9y5CAdEq36WULJPmWv2VvZZ0xA5MNTrY7C00KL9rq6Op";
   const urlScheme = "ribon";
-  const merchantIdentifier = "";
+  const merchantIdentifier = "merchant.ribon.app";
 
   return (
     <StripeContext.Provider value={stripeObject}>

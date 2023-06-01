@@ -88,7 +88,7 @@ export default () => ({
       [
         "@stripe/stripe-react-native",
         {
-          "merchantIdentifier": "",
+          "merchantIdentifier": "merchant.ribon.app",
           "enableGooglePay": true
         }
       ],
