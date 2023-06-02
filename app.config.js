@@ -73,6 +73,7 @@ export default () => ({
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
       "@react-native-firebase/crashlytics",
+      "@config-plugins/detox",
       [
         "@config-plugins/react-native-branch",
         {
