@@ -26,4 +26,17 @@ describe("Example", () => {
     await element(by.text("What is a ticket?")).tap();
     await expect(element(by.text("Tickets are used to make donations. You get one everyday when you sign in."))).toBeVisible();
   });
+
+  it("goes to impact page", async () => {
+    await element(by.text("Impact")).tap();
+    await expect(element(by.text("Horas da Vida"))).toBeVisible();
+    await expect(element(by.text("Amor em Patas"))).toBeVisible();
+  });
+
+  it("goes donates", async () => {
+    await element(by.text("Donate")).atIndex(0).tap();
+    await element(by.text("Donate")).atIndex(0).tap();
+
+    await waitFor(element(by.text("If you want, you can do more"))).toBeVisible().withTimeout(5000)
+  });
 });
