@@ -35,7 +35,11 @@ function CardCenterImageButton({
     <View style={S.container}>
       <View style={S.cardWrapper}>
         <View style={S.containerImage}>
-          <TouchableOpacity onPress={onImagePress} activeOpacity={0.8}>
+          <TouchableOpacity
+            accessibilityRole="button"
+            onPress={onImagePress}
+            activeOpacity={0.8}
+          >
             {labelText && (
               <View style={S.labelContainer}>
                 <Icon
@@ -47,11 +51,19 @@ function CardCenterImageButton({
                 <Text style={S.label}>{labelText}</Text>
               </View>
             )}
-            <Image style={S.cardImage} source={{ uri: image }} />
+            <Image
+              style={S.cardImage}
+              source={{ uri: image }}
+              accessibilityIgnoresInvertColors
+            />
           </TouchableOpacity>
           <Text style={S.imageDescription}>{imageDescription}</Text>
           <LinearGradient
-            colors={["transparent", "rgba(40, 36, 28, 0.4)", "rgba(40, 36, 28, 0.8)"]}
+            colors={[
+              "transparent",
+              "rgba(40, 36, 28, 0.4)",
+              "rgba(40, 36, 28, 0.8)",
+            ]}
             style={S.darkStroke}
           />
         </View>
@@ -77,7 +89,10 @@ function CardCenterImageButton({
             onPress={onClickButton}
             text={buttonText}
             disabled={buttonDisabled}
-            customStyles={S.button}
+            customStyles={{
+              ...S.button,
+              ...(buttonDisabled ? S.disabledButton : {}),
+            }}
           />
         </View>
       </View>

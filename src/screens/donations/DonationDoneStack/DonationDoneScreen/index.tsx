@@ -33,7 +33,10 @@ export default function DonationDoneScreen({
 
   return (
     <DoneScreenTemplate
-      image={nonProfit.mainImage}
+      image={nonProfit.confirmationImage || nonProfit.mainImage}
+      imageDescription={
+        nonProfit.confirmationImageDescription || nonProfit.mainImageDescription
+      }
       title={t("title") || ""}
       description={t("description") || ""}
       highlightedDescription={formattedImpactText(

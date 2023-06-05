@@ -13,6 +13,7 @@ type Props = {
   highlightedDescription?: string | JSX.Element;
   buttonTitle?: string;
   onButtonPress?: () => void;
+  imageDescription?: string;
 };
 export default function DoneScreenTemplate({
   image,
@@ -21,12 +22,11 @@ export default function DoneScreenTemplate({
   description,
   highlightedDescription,
   onButtonPress,
+  imageDescription,
 }: Props) {
   return (
     <View style={S.container}>
-      <View
-        style={S.animationContainer}
-      >
+      <View style={S.animationContainer}>
         <View style={S.diamondBackground}>
           <LottieAnimation
             animationData={BackgroundAnimation}
@@ -36,7 +36,15 @@ export default function DoneScreenTemplate({
           />
         </View>
         <View style={S.diamond}>
-          {image && <Image style={S.cardImage} source={{ uri: image }} />}
+          {image && (
+            <Image
+              style={S.cardImage}
+              source={{ uri: image }}
+              accessibilityIgnoresInvertColors={false}
+              accessibilityHint=""
+              accessibilityLabel={imageDescription || ""}
+            />
+          )}
         </View>
       </View>
       {title && <Text style={S.title}>{title}</Text>}

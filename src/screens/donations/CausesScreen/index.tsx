@@ -232,7 +232,7 @@ export default function CausesScreen() {
                   undefined,
                   t("impactPrefix") || "",
                 )}
-                buttonText={t("buttonText")}
+                buttonText={hasTickets() ? t("buttonText") : t("noTickets")}
                 onImagePress={() => {
                   handleNonProfitImagePress(nonProfit);
                 }}

@@ -6,7 +6,12 @@ import ModalDialog from ".";
 describe("ModalDialog", () => {
   it("should render without error", async () => {
     await renderComponentAsync(
-      <ModalDialog title="Modal" description="carregando..." visible />,
+      <ModalDialog
+        title="Modal"
+        description="carregando..."
+        visible
+        setVisible={() => {}}
+      />,
     );
     expectTextToBeInTheDocument("carregando...");
   });

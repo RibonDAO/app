@@ -12,11 +12,21 @@
     "login": "Fazer login",
     "notifications": "Ativar notificações",
     "language": "Alterar idioma",
+    "deleteAccount": "Excluir conta",
     "connectWallet": "Conectar",
     "ticketModal": {
       "title": "Legal! Você tem 1 vale para doar :)",
       "description": "Você pode destiná-lo para qualquer projeto",
       "buttonText": "Vamos lá!"
+    },
+    "deleteAccountModal": {
+      "title": "Confirmar exclusão de conta",
+      "description": "Você sairá do app automaticamente e receberá um e-mail de exclusão de conta para continuar com o processo.",
+      "cancel": "Cancelar",
+      "close": "Fechar",
+      "confirm": "Receber e-mail",
+      "emailSentTitle": "E-mail enviado",
+      "emailSentDescription": "Você receberá um e-mail com o link para excluir sua conta em breve. Se você não receber, por favor, verifique sua caixa de promoções/spam."
     },
     "disconnectWallet": "Desconectar carteira",
     "cancel": "cancelar",
@@ -26,6 +36,7 @@
     "causesScreen": {
       "title": "Doe para um projeto",
       "buttonText": "Doar ticket",
+      "noTickets": "Sem tickets",
       "allCauses": "Todas",
       "enableNotification": {
         "title": "Não perca seu ticket diário!",
@@ -244,7 +255,7 @@
       "directDonationsTitle": "Doações Diretas",
       "impactNotification": {
         "title": "Vamos importar o seu impacto em breve!",
-        "description": "Suas doações em ribons da plataforma antiga irão ser importados em breve para o seu perfil.",
+        "description": "Suas doações em ribons da plataforma antiga irão ser importadas em breve para o seu perfil.",
         "link": "Não mostrar novamente"
       }
     }
