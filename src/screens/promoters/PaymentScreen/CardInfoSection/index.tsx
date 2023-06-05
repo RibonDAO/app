@@ -2,7 +2,6 @@ import InputText from "components/atomics/inputs/InputText";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { maskToCreditCard, maskToExpirationDate } from "@ribon.io/shared/lib";
-import getThemeByFlow from "lib/themeByFlow";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -27,7 +26,6 @@ function CardInfoSection() {
     cvv,
     setCvv,
     setButtonDisabled,
-    flow,
   } = useCardPaymentInformation();
 
   const { currentUser } = useCurrentUser();
@@ -40,23 +38,15 @@ function CardInfoSection() {
     setNumber(maskToCreditCard(value));
   };
 
-  const colorTheme = getThemeByFlow(flow);
-
   useEffect(() => {
     setButtonDisabled(
       !(email && number && name && expirationDate && cvv.length >= 3),
     );
   }, [email, number, name, expirationDate, cvv]);
 
-  const inputStyles = {
-    borderColor: colorTheme.shade40,
-    color: colorTheme.shade20,
-  };
-
   return (
     <View style={S.container}>
       <InputText
-        style={inputStyles}
         name="email"
         placeholder={t("email")}
         value={email}
@@ -66,7 +56,6 @@ function CardInfoSection() {
         autoCapitalize="none"
       />
       <InputText
-        style={inputStyles}
         name="number"
         placeholder={t("cardNumber")}
         value={number}
@@ -75,7 +64,6 @@ function CardInfoSection() {
         keyboardType="numeric"
       />
       <InputText
-        style={inputStyles}
         name="name"
         placeholder={t("cardName")}
         value={name}
@@ -83,7 +71,6 @@ function CardInfoSection() {
       />
       <View style={S.half}>
         <InputText
-          style={inputStyles}
           name="expirationDate"
           value={expirationDate}
           placeholder={t("cardDueDate")}
@@ -93,7 +80,6 @@ function CardInfoSection() {
           containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
         />
         <InputText
-          style={inputStyles}
           name="cvv"
           placeholder={t("cvv")}
           maxLength={4}

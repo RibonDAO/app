@@ -1,25 +1,60 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import {
+  defaultBodySmMedium,
+  defaultBodyXsRegular,
+} from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {},
-  input: {
+  inputContainer: {
     width: "100%",
     marginBottom: theme.spacingNative(12),
     padding: theme.spacingNative(8),
     borderWidth: 1,
-    borderColor: theme.colors.brand.primary[300],
-    borderRadius: 8,
+    borderColor: theme.colors.neutral[400],
+    borderRadius: 4,
     height: 48,
+    color: theme.colors.neutral[900],
+  },
+  iconInput: {
+    position: "absolute",
+    right: 0,
+    padding: theme.spacingNative(12),
+  },
+  input: {},
+  inputActive: {
+    borderColor: theme.colors.neutral[600],
+    borderWidth: 2,
+  },
+  inputSuccess: {
+    borderColor: theme.colors.brand.primary[600],
+  },
+  inputError: {
+    borderColor: theme.colors.feedback.error[600],
   },
   inputDisabled: {
-    width: "100%",
-    marginBottom: theme.spacingNative(12),
-    padding: theme.spacingNative(8),
-    height: 48,
-    borderWidth: 1,
     borderColor: theme.colors.neutral[500],
-    borderRadius: 8,
+    backgroundColor: "#F1F1EF",
+    color: theme.colors.neutral[400],
+  },
+  label: {
+    ...defaultBodySmMedium,
+    marginBottom: theme.spacingNative(4),
+    color: theme.colors.neutral[700],
+  },
+  labelDisabled: {
+    color: theme.colors.neutral[500],
+  },
+  feedback: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: theme.spacingNative(4),
+  },
+  errorMessage: {
+    ...defaultBodyXsRegular,
+    color: theme.colors.feedback.error[600],
   },
 });
 

@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "contexts/languageContext";
 import { maskForTaxId } from "@ribon.io/shared/lib";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
-import getThemeByFlow from "lib/themeByFlow";
 import InputText from "components/atomics/inputs/InputText";
 import { View } from "react-native";
 import S from "screens/promoters/PaymentScreen/UserInfoSection/styles";
@@ -16,10 +15,6 @@ import {
   countryCodeByLanguage,
 } from "lib/countryByLanguage";
 import { Languages } from "types/enums/Languages";
-import {
-  BRstates,
-  USAstates,
-} from "screens/promoters/PaymentScreen/UserInfoSection/federationStates";
 import { theme } from "@ribon.io/shared/styles";
 
 function UserInfoSection(): JSX.Element {
@@ -29,7 +24,6 @@ function UserInfoSection(): JSX.Element {
   });
   const { currentLang } = useLanguage();
   const {
-    country,
     setCountry,
     state,
     setState,
@@ -38,7 +32,6 @@ function UserInfoSection(): JSX.Element {
     taxId,
     setTaxId,
     setButtonDisabled,
-    flow,
   } = useCardPaymentInformation();
 
   const [currentCountryCode, setCurrentCountryCode] = useState(
@@ -53,7 +46,6 @@ function UserInfoSection(): JSX.Element {
     return countryName === t("brazilName");
   }
 
-  const colorTheme = getThemeByFlow(flow);
   const [brazilFormatForTaxId, setBrazilFormatForTaxId] = useState(true);
 
   const maxTaxIdLength = () => (brazilFormatForTaxId ? 14 : 11);
@@ -68,20 +60,9 @@ function UserInfoSection(): JSX.Element {
     setBrazilFormatForTaxId(isBrazil(selectedCountry.name as string));
   };
 
-  const federationStates = useCallback(() => {
-    if (isBrazil(country)) return BRstates;
-
-    return USAstates;
-  }, [country]);
-
   useEffect(() => {
     setButtonDisabled(!(state && city && taxId.length === maxTaxIdLength()));
   }, [state, city, taxId]);
-
-  const inputStyles = {
-    borderColor: colorTheme.shade40,
-    color: colorTheme.shade20,
-  };
 
   return (
     <View style={S.container}>
@@ -96,19 +77,16 @@ function UserInfoSection(): JSX.Element {
         filterProps={{ placeholder: t("searchCountryPlaceholder") || "" }}
         containerButtonStyle={[
           S.countryInputContainer,
-          { borderColor: colorTheme.shade40 },
+          { borderColor: theme.colors.neutral[400] },
         ]}
         theme={{
           ...S.countryInputTheme,
-          primaryColor: colorTheme.shade20,
-          primaryColorVariant: colorTheme.shade20,
-          filterPlaceholderTextColor: colorTheme.shade20,
-          onBackgroundTextColor: colorTheme.shade40,
+          filterPlaceholderTextColor: theme.colors.neutral[900],
+          onBackgroundTextColor: theme.colors.neutral[900],
         }}
       />
       <View style={S.halfInputContainer}>
         <InputText
-          style={inputStyles}
           name={city}
           placeholder={t("city")}
           value={city}
@@ -117,7 +95,6 @@ function UserInfoSection(): JSX.Element {
           autoFocus
         />
         <InputText
-          style={inputStyles}
           name={state}
           placeholder={t("state")}
           value={state}
@@ -126,7 +103,6 @@ function UserInfoSection(): JSX.Element {
         />
       </View>
       <InputText
-        style={inputStyles}
         name={taxId}
         placeholder={t("taxId")}
         value={taxId}
