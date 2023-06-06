@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   container: {},
   inputContainer: {
     width: "100%",
-    marginBottom: theme.spacingNative(12),
     padding: theme.spacingNative(8),
     borderWidth: 1,
     borderColor: theme.colors.neutral[400],
@@ -22,7 +21,27 @@ const styles = StyleSheet.create({
     right: 0,
     padding: theme.spacingNative(12),
   },
-  input: {},
+  rightIcon: {
+    position: "absolute",
+    right: 0,
+    padding: theme.spacingNative(12),
+  },
+  leftIcon: {
+    position: "absolute",
+    left: 0,
+    padding: theme.spacingNative(12),
+  },
+  labelIcon: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  required: {
+    color: theme.colors.feedback.error[600],
+  },
+  input: {
+    paddingLeft: theme.spacingNative(32),
+  },
   inputActive: {
     borderColor: theme.colors.neutral[600],
     borderWidth: 2,
@@ -42,9 +61,14 @@ const styles = StyleSheet.create({
     ...defaultBodySmMedium,
     marginBottom: theme.spacingNative(4),
     color: theme.colors.neutral[700],
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
   },
-  labelDisabled: {
-    color: theme.colors.neutral[500],
+  labelDisabled: {},
+  iconError: {
+    marginRight: theme.spacingNative(4),
   },
   feedback: {
     display: "flex",
@@ -52,6 +76,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: theme.spacingNative(4),
   },
+  helper: {
+    ...defaultBodyXsRegular,
+    color: theme.colors.neutral[600],
+  },
+
   errorMessage: {
     ...defaultBodyXsRegular,
     color: theme.colors.feedback.error[600],

@@ -17,6 +17,12 @@ export interface Props extends Omit<TextInputProps, "placeholder"> {
   errorMessage?: string;
   status?: string;
   containerStyle?: ViewStyle;
+  helper?: string;
+  required?: boolean;
+  leftIcon?: any;
+  rightIcon?: any;
+  label?: string;
+  labelIcon?: any;
 }
 
 function InputText({
@@ -30,6 +36,12 @@ function InputText({
   errorMessage,
   status,
   containerStyle,
+  helper,
+  required,
+  leftIcon,
+  rightIcon,
+  labelIcon,
+  label,
   ...rest
 }: Props): JSX.Element {
   const [isActive, setIsActive] = useState(false);
@@ -56,9 +68,20 @@ function InputText({
 
   return (
     <View style={[S.container, containerStyle]}>
-      <Text style={[disabled ? S.labelDisabled : S.label, S.label]}>
-        {placeholder}
-      </Text>
+      <View style={S.labelIcon}>
+        <Text style={[disabled ? S.labelDisabled : S.label, S.label]}>
+          {required && <Text style={S.required}>*</Text>}
+          {label}{" "}
+        </Text>
+        {labelIcon && (
+          <Icon
+            type="rounded"
+            name={labelIcon}
+            size={20}
+            color={theme.colors.neutral[600]}
+          />
+        )}
+      </View>
       <View style={[S.inputContainer, customInputStyle()]}>
         {status === "success" && (
           <Icon
@@ -67,6 +90,24 @@ function InputText({
             size={20}
             color={theme.colors.feedback.success[600]}
             style={S.iconInput}
+          />
+        )}
+        {leftIcon && (
+          <Icon
+            type="rounded"
+            name={leftIcon}
+            size={20}
+            color={theme.colors.neutral[600]}
+            style={S.leftIcon}
+          />
+        )}
+        {rightIcon && (
+          <Icon
+            type="rounded"
+            name={rightIcon}
+            size={20}
+            color={theme.colors.neutral[600]}
+            style={S.rightIcon}
           />
         )}
         <TextInput
@@ -80,7 +121,7 @@ function InputText({
           onChangeText={onChangeText}
           editable={!disabled}
           selectTextOnFocus={!disabled}
-          style={S.input}
+          style={rightIcon ? S.input : null}
           onFocus={() => setIsActive(true)}
           onBlur={() => setIsActive(false)}
           {...rest}
@@ -93,9 +134,23 @@ function InputText({
             name="dangerous"
             size={20}
             color={theme.colors.feedback.error[600]}
+            style={S.iconError}
           />
 
           <Text style={S.errorMessage}>{errorMessage}</Text>
+        </View>
+      )}
+      {helper && (
+        <View style={S.feedback}>
+          <Icon
+            type="rounded"
+            name="error"
+            size={20}
+            color={theme.colors.neutral[600]}
+            style={S.iconError}
+          />
+
+          <Text style={S.helper}>{helper}</Text>
         </View>
       )}
     </View>
