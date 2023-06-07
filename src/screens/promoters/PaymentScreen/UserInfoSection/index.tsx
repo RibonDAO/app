@@ -24,6 +24,7 @@ function UserInfoSection(): JSX.Element {
   });
   const { currentLang } = useLanguage();
   const {
+    country,
     setCountry,
     state,
     setState,
@@ -38,9 +39,8 @@ function UserInfoSection(): JSX.Element {
     countryCodeByLanguage(currentLang),
   );
 
-  useEffect(() => {
-    setCountry(countryByLanguage(currentLang));
-  }, []);
+  const currentContry = countryByLanguage(currentLang);
+  setCountry(currentContry);
 
   function isBrazil(countryName: string) {
     return countryName === t("brazilName");
@@ -49,10 +49,6 @@ function UserInfoSection(): JSX.Element {
   const [brazilFormatForTaxId, setBrazilFormatForTaxId] = useState(true);
 
   const maxTaxIdLength = () => (brazilFormatForTaxId ? 14 : 11);
-
-  const handleChangeMask = (value: string) => {
-    setTaxId(maskForTaxId(value, brazilFormatForTaxId));
-  };
 
   const handleCountryChange = (selectedCountry: Country) => {
     setCountry(selectedCountry.name as string);
@@ -105,8 +101,9 @@ function UserInfoSection(): JSX.Element {
       <InputText
         name={taxId}
         placeholder={t("taxId")}
+        mask={maskForTaxId(country, currentLang)}
         value={taxId}
-        onChangeText={handleChangeMask}
+        onChangeText={(value) => setTaxId(value)}
         maxLength={maxTaxIdLength()}
         keyboardType="numeric"
       />

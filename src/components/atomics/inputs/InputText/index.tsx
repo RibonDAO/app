@@ -3,6 +3,7 @@ import { View, ViewStyle } from "react-native";
 import { KeyboardType, TextInput, TextInputProps, Text } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
+import { MaskedTextInput } from "react-native-mask-text";
 import S from "./styles";
 
 export interface Props extends Omit<TextInputProps, "placeholder"> {
@@ -12,7 +13,7 @@ export interface Props extends Omit<TextInputProps, "placeholder"> {
   placeholder?: string | null;
   maxLength?: number;
   disabled?: boolean;
-  onChangeText?: (text: string) => void;
+  onChangeText: (text: string) => void;
   ref?: RefObject<TextInput>;
   errorMessage?: string;
   status?: string;
@@ -23,6 +24,7 @@ export interface Props extends Omit<TextInputProps, "placeholder"> {
   rightIcon?: any;
   label?: string;
   labelIcon?: any;
+  mask?: string;
 }
 
 function InputText({
@@ -42,6 +44,7 @@ function InputText({
   rightIcon,
   labelIcon,
   label,
+  mask,
   ...rest
 }: Props): JSX.Element {
   const [isActive, setIsActive] = useState(false);
@@ -110,22 +113,42 @@ function InputText({
             style={S.rightIcon}
           />
         )}
-        <TextInput
-          ref={rest.ref}
-          placeholder={placeholder || ""}
-          placeholderTextColor={theme.colors.neutral[500]}
-          keyboardType={keyboardType}
-          aria-label={name}
-          value={value}
-          maxLength={maxLength}
-          onChangeText={onChangeText}
-          editable={!disabled}
-          selectTextOnFocus={!disabled}
-          style={rightIcon ? S.input : null}
-          onFocus={() => setIsActive(true)}
-          onBlur={() => setIsActive(false)}
-          {...rest}
-        />
+        {mask ? (
+          <MaskedTextInput
+            ref={rest.ref}
+            mask={mask ?? ""}
+            placeholder={placeholder || ""}
+            placeholderTextColor={theme.colors.neutral[500]}
+            keyboardType={keyboardType || "default"}
+            aria-label={name}
+            value={value}
+            maxLength={maxLength}
+            onChangeText={onChangeText}
+            editable={!disabled}
+            selectTextOnFocus={!disabled}
+            style={rightIcon ? S.input : null}
+            onFocus={() => setIsActive(true)}
+            onBlur={() => setIsActive(false)}
+            {...rest}
+          />
+        ) : (
+          <TextInput
+            ref={rest.ref}
+            placeholder={placeholder || ""}
+            placeholderTextColor={theme.colors.neutral[500]}
+            keyboardType={keyboardType || "default"}
+            aria-label={name}
+            value={value}
+            maxLength={maxLength}
+            onChangeText={onChangeText}
+            editable={!disabled}
+            selectTextOnFocus={!disabled}
+            style={rightIcon ? S.input : null}
+            onFocus={() => setIsActive(true)}
+            onBlur={() => setIsActive(false)}
+            {...rest}
+          />
+        )}
       </View>
       {errorMessage && status === "error" && (
         <View style={S.feedback}>

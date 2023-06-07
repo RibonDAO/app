@@ -1,7 +1,6 @@
 import InputText from "components/atomics/inputs/InputText";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { maskToCreditCard, maskToExpirationDate } from "@ribon.io/shared/lib";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -30,14 +29,6 @@ function CardInfoSection() {
 
   const { currentUser } = useCurrentUser();
 
-  const maskExpiration = (value: string) => {
-    setExpirationDate(maskToExpirationDate(value));
-  };
-
-  const maskCreditCard = (value: string) => {
-    setNumber(maskToCreditCard(value));
-  };
-
   useEffect(() => {
     setButtonDisabled(
       !(email && number && name && expirationDate && cvv.length >= 3),
@@ -58,8 +49,9 @@ function CardInfoSection() {
       <InputText
         name="number"
         placeholder={t("cardNumber")}
+        mask="9999 9999 9999 9999"
         value={number}
-        onChangeText={maskCreditCard}
+        onChangeText={(value) => setNumber(value)}
         maxLength={19}
         keyboardType="numeric"
       />
@@ -74,7 +66,9 @@ function CardInfoSection() {
           name="expirationDate"
           value={expirationDate}
           placeholder={t("cardDueDate")}
-          onChangeText={maskExpiration}
+          mask="99/9999"
+          autoComplete="cc-exp"
+          onChangeText={(value) => setExpirationDate(value)}
           maxLength={7}
           keyboardType="numeric"
           containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
