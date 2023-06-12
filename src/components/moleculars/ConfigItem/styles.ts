@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.neutral[200],
     borderBottomWidth: 2,
   },
+  lastConfigItem: {
+    borderBottomWidth: 0,
+  },
   text: {
     paddingLeft: theme.spacingNative(8),
   },

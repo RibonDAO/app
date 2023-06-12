@@ -2626,10 +2626,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.0.56":
-  version "1.0.56"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.56.tgz#18b6d6781d87943ba242e5a13213b59911a168e3"
-  integrity sha512-9dXt6L7vYjLpDVP2ndkBsRoFvSthH501aFzImQOA5sRXL7TxPQN1o9ruZW9AYt1oFXobvulDMpY1w1aj9aHwpg==
+"@ribon.io/shared@^1.0.61":
+  version "1.0.61"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.61.tgz#1d771c40f6413b9b64a590f57dd42e4b09a89655"
+  integrity sha512-O7Qf8ZXaHOGSOiA+6RpME79oXqwca85WgxbddUry8y/0r0IXLCkZRXsHZE3ON165mg9kLNAHfFvoZmvGm94UGA==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
