@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import GooglePayLogo from "assets/images/payments/google-pay-logo.png";
 import { theme } from "@ribon.io/shared/styles";
 import { logError } from "services/crashReport";
-import googlePayApi from "services/api/googlePayApi";
+import storePayApi from "services/api/storePayApi";
 import S from "./styles";
 
 type Props = {
@@ -88,10 +88,11 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         integrationId,
         causeId: cause?.id,
         nonProfitId: nonProfit?.id,
+        paymentMethodType: "google_pay",
       };
 
       try {
-        await googlePayApi.postGooglePay(data);
+        await storePayApi.postStorePay(data);
         registerAction("contribution_done_screen_view");
 
         navigateTo("ContributionDoneScreen", {

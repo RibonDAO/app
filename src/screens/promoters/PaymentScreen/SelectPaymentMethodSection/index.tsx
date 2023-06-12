@@ -25,7 +25,7 @@ function SelectPaymentMethodSection({ onOptionChanged }: Props) {
     {
       name: "Apple Pay",
       value: "applePay",
-      id: 2,
+      id: 3,
       icon: ApplePayIcon,
     },
   ];

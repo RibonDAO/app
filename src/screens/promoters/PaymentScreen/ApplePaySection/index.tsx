@@ -7,7 +7,7 @@ import {
 } from "@stripe/stripe-react-native";
 import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
-import googlePayApi from "services/api/googlePayApi";
+import storePayApi from "services/api/storePayApi";
 import { logError } from "services/crashReport";
 import { useTasksContext } from "contexts/tasksContext";
 import { useNavigation } from "hooks/useNavigation";
@@ -30,7 +30,8 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
   ]);
 
   const { registerAction } = useTasksContext();
-  const { presentApplePay, isApplePaySupported } = useApplePay();
+  const { presentApplePay, isApplePaySupported, confirmApplePayPayment } =
+    useApplePay();
   const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const pay = async () => {
@@ -62,10 +63,12 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         integrationId,
         causeId: cause?.id,
         nonProfitId: nonProfit?.id,
+        paymentMethodType: "apple_pay",
       };
 
       try {
-        await googlePayApi.postGooglePay(data);
+        await storePayApi.postStorePay(data);
+        await confirmApplePayPayment("");
         registerAction("contribution_done_screen_view");
 
         navigateTo("ContributionDoneScreen", {
