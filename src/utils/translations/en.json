@@ -107,6 +107,11 @@
       "seeAllPosts": "See all posts",
       "continue": "Continue"
     },
+    "giveTicketScreen": {
+      "ribonTitle": "Welcome to Ribon!",
+      "subtitle": "Your donation ticket is available",
+      "button": "Get my ticket"
+    },
     "forYouScreen": {
       "newsSection": {
         "title": "For you",

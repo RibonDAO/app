@@ -107,6 +107,11 @@
       "seeAllPosts": "Ver publicações",
       "continue": "Continuar"
     },
+    "giveTicketScreen": {
+      "ribonTitle": "Que bom ter você na Ribon!",
+      "subtitle": "Seu ticket doação está disponível",
+      "button": "Receber meu ticket"
+    },
     "forYouScreen": {
       "newsSection": {
         "title": "Para você",
