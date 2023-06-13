@@ -49,15 +49,17 @@ function UserInfoSection(): JSX.Element {
 
   const handleCountryChange = (selectedCountry: Country) => {
     setCountry(selectedCountry.name as string);
+    setTaxId("");
     setCurrentCountryCode(selectedCountry.cca2);
     setBrazilFormatForTaxId(isBrazil(selectedCountry.name as string));
   };
 
   useEffect(() => {
-    const currentContry = countryByLanguage(currentLang);
-
-    setCountry(currentContry);
-  }, [currentLang, setCountry, countryByLanguage, country]);
+    if (!country) {
+      setCountry(countryByLanguage(currentLang));
+      setBrazilFormatForTaxId(isBrazil(countryByLanguage(currentLang)));
+    }
+  }, [currentLang, country]);
 
   useEffect(() => {
     setButtonDisabled(!(state && city && taxId.length === maxTaxIdLength()));
@@ -91,7 +93,6 @@ function UserInfoSection(): JSX.Element {
           value={city}
           onChangeText={(value) => setCity(value)}
           containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
-          autoFocus
         />
         <InputText
           name={state}
