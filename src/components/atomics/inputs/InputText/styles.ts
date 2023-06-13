@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     height: 48,
     color: theme.colors.neutral[900],
+    marginBottom: theme.spacingNative(16),
   },
   iconInput: {
     position: "absolute",
@@ -74,7 +75,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: theme.spacingNative(4),
+    marginTop: -16,
+    marginBottom: theme.spacingNative(16),
   },
   helper: {
     ...defaultBodyXsRegular,

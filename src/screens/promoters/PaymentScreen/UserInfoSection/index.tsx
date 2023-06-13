@@ -39,9 +39,6 @@ function UserInfoSection(): JSX.Element {
     countryCodeByLanguage(currentLang),
   );
 
-  const currentContry = countryByLanguage(currentLang);
-  setCountry(currentContry);
-
   function isBrazil(countryName: string) {
     return countryName === t("brazilName");
   }
@@ -55,6 +52,12 @@ function UserInfoSection(): JSX.Element {
     setCurrentCountryCode(selectedCountry.cca2);
     setBrazilFormatForTaxId(isBrazil(selectedCountry.name as string));
   };
+
+  useEffect(() => {
+    const currentContry = countryByLanguage(currentLang);
+
+    setCountry(currentContry);
+  }, [currentLang, setCountry, countryByLanguage, country]);
 
   useEffect(() => {
     setButtonDisabled(!(state && city && taxId.length === maxTaxIdLength()));

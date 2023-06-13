@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     height: 48,
     justifyContent: "center",
     paddingLeft: theme.spacingNative(4),
+    marginBottom: theme.spacingNative(16),
   },
   countryInputTheme: {
     fontFamily: "Inter400",

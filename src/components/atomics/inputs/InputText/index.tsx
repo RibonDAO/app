@@ -72,10 +72,12 @@ function InputText({
   return (
     <View style={[S.container, containerStyle]}>
       <View style={S.labelIcon}>
-        <Text style={[disabled ? S.labelDisabled : S.label, S.label]}>
-          {required && <Text style={S.required}>*</Text>}
-          {label}{" "}
-        </Text>
+        {label && (
+          <Text style={[disabled ? S.labelDisabled : S.label, S.label]}>
+            {required && <Text style={S.required}>*</Text>}
+            {label}
+          </Text>
+        )}
         {labelIcon && (
           <Icon
             type="rounded"
