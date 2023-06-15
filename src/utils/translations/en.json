@@ -92,10 +92,9 @@
       }
     },
     "receiveTicketScreen": {
-      "title": "Donating together to change lives!",
-      "description": "You have a ticket to receive :)",
-      "buttonText": "Receive ticket",
-      "animationText": "Receiving ticket"
+      "textOrigin": "Community",
+      "textDestiny": "You",
+      "description": "Receiving ticket..."
     }
   },
   "content": {
@@ -108,9 +107,12 @@
       "continue": "Continue"
     },
     "giveTicketScreen": {
-      "ribonTitle": "Welcome to Ribon!",
-      "subtitle": "Your donation ticket is available",
-      "button": "Get my ticket"
+      "title": "You have 1 ticket!",
+      "subtitle": "Every day when you login in Ribon you get a new ticket.",
+      "button": "Donate ticket",
+      "onboardingTitle": "Welcome to Ribon!",
+      "onboardingSubtitle": "Your donation ticket is available",
+      "onboardingButton": "Get my ticket"
     },
     "forYouScreen": {
       "newsSection": {

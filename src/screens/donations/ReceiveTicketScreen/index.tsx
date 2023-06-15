@@ -1,58 +1,38 @@
-import Button from "components/atomics/buttons/Button";
-import { Text, View } from "react-native";
-import RibonBackgroundLogo from "components/vectors/RibonBackgroundLogo";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import TransferTicketAnimation from "components/moleculars/TransferTicketAnimation";
 import SupportersIcon from "components/vectors/SupportersIcon";
 import UserIcon from "components/vectors/UserIcon";
+import { useNavigation } from "hooks/useNavigation";
+import { View, Text } from "react-native";
+import { useTranslation } from "react-i18next";
+import TopShape from "./assets/TopShape";
 import S from "./styles";
 
-type Props = {
-  onTicketReceived: () => void;
-};
-
-function ReceiveTicketScreen({ onTicketReceived }: Props): JSX.Element {
+function ReceiveTicketScreen(): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.receiveTicketScreen",
   });
-  const [animationVisible, setAnimationVisible] = useState(false);
 
-  const openAnimation = () => {
-    setAnimationVisible(true);
-  };
+  const { navigateTo } = useNavigation();
 
   return (
     <View style={S.container}>
-      {animationVisible ? (
+      <View style={S.topShape}>
+        <TopShape />
+      </View>
+      <View style={S.animationContainer}>
         <TransferTicketAnimation
           onAnimationEnd={() => {
             setTimeout(() => {
-              setAnimationVisible(false);
+              navigateTo("CausesScreen");
             }, 500);
-            onTicketReceived();
           }}
           senderIcon={<SupportersIcon />}
           receiverIcon={<UserIcon />}
-          description={t("animationText").toString()}
+          senderText={t("textOrigin")}
+          receiverText={t("textDestiny")}
         />
-      ) : (
-        <>
-          <View style={S.icon}>
-            <RibonBackgroundLogo />
-          </View>
-
-          <Text style={S.title}>{t("title")}</Text>
-
-          <Text style={S.description}>{t("description")}</Text>
-
-          <Button
-            customStyles={S.button}
-            text={t("buttonText")}
-            onPress={openAnimation}
-          />
-        </>
-      )}
+      </View>
+      <Text style={S.description}>{t("description")}</Text>
     </View>
   );
 }

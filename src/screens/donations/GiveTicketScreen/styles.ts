@@ -4,19 +4,18 @@ import { defaultBodyMdSemibold } from "styles/typography/default";
 import { stylizedDisplayXs } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  container: {},
   content: {
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: theme.spacingNative(16),
+    alignSelf: "center",
+    maxHeight: "100%",
+    minHeight: "80%",
   },
+
   textContainer: {
     marginTop: theme.spacingNative(24),
     marginBottom: theme.spacingNative(24),
@@ -28,10 +27,16 @@ const styles = StyleSheet.create({
     ...stylizedDisplayXs,
     marginTop: theme.spacingNative(20),
     color: theme.colors.brand.primary[800],
+    textAlign: "center",
   },
   subtitle: {
     ...defaultBodyMdSemibold,
     color: theme.colors.neutral[500],
+    textAlign: "center",
+  },
+  arrow: {
+    padding: theme.spacingNative(16),
+    alignSelf: "flex-start",
   },
 });
 

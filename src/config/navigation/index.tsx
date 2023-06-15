@@ -169,7 +169,7 @@ function RootNavigator() {
 
       <Stack.Screen
         name="ReceiveTicketScreen"
-        component={ReceiveTicketScreen as any}
+        component={ReceiveTicketScreen}
         options={{
           title: "ReceiveTicketScreen",
           headerShown: false,
