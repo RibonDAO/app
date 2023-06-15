@@ -2,9 +2,9 @@ import TransferTicketAnimation from "components/moleculars/TransferTicketAnimati
 import SupportersIcon from "components/vectors/SupportersIcon";
 import UserIcon from "components/vectors/UserIcon";
 import { useNavigation } from "hooks/useNavigation";
-import { View, Text } from "react-native";
+import { View, Text, ImageBackground } from "react-native";
 import { useTranslation } from "react-i18next";
-import TopShape from "./assets/TopShape";
+import topBackground from "./assets/topBackground.png";
 import S from "./styles";
 
 function ReceiveTicketScreen(): JSX.Element {
@@ -16,23 +16,22 @@ function ReceiveTicketScreen(): JSX.Element {
 
   return (
     <View style={S.container}>
-      <View style={S.topShape}>
-        <TopShape />
-      </View>
-      <View style={S.animationContainer}>
-        <TransferTicketAnimation
-          onAnimationEnd={() => {
-            setTimeout(() => {
-              navigateTo("CausesScreen");
-            }, 500);
-          }}
-          senderIcon={<SupportersIcon />}
-          receiverIcon={<UserIcon />}
-          senderText={t("textOrigin")}
-          receiverText={t("textDestiny")}
-        />
-      </View>
-      <Text style={S.description}>{t("description")}</Text>
+      <ImageBackground source={topBackground} style={S.topBackground}>
+        <View style={S.animationContainer}>
+          <TransferTicketAnimation
+            onAnimationEnd={() => {
+              setTimeout(() => {
+                navigateTo("CausesScreen");
+              }, 500);
+            }}
+            senderIcon={<SupportersIcon />}
+            receiverIcon={<UserIcon />}
+            senderText={t("textOrigin")}
+            receiverText={t("textDestiny")}
+          />
+        </View>
+        <Text style={S.description}>{t("description")}</Text>
+      </ImageBackground>
     </View>
   );
 }

@@ -8,17 +8,19 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: theme.spacingNative(16),
+    paddingHorizontal: theme.spacingNative(16),
+    paddingBottom: theme.spacingNative(16),
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+
     backgroundColor: theme.colors.neutral10,
   },
-  topShape: {
-    width: Dimensions.get("window").width,
-    height: "100%",
-    position: "absolute",
-    top: theme.spacingNative(0),
-    left: theme.spacingNative(0),
+
+  topBackground: {
+    flex: 1,
+    height: 116,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
   description: {
     ...defaultBodyMdBold,
