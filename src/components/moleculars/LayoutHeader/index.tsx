@@ -84,10 +84,6 @@ function LayoutHeader({
     }
   };
 
-  const toggleTicketModal = () => {
-    setTicketModalVisible(!ticketModalVisible);
-  };
-
   const toggleBlockedDonationModal = () => {
     setBlockedDonationModalVisible(!ticketModalVisible);
   };
@@ -139,7 +135,7 @@ function LayoutHeader({
 
   const handleTicketClick = () => {
     if (hasTickets()) {
-      toggleTicketModal();
+      navigateTo("GiveTicketScreen");
     } else {
       toggleBlockedDonationModal();
     }

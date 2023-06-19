@@ -4,6 +4,7 @@ import {
   useFreeDonationCauses,
   useCanDonate,
   useStories,
+  useFirstAccessToIntegration,
 } from "@ribon.io/shared/hooks";
 import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
@@ -46,6 +47,11 @@ export default function CausesScreen() {
     isLoading: loadingCanDonate,
     refetch: refetchCanDonate,
   } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
+  const {
+    isFirstAccessToIntegration,
+    refetch: refetchFirstAccessToIntegration,
+    isLoading: loadingFirstAccessToIntegration,
+  } = useFirstAccessToIntegration(RIBON_INTEGRATION_ID);
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
@@ -68,6 +74,7 @@ export default function CausesScreen() {
   useEffect(() => {
     setTimeout(() => {
       refetchCanDonate();
+      refetchFirstAccessToIntegration();
     }, 500);
   }, [JSON.stringify(currentUser)]);
 
@@ -182,7 +189,7 @@ export default function CausesScreen() {
       </View>
     );
 
-  return isLoading || loadingCanDonate ? (
+  return isLoading || loadingCanDonate || loadingFirstAccessToIntegration ? (
     <Placeholder />
   ) : (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
@@ -195,7 +202,10 @@ export default function CausesScreen() {
             setStoriesVisible={setStoriesVisible}
           />
         )}
-        <TicketSection canDonate={canDonate} />
+        <TicketSection
+          canDonate={canDonate}
+          isFirstAccessToIntegration={isFirstAccessToIntegration}
+        />
         {renderNotificationCard()}
         <Text style={S.title}>{t("title")}</Text>
         <ScrollView

@@ -58,6 +58,9 @@
         "title": "No causes available",
         "text": "But you can contribute donating in community for a cause",
         "button": "Donate in community"
+      },
+      "ticketSection": {
+        "ticketToast": "You have a new ticket!"
       }
     },
     "donateScreen": {
@@ -92,10 +95,9 @@
       }
     },
     "receiveTicketScreen": {
-      "title": "Donating together to change lives!",
-      "description": "You have a ticket to receive :)",
-      "buttonText": "Receive ticket",
-      "animationText": "Receiving ticket"
+      "textOrigin": "Community",
+      "textDestiny": "You",
+      "description": "Receiving ticket..."
     }
   },
   "content": {
@@ -106,6 +108,16 @@
       "subtitle": "Now you can see what's new at Ribon and good news selected to warm your heart!",
       "seeAllPosts": "See all posts",
       "continue": "Continue"
+    },
+    "giveTicketScreen": {
+      "title": "You have 1 ticket!",
+      "subtitle": "Every day when you login in Ribon you get a new ticket.",
+      "button": "Donate ticket",
+      "onboardingTitle": "Welcome to Ribon!",
+      "onboardingSubtitle": "Your donation ticket is available",
+      "onboardingButton": "Get my ticket",
+      "whatIsATicket": "What is a ticket?",
+      "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in."
     },
     "forYouScreen": {
       "newsSection": {

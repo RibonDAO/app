@@ -1,4 +1,4 @@
-import { Dimensions, View } from "react-native";
+import { Dimensions, View, Text } from "react-native";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
 import * as Animatable from "react-native-animatable";
 import { useEffect } from "react";
@@ -9,6 +9,8 @@ type Props = {
   senderIcon?: JSX.Element;
   receiverIcon?: JSX.Element;
   description?: string;
+  receiverText?: string | null;
+  senderText?: string | null;
 };
 
 const boxAnimation = {
@@ -34,6 +36,8 @@ function TransferTicketAnimation({
   senderIcon,
   receiverIcon,
   description,
+  receiverText,
+  senderText,
 }: Props): JSX.Element {
   const ANIMATION_TIME = 4000;
 
@@ -66,7 +70,10 @@ function TransferTicketAnimation({
           <View style={S.diamondImage}>{receiverIcon}</View>
         </View>
       </View>
-
+      <View style={S.textContainer}>
+        <Text style={S.diamondText}>{senderText}</Text>
+        <Text style={S.diamondText}>{receiverText}</Text>
+      </View>
       <Animatable.Text
         animation={fadeIn}
         duration={ANIMATION_TIME}

@@ -1,5 +1,6 @@
 import { theme } from "@ribon.io/shared/styles";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+import { defaultBodyMdBold } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,32 +8,29 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: theme.spacingNative(16),
-    width: "100%",
+    paddingHorizontal: theme.spacingNative(16),
+    paddingBottom: theme.spacingNative(16),
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+
     backgroundColor: theme.colors.neutral10,
   },
-  icon: {
-    borderRadius: 50,
-    backgroundColor: "transparent",
-    marginTop: -52,
-  },
-  title: {
-    marginTop: theme.spacingNative(16),
-    marginBottom: theme.spacingNative(8),
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 36,
-    textAlign: "center",
+
+  topBackground: {
+    flex: 1,
+    height: 116,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
   description: {
-    fontSize: 14,
-    lineHeight: 28,
-    marginBottom: theme.spacingNative(20),
-    color: theme.colors.neutral[500],
+    ...defaultBodyMdBold,
+    bottom: 0,
+    marginTop: theme.spacingNative(32),
+    color: theme.colors.brand.primary[800],
+    textAlign: "center",
+    top: "25%",
   },
-  button: {
-    height: 48,
-  },
+  animationContainer: {},
 });
 
 export default styles;
