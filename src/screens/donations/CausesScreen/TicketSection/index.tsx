@@ -4,6 +4,7 @@ import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
 import { theme } from "@ribon.io/shared";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   canDonate: boolean;
@@ -12,6 +13,9 @@ type Props = {
 
 export const ALREADY_RECEIVED_TICKET_KEY = "ALREADY_RECEIVED_TICKET_KEY";
 function TicketSection({ canDonate, isFirstAccessToIntegration }: Props) {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "donations.causesScreen.ticketSection",
+  });
   const { setTickets } = useTickets();
   const { navigateTo } = useNavigation();
 
@@ -33,7 +37,7 @@ function TicketSection({ canDonate, isFirstAccessToIntegration }: Props) {
           if (!isFirstAccessToIntegration) {
             showToast({
               type: "custom",
-              message: "You have a new ticket!",
+              message: t("ticketToast"),
               position: "bottom",
               navigate: "GiveTicketScreen",
               icon: "confirmation_number",

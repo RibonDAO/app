@@ -58,6 +58,9 @@
         "title": "Nenhuma causa disponível",
         "text": "Mas você pode contribuir doando em comunidade para uma causa",
         "button": "Doe em comunidade"
+      },
+      "ticketSection": {
+        "ticketToast": "Você tem um novo ticket!"
       }
     },
     "donateScreen": {
@@ -112,7 +115,9 @@
       "button": "Doar ticket",
       "onboardingTitle": "Que bom ter você na Ribon!",
       "onboardingSubtitle": "Seu ticket doação está disponível",
-      "onboardingButton": "Receber meu ticket"
+      "onboardingButton": "Receber meu ticket",
+      "whatIsATicket": "O que é um ticket?",
+      "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon."
     },
     "forYouScreen": {
       "newsSection": {

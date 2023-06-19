@@ -6,6 +6,8 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import { useRouteParams } from "hooks/useRouteParams";
 import ArrowLeft from "components/vectors/ArrowLeft";
+import Icon from "components/atomics/Icon";
+import Tooltip from "components/atomics/Tooltip";
 import Ticket from "./assets/Ticket";
 import S from "./styles";
 
@@ -71,6 +73,24 @@ export default function GiveTicketScreen() {
             width: 328,
           }}
         />
+
+        {!isOnboarding && (
+          <Tooltip tooltipText={t("ticketExplanation")}>
+            <View style={S.ticketExplanationSection}>
+              <Icon
+                type="rounded"
+                name="help"
+                size={20}
+                color={theme.colors.gray30}
+              />
+              <View style={{ overflow: "hidden" }}>
+                <View style={S.ticketTextContainer}>
+                  <Text style={S.ticketText}>{t("whatIsATicket")}</Text>
+                </View>
+              </View>
+            </View>
+          </Tooltip>
+        )}
       </View>
     </View>
   );
