@@ -131,11 +131,11 @@ function LayoutHeader({
   };
 
   const renderDeleteAccountModal = () => (
-      <DeleteAccountModal
-        visible={deleteAccountModalVisible}
-        setVisible={setDeleteAccountModalVisible}
-      />
-    );
+    <DeleteAccountModal
+      visible={deleteAccountModalVisible}
+      setVisible={setDeleteAccountModalVisible}
+    />
+  );
 
   const handleTicketClick = () => {
     if (hasTickets()) {
@@ -264,7 +264,11 @@ function LayoutHeader({
   return (
     <View style={S.configContainer}>
       {!hideTicket && (
-        <TouchableOpacity accessibilityRole="button" style={S.container} onPress={handleTicketClick}>
+        <TouchableOpacity
+          accessibilityRole="button"
+          style={S.container}
+          onPress={handleTicketClick}
+        >
           <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
             <Text style={{ ...S.ticketCounter, color: ticketColor }}>
               {tickets}
@@ -275,7 +279,11 @@ function LayoutHeader({
       )}
 
       {!hideWallet && (
-        <TouchableOpacity accessibilityRole="button" style={S.container} onPress={handleWalletButtonClick}>
+        <TouchableOpacity
+          accessibilityRole="button"
+          style={S.container}
+          onPress={handleWalletButtonClick}
+        >
           <View style={S.walletContainer}>
             <Text style={S.walletText}>
               {wallet ? walletTruncate(wallet) : t("connectWallet")}
@@ -285,7 +293,11 @@ function LayoutHeader({
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity accessibilityRole="button" style={S.container} onPress={toggleModal}>
+      <TouchableOpacity
+        accessibilityRole="button"
+        style={S.container}
+        onPress={toggleModal}
+      >
         <CogIcon />
       </TouchableOpacity>
 

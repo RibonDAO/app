@@ -17,10 +17,11 @@ const styles = StyleSheet.create({
   countryInputContainer: {
     marginVertical: 12,
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 4,
     height: 48,
     justifyContent: "center",
     paddingLeft: theme.spacingNative(4),
+    marginBottom: theme.spacingNative(16),
   },
   countryInputTheme: {
     fontFamily: "Inter400",
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: theme.spacingNative(4),
     height: 48,
-    borderRadius: 8,
+    borderRadius: 4,
     paddingLeft: 8,
   },
   dropdownText: {

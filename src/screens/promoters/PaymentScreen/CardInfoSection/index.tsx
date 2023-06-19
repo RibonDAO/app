@@ -1,8 +1,6 @@
 import InputText from "components/atomics/inputs/InputText";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { maskToCreditCard, maskToExpirationDate } from "@ribon.io/shared/lib";
-import getThemeByFlow from "lib/themeByFlow";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -27,20 +25,9 @@ function CardInfoSection() {
     cvv,
     setCvv,
     setButtonDisabled,
-    flow,
   } = useCardPaymentInformation();
 
   const { currentUser } = useCurrentUser();
-
-  const maskExpiration = (value: string) => {
-    setExpirationDate(maskToExpirationDate(value));
-  };
-
-  const maskCreditCard = (value: string) => {
-    setNumber(maskToCreditCard(value));
-  };
-
-  const colorTheme = getThemeByFlow(flow);
 
   useEffect(() => {
     setButtonDisabled(
@@ -48,15 +35,9 @@ function CardInfoSection() {
     );
   }, [email, number, name, expirationDate, cvv]);
 
-  const inputStyles = {
-    borderColor: colorTheme.shade40,
-    color: colorTheme.shade20,
-  };
-
   return (
     <View style={S.container}>
       <InputText
-        style={inputStyles}
         name="email"
         placeholder={t("email")}
         value={email}
@@ -66,16 +47,15 @@ function CardInfoSection() {
         autoCapitalize="none"
       />
       <InputText
-        style={inputStyles}
         name="number"
         placeholder={t("cardNumber")}
+        mask="9999 9999 9999 9999"
         value={number}
-        onChangeText={maskCreditCard}
+        onChangeText={(value) => setNumber(value)}
         maxLength={19}
         keyboardType="numeric"
       />
       <InputText
-        style={inputStyles}
         name="name"
         placeholder={t("cardName")}
         value={name}
@@ -83,17 +63,17 @@ function CardInfoSection() {
       />
       <View style={S.half}>
         <InputText
-          style={inputStyles}
           name="expirationDate"
           value={expirationDate}
           placeholder={t("cardDueDate")}
-          onChangeText={maskExpiration}
+          mask="99/9999"
+          autoComplete="cc-exp"
+          onChangeText={(value) => setExpirationDate(value)}
           maxLength={7}
           keyboardType="numeric"
           containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
         />
         <InputText
-          style={inputStyles}
           name="cvv"
           placeholder={t("cvv")}
           maxLength={4}

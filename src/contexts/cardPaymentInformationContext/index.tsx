@@ -27,6 +27,7 @@ import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { normalizedLanguage } from "lib/currentLanguage";
 import { logEvent } from "services/analytics";
 import { useTasksContext } from "contexts/tasksContext";
+import { countryByLanguage } from "lib/countryByLanguage";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -80,6 +81,7 @@ export const CURRENT_COIN_KEY = "CURRENT_COIN_KEY";
 function CardPaymentInformationProvider({ children }: Props) {
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
+  const currentContry = countryByLanguage(currentLang);
   const { registerAction } = useTasksContext();
   const [loading, setLoading] = useState(false);
   const [currentCoin, setCurrentCoin] = useState<Currencies>();
@@ -109,7 +111,7 @@ function CardPaymentInformationProvider({ children }: Props) {
 
   const integrationId = RIBON_INTEGRATION_ID;
 
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState(currentContry);
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [taxId, setTaxId] = useState("");

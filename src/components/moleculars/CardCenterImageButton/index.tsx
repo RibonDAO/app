@@ -35,7 +35,11 @@ function CardCenterImageButton({
     <View style={S.container}>
       <View style={S.cardWrapper}>
         <View style={S.containerImage}>
-          <TouchableOpacity accessibilityRole="button" onPress={onImagePress} activeOpacity={0.8}>
+          <TouchableOpacity
+            accessibilityRole="button"
+            onPress={onImagePress}
+            activeOpacity={0.8}
+          >
             {labelText && (
               <View style={S.labelContainer}>
                 <Icon

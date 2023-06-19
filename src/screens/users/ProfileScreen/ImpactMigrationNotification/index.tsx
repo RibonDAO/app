@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { View } from "react-native";
 import S from "./styles";
 
-export const IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT_KEY =
-  "IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT_KEY";
+export const IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT =
+  "IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT";
 function ImpactMigrationNotification() {
   const [hideNotification, setHideNotification] = useState(false);
   const { t } = useTranslation("translation", {
@@ -15,20 +15,19 @@ function ImpactMigrationNotification() {
 
   const currentNotificationSeenCount = async () =>
     parseInt(
-      (await getLocalStorageItem(
-        IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT_KEY,
-      )) || "0",
+      (await getLocalStorageItem(IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT)) ||
+        "0",
       10,
     );
   const handleHideNotificationClick = (setVisible: any) => {
     setVisible(false);
-    setLocalStorageItem(IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT_KEY, "3");
+    setLocalStorageItem(IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT, "3");
   };
 
   const handleCloseClick = async () => {
     const notificationsSeenCount = (await currentNotificationSeenCount()) + 1;
     setLocalStorageItem(
-      IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT_KEY,
+      IMPACT_MIGRATION_NOTIFICATION_SEEN_COUNT,
       notificationsSeenCount.toString(),
     );
   };

@@ -19,7 +19,8 @@ function ConfigItem({
   last,
 }: Props): JSX.Element {
   return (
-    <TouchableOpacity accessibilityRole="button"
+    <TouchableOpacity
+      accessibilityRole="button"
       style={{ ...S.configItem, ...(last && S.lastConfigItem) }}
       onPress={onPress && onPress}
     >
