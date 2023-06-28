@@ -21,6 +21,7 @@ import Inter500 from "../assets/fonts/inter/Inter-Medium.ttf";
 import Inter600 from "../assets/fonts/inter/Inter-SemiBold.ttf";
 import Inter100 from "../assets/fonts/inter/Inter-Thin.ttf";
 
+SplashScreen.preventAutoHideAsync();
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const { currentUser } = useCurrentUser();
@@ -44,7 +45,6 @@ export default function useCachedResources() {
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync();
         // Load fonts
         await Font.loadAsync({
           ...FontAwesome.font,
@@ -68,7 +68,6 @@ export default function useCachedResources() {
         console.warn(e);
       } finally {
         setLoadingComplete(true);
-        SplashScreen.hideAsync();
       }
     }
 
