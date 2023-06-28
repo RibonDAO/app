@@ -48,7 +48,7 @@ function AnimatedSplashScreen({ children, image }: Props) {
             StyleSheet.absoluteFill,
             {
               backgroundColor:
-                Constants.manifest?.splash?.backgroundColor || "#fff",
+                Constants.expoConfig?.splash?.backgroundColor || "#fff",
               opacity: animation,
             },
           ]}
@@ -57,7 +57,7 @@ function AnimatedSplashScreen({ children, image }: Props) {
             style={{
               width: "100%",
               height: "100%",
-              resizeMode: Constants.manifest?.splash?.resizeMode || "contain",
+              resizeMode: Constants.expoConfig?.splash?.resizeMode || "contain",
             }}
             source={image}
             onLoadEnd={onImageLoaded}
