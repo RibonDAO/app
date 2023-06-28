@@ -13,15 +13,17 @@ function AnimatedSplashScreen({ children, image }: Props) {
   const [isAppReady, setAppReady] = useState(false);
   const [isSplashAnimationComplete, setAnimationComplete] = useState(false);
 
+  const DURATION = 1000;
+
   useEffect(() => {
     if (isAppReady) {
       setTimeout(() => {
         Animated.timing(animation, {
           toValue: 0,
-          duration: 2000,
+          duration: DURATION,
           useNativeDriver: true,
         }).start(() => setAnimationComplete(true));
-      }, 2000);
+      }, 1800);
     }
   }, [isAppReady]);
 
@@ -45,7 +47,8 @@ function AnimatedSplashScreen({ children, image }: Props) {
           style={[
             StyleSheet.absoluteFill,
             {
-              backgroundColor: Constants.manifest?.splash?.backgroundColor,
+              backgroundColor:
+                Constants.manifest?.splash?.backgroundColor || "#fff",
               opacity: animation,
             },
           ]}
@@ -55,11 +58,6 @@ function AnimatedSplashScreen({ children, image }: Props) {
               width: "100%",
               height: "100%",
               resizeMode: Constants.manifest?.splash?.resizeMode || "contain",
-              transform: [
-                {
-                  scale: animation,
-                },
-              ],
             }}
             source={image}
             onLoadEnd={onImageLoaded}

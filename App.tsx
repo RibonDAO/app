@@ -7,21 +7,20 @@ import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { AnimatedAppLoader } from "./src/components/AnimatedAppLoader";
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
-import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
 import UnsafeAreaProvider, {
   useUnsafeAreaContext,
 } from "./src/contexts/unsafeAreaContext";
 import TasksProvider from "./src/contexts/tasksContext";
+import SplashScreenImage from "./src/assets/images/splash.png";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
   const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
 
   if (!isLoadingComplete) {
@@ -47,8 +46,8 @@ function Main() {
                   edges={["bottom"]}
                   style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
                 >
-                  <Navigation colorScheme={colorScheme} />
-                  <StatusBar style="dark" />
+                  <Navigation />
+                  <StatusBar />
                 </SafeAreaView>
               </SafeAreaView>
             </SafeAreaProvider>
@@ -61,16 +60,18 @@ function Main() {
 
 export default function App() {
   return (
-    <Suspense fallback={<View />}>
-      <ScrollEnabledProvider>
-        <CurrentUserProvider>
-          <LanguageProvider>
-            <UnsafeAreaProvider>
-              <Main />
-            </UnsafeAreaProvider>
-          </LanguageProvider>
-        </CurrentUserProvider>
-      </ScrollEnabledProvider>
-    </Suspense>
+    <AnimatedAppLoader image={SplashScreenImage}>
+      <Suspense fallback={<View />}>
+        <ScrollEnabledProvider>
+          <CurrentUserProvider>
+            <LanguageProvider>
+              <UnsafeAreaProvider>
+                <Main />
+              </UnsafeAreaProvider>
+            </LanguageProvider>
+          </CurrentUserProvider>
+        </ScrollEnabledProvider>
+      </Suspense>
+    </AnimatedAppLoader>
   );
 }

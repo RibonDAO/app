@@ -70,12 +70,8 @@ export default function CausesScreen() {
     useState(false);
 
   useEffect(() => {
-    if (!isLoading) perform(SplashScreen.hideAsync).in(200);
-  }, [isLoading]);
-
-  useEffect(() => {
     logEvent("P1_view");
-    perform(SplashScreen.hideAsync).in(3500);
+    perform(SplashScreen.hideAsync).in(500);
   }, []);
 
   useEffect(() => {
