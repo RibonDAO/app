@@ -31,8 +31,6 @@ import InlineNotification from "components/moleculars/notifications/InlineNotifi
 import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
-import * as SplashScreen from "expo-splash-screen";
-import { perform } from "lib/timeoutHelpers";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
@@ -71,7 +69,6 @@ export default function CausesScreen() {
 
   useEffect(() => {
     logEvent("P1_view");
-    perform(SplashScreen.hideAsync).in(500);
   }, []);
 
   useEffect(() => {
