@@ -70,7 +70,7 @@ export default function useCachedResources() {
         setLoadingComplete(true);
         setTimeout(() => {
           SplashScreen.hideAsync();
-        }, 1700);
+        }, 3000);
       }
     }
 
