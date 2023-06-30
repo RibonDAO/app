@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Asset } from "expo-asset";
 import { Animated, Image, StyleSheet, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
-import Constants from "expo-constants";
 import { logError } from "services/crashReport";
 
 SplashScreen.preventAutoHideAsync();
@@ -18,10 +17,10 @@ function AnimatedSplashScreen({ children, image }: Props) {
       setTimeout(() => {
         Animated.timing(animation, {
           toValue: 0,
-          duration: 2000,
-          useNativeDriver: true,
+          duration: 1000,
+          useNativeDriver: false,
         }).start(() => setAnimationComplete(true));
-      }, 2000);
+      }, 1800);
     }
   }, [isAppReady]);
 
@@ -45,7 +44,7 @@ function AnimatedSplashScreen({ children, image }: Props) {
           style={[
             StyleSheet.absoluteFill,
             {
-              backgroundColor: Constants.manifest?.splash?.backgroundColor,
+              backgroundColor: "#fff",
               opacity: animation,
             },
           ]}
@@ -54,12 +53,7 @@ function AnimatedSplashScreen({ children, image }: Props) {
             style={{
               width: "100%",
               height: "100%",
-              resizeMode: Constants.manifest?.splash?.resizeMode || "contain",
-              transform: [
-                {
-                  scale: animation,
-                },
-              ],
+              resizeMode: "contain",
             }}
             source={image}
             onLoadEnd={onImageLoaded}

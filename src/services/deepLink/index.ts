@@ -9,7 +9,7 @@ export function initializeDeeplink(navigateTo: (path: string) => void) {
     },
     onOpenComplete: ({ error, params, uri }) => {
       if (error) {
-        console.error(
+        console.log(
           `subscribe onOpenComplete, Error from opening uri: ${uri} error: ${error}`,
         );
         return;

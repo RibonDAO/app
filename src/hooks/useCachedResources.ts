@@ -3,7 +3,6 @@ import * as Font from "expo-font";
 import * as Sentry from "sentry-expo";
 import { useEffect, useState } from "react";
 import { initializeApi } from "services/api";
-import * as SplashScreen from "expo-splash-screen";
 import MaterialSymbolsRounded from "assets/fonts/material/MaterialSymbolsRounded.ttf";
 import MaterialSymbolsOutlined from "assets/fonts/material/MaterialSymbolsOutlined.ttf";
 import MaterialSymbolsSharp from "assets/fonts/material/MaterialSymbolsSharp.ttf";
@@ -21,7 +20,6 @@ import Inter500 from "../assets/fonts/inter/Inter-Medium.ttf";
 import Inter600 from "../assets/fonts/inter/Inter-SemiBold.ttf";
 import Inter100 from "../assets/fonts/inter/Inter-Thin.ttf";
 
-SplashScreen.preventAutoHideAsync();
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const { currentUser } = useCurrentUser();
@@ -68,9 +66,6 @@ export default function useCachedResources() {
         console.warn(e);
       } finally {
         setLoadingComplete(true);
-        setTimeout(() => {
-          SplashScreen.hideAsync();
-        }, 1700);
       }
     }
 
