@@ -10,6 +10,7 @@ import MaterialSymbolsSharp from "assets/fonts/material/MaterialSymbolsSharp.ttf
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useLanguage } from "contexts/languageContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
+import { perform } from "lib/timeoutHelpers";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter400 from "../assets/fonts/inter/Inter-Regular.ttf";
 import Inter900 from "../assets/fonts/inter/Inter-Black.ttf";
@@ -68,9 +69,7 @@ export default function useCachedResources() {
         console.warn(e);
       } finally {
         setLoadingComplete(true);
-        setTimeout(() => {
-          SplashScreen.hideAsync();
-        }, 3000);
+        perform(SplashScreen.hideAsync).in(3000);
       }
     }
 
