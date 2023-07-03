@@ -64,6 +64,13 @@ export type SupportNonProfitParamList = {
   causeDonated?: Cause;
 };
 
+export type PaymentScreenV2ParamList = {
+  target: string;
+  targetId: string;
+  offer: string;
+  currency: string;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   DonateScreen: DonateScreenList;
@@ -82,6 +89,7 @@ export type RootStackParamList = {
   PromotersScreen: PromotersScreenParams;
   OnboardingScreen: undefined;
   DonateModal: undefined;
+  PaymentScreenV2: PaymentScreenV2ParamList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

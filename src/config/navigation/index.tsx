@@ -37,6 +37,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import GiveTicketScreen from "screens/donations/GiveTicketScreen";
+import PaymentScreenV2 from "screens/promoters/PaymentScreenV2";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -211,6 +212,17 @@ function RootNavigator() {
         component={PaymentScreen}
         options={{
           headerTintColor: theme.colors.brand.secondary[700],
+          headerTitle: "",
+          headerBackTitleVisible: false,
+          headerStyle: { backgroundColor: theme.colors.neutral10 },
+        }}
+      />
+
+      <Stack.Screen
+        name="PaymentScreenV2"
+        component={PaymentScreenV2}
+        options={{
+          headerTintColor: theme.colors.brand.primary[700],
           headerTitle: "",
           headerBackTitleVisible: false,
           headerStyle: { backgroundColor: theme.colors.neutral10 },
