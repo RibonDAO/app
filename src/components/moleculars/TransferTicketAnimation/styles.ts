@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { defaultBodyXsMedium } from "styles/typography/default";
 
 const { primary } = theme.colors.brand;
 
@@ -7,10 +8,16 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
   },
+  textContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: Dimensions.get("window").width,
+  },
   containerColumn: {
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   containerRow: {
     flexDirection: "row",
@@ -58,6 +65,13 @@ const styles = StyleSheet.create({
     marginTop: theme.spacingNative(20),
     color: primary[300],
     fontWeight: "bold",
+  },
+  diamondText: {
+    ...defaultBodyXsMedium,
+    paddingTop: theme.spacingNative(8),
+    color: theme.colors.neutral[500],
+    width: "50%",
+    textAlign: "center",
   },
 });
 

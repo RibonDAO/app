@@ -58,6 +58,9 @@
         "title": "Nenhuma causa disponível",
         "text": "Mas você pode contribuir doando em comunidade para uma causa",
         "button": "Doe em comunidade"
+      },
+      "ticketSection": {
+        "ticketToast": "Você tem um novo ticket!"
       }
     },
     "donateScreen": {
@@ -92,10 +95,9 @@
       }
     },
     "receiveTicketScreen": {
-      "title": "Doar juntos para mudar vidas!",
-      "description": "Você tem um ticket para receber :)",
-      "buttonText": "Receber ticket",
-      "animationText": "Recebendo ticket"
+      "textOrigin": "Comunidade",
+      "textDestiny": "Você",
+      "description": "Recebendo ticket..."
     }
   },
   "content": {
@@ -106,6 +108,16 @@
       "subtitle": "Você doou e agora pode ver novidades da Ribon e notícias pra aquecer seu coração!",
       "seeAllPosts": "Ver publicações",
       "continue": "Continuar"
+    },
+    "giveTicketScreen": {
+      "title": "Você tem 1 ticket!",
+      "subtitle": "Você recebe um novo ticket sempre que entra na Ribon pela primeira vez no dia",
+      "button": "Doar ticket",
+      "onboardingTitle": "Que bom ter você na Ribon!",
+      "onboardingSubtitle": "Seu ticket doação está disponível",
+      "onboardingButton": "Receber meu ticket",
+      "whatIsATicket": "O que é um ticket?",
+      "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon."
     },
     "forYouScreen": {
       "newsSection": {
