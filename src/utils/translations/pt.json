@@ -78,7 +78,11 @@
       "termsLink": "https://ribon.io/privacy-policy/#termos",
       "privacyPolicyText": "Política de Privacidade",
       "privacyPolicyLink": "https://ribon.io/privacy-policy/#pol%C3%ADtica",
-      "and": " e a"
+      "and": " e a",
+      "signedInSection": {
+        "title": "Your donation",
+        "confirmDonation": "Confirm donation"
+      }
     },
     "donationDoneScreen": {
       "title": "Parabéns!",
