@@ -7,6 +7,9 @@ import { useTranslation } from "react-i18next";
 import { useDonations } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { theme } from "@ribon.io/shared/styles";
+import BackgroundShapes from "components/vectors/BackgroundShapes";
+import S from "./styles";
 
 type Props = {
   nonProfit: NonProfit;
@@ -46,15 +49,32 @@ function SignedInSection({
   };
 
   return (
-    <View>
-      <Image
-        source={{ uri: nonProfit.mainImage }}
-        accessibilityIgnoresInvertColors
-      />
-      <Text>{t("title")}</Text>
-      <Text>{formattedImpactText(nonProfit, undefined, false, true)}</Text>
+    <View style={S.container}>
+      <View style={S.imageContainer}>
+        <View style={S.imageBackground}>
+          <BackgroundShapes />
+        </View>
+        <Image
+          style={S.mainImage}
+          source={{ uri: nonProfit.mainImage }}
+          accessibilityIgnoresInvertColors
+        />
+      </View>
+      <View style={S.contentContainer}>
+        <Text style={S.title}>{t("title")}</Text>
+        <Text style={S.description}>
+          {formattedImpactText(nonProfit, undefined, false, true)}
+        </Text>
 
-      <Button text={t("confirmDonation")} onPress={handleButtonPress} />
+        <Button
+          text={t("confirmDonation")}
+          onPress={handleButtonPress}
+          backgroundColor={theme.colors.brand.primary[600]}
+          borderColor={theme.colors.brand.primary[600]}
+          customStyles={S.button}
+          textColor={theme.colors.neutral[25]}
+        />
+      </View>
     </View>
   );
 }
