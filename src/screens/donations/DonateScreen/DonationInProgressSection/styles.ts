@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height * 0.9,
     width: Dimensions.get("window").width,
   },
   nonProfitLogo: {

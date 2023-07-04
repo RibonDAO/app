@@ -11,6 +11,7 @@ import { setLocalStorageItem } from "lib/localStorage";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { useNavigation } from "hooks/useNavigation";
 import { showToast } from "lib/Toast";
+import { useTickets } from "contexts/ticketsContext";
 import Placeholder from "./placeholder";
 
 function DonateScreen() {
@@ -21,10 +22,11 @@ function DonateScreen() {
   } = useRouteParams<"DonateScreen">();
   const { signedIn } = useCurrentUser();
   const { navigateTo, popNavigation } = useNavigation();
+  const { removeTicket } = useTickets();
 
   const onContinue = () => {
-    logEvent("P12_continueBtn_click", { nonProfitId: nonProfit.id });
     setIsDonating(true);
+    logEvent("P12_continueBtn_click", { nonProfitId: nonProfit.id });
   };
 
   const onDonationSuccess = () => {
@@ -39,43 +41,40 @@ function DonateScreen() {
       type: "error",
       message: error.response.data.formatted_message,
     });
+    popNavigation();
   };
 
-  const onAnimationEnd = () => {
-    if (donationSucceeded)
-      return navigateTo("DonationDoneScreen", { nonProfit });
+  const onAnimationEnd = useCallback(() => {
+    if (donationSucceeded) {
+      removeTicket();
+      navigateTo("DonationDoneScreen", { nonProfit });
+    }
+  }, [donationSucceeded]);
 
-    return popNavigation();
-  };
-
-  const renderCurrentSection = useCallback(() => {
-    if (isDonating)
-      return (
+  return (
+    <View>
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {isDonating ? (
         <DonationInProgressSection
           nonProfit={nonProfit}
           onAnimationEnd={onAnimationEnd}
         />
-      );
-    if (signedIn)
-      return (
+      ) : signedIn ? (
         <SignedInSection
           nonProfit={nonProfit}
           onContinue={onContinue}
           onDonationFail={onDonationFail}
           onDonationSuccess={onDonationSuccess}
         />
-      );
-
-    return (
-      <EmailInputSection
-        nonProfit={nonProfit}
-        onContinue={onContinue}
-        onDonationFail={onDonationFail}
-        onDonationSuccess={onDonationSuccess}
-      />
-    );
-  }, [donationSucceeded]);
-
-  return <View>{renderCurrentSection()}</View>;
+      ) : (
+        <EmailInputSection
+          nonProfit={nonProfit}
+          onContinue={onContinue}
+          onDonationFail={onDonationFail}
+          onDonationSuccess={onDonationSuccess}
+        />
+      )}
+    </View>
+  );
 }
 export default withPlaceholder(DonateScreen, Placeholder);

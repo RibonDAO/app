@@ -80,8 +80,8 @@
       "privacyPolicyLink": "https://ribon.io/privacy-policy/#pol%C3%ADtica",
       "and": " e a",
       "signedInSection": {
-        "title": "Your donation",
-        "confirmDonation": "Confirm donation"
+        "title": "Sua doação",
+        "confirmDonation": "Confirmar doação"
       }
     },
     "donationDoneScreen": {
