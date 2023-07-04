@@ -31,6 +31,7 @@ import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
 import { useFocusEffect } from "@react-navigation/native";
+import { useAppState } from "hooks/useAppState";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
@@ -65,6 +66,12 @@ export default function CausesScreen() {
   const { hasTickets } = useTickets();
   const [isNotificationCardVisible, setNotificationCardVisible] =
     useState(false);
+
+  useAppState({
+    onComeToForeground: () => {
+      refetchCanDonate();
+    },
+  });
 
   useEffect(() => {
     logEvent("P1_view");
