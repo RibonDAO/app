@@ -51,12 +51,12 @@ const styles = StyleSheet.create({
   },
   privacyPolicyText: {
     ...defaultBodySmRegular,
-    color: theme.colors.neutral[200],
+    color: theme.colors.neutral[600],
     textAlign: "center",
     marginTop: theme.spacingNative(16),
   },
   privacyPolicyLink: {
-    color: theme.colors.brand.primary[300],
+    color: theme.colors.brand.primary[600],
   },
   inputContainer: {
     height: 48,

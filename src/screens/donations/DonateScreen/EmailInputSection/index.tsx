@@ -77,7 +77,7 @@ function EmailInputSection({
   };
 
   const linkToTerms = () => {
-    openInWebViewer(t("terms"));
+    openInWebViewer(t("termsLink"));
   };
 
   return (
