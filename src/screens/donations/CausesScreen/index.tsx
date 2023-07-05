@@ -32,6 +32,8 @@ import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
 import { useFocusEffect } from "@react-navigation/native";
 import { useAppState } from "hooks/useAppState";
+import * as SplashScreen from "expo-splash-screen";
+import { perform } from "lib/timeoutHelpers";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
@@ -72,6 +74,10 @@ export default function CausesScreen() {
       refetchCanDonate();
     },
   });
+
+  useEffect(() => {
+    if (!isLoading) perform(SplashScreen.hideAsync).in(100);
+  }, [isLoading]);
 
   useEffect(() => {
     logEvent("P1_view");
