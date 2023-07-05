@@ -39,13 +39,13 @@ function TransferTicketAnimation({
   receiverText,
   senderText,
 }: Props): JSX.Element {
-  const ANIMATION_TIME = 4000;
+  const ANIMATION_TIME = 3000;
 
   useEffect(() => {
     setTimeout(() => {
       onAnimationEnd();
     }, ANIMATION_TIME);
-  }, []);
+  }, [onAnimationEnd]);
 
   return (
     <View style={S.containerColumn}>
