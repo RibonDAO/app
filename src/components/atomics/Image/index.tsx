@@ -14,7 +14,7 @@ interface Props extends ImageProps {
   style?: ImageStyle;
   transition?: number;
 }
-function Image({ source, style, transition = 800, ...rest }: Props) {
+function Image({ source, style, transition = 300, ...rest }: Props) {
   if (typeof source === "number") {
     return (
       <ReactNativeImageComponent source={source} style={style} {...rest} />
