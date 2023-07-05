@@ -55,7 +55,7 @@ function TicketSection({ canDonate, isFirstAccessToIntegration }: Props) {
       }
     }
     fetchTicketReceived();
-  }, []);
+  }, [canDonate]);
 
   return null;
 }

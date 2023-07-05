@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   useFreeDonationNonProfits,
   useFreeDonationCauses,
@@ -13,7 +13,6 @@ import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
-import { useCurrentUser } from "contexts/currentUserContext";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
@@ -31,6 +30,8 @@ import InlineNotification from "components/moleculars/notifications/InlineNotifi
 import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
+import { useFocusEffect } from "@react-navigation/native";
+import { useAppState } from "hooks/useAppState";
 import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
 import Placeholder from "./placeholder";
@@ -61,13 +62,18 @@ export default function CausesScreen() {
     {} as NonProfit,
   );
   const { navigateTo } = useNavigation();
-  const { currentUser } = useCurrentUser();
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets } = useTickets();
   const [isNotificationCardVisible, setNotificationCardVisible] =
     useState(false);
+
+  useAppState({
+    onComeToForeground: () => {
+      refetchCanDonate();
+    },
+  });
 
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
@@ -77,12 +83,12 @@ export default function CausesScreen() {
     logEvent("P1_view");
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
+  useFocusEffect(
+    useCallback(() => {
       refetchCanDonate();
       refetchFirstAccessToIntegration();
-    }, 500);
-  }, [JSON.stringify(currentUser)]);
+    }, []),
+  );
 
   useEffect(() => {
     const notificationCardVisible = async () => {
