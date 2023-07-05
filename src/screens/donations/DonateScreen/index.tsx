@@ -22,7 +22,7 @@ function DonateScreen() {
   } = useRouteParams<"DonateScreen">();
   const { signedIn } = useCurrentUser();
   const { navigateTo, popNavigation } = useNavigation();
-  const { removeTicket } = useTickets();
+  const { setTickets } = useTickets();
 
   const onContinue = () => {
     setIsDonating(true);
@@ -46,7 +46,7 @@ function DonateScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      removeTicket();
+      setTickets(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     }
   }, [donationSucceeded]);
