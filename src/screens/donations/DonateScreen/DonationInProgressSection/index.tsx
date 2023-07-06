@@ -5,6 +5,7 @@ import { View } from "react-native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { NonProfit } from "@ribon.io/shared/types";
+import TopMountainShapes from "components/vectors/TopMountainShapes";
 import S from "./styles";
 
 type Props = {
@@ -18,18 +19,21 @@ function DonationInProgressSection({ nonProfit, onAnimationEnd }: Props) {
 
   return (
     <View style={S.animationContainer}>
-      <TransferTicketAnimation
-        onAnimationEnd={onAnimationEnd}
-        senderIcon={<UserIcon />}
-        receiverIcon={
-          <Image
-            style={S.nonProfitLogo}
-            source={{ uri: nonProfit.logo }}
-            accessibilityIgnoresInvertColors
-          />
-        }
-        description={t("animationText").toString()}
-      />
+      <TopMountainShapes />
+      <View style={S.centerContainer}>
+        <TransferTicketAnimation
+          onAnimationEnd={onAnimationEnd}
+          senderIcon={<UserIcon />}
+          receiverIcon={
+            <Image
+              style={S.nonProfitLogo}
+              source={{ uri: nonProfit.logo }}
+              accessibilityIgnoresInvertColors
+            />
+          }
+          description={t("animationText").toString()}
+        />
+      </View>
     </View>
   );
 }
