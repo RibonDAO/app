@@ -120,7 +120,7 @@ function EmailInputSection({
             />
 
             <Button
-              text={t("donateText")}
+              text={t("continueText")}
               onPress={handleButtonPress}
               disabled={!isValidEmail(email)}
               customStyles={S.button}
