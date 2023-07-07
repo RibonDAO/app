@@ -21,6 +21,10 @@ function DonationInProgressSection({ nonProfit, onAnimationEnd }: Props) {
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
+
+    return () => {
+      navigation.setOptions({ headerShown: true });
+    };
   }, []);
 
   return (

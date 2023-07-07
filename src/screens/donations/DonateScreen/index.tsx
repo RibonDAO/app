@@ -39,7 +39,7 @@ function DonateScreen() {
     setDonationSucceeded(false);
     showToast({
       type: "error",
-      message: error.response.data.formatted_message,
+      message: error?.response?.data?.formatted_message,
     });
     popNavigation();
   };
