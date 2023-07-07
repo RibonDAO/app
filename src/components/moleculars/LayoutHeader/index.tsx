@@ -27,6 +27,7 @@ import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
+import DeleteAccountModal from "./DeleteAccountModal";
 import S from "./styles";
 
 type Props = {
@@ -43,6 +44,8 @@ function LayoutHeader({
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [blockedDonationModalVisible, setBlockedDonationModalVisible] =
+    useState(false);
+  const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
     useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const { navigateTo } = useNavigation();
@@ -81,31 +84,16 @@ function LayoutHeader({
     }
   };
 
-  const handleUserLogin = () =>
-    currentUser ? (
-      <View style={{ width: 50 }}>
-        <RoundButton
-          active={false}
-          text={t("exitButton")}
-          onPress={handleLogout}
-        />
-      </View>
-    ) : (
-      <Icon
-        type="rounded"
-        size={20}
-        color={theme.colors.brand.primary[300]}
-        name="arrow_forward_ios"
-        onPress={toggleModal}
-      />
-    );
-
-  const toggleTicketModal = () => {
-    setTicketModalVisible(!ticketModalVisible);
-  };
-
   const toggleBlockedDonationModal = () => {
     setBlockedDonationModalVisible(!ticketModalVisible);
+  };
+
+  const toggleDeleteAccountModal = () => {
+    toggleModal();
+
+    setTimeout(() => {
+      setDeleteAccountModalVisible(!deleteAccountModalVisible);
+    }, 800);
   };
 
   useFocusEffect(
@@ -138,9 +126,16 @@ function LayoutHeader({
     );
   };
 
+  const renderDeleteAccountModal = () => (
+    <DeleteAccountModal
+      visible={deleteAccountModalVisible}
+      setVisible={setDeleteAccountModalVisible}
+    />
+  );
+
   const handleTicketClick = () => {
     if (hasTickets()) {
-      toggleTicketModal();
+      navigateTo("GiveTicketScreen");
     } else {
       toggleBlockedDonationModal();
     }
@@ -168,6 +163,56 @@ function LayoutHeader({
     />
   );
 
+  const renderLogoutConfigItem = () =>
+    currentUser && (
+      <ConfigItem
+        icon={LetterIcon}
+        text={currentUser.email}
+        onPress={handleLogout}
+        cta={
+          <View style={{ width: 50 }}>
+            <RoundButton
+              active={false}
+              text={t("exitButton")}
+              onPress={handleLogout}
+            />
+          </View>
+        }
+      />
+    );
+
+  const renderDeleteAccountConfigItem = () => {
+    const icon = useCallback(
+      () => (
+        <Icon
+          type="rounded"
+          size={26}
+          color={theme.colors.brand.tertiary[400]}
+          name="delete_forever"
+        />
+      ),
+      [],
+    );
+
+    return (
+      currentUser && (
+        <ConfigItem
+          icon={icon}
+          text={t("deleteAccount")}
+          onPress={toggleDeleteAccountModal}
+          last={Boolean(currentUser)}
+          cta={
+            <Icon
+              type="rounded"
+              size={20}
+              color={theme.colors.brand.tertiary[400]}
+              name="arrow_forward_ios"
+            />
+          }
+        />
+      )
+    );
+  };
   const renderConfigModal = () => (
     <Modal
       isVisible={menuVisible}
@@ -185,9 +230,16 @@ function LayoutHeader({
         />
 
         <ConfigItem
+          icon={GlobeIcon}
+          text={t("language")}
+          linkIcon={ChangeLanguageItem}
+        />
+
+        <ConfigItem
           icon={SupportIcon}
           text={t("support")}
           onPress={linkToSupport}
+          last={!currentUser}
           cta={
             <Icon
               type="rounded"
@@ -199,18 +251,8 @@ function LayoutHeader({
           }
         />
 
-        <ConfigItem
-          icon={LetterIcon}
-          text={currentUser ? currentUser?.email : t("login")}
-          onPress={currentUser ? handleLogout : toggleModal}
-          cta={handleUserLogin()}
-        />
-
-        <ConfigItem
-          icon={GlobeIcon}
-          text={t("language")}
-          linkIcon={ChangeLanguageItem}
-        />
+        {renderLogoutConfigItem()}
+        {renderDeleteAccountConfigItem()}
       </View>
     </Modal>
   );
@@ -218,7 +260,11 @@ function LayoutHeader({
   return (
     <View style={S.configContainer}>
       {!hideTicket && (
-        <TouchableOpacity accessibilityRole="button" style={S.container} onPress={handleTicketClick}>
+        <TouchableOpacity
+          accessibilityRole="button"
+          style={S.container}
+          onPress={handleTicketClick}
+        >
           <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
             <Text style={{ ...S.ticketCounter, color: ticketColor }}>
               {tickets}
@@ -229,7 +275,11 @@ function LayoutHeader({
       )}
 
       {!hideWallet && (
-        <TouchableOpacity accessibilityRole="button" style={S.container} onPress={handleWalletButtonClick}>
+        <TouchableOpacity
+          accessibilityRole="button"
+          style={S.container}
+          onPress={handleWalletButtonClick}
+        >
           <View style={S.walletContainer}>
             <Text style={S.walletText}>
               {wallet ? walletTruncate(wallet) : t("connectWallet")}
@@ -239,7 +289,11 @@ function LayoutHeader({
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity accessibilityRole="button" style={S.container} onPress={toggleModal}>
+      <TouchableOpacity
+        accessibilityRole="button"
+        style={S.container}
+        onPress={toggleModal}
+      >
         <CogIcon />
       </TouchableOpacity>
 
@@ -248,6 +302,8 @@ function LayoutHeader({
       {renderBlockedDonationModal()}
 
       {renderConfigModal()}
+
+      {renderDeleteAccountModal()}
     </View>
   );
 }

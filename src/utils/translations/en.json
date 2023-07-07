@@ -12,11 +12,21 @@
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0",
     "login": "Login",
     "language": "Change language",
+    "deleteAccount": "Delete account",
     "connectWallet": "Connect",
     "ticketModal": {
       "title": "Cool! You have 1 ticket to donate :)",
       "description": "You can use to donate to any project",
       "buttonText": "Let's go!"
+    },
+    "deleteAccountModal": {
+      "title": "Confirm account deletion",
+      "description": "You will be signed out automatically and receive an account deletion e-mail to proceed with your request.",
+      "cancel": "Cancel",
+      "close": "Close",
+      "confirm": "Receive e-mail",
+      "emailSentTitle": "E-mail sent!",
+      "emailSentDescription": "We sent you an e-mail with instructions to delete your account. If you don't receive it, please check your promotions/spam folder."
     },
     "disconnectWallet": "Disconnect wallet",
     "cancel": "cancel",
@@ -48,6 +58,9 @@
         "title": "No causes available",
         "text": "But you can contribute donating in community for a cause",
         "button": "Donate in community"
+      },
+      "ticketSection": {
+        "ticketToast": "You have a new ticket!"
       }
     },
     "donateScreen": {
@@ -65,7 +78,11 @@
       "termsLink": "https://ribon.io/en/privacy-policy/#terms",
       "privacyPolicyText": "Privacy Policy",
       "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
-      "and": " and"
+      "and": " and",
+      "signedInSection": {
+        "title": "Your donation",
+        "confirmDonation": "Confirm donation"
+      }
     },
     "donationDoneScreen": {
       "title": "Congratulations!",
@@ -82,10 +99,9 @@
       }
     },
     "receiveTicketScreen": {
-      "title": "Donating together to change lives!",
-      "description": "You have a ticket to receive :)",
-      "buttonText": "Receive ticket",
-      "animationText": "Receiving ticket"
+      "textOrigin": "Community",
+      "textDestiny": "You",
+      "description": "Receiving ticket..."
     }
   },
   "content": {
@@ -96,6 +112,16 @@
       "subtitle": "Now you can see what's new at Ribon and good news selected to warm your heart!",
       "seeAllPosts": "See all posts",
       "continue": "Continue"
+    },
+    "giveTicketScreen": {
+      "title": "You have 1 ticket!",
+      "subtitle": "Every day when you login in Ribon you get a new ticket.",
+      "button": "Donate ticket",
+      "onboardingTitle": "Welcome to Ribon!",
+      "onboardingSubtitle": "Your donation ticket is available",
+      "onboardingButton": "Get my ticket",
+      "whatIsATicket": "What is a ticket?",
+      "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in."
     },
     "forYouScreen": {
       "newsSection": {
@@ -244,9 +270,9 @@
       "ticketDonationsTitle": "Ticket Donations",
       "directDonationsTitle": "Direct Donations",
       "impactNotification": {
-        "title": "We will be importing your impact soon!",
-        "description": "Your ribons donations from the old platform will soon be imported into your impact.",
-        "link": "Do not show again"
+        "title": "We have imported your impact!",
+        "description": "Your history of donations from the old platform are in the \"Ticket donations\" tab.",
+        "link": "Don’t show this again"
       }
     }
   },

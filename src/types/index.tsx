@@ -28,6 +28,10 @@ export type ContributionDoneParamsList = {
   cause?: Cause;
 };
 
+export type GiveTicketScreenParamList = {
+  isOnboarding?: boolean;
+};
+
 export type CommunityAddModalParamList = {
   amount: string;
 };
@@ -68,6 +72,7 @@ export type RootStackParamList = {
   AvailableArticleScreen: undefined;
   NotFound: undefined;
   ReceiveTicketScreen: undefined;
+  GiveTicketScreen: GiveTicketScreenParamList;
   CausesScreen: undefined;
   ForYouScreen: ForYouScreenParamsList;
   PostDonationScreen: PostDonationScreenParams;

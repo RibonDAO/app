@@ -36,6 +36,7 @@ import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
+import GiveTicketScreen from "screens/donations/GiveTicketScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -168,11 +169,17 @@ function RootNavigator() {
 
       <Stack.Screen
         name="ReceiveTicketScreen"
-        component={ReceiveTicketScreen as any}
+        component={ReceiveTicketScreen}
         options={{
           title: "ReceiveTicketScreen",
           headerShown: false,
         }}
+      />
+
+      <Stack.Screen
+        name="GiveTicketScreen"
+        component={GiveTicketScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
       <Stack.Screen

@@ -12,11 +12,21 @@
     "login": "Fazer login",
     "notifications": "Ativar notificações",
     "language": "Alterar idioma",
+    "deleteAccount": "Excluir conta",
     "connectWallet": "Conectar",
     "ticketModal": {
       "title": "Legal! Você tem 1 vale para doar :)",
       "description": "Você pode destiná-lo para qualquer projeto",
       "buttonText": "Vamos lá!"
+    },
+    "deleteAccountModal": {
+      "title": "Confirmar exclusão de conta",
+      "description": "Você sairá do app automaticamente e receberá um e-mail de exclusão de conta para continuar com o processo.",
+      "cancel": "Cancelar",
+      "close": "Fechar",
+      "confirm": "Receber e-mail",
+      "emailSentTitle": "E-mail enviado",
+      "emailSentDescription": "Você receberá um e-mail com o link para excluir sua conta em breve. Se você não receber, por favor, verifique sua caixa de promoções/spam."
     },
     "disconnectWallet": "Desconectar carteira",
     "cancel": "cancelar",
@@ -48,6 +58,9 @@
         "title": "Nenhuma causa disponível",
         "text": "Mas você pode contribuir doando em comunidade para uma causa",
         "button": "Doe em comunidade"
+      },
+      "ticketSection": {
+        "ticketToast": "Você tem um novo ticket!"
       }
     },
     "donateScreen": {
@@ -65,7 +78,11 @@
       "termsLink": "https://ribon.io/privacy-policy/#termos",
       "privacyPolicyText": "Política de Privacidade",
       "privacyPolicyLink": "https://ribon.io/privacy-policy/#pol%C3%ADtica",
-      "and": " e a"
+      "and": " e a",
+      "signedInSection": {
+        "title": "Sua doação",
+        "confirmDonation": "Confirmar doação"
+      }
     },
     "donationDoneScreen": {
       "title": "Parabéns!",
@@ -82,10 +99,9 @@
       }
     },
     "receiveTicketScreen": {
-      "title": "Doar juntos para mudar vidas!",
-      "description": "Você tem um ticket para receber :)",
-      "buttonText": "Receber ticket",
-      "animationText": "Recebendo ticket"
+      "textOrigin": "Comunidade",
+      "textDestiny": "Você",
+      "description": "Recebendo ticket..."
     }
   },
   "content": {
@@ -96,6 +112,16 @@
       "subtitle": "Você doou e agora pode ver novidades da Ribon e notícias pra aquecer seu coração!",
       "seeAllPosts": "Ver publicações",
       "continue": "Continuar"
+    },
+    "giveTicketScreen": {
+      "title": "Você tem 1 ticket!",
+      "subtitle": "Você recebe um novo ticket sempre que entra na Ribon pela primeira vez no dia",
+      "button": "Doar ticket",
+      "onboardingTitle": "Que bom ter você na Ribon!",
+      "onboardingSubtitle": "Seu ticket doação está disponível",
+      "onboardingButton": "Receber meu ticket",
+      "whatIsATicket": "O que é um ticket?",
+      "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon."
     },
     "forYouScreen": {
       "newsSection": {
@@ -244,8 +270,8 @@
       "ticketDonationsTitle": "Doações em Ticket",
       "directDonationsTitle": "Doações Diretas",
       "impactNotification": {
-        "title": "Vamos importar o seu impacto em breve!",
-        "description": "Suas doações em ribons da plataforma antiga irão ser importadas em breve para o seu perfil.",
+        "title": "Migramos seu impacto!",
+        "description": "O seu histórico de doações feitas na plataforma antiga está na aba \"doações em ticket\".",
         "link": "Não mostrar novamente"
       }
     }

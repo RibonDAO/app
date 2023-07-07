@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   useFreeDonationNonProfits,
   useFreeDonationCauses,
   useCanDonate,
   useStories,
+  useFirstAccessToIntegration,
 } from "@ribon.io/shared/hooks";
 import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
@@ -12,7 +13,6 @@ import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
-import { useCurrentUser } from "contexts/currentUserContext";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
@@ -30,6 +30,10 @@ import InlineNotification from "components/moleculars/notifications/InlineNotifi
 import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
+import { useFocusEffect } from "@react-navigation/native";
+import { useAppState } from "hooks/useAppState";
+import * as SplashScreen from "expo-splash-screen";
+import { perform } from "lib/timeoutHelpers";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
@@ -46,6 +50,11 @@ export default function CausesScreen() {
     isLoading: loadingCanDonate,
     refetch: refetchCanDonate,
   } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
+  const {
+    isFirstAccessToIntegration,
+    refetch: refetchFirstAccessToIntegration,
+    isLoading: loadingFirstAccessToIntegration,
+  } = useFirstAccessToIntegration(RIBON_INTEGRATION_ID);
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
@@ -53,7 +62,6 @@ export default function CausesScreen() {
     {} as NonProfit,
   );
   const { navigateTo } = useNavigation();
-  const { currentUser } = useCurrentUser();
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
@@ -61,15 +69,26 @@ export default function CausesScreen() {
   const [isNotificationCardVisible, setNotificationCardVisible] =
     useState(false);
 
+  useAppState({
+    onComeToForeground: () => {
+      refetchCanDonate();
+    },
+  });
+
+  useEffect(() => {
+    if (!isLoading) perform(SplashScreen.hideAsync).in(100);
+  }, [isLoading]);
+
   useEffect(() => {
     logEvent("P1_view");
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
+  useFocusEffect(
+    useCallback(() => {
       refetchCanDonate();
-    }, 500);
-  }, [JSON.stringify(currentUser)]);
+      refetchFirstAccessToIntegration();
+    }, []),
+  );
 
   useEffect(() => {
     const notificationCardVisible = async () => {
@@ -182,7 +201,7 @@ export default function CausesScreen() {
       </View>
     );
 
-  return isLoading || loadingCanDonate ? (
+  return isLoading || loadingCanDonate || loadingFirstAccessToIntegration ? (
     <Placeholder />
   ) : (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
@@ -195,7 +214,10 @@ export default function CausesScreen() {
             setStoriesVisible={setStoriesVisible}
           />
         )}
-        <TicketSection canDonate={canDonate} />
+        <TicketSection
+          canDonate={canDonate}
+          isFirstAccessToIntegration={isFirstAccessToIntegration}
+        />
         {renderNotificationCard()}
         <Text style={S.title}>{t("title")}</Text>
         <ScrollView
