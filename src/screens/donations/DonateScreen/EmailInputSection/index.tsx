@@ -1,5 +1,4 @@
 import {
-  Dimensions,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -85,10 +84,7 @@ function EmailInputSection({
   return (
     <KeyboardAvoidingView
       behavior="position"
-      style={{
-        height:
-          Platform.OS === "android" ? Dimensions.get("window").height : "100%",
-      }}
+      style={S.keyboardView}
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -20}
     >
       <TouchableWithoutFeedback

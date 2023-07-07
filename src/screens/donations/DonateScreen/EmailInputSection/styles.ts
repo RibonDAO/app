@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 import { stylizedDisplayXs } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 import {
@@ -70,6 +70,10 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     alignItems: "center",
     justifyContent: "center",
+  },
+  keyboardView: {
+    height:
+      Platform.OS === "android" ? Dimensions.get("window").height : "100%",
   },
 });
 
