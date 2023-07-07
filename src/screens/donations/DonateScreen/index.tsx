@@ -16,7 +16,7 @@ import Placeholder from "./placeholder";
 
 function DonateScreen() {
   const [isDonating, setIsDonating] = useState(false);
-  const [donationSucceeded, setDonationSucceeded] = useState(false);
+  const [donationSucceeded, setDonationSucceeded] = useState(true);
   const {
     params: { nonProfit },
   } = useRouteParams<"DonateScreen">();

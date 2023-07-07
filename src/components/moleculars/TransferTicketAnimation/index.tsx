@@ -42,9 +42,11 @@ function TransferTicketAnimation({
   const ANIMATION_TIME = 3000;
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       onAnimationEnd();
     }, ANIMATION_TIME);
+
+    return () => clearTimeout(timeout);
   }, [onAnimationEnd]);
 
   return (
