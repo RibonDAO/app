@@ -2,6 +2,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
   Text,
   TouchableWithoutFeedback,
   View,
@@ -82,14 +83,14 @@ function EmailInputSection({
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? "position" : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
     >
       <TouchableWithoutFeedback
         accessibilityRole="button"
         onPress={Keyboard.dismiss}
       >
-        <View style={S.container}>
+        <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
             <View style={S.imageBackground}>
               <BackgroundShapes />
@@ -136,7 +137,7 @@ function EmailInputSection({
               </Text>
             </Text>
           </View>
-        </View>
+        </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
