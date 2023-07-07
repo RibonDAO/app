@@ -2,10 +2,11 @@ import TransferTicketAnimation from "components/moleculars/TransferTicketAnimati
 import UserIcon from "components/vectors/UserIcon";
 import Image from "components/atomics/Image";
 import { View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NonProfit } from "@ribon.io/shared/types";
 import TopMountainShapes from "components/vectors/TopMountainShapes";
+import { useNavigation } from "@react-navigation/native";
 import S from "./styles";
 
 type Props = {
@@ -16,6 +17,11 @@ function DonationInProgressSection({ nonProfit, onAnimationEnd }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donateScreen",
   });
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, []);
 
   return (
     <View style={S.animationContainer}>
