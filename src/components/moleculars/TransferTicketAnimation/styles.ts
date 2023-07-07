@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   diamondImage: {
     backgroundColor: "transparent",
-    transform: [{ rotate: "45deg" }],
+    transform: [{ rotate: "45deg" }, { scale: 1.2 }],
   },
   stripedLine: {
     borderStyle: "dashed",

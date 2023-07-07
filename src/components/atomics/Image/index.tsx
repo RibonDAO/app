@@ -1,70 +1,35 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
 import {
   Image as ReactNativeImageComponent,
-  View,
-  ActivityIndicator,
   ImageStyle,
   ImageRequireSource,
   ImageProps,
 } from "react-native";
-import * as FileSystem from "expo-file-system";
-import {
-  cacheImage,
-  findImageInCache,
-  hashFromString,
-} from "components/atomics/Image/helpers";
+import { Image as ExpoImage } from "expo-image";
+
+const blurhash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4";
 
 interface Props extends ImageProps {
   source: { uri: string } | ImageRequireSource;
   style?: ImageStyle;
+  transition?: number;
 }
-function Image({ source, style, ...rest }: Props) {
+function Image({ source, style, transition = 800, ...rest }: Props) {
   if (typeof source === "number") {
-    return <ReactNativeImageComponent source={source} style={style} />;
+    return (
+      <ReactNativeImageComponent source={source} style={style} {...rest} />
+    );
   }
 
-  const { uri } = source;
-  const isMounted = useRef(true);
-  const [imgUri, setUri] = useState("");
-
-  const cacheKey = useCallback(async () => {
-    if (!uri) return undefined;
-
-    return hashFromString(uri);
-  }, [uri]);
-
-  useEffect(() => {
-    async function loadImg() {
-      const key = await cacheKey();
-      if (!key) return;
-
-      const cacheFileUri = `${FileSystem.cacheDirectory}${key}`;
-      const imgXistsInCache = await findImageInCache(cacheFileUri);
-      if (imgXistsInCache.exists) {
-        setUri(cacheFileUri);
-      } else {
-        const cached = await cacheImage(uri, cacheFileUri, () => {});
-        if (cached.cached && cached.path) {
-          setUri(cached.path);
-        }
-      }
-    }
-    loadImg();
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, [cacheKey]);
-  return imgUri ? (
-    <ReactNativeImageComponent
-      source={{ uri: imgUri }}
+  return (
+    <ExpoImage
       style={style}
-      {...rest}
+      source={{ uri: source.uri }}
+      placeholder={blurhash}
+      contentFit="cover"
+      transition={transition}
+      {...(rest as any)}
     />
-  ) : (
-    <View style={{ ...style, alignItems: "center", justifyContent: "center" }}>
-      <ActivityIndicator size={33} />
-    </View>
   );
 }
 export default Image;

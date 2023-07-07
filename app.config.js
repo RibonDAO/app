@@ -1,5 +1,5 @@
-const version = "5.0.4";
-const buildNumber = 309;
+const version = "5.0.11";
+const buildNumber = 315;
 
 export default () => ({
   "expo": {
@@ -9,7 +9,7 @@ export default () => ({
     "version": version,
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "ribon",
     "jsEngine": "hermes",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -72,7 +72,14 @@ export default () => ({
       "sentry-expo",
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
-      "@react-native-firebase/crashlytics"
+      "@react-native-firebase/crashlytics",
+      [
+        "@config-plugins/react-native-branch",
+        {
+          "apiKey": "key_live_psjoynwxXPk14LioRerHjhggEvgKd6Bh",
+          "iosAppDomain": "donation.app.link"
+        }
+      ],
     ],
     "extra": {
       "eas": {

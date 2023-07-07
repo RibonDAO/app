@@ -10,6 +10,7 @@
     "support": "Suporte ao usuário",
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0",
     "login": "Fazer login",
+    "notifications": "Ativar notificações",
     "language": "Alterar idioma",
     "connectWallet": "Conectar",
     "ticketModal": {
@@ -25,7 +26,14 @@
     "causesScreen": {
       "title": "Doe para um projeto",
       "buttonText": "Doar ticket",
+      "noTickets": "Sem tickets",
       "allCauses": "Todas",
+      "enableNotification": {
+        "title": "Não perca seu ticket diário!",
+        "link": "Ligar notificações",
+        "successToastMessage": "Notificações ligadas",
+        "errorToastMessage": "Erro ao ligar notificações"
+      },
       "userSupportSection": {
         "title": "Suporte ao Usuário",
         "description": "Dúvidas, ideias, estornos. Estamos aqui!",
@@ -35,7 +43,7 @@
       "impactPrefix": "Doe",
       "labelText": "Saiba mais",
       "whatIsATicket": "O que é um ticket?",
-      "ticketExplanation": "Os tickets servem para fazer doações e você recebe um a cada dia que entrar aqui na Ribon",
+      "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
       "noCauses": {
         "title": "Nenhuma causa disponível",
         "text": "Mas você pode contribuir doando em comunidade para uma causa",
@@ -106,6 +114,12 @@
       "tasksSection": {
         "title": "Tarefas",
         "titleSuperTasks": "Super tarefas",
+        "enableNotification": {
+          "title": "Receba o alerta de tarefas!",
+          "link": "Ligar notificações",
+          "successToastMessage": "Notificações ligadas",
+          "errorToastMessage": "Erro ao ligar notificações"
+        },
         "tasks": {
           "donate_ticket": "Doar ticket",
           "donate_ticket_on_native": "Baixar o app e doar um ticket",
@@ -149,6 +163,7 @@
       "refundText": "*Pagamentos em criptomoeda não são estornáveis",
       "tokenAmountTransferMessage": "Aprovando quantidade de tokens pra transação...",
       "contractTransferMessage": "Transferindo pro contrato...",
+      "successDonationMessage": "Você doou {{amount}} {{tokenSymbol}} com sucesso!",
       "communityAddScreen": {
         "title": "Como a comunidade aumenta a sua doação de {{value}}?",
         "button": "Doar {{value}}"
@@ -220,7 +235,9 @@
             "description": "Você ainda não fez doações diretas, que tal fazer a sua primeira?",
             "buttonText": "Doar diretamente"
           },
-          "migrated": "Migrado"
+          "migrated": "Migrado",
+          "showMore": "Mostrar mais",
+          "generalReceiver": "Geral"
         }
       },
       "communityDonationsTitle": "Doações em Comunidade",
@@ -228,7 +245,7 @@
       "directDonationsTitle": "Doações Diretas",
       "impactNotification": {
         "title": "Vamos importar o seu impacto em breve!",
-        "description": "Suas doações em ribons da plataforma antiga irão ser importados em breve para o seu perfil.",
+        "description": "Suas doações em ribons da plataforma antiga irão ser importadas em breve para o seu perfil.",
         "link": "Não mostrar novamente"
       }
     }

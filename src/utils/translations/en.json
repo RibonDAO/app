@@ -8,6 +8,7 @@
   "layoutHeader": {
     "exitButton": "Exit",
     "support": "User Support",
+    "notifications": "Allow notifications",
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0",
     "login": "Login",
     "language": "Change language",
@@ -26,6 +27,13 @@
       "title": "Donate to a Project",
       "buttonText": "Donate",
       "allCauses": "All",
+      "noTickets": "No tickets",
+      "enableNotification": {
+        "title": "Don't miss your daily ticket!",
+        "link": "Enable notifications",
+        "successToastMessage": "Notifications turned on",
+        "errorToastMessage": "Error turning on notifications"
+      },
       "userSupportSection": {
         "title": "Ribon Support",
         "description": "Doubts, ideas, refunds. We're here!",
@@ -35,7 +43,7 @@
       "impactPrefix": "Donate",
       "labelText": "Learn more",
       "whatIsATicket": "What is a ticket?",
-      "ticketExplanation": "Tickets are used to make donations and you get a new one everyday when you log in Ribon.",
+      "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "noCauses": {
         "title": "No causes available",
         "text": "But you can contribute donating in community for a cause",
@@ -106,6 +114,12 @@
       "tasksSection": {
         "title": "Tasks",
         "titleSuperTasks": "Super tasks",
+        "enableNotification": {
+          "title": "Get the task reset notification!",
+          "link": "Enable notifications",
+          "successToastMessage": "Notifications turned on",
+          "errorToastMessage": "Error turning on notifications"
+        },
         "tasks": {
           "donate_ticket": "Donate a ticket",
           "donate_ticket_on_native": "Get the app and donate a ticket",
@@ -221,7 +235,9 @@
             "description": "You have not made direct donations  yet, why not try your first one?",
             "buttonText": "Donate directly"
           },
-          "migrated": "Migrated"
+          "migrated": "Migrated",
+          "showMore": "Show more",
+          "generalReceiver": "General"
         }
       },
       "communityDonationsTitle": "Community Donations",

@@ -6,8 +6,9 @@ import S from "./styles";
 
 export type Props = {
   title: string;
-  description: string;
+  description?: string | null;
   firstLink?: string;
+  customIcon?: string;
   onFirstLinkClick?: (setVisible: Dispatch<boolean>) => void;
   secondLink?: string;
   onSecondLinkClick?: (setVisible: Dispatch<boolean>) => void;
@@ -18,6 +19,7 @@ function InlineNotification({
   title,
   description,
   firstLink,
+  customIcon,
   onFirstLinkClick,
   secondLink,
   onSecondLinkClick,
@@ -40,6 +42,8 @@ function InlineNotification({
   };
 
   const iconByType = () => {
+    if (customIcon) return customIcon;
+
     switch (type) {
       case "success":
         return "check_circle";
@@ -90,15 +94,15 @@ function InlineNotification({
         />
         <View style={S.textContainer}>
           <Text style={S.title}>{title}</Text>
-          <Text style={S.description}>{description}</Text>
+          {description && <Text style={S.description}>{description}</Text>}
           <View style={S.links}>
             {firstLink && (
-              <TouchableOpacity onPress={handleFirstLinkClick}>
+              <TouchableOpacity accessibilityRole="button" onPress={handleFirstLinkClick}>
                 <Text style={S.link}>{firstLink}</Text>
               </TouchableOpacity>
             )}
             {secondLink && (
-              <TouchableOpacity onPress={handleSecondLinkClick}>
+              <TouchableOpacity accessibilityRole="button" onPress={handleSecondLinkClick}>
                 <Text style={S.link}>{secondLink}</Text>
               </TouchableOpacity>
             )}
@@ -106,7 +110,7 @@ function InlineNotification({
         </View>
       </View>
       <View style={S.rightContainer}>
-        <TouchableOpacity onPress={handleCloseIconClick}>
+        <TouchableOpacity accessibilityRole="button" onPress={handleCloseIconClick}>
           <Icon
             accessibilityHint="close-icon"
             type="sharp"

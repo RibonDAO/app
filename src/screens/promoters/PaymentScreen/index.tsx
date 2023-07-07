@@ -9,7 +9,6 @@ import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { Platform, Text, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
-import { theme } from "@ribon.io/shared/styles";
 import { useKeyboardVisibility } from "hooks/useKeyboardVisibility";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
@@ -143,8 +142,9 @@ function PaymentScreen(): JSX.Element {
             onPress={handleContinueClick}
             disabled={buttonDisabled}
             customStyles={styles.donateButton}
-            backgroundColor={theme.colors.brand.secondary[300]}
-            borderColor={theme.colors.brand.secondary[300]}
+            backgroundColor={colorTheme.shade20}
+            borderColor={colorTheme.shade20}
+            textColor={colorTheme.shade40}
           />
         </View>
       )}

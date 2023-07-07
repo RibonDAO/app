@@ -135,6 +135,8 @@ export default function CardStories({
               uri: content[current]?.content,
             }}
             style={{ width, height, resizeMode: "cover" }}
+            transition={current === 0 ? 800 : 0}
+            accessibilityIgnoresInvertColors
           />
         </View>
         <View style={S.innerContainer}>
@@ -167,6 +169,7 @@ export default function CardStories({
               onPress={() => {
                 close();
               }}
+              accessibilityRole="button"
             >
               <View style={S.crossIconContainer}>
                 <Icon type="rounded" size={28} color="white" name="close" />
@@ -204,6 +207,7 @@ export default function CardStories({
                   source={{
                     uri: avatar,
                   }}
+                  accessibilityIgnoresInvertColors
                 />
               )}
               <View style={S.titlesContainer}>
@@ -213,10 +217,16 @@ export default function CardStories({
             </View>
           </View>
           <View style={S.passStoryView}>
-            <TouchableWithoutFeedback onPress={() => previous()}>
+            <TouchableWithoutFeedback
+              onPress={() => previous()}
+              accessibilityRole="button"
+            >
               <View style={{ flex: 1 }} />
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => next()}>
+            <TouchableWithoutFeedback
+              onPress={() => next()}
+              accessibilityRole="button"
+            >
               <View style={{ flex: 1 }} />
             </TouchableWithoutFeedback>
           </View>

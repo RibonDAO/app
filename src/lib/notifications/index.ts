@@ -1,4 +1,4 @@
-import messaging from '@react-native-firebase/messaging';
+import messaging from "@react-native-firebase/messaging";
 
 export default async function requestUserPermissionForNotifications() {
   const permissionStatus = await messaging().requestPermission();
@@ -7,17 +7,27 @@ export default async function requestUserPermissionForNotifications() {
     permissionStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
   if (enabled) {
-    console.log('Authorization status:', permissionStatus);
+    // eslint-disable-next-line no-console
+    console.log("Authorization status:", permissionStatus);
   }
+
+  return enabled;
+}
+
+export async function isNotificationsEnabled() {
+  const enabled = await messaging().hasPermission();
+  return enabled;
 }
 
 export async function setBackgroundMessageHandler() {
-  messaging().setBackgroundMessageHandler(async remoteMessage => {
-    console.log('Message handled in the background!', remoteMessage);
+  messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+    // eslint-disable-next-line no-console
+    console.log("Message handled in the background!", remoteMessage);
   });
 }
 
 export async function getNotificationToken() {
   const token = await messaging().getToken();
-  console.log('token:', token);
+  // eslint-disable-next-line no-console
+  console.log("token:", token);
 }

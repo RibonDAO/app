@@ -25,8 +25,15 @@ import TicketSection from "screens/donations/CausesScreen/TicketSection";
 import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
 import { logEvent } from "services/analytics";
-import S from "./styles";
+import { Image } from "expo-image";
+import InlineNotification from "components/moleculars/notifications/InlineNotification";
+import requestUserPermissionForNotifications from "lib/notifications";
+import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
+import { showToast } from "lib/Toast";
 import Placeholder from "./placeholder";
+import S from "./styles";
+
+const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
 export default function CausesScreen() {
   const { t } = useTranslation("translation", {
@@ -51,6 +58,8 @@ export default function CausesScreen() {
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets } = useTickets();
+  const [isNotificationCardVisible, setNotificationCardVisible] =
+    useState(false);
 
   useEffect(() => {
     logEvent("P1_view");
@@ -61,6 +70,17 @@ export default function CausesScreen() {
       refetchCanDonate();
     }, 500);
   }, [JSON.stringify(currentUser)]);
+
+  useEffect(() => {
+    const notificationCardVisible = async () => {
+      const value = await getLocalStorageItem(NOTIFICATION_CARD_VISIBLE_KEY);
+      return value === "true" || value === null;
+    };
+
+    notificationCardVisible().then((visible) => {
+      setNotificationCardVisible(visible);
+    });
+  }, []);
 
   const causesFilter = () => {
     const causesApi = causes.filter((cause) => cause.active);
@@ -98,6 +118,7 @@ export default function CausesScreen() {
     setCurrentNonProfit(nonProfit);
     try {
       const nonProfitStories = await fetchNonProfitStories(nonProfit.id);
+      Image.prefetch(nonProfitStories.map((story) => story.image));
       if (nonProfitStories.length === 0) return;
       setStories(nonProfitStories);
       setStoriesVisible(true);
@@ -121,6 +142,46 @@ export default function CausesScreen() {
     navigateTo("PromotersScreen");
   };
 
+  const handleHideNotificationClick = async () => {
+    const hideAlert = () => {
+      setLocalStorageItem(NOTIFICATION_CARD_VISIBLE_KEY, "false");
+      setNotificationCardVisible(false);
+    };
+
+    try {
+      const enabled = await requestUserPermissionForNotifications();
+      if (enabled) {
+        showToast({
+          type: "success",
+          message: t("enableNotification.successToastMessage"),
+          position: "bottom",
+        });
+        hideAlert();
+      }
+    } catch (e) {
+      logError(e);
+      showToast({
+        type: "error",
+        message: t("enableNotification.errorToastMessage"),
+        position: "bottom",
+      });
+      hideAlert();
+    }
+  };
+
+  const renderNotificationCard = () =>
+    isNotificationCardVisible && (
+      <View style={{ paddingBottom: 16 }}>
+        <InlineNotification
+          title={t("enableNotification.title")}
+          type="warning"
+          customIcon="notifications"
+          firstLink={t("enableNotification.link") || ""}
+          onFirstLinkClick={handleHideNotificationClick}
+        />
+      </View>
+    );
+
   return isLoading || loadingCanDonate ? (
     <Placeholder />
   ) : (
@@ -135,14 +196,19 @@ export default function CausesScreen() {
           />
         )}
         <TicketSection canDonate={canDonate} />
+        {renderNotificationCard()}
         <Text style={S.title}>{t("title")}</Text>
-        <View style={S.groupButtonsContainer}>
+        <ScrollView
+          style={S.groupButtonsContainer}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >
           <GroupButtons
             elements={causesFilter()}
             onChange={handleCauseChange}
             nameExtractor={(cause) => cause.name}
           />
-        </View>
+        </ScrollView>
       </View>
 
       {nonProfitsFilter()?.length > 0 ? (
@@ -166,7 +232,7 @@ export default function CausesScreen() {
                   undefined,
                   t("impactPrefix") || "",
                 )}
-                buttonText={t("buttonText")}
+                buttonText={hasTickets() ? t("buttonText") : t("noTickets")}
                 onImagePress={() => {
                   handleNonProfitImagePress(nonProfit);
                 }}
