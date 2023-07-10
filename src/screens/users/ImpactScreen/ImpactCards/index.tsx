@@ -13,7 +13,7 @@ function ImpactCards(): JSX.Element {
   const { currentUser } = useCurrentUser();
   const { userStatistics } = useStatistics({ userId: currentUser?.id });
   const { t } = useTranslation("translation", {
-    keyPrefix: "users.profileScreen.impactCards",
+    keyPrefix: "users.impactScreen.impactCards",
   });
 
   // TODO: dynamic currency on totaldonated
