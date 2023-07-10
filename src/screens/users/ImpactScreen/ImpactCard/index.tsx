@@ -20,7 +20,7 @@ function ImpactCard({
   color = theme.colors.brand.primary[800],
 }: Props): JSX.Element {
   return (
-    <TouchableOpacity onPress={onPress} style={S.badgeContainer}>
+    <TouchableOpacity accessibilityRole="button" onPress={onPress} style={S.badgeContainer}>
       <View style={S.badgeRoundContainer}>
         <Icon
           style={S.icon}

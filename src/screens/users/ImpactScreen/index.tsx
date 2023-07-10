@@ -7,7 +7,7 @@ import { logEvent } from "services/analytics";
 import TabViewSection from "./TabViewSection";
 import S from "./styles";
 
-function ProfileScreen() {
+function ImpactScreen() {
   const { currentUser } = useCurrentUser();
   const { refetch: refetchImpact } = useImpact(currentUser?.id);
   const { refetch: refetchStatistics } = useStatistics({
@@ -34,4 +34,4 @@ function ProfileScreen() {
   );
 }
 
-export default ProfileScreen;
+export default ImpactScreen;

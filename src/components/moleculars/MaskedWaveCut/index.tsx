@@ -16,7 +16,12 @@ function MaskedWaveCut({ image = "", imageStyles }: Props) {
       }
     >
       {image && (
-        <Image source={{ uri: image }} style={imageStyles} transition={0} />
+        <Image
+          source={{ uri: image }}
+          style={imageStyles}
+          transition={0}
+          accessibilityIgnoresInvertColors
+        />
       )}
     </MaskedView>
   );

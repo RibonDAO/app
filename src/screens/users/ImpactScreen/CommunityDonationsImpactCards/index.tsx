@@ -35,7 +35,7 @@ function CommunityDonationsImpactCards(): JSX.Element {
     (legacyContributions && legacyContributions?.length > 0);
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
-    keyPrefix: "users.profileScreen.ngoImpactCards.zeroDonationsSection",
+    keyPrefix: "users.impactScreen.ngoImpactCards.zeroDonationsSection",
   });
 
   const hasDuplicatedIds = (items: any[]) => {

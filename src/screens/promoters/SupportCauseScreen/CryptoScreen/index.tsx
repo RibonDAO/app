@@ -135,7 +135,8 @@ function CryptoScreen(): JSX.Element {
     return t("connectWalletButtonText");
   };
 
-  const preSelectedIndex = () => cause ? causesFilter().findIndex((c) => c.id === cause?.id) : 0;
+  const preSelectedIndex = () =>
+    cause ? causesFilter().findIndex((c) => c.id === cause?.id) : 0;
 
   return (
     <ScrollView
