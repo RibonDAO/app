@@ -22,6 +22,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import BackgroundShapes from "components/vectors/BackgroundShapes";
 import Image from "components/atomics/Image";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
+import { perform } from "lib/timeoutHelpers";
 import S from "./styles";
 
 type Props = {
@@ -47,18 +48,18 @@ function EmailInputSection({
   const { formattedImpactText } = useFormattedImpactText();
 
   async function donateCallback() {
-    if (email) {
-      try {
-        const user = await findOrCreateUser(
-          email,
-          formattedLanguage(currentLang),
-        );
+    try {
+      const user = await findOrCreateUser(
+        email,
+        formattedLanguage(currentLang),
+      );
+      perform(() => {
         setCurrentUser(user);
-        await donate(RIBON_INTEGRATION_ID, nonProfit.id, email, PLATFORM);
-        onDonationSuccess();
-      } catch (error: any) {
-        onDonationFail(error);
-      }
+      }).in(3000);
+      await donate(RIBON_INTEGRATION_ID, nonProfit.id, email, PLATFORM);
+      onDonationSuccess();
+    } catch (error: any) {
+      onDonationFail(error);
     }
   }
 
