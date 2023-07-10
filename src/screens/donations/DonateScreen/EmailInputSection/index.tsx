@@ -2,6 +2,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
   Text,
   TouchableWithoutFeedback,
   View,
@@ -18,8 +19,10 @@ import { NonProfit } from "@ribon.io/shared/types";
 import { useDonations, useUsers } from "@ribon.io/shared/hooks";
 import { useLanguage } from "contexts/languageContext";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { LinearGradient } from "expo-linear-gradient";
-import { theme } from "@ribon.io/shared/styles";
+import BackgroundShapes from "components/vectors/BackgroundShapes";
+import Image from "components/atomics/Image";
+import useFormattedImpactText from "hooks/useFormattedImpactText";
+import { perform } from "lib/timeoutHelpers";
 import S from "./styles";
 
 type Props = {
@@ -42,20 +45,21 @@ function EmailInputSection({
   const { currentLang } = useLanguage();
   const { setCurrentUser } = useCurrentUser();
   const { donate } = useDonations(undefined);
+  const { formattedImpactText } = useFormattedImpactText();
 
   async function donateCallback() {
-    if (email) {
-      try {
-        const user = await findOrCreateUser(
-          email,
-          formattedLanguage(currentLang),
-        );
+    try {
+      const user = await findOrCreateUser(
+        email,
+        formattedLanguage(currentLang),
+      );
+      perform(() => {
         setCurrentUser(user);
-        await donate(RIBON_INTEGRATION_ID, nonProfit.id, email, PLATFORM);
-        onDonationSuccess();
-      } catch (error: any) {
-        onDonationFail(error);
-      }
+      }).in(3000);
+      await donate(RIBON_INTEGRATION_ID, nonProfit.id, email, PLATFORM);
+      onDonationSuccess();
+    } catch (error: any) {
+      onDonationFail(error);
     }
   }
 
@@ -75,71 +79,69 @@ function EmailInputSection({
   };
 
   const linkToTerms = () => {
-    openInWebViewer(t("terms"));
+    openInWebViewer(t("termsLink"));
   };
 
   return (
-    <>
-      <View style={S.nonProfitContainer}>
-        <View style={S.textWrapper}>
-          <Text style={S.nonProfitText}>{t("nonProfitText")}</Text>
-          <Text style={S.nonProfitHighlight}>{nonProfit.name}</Text>
-        </View>
-
-        <LinearGradient
-          colors={[theme.colors.brand.primary[800], "transparent"]}
-          start={[0.0, 0.5]}
-          end={[1.0, 0.5]}
-          locations={[0.0, 1.0]}
-          style={S.gradient}
-        />
-      </View>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
+    <KeyboardAvoidingView
+      behavior="position"
+      style={S.keyboardView}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -20}
+    >
+      <TouchableWithoutFeedback
+        accessibilityRole="button"
+        onPress={Keyboard.dismiss}
       >
-        <TouchableWithoutFeedback
-          accessibilityRole="button"
-          onPress={Keyboard.dismiss}
-        >
-          <View style={S.container}>
-            <View style={S.inputEmailContainer}>
-              <Text style={S.description}>{t("description")}</Text>
-
-              <InputText
-                name="email"
-                placeholder={t("textInputPlaceholder") || ""}
-                keyboardType="email-address"
-                onChangeText={handleTextChange}
-                value={email}
-                autoCapitalize="none"
-                textContentType="emailAddress"
-                autoFocus
-              />
+        <ScrollView contentContainerStyle={S.container}>
+          <View style={S.imageContainer}>
+            <View style={S.imageBackground}>
+              <BackgroundShapes />
             </View>
-
-            <View style={S.buttonContainer}>
-              <Button
-                text={t("donateText")}
-                onPress={handleButtonPress}
-                disabled={!isValidEmail(email)}
-                customStyles={S.button}
-              />
-              <Text style={S.privacyPolicyText}>
-                {t("agreementText")}{" "}
-                <Text style={S.privacyPolicyLink} onPress={linkToTerms}>
-                  {t("termsText")}
-                </Text>
-                {t("and")}{" "}
-                <Text style={S.privacyPolicyLink} onPress={linkToPrivacyPolicy}>
-                  {t("privacyPolicyText")}
-                </Text>
-              </Text>
-            </View>
+            <Image
+              style={S.mainImage}
+              source={{ uri: nonProfit.mainImage }}
+              accessibilityIgnoresInvertColors
+            />
           </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    </>
+          <View style={S.contentContainer}>
+            <Text style={S.title}>{t("title")}</Text>
+            <Text style={S.description}>
+              {formattedImpactText(nonProfit, undefined, false, true)}
+            </Text>
+
+            <InputText
+              name="email"
+              placeholder={t("textInputPlaceholder") || ""}
+              keyboardType="email-address"
+              onChangeText={handleTextChange}
+              value={email}
+              autoCapitalize="none"
+              textContentType="emailAddress"
+              autoFocus
+              containerStyle={S.inputContainer}
+              style={S.input}
+            />
+
+            <Button
+              text={t("continueText")}
+              onPress={handleButtonPress}
+              disabled={!isValidEmail(email)}
+              customStyles={S.button}
+            />
+            <Text style={S.privacyPolicyText}>
+              {t("agreementText")}{" "}
+              <Text style={S.privacyPolicyLink} onPress={linkToTerms}>
+                {t("termsText")}
+              </Text>
+              {t("and")}{" "}
+              <Text style={S.privacyPolicyLink} onPress={linkToPrivacyPolicy}>
+                {t("privacyPolicyText")}
+              </Text>
+            </Text>
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

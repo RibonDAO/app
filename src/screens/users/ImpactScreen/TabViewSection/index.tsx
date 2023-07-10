@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CollapsibleTabView } from "react-native-collapsible-tab-view";
 import * as React from "react";
-import ImpactCards from "screens/users/ProfileScreen/ImpactCards";
+import ImpactCards from "screens/users/ImpactScreen/ImpactCards";
 import TicketDonationsTabView from "../TicketDonationsTabView";
 import CommunityDonationsTabView from "../CommunityDonationsTabView";
 import DirectDonationsTabView from "../DirectDonationsTabView";
@@ -48,7 +48,7 @@ const renderTabBar = (props: any) => (
 
 function TabViewSection(): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "users.profileScreen",
+    keyPrefix: "users.impactScreen",
   });
 
   const layout = useWindowDimensions();

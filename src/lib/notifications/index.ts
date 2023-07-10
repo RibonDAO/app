@@ -7,6 +7,7 @@ export default async function requestUserPermissionForNotifications() {
     permissionStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
   if (enabled) {
+    // eslint-disable-next-line no-console
     console.log("Authorization status:", permissionStatus);
   }
 
@@ -20,11 +21,13 @@ export async function isNotificationsEnabled() {
 
 export async function setBackgroundMessageHandler() {
   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+    // eslint-disable-next-line no-console
     console.log("Message handled in the background!", remoteMessage);
   });
 }
 
 export async function getNotificationToken() {
   const token = await messaging().getToken();
+  // eslint-disable-next-line no-console
   console.log("token:", token);
 }

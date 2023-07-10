@@ -3,7 +3,7 @@
     "causes": "Tickets",
     "foryou": "Para você",
     "giving": "Doações",
-    "profile": "Impacto"
+    "impact": "Impacto"
   },
   "layoutHeader": {
     "exitButton": "Sair",
@@ -72,8 +72,9 @@
       "safeDataText": "Os seus dados estão seguros com a gente",
       "donatingText": "Doando",
       "donateText": "Doar",
+      "continueText": "Continuar",
       "animationText": "Doando ticket",
-      "agreementText": "Ao clicar em Confirmar, eu concordo com os",
+      "agreementText": "Ao clicar em Continuar, eu concordo com os",
       "termsText": "Termos",
       "termsLink": "https://ribon.io/privacy-policy/#termos",
       "privacyPolicyText": "Política de Privacidade",
@@ -236,7 +237,7 @@
     }
   },
   "users": {
-    "profileScreen": {
+    "impactScreen": {
       "title": "Meu Impacto",
       "impactCards": {
         "totalTickets": "Tickets doados",

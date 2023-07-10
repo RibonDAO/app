@@ -4,7 +4,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import usePersonPayments from "hooks/apiHooks/usePersonPayments";
 import { theme } from "@ribon.io/shared/styles";
-import DirectDonationCard from "screens/users/ProfileScreen/DirectDonationsImpactCards/DirectDonationCard";
+import DirectDonationCard from "screens/users/ImpactScreen/DirectDonationsImpactCards/DirectDonationCard";
 import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
 import Button from "components/atomics/buttons/Button";
@@ -27,7 +27,7 @@ function DirectDonationsImpactCards(): JSX.Element {
   const hasImpact = impactItems() && impactItems()?.length > 0;
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
-    keyPrefix: "users.profileScreen.ngoImpactCards.zeroDonationsSection",
+    keyPrefix: "users.impactScreen.ngoImpactCards.zeroDonationsSection",
   });
 
   const hasDuplicatedIds = (items: any[]) => {

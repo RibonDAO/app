@@ -27,9 +27,9 @@ const linking: LinkingOptions<RootStackParamList> = {
               NewsScreen: "news",
             },
           },
-          ProfileScreen: {
+          ImpactScreen: {
             screens: {
-              ProfileScreen: "profile",
+              ImpactScreen: "impact",
             },
           },
           PromotersScreen: {

@@ -1,117 +1,79 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
+import { stylizedDisplayXs } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 import {
-  defaultBodyLgBold,
-  defaultBodyLgRegular,
+  defaultBodyMdRegular,
+  defaultBodyMdSemibold,
   defaultBodySmRegular,
 } from "styles/typography/default";
-import { stylizedDisplaySm } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
-  gradient: {
-    height: "100%",
-    width: "50%",
-    position: "absolute",
-    right: 0,
-  },
   container: {
-    alignItems: "center",
     paddingHorizontal: theme.spacingNative(16),
-    marginTop: theme.spacingNative(24),
   },
-  animationContainer: {
-    position: "absolute",
+  imageContainer: {
+    marginTop: theme.spacingNative(24),
+    paddingHorizontal: theme.spacingNative(64),
+    paddingVertical: theme.spacingNative(48),
     alignItems: "center",
     justifyContent: "center",
-    height: Dimensions.get("window").height,
-    width: Dimensions.get("window").width,
   },
+  contentContainer: {
+    marginTop: theme.spacingNative(24),
+    alignItems: "center",
+  },
+  imageBackground: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  mainImage: {
+    width: 200,
+    height: 200,
+    resizeMode: "cover",
+    borderRadius: 8,
+  },
+
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
+    ...stylizedDisplayXs,
+    color: theme.colors.brand.primary[900],
     marginBottom: theme.spacingNative(8),
-    color: theme.colors.neutral[500],
   },
   description: {
-    ...defaultBodyLgBold,
-    marginBottom: theme.spacingNative(16),
-    fontSize: 20,
-    textAlign: "center",
-  },
-  impactDescription: {
-    ...defaultBodyLgRegular,
-    marginBottom: theme.spacingNative(16),
-    fontSize: 20,
-    textAlign: "center",
-  },
-  logo: {
-    width: "50%",
-    height: "100%",
-  },
-  nonProfitLogo: {
-    width: 100,
-    height: 100,
-  },
-  inputEmailContainer: {
-    width: "100%",
-    marginTop: 14,
-  },
-  inputHint: {
-    fontSize: 12,
-    marginTop: theme.spacingNative(4),
-  },
-  nonProfitContainer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    paddingLeft: theme.spacingNative(16),
-    backgroundColor: theme.colors.brand.primary[800],
-    color: theme.colors.neutral10,
-  },
-  nonProfitText: {
-    ...defaultBodySmRegular,
-    fontWeight: "500",
-    color: theme.colors.neutral10,
-    marginBottom: theme.spacingNative(4),
-    flexWrap: "wrap",
-  },
-  nonProfitHighlight: {
-    ...stylizedDisplaySm,
-    color: theme.colors.neutral10,
-    flexWrap: "wrap",
-  },
-  buttonContainer: {
-    marginTop: theme.spacingNative(8),
-    width: "100%",
-    height: "100%",
+    ...defaultBodyMdSemibold,
+    color: theme.colors.neutral[500],
+    marginBottom: theme.spacingNative(24),
   },
   button: {
     height: 48,
   },
-  cancelButton: {
-    height: 32,
-    marginTop: theme.spacingNative(16),
-    borderWidth: 0,
-    backgroundColor: "transparent",
-  },
-  textWrapper: {
-    flex: 1,
-    backgroundColor: "transparent",
-    paddingBottom: theme.spacingNative(24),
-    paddingTop: theme.spacingNative(32),
-  },
-  ticketImage: {
-    height: 88,
-    width: 88,
-  },
   privacyPolicyText: {
     ...defaultBodySmRegular,
-    color: theme.colors.neutral[200],
+    color: theme.colors.neutral[600],
     textAlign: "center",
     marginTop: theme.spacingNative(16),
   },
   privacyPolicyLink: {
-    color: theme.colors.brand.primary[300],
+    color: theme.colors.brand.primary[600],
+  },
+  inputContainer: {
+    height: 48,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  input: {
+    ...defaultBodyMdRegular,
+    height: "100%",
+    lineHeight: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  keyboardView: {
+    height:
+      Platform.OS === "android" ? Dimensions.get("window").height : "100%",
   },
 });
 
