@@ -16,13 +16,13 @@ import Placeholder from "./placeholder";
 
 function DonateScreen() {
   const [isDonating, setIsDonating] = useState(false);
-  const [donationSucceeded, setDonationSucceeded] = useState(false);
+  const [donationSucceeded, setDonationSucceeded] = useState(true);
   const {
     params: { nonProfit },
   } = useRouteParams<"DonateScreen">();
   const { signedIn } = useCurrentUser();
   const { navigateTo, popNavigation } = useNavigation();
-  const { removeTicket } = useTickets();
+  const { setTickets } = useTickets();
 
   const onContinue = () => {
     setIsDonating(true);
@@ -39,14 +39,14 @@ function DonateScreen() {
     setDonationSucceeded(false);
     showToast({
       type: "error",
-      message: error.response.data.formatted_message,
+      message: error?.response?.data?.formatted_message,
     });
     popNavigation();
   };
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      removeTicket();
+      setTickets(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     }
   }, [donationSucceeded]);
