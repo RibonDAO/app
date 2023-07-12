@@ -21,12 +21,12 @@ function DebugEventsView() {
           ...existingEventLog,
           count: existingEventLog.count + 1,
         };
-        return prevEventLogs.map((log) =>
-          log.eventName === eventName &&
-          JSON.stringify(log.eventParams) === JSON.stringify(eventParams)
-            ? updatedEventLog
-            : log,
+        const filteredLogs = prevEventLogs.filter(
+          (log) =>
+            log.eventName !== eventName ||
+            JSON.stringify(log.eventParams) !== JSON.stringify(eventParams),
         );
+        return [updatedEventLog, ...filteredLogs];
       } else {
         const newEventLog: EventLog = {
           eventName,
