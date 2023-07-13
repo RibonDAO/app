@@ -9,6 +9,8 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
 import BackgroundShapes from "components/vectors/BackgroundShapes";
+import { useEffect } from "react";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 
 type Props = {
@@ -29,6 +31,10 @@ function SignedInSection({
   const { currentUser } = useCurrentUser();
   const { donate } = useDonations(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
+
+  useEffect(() => {
+    logEvent("P1_donateConfirmModal_view", { nonProfitId: nonProfit.id });
+  }, []);
 
   const handleButtonPress = async () => {
     if (!currentUser?.email) return;
