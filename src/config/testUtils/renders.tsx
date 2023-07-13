@@ -40,6 +40,8 @@ import UnsafeAreaProvider, {
 } from "contexts/unsafeAreaContext";
 
 import { waitForPromises } from "config/testUtils";
+import { NavigationContainer } from "@react-navigation/native";
+import { testLinkingConfig } from "config/testUtils/test-helper";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -102,47 +104,49 @@ function renderAllProviders(
     component: (
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18n}>
-          {renderProvider(
-            LoadingOverlayProvider,
-            LoadingOverlayContext,
-            loadingOverlayValue,
-            renderProvider(
-              WalletProvider,
-              WalletContext,
-              walletProviderValue,
+          <NavigationContainer linking={testLinkingConfig}>
+            {renderProvider(
+              LoadingOverlayProvider,
+              LoadingOverlayContext,
+              loadingOverlayValue,
               renderProvider(
-                NetworkProvider,
-                NetworkContext,
-                networkProviderValue,
+                WalletProvider,
+                WalletContext,
+                walletProviderValue,
                 renderProvider(
-                  UnsafeAreaProvider,
-                  UnsafeAreaContext,
-                  unsafeAreaProviderValue,
+                  NetworkProvider,
+                  NetworkContext,
+                  networkProviderValue,
                   renderProvider(
-                    CryptoPaymentProvider,
-                    CryptoPaymentContext,
-                    cryptoPaymentProviderValue,
+                    UnsafeAreaProvider,
+                    UnsafeAreaContext,
+                    unsafeAreaProviderValue,
                     renderProvider(
-                      CardPaymentInformationProvider,
-                      CardPaymentInformationContext,
-                      cardPaymentProviderValue,
+                      CryptoPaymentProvider,
+                      CryptoPaymentContext,
+                      cryptoPaymentProviderValue,
                       renderProvider(
-                        TicketsProvider,
-                        TicketsContext,
-                        ticketsProviderValue,
+                        CardPaymentInformationProvider,
+                        CardPaymentInformationContext,
+                        cardPaymentProviderValue,
                         renderProvider(
-                          ScrollEnabledProvider,
-                          ScrollEnabledContext,
-                          scrollEnabledProviderValue,
-                          children,
+                          TicketsProvider,
+                          TicketsContext,
+                          ticketsProviderValue,
+                          renderProvider(
+                            ScrollEnabledProvider,
+                            ScrollEnabledContext,
+                            scrollEnabledProviderValue,
+                            children,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          )}
+            )}
+          </NavigationContainer>
         </I18nextProvider>
       </QueryClientProvider>
     ),

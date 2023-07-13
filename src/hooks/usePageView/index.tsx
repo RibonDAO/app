@@ -5,7 +5,12 @@ import { logEvent } from "services/analytics";
 function usePageView(eventName: string, eventParams?: Record<any, any>) {
   useFocusEffect(
     useCallback(() => {
-      logEvent(eventName, eventParams);
+      if (eventParams) {
+        logEvent(eventName, eventParams);
+        return;
+      }
+
+      logEvent(eventName);
     }, []),
   );
 }
