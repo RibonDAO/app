@@ -10,6 +10,7 @@ import MaterialSymbolsSharp from "assets/fonts/material/MaterialSymbolsSharp.ttf
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useLanguage } from "contexts/languageContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
+import { perform } from "lib/timeoutHelpers";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter400 from "../assets/fonts/inter/Inter-Regular.ttf";
 import Inter900 from "../assets/fonts/inter/Inter-Black.ttf";
@@ -21,6 +22,7 @@ import Inter500 from "../assets/fonts/inter/Inter-Medium.ttf";
 import Inter600 from "../assets/fonts/inter/Inter-SemiBold.ttf";
 import Inter100 from "../assets/fonts/inter/Inter-Thin.ttf";
 
+SplashScreen.preventAutoHideAsync();
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const { currentUser } = useCurrentUser();
@@ -44,7 +46,6 @@ export default function useCachedResources() {
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync();
         // Load fonts
         await Font.loadAsync({
           ...FontAwesome.font,
@@ -68,7 +69,7 @@ export default function useCachedResources() {
         console.warn(e);
       } finally {
         setLoadingComplete(true);
-        SplashScreen.hideAsync();
+        perform(SplashScreen.hideAsync).in(3000);
       }
     }
 

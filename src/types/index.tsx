@@ -55,7 +55,7 @@ export type PostDonationScreenParams = {
 export type RootTabParamList = {
   CausesScreen: undefined;
   ForYouScreen: undefined;
-  ProfileScreen: undefined;
+  ImpactScreen: undefined;
   PromotersScreen: PromotersScreenParams;
   PostDonationScreen: PostDonationScreenParams;
 };

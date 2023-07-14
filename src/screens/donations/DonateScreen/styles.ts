@@ -10,7 +10,7 @@ import { stylizedDisplaySm } from "styles/typography/stylized";
 const styles = StyleSheet.create({
   gradient: {
     height: "100%",
-    width: "50%",
+    width: "25%",
     position: "absolute",
     right: 0,
   },

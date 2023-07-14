@@ -23,7 +23,7 @@ function NgoImpactCards(): JSX.Element {
   const hasImpact = impactItems() && impactItems()?.length > 0;
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
-    keyPrefix: "users.profileScreen.ngoImpactCards.zeroDonationsSection",
+    keyPrefix: "users.impactScreen.ngoImpactCards.zeroDonationsSection",
   });
 
   const navigateToCausesScreen = () => {

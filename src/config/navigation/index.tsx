@@ -9,7 +9,7 @@ import CausesProvider from "contexts/causesContext";
 import DonateScreen from "screens/donations/DonateScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
-import ProfileScreen from "screens/users/ProfileScreen";
+import ImpactScreen from "screens/users/ImpactScreen";
 import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
 import { RootStackParamList, RootTabParamList } from "types";
 import { theme } from "@ribon.io/shared/styles";
@@ -133,10 +133,10 @@ function BottomTabNavigator() {
       />
 
       <BottomTab.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
+        name="ImpactScreen"
+        component={ImpactScreen}
         options={{
-          title: t("tabs.profile") || "Impact",
+          title: t("tabs.impact") || "Impact",
           tabBarIcon: ({ color }: any) =>
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
           header: headerWithoutTicket,

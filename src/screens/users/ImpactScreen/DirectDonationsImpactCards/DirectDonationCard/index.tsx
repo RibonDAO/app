@@ -2,7 +2,7 @@ import { useNonProfitImpact } from "@ribon.io/shared/hooks";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { Currencies, NonProfit, PersonPayment } from "@ribon.io/shared/types";
 import { formatDateTime } from "lib/formatters/dateFormatter";
-import S from "screens/users/ProfileScreen/DirectDonationsImpactCards/styles";
+import S from "screens/users/ImpactScreen/DirectDonationsImpactCards/styles";
 import CardImageText from "components/moleculars/CardImageText";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 

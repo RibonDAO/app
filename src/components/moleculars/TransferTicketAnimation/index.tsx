@@ -1,7 +1,11 @@
 import { Dimensions, View, Text } from "react-native";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
-import * as Animatable from "react-native-animatable";
 import { useEffect } from "react";
+import Animated, {
+  useSharedValue,
+  withTiming,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 import S from "./styles";
 
 type Props = {
@@ -13,24 +17,6 @@ type Props = {
   senderText?: string | null;
 };
 
-const boxAnimation = {
-  from: {
-    left: 20,
-  },
-  to: {
-    left: Dimensions.get("window").width - 150,
-  },
-};
-
-const fadeIn = {
-  from: {
-    opacity: 0,
-  },
-  to: {
-    opacity: 1,
-  },
-};
-
 function TransferTicketAnimation({
   onAnimationEnd,
   senderIcon,
@@ -39,13 +25,32 @@ function TransferTicketAnimation({
   receiverText,
   senderText,
 }: Props): JSX.Element {
-  const ANIMATION_TIME = 4000;
+  const ANIMATION_TIME = 3000;
+  const left = useSharedValue(20);
+  const opacity = useSharedValue(0);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       onAnimationEnd();
     }, ANIMATION_TIME);
+
+    return () => clearTimeout(timeout);
+  }, [onAnimationEnd]);
+
+  useEffect(() => {
+    left.value = withTiming(Dimensions.get("window").width - 150, {
+      duration: ANIMATION_TIME,
+    });
+    opacity.value = withTiming(1, { duration: ANIMATION_TIME });
   }, []);
+
+  const boxStyle = useAnimatedStyle(() => ({
+    left: left.value,
+  }));
+
+  const textStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
 
   return (
     <View style={S.containerColumn}>
@@ -58,13 +63,9 @@ function TransferTicketAnimation({
           <View style={S.stripedLine} />
         </View>
 
-        <Animatable.View
-          animation={boxAnimation}
-          duration={ANIMATION_TIME}
-          style={S.ticketRoundBox}
-        >
+        <Animated.View style={[S.ticketRoundBox, boxStyle]}>
           <TicketWhiteIcon />
-        </Animatable.View>
+        </Animated.View>
 
         <View style={S.diamond}>
           <View style={S.diamondImage}>{receiverIcon}</View>
@@ -74,13 +75,7 @@ function TransferTicketAnimation({
         <Text style={S.diamondText}>{senderText}</Text>
         <Text style={S.diamondText}>{receiverText}</Text>
       </View>
-      <Animatable.Text
-        animation={fadeIn}
-        duration={ANIMATION_TIME}
-        style={S.text}
-      >
-        {description}
-      </Animatable.Text>
+      <Animated.Text style={[S.text, textStyle]}>{description}</Animated.Text>
     </View>
   );
 }
