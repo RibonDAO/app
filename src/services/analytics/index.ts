@@ -1,5 +1,6 @@
 import analytics from "@react-native-firebase/analytics";
 import { logError } from "services/crashReport";
+import { logDebugEvent } from "config/DebugEventsView";
 import { mixpanel } from "./mixpanel";
 
 export async function logEvent(eventName: string, params?: Record<any, any>) {
@@ -7,6 +8,9 @@ export async function logEvent(eventName: string, params?: Record<any, any>) {
   await analytics().logEvent(eventName, paramsWithPlatform);
   if (mixpanel !== undefined) {
     mixpanel?.track(eventName, paramsWithPlatform);
+  }
+  if (process.env.DEBUG_VIEW_ENABLED) {
+    logDebugEvent(eventName, paramsWithPlatform);
   }
 }
 
