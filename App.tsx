@@ -8,11 +8,12 @@ import "./i18n.config";
 import { Platform, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { debugEventsEnabled } from "./src/config/DebugEventsView/helpers";
+import DebugEventsView from "./src/config/DebugEventsView";
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
-import useColorScheme from "./src/hooks/useColorScheme";
 import useCachedResources from "./src/hooks/useCachedResources";
 import UnsafeAreaProvider, {
   useUnsafeAreaContext,
@@ -21,7 +22,6 @@ import TasksProvider from "./src/contexts/tasksContext";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
   const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
 
   if (!isLoadingComplete) {
@@ -47,8 +47,9 @@ function Main() {
                   edges={["bottom"]}
                   style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
                 >
-                  <Navigation colorScheme={colorScheme} />
-                  <StatusBar style="dark" />
+                  {debugEventsEnabled() && <DebugEventsView />}
+                  <Navigation />
+                  <StatusBar />
                 </SafeAreaView>
               </SafeAreaView>
             </SafeAreaProvider>
