@@ -22,6 +22,7 @@ import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
 import PaymentScreen from "screens/promoters/PaymentScreen";
+import CheckoutScreen from "screens/promoters/CheckoutScreen";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
@@ -211,6 +212,17 @@ function RootNavigator() {
         component={PaymentScreen}
         options={{
           headerTintColor: theme.colors.brand.secondary[700],
+          headerTitle: "",
+          headerBackTitleVisible: false,
+          headerStyle: { backgroundColor: theme.colors.neutral10 },
+        }}
+      />
+
+      <Stack.Screen
+        name="CheckoutScreen"
+        component={CheckoutScreen}
+        options={{
+          headerTintColor: theme.colors.brand.primary[700],
           headerTitle: "",
           headerBackTitleVisible: false,
           headerStyle: { backgroundColor: theme.colors.neutral10 },
