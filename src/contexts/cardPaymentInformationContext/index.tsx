@@ -22,7 +22,7 @@ import {
 import { showToast } from "lib/Toast";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { useNavigation } from "hooks/useNavigation";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { normalizedLanguage } from "lib/currentLanguage";
 import { logEvent } from "services/analytics";
@@ -186,6 +186,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       },
       causeId: cause?.id,
       nonProfitId: nonProfit?.id,
+      platform: PLATFORM,
     };
 
     try {
