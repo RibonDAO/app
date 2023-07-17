@@ -4,7 +4,7 @@ import {
   NavigatorScreenParams,
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
+import { Cause, Currencies, NonProfit, Offer } from "@ribon.io/shared/types";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -67,8 +67,8 @@ export type SupportNonProfitParamList = {
 export type CheckoutScreenParamList = {
   target: string;
   targetId: string;
-  offer: string;
-  currency: string;
+  offer: number;
+  currency: Currencies;
 };
 
 export type RootStackParamList = {

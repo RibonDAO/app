@@ -38,6 +38,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import GiveTicketScreen from "screens/donations/GiveTicketScreen";
+import CheckoutProvider from "contexts/checkoutContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -222,10 +223,7 @@ function RootNavigator() {
         name="CheckoutScreen"
         component={CheckoutScreen}
         options={{
-          headerTintColor: theme.colors.brand.primary[700],
-          headerTitle: "",
-          headerBackTitleVisible: false,
-          headerStyle: { backgroundColor: theme.colors.neutral10 },
+          headerShown: false,
         }}
       />
 
@@ -280,16 +278,18 @@ export default function Navigation() {
       <LoadingOverlayProvider>
         <WalletProvider>
           <NetworkProvider>
-            <CryptoPaymentProvider>
-              <CardPaymentInformationProvider>
-                <CausesProvider>
-                  <TicketsProvider>
-                    <RootNavigator />
-                    <Toast config={toastConfig} />
-                  </TicketsProvider>
-                </CausesProvider>
-              </CardPaymentInformationProvider>
-            </CryptoPaymentProvider>
+            <CheckoutProvider>
+              <CryptoPaymentProvider>
+                <CardPaymentInformationProvider>
+                  <CausesProvider>
+                    <TicketsProvider>
+                      <RootNavigator />
+                      <Toast config={toastConfig} />
+                    </TicketsProvider>
+                  </CausesProvider>
+                </CardPaymentInformationProvider>
+              </CryptoPaymentProvider>
+            </CheckoutProvider>
           </NetworkProvider>
         </WalletProvider>
       </LoadingOverlayProvider>
