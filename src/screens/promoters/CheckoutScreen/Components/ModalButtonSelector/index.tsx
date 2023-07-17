@@ -47,6 +47,7 @@ export default function ModalButtonSelector({
             onPress={() => {
               handleClick(index);
             }}
+            key={item.label}
             text={item.label}
             customStyles={S.button}
             backgroundColor={backgroundColor(index)}
