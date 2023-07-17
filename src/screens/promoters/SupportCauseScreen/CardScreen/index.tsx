@@ -59,7 +59,9 @@ function CardScreen(): JSX.Element {
 
   const handleDonateClick = () => {
     if (Platform.OS === "ios") {
-      Linking.openURL("https://dapp.ribon.io/promoters/support-cause");
+      Linking.openURL(
+        "http://dapp.ribon.io/promoters/support-cause?platform=app",
+      );
     } else {
       setFlow("cause");
       logEvent("giveCauseBtn_start", {
