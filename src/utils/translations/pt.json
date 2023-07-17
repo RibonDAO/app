@@ -234,6 +234,29 @@
       },
       "tooltipImpact": "Como calculamos o impacto?",
       "tooltipImpactText": "O cálculo é feito com base no valor mínimo necessário para que o projeto consiga bons resultados. As causas da Ribon fazem parte do movimento social “Altruísmo Eficaz”, e têm como objetivo gerar grande impacto a custo baixo."
+    },
+    "checkoutPage": {
+      "changeCurrency": "Mudar moeda",
+      "back": "Voltar",
+      "donatingTo": "Doando para ",
+      "netDonation": "Doação líquida: ",
+      "serviceFees": "Taxas de serviço: ",
+      "payment": "Pagamento",
+      "selectCurrency": "Selecione a moeda",
+      "selectValue": "Selecione o valor",
+      "additionalFeesText": "O pagamento é processado em dólar, o valor pode sofrer uma pequena variação de acordo com as taxas do seu banco.",
+      "paymentMethodSection": {
+        "creditCard": "Cartão de crédito",
+        "googlePay": "Google Pay",
+        "applePay": "Apple Pay",
+        "creditCardFields": {
+          "number": "Número do cartão",
+          "name": "Nome impresso",
+          "expirationDate": "Data de validade",
+          "cvv": "CVV"
+        }
+      },
+      "confirmPayment": "Confirmar pagamento"
     }
   },
   "users": {
