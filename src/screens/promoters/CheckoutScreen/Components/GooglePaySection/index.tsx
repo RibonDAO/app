@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useGooglePay } from "@stripe/stripe-react-native";
+import { GooglePayButton, useGooglePay } from "@stripe/stripe-react-native";
 import { View } from "react-native";
 import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useTasksContext } from "contexts/tasksContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
-import Button from "components/atomics/buttons/Button";
-import { theme } from "@ribon.io/shared/styles";
 import { logError } from "services/crashReport";
 import storePayApi from "services/api/storePayApi";
 import S from "./styles";
@@ -21,12 +19,8 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { registerAction } = useTasksContext();
   const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
-  const {
-    isGooglePaySupported,
-    initGooglePay,
-    loading,
-    createGooglePayPaymentMethod,
-  } = useGooglePay();
+  const { isGooglePaySupported, initGooglePay, createGooglePayPaymentMethod } =
+    useGooglePay();
   const [initialized, setInitialized] = useState(false);
   const testEnv = true;
 
@@ -105,17 +99,9 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
 
   return (
     <View>
-      <View style={S.row}>
-        <Button
-          text="Google Pay"
-          onPress={createPaymentMethod}
-          disabled={!initialized || loading}
-          customStyles={S.standardButton}
-          textColorOutline={theme.colors.neutral[500]}
-          customTextStyles={S.standardButtonText}
-          outline
-        />
-      </View>
+      {initialized && (
+        <GooglePayButton onPress={createPaymentMethod} style={S.payButton} />
+      )}
     </View>
   );
 }
