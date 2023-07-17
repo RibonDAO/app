@@ -9,18 +9,24 @@ import { useCardPaymentInformation } from "contexts/cardPaymentInformationContex
 import { useOffers } from "@ribon.io/shared/hooks";
 import { Currencies, Offer, NonProfit, Cause } from "@ribon.io/shared/types";
 import { useEffect, useState } from "react";
+import { useApplePay, useGooglePay } from "@stripe/stripe-react-native";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
 import CreditCardForm from "../Components/CreditCardForm";
 import PriceSelection from "../Components/PriceSelection";
 import ModalButtonSelector from "../Components/ModalButtonSelector";
+import ApplePaySection from "../Components/ApplePaySection";
+import GooglePaySection from "../Components/GooglePaySection";
 import S from "./styles";
 
 export default function CardSection() {
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.checkoutScreen",
   });
+
+  const { isApplePaySupported } = useApplePay();
+  const { isGooglePaySupported } = useGooglePay();
 
   const { target, targetId, currency, offer, setOffer } = useCheckoutContext();
   const {
@@ -41,6 +47,8 @@ export default function CardSection() {
 
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [offersModalVisible, setOffersModalVisible] = useState(false);
+  const [isGooglePaySupportedState, setIsGooglePaySupportedState] =
+    useState<boolean>(false);
 
   const resetOffer = () => setOffer(0);
 
@@ -80,6 +88,17 @@ export default function CardSection() {
     handleSubmit();
   };
 
+  const nonProfit = payable as NonProfit;
+
+  const cause = target === "non_profit" ? nonProfit?.cause : payable;
+  const actualNonProfit = target === "non_profit" ? nonProfit : undefined;
+
+  useEffect(() => {
+    isGooglePaySupported().then((result) => {
+      setIsGooglePaySupportedState(result);
+    });
+  }, []);
+
   return (
     <View>
       <ModalButtonSelector
@@ -114,13 +133,31 @@ export default function CardSection() {
           },
           {
             title: t("paymentMethodSection.googlePay"),
-            onClick: () => {},
+            children: (
+              <View>
+                <GooglePaySection
+                  offer={currentOffer as Offer}
+                  nonProfit={actualNonProfit}
+                  cause={cause as Cause}
+                />
+              </View>
+            ),
             rightIcon: <GooglePayIcon />,
+            show: isGooglePaySupportedState,
           },
           {
             title: t("paymentMethodSection.applePay"),
-            onClick: () => {},
+            children: (
+              <View>
+                <ApplePaySection
+                  offer={currentOffer as Offer}
+                  nonProfit={actualNonProfit}
+                  cause={cause as Cause}
+                />
+              </View>
+            ),
             rightIcon: <ApplePayIcon />,
+            show: isApplePaySupported,
           },
         ]}
       />
