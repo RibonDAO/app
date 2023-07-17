@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import { Text, View } from "react-native";
 import ArrowLeft from "components/vectors/ArrowLeft";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { Currencies } from "@ribon.io/shared/types";
 import { useCallback, useState } from "react";
@@ -49,10 +49,15 @@ export default function Header() {
         setVisible={setCurrencyModalVisible}
       />
 
-      <TouchableOpacity accessibilityRole="button" onPress={popNavigation} style={S.backButton}>
+      <TouchableOpacity
+        accessibilityRole="button"
+        onPress={popNavigation}
+        style={S.backButton}
+      >
         <ArrowLeft />
       </TouchableOpacity>
-      <TouchableOpacity accessibilityRole="button"
+      <TouchableOpacity
+        accessibilityRole="button"
         onPress={() => setCurrencyModalVisible(true)}
         style={S.changeCurrencyButton}
       >
