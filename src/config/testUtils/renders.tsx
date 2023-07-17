@@ -42,6 +42,10 @@ import CheckoutProvider, {
   ICheckoutContext,
   CheckoutContext,
 } from "contexts/checkoutContext";
+import StripeProvider, {
+  IStripeContext,
+  StripeContext,
+} from "contexts/stripeContext";
 
 import { waitForPromises } from "config/testUtils";
 import i18n from "../../../i18n-test";
@@ -86,6 +90,7 @@ export type RenderComponentProps = {
   scrollEnabledProviderValue?: Partial<IScrollEnabledContext>;
   unsafeAreaProviderValue?: Partial<IUnsafeAreaContext>;
   checkoutProviderValue?: Partial<ICheckoutContext>;
+  stripeProviderValue?: Partial<IStripeContext>;
 };
 
 function renderAllProviders(
@@ -100,6 +105,7 @@ function renderAllProviders(
     scrollEnabledProviderValue = {},
     unsafeAreaProviderValue = {},
     checkoutProviderValue = {},
+    stripeProviderValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -144,7 +150,12 @@ function renderAllProviders(
                             ScrollEnabledProvider,
                             ScrollEnabledContext,
                             scrollEnabledProviderValue,
-                            children,
+                            renderProvider(
+                              StripeProvider,
+                              StripeContext,
+                              stripeProviderValue,
+                              children,
+                            ),
                           ),
                         ),
                       ),
