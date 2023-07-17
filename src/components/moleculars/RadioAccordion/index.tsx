@@ -7,6 +7,7 @@ type AccordionItem = {
   children?: JSX.Element;
   rightIcon?: JSX.Element;
   onClick?: () => void;
+  show?: boolean | null;
 };
 
 export type Props = {
@@ -38,6 +39,8 @@ function RadioAccordion({ current, items }: Props): JSX.Element {
   return (
     <View style={S.container}>
       {items.map((item, index) => {
+        if (item?.show === false) return null;
+
         const { title, children, rightIcon } = item;
         const isLast = index === items.length - 1;
 
