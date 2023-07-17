@@ -41,6 +41,8 @@ export type PaymentPageList = {
   cause?: Cause;
   nonProfit?: NonProfit;
   flow: string;
+  value?: string;
+  currency?: string;
 };
 
 export type PromotersScreenParams = {
