@@ -61,7 +61,7 @@ function CardImageText({
           onPress={onButtonPress}
           style={S.button}
         >
-          <Text>{buttonText}</Text>
+          <Text style={S.buttonText}>{buttonText}</Text>
         </TouchableOpacity>
       )}
     </View>

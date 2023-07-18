@@ -264,7 +264,9 @@
           },
           "migrated": "Migrated",
           "showMore": "Show more",
-          "generalReceiver": "General"
+          "generalReceiver": "General",
+          "seeDetails": "Monitor Increase →",
+          "increaseText": "The community increases the donation amount by +20%"
         }
       },
       "communityDonationsTitle": "Community Donations",

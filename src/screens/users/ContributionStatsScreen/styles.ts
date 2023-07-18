@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { stylizedDisplayLg } from "styles/typography/stylized";
+import { stylizedDisplaySm } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 
 export default StyleSheet.create({
@@ -12,7 +12,7 @@ export default StyleSheet.create({
   title: {
     marginBottom: 32,
     color: "#333333",
-    ...stylizedDisplayLg,
+    ...stylizedDisplaySm,
   },
   titleHighlight: {
     fontSize: 24,

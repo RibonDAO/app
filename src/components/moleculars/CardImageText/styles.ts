@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodySmRegular,
+  defaultBodySmSemibold,
   defaultBodyXsRegular,
   defaultHeadingXs,
 } from "styles/typography/default";
@@ -65,12 +66,12 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "100%",
-    height: 48,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
+    marginTop: theme.spacingNative(8),
     borderRadius: 4,
-    backgroundColor: "#FF5F5F",
-    color: "#FFFFFF",
+  },
+  buttonText: {
+    ...defaultBodySmSemibold,
+    color: theme.colors.brand.primary[600],
   },
 });
 

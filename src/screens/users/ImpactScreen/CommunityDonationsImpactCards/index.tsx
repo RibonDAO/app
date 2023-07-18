@@ -2,7 +2,6 @@ import { Text, View } from "react-native";
 import { useCallback, useState } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import usePersonPayments from "hooks/apiHooks/usePersonPayments";
 import { formatDateTime } from "lib/formatters/dateFormatter";
 import CardImageText from "components/moleculars/CardImageText";
 import { theme } from "@ribon.io/shared/styles";
@@ -12,21 +11,24 @@ import { useFocusEffect } from "@react-navigation/native";
 import Button from "components/atomics/buttons/Button";
 import LoaderAnimated from "components/atomics/LoaderAnimated";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useLegacyContributions } from "@ribon.io/shared/hooks";
+import {
+  useContributions,
+  useLegacyContributions,
+} from "@ribon.io/shared/hooks";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import ZeroDonationsSection from "../ZeroDonationsSection";
 import S from "./styles";
 
 function CommunityDonationsImpactCards(): JSX.Element {
-  const { useCommunityPersonPayments } = usePersonPayments();
   const per = 6;
   const [page, setPage] = useState(1);
   const [showMoreDisabled, setShowMoreDisabled] = useState(false);
   const [showMoreVisible, setShowMoreVisible] = useState(true);
-  const { data, refetch } = useCommunityPersonPayments(page, per);
   const [impactCards, setImpactCards] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const { currentUser } = useCurrentUser();
+  const { useLabelableContributions } = useContributions(currentUser?.id);
+  const { data, refetch } = useLabelableContributions();
   const { legacyContributions } = useLegacyContributions(currentUser?.id);
 
   const impactItems = useCallback(() => data || [], [data]);
@@ -123,18 +125,22 @@ function CommunityDonationsImpactCards(): JSX.Element {
             style={{ marginBottom: theme.spacingNative(12) }}
           >
             <CardImageText
-              subtitle={item.receiver.name}
+              subtitle={item.receiver?.name}
               title={
-                item.offer
-                  ? formatPrice(item.offer.priceValue, item.offer.currency)
-                  : `${item.amountCents / 100} USDC`
+                item.personPayment
+                  ? formatPrice(
+                      item.personPayment.offer.priceValue,
+                      item.personPayment.offer.currency,
+                    )
+                  : `${item.usdValueCents / 100} USDC`
               }
-              footerText={formatDateTime(item.paidDate)}
+              footerText={formatDateTime(item.personPayment.paidDate)}
               subtitleStyle={S.subtitleStyle}
               titleStyle={S.titleStyle}
+              text={t("increaseText") || ""}
               buttonText={t("seeDetails") || ""}
               onButtonPress={() => {
-                navigateToContributionStatsScreen(171);
+                navigateToContributionStatsScreen(item.id);
               }}
             />
           </View>

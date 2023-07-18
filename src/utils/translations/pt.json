@@ -264,7 +264,9 @@
           },
           "migrated": "Migrado",
           "showMore": "Mostrar mais",
-          "generalReceiver": "Geral"
+          "generalReceiver": "Geral",
+          "seeDetails": "Acompanhar impacto →",
+          "increaseText": "Sua doação aumentada em +20% pela comunidade da Ribon"
         }
       },
       "communityDonationsTitle": "Doações em Comunidade",
