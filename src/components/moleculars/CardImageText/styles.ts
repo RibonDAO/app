@@ -63,6 +63,15 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.brand.primary[800],
   },
+  button: {
+    width: "100%",
+    height: 48,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 4,
+    backgroundColor: "#FF5F5F",
+    color: "#FFFFFF",
+  },
 });
 
 export default styles;

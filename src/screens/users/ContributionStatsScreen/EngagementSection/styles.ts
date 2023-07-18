@@ -8,9 +8,7 @@ export default StyleSheet.create({
   titleContainer: {
     marginBottom: 24,
   },
-  dataContainer: {
-    flex: 0.5,
-  },
+  dataContainer: {},
   contentContainer: {
     display: "flex",
   },

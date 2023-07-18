@@ -1,9 +1,12 @@
 import { StyleSheet } from "react-native";
 import { stylizedDisplayLg } from "styles/typography/stylized";
+import { theme } from "@ribon.io/shared/styles";
 
 export default StyleSheet.create({
   container: {
-    marginBottom: 64,
+    paddingTop: theme.spacingNative(24),
+    marginBottom: theme.spacingNative(64),
+    paddingHorizontal: theme.spacingNative(16),
     position: "relative",
   },
   title: {
@@ -21,7 +24,8 @@ export default StyleSheet.create({
   containerItem: {},
   divider: {
     height: 8,
-    margin: "32px -16px",
+    marginVertical: 32,
+    marginHorizontal: -16,
     backgroundColor: "#F0F0F0",
   },
 });

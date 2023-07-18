@@ -37,6 +37,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import GiveTicketScreen from "screens/donations/GiveTicketScreen";
+import ContributionStatsScreen from "screens/users/ContributionStatsScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -228,6 +229,18 @@ function RootNavigator() {
       <Stack.Screen
         name="DonateScreen"
         component={DonateScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
+          headerBackTitleVisible: true,
+          headerBackTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="ContributionStatsScreen"
+        component={ContributionStatsScreen}
         options={{
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],

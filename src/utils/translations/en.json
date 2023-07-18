@@ -287,5 +287,28 @@
     "for": "for",
     "and": "and",
     "of": "of"
+  },
+  "contributionStatsPage": {
+    "title": "You donated {{amount}} for {{cause}}",
+    "engagementSection": {
+      "title": "Your donation generated tickets",
+      "numberOfTicketDonors": "people have already donated tickets",
+      "numberOfContributorsDonors": "donated money inspired by you"
+    },
+    "boostSection": {
+      "title": "Your cause gets more",
+      "subtitle": "Total raised for your cause so far",
+      "tip": "By donating money through Ribon,you generate tickets so that other people can donate for free. With that, some of them are inspired to donate money too."
+    },
+    "video": {
+      "title": "Understand how the Ribon community <b>increases your donation</b>"
+    },
+    "supportSection": {
+      "title": "Give us your opinion",
+      "text": "What did you think of this experience?"
+    },
+    "giftCycleSection": {
+      "realTimeDonationLabel": "Updated in real time"
+    }
   }
 }

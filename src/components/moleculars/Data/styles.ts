@@ -8,7 +8,7 @@ export default StyleSheet.create({
   container: {},
   data: {
     ...defaultHeadingXxs,
-    color: "#777777",
+    color: "red",
   },
   label: {
     ...defaultBodySmMedium,

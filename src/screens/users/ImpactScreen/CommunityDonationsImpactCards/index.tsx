@@ -72,6 +72,11 @@ function CommunityDonationsImpactCards(): JSX.Element {
     navigateTo("PromotersScreen");
   };
 
+  const navigateToContributionStatsScreen = (contributionId: number) => {
+    logEvent("contributionCard_click");
+    navigateTo("ContributionStatsScreen", { contributionId });
+  };
+
   const handleShowMoreClick = () => {
     setLoading(true);
 
@@ -127,6 +132,10 @@ function CommunityDonationsImpactCards(): JSX.Element {
               footerText={formatDateTime(item.paidDate)}
               subtitleStyle={S.subtitleStyle}
               titleStyle={S.titleStyle}
+              buttonText={t("seeDetails") || ""}
+              onButtonPress={() => {
+                navigateToContributionStatsScreen(171);
+              }}
             />
           </View>
         ))}

@@ -287,5 +287,28 @@
     "for": "para",
     "and": "e",
     "of": "de"
+  },
+  "contributionStatsPage": {
+    "title": "Você doou {{amount}} para {{cause}}",
+    "engagementSection": {
+      "title": "Sua doação gerou tickets",
+      "numberOfTicketDonors": "pessoas já doaram tickets",
+      "numberOfContributorsDonors": "doaram dinheiro inspiradas por você"
+    },
+    "boostSection": {
+      "title": "Sua causa recebe mais",
+      "subtitle": "Total arrecadado para sua causa até agora",
+      "tip": "Doando dinheiro pela Ribon, você gera tickets para que outras pessoas possam doar de graça. Com isso, algumas delas se inspiram a doar dinheiro também."
+    },
+    "video": {
+      "title": "Entenda como a comunidade da Ribon aumenta a sua doação"
+    },
+    "supportSection": {
+      "title": "Nos dê sua opinião",
+      "text": "O que você achou dessa experiência ?"
+    },
+    "giftCycleSection": {
+      "realTimeDonationLabel": "Atualizado em tempo real"
+    }
   }
 }
