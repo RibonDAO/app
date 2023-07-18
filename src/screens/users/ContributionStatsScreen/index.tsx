@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, ScrollView, Linking } from "react-native";
 import { useContributions } from "@ribon.io/shared/hooks";
 import { useTranslation } from "react-i18next";
@@ -11,6 +11,7 @@ import Banner from "components/moleculars/Banner";
 import { theme } from "@ribon.io/shared/styles";
 import RibonSunLeft from "assets/images/ribon-sun-left.png";
 import GiftCycleSection from "screens/users/ContributionStatsScreen/GiftCycleSection";
+import usePageView from "hooks/usePageView";
 import EngagementSection from "./EngagementSection";
 import BoostSection from "./BoostSection";
 import S from "./styles";
@@ -24,9 +25,7 @@ function ContributionStatsScreen(): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "contributionStatsPage",
   });
-  useEffect(() => {
-    logEvent("P24_view ");
-  }, []);
+  usePageView("P24_view");
 
   const { data } = useContributionStats(Number(contributionId));
 
