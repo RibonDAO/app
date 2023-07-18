@@ -4,7 +4,6 @@ import { defaultBodySmMedium } from "styles/typography/default";
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "center",
     paddingHorizontal: 8,
   },
   subtitle: {

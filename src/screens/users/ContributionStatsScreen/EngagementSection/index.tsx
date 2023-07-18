@@ -30,7 +30,7 @@ function EngagementSection({
   };
 
   return (
-    <Card border backgroundColor="transparent">
+    <Card border={false} backgroundColor="transparent">
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Title

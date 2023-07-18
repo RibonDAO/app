@@ -8,8 +8,11 @@ export default StyleSheet.create({
   titleContainer: {
     marginBottom: 24,
   },
-  dataContainer: {},
+  dataContainer: {
+    flex: 1,
+  },
   contentContainer: {
     display: "flex",
+    flexDirection: "row",
   },
 });

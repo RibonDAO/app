@@ -20,7 +20,7 @@ function BoostSection({ totalAmountToCause }: Props): JSX.Element {
   const icon: IconProps = {
     type: "rounded",
     name: "volunteer_activism",
-    color: "#FF5F5F",
+    color: theme.colors.brand.primary[600],
     size: 24,
   };
 
@@ -50,10 +50,10 @@ function BoostSection({ totalAmountToCause }: Props): JSX.Element {
                 type: "rounded",
                 name: "emoji_objects",
                 size: 20,
-                color: "#FF5F5F",
+                color: theme.colors.brand.primary[800],
               }}
-              color="#FF5F5F"
-              secondaryColor="#F5F5F5"
+              color={theme.colors.brand.primary[800]}
+              secondaryColor={theme.colors.brand.primary[50]}
             />
           </View>
         </View>

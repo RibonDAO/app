@@ -3,36 +3,39 @@ import {
   defaultBodySmMedium,
   defaultHeadingMd,
 } from "styles/typography/default";
+import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   container: {},
   titleContainer: {
-    marginBottom: 24,
+    marginBottom: theme.spacingNative(24),
   },
   dataContainer: {
     marginBottom: 16,
   },
   tooltipCardContainer: {
     width: "100%",
-    marginTop: 16,
-    marginBottom: 16,
+    marginTop: theme.spacingNative(16),
+    marginBottom: theme.spacingNative(16),
     marginLeft: -16,
     backgroundColor: "#F5F5F5",
   },
   innerCardContainer: {
     width: "100%",
-    paddingTop: 24,
-    paddingRight: 16,
-    paddingBottom: 24,
-    paddingLeft: 16,
+    paddingTop: theme.spacingNative(24),
+    paddingRight: theme.spacingNative(16),
+    paddingBottom: theme.spacingNative(24),
+    paddingLeft: theme.spacingNative(16),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: theme.colors.brand.primary[50],
   },
   subtitleContainer: {
     width: 280,
-    marginRight: 18,
+    marginRight: theme.spacingNative(18),
     flexWrap: "wrap",
+    backgroundColor: theme.colors.brand.primary[50],
   },
   iconContainer: {
     padding: 4,
@@ -42,12 +45,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#F0F0F0",
   },
   boost: {
-    fontSize: 16,
-    color: "#FF5F5F",
+    fontSize: 28,
+    color: theme.colors.brand.primary[500],
   },
   title: {
     ...defaultHeadingMd,
-    color: "#FF5F5F",
+    color: theme.colors.brand.primary[800],
   },
   text: {
     color: "#999999",

@@ -7,8 +7,6 @@ import {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 12,
   },
   title: {
     ...defaultHeadingXxs,
@@ -24,6 +22,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F0F0F0",
+    marginRight: 4,
   },
   textContainer: {},
 });
