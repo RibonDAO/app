@@ -38,6 +38,14 @@ import UnsafeAreaProvider, {
   UnsafeAreaContext,
   IUnsafeAreaContext,
 } from "contexts/unsafeAreaContext";
+import CheckoutProvider, {
+  ICheckoutContext,
+  CheckoutContext,
+} from "contexts/checkoutContext";
+import StripeProvider, {
+  IStripeContext,
+  StripeContext,
+} from "contexts/stripeContext";
 
 import { waitForPromises } from "config/testUtils";
 import i18n from "../../../i18n-test";
@@ -81,6 +89,8 @@ export type RenderComponentProps = {
   ticketsProviderValue?: Partial<ITicketsContext>;
   scrollEnabledProviderValue?: Partial<IScrollEnabledContext>;
   unsafeAreaProviderValue?: Partial<IUnsafeAreaContext>;
+  checkoutProviderValue?: Partial<ICheckoutContext>;
+  stripeProviderValue?: Partial<IStripeContext>;
 };
 
 function renderAllProviders(
@@ -94,6 +104,8 @@ function renderAllProviders(
     ticketsProviderValue = {},
     scrollEnabledProviderValue = {},
     unsafeAreaProviderValue = {},
+    checkoutProviderValue = {},
+    stripeProviderValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -115,26 +127,36 @@ function renderAllProviders(
                 NetworkContext,
                 networkProviderValue,
                 renderProvider(
-                  UnsafeAreaProvider,
-                  UnsafeAreaContext,
-                  unsafeAreaProviderValue,
+                  CheckoutProvider,
+                  CheckoutContext,
+                  checkoutProviderValue,
                   renderProvider(
-                    CryptoPaymentProvider,
-                    CryptoPaymentContext,
-                    cryptoPaymentProviderValue,
+                    UnsafeAreaProvider,
+                    UnsafeAreaContext,
+                    unsafeAreaProviderValue,
                     renderProvider(
-                      CardPaymentInformationProvider,
-                      CardPaymentInformationContext,
-                      cardPaymentProviderValue,
+                      CryptoPaymentProvider,
+                      CryptoPaymentContext,
+                      cryptoPaymentProviderValue,
                       renderProvider(
-                        TicketsProvider,
-                        TicketsContext,
-                        ticketsProviderValue,
+                        CardPaymentInformationProvider,
+                        CardPaymentInformationContext,
+                        cardPaymentProviderValue,
                         renderProvider(
-                          ScrollEnabledProvider,
-                          ScrollEnabledContext,
-                          scrollEnabledProviderValue,
-                          children,
+                          TicketsProvider,
+                          TicketsContext,
+                          ticketsProviderValue,
+                          renderProvider(
+                            ScrollEnabledProvider,
+                            ScrollEnabledContext,
+                            scrollEnabledProviderValue,
+                            renderProvider(
+                              StripeProvider,
+                              StripeContext,
+                              stripeProviderValue,
+                              children,
+                            ),
+                          ),
                         ),
                       ),
                     ),
