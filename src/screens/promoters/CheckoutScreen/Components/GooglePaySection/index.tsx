@@ -22,7 +22,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { isGooglePaySupported, initGooglePay, createGooglePayPaymentMethod } =
     useGooglePay();
   const [initialized, setInitialized] = useState(false);
-  const testEnv = true;
+  const testEnv = false;
 
   const initialize = async () => {
     if (!(await isGooglePaySupported({ testEnv }))) return;
