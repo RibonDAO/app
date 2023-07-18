@@ -22,11 +22,13 @@ import { useWalletContext } from "contexts/walletContext";
 import { BigNumber, utils } from "ethers";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { useTranslation } from "react-i18next";
+import { PLATFORM } from "utils/constants/Application";
 
 export type onDonationToContractSuccessProps = (
   hash: string,
   timestamp: number,
   amountDonated: BigNumber,
+  platform: string,
 ) => void;
 
 export interface ICryptoPaymentContext {
@@ -60,7 +62,7 @@ export const CryptoPaymentContext = createContext<ICryptoPaymentContext>(
 export const INITIAL_AMOUNT = "5";
 function CryptoPaymentProvider({ children }: Props) {
   const [isInCryptoPage, setIsInCryptoPage] = useState(false);
-  const { currentNetwork, isValidNetwork } = useNetworkContext();
+  const { currentNetwork } = useNetworkContext();
   const [amount, setAmount] = useState(INITIAL_AMOUNT);
   const [loading, setLoading] = useState(false);
   const [userBalance, setUserBalance] = useState("");
@@ -140,7 +142,8 @@ function CryptoPaymentProvider({ children }: Props) {
       const { hash } = response;
       const timestamp = Math.floor(new Date().getTime() / 1000);
 
-      if (onSuccess) onSuccess(hash, timestamp, utils.parseEther(amount));
+      if (onSuccess)
+        onSuccess(hash, timestamp, utils.parseEther(amount), PLATFORM);
     } catch (error) {
       logError(error);
     } finally {
