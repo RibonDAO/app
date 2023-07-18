@@ -6,6 +6,7 @@ import { logEvent } from "services/analytics";
 import { Loader } from "rn-placeholder";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useRouteParams } from "hooks/useRouteParams";
+import VideoSection from "screens/users/ContributionStatsScreen/VideoSection";
 import EngagementSection from "./EngagementSection";
 import BoostSection from "./BoostSection";
 import S from "./styles";
@@ -45,10 +46,12 @@ function ContributionStatsScreen(): JSX.Element {
             ).toString()}
             totalContributors={data.stats.totalContributors.toString()}
           />
+          <View style={S.divider} />
           <BoostSection totalAmountToCause={data.stats.totalAmountToCause} />
+          <View style={S.divider} />
+          <VideoSection />
         </View>
       </View>
-      <View style={S.divider} />
     </ScrollView>
   );
 }
