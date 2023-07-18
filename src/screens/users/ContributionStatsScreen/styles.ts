@@ -10,6 +10,9 @@ export default StyleSheet.create({
     paddingHorizontal: theme.spacingNative(16),
     position: "relative",
   },
+  bannerContainer: {
+    marginTop: theme.spacingNative(24),
+  },
   title: {
     marginBottom: 32,
     color: "#333333",
