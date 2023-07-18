@@ -14,13 +14,13 @@ export default StyleSheet.create({
     marginTop: theme.spacingNative(24),
   },
   title: {
-    marginBottom: 32,
-    color: "#333333",
+    marginBottom: theme.spacingNative(24),
+    color: theme.colors.neutral[800],
     ...stylizedDisplaySm,
   },
   titleHighlight: {
     fontSize: 24,
-    color: "#FF5F5F",
+    color: theme.colors.brand.primary[600],
   },
   contentContainer: {
     flexDirection: "column",

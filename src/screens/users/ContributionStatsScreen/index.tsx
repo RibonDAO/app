@@ -10,6 +10,7 @@ import VideoSection from "screens/users/ContributionStatsScreen/VideoSection";
 import Banner from "components/moleculars/Banner";
 import { theme } from "@ribon.io/shared/styles";
 import RibonSunLeft from "assets/images/ribon-sun-left.png";
+import GiftCycleSection from "screens/users/ContributionStatsScreen/GiftCycleSection";
 import EngagementSection from "./EngagementSection";
 import BoostSection from "./BoostSection";
 import S from "./styles";
@@ -43,6 +44,7 @@ function ContributionStatsScreen(): JSX.Element {
       <Text style={S.title}>{t("title", { amount, cause })}</Text>
       <View style={S.contentContainer}>
         <View style={S.containerItem}>
+          <GiftCycleSection />
           <EngagementSection
             totalDonors={(
               data.stats.totalDonors + data.stats.totalContributors
