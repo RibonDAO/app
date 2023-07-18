@@ -25,7 +25,12 @@ function ContributionStatsScreen(): JSX.Element {
 
   const { data } = useContributionStats(Number(contributionId));
 
-  if (!data) return <Loader />;
+  if (!data)
+    return (
+      <View style={S.container}>
+        <Loader />
+      </View>
+    );
 
   const amount = data.stats.initialAmount;
   const cause = data.receiver?.name;
