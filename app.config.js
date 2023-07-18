@@ -64,6 +64,11 @@ export default () => ({
       [
         "expo-build-properties",
         {
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33,
+            "buildToolsVersion": "33.0.0"
+          },
           "ios": {
             "useFrameworks": "static"
           }
@@ -78,6 +83,13 @@ export default () => ({
         {
           "apiKey": "key_live_psjoynwxXPk14LioRerHjhggEvgKd6Bh",
           "iosAppDomain": "donation.app.link"
+        }
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.ribon.app",
+          "enableGooglePay": true
         }
       ],
     ],

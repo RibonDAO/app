@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { debugEventsEnabled } from "./src/config/DebugEventsView/helpers";
 import DebugEventsView from "./src/config/DebugEventsView";
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
+import StripeProvider from "./src/contexts/stripeContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
 import Navigation from "./src/config/navigation";
@@ -48,8 +49,10 @@ function Main() {
                   style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
                 >
                   {debugEventsEnabled() && <DebugEventsView />}
-                  <Navigation />
-                  <StatusBar />
+                  <StripeProvider>
+                    <Navigation />
+                    <StatusBar />
+                  </StripeProvider>
                 </SafeAreaView>
               </SafeAreaView>
             </SafeAreaProvider>

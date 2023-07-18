@@ -38,10 +38,16 @@ import UnsafeAreaProvider, {
   UnsafeAreaContext,
   IUnsafeAreaContext,
 } from "contexts/unsafeAreaContext";
+import CheckoutProvider, {
+  ICheckoutContext,
+  CheckoutContext,
+} from "contexts/checkoutContext";
+import StripeProvider, {
+  IStripeContext,
+  StripeContext,
+} from "contexts/stripeContext";
 
 import { waitForPromises } from "config/testUtils";
-import { NavigationContainer } from "@react-navigation/native";
-import { testLinkingConfig } from "config/testUtils/test-helper";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -83,6 +89,8 @@ export type RenderComponentProps = {
   ticketsProviderValue?: Partial<ITicketsContext>;
   scrollEnabledProviderValue?: Partial<IScrollEnabledContext>;
   unsafeAreaProviderValue?: Partial<IUnsafeAreaContext>;
+  checkoutProviderValue?: Partial<ICheckoutContext>;
+  stripeProviderValue?: Partial<IStripeContext>;
 };
 
 function renderAllProviders(
@@ -96,6 +104,8 @@ function renderAllProviders(
     ticketsProviderValue = {},
     scrollEnabledProviderValue = {},
     unsafeAreaProviderValue = {},
+    checkoutProviderValue = {},
+    stripeProviderValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -104,19 +114,22 @@ function renderAllProviders(
     component: (
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18n}>
-          <NavigationContainer linking={testLinkingConfig}>
-            {renderProvider(
-              LoadingOverlayProvider,
-              LoadingOverlayContext,
-              loadingOverlayValue,
+          {renderProvider(
+            LoadingOverlayProvider,
+            LoadingOverlayContext,
+            loadingOverlayValue,
+            renderProvider(
+              WalletProvider,
+              WalletContext,
+              walletProviderValue,
               renderProvider(
-                WalletProvider,
-                WalletContext,
-                walletProviderValue,
+                NetworkProvider,
+                NetworkContext,
+                networkProviderValue,
                 renderProvider(
-                  NetworkProvider,
-                  NetworkContext,
-                  networkProviderValue,
+                  CheckoutProvider,
+                  CheckoutContext,
+                  checkoutProviderValue,
                   renderProvider(
                     UnsafeAreaProvider,
                     UnsafeAreaContext,
@@ -137,7 +150,12 @@ function renderAllProviders(
                             ScrollEnabledProvider,
                             ScrollEnabledContext,
                             scrollEnabledProviderValue,
-                            children,
+                            renderProvider(
+                              StripeProvider,
+                              StripeContext,
+                              stripeProviderValue,
+                              children,
+                            ),
                           ),
                         ),
                       ),
@@ -145,8 +163,8 @@ function renderAllProviders(
                   ),
                 ),
               ),
-            )}
-          </NavigationContainer>
+            ),
+          )}
         </I18nextProvider>
       </QueryClientProvider>
     ),
