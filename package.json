@@ -45,7 +45,7 @@
     "@react-navigation/material-top-tabs": "^6.6.2",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
-    "@ribon.io/shared": "^1.0.75",
+    "@ribon.io/shared": "^1.0.77",
     "@sentry/react-native": "4.9.0",
     "@stripe/stripe-react-native": "0.19.0",
     "@walletconnect/react-native-dapp": "^1.8.0",
