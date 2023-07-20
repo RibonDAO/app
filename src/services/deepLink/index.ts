@@ -1,9 +1,10 @@
-import { setLocalStorageItem } from "@ribon.io/shared";
 import branch from "react-native-branch";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 
-export const INTEGRATION_ID = "integration_id";
-export async function initializeDeeplink(navigateTo: (path: string) => void) {
+export async function initializeDeeplink(
+  navigateTo: (path: string) => void,
+  setCurrentIntegrationId: (integrationId: string) => void,
+) {
   branch.subscribe({
     onOpenStart: ({ uri, cachedInitialEvent }) => {
       // eslint-disable-next-line no-console
@@ -15,7 +16,8 @@ export async function initializeDeeplink(navigateTo: (path: string) => void) {
       const latestParams = await branch.getLatestReferringParams();
       const integrationId =
         (latestParams.$integration_id as string) || RIBON_INTEGRATION_ID;
-      setLocalStorageItem(INTEGRATION_ID, integrationId);
+
+      setCurrentIntegrationId(integrationId);
       if (error) {
         // eslint-disable-next-line no-console
         console.error(
