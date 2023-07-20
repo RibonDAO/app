@@ -22,7 +22,7 @@ const IconSharp = createIconSet(
   "material-symbols-sharp.ttf",
 );
 
-interface Props extends IconProps<any> {
+export interface Props extends IconProps<any> {
   type: "sharp" | "rounded" | "outlined";
 }
 function Icon(props: Props) {

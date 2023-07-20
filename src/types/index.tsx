@@ -28,6 +28,10 @@ export type ContributionDoneParamsList = {
   cause?: Cause;
 };
 
+export type ContributionStatsScreenParamsList = {
+  contributionId: number;
+};
+
 export type GiveTicketScreenParamList = {
   isOnboarding?: boolean;
 };
@@ -92,6 +96,7 @@ export type RootStackParamList = {
   CheckoutScreen: CheckoutScreenParamList;
   OnboardingScreen: undefined;
   DonateModal: undefined;
+  ContributionStatsScreen: ContributionStatsScreenParamsList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
