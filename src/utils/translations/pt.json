@@ -326,7 +326,10 @@
       "tip": "Doando dinheiro pela Ribon, você gera tickets para que outras pessoas possam doar de graça. Com isso, algumas delas se inspiram a doar dinheiro também."
     },
     "video": {
-      "title": "Entenda como a comunidade da Ribon aumenta a sua doação"
+      "title": {
+        "part1": "Entenda como a comunidade da Ribon",
+        "part2": "aumenta a sua doação"
+      }
     },
     "supportSection": {
       "title": "Nos dê sua opinião",
