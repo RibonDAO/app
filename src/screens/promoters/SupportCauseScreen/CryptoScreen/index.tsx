@@ -15,10 +15,10 @@ import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { logError } from "services/crashReport";
 import { useNavigation } from "hooks/useNavigation";
-import UserSupportSection from "components/moleculars/UserSupportSection";
 import { useNetworkContext } from "contexts/networkContext";
 import { defaultNetwork } from "config/networks";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
+import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import styles from "./styles";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 
@@ -217,7 +217,7 @@ function CryptoScreen(): JSX.Element {
         </View>
       </View>
 
-      <UserSupportSection />
+      <UserSupportBanner from="" />
     </ScrollView>
   );
 }

@@ -15,9 +15,9 @@ import { View, Text, Platform, Linking } from "react-native";
 import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
-import UserSupportSection from "components/moleculars/UserSupportSection";
 import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
+import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
 
@@ -172,7 +172,7 @@ function CardScreen(): JSX.Element {
         </View>
       </View>
 
-      <UserSupportSection />
+      <UserSupportBanner from="" />
     </ScrollView>
   );
 }

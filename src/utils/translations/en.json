@@ -287,5 +287,10 @@
     "for": "for",
     "and": "and",
     "of": "of"
+  },
+  "userSupportBanner": {
+    "title": "Access user support",
+    "text": "Questions, ideias, refunds. We’re here!",
+    "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0"
   }
 }

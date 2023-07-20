@@ -11,7 +11,6 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import UserSupportSection from "components/moleculars/UserSupportSection";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
@@ -34,6 +33,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useAppState } from "hooks/useAppState";
 import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
+import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
@@ -300,7 +300,7 @@ export default function CausesScreen() {
       </Tooltip>
 
       <View style={S.supportContainer}>
-        <UserSupportSection />
+        <UserSupportBanner from="donateTickets_page" />
       </View>
     </ScrollView>
   );
