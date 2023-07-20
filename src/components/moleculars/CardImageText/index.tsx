@@ -1,4 +1,4 @@
-import { View, Text, TextStyle } from "react-native";
+import { View, Text, TextStyle, TouchableOpacity } from "react-native";
 import Image from "components/atomics/Image";
 import S from "./styles";
 
@@ -13,6 +13,8 @@ export type Props = {
   footerTextStyle?: TextStyle;
   image?: string;
   label?: string;
+  buttonText?: string;
+  onButtonPress?: () => void;
 };
 
 function CardImageText({
@@ -26,11 +28,19 @@ function CardImageText({
   textStyle,
   titleStyle,
   footerTextStyle,
+  buttonText,
+  onButtonPress,
 }: Props): JSX.Element {
   return (
     <View style={S.container}>
       <View style={S.insideContainer}>
-        {image && <Image source={{ uri: image }} style={S.image} />}
+        {image && (
+          <Image
+            source={{ uri: image }}
+            style={S.image}
+            accessibilityIgnoresInvertColors
+          />
+        )}
         {subtitle && (
           <Text style={[S.subtitle, subtitleStyle]}>{subtitle}</Text>
         )}
@@ -44,6 +54,15 @@ function CardImageText({
       </View>
       {footerText && (
         <Text style={[S.footerText, footerTextStyle]}>{footerText}</Text>
+      )}
+      {buttonText && (
+        <TouchableOpacity
+          accessibilityRole="button"
+          onPress={onButtonPress}
+          style={S.button}
+        >
+          <Text style={S.buttonText}>{buttonText}</Text>
+        </TouchableOpacity>
       )}
     </View>
   );

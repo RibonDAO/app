@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { View } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useImpact, useStatistics } from "@ribon.io/shared/hooks";
-import { logEvent } from "services/analytics";
+import usePageView from "hooks/usePageView";
 import TabViewSection from "./TabViewSection";
 import S from "./styles";
 
@@ -13,10 +13,7 @@ function ImpactScreen() {
   const { refetch: refetchStatistics } = useStatistics({
     userId: currentUser?.id,
   });
-
-  useEffect(() => {
-    logEvent("P9_view");
-  }, []);
+  usePageView("P9_view");
 
   useFocusEffect(
     useCallback(() => {

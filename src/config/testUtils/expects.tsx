@@ -31,7 +31,7 @@ export function expectLogEventToHaveBeenCalledWith(
   if (params)
     return expect(mockLogEventFunction).toHaveBeenCalledWith(event, params);
 
-  return expect(mockLogEventFunction).toHaveBeenCalledWith(event);
+  return expect(mockLogEventFunction).toHaveBeenCalledWith(event, {});
 }
 
 type expectPageToNavigateToType = {
