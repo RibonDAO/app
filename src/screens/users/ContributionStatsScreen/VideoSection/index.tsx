@@ -15,7 +15,7 @@ function VideoSection() {
       </Text>
       <WebView
         containerStyle={S.embeddedVideo}
-        style={{}}
+        style={{ opacity: 0.99 }} // opacity is set to 0.99 to avoid a bug in the WebView component
         javaScriptEnabled
         source={{
           uri: "https://www.youtube.com/embed/tJ9lY9npcNU?rel=0&autoplay=0&showinfo=0&controls=0",

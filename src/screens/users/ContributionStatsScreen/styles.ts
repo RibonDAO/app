@@ -17,6 +17,7 @@ export default StyleSheet.create({
     marginBottom: theme.spacingNative(24),
     color: theme.colors.neutral[800],
     ...stylizedDisplaySm,
+    fontSize: 26,
   },
   titleHighlight: {
     fontSize: 24,
