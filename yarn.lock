@@ -2633,10 +2633,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.0.75":
-  version "1.0.75"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.75.tgz#ee2f22f898e261b3a255b9e10802cedd3cde8ead"
-  integrity sha512-T1cfmxd7dtkzo4aqn5errpTDRIgaUpmIE0mLonUYTC+97mFH60dIfHOHZBShaMZoGBa1XDBkezQFtHLpPCBDbg==
+"@ribon.io/shared@^1.0.77":
+  version "1.0.77"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.77.tgz#55234e2ebf0b0720325b7c63a6e52de1f8058c3d"
+  integrity sha512-MbqkP+Tm8GHqukhBF8T25UgIo/BuSEPlN8wyrZ4KuPgmRPEeDJrVObXeCKM3RN95Q21pp8/Q8dSF/BrbGDOzGQ==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -2831,6 +2831,11 @@
   integrity sha512-USTLkZze5gkel8MYCujSRBVIrUQ3YPBrLOx7GNk/0wttvVtlzWXAq9eLbQ4p/NicGxP+3T7KPEMVV//g+yubpw==
   dependencies:
     lodash "^4.17.15"
+
+"@stripe/stripe-react-native@0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-react-native/-/stripe-react-native-0.19.0.tgz#a838440739082c2cc7a3d516b0e60de0013b4f32"
+  integrity sha512-J4UWmg8oUIhMvLsU94pWqsXpLyxxh3wT4AG/VKdzzb3Wn80a2b6zeOxtY3/7uoNV4AGurhZXvo7Gv01/y7MChQ==
 
 "@testing-library/react-hooks@^8.0.1":
   version "8.0.1"

@@ -1,5 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
 import api from "services/api";
+import { LinkingOptions } from "@react-navigation/native";
+import { RootStackParamList } from "types";
 
 const mockApi = new MockAdapter(api);
 
@@ -41,4 +43,40 @@ export const mockEnv = (envVars: Record<any, any>) => {
   afterAll(() => {
     process.env = INITIAL_ENV;
   });
+};
+
+export const testLinkingConfig: LinkingOptions<RootStackParamList> = {
+  prefixes: [],
+  config: {
+    screens: {
+      Root: {
+        screens: {
+          CausesScreen: {
+            screens: {
+              CausesScreen: "causes",
+              ReceiveTicketScreen: "receive-ticket",
+              DonationDonePage: "donation-done",
+            },
+          },
+          ForYouScreen: {
+            screens: {
+              NewsScreen: "news",
+            },
+          },
+          ImpactScreen: {
+            screens: {
+              ImpactScreen: "impact",
+            },
+          },
+          PromotersScreen: {
+            screens: {
+              PromotersScreen: "promoters",
+            },
+          },
+        },
+      },
+      DonateModal: "modal",
+      NotFound: "*",
+    },
+  },
 };

@@ -22,6 +22,7 @@ import LoadingOverlayProvider from "contexts/loadingOverlayContext";
 import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAddScreen";
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
 import PaymentScreen from "screens/promoters/PaymentScreen";
+import CheckoutScreen from "screens/promoters/CheckoutScreen";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
@@ -37,6 +38,8 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import GiveTicketScreen from "screens/donations/GiveTicketScreen";
+import ContributionStatsScreen from "screens/users/ContributionStatsScreen";
+import CheckoutProvider from "contexts/checkoutContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -218,6 +221,14 @@ function RootNavigator() {
       />
 
       <Stack.Screen
+        name="CheckoutScreen"
+        component={CheckoutScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
         name="OnboardingScreen"
         component={OnboardingScreen}
         options={{
@@ -228,6 +239,18 @@ function RootNavigator() {
       <Stack.Screen
         name="DonateScreen"
         component={DonateScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
+          headerBackTitleVisible: true,
+          headerBackTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="ContributionStatsScreen"
+        component={ContributionStatsScreen}
         options={{
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
@@ -268,16 +291,18 @@ export default function Navigation() {
       <LoadingOverlayProvider>
         <WalletProvider>
           <NetworkProvider>
-            <CryptoPaymentProvider>
-              <CardPaymentInformationProvider>
-                <CausesProvider>
-                  <TicketsProvider>
-                    <RootNavigator />
-                    <Toast config={toastConfig} />
-                  </TicketsProvider>
-                </CausesProvider>
-              </CardPaymentInformationProvider>
-            </CryptoPaymentProvider>
+            <CheckoutProvider>
+              <CryptoPaymentProvider>
+                <CardPaymentInformationProvider>
+                  <CausesProvider>
+                    <TicketsProvider>
+                      <RootNavigator />
+                      <Toast config={toastConfig} />
+                    </TicketsProvider>
+                  </CausesProvider>
+                </CardPaymentInformationProvider>
+              </CryptoPaymentProvider>
+            </CheckoutProvider>
           </NetworkProvider>
         </WalletProvider>
       </LoadingOverlayProvider>

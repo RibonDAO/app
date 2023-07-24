@@ -234,6 +234,29 @@
       },
       "tooltipImpact": "Como calculamos o impacto?",
       "tooltipImpactText": "O cálculo é feito com base no valor mínimo necessário para que o projeto consiga bons resultados. As causas da Ribon fazem parte do movimento social “Altruísmo Eficaz”, e têm como objetivo gerar grande impacto a custo baixo."
+    },
+    "checkoutScreen": {
+      "changeCurrency": "Mudar moeda",
+      "back": "Voltar",
+      "donatingTo": "Doando para ",
+      "netDonation": "Doação líquida: ",
+      "serviceFees": "Taxas de serviço: ",
+      "payment": "Pagamento",
+      "selectCurrency": "Selecione a moeda",
+      "selectValue": "Selecione o valor",
+      "additionalFeesText": "O pagamento é processado em dólar, o valor pode sofrer uma pequena variação de acordo com as taxas do seu banco.",
+      "paymentMethodSection": {
+        "creditCard": "Cartão de crédito",
+        "googlePay": "Google Pay",
+        "applePay": "Apple Pay",
+        "creditCardFields": {
+          "number": "Número do cartão",
+          "name": "Nome impresso",
+          "expirationDate": "Data de validade",
+          "cvv": "CVV"
+        }
+      },
+      "confirmPayment": "Confirmar pagamento"
     }
   },
   "users": {
@@ -264,7 +287,9 @@
           },
           "migrated": "Migrado",
           "showMore": "Mostrar mais",
-          "generalReceiver": "Geral"
+          "generalReceiver": "Geral",
+          "seeDetails": "Acompanhar impacto →",
+          "increaseText": "Sua doação aumentada em +20% pela comunidade da Ribon"
         }
       },
       "communityDonationsTitle": "Doações em Comunidade",
@@ -292,5 +317,31 @@
     "title": "Suporte ao Usuário",
     "text": "Dúvidas, ideias, estornos. Estamos aqui!",
     "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0"
+  },
+  "contributionStatsPage": {
+    "title": "Você doou {{amount}} para {{cause}}",
+    "engagementSection": {
+      "title": "Sua doação gerou tickets",
+      "numberOfTicketDonors": "pessoas já doaram tickets",
+      "numberOfContributorsDonors": "doaram dinheiro inspiradas por você"
+    },
+    "boostSection": {
+      "title": "Sua causa recebe mais",
+      "subtitle": "Total arrecadado para sua causa até agora",
+      "tip": "Doando dinheiro pela Ribon, você gera tickets para que outras pessoas possam doar de graça. Com isso, algumas delas se inspiram a doar dinheiro também."
+    },
+    "video": {
+      "title": {
+        "part1": "Entenda como a comunidade da Ribon",
+        "part2": "aumenta a sua doação"
+      }
+    },
+    "supportSection": {
+      "title": "Nos dê sua opinião",
+      "text": "O que você achou dessa experiência ?"
+    },
+    "giftCycleSection": {
+      "realTimeDonationLabel": "Atualizado em tempo real"
+    }
   }
 }

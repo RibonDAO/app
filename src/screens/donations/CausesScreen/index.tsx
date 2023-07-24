@@ -34,12 +34,14 @@ import { useAppState } from "hooks/useAppState";
 import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
+import usePageView from "hooks/usePageView";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
 export default function CausesScreen() {
+  usePageView("P1_view");
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
@@ -78,10 +80,6 @@ export default function CausesScreen() {
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
   }, [isLoading]);
-
-  useEffect(() => {
-    logEvent("P1_view");
-  }, []);
 
   useFocusEffect(
     useCallback(() => {

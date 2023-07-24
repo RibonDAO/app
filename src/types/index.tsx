@@ -4,7 +4,7 @@ import {
   NavigatorScreenParams,
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
+import { Cause, Currencies, NonProfit, Offer } from "@ribon.io/shared/types";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -26,6 +26,10 @@ export type ForYouScreenParamsList = {
 export type ContributionDoneParamsList = {
   nonProfit?: NonProfit;
   cause?: Cause;
+};
+
+export type ContributionStatsScreenParamsList = {
+  contributionId: number;
 };
 
 export type GiveTicketScreenParamList = {
@@ -66,6 +70,13 @@ export type SupportNonProfitParamList = {
   causeDonated?: Cause;
 };
 
+export type CheckoutScreenParamList = {
+  target: string;
+  targetId: string;
+  offer: number;
+  currency: Currencies;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   DonateScreen: DonateScreenList;
@@ -82,8 +93,10 @@ export type RootStackParamList = {
   PaymentScreen: PaymentPageList;
   SupportNonProfitScreen: SupportNonProfitParamList;
   PromotersScreen: PromotersScreenParams;
+  CheckoutScreen: CheckoutScreenParamList;
   OnboardingScreen: undefined;
   DonateModal: undefined;
+  ContributionStatsScreen: ContributionStatsScreenParamsList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
