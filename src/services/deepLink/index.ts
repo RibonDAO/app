@@ -12,26 +12,15 @@ export async function initializeDeeplink(
         `subscribe onOpenStart, will open ${uri} cachedInitialEvent is ${cachedInitialEvent}`,
       );
     },
-    onOpenComplete: async ({ error, params, uri }) => {
+    onOpenComplete: async () => {
       const latestParams = await branch.getLatestReferringParams();
       const integrationId =
         (latestParams.$integration_id as string) || RIBON_INTEGRATION_ID;
 
       setCurrentIntegrationId(integrationId);
-      if (error) {
-        // eslint-disable-next-line no-console
-        console.error(
-          `subscribe onOpenComplete, Error from opening uri: ${uri} error: ${error}`,
-        );
-        if (latestParams.$custom_meta_tags)
-          navigateTo(latestParams.$custom_meta_tags as string);
-        return;
-      }
-      if (params) {
-        if (params.navigate) {
-          navigateTo(params.navigate as string);
-        }
-      }
+
+      if (latestParams.$custom_meta_tags)
+        navigateTo(latestParams.$custom_meta_tags as string);
     },
   });
 }
