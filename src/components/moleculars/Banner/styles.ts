@@ -48,16 +48,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   circle: {
-    borderRadius: 50,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: theme.colors.neutral10,
     padding: 3.2,
   },
   background: {
     flex: 1,
-    position: "relative",
-    width: "100%",
-    height: "100%",
-    alignSelf: "flex-end",
+    resizeMode: "contain",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
 });
 

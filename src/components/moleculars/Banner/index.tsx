@@ -1,16 +1,19 @@
+/* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import { theme } from "@ribon.io/shared/styles";
 import Icon, { Props as IconProps } from "components/atomics/Icon";
 import ArrowRight from "components/vectors/ArrowRight";
-import { TouchableOpacity, View, Text, ImageBackground } from "react-native";
+import { useState } from "react";
+import { TouchableOpacity, View, Text, Image } from "react-native";
 import {
   defaultBodyMdSemibold,
   defaultBodySmSemibold,
   defaultHeadingXxs,
 } from "styles/typography/default";
 
+import { darken } from "polished";
 import S from "./styles";
 
-const { primary } = theme.colors.brand;
+const { primary, secondary } = theme.colors.brand;
 
 export type TitleProps = {
   text: string;
@@ -39,16 +42,23 @@ function Banner({
   text,
   textColor,
   cardBackground,
-  backgroundColor,
+  backgroundColor = secondary[100],
   children,
   arrowLinkColor = primary[800],
   onArrowClick,
   withCircle = false,
 }: Props): JSX.Element {
-  const handleClick = () => {
-    if (onArrowClick) onArrowClick();
-  };
+  const [isPressed, setIsPressed] = useState(false);
 
+  const handleClick = () => {
+    if (onArrowClick) {
+      onArrowClick();
+      setIsPressed(!isPressed);
+    }
+  };
+  const pressStyle = {
+    backgroundColor: isPressed ? darken(0.1, backgroundColor) : backgroundColor,
+  };
   const titleSize = () => {
     switch (title?.size) {
       case "small":
@@ -65,52 +75,53 @@ function Banner({
   return (
     <TouchableOpacity
       accessibilityRole="button"
-      style={[S.container, { backgroundColor }]}
+      style={[S.container, { ...pressStyle }]}
       onPress={handleClick}
     >
-      <ImageBackground
-        source={cardBackground}
-        resizeMode="contain"
-        resizeMethod="resize"
-        style={S.background}
-      >
-        <View style={S.content}>
-          <View style={S.iconText}>
-            {icon && (
-              <View
-                style={[
-                  S.iconContainer,
-                  withCircle ? S.circle : S.iconContainer,
-                ]}
-              >
-                <Icon {...icon} />
-              </View>
-            )}
-            <View style={S.titleContainer}>
-              {title && (
-                <Text style={[S.title, { color: title.color, ...titleSize() }]}>
-                  {title.text}
-                </Text>
-              )}
+      {!isPressed && (
+        <Image
+          source={cardBackground}
+          resizeMode="contain"
+          style={{
+            position: "absolute",
+            height: " 100%",
+            right: -12,
+          }}
+        />
+      )}
+      <View style={S.content}>
+        <View style={S.iconText}>
+          {icon && (
+            <View
+              style={[S.iconContainer, withCircle ? S.circle : S.iconContainer]}
+            >
+              <Icon {...icon} />
             </View>
-          </View>
-          {subtitle && (
-            <Text style={[S.title, { color: subtitle.color }]}>
-              {subtitle.text}
-            </Text>
           )}
-          <View style={S.textContainer}>
-            {text && <Text style={(S.text, { color: textColor })}>{text}</Text>}
-            {children && <View style={S.childrenContainer}>{children}</View>}
-
-            {onArrowClick && (
-              <View style={S.arrowContainer}>
-                <ArrowRight color={arrowLinkColor} />
-              </View>
+          <View style={S.titleContainer}>
+            {title && (
+              <Text style={[S.title, { color: title.color, ...titleSize() }]}>
+                {title.text}
+              </Text>
             )}
           </View>
         </View>
-      </ImageBackground>
+        {subtitle && (
+          <Text style={[S.title, { color: subtitle.color }]}>
+            {subtitle.text}
+          </Text>
+        )}
+        <View style={S.textContainer}>
+          {text && <Text style={(S.text, { color: textColor })}>{text}</Text>}
+          {children && <View style={S.childrenContainer}>{children}</View>}
+
+          {onArrowClick && (
+            <View style={S.arrowContainer}>
+              <ArrowRight color={arrowLinkColor} />
+            </View>
+          )}
+        </View>
+      </View>
     </TouchableOpacity>
   );
 }
