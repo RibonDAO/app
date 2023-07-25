@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ImageRequireSource } from "react-native";
 import Icon, { Props as IconProps } from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared/styles";
 import Image from "components/atomics/Image";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 
 type TitleProps = {
@@ -21,6 +22,7 @@ type Props = {
   children?: React.ReactNode;
   arrowLinkColor?: string;
   onArrowClick?: () => void;
+  source?: string;
 };
 
 function Banner({
@@ -33,9 +35,11 @@ function Banner({
   children,
   arrowLinkColor = theme.colors.brand.secondary[800],
   onArrowClick,
+  source,
 }: Props) {
   const handleClick = () => {
     if (onArrowClick) onArrowClick();
+    logEvent("supportBtn_click", { from: source });
   };
 
   const flexDirection = onArrowClick ? "row" : "column";

@@ -1,6 +1,10 @@
 import branch from "react-native-branch";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 
-export function initializeDeeplink(navigateTo: (path: string) => void) {
+export async function initializeDeeplink(
+  navigateTo: (path: string) => void,
+  setCurrentIntegrationId: (integrationId: string) => void,
+) {
   branch.subscribe({
     onOpenStart: ({ uri, cachedInitialEvent }) => {
       // eslint-disable-next-line no-console
@@ -8,19 +12,15 @@ export function initializeDeeplink(navigateTo: (path: string) => void) {
         `subscribe onOpenStart, will open ${uri} cachedInitialEvent is ${cachedInitialEvent}`,
       );
     },
-    onOpenComplete: ({ error, params, uri }) => {
-      if (error) {
-        // eslint-disable-next-line no-console
-        console.error(
-          `subscribe onOpenComplete, Error from opening uri: ${uri} error: ${error}`,
-        );
-        return;
-      }
-      if (params) {
-        if (params.navigate) {
-          navigateTo(params.navigate as string);
-        }
-      }
+    onOpenComplete: async () => {
+      const latestParams = await branch.getLatestReferringParams();
+      const integrationId =
+        (latestParams.$integration_id as string) || RIBON_INTEGRATION_ID;
+
+      setCurrentIntegrationId(integrationId);
+
+      if (latestParams.$custom_meta_tags)
+        navigateTo(latestParams.$custom_meta_tags as string);
     },
   });
 }

@@ -172,7 +172,7 @@ function CardScreen(): JSX.Element {
         </View>
       </View>
 
-      <UserSupportSection />
+      <UserSupportSection source="giveCauseCC_page" />
     </ScrollView>
   );
 }
