@@ -15,7 +15,7 @@ export async function initializeDeeplink(
     onOpenComplete: async () => {
       const latestParams = await branch.getLatestReferringParams();
       const integrationId =
-        (latestParams.$integration_id as string) || RIBON_INTEGRATION_ID;
+        (latestParams.integration_id as string) || RIBON_INTEGRATION_ID;
 
       setCurrentIntegrationId(integrationId);
 
