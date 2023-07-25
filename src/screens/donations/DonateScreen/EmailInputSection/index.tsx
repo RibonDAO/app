@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import Button from "components/atomics/buttons/Button";
-import { isValidEmail } from "lib/validators/email";
+import { isValidEmail } from "lib/validators";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import InputText from "components/atomics/inputs/InputText";
