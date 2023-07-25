@@ -1,7 +1,9 @@
-import UserSupportSection from "components/moleculars/UserSupportSection";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import { ScrollView, View } from "react-native";
 import { useScrollEnabled } from "contexts/scrollEnabledContext";
+
+import UserSupportBanner from "components/moleculars/UserSupportBanner";
+
 import usePageView from "hooks/usePageView";
 import CardScreen from "./CardScreen";
 import Placeholder from "./placeholder";
@@ -16,7 +18,7 @@ function SupportNonProfitScreen(): JSX.Element {
       <CardScreen />
 
       <View style={S.supportSection}>
-        <UserSupportSection />
+        <UserSupportBanner from="giveNonProfit_page" />
       </View>
     </ScrollView>
   );
