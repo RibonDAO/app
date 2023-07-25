@@ -1,73 +1,68 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import {
-  defaultBodyMdSemibold,
-  defaultBodySmRegular,
-} from "styles/typography/default";
+import { defaultBodySmRegular } from "styles/typography/default";
 
-export default StyleSheet.create({
-  outerContainer: {
-    backgroundColor: theme.colors.brand.secondary[50],
-  },
+const styles = StyleSheet.create({
   container: {
-    width: "100%",
     maxWidth: 472,
-    height: 128,
-    padding: 16,
     borderRadius: 8,
     display: "flex",
-    justifyContent: "space-between",
-    zIndex: 1,
-  },
-  content: {
-    marginBottom: 12,
     flexDirection: "column",
   },
-  iconContainer: {
-    marginRight: 8,
-    backgroundColor: "#fff",
-    padding: 4,
-    height: 32,
+  content: {
+    padding: theme.spacingNative(16),
+    marginBottom: theme.spacingNative(12),
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: 32,
-    borderRadius: 50,
+  },
+  iconContainer: {
+    marginRight: theme.spacingNative(8),
   },
   iconText: {
+    display: "flex",
     flexDirection: "row",
     alignItems: "center",
   },
   titleContainer: {
+    display: "flex",
     flexDirection: "column",
   },
-  title: {
-    ...defaultBodyMdSemibold,
-    color: theme.colors.neutral[900],
-  },
-  subtitle: {
-    ...defaultBodySmRegular,
-    color: theme.colors.neutral[800],
+  title: {},
+  subTitle: {
+    marginBottom: theme.spacingNative(4),
   },
   text: {
     ...defaultBodySmRegular,
-    color: theme.colors.neutral[800],
+    marginTop: theme.spacingNative(4),
   },
   childrenContainer: {
-    marginTop: 12,
-    display: "flex",
+    marginTop: theme.spacingNative(12),
   },
   arrowContainer: {
-    position: "relative",
-    height: "100%",
+    display: "flex",
+    flexDirection: "row",
+    marginLeft: theme.spacingNative(16),
+  },
+  textContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  circle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: theme.colors.neutral10,
+    padding: 3.2,
   },
-  image: {
-    position: "absolute",
-    right: 0,
-    top: 0,
-    resizeMode: "cover",
-    height: "100%",
+  background: {
+    flex: 1,
+    resizeMode: "contain",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
 });
+
+export default styles;
