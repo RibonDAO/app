@@ -85,7 +85,7 @@ function Banner({
           style={{
             position: "absolute",
             height: " 100%",
-            right: -12,
+            right: -16,
           }}
         />
       )}

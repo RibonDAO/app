@@ -5,8 +5,8 @@ import { logEvent } from "services/analytics";
 import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
+import RibonSunLeft from "assets/images/ribon-sun-left.png";
 import Banner from "../Banner";
-import Background from "./assets/background.png";
 
 type Props = {
   from: string;
@@ -40,7 +40,7 @@ function UserSupportBanner({ from }: Props): JSX.Element {
           size: 24,
         }}
         withCircle
-        cardBackground={Background}
+        cardBackground={RibonSunLeft}
         textColor={theme.colors.neutral[900]}
         backgroundColor={theme.colors.brand.secondary[100]}
         arrowLinkColor={theme.colors.brand.secondary[900]}
