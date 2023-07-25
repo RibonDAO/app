@@ -1,10 +1,9 @@
 import { Text, View } from "react-native";
 import { useTasks } from "utils/constants/Tasks";
-import { useIntegration, useTasksStatistics } from "@ribon.io/shared";
+import { useTasksStatistics } from "@ribon.io/shared";
 import ProgressBar from "components/atomics/ProgressBar";
 import { useTranslation } from "react-i18next";
 import { useTasksContext } from "contexts/tasksContext";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import Image from "components/atomics/Image";
 import { openInWebViewer } from "lib/linkOpener";
 import { useCountdown } from "hooks/useCountdown";
@@ -21,6 +20,7 @@ import requestUserPermissionForNotifications from "lib/notifications";
 import { showToast } from "lib/Toast";
 import { logError } from "services/crashReport";
 import InlineNotification from "components/moleculars/notifications/InlineNotification";
+import { useIntegrationContext } from "contexts/integrationContext";
 import StatisticsCardsSection from "./StatisticsCardsSection";
 import DailyTasksSection from "./DailyTasksSection";
 import MonthlyTasksSection from "./MonthlyTasksSection";
@@ -113,7 +113,7 @@ export default function TasksSection() {
     }
   }, [index]);
 
-  const { integration } = useIntegration(RIBON_INTEGRATION_ID);
+  const { integration } = useIntegrationContext();
 
   const linkToIntegration = () => {
     openInWebViewer(integration?.integrationTask?.linkAddress ?? "");
