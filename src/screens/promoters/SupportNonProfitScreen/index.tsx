@@ -18,7 +18,7 @@ function SupportNonProfitScreen(): JSX.Element {
       <CardScreen />
 
       <View style={S.supportSection}>
-        <UserSupportBanner from="" />
+        <UserSupportBanner from="giveNonProfit_page" />
       </View>
     </ScrollView>
   );

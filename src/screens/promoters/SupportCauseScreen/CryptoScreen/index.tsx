@@ -217,7 +217,7 @@ function CryptoScreen(): JSX.Element {
         </View>
       </View>
 
-      <UserSupportBanner from="" />
+      <UserSupportBanner from="giveCauseCrypto_page" />
     </ScrollView>
   );
 }
