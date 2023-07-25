@@ -24,7 +24,7 @@ function UserSupportBanner({ from }: Props): JSX.Element {
   };
 
   return (
-    <View style={{ marginTop: 16 }}>
+    <View style={{ marginTop: theme.spacingNative(16) }}>
       <Banner
         onArrowClick={handleClick}
         title={{
