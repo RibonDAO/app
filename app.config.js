@@ -1,5 +1,5 @@
-const version = "5.0.17";
-const buildNumber = 321;
+const version = "5.0.18";
+const buildNumber = 322;
 
 export default () => ({
   "expo": {
@@ -42,7 +42,8 @@ export default () => ({
          "UIBackgroundModes": [
            "fetch",
            "remote-notification"
-         ]
+         ],
+         "NSCameraUsageDescription": "This app requires access to your phone's camera."
       },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
