@@ -326,7 +326,10 @@
       "tip": "By donating money through Ribon,you generate tickets so that other people can donate for free. With that, some of them are inspired to donate money too."
     },
     "video": {
-      "title": "Understand how the Ribon community <b>increases your donation</b>"
+      "title": {
+        "part1": "Understand how the Ribon community",
+        "part2": "increases your donation"
+      }
     },
     "supportSection": {
       "title": "Give us your opinion",

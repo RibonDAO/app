@@ -298,7 +298,7 @@ export default function CausesScreen() {
       </Tooltip>
 
       <View style={S.supportContainer}>
-        <UserSupportSection />
+        <UserSupportSection source="donateTickets_page" />
       </View>
     </ScrollView>
   );

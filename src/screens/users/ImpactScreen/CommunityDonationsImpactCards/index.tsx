@@ -38,7 +38,9 @@ function CommunityDonationsImpactCards(): JSX.Element {
   };
 
   const navigateToContributionStatsScreen = (contributionId: number) => {
-    logEvent("contributionCard_click");
+    logEvent("contributionDashCta_Btn_click", {
+      from: "impact_page",
+    });
     navigateTo("ContributionStatsScreen", { contributionId });
   };
 

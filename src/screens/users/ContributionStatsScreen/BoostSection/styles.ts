@@ -1,9 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import {
   defaultBodySmMedium,
   defaultHeadingMd,
 } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
+
+const screenWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {},
@@ -14,11 +16,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   tooltipCardContainer: {
-    width: "100%",
+    width: screenWidth,
     marginTop: theme.spacingNative(16),
     marginBottom: theme.spacingNative(16),
     marginLeft: -16,
-    backgroundColor: "#F5F5F5",
   },
   innerCardContainer: {
     width: "100%",
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
     width: 280,
     marginRight: theme.spacingNative(18),
     flexWrap: "wrap",
-    backgroundColor: theme.colors.brand.primary[50],
   },
   iconContainer: {
     padding: 4,

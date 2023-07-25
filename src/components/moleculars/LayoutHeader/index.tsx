@@ -23,6 +23,7 @@ import { Linking, Platform } from "react-native";
 import ButtonSwitch from "components/atomics/buttons/ButtonSwitch";
 import { isNotificationsEnabled } from "lib/notifications";
 import { useFocusEffect } from "@react-navigation/native";
+import { logEvent } from "services/analytics";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
@@ -143,6 +144,7 @@ function LayoutHeader({
 
   const linkToSupport = () => {
     openInWebViewer(t("supportLink"));
+    logEvent("supportBtn_Click", { from: "config_page" });
   };
 
   const notificationsSwitch = () => (

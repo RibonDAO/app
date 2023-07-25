@@ -5,18 +5,23 @@ import { theme } from "@ribon.io/shared/styles";
 export default StyleSheet.create({
   container: {
     paddingTop: theme.spacingNative(24),
+    paddingBottom: theme.spacingNative(24),
     marginBottom: theme.spacingNative(64),
     paddingHorizontal: theme.spacingNative(16),
     position: "relative",
   },
+  bannerContainer: {
+    marginTop: theme.spacingNative(24),
+  },
   title: {
-    marginBottom: 32,
-    color: "#333333",
+    marginBottom: theme.spacingNative(24),
+    color: theme.colors.neutral[800],
     ...stylizedDisplaySm,
+    fontSize: 26,
   },
   titleHighlight: {
     fontSize: 24,
-    color: "#FF5F5F",
+    color: theme.colors.brand.primary[600],
   },
   contentContainer: {
     flexDirection: "column",
