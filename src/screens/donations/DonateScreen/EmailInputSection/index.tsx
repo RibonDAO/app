@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { isValidEmail } from "lib/validators";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import InputText from "components/atomics/inputs/InputText";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
@@ -23,7 +23,7 @@ import BackgroundShapes from "components/vectors/BackgroundShapes";
 import Image from "components/atomics/Image";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { perform } from "lib/timeoutHelpers";
-import { logEvent } from "services/analytics";
+import usePageView from "hooks/usePageView";
 import S from "./styles";
 
 type Props = {
@@ -38,6 +38,7 @@ function EmailInputSection({
   onDonationFail,
   onDonationSuccess,
 }: Props) {
+  usePageView("P12_view", { nonProfitId: nonProfit.id });
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donateScreen",
   });
@@ -47,10 +48,6 @@ function EmailInputSection({
   const { setCurrentUser } = useCurrentUser();
   const { donate } = useDonations(undefined);
   const { formattedImpactText } = useFormattedImpactText();
-
-  useEffect(() => {
-    logEvent("P12_view", { nonProfitId: nonProfit.id });
-  }, []);
 
   async function donateCallback() {
     try {

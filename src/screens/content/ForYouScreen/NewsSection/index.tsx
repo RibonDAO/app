@@ -24,10 +24,6 @@ export default function NewsSection() {
   const { getArticles } = useArticles();
 
   useEffect(() => {
-    logEvent("P20_view");
-  }, []);
-
-  useEffect(() => {
     const fetchArticles = async () => {
       const currentArticles = await getArticles();
       setArticles(currentArticles);
