@@ -1,5 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -57,6 +57,10 @@ function LayoutHeader({
     : theme.colors.neutral[500];
   const ticketIcon = hasTickets() ? <TicketIcon /> : <GrayTicketIcon />;
   const { connectWallet, wallet, killSession } = useWalletContext();
+
+  useEffect(() => {
+    if (menuVisible) logEvent("P18_view");
+  }, [menuVisible]);
 
   const handleWalletButtonClick = () => {
     if (wallet) {

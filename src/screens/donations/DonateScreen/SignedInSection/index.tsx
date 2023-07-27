@@ -9,8 +9,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
 import BackgroundShapes from "components/vectors/BackgroundShapes";
-import { useEffect } from "react";
-import { logEvent } from "services/analytics";
+import usePageView from "hooks/usePageView";
 import S from "./styles";
 
 type Props = {
@@ -25,16 +24,13 @@ function SignedInSection({
   onDonationSuccess,
   onDonationFail,
 }: Props) {
+  usePageView("P13_view");
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donateScreen.signedInSection",
   });
   const { currentUser } = useCurrentUser();
   const { donate } = useDonations(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
-
-  useEffect(() => {
-    logEvent("P1_donateConfirmModal_view", { nonProfitId: nonProfit.id });
-  }, []);
 
   const handleButtonPress = async () => {
     if (!currentUser?.email) return;
