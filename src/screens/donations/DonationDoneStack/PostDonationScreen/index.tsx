@@ -7,12 +7,14 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTasksContext } from "contexts/tasksContext";
 import { theme } from "@ribon.io/shared";
 import { RootStackScreenProps } from "types";
+import usePageView from "hooks/usePageView";
 import S from "./styles";
 import ContributionImage from "./ContributionImage";
 
 function PostDonationScreen({
   route,
 }: RootStackScreenProps<"PostDonationScreen">) {
+  usePageView("P8_view");
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen",
   });

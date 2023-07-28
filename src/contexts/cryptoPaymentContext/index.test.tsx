@@ -65,6 +65,8 @@ function CryptoPaymentTestPage() {
         onChange={(event) => {
           setAmount(event.nativeEvent.text);
         }}
+        accessibilityLabel="Enter donation amount"
+        accessibilityHint="Type the amount you want to donate in the input field."
       />
       <Text>{userBalance}</Text>
       <Text>{tokenSymbol}</Text>

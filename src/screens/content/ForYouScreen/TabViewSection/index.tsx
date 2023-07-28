@@ -1,7 +1,7 @@
 import { useWindowDimensions, View, Text } from "react-native";
 import { SceneMap, TabBar } from "react-native-tab-view";
 import { theme } from "@ribon.io/shared/styles";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CollapsibleTabView } from "react-native-collapsible-tab-view";
 import React, { useEffect } from "react";
@@ -11,6 +11,8 @@ import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import { useTasksContext } from "contexts/tasksContext";
 import { TASKS } from "utils/constants/Tasks";
+import { logEvent } from "services/analytics";
+import { useFocusEffect } from "@react-navigation/native";
 import TasksSection from "../TasksSection";
 import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
@@ -65,6 +67,15 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
       }, 500);
     }
   }, [initialTabIndex]);
+
+  useFocusEffect(
+    useCallback(() => {
+      const eventName =
+        // eslint-disable-next-line no-nested-ternary
+        index === 0 ? "P21_view" : canDonate ? "P16_view" : "P20_view";
+      logEvent(eventName);
+    }, [index]),
+  );
 
   const [routes] = useState([
     { key: "TasksSectionTabView", title: t("tasksSectionTitle") },

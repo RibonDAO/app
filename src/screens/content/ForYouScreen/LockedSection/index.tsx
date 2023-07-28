@@ -3,24 +3,17 @@ import Button from "components/atomics/buttons/Button";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
 import ImageWithInfoLayout from "components/moleculars/layouts/ImageWithInfoLayout";
-import { useEffect } from "react";
-import { logEvent } from "services/analytics";
 import styles from "./styles";
 
 export default function LockedSection() {
   const { t } = useTranslation("translation", {
     keyPrefix: "content.forYouScreen.lockedSection",
   });
-
   const { navigateTo } = useNavigation();
 
   const handleButtonClick = () => {
     navigateTo("CausesScreen");
   };
-
-  useEffect(() => {
-    logEvent("P16_view");
-  }, []);
 
   return (
     <View style={styles.outerContainer}>

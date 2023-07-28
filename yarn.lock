@@ -1098,6 +1098,13 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@babel/runtime@^7.17.8":
+  version "7.22.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.6.tgz#57d64b9ae3cff1d67eb067ae117dac087f5bd438"
+  integrity sha512-wDb5pWm4WDdF6LFUde3Jl8WzPA+3ZbxYqkC6xAXuD3irdEHN1k0NfTRrJD8ZD378SJ61miMLCqIOXYhd8x+AJQ==
+  dependencies:
+    regenerator-runtime "^0.13.11"
+
 "@babel/template@^7.0.0", "@babel/template@^7.18.10", "@babel/template@^7.20.7", "@babel/template@^7.3.3", "@babel/template@^7.8.6":
   version "7.20.7"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.20.7.tgz#a15090c2839a83b02aa996c0b4994005841fd5a8"
@@ -2626,10 +2633,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.0.75":
-  version "1.0.75"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.75.tgz#ee2f22f898e261b3a255b9e10802cedd3cde8ead"
-  integrity sha512-T1cfmxd7dtkzo4aqn5errpTDRIgaUpmIE0mLonUYTC+97mFH60dIfHOHZBShaMZoGBa1XDBkezQFtHLpPCBDbg==
+"@ribon.io/shared@^1.0.77":
+  version "1.0.77"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.77.tgz#55234e2ebf0b0720325b7c63a6e52de1f8058c3d"
+  integrity sha512-MbqkP+Tm8GHqukhBF8T25UgIo/BuSEPlN8wyrZ4KuPgmRPEeDJrVObXeCKM3RN95Q21pp8/Q8dSF/BrbGDOzGQ==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -12657,6 +12664,13 @@ pnp-webpack-plugin@^1.5.0:
   integrity sha512-2Rb3vm+EXble/sMXNSu6eoBx8e79gKqhNq9F5ZWW6ERNCTE/Q0wQNne5541tE5vKjfM8hpNCYL+LGc1YTfI0dg==
   dependencies:
     ts-pnp "^1.1.6"
+
+polished@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-4.2.2.tgz#2529bb7c3198945373c52e34618c8fe7b1aa84d1"
+  integrity sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==
+  dependencies:
+    "@babel/runtime" "^7.17.8"
 
 portfinder@^1.0.26:
   version "1.0.32"

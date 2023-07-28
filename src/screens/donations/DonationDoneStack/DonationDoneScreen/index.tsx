@@ -5,11 +5,13 @@ import { useTranslation } from "react-i18next";
 import DoneScreenTemplate from "screens/templates/DoneScreenTemplate";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import useSound from "hooks/useSound";
+import usePageView from "hooks/usePageView";
 import donationDoneSound from "./assets/donation-done.mp3";
 
 export default function DonationDoneScreen({
   route,
 }: RootStackScreenProps<"DonationDoneScreen">) {
+  usePageView("P7_view");
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donationDoneScreen",
   });

@@ -1,5 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import GlobeIcon from "components/vectors/GlobeIcon";
@@ -23,6 +23,7 @@ import { Linking, Platform } from "react-native";
 import ButtonSwitch from "components/atomics/buttons/ButtonSwitch";
 import { isNotificationsEnabled } from "lib/notifications";
 import { useFocusEffect } from "@react-navigation/native";
+import { logEvent } from "services/analytics";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
@@ -56,6 +57,10 @@ function LayoutHeader({
     : theme.colors.neutral[500];
   const ticketIcon = hasTickets() ? <TicketIcon /> : <GrayTicketIcon />;
   const { connectWallet, wallet, killSession } = useWalletContext();
+
+  useEffect(() => {
+    if (menuVisible) logEvent("P18_view");
+  }, [menuVisible]);
 
   const handleWalletButtonClick = () => {
     if (wallet) {
@@ -143,6 +148,7 @@ function LayoutHeader({
 
   const linkToSupport = () => {
     openInWebViewer(t("supportLink"));
+    logEvent("supportBtn_Click", { from: "config_page" });
   };
 
   const notificationsSwitch = () => (
