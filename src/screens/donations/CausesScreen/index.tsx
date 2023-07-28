@@ -6,7 +6,7 @@ import {
   useStories,
   useFirstAccessToIntegration,
 } from "@ribon.io/shared/hooks";
-import { ScrollView, Text, View, TouchableOpacity } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
@@ -203,18 +203,6 @@ export default function CausesScreen() {
     <Placeholder />
   ) : (
     <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
-      <TouchableOpacity accessibilityRole="button"
-        onPress={() => {
-          navigateTo("CheckoutScreen", {
-            target: "cause",
-            targetId: 2,
-            offer: 1,
-            currency: "USD",
-          });
-        }}
-      >
-        <Text>Checkout</Text>
-      </TouchableOpacity>
       <View style={S.containerPadding}>
         {currentNonProfit && (
           <StoriesSection

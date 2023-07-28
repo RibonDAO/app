@@ -34,6 +34,7 @@ export default function CardSection() {
     setCause,
     setNonProfit,
     resetStates,
+    setFlow,
   } = useCardPaymentInformation();
   const payable = usePayable(target, targetId);
 
@@ -83,16 +84,33 @@ export default function CardSection() {
   }));
 
   const handlePayment = () => {
-    if (!currentOffer) return;
-
-    setOfferId(currentOffer?.id);
-    setCurrentCoin(Currencies[currency as keyof typeof Currencies]);
-
-    if (target === "cause") setCause(payable as Cause);
-    if (target === "nonProfit") setNonProfit(payable as NonProfit);
-
     handleSubmit();
   };
+
+  useEffect(() => {
+    if (currentOffer) setOfferId(currentOffer.id);
+  }, [currentOffer]);
+
+  useEffect(() => {
+    if (!payable) return;
+
+    if (target === "cause") {
+      setNonProfit(undefined);
+      setCause(payable as Cause);
+      setFlow("cause");
+    } else if (target === "non_profit") {
+      setNonProfit(payable as NonProfit);
+      setCause((payable as NonProfit).cause as Cause);
+      setFlow("nonProfit");
+    }
+  }, [payable]);
+
+  useEffect(() => {
+    if (currentOffer)
+      setCurrentCoin(
+        Currencies[currency?.toUpperCase() as keyof typeof Currencies],
+      );
+  }, [currentOffer]);
 
   const nonProfit = payable as NonProfit;
 
@@ -106,7 +124,7 @@ export default function CardSection() {
   }, []);
 
   return (
-    <View style={S.container}>
+    <View>
       <ModalButtonSelector
         title={t("selectValue")}
         key="offerModal"
