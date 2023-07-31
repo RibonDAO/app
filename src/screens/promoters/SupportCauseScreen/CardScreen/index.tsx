@@ -33,6 +33,7 @@ function CardScreen(): JSX.Element {
     priceCents: 1000,
     positionOrder: 0,
   } as Offer);
+  const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const { cause, setCause, setOfferId, setFlow, loading } =
     useCardPaymentInformation();
 
@@ -71,10 +72,11 @@ function CardScreen(): JSX.Element {
         currency: currentOffer.currency,
       });
 
-      navigateTo("PaymentScreen", {
-        offer: currentOffer,
-        flow: "cause",
-        cause,
+      navigateTo("CheckoutScreen", {
+        target: "cause",
+        targetId: cause?.id,
+        offer: currentOfferIndex,
+        currency: currentOffer.currency,
       });
     }
   };
@@ -95,9 +97,10 @@ function CardScreen(): JSX.Element {
     )}`;
   };
 
-  const handleOfferChange = (offer: Offer) => {
+  const handleOfferChange = (offer: Offer, index: number) => {
     setCurrentOffer(offer);
     setOfferId(offer.id);
+    setCurrentOfferIndex(index);
   };
 
   if (!currentOffer || loading) return <View />;
