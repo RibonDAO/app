@@ -18,7 +18,7 @@ function UserSupportSection({ source }: Props): JSX.Element {
   });
 
   const handleClick = (src?: string) => {
-    logEvent("supportBtn_Click", { from: src });
+    logEvent("supportBtn_click", { from: src });
     openInWebViewer(t("link"));
   };
 
