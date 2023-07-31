@@ -127,7 +127,7 @@ export default function CardSection() {
   }, []);
 
   return (
-    <View>
+    <View style={S.container}>
       <ModalButtonSelector
         title={t("selectValue")}
         key="offerModal"

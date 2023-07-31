@@ -193,6 +193,8 @@ function CardPaymentInformationProvider({ children }: Props) {
       platform: PLATFORM,
     };
 
+    console.log(paymentInformation);
+
     try {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
       login();
@@ -215,7 +217,6 @@ function CardPaymentInformationProvider({ children }: Props) {
       });
       resetStates();
     } catch (error: any) {
-      console.log("erro", error?.response?.data);
       logError(error);
       showToast({
         type: "error",

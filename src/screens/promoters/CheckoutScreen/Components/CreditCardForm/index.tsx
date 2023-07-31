@@ -102,6 +102,7 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
           onChangeText={(value) => setEmail(value)}
           style={{ display: "flex", flex: 1 }}
           testID="name"
+          autoCapitalize="none"
         />
       )}
       {showFiscalFields && (
