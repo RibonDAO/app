@@ -193,8 +193,6 @@ function CardPaymentInformationProvider({ children }: Props) {
       platform: PLATFORM,
     };
 
-    console.log(paymentInformation);
-
     try {
       await creditCardPaymentApi.postCreditCardPayment(paymentInformation);
       login();
