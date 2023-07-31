@@ -27,7 +27,5 @@ export async function setBackgroundMessageHandler() {
 }
 
 export async function getNotificationToken() {
-  const token = await messaging().getToken();
-  // eslint-disable-next-line no-console
-  console.log("token:", token);
+  return messaging().getToken();
 }
