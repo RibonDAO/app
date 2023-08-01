@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     height: 48,
   },
   changeCurrencyButton: {
+    marginTop: theme.spacingNative(8),
     paddingHorizontal: theme.spacingNative(16),
     paddingVertical: theme.spacingNative(4),
     borderColor: theme.colors.brand.primary[600],
