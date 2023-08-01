@@ -6,6 +6,9 @@ import {
 } from "styles/typography/default";
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: theme.spacingNative(64),
+  },
   title: {
     ...defaultBodyMdMedium,
     color: theme.colors.neutral[600],
@@ -18,10 +21,6 @@ const styles = StyleSheet.create({
     ...defaultBodyMdSemibold,
     marginTop: theme.spacingNative(16),
     marginBottom: theme.spacingNative(8),
-  },
-  button: {
-    marginTop: theme.spacingNative(16),
-    height: 48,
   },
 });
 

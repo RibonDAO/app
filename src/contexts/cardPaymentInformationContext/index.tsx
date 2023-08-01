@@ -151,6 +151,10 @@ function CardPaymentInformationProvider({ children }: Props) {
     setButtonDisabled(false);
   };
 
+  useEffect(() => {
+    if (currentUser) setEmail(currentUser.email);
+  }, [JSON.stringify(currentUser)]);
+
   const login = async () => {
     if (!signedIn) {
       const user = await findOrCreateUser(
@@ -210,13 +214,14 @@ function CardPaymentInformationProvider({ children }: Props) {
         nonProfit,
       });
       resetStates();
-    } catch (error) {
+    } catch (error: any) {
       logError(error);
       showToast({
         type: "error",
         message: t("onErrorMessage", "error"),
       });
     } finally {
+      setButtonDisabled(false);
       hideLoadingOverlay();
     }
   };

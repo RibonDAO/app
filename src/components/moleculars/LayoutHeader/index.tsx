@@ -148,7 +148,7 @@ function LayoutHeader({
 
   const linkToSupport = () => {
     openInWebViewer(t("supportLink"));
-    logEvent("supportBtn_Click", { from: "config_page" });
+    logEvent("supportBtn_click", { from: "config_page" });
   };
 
   const notificationsSwitch = () => (

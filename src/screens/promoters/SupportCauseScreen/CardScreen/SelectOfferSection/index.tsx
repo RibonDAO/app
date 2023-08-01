@@ -17,7 +17,7 @@ const { neutral } = theme.colors;
 
 type Props = {
   cause: Cause | undefined;
-  onOfferChange: (offer: Offer) => void;
+  onOfferChange: (offer: Offer, index: number) => void;
 };
 
 const CURRENT_OFFER_INDEX_KEY = "CURRENT_OFFER_INDEX_KEY";
@@ -53,7 +53,7 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
   }, [offers]);
 
   useEffect(() => {
-    if (currentOffer) onOfferChange(currentOffer);
+    if (currentOffer) onOfferChange(currentOffer, currentOfferIndex);
   }, [currentOffer]);
 
   useEffect(() => {
