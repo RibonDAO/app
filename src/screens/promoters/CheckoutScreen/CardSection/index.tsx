@@ -50,7 +50,10 @@ export default function CardSection() {
     offers,
     refetch: refetchOffers,
     isLoading: isLoadingOffers,
-  } = useOffers(Currencies[currency as keyof typeof Currencies], false);
+  } = useOffers(
+    Currencies[currency?.toUpperCase() as keyof typeof Currencies],
+    false,
+  );
 
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [offersModalVisible, setOffersModalVisible] = useState(false);
@@ -124,7 +127,7 @@ export default function CardSection() {
   }, []);
 
   return (
-    <View>
+    <View style={S.container}>
       <ModalButtonSelector
         title={t("selectValue")}
         key="offerModal"

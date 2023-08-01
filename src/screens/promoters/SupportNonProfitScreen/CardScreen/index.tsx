@@ -52,11 +52,11 @@ function CardScreen(): JSX.Element {
         price: currentOffer?.priceValue,
         currency: currentOffer?.currency,
       });
-      navigateTo("PaymentScreen", {
-        offer: currentOffer,
-        flow: "nonProfit",
-        cause,
-        nonProfit,
+      navigateTo("CheckoutScreen", {
+        target: "non_profit",
+        targetId: nonProfit?.id,
+        offer: currentOfferIndex,
+        currency: currentOffer?.currency,
       });
     }
   };

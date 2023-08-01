@@ -8,12 +8,16 @@ import {
 } from "react-native";
 import { useEffect } from "react";
 import { useCheckoutContext } from "contexts/checkoutContext";
+import usePageView from "hooks/usePageView";
+import { withPlaceholder } from "config/navigation/withPlaceholder";
 import Header from "./Components/Header";
 import CryptoSection from "./CryptoSection";
 import CardSection from "./CardSection";
 import S from "./styles";
+import Placeholder from "./placeholder";
 
-export default function CheckoutScreen(): JSX.Element {
+function CheckoutScreen(): JSX.Element {
+  usePageView("P23_view");
   const { params } = useRouteParams<"CheckoutScreen">();
 
   const {
@@ -52,3 +56,5 @@ export default function CheckoutScreen(): JSX.Element {
     </KeyboardAvoidingView>
   );
 }
+
+export default withPlaceholder(CheckoutScreen, Placeholder);

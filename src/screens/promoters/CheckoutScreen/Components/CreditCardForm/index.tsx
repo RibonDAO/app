@@ -102,6 +102,7 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
           onChangeText={(value) => setEmail(value)}
           style={{ display: "flex", flex: 1 }}
           testID="name"
+          autoCapitalize="none"
         />
       )}
       {showFiscalFields && (
@@ -203,9 +204,10 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
 
       <Button
         text={t("confirmPayment")}
-        onPress={() => {}}
-        timeout={2000}
-        timeoutCallback={onSubmit}
+        onPress={() => {
+          setButtonDisabled(true);
+          onSubmit();
+        }}
         disabled={buttonDisabled}
         customStyles={S.button}
         textColor={theme.colors.neutral10}
