@@ -35,7 +35,7 @@ function CheckoutScreen(): JSX.Element {
     if (targetParam) setTarget(targetParam);
     if (offerParam) setOffer(offerParam);
     if (currencyParam) setCurrency(currencyParam);
-  }, []);
+  }, [targetParam, currencyParam, targetParam, offerParam]);
 
   return (
     <KeyboardAvoidingView
