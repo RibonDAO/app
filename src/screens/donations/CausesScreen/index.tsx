@@ -35,6 +35,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import usePageView from "hooks/usePageView";
+import useDevice from "hooks/apiHooks/useDevice";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
@@ -76,6 +77,8 @@ export default function CausesScreen() {
       refetchCanDonate();
     },
   });
+  const { registerDevice } = useDevice();
+  registerDevice();
 
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
@@ -173,6 +176,7 @@ export default function CausesScreen() {
           message: t("enableNotification.successToastMessage"),
           position: "bottom",
         });
+        registerDevice();
         hideAlert();
       }
     } catch (e) {
