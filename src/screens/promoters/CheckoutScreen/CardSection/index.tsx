@@ -158,7 +158,7 @@ export default function CardSection() {
             children: (
               <CreditCardForm
                 onSubmit={handlePayment}
-                showFiscalFields={currentOffer?.gateway !== "stripe"}
+                showFiscalFields={currentOffer?.gateway === "stripe"}
               />
             ),
             rightIcon: <CreditCardIcon />,
