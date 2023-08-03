@@ -55,6 +55,7 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
     email,
     setEmail,
   } = useCardPaymentInformation();
+  const [maskedTaxId, setMaskedTaxId] = useState("999.999.999-99");
 
   useEffect(() => {
     setButtonDisabled(
@@ -75,6 +76,12 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
   const [currentCountryCode, setCurrentCountryCode] = useState(
     countryCodeByLanguage(currentLang),
   );
+
+  useEffect(() => {
+    if (country && currentLang) {
+      setMaskedTaxId(maskForTaxId(country, currentLang));
+    }
+  }, [country, currentLang]);
 
   const handleCountryChange = (selectedCountry: Country) => {
     setCountry(selectedCountry.name as string);
@@ -147,7 +154,7 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
           <InputText
             name={taxId}
             placeholder={field("taxId")}
-            mask={maskForTaxId(country, currentLang)}
+            mask={maskedTaxId}
             value={taxId}
             onChangeText={(value) => setTaxId(value)}
             maxLength={maxTaxIdLength()}
