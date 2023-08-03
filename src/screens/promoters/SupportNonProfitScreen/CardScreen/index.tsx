@@ -41,9 +41,8 @@ function CardScreen(): JSX.Element {
 
   const handleDonateClick = (nonProfit: NonProfit) => {
     if (Platform.OS === "ios") {
-      Linking.openURL(
-        "https://dapp.ribon.io/promoters/support-non-profit?platform=app",
-      );
+      const url = `https://dapp.ribon.io/promoters/checkout?target=non_profit&target_id=${nonProfit.id}&currency=${currentOffer?.currency}&offer=${currentOfferIndex}`;
+      Linking.openURL(url);
     } else {
       setFlow("nonProfit");
       logEvent("giveNgoBtn_start", {
