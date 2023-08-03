@@ -13540,11 +13540,6 @@ react-native-country-picker-modal@^2.0.0:
     prop-types "15.7.2"
     react-async-hook "3.6.1"
 
-react-native-device-info@^10.8.0:
-  version "10.8.0"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-10.8.0.tgz#c331c94d65542f86bac197f223ee064c7e10a9ec"
-  integrity sha512-DE4/X82ZVhdcnR1Y21iTP46WSSJA/rHK3lmeqWfGGq1RKLwXTIdxmfbZZnYwryqJ+esrw2l4ND19qlgxDGby8A==
-
 react-native-dropdown-picker@^5.4.4:
   version "5.4.4"
   resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.4.tgz#59da1ecd4bc6d1fb698ed57f4ce615adf3944e90"

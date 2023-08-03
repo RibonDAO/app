@@ -244,6 +244,7 @@
       "payment": "Pagamento",
       "selectCurrency": "Selecione a moeda",
       "selectValue": "Selecione o valor",
+      "brazilName": "Brasil",
       "additionalFeesText": "O pagamento é processado em dólar, o valor pode sofrer uma pequena variação de acordo com as taxas do seu banco.",
       "searchCountryPlaceholder": "Procurar país",
       "paymentMethodSection": {

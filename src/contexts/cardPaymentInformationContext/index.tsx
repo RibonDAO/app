@@ -120,7 +120,7 @@ function CardPaymentInformationProvider({ children }: Props) {
   const [name, setName] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [cvv, setCvv] = useState("");
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [cryptoGiving, setCryptoGiving] = useState("");
   const [offerId, setOfferId] = useState(1);
   const [cause, setCause] = useState<Cause>();
@@ -148,7 +148,7 @@ function CardPaymentInformationProvider({ children }: Props) {
     setName("");
     setExpirationDate("");
     setCvv("");
-    setButtonDisabled(false);
+    setButtonDisabled(true);
   };
 
   useEffect(() => {
