@@ -13,6 +13,7 @@ import {
   useContributions,
   useLegacyContributions,
 } from "@ribon.io/shared/hooks";
+import { useFocusEffect } from "@react-navigation/native";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import ZeroDonationsSection from "../ZeroDonationsSection";
 import S from "./styles";
@@ -20,8 +21,14 @@ import S from "./styles";
 function CommunityDonationsImpactCards(): JSX.Element {
   const { currentUser } = useCurrentUser();
   const { useLabelableContributions } = useContributions(currentUser?.id);
-  const { data, isLoading } = useLabelableContributions();
+  const { data, isLoading, refetch } = useLabelableContributions();
   const { legacyContributions } = useLegacyContributions(currentUser?.id);
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, []),
+  );
 
   const impactItems = useCallback(() => data || [], [data]);
   const hasImpact =
