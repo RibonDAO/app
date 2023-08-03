@@ -5,11 +5,13 @@ import {
   removeLocalStorageItem,
   setLocalStorageItem,
 } from "lib/localStorage";
+import { useCurrentUser } from "contexts/currentUserContext";
 
 export const HAS_SEEN_CONTRIBUTIONS_TODAY_KEY =
   "HAS_SEEN_CONTRIBUTIONS_TODAY_KEY";
 function useContributionActivity() {
-  const { useLabelableContributions } = useContributions();
+  const { currentUser } = useCurrentUser();
+  const { useLabelableContributions } = useContributions(currentUser?.id);
   const { data: userContributions } = useLabelableContributions();
 
   const [newContributionActivity, setNewContributionActivity] = useState(false);

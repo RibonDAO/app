@@ -14,6 +14,7 @@ import {
   useLegacyContributions,
 } from "@ribon.io/shared/hooks";
 import { useFocusEffect } from "@react-navigation/native";
+import useContributionActivity from "hooks/useContributionActivity";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import ZeroDonationsSection from "../ZeroDonationsSection";
 import S from "./styles";
@@ -23,10 +24,12 @@ function CommunityDonationsImpactCards(): JSX.Element {
   const { useLabelableContributions } = useContributions(currentUser?.id);
   const { data, isLoading, refetch } = useLabelableContributions();
   const { legacyContributions } = useLegacyContributions(currentUser?.id);
+  const { setHasSeenToday } = useContributionActivity();
 
   useFocusEffect(
     useCallback(() => {
       refetch();
+      setHasSeenToday();
     }, []),
   );
 

@@ -1,7 +1,12 @@
 import * as React from "react";
 import Svg, { Mask, Path, G } from "react-native-svg";
+import useContributionActivity from "hooks/useContributionActivity";
+import { View } from "react-native";
+import S from "config/navigation/assets/styles";
 
 function ImpactIconOff() {
+  const { newContributionActivity } = useContributionActivity();
+
   return (
     <Svg width={24} height={24} fill="none">
       <Mask
@@ -20,6 +25,7 @@ function ImpactIconOff() {
           fill="#867F70"
         />
       </G>
+      {newContributionActivity && <View style={S.redBall} />}
     </Svg>
   );
 }

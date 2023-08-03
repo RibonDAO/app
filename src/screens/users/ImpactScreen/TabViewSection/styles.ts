@@ -27,6 +27,15 @@ const styles = StyleSheet.create({
     padding: 1.5,
     marginBottom: -2,
   },
+  redBall: {
+    position: "absolute",
+    width: 8,
+    height: 8,
+    backgroundColor: theme.colors.feedback.error[500],
+    borderRadius: 100,
+    top: 0,
+    left: -95,
+  },
 });
 
 export default styles;

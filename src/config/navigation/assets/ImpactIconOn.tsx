@@ -1,7 +1,12 @@
 import * as React from "react";
 import Svg, { Mask, Path, G, Rect } from "react-native-svg";
+import { View } from "react-native";
+import S from "config/navigation/assets/styles";
+import useContributionActivity from "hooks/useContributionActivity";
 
 function ImpactIconOn() {
+  const { newContributionActivity } = useContributionActivity();
+
   return (
     <Svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <Mask
@@ -20,6 +25,7 @@ function ImpactIconOn() {
           fill="#00DA93"
         />
       </G>
+      {newContributionActivity && <View style={S.redBall} />}
     </Svg>
   );
 }
