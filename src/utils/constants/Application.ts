@@ -10,3 +10,8 @@ export const REACT_APP_MIXPANEL_TOKEN =
   Constants.expoConfig?.extra?.REACT_APP_MIXPANEL_TOKEN;
 
 export const PLATFORM = "app";
+
+export const STRIPE_GLOBAL_PUBLISHABLE_KEY =
+  Constants.expoConfig?.extra?.REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY;
+export const STRIPE_PUBLISHABLE_KEY =
+  Constants.expoConfig?.extra?.REACT_APP_STRIPE_PUBLISHABLE_KEY;
