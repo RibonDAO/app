@@ -1,8 +1,13 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { StripeProvider as ReactNativeStripeProvider } from "@stripe/stripe-react-native";
+import {
+  STRIPE_GLOBAL_PUBLISHABLE_KEY,
+  STRIPE_PUBLISHABLE_KEY,
+} from "utils/constants/Application";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IStripeContext {}
+export interface IStripeContext {
+  changePublishableKey: (gateway: string) => void;
+}
 
 export type Props = {
   children: JSX.Element[] | JSX.Element;
@@ -13,12 +18,27 @@ export const StripeContext = createContext<IStripeContext>(
 );
 
 function StripeProvider({ children }: Props) {
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const stripeObject: IStripeContext = {};
-  const publishableKey =
-    "pk_test_51JRgaRJuOnwQq9Qx2RrybIhE1vRgC5tNd32EJkINCTmgGZYSr3QXne9y5CAdEq36WULJPmWv2VvZZ0xA5MNTrY7C00KL9rq6Op";
+  const [publishableKey, setPublishableKey] = useState(
+    STRIPE_GLOBAL_PUBLISHABLE_KEY,
+  );
   const urlScheme = "ribon";
   const merchantIdentifier = "merchant.ribon.app";
+
+  const changePublishableKey = (gateway: string) => {
+    if (gateway === "stripe") {
+      setPublishableKey(STRIPE_PUBLISHABLE_KEY);
+      return;
+    }
+
+    setPublishableKey(STRIPE_GLOBAL_PUBLISHABLE_KEY);
+  };
+
+  const stripeObject: IStripeContext = useMemo(
+    () => ({
+      changePublishableKey,
+    }),
+    [],
+  );
 
   return (
     <StripeContext.Provider value={stripeObject}>

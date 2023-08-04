@@ -8,6 +8,7 @@ import { useOffers } from "@ribon.io/shared/hooks";
 import { Currencies, Offer, NonProfit, Cause } from "@ribon.io/shared/types";
 import { useEffect, useState } from "react";
 import { useGooglePay } from "@stripe/stripe-react-native";
+import { useStripeContext } from "contexts/stripeContext";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
@@ -37,6 +38,7 @@ export default function CardSection() {
     setFlow,
   } = useCardPaymentInformation();
   const payable = usePayable(target, targetId);
+  const { changePublishableKey } = useStripeContext();
 
   useEffect(() => {
     resetStates();
@@ -91,7 +93,10 @@ export default function CardSection() {
   };
 
   useEffect(() => {
-    if (currentOffer) setOfferId(currentOffer.id);
+    if (currentOffer) {
+      changePublishableKey(currentOffer.gateway);
+      setOfferId(currentOffer.id);
+    }
   }, [currentOffer]);
 
   useEffect(() => {
@@ -151,7 +156,6 @@ export default function CardSection() {
 
       <Text style={S.accordionTitle}>{t("payment")}</Text>
       <RadioAccordion
-        current={0}
         items={[
           {
             title: t("paymentMethodSection.creditCard"),
