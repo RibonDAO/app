@@ -52,8 +52,8 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
       cartItems: cart,
       country: "BR",
       currency: offer.currency,
-      requiredShippingAddressFields: ["emailAddress", "postalAddress", "name"],
-      requiredBillingContactFields: ["name"],
+      requiredShippingAddressFields: ["emailAddress"],
+      requiredBillingContactFields: ["name", "emailAddress", "postalAddress"],
       jcbEnabled: true,
     });
 
@@ -78,8 +78,8 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
       };
 
       try {
-        await storePayApi.postStorePay(data);
-        await confirmApplePayPayment("");
+        const response = await storePayApi.postStorePay(data);
+        await confirmApplePayPayment(response.data.clientSecret);
         registerAction("contribution_done_screen_view");
 
         navigateTo("ContributionDoneScreen", {
