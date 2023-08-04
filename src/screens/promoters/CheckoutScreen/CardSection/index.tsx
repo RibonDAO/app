@@ -156,7 +156,6 @@ export default function CardSection() {
 
       <Text style={S.accordionTitle}>{t("payment")}</Text>
       <RadioAccordion
-        current={0}
         items={[
           {
             title: t("paymentMethodSection.creditCard"),
