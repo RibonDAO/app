@@ -79,6 +79,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
 
       try {
         await storePayApi.postStorePay(data);
+        // TODO: add previous successful client secret return from backend to cofirm here
         await confirmApplePayPayment("");
         registerAction("contribution_done_screen_view");
 
