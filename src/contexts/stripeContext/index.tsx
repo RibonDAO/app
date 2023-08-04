@@ -5,7 +5,6 @@ import {
   STRIPE_PUBLISHABLE_KEY,
 } from "utils/constants/Application";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IStripeContext {
   changePublishableKey: (gateway: string) => void;
 }
