@@ -6,6 +6,8 @@ import WalletProvider from "contexts/walletContext";
 import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import CausesProvider from "contexts/causesContext";
+import CauseContributionProvider from "contexts/causesContributionContext";
+import CauseDonationProvider from "contexts/causesDonationContext";
 import DonateScreen from "screens/donations/DonateScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
@@ -40,6 +42,7 @@ import { useNavigation } from "hooks/useNavigation";
 import GiveTicketScreen from "screens/donations/GiveTicketScreen";
 import ContributionStatsScreen from "screens/users/ContributionStatsScreen";
 import CheckoutProvider from "contexts/checkoutContext";
+import NonProfitsProvider from "contexts/nonProfitsContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -295,10 +298,16 @@ export default function Navigation() {
               <CryptoPaymentProvider>
                 <CardPaymentInformationProvider>
                   <CausesProvider>
-                    <TicketsProvider>
-                      <RootNavigator />
-                      <Toast config={toastConfig} />
-                    </TicketsProvider>
+                    <CauseDonationProvider>
+                      <CauseContributionProvider>
+                        <NonProfitsProvider>
+                          <TicketsProvider>
+                            <RootNavigator />
+                            <Toast config={toastConfig} />
+                          </TicketsProvider>
+                        </NonProfitsProvider>
+                      </CauseContributionProvider>
+                    </CauseDonationProvider>
                   </CausesProvider>
                 </CardPaymentInformationProvider>
               </CryptoPaymentProvider>

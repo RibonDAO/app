@@ -48,6 +48,22 @@ import StripeProvider, {
 } from "contexts/stripeContext";
 
 import { waitForPromises } from "config/testUtils";
+import CausesProvider, {
+  CausesContext,
+  ICausesContext,
+} from "contexts/causesContext";
+import CauseDonationProvider, {
+  CauseDonationContext,
+  ICauseDonationContext,
+} from "contexts/causesDonationContext";
+import CauseContributionProvider, {
+  CauseContributionContext,
+  ICauseContributionContext,
+} from "contexts/causesContributionContext";
+import NonProfitsProvider, {
+  INonProfitsContext,
+  NonProfitsContext,
+} from "contexts/nonProfitsContext";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -91,6 +107,10 @@ export type RenderComponentProps = {
   unsafeAreaProviderValue?: Partial<IUnsafeAreaContext>;
   checkoutProviderValue?: Partial<ICheckoutContext>;
   stripeProviderValue?: Partial<IStripeContext>;
+  causesProviderValue?: Partial<ICausesContext>;
+  causeDonationProviderValue?: Partial<ICauseDonationContext>;
+  causeContributionProviderValue?: Partial<ICauseContributionContext>;
+  nonProfitsProviderValue?: Partial<INonProfitsContext>;
 };
 
 function renderAllProviders(
@@ -106,6 +126,10 @@ function renderAllProviders(
     unsafeAreaProviderValue = {},
     checkoutProviderValue = {},
     stripeProviderValue = {},
+    causesProviderValue = {},
+    causeContributionProviderValue = {},
+    causeDonationProviderValue = {},
+    nonProfitsProviderValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -150,11 +174,32 @@ function renderAllProviders(
                             ScrollEnabledProvider,
                             ScrollEnabledContext,
                             scrollEnabledProviderValue,
+
                             renderProvider(
                               StripeProvider,
                               StripeContext,
                               stripeProviderValue,
-                              children,
+                              renderProvider(
+                                CausesProvider,
+                                CausesContext,
+                                causesProviderValue,
+                                renderProvider(
+                                  CauseDonationProvider,
+                                  CauseDonationContext,
+                                  causeDonationProviderValue,
+                                  renderProvider(
+                                    CauseContributionProvider,
+                                    CauseContributionContext,
+                                    causeContributionProviderValue,
+                                    renderProvider(
+                                      NonProfitsProvider,
+                                      NonProfitsContext,
+                                      nonProfitsProviderValue,
+                                      children,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),

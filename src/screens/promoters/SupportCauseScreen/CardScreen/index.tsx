@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
-import { useCauses } from "@ribon.io/shared/hooks";
+
 import { Cause, Offer } from "@ribon.io/shared/types";
 import { useNavigation } from "hooks/useNavigation";
 import {
@@ -18,6 +18,8 @@ import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import UserSupportSection from "components/moleculars/UserSupportSection";
 import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
+import { useCausesContext } from "contexts/causesContext";
+import { useCauseContributionContext } from "contexts/causesContributionContext";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
 
@@ -36,7 +38,9 @@ function CardScreen(): JSX.Element {
   const { cause, setCause, setOfferId, setFlow, loading } =
     useCardPaymentInformation();
 
-  const { causes } = useCauses();
+  const { causes } = useCausesContext();
+  const { chosenCause, setChosenCause, chosenCauseIndex, setChosenCauseIndex } =
+    useCauseContributionContext();
   const { cause: causeCrypto } = useCryptoPayment();
   const { scrollEnabled } = useScrollEnabled();
 
@@ -44,17 +48,20 @@ function CardScreen(): JSX.Element {
     keyPrefix: "promoters.supportCauseScreen",
   });
 
-  const causesFilter = () => {
-    const causesApi = causes.filter((currentCause) => currentCause.active);
-    return causesApi || [];
-  };
-
   useEffect(() => {
-    setCause(causeCrypto || causesFilter()[0]);
+    setCause(causeCrypto || chosenCause);
   }, [causes]);
 
-  const handleCauseClick = (causeClicked: Cause) => {
+  useEffect(() => {
+    logEvent("contributionCardsOrder_view", {
+      causes,
+    });
+  }, [causes]);
+
+  const handleCauseClick = (causeClicked: Cause, index: number) => {
     setCause(causeClicked);
+    setChosenCauseIndex(index);
+    setChosenCause(causeClicked);
   };
 
   const handleDonateClick = () => {
@@ -102,9 +109,6 @@ function CardScreen(): JSX.Element {
 
   if (!currentOffer || loading) return <View />;
 
-  const preSelectedIndex = () =>
-    causeCrypto ? causesFilter().findIndex((c) => c.id === causeCrypto?.id) : 0;
-
   return (
     <ScrollView
       contentContainerStyle={S.container}
@@ -112,9 +116,9 @@ function CardScreen(): JSX.Element {
     >
       <Text style={S.title}>{t("title")}</Text>
       <GroupButtons
-        elements={causesFilter()}
+        elements={causes}
         onChange={handleCauseClick}
-        indexSelected={preSelectedIndex()}
+        indexSelected={chosenCauseIndex}
         nameExtractor={(element) => element.name}
         backgroundColor={theme.colors.brand.secondary[700]}
         textColorOutline={theme.colors.brand.secondary[700]}
@@ -122,13 +126,16 @@ function CardScreen(): JSX.Element {
         borderColorOutline={theme.colors.brand.secondary[300]}
       />
       <View style={S.contentContainer}>
-        <MaskedWaveCut imageStyles={S.supportImage} image={cause?.coverImage} />
+        <MaskedWaveCut
+          imageStyles={S.supportImage}
+          image={chosenCause?.coverImage}
+        />
 
         <View style={S.donateContainer}>
           <View style={S.givingContainer}>
             <View style={S.contributionContainer}>
               <SelectOfferSection
-                cause={cause}
+                cause={chosenCause}
                 onOfferChange={handleOfferChange}
               />
             </View>

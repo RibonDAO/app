@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
-  useFreeDonationNonProfits,
-  useFreeDonationCauses,
   useCanDonate,
   useStories,
   useFirstAccessToIntegration,
@@ -35,6 +33,8 @@ import { useAppState } from "hooks/useAppState";
 import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
 import usePageView from "hooks/usePageView";
+import { useCausesContext } from "contexts/causesContext";
+import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
@@ -45,8 +45,9 @@ export default function CausesScreen() {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
-  const { nonProfits, isLoading } = useFreeDonationNonProfits();
-  const { causes } = useFreeDonationCauses();
+  const { nonProfitsWithPoolBalance: nonProfits, isLoading } =
+    useNonProfitsContext();
+  const { causesWithPoolBalance: causes } = useCausesContext();
   const {
     canDonate,
     isLoading: loadingCanDonate,
@@ -80,6 +81,13 @@ export default function CausesScreen() {
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
   }, [isLoading]);
+
+  useEffect(() => {
+    logEvent("donationCardsOrder_view", {
+      nonProfits,
+      causes,
+    });
+  }, [nonProfits, causes]);
 
   useFocusEffect(
     useCallback(() => {
