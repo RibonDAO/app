@@ -10,7 +10,7 @@ function CreditCardIcon() {
         maskUnits="userSpaceOnUse"
         x={11}
         y={4}
-        width={24}
+        width={36}
         height={24}
       >
         <Rect x={11} y={4} width={24} height={24} fill="#D9D9D9" />

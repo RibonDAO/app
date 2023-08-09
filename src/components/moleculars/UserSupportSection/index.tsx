@@ -1,20 +1,24 @@
 import { useTranslation } from "react-i18next";
 import Icon from "components/atomics/Icon";
 import { logEvent } from "services/analytics";
-import { ImageBackground, Linking, Text, View } from "react-native";
+import { ImageBackground, Text, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared";
 import S from "./styles";
 import cardBackground from "./assets/cardBackground.png";
 
-function UserSupportSection(): JSX.Element {
+type Props = {
+  source?: string;
+};
+
+function UserSupportSection({ source }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen.userSupportSection",
   });
 
-  const handleClick = () => {
-    logEvent("UserSupportBtn_Click");
+  const handleClick = (src?: string) => {
+    logEvent("supportBtn_click", { from: src });
     openInWebViewer(t("link"));
   };
 
@@ -38,7 +42,7 @@ function UserSupportSection(): JSX.Element {
           textColor={theme.colors.brand.secondary[700]}
           customStyles={S.supportButton}
           text={t("primaryButtonText")}
-          onPress={handleClick}
+          onPress={() => handleClick(source)}
         />
       </ImageBackground>
     </View>

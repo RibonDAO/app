@@ -3,13 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import usePayable from "hooks/usePayable";
 import RadioAccordion from "components/moleculars/RadioAccordion";
-import Button from "components/atomics/buttons/Button";
-import { theme } from "@ribon.io/shared/styles";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useOffers } from "@ribon.io/shared/hooks";
 import { Currencies, Offer, NonProfit, Cause } from "@ribon.io/shared/types";
 import { useEffect, useState } from "react";
-import { useApplePay, useGooglePay } from "@stripe/stripe-react-native";
+import { useGooglePay } from "@stripe/stripe-react-native";
+import { useStripeContext } from "contexts/stripeContext";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
@@ -25,25 +24,38 @@ export default function CardSection() {
     keyPrefix: "promoters.checkoutScreen",
   });
 
-  const { isApplePaySupported } = useApplePay();
+  // const { isApplePaySupported } = useApplePay();
   const { isGooglePaySupported } = useGooglePay();
 
   const { target, targetId, currency, offer, setOffer } = useCheckoutContext();
   const {
-    buttonDisabled,
     handleSubmit,
     setOfferId,
     setCurrentCoin,
     setCause,
     setNonProfit,
+    resetStates,
+    setFlow,
   } = useCardPaymentInformation();
   const payable = usePayable(target, targetId);
+  const { changePublishableKey } = useStripeContext();
+
+  useEffect(() => {
+    resetStates();
+
+    return () => {
+      resetStates();
+    };
+  }, []);
 
   const {
     offers,
     refetch: refetchOffers,
     isLoading: isLoadingOffers,
-  } = useOffers(Currencies[currency as keyof typeof Currencies], false);
+  } = useOffers(
+    Currencies[currency?.toUpperCase() as keyof typeof Currencies],
+    false,
+  );
 
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [offersModalVisible, setOffersModalVisible] = useState(false);
@@ -77,16 +89,36 @@ export default function CardSection() {
   }));
 
   const handlePayment = () => {
-    if (!currentOffer) return;
-
-    setOfferId(currentOffer?.id);
-    setCurrentCoin(Currencies[currency as keyof typeof Currencies]);
-
-    if (target === "cause") setCause(payable as Cause);
-    if (target === "nonProfit") setNonProfit(payable as NonProfit);
-
     handleSubmit();
   };
+
+  useEffect(() => {
+    if (currentOffer) {
+      changePublishableKey(currentOffer.gateway);
+      setOfferId(currentOffer.id);
+    }
+  }, [currentOffer]);
+
+  useEffect(() => {
+    if (!payable) return;
+
+    if (target === "cause") {
+      setNonProfit(undefined);
+      setCause(payable as Cause);
+      setFlow("cause");
+    } else if (target === "non_profit") {
+      setNonProfit(payable as NonProfit);
+      setCause((payable as NonProfit).cause as Cause);
+      setFlow("nonProfit");
+    }
+  }, [payable]);
+
+  useEffect(() => {
+    if (currentOffer)
+      setCurrentCoin(
+        Currencies[currency?.toUpperCase() as keyof typeof Currencies],
+      );
+  }, [currentOffer]);
 
   const nonProfit = payable as NonProfit;
 
@@ -100,7 +132,7 @@ export default function CardSection() {
   }, []);
 
   return (
-    <View>
+    <View style={S.container}>
       <ModalButtonSelector
         title={t("selectValue")}
         key="offerModal"
@@ -124,11 +156,15 @@ export default function CardSection() {
 
       <Text style={S.accordionTitle}>{t("payment")}</Text>
       <RadioAccordion
-        current={0}
         items={[
           {
             title: t("paymentMethodSection.creditCard"),
-            children: <CreditCardForm />,
+            children: (
+              <CreditCardForm
+                onSubmit={handlePayment}
+                showFiscalFields={currentOffer?.gateway === "stripe"}
+              />
+            ),
             rightIcon: <CreditCardIcon />,
           },
           {
@@ -157,21 +193,9 @@ export default function CardSection() {
               </View>
             ),
             rightIcon: <ApplePayIcon />,
-            show: isApplePaySupported,
+            show: false,
           },
         ]}
-      />
-
-      <Button
-        text={t("confirmPayment")}
-        onPress={() => {}}
-        timeout={2000}
-        timeoutCallback={handlePayment}
-        disabled={buttonDisabled}
-        customStyles={S.button}
-        textColor={theme.colors.neutral10}
-        backgroundColor={theme.colors.brand.primary[600]}
-        borderColor="transparent"
       />
     </View>
   );

@@ -9,10 +9,12 @@ import { useTranslation } from "react-i18next";
 import { useUnsafeAreaContext } from "contexts/unsafeAreaContext";
 import { defaultBodyMdSemibold } from "styles/typography/default";
 import { logEvent } from "services/analytics";
+import usePageView from "hooks/usePageView";
 import NewsPlaceholder from "./placeholder";
 import S from "./styles";
 
 export default function AvailableArticleScreen() {
+  usePageView("P19_view");
   const { navigateTo } = useNavigation();
   const { getArticles } = useArticles();
   const [article, setArticle] = React.useState<any>();

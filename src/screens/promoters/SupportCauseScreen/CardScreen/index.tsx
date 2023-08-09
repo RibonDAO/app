@@ -15,11 +15,11 @@ import { View, Text, Platform, Linking } from "react-native";
 import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
-import UserSupportSection from "components/moleculars/UserSupportSection";
 import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import { useCausesContext } from "contexts/causesContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
+import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
 
@@ -35,6 +35,7 @@ function CardScreen(): JSX.Element {
     priceCents: 1000,
     positionOrder: 0,
   } as Offer);
+  const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const { cause, setCause, setOfferId, setFlow, loading } =
     useCardPaymentInformation();
 
@@ -66,9 +67,8 @@ function CardScreen(): JSX.Element {
 
   const handleDonateClick = () => {
     if (Platform.OS === "ios") {
-      Linking.openURL(
-        "http://dapp.ribon.io/promoters/support-cause?platform=app",
-      );
+      const url = `https://dapp.ribon.io/promoters/checkout?target=cause&target_id=${cause?.id}&currency=${currentOffer.currency}&offer=${currentOfferIndex}`;
+      Linking.openURL(url);
     } else {
       setFlow("cause");
       logEvent("giveCauseBtn_start", {
@@ -78,10 +78,11 @@ function CardScreen(): JSX.Element {
         currency: currentOffer.currency,
       });
 
-      navigateTo("PaymentScreen", {
-        offer: currentOffer,
-        flow: "cause",
-        cause,
+      navigateTo("CheckoutScreen", {
+        target: "cause",
+        targetId: cause?.id,
+        offer: currentOfferIndex,
+        currency: currentOffer.currency,
       });
     }
   };
@@ -102,9 +103,10 @@ function CardScreen(): JSX.Element {
     )}`;
   };
 
-  const handleOfferChange = (offer: Offer) => {
+  const handleOfferChange = (offer: Offer, index: number) => {
     setCurrentOffer(offer);
     setOfferId(offer.id);
+    setCurrentOfferIndex(index);
   };
 
   if (!currentOffer || loading) return <View />;
@@ -178,8 +180,7 @@ function CardScreen(): JSX.Element {
           />
         </View>
       </View>
-
-      <UserSupportSection />
+      <UserSupportBanner from="giveCauseCC_page" />
     </ScrollView>
   );
 }

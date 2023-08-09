@@ -120,7 +120,7 @@ function CardPaymentInformationProvider({ children }: Props) {
   const [name, setName] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [cvv, setCvv] = useState("");
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [cryptoGiving, setCryptoGiving] = useState("");
   const [offerId, setOfferId] = useState(1);
   const [cause, setCause] = useState<Cause>();
@@ -148,8 +148,12 @@ function CardPaymentInformationProvider({ children }: Props) {
     setName("");
     setExpirationDate("");
     setCvv("");
-    setButtonDisabled(false);
+    setButtonDisabled(true);
   };
+
+  useEffect(() => {
+    if (currentUser) setEmail(currentUser.email);
+  }, [JSON.stringify(currentUser)]);
 
   const login = async () => {
     if (!signedIn) {
@@ -210,13 +214,14 @@ function CardPaymentInformationProvider({ children }: Props) {
         nonProfit,
       });
       resetStates();
-    } catch (error) {
+    } catch (error: any) {
       logError(error);
       showToast({
         type: "error",
         message: t("onErrorMessage", "error"),
       });
     } finally {
+      setButtonDisabled(false);
       hideLoadingOverlay();
     }
   };

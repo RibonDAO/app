@@ -3,7 +3,6 @@ import Button from "components/atomics/buttons/Button";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
 import ImageWithInfoLayout from "components/moleculars/layouts/ImageWithInfoLayout";
-import usePageView from "hooks/usePageView";
 import styles from "./styles";
 
 export default function LockedSection() {
@@ -11,7 +10,6 @@ export default function LockedSection() {
     keyPrefix: "content.forYouScreen.lockedSection",
   });
   const { navigateTo } = useNavigation();
-  usePageView("P16_view");
 
   const handleButtonClick = () => {
     navigateTo("CausesScreen");

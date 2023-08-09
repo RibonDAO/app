@@ -1,5 +1,5 @@
 import { useNavigation } from "hooks/useNavigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "components/atomics/buttons/Button";
 import { View, Text, TouchableOpacity } from "react-native";
@@ -8,6 +8,7 @@ import { useRouteParams } from "hooks/useRouteParams";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import Icon from "components/atomics/Icon";
 import Tooltip from "components/atomics/Tooltip";
+import { logEvent } from "services/analytics";
 import Ticket from "./assets/Ticket";
 import S from "./styles";
 
@@ -19,6 +20,11 @@ export default function GiveTicketScreen() {
   });
 
   const { navigateTo } = useNavigation();
+
+  useEffect(() => {
+    const eventName = isOnboarding ? "P10_view" : "P11_view";
+    logEvent(eventName);
+  }, []);
 
   const receiveTicket = () => {
     navigateTo("ReceiveTicketScreen");

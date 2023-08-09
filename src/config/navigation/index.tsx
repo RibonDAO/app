@@ -43,6 +43,9 @@ import GiveTicketScreen from "screens/donations/GiveTicketScreen";
 import ContributionStatsScreen from "screens/users/ContributionStatsScreen";
 import CheckoutProvider from "contexts/checkoutContext";
 import NonProfitsProvider from "contexts/nonProfitsContext";
+import IntegrationProvider, {
+  useIntegrationContext,
+} from "contexts/integrationContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -155,8 +158,9 @@ function BottomTabNavigator() {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   const { navigateTo } = useNavigation();
+  const { setCurrentIntegrationId } = useIntegrationContext();
   useEffect(() => {
-    initializeDeeplink(navigateTo);
+    initializeDeeplink(navigateTo, setCurrentIntegrationId);
   }, []);
 
   return (
@@ -302,8 +306,10 @@ export default function Navigation() {
                       <CauseContributionProvider>
                         <NonProfitsProvider>
                           <TicketsProvider>
-                            <RootNavigator />
-                            <Toast config={toastConfig} />
+                            <IntegrationProvider>
+                              <RootNavigator />
+                              <Toast config={toastConfig} />
+                            </IntegrationProvider>
                           </TicketsProvider>
                         </NonProfitsProvider>
                       </CauseContributionProvider>
