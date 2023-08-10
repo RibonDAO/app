@@ -16,22 +16,18 @@ const mockNonProfit2 = nonProfitFactory({
   name: "Other non Profit",
 });
 
-jest.mock("@ribon.io/shared/hooks", () => ({
-  __esModule: true,
-  ...jest.requireActual("@ribon.io/shared/hooks"),
-  useCauses: () => ({
-    causes: [mockCause, mockCause2],
-    refetch: () => {},
-  }),
-  useNonProfits: () => ({
-    nonProfits: [mockNonProfit, mockNonProfit2],
-    refetch: () => {},
-  }),
-}));
-
 describe("SupportNonProfitScreen", () => {
   beforeEach(async () => {
-    renderComponent(<SupportNonProfitScreen />);
+    renderComponent(<SupportNonProfitScreen />, {
+      causesProviderValue: {
+        causes: [mockCause, mockCause2],
+        refetch: () => {},
+      },
+      nonProfitsProviderValue: {
+        nonProfits: [mockNonProfit, mockNonProfit2],
+        refetch: () => {},
+      },
+    });
     await waitForPromises();
   });
 

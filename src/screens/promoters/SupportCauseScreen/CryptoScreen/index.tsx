@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
-import { useCauses } from "@ribon.io/shared/hooks";
 import { Cause } from "@ribon.io/shared/types";
 import { useWalletContext } from "contexts/walletContext";
 import {
@@ -18,6 +17,9 @@ import { useNavigation } from "hooks/useNavigation";
 import { useNetworkContext } from "contexts/networkContext";
 import { defaultNetwork } from "config/networks";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
+import { useCausesContext } from "contexts/causesContext";
+import { useCauseContributionContext } from "contexts/causesContributionContext";
+import { logEvent } from "services/analytics";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import styles from "./styles";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
@@ -43,7 +45,9 @@ function CryptoScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
 
   const [refreshing, setRefreshing] = useState(false);
-  const { causes, refetch: refetchCauses } = useCauses();
+  const { causes, refetch: refetchCauses } = useCausesContext();
+  const { chosenCause, setChosenCause, chosenCauseIndex, setChosenCauseIndex } =
+    useCauseContributionContext();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCauseScreen",
@@ -55,19 +59,20 @@ function CryptoScreen(): JSX.Element {
     [wallet, invalidNetwork],
   );
 
-  const causesFilter = () => {
-    const causesApi = causes.filter((currentCause) => currentCause.active);
-    return causesApi || [];
-  };
-
   useEffect(() => {
-    setCause(causeCard || causesFilter()[0]);
+    setCause(causeCard || (chosenCause as Cause));
   }, [JSON.stringify(causes)]);
 
   useEffect(() => {
     if (cause?.pools && cause?.pools[0])
       setCurrentPool(cause?.pools[0].address);
   }, [cause]);
+
+  useEffect(() => {
+    logEvent("contributionCardsOrder_view", {
+      causes,
+    });
+  }, [causes]);
 
   const resetScreen = () => {
     async function reset() {
@@ -87,12 +92,14 @@ function CryptoScreen(): JSX.Element {
     reset();
   };
 
-  const handleCauseClick = (causeClicked: Cause) => {
+  const handleCauseClick = (causeClicked: Cause, index: number) => {
     setCause(causeClicked);
+    setChosenCause(causeClicked);
+    setChosenCauseIndex(index);
   };
 
   useEffect(() => {
-    setCause(causeCard || causesFilter()[0]);
+    setCause(causeCard || (chosenCause as Cause));
   }, [causes]);
 
   const onDonationToContractSuccess = () => {
@@ -135,9 +142,6 @@ function CryptoScreen(): JSX.Element {
     return t("connectWalletButtonText");
   };
 
-  const preSelectedIndex = () =>
-    cause ? causesFilter().findIndex((c) => c.id === cause?.id) : 0;
-
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -147,10 +151,10 @@ function CryptoScreen(): JSX.Element {
     >
       <Text style={styles.title}>{t("title")}</Text>
       <GroupButtons
-        elements={causesFilter()}
+        elements={causes}
         onChange={handleCauseClick}
         nameExtractor={(element) => element.name}
-        indexSelected={preSelectedIndex()}
+        indexSelected={chosenCauseIndex}
         backgroundColor={theme.colors.brand.secondary[700]}
         textColorOutline={theme.colors.brand.secondary[700]}
         borderColor={theme.colors.brand.secondary[700]}
@@ -158,14 +162,14 @@ function CryptoScreen(): JSX.Element {
       />
       <View style={styles.contentContainer}>
         <MaskedWaveCut
-          image={cause?.coverImage}
+          image={chosenCause?.coverImage}
           imageStyles={styles.supportImage}
         />
         <View style={styles.donateContainer}>
           <View style={styles.givingContainer}>
             <View style={styles.contributionContainer}>
               <SelectCryptoOfferSection
-                cause={cause}
+                cause={chosenCause}
                 onValueChange={(value: string) => setAmount(value)}
               />
             </View>
