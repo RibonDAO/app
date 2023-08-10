@@ -1,51 +1,33 @@
 import { useCauses } from "@ribon.io/shared/hooks";
-import {
-  createContext,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useContext, useMemo } from "react";
 import { Cause } from "@ribon.io/shared/types";
 
 export interface ICausesContext {
   causes: Cause[];
-  activeCauses: Cause[];
-  chosenCause: Cause | undefined;
-  currentCauseId: number;
-  setCurrentCauseId: (id: SetStateAction<number>) => void;
+  causesWithPoolBalance: Cause[];
   refetch: () => void;
+  isLoading: boolean;
 }
 
 export const CausesContext = createContext<ICausesContext>(
   {} as ICausesContext,
 );
+CausesContext.displayName = "CausesContext";
 
 function CausesProvider({ children }: any) {
   const { causes, refetch, isLoading } = useCauses();
-  const [activeCauses, setActiveCauses] = useState<Cause[]>([]);
-  const [currentCauseId, setCurrentCauseId] = useState(-1);
-
-  const causesFilter = () => causes.filter((cause) => cause.active);
-
-  useEffect(() => {
-    if (!isLoading) {
-      setActiveCauses(causesFilter());
-      setCurrentCauseId(activeCauses[0]?.id);
-    }
-  }, [JSON.stringify(causes), isLoading]);
+  const causesWithPoolBalance = causes?.filter(
+    (cause) => cause.withPoolBalance,
+  );
 
   const causesObject: ICausesContext = useMemo(
     () => ({
       causes,
+      causesWithPoolBalance,
       refetch,
-      chosenCause: causes[0],
-      activeCauses,
-      currentCauseId,
-      setCurrentCauseId,
+      isLoading,
     }),
-    [causes, activeCauses, currentCauseId],
+    [causes, refetch, isLoading],
   );
 
   return (

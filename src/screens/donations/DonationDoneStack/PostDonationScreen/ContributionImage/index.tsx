@@ -1,11 +1,12 @@
+/* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import { Text, TouchableOpacity } from "react-native";
-import { useCausesContext } from "contexts/causesContext";
 import { View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import Image from "components/atomics/Image";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
+import { useCauseContributionContext } from "contexts/causesContributionContext";
 import S from "./styles";
 
 type Props = {
@@ -21,19 +22,24 @@ function ContributionImage({
   idCause,
   isCause = false,
 }: Props) {
-  const { setCurrentCauseId } = useCausesContext();
+  const { setChosenCauseId } = useCauseContributionContext();
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen.contributionImage",
   });
 
   const handleClick = () => {
-    setCurrentCauseId(idCause);
+    setChosenCauseId(idCause);
     navigateTo("PromotersScreen", { isInCommunity: !!isCause });
   };
 
   return (
-    <TouchableOpacity style={S.container} onPress={handleClick} key={name}>
+    <TouchableOpacity
+      accessibilityRole="button"
+      style={S.container}
+      onPress={handleClick}
+      key={name}
+    >
       <Image style={S.imageContainer} source={{ uri: coverImage }} />
 
       {isCause && (
