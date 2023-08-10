@@ -58,17 +58,21 @@ export default function CardSection() {
   );
 
   const [currentOffer, setCurrentOffer] = useState<Offer>();
+  const [currentIndex, setCurrentIndex] = useState<number>();
   const [offersModalVisible, setOffersModalVisible] = useState(false);
   const [isGooglePaySupportedState, setIsGooglePaySupportedState] =
     useState<boolean>(false);
 
-  const resetOffer = () => setOffer(0);
+  const resetOffer = () => setOffer(offers[0]?.priceCents as number);
 
   useEffect(() => {
     if (offers && offer !== undefined && !isLoadingOffers) {
-      setCurrentOffer(offers[offer]);
+      const actualOffer = offers.find(
+        (item: Offer) => item.priceCents === offer,
+      );
+      setCurrentOffer(actualOffer);
 
-      if (offers.length - 1 < offer) resetOffer();
+      if (!actualOffer) resetOffer();
     }
   }, [offers, offer, isLoadingOffers]);
 
@@ -76,11 +80,15 @@ export default function CardSection() {
     refetchOffers();
   }, [currency]);
 
-  const handleOfferChange = (offerItem: any) => {
-    const offerIndex = offers?.findIndex(
-      (item: any) => item.id === offerItem.id,
+  useEffect(() => {
+    if (currentIndex) setCurrentOffer(offers[currentIndex]);
+  }, [currentIndex]);
+
+  const handleOfferChange = (offerItem: Offer) => {
+    const offerChanged = offers?.find(
+      (item: Offer) => item.priceCents === offerItem.priceCents,
     );
-    setOffer(offerIndex);
+    setOffer(offerChanged?.priceCents as number);
   };
 
   const buttonOfferItems = offers?.map((offerItem) => ({
@@ -96,6 +104,7 @@ export default function CardSection() {
     if (currentOffer) {
       changePublishableKey(currentOffer.gateway);
       setOfferId(currentOffer.id);
+      setCurrentIndex(offers?.findIndex((item) => item.id === currentOffer.id));
     }
   }, [currentOffer]);
 
@@ -136,8 +145,8 @@ export default function CardSection() {
       <ModalButtonSelector
         title={t("selectValue")}
         key="offerModal"
-        current={offer}
-        setCurrentIndex={setOffer}
+        current={currentIndex}
+        setCurrentIndex={setCurrentIndex}
         items={buttonOfferItems}
         visible={offersModalVisible}
         setVisible={setOffersModalVisible}

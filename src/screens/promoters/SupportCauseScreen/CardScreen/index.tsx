@@ -23,19 +23,9 @@ import SelectOfferSection from "./SelectOfferSection";
 
 function CardScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
-  const [currentOffer, setCurrentOffer] = useState<Offer>({
-    currency: "usd",
-    price: "10",
-    priceValue: 10,
-    id: 1,
-    active: true,
-    subscription: false,
-    priceCents: 1000,
-    positionOrder: 0,
-  } as Offer);
+  const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
-  const { cause, setCause, setOfferId, setFlow, loading } =
-    useCardPaymentInformation();
+  const { cause, setCause, setFlow } = useCardPaymentInformation();
 
   const { causes } = useCauses();
   const { cause: causeCrypto } = useCryptoPayment();
@@ -59,28 +49,29 @@ function CardScreen(): JSX.Element {
   };
 
   const handleDonateClick = () => {
-    if (Platform.OS === "ios") {
-      const url = `https://dapp.ribon.io/promoters/checkout?target=cause&target_id=${cause?.id}&currency=${currentOffer.currency}&offer=${currentOfferIndex}`;
+    if (Platform.OS !== "ios") {
+      const url = `https://dapp.ribon.io/promoters/checkout?target=cause&target_id=${cause?.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}`;
       Linking.openURL(url);
     } else {
       setFlow("cause");
       logEvent("giveCauseBtn_start", {
         from: "giveCauseCC_page",
         causeId: cause?.id,
-        price: currentOffer.priceValue,
-        currency: currentOffer.currency,
+        price: currentOffer?.priceValue,
+        currency: currentOffer?.currency,
       });
 
       navigateTo("CheckoutScreen", {
         target: "cause",
         targetId: cause?.id,
-        offer: currentOfferIndex,
-        currency: currentOffer.currency,
+        offer: currentOffer?.priceCents,
+        currency: currentOffer?.currency,
       });
     }
   };
 
   const handleCommunityAddClick = () => {
+    if (!currentOffer) return;
     navigateTo("CommunityAddModal", {
       amount: formatPrice(currentOffer?.priceValue, currentOffer?.currency),
     });
@@ -98,11 +89,8 @@ function CardScreen(): JSX.Element {
 
   const handleOfferChange = (offer: Offer, index: number) => {
     setCurrentOffer(offer);
-    setOfferId(offer.id);
     setCurrentOfferIndex(index);
   };
-
-  if (!currentOffer || loading) return <View />;
 
   const preSelectedIndex = () =>
     causeCrypto ? causesFilter().findIndex((c) => c.id === causeCrypto?.id) : 0;
@@ -132,6 +120,7 @@ function CardScreen(): JSX.Element {
               <SelectOfferSection
                 cause={cause}
                 onOfferChange={handleOfferChange}
+                currentIndex={currentOfferIndex}
               />
             </View>
             <View style={S.communityAddContainer}>
@@ -158,7 +147,7 @@ function CardScreen(): JSX.Element {
           </View>
           <Button
             text={t("donateButtonText", {
-              value: removeInsignificantZeros(currentOffer.price),
+              value: removeInsignificantZeros(currentOffer?.price || "0"),
             })}
             onPress={handleDonateClick}
             borderColor={theme.colors.brand.secondary[300]}
