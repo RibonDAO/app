@@ -49,14 +49,13 @@ export default function CardSection() {
 
   const { offer: offerParam, subscription } = params;
 
-  useEffect(() => {
-    resetStates();
-
-    return () => {
-      resetStates();
-    };
-  }, []);
   const [isSubscription, setIsSubscription] = useState(subscription);
+
+  const [currentOffer, setCurrentOffer] = useState<Offer>();
+  const [currentIndex, setCurrentIndex] = useState<number>();
+  const [offersModalVisible, setOffersModalVisible] = useState(false);
+  const [isGooglePaySupportedState, setIsGooglePaySupportedState] =
+    useState<boolean>(false);
 
   const {
     offers,
@@ -67,19 +66,22 @@ export default function CardSection() {
     isSubscription,
   );
 
-  const [currentOffer, setCurrentOffer] = useState<Offer>();
-  const [currentIndex, setCurrentIndex] = useState<number>();
-  const [offersModalVisible, setOffersModalVisible] = useState(false);
-  const [isGooglePaySupportedState, setIsGooglePaySupportedState] =
-    useState<boolean>(false);
+  const resetOffer = () => setOffer(offers[0].priceCents);
 
-  const resetOffer = () => setOffer(offers[0]?.priceCents as number);
+  useEffect(() => {
+    resetStates();
+
+    return () => {
+      resetStates();
+    };
+  }, []);
 
   useEffect(() => {
     if (offers && offer !== undefined && !isLoadingOffers) {
       const actualOffer = offers.find(
         (item: Offer) => item.priceCents === offer,
       );
+
       setCurrentOffer(actualOffer);
 
       if (!actualOffer) resetOffer();
@@ -91,43 +93,25 @@ export default function CardSection() {
   }, [currency, isSubscription]);
 
   useEffect(() => {
-    if (offerParam) {
-      const actualOffer = offers?.find(
-        (item: Offer) => item.priceCents === offerParam,
-      );
-      setCurrentOffer(actualOffer);
-      setCurrentIndex(
-        offers?.findIndex((item: Offer) => item.priceCents === offerParam),
-      );
-      setOffer(currentIndex ?? 0);
+    if (offerParam != null) {
+      setOffer(offerParam);
     }
   }, [offerParam]);
 
   useEffect(() => {
-    if (currentIndex) setCurrentOffer(offers[currentIndex]);
-  }, [currentIndex]);
-
-  const handleOfferChange = (offerItem: Offer) => {
-    const offerChanged = offers?.find(
-      (item: Offer) => item.priceCents === offerItem.priceCents,
-    );
-    setOffer(offerChanged?.priceCents as number);
-  };
-
-  const buttonOfferItems = offers?.map((offerItem) => ({
-    label: offerItem.price,
-    onClick: () => handleOfferChange(offerItem),
-  }));
-
-  const handlePayment = () => {
-    handleSubmit();
-  };
+    if (offers && currentIndex !== undefined && !isLoadingOffers) {
+      const actualOffer = offers[currentIndex];
+      setOffer(actualOffer?.priceCents ?? offers[0].priceCents);
+    }
+  }, [currentIndex, offers, isLoadingOffers]);
 
   useEffect(() => {
     if (currentOffer) {
       changePublishableKey(currentOffer.gateway);
       setOfferId(currentOffer.id);
-      setCurrentIndex(offers?.findIndex((item) => item.id === currentOffer.id));
+      setCurrentCoin(
+        Currencies[currency?.toUpperCase() as keyof typeof Currencies],
+      );
     }
   }, [currentOffer]);
 
@@ -145,8 +129,30 @@ export default function CardSection() {
     }
   }, [payable]);
 
-  const onSubscriptionClick = (subscriptionState: boolean) => {
-    setIsSubscription(subscriptionState);
+  useEffect(() => {
+    isGooglePaySupported().then((result) => {
+      setIsGooglePaySupportedState(result);
+    });
+  }, []);
+
+  const handleOfferChange = (offerItem: Offer) => {
+    const offerChanged = offers?.find(
+      (item: Offer) => item.priceCents === offerItem.priceCents,
+    );
+    setOffer(offerChanged?.priceCents ?? offers[0].priceCents);
+  };
+
+  const buttonOfferItems = offers?.map((offerItem) => ({
+    label: offerItem.price,
+    onClick: () => handleOfferChange(offerItem),
+  }));
+
+  const handlePayment = () => {
+    handleSubmit();
+  };
+
+  const onSubscriptionClick = () => {
+    setIsSubscription(!isSubscription);
 
     if (payable)
       logEvent("P23_changeRecurrence_click", {
@@ -154,30 +160,16 @@ export default function CardSection() {
       });
   };
 
-  useEffect(() => {
-    if (currentOffer)
-      setCurrentCoin(
-        Currencies[currency?.toUpperCase() as keyof typeof Currencies],
-      );
-  }, [currentOffer]);
-
   const nonProfit = payable as NonProfit;
-
   const cause = target === "non_profit" ? nonProfit?.cause : payable;
   const actualNonProfit = target === "non_profit" ? nonProfit : undefined;
-
-  useEffect(() => {
-    isGooglePaySupported().then((result) => {
-      setIsGooglePaySupportedState(result);
-    });
-  }, []);
 
   return (
     <View style={S.container}>
       <ModalButtonSelector
         title={t("selectValue")}
         key="offerModal"
-        current={currentIndex}
+        current={offers.findIndex((item) => item.priceCents === offer)}
         setCurrentIndex={setCurrentIndex}
         items={buttonOfferItems}
         visible={offersModalVisible}
@@ -211,7 +203,7 @@ export default function CardSection() {
             color: theme.colors.brand.primary[600],
             ...defaultBodyXsSemibold,
           }}
-          onPress={() => onSubscriptionClick(!isSubscription)}
+          onPress={() => onSubscriptionClick()}
           customStyles={S.donateButton}
           outline
         />

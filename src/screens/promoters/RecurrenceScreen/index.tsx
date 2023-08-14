@@ -89,7 +89,6 @@ export default function RecurrenceScreen() {
         (item: Offer) => item.priceCents === offer,
       );
       setCurrentOffer(actualOffer);
-      if (actualOffer) setCurrentIndex(offers.indexOf(actualOffer));
       if (!actualOffer) resetOffer();
     }
   }, [offers, offer, isLoadingOffers]);
@@ -159,7 +158,7 @@ export default function RecurrenceScreen() {
             <ModalButtonSelector
               title={t("selectValue")}
               key="offerModal"
-              current={currentIndex}
+              current={offers.findIndex((item) => item.priceCents === offer)}
               setCurrentIndex={setCurrentIndex}
               items={buttonOfferItems}
               visible={offersModalVisible}
