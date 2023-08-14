@@ -52,7 +52,7 @@ export default function RecurrenceScreen() {
     false,
   );
 
-  const { params } = useRouteParams<"CheckoutScreen">();
+  const { params } = useRouteParams<"RecurrenceScreen">();
 
   const {
     target: targetParam,
@@ -68,7 +68,7 @@ export default function RecurrenceScreen() {
     if (offerParam != null) {
       setOffer(offerParam);
     }
-  }, [targetParam, currencyParam, targetParam, offerParam, offers]);
+  }, [targetParam, currencyParam, targetIdParam, offerParam, offers]);
 
   useEffect(() => {
     refetchOffers();

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   donateButton: {
     ...defaultBodyXsSemibold,
     height: 28,
-    width: 56,
+    width: "auto",
     display: "flex",
     alignItems: "center",
     gap: theme.spacingNative(4),

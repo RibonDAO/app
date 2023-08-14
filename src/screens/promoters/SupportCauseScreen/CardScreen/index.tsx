@@ -70,7 +70,7 @@ function CardScreen(): JSX.Element {
 
       navigateTo("RecurrenceScreen", {
         target: "cause",
-        targetId: cause?.id,
+        targetId: cause?.id || 0,
         offer: currentOffer?.priceCents,
         currency: currentOffer?.currency,
       });
