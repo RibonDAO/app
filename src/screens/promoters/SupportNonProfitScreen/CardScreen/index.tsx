@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
-import { useCauses, useNonProfits } from "@ribon.io/shared/hooks";
 import { Cause, Offer, NonProfit } from "@ribon.io/shared/types";
 import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
@@ -10,6 +9,9 @@ import GroupButtons from "components/moleculars/GroupButtons";
 import { FlatList, Linking, Platform, Text, View } from "react-native";
 import NonProfitCard from "screens/promoters/SupportNonProfitScreen/CardScreen/NonProfitCard";
 import { useScrollEnabled } from "contexts/scrollEnabledContext";
+import { useNonProfitsContext } from "contexts/nonProfitsContext";
+import { useCauseContributionContext } from "contexts/causesContributionContext";
+import { useCausesContext } from "contexts/causesContext";
 import S from "../styles";
 
 function CardScreen(): JSX.Element {
@@ -17,8 +19,10 @@ function CardScreen(): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const { cause, setCause, setOfferId, setFlow } = useCardPaymentInformation();
-  const { nonProfits } = useNonProfits();
-  const { causes } = useCauses();
+  const { chosenCause, setChosenCause, chosenCauseIndex, setChosenCauseIndex } =
+    useCauseContributionContext();
+  const { nonProfits } = useNonProfitsContext();
+  const { causes } = useCausesContext();
   const { tertiary } = theme.colors.brand;
   const { scrollEnabled } = useScrollEnabled();
 
@@ -26,17 +30,21 @@ function CardScreen(): JSX.Element {
     keyPrefix: "promoters.supportNonProfitPage",
   });
 
-  const causesFilter = () => {
-    const causesApi = causes.filter((currentCause) => currentCause.active);
-    return causesApi || [];
-  };
-
   useEffect(() => {
-    setCause(causesFilter()[0]);
+    setCause(chosenCause);
   }, [causes]);
 
-  const handleCauseClick = (causeClicked: Cause) => {
+  useEffect(() => {
+    logEvent("contributionCardsOrder_view", {
+      nonProfits,
+      causes,
+    });
+  }, [nonProfits, causes]);
+
+  const handleCauseClick = (causeClicked: Cause, index: number) => {
     setCause(causeClicked);
+    setChosenCauseIndex(index);
+    setChosenCause(causeClicked);
   };
 
   const handleDonateClick = (nonProfit: NonProfit) => {
@@ -77,9 +85,9 @@ function CardScreen(): JSX.Element {
         <Text style={S.Title}>{t("title")}</Text>
 
         <GroupButtons
-          elements={causesFilter()}
+          elements={causes}
           onChange={handleCauseClick}
-          indexSelected={0}
+          indexSelected={chosenCauseIndex}
           nameExtractor={(element) => element.name}
           backgroundColor={tertiary[800]}
           textColorOutline={tertiary[800]}
