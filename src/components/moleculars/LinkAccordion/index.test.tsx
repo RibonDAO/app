@@ -1,60 +1,38 @@
 import { clickOn } from "config/testUtils";
+import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { renderComponentAsync } from "config/testUtils/renders";
-import {
-  expectTextNotToBeInTheDocument,
-  expectTextToBeInTheDocument,
-} from "config/testUtils/expects";
-import { Text } from "react-native";
 import LinkAccordion from ".";
 
-const props = {
+const mockFn = jest.fn();
+
+const linkProps = {
   items: [
     {
-      title: "Credit Card",
-      children: <Text>Credit Card is Visible</Text>,
+      title: "Item 1",
+      handleClick: mockFn,
+      leftIcon: "event_available",
     },
     {
-      title: "Google Play",
-      onClick: () => {},
-    },
-    {
-      title: "Apple Pay",
-      onClick: () => {},
+      title: "Item 2",
+      handleClick: () => {},
+      leftIcon: "event_in_progress",
     },
   ],
 };
 
 describe("LinkAccordion", () => {
   it("should render without error", () => {
-    renderComponentAsync(<LinkAccordion isRadio {...props} />);
-
-    expectTextToBeInTheDocument("Credit Card");
-    expectTextToBeInTheDocument("Google Play");
-    expectTextToBeInTheDocument("Apple Pay");
-  });
-
-  describe("when the component is not visible and don't have text", () => {
-    it("does not show", () => {
-      renderComponentAsync(<LinkAccordion isRadio {...props} />);
-
-      expectTextNotToBeInTheDocument("Credit Card is Visible");
-    });
-  });
-
-  describe("when the component is visible and has a current", () => {
-    it("shows the current item", () => {
-      renderComponentAsync(<LinkAccordion isRadio {...props} current={0} />);
-
-      expectTextToBeInTheDocument("Credit Card is Visible");
-    });
+    renderComponentAsync(<LinkAccordion {...linkProps} />);
+    expectTextToBeInTheDocument("Item 1");
+    expectTextToBeInTheDocument("Item 2");
   });
 
   describe("when element is clicked", () => {
-    it("shows the children", () => {
-      renderComponentAsync(<LinkAccordion isRadio {...props} />);
+    it("calls handleClick function", () => {
+      renderComponentAsync(<LinkAccordion {...linkProps} />);
+      clickOn("Item 1");
 
-      clickOn("Credit Card");
-      expectTextToBeInTheDocument("Credit Card is Visible");
+      expect(mockFn).toHaveBeenCalled();
     });
   });
 });

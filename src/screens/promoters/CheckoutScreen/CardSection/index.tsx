@@ -2,7 +2,6 @@ import { Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import usePayable from "hooks/usePayable";
-import LinkAccordion from "components/moleculars/LinkAccordion";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useOffers } from "@ribon.io/shared/hooks";
 import { Currencies, Offer, NonProfit, Cause } from "@ribon.io/shared/types";
@@ -15,6 +14,7 @@ import Button from "components/atomics/buttons/Button";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared/styles";
 import { defaultBodyXsSemibold } from "styles/typography/default";
+import RadioAccordion from "components/moleculars/RadioAccordion";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
@@ -218,8 +218,7 @@ export default function CardSection() {
       </View>
 
       <Text style={S.accordionTitle}>{t("payment")}</Text>
-      <LinkAccordion
-        isRadio
+      <RadioAccordion
         items={[
           {
             title: t("paymentMethodSection.creditCard"),
