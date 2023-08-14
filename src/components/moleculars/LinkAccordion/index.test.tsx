@@ -5,7 +5,7 @@ import {
   expectTextToBeInTheDocument,
 } from "config/testUtils/expects";
 import { Text } from "react-native";
-import RadioAccordion from ".";
+import LinkAccordion from ".";
 
 const props = {
   items: [
@@ -24,9 +24,9 @@ const props = {
   ],
 };
 
-describe("RadioAccordion", () => {
+describe("LinkAccordion", () => {
   it("should render without error", () => {
-    renderComponentAsync(<RadioAccordion {...props} />);
+    renderComponentAsync(<LinkAccordion isRadio {...props} />);
 
     expectTextToBeInTheDocument("Credit Card");
     expectTextToBeInTheDocument("Google Play");
@@ -35,7 +35,7 @@ describe("RadioAccordion", () => {
 
   describe("when the component is not visible and don't have text", () => {
     it("does not show", () => {
-      renderComponentAsync(<RadioAccordion {...props} />);
+      renderComponentAsync(<LinkAccordion isRadio {...props} />);
 
       expectTextNotToBeInTheDocument("Credit Card is Visible");
     });
@@ -43,7 +43,7 @@ describe("RadioAccordion", () => {
 
   describe("when the component is visible and has a current", () => {
     it("shows the current item", () => {
-      renderComponentAsync(<RadioAccordion {...props} current={0} />);
+      renderComponentAsync(<LinkAccordion isRadio {...props} current={0} />);
 
       expectTextToBeInTheDocument("Credit Card is Visible");
     });
@@ -51,7 +51,7 @@ describe("RadioAccordion", () => {
 
   describe("when element is clicked", () => {
     it("shows the children", () => {
-      renderComponentAsync(<RadioAccordion {...props} />);
+      renderComponentAsync(<LinkAccordion isRadio {...props} />);
 
       clickOn("Credit Card");
       expectTextToBeInTheDocument("Credit Card is Visible");

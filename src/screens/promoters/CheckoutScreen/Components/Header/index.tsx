@@ -42,7 +42,7 @@ export default function Header() {
       <ModalButtonSelector
         title={t("selectCurrency")}
         key="currencyModal"
-        current={currencyIndex}
+        current={currencyIndex ?? 0}
         setCurrentIndex={setCurrencyByIndex}
         items={buttonCurrencyItems}
         visible={currencyModalVisible}

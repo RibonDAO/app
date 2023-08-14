@@ -2,13 +2,19 @@ import { Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import usePayable from "hooks/usePayable";
-import RadioAccordion from "components/moleculars/RadioAccordion";
+import LinkAccordion from "components/moleculars/LinkAccordion";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useOffers } from "@ribon.io/shared/hooks";
 import { Currencies, Offer, NonProfit, Cause } from "@ribon.io/shared/types";
 import { useEffect, useState } from "react";
 import { useGooglePay } from "@stripe/stripe-react-native";
 import { useStripeContext } from "contexts/stripeContext";
+import { useRouteParams } from "hooks/useRouteParams";
+import Icon from "components/atomics/Icon";
+import Button from "components/atomics/buttons/Button";
+import { logEvent } from "services/analytics";
+import { theme } from "@ribon.io/shared/styles";
+import { defaultBodyXsSemibold } from "styles/typography/default";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
@@ -27,7 +33,7 @@ export default function CardSection() {
   // const { isApplePaySupported } = useApplePay();
   const { isGooglePaySupported } = useGooglePay();
 
-  const { target, targetId, currency, offer, setOffer } = useCheckoutContext();
+  const { target, targetId, currency, setOffer, offer } = useCheckoutContext();
   const {
     handleSubmit,
     setOfferId,
@@ -39,6 +45,9 @@ export default function CardSection() {
   } = useCardPaymentInformation();
   const payable = usePayable(target, targetId);
   const { changePublishableKey } = useStripeContext();
+  const { params } = useRouteParams<"CheckoutScreen">();
+
+  const { offer: offerParam, subscription } = params;
 
   useEffect(() => {
     resetStates();
@@ -47,6 +56,7 @@ export default function CardSection() {
       resetStates();
     };
   }, []);
+  const [isSubscription, setIsSubscription] = useState(subscription);
 
   const {
     offers,
@@ -54,7 +64,7 @@ export default function CardSection() {
     isLoading: isLoadingOffers,
   } = useOffers(
     Currencies[currency?.toUpperCase() as keyof typeof Currencies],
-    false,
+    isSubscription,
   );
 
   const [currentOffer, setCurrentOffer] = useState<Offer>();
@@ -74,11 +84,24 @@ export default function CardSection() {
 
       if (!actualOffer) resetOffer();
     }
-  }, [offers, offer, isLoadingOffers]);
+  }, [offers, offer, isLoadingOffers, isSubscription]);
 
   useEffect(() => {
     refetchOffers();
-  }, [currency]);
+  }, [currency, isSubscription]);
+
+  useEffect(() => {
+    if (offerParam) {
+      const actualOffer = offers?.find(
+        (item: Offer) => item.priceCents === offerParam,
+      );
+      setCurrentOffer(actualOffer);
+      setCurrentIndex(
+        offers?.findIndex((item: Offer) => item.priceCents === offerParam),
+      );
+      setOffer(currentIndex ?? 0);
+    }
+  }, [offerParam]);
 
   useEffect(() => {
     if (currentIndex) setCurrentOffer(offers[currentIndex]);
@@ -122,6 +145,15 @@ export default function CardSection() {
     }
   }, [payable]);
 
+  const onSubscriptionClick = (subscriptionState: boolean) => {
+    setIsSubscription(subscriptionState);
+
+    if (payable)
+      logEvent("P23_changeRecurrence_click", {
+        receiver: payable?.name,
+      });
+  };
+
   useEffect(() => {
     if (currentOffer)
       setCurrentCoin(
@@ -163,8 +195,31 @@ export default function CardSection() {
         />
       )}
 
+      <View style={S.recurrenceContainer}>
+        <Icon
+          name={isSubscription ? "event_repeat" : "event_available"}
+          size={25}
+          color={theme.colors.brand.primary[600]}
+          type="outlined"
+        />
+        <Text style={S.recurrenceTitle}>
+          {isSubscription ? t("monthlyContribution") : t("uniqueContribution")}
+        </Text>
+        <Button
+          text={t("recurrenceButton")}
+          customTextStyles={{
+            color: theme.colors.brand.primary[600],
+            ...defaultBodyXsSemibold,
+          }}
+          onPress={() => onSubscriptionClick(!isSubscription)}
+          customStyles={S.donateButton}
+          outline
+        />
+      </View>
+
       <Text style={S.accordionTitle}>{t("payment")}</Text>
-      <RadioAccordion
+      <LinkAccordion
+        isRadio
         items={[
           {
             title: t("paymentMethodSection.creditCard"),

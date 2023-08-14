@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     position: "relative",
   },
-  radioListItem: {
+  linkListItem: {
     width: "100%",
     padding: theme.spacingNative(20),
     borderBottomColor: theme.colors.neutral[100],
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.brand.primary[600],
     borderWidth: 6,
   },
-  radioRow: {
+  linkRow: {
     width: "100%",
     position: "relative",
     display: "flex",
@@ -51,12 +51,16 @@ const styles = StyleSheet.create({
   rightIcon: {
     width: 28,
   },
-  radioContent: {
+  linkContent: {
     width: "100%",
     marginTop: theme.spacingNative(20),
     position: "relative",
     display: "flex",
     flexDirection: "column",
+  },
+  rightElement: {},
+  title: {
+    marginHorizontal: theme.spacingNative(8),
   },
 });
 

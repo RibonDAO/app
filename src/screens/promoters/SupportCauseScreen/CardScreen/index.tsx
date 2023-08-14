@@ -49,8 +49,8 @@ function CardScreen(): JSX.Element {
   };
 
   const handleDonateClick = () => {
-    if (Platform.OS !== "ios") {
-      const url = `https://dapp.ribon.io/promoters/checkout?target=cause&target_id=${cause?.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}`;
+    if (Platform.OS === "ios") {
+      const url = `https://dapp.ribon.io/promoters/recurrence?target=cause&target_id=${cause?.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}`;
       Linking.openURL(url);
     } else {
       setFlow("cause");
@@ -61,7 +61,7 @@ function CardScreen(): JSX.Element {
         currency: currentOffer?.currency,
       });
 
-      navigateTo("CheckoutScreen", {
+      navigateTo("RecurrenceScreen", {
         target: "cause",
         targetId: cause?.id,
         offer: currentOffer?.priceCents,
