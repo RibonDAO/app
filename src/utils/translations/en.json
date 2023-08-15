@@ -235,9 +235,19 @@
       "tooltipImpact": "How we calculate the impact?",
       "tooltipImpactText": "The calculations are based on the minimum value needed for the project achieve good results. Ribon’s causes are part of the social moviment “Effective Altruism”, which aim to generate big impact at low cost."
     },
+    "recurrenceScreen": {
+      "title": "Recurrence",
+      "donatingTo": "Donating to ",
+      "recurrentDonationDescription": "Contribute monthly",
+      "uniqueDonationDescription": "Contribute once",
+      "selectValue": "Select value"
+    },
     "checkoutScreen": {
       "changeCurrency": "Change currency",
       "back": "Back",
+      "monthlyContribution": "Contributing monthly",
+      "uniqueContribution": "Contributing once",
+      "recurrenceButton": "Change",
       "donatingTo": "Donating to ",
       "netDonation": "Net donation: ",
       "serviceFees": "Service fees: ",

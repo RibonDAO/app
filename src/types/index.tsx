@@ -75,6 +75,14 @@ export type CheckoutScreenParamList = {
   targetId: string;
   offer: number;
   currency: Currencies;
+  subscription?: boolean;
+};
+
+export type RecurrenceScreenParamList = {
+  target: string;
+  targetId: string;
+  offer: number;
+  currency: Currencies;
 };
 
 export type RootStackParamList = {
@@ -94,6 +102,7 @@ export type RootStackParamList = {
   SupportNonProfitScreen: SupportNonProfitParamList;
   PromotersScreen: PromotersScreenParams;
   CheckoutScreen: CheckoutScreenParamList;
+  RecurrenceScreen: RecurrenceScreenParamList;
   OnboardingScreen: undefined;
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
