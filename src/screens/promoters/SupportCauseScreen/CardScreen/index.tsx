@@ -40,7 +40,7 @@ function CardScreen(): JSX.Element {
   });
 
   useEffect(() => {
-    setCause(causeCrypto || chosenCause);
+    setCause(causeCrypto || chosenCause || causes[chosenCauseIndex ?? 0]);
   }, [causes]);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function CardScreen(): JSX.Element {
 
       navigateTo("RecurrenceScreen", {
         target: "cause",
-        targetId: cause?.id || 0,
+        targetId: cause?.id ?? causes[0].id,
         offer: currentOffer?.priceCents,
         currency: currentOffer?.currency,
       });
