@@ -62,13 +62,22 @@ export default function RecurrenceScreen() {
   } = params;
 
   useEffect(() => {
-    if (targetIdParam) setTargetId(targetIdParam);
-    if (targetParam) setTarget(targetParam);
-    if (currencyParam) setCurrency(currencyParam);
     if (offerParam != null) {
       setOffer(offerParam);
     }
-  }, [targetParam, currencyParam, targetIdParam, offerParam]);
+  }, [offerParam]);
+
+  useEffect(() => {
+    if (targetIdParam) setTargetId(targetIdParam);
+  }, [targetIdParam]);
+
+  useEffect(() => {
+    if (targetParam) setTarget(targetParam);
+  }, [targetParam]);
+
+  useEffect(() => {
+    if (currencyParam) setCurrency(currencyParam);
+  }, [currencyParam]);
 
   useEffect(() => {
     refetchOffers();
