@@ -68,7 +68,7 @@ export default function RecurrenceScreen() {
     if (offerParam != null) {
       setOffer(offerParam);
     }
-  }, [targetParam, currencyParam, targetIdParam, offerParam, offers]);
+  }, [targetParam, currencyParam, targetIdParam, offerParam]);
 
   useEffect(() => {
     refetchOffers();

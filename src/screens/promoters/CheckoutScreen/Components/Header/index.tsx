@@ -20,7 +20,9 @@ export default function Header() {
 
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
 
-  const currencyIndex = Object.values(Currencies).indexOf(currency);
+  const currencyIndex = Object.values(Currencies).indexOf(
+    currency?.toUpperCase() as Currencies,
+  );
 
   const { popNavigation } = useNavigation();
 
