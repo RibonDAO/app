@@ -1,18 +1,21 @@
 import { View } from "react-native";
 import { useCanDonate } from "@ribon.io/shared";
-import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM } from "utils/constants/Application";
 import { useCallback } from "react";
 import ForYouTabsProvider from "contexts/forYouTabsContext";
 import { useRouteParams } from "hooks/useRouteParams";
 import { useFocusEffect } from "@react-navigation/native";
+import { useIntegrationContext } from "contexts/integrationContext";
 import TabViewSection from "./TabViewSection";
 import styles from "./styles";
 
 export default function ForYouScreen(): JSX.Element {
   const { params } = useRouteParams<"ForYouScreen">();
 
+  const { currentIntegrationId } = useIntegrationContext();
+
   const { refetch: refetchCanDonate } = useCanDonate(
-    RIBON_INTEGRATION_ID,
+    currentIntegrationId,
     PLATFORM,
   );
 
