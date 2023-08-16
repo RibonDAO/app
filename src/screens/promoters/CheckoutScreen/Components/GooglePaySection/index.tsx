@@ -57,6 +57,8 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
     initialize();
   }, []);
 
+  const showFiscalFields = () => offer.gateway === "stripe";
+
   const createPaymentMethod = async () => {
     showLoadingOverlay();
     const { error, paymentMethod } = await createGooglePayPaymentMethod({
@@ -104,12 +106,11 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
     setInitialized(false);
   };
 
-  const googlePayButtonDisabled = () =>
-    offer.gateway === "stripe" && taxId.length < 14;
+  const googlePayButtonDisabled = () => showFiscalFields() && taxId.length < 14;
 
   return (
     <View>
-      {offer.gateway === "stripe" && (
+      {showFiscalFields() && (
         <InputText
           name="taxId"
           placeholder={field("taxId")}
