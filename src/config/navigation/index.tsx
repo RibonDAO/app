@@ -35,7 +35,7 @@ import ForYouScreen from "screens/content/ForYouScreen";
 import { useCanDonate } from "@ribon.io/shared";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "lib/Toast";
-import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
@@ -77,8 +77,10 @@ function BottomTabNavigator() {
 
   const { currentUser } = useCurrentUser();
 
+  const { currentIntegrationId } = useIntegrationContext();
+
   const { canDonate, refetch: refetchCanDonate } = useCanDonate(
-    RIBON_INTEGRATION_ID,
+    currentIntegrationId,
     PLATFORM,
   );
 

@@ -7,12 +7,13 @@ import { CollapsibleTabView } from "react-native-collapsible-tab-view";
 import React, { useEffect } from "react";
 import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
 import { useCanDonate } from "@ribon.io/shared";
-import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM } from "utils/constants/Application";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import { useTasksContext } from "contexts/tasksContext";
 import { TASKS } from "utils/constants/Tasks";
 import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
+import { useIntegrationContext } from "contexts/integrationContext";
 import TasksSection from "../TasksSection";
 import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
@@ -24,7 +25,8 @@ type Route = {
 };
 
 function NewsSectionTabView(): JSX.Element {
-  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
+  const { currentIntegrationId } = useIntegrationContext();
+  const { canDonate } = useCanDonate(currentIntegrationId, PLATFORM);
   return (
     <ParallaxTabViewContainer routeKey="NewsSectionTabView">
       {canDonate ? <LockedSection /> : <NewsSection />}
@@ -55,7 +57,8 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
   });
 
   const layout = useWindowDimensions();
-  const { canDonate } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
+  const { currentIntegrationId } = useIntegrationContext();
+  const { canDonate } = useCanDonate(currentIntegrationId, PLATFORM);
   const { registerAction, hasCompletedATask, tasksState } = useTasksContext();
 
   const { index, setIndex } = useForYouTabsContext();

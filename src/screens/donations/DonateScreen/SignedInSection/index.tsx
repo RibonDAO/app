@@ -6,10 +6,11 @@ import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useTranslation } from "react-i18next";
 import { useDonations } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
 import BackgroundShapes from "components/vectors/BackgroundShapes";
 import usePageView from "hooks/usePageView";
+import { useIntegrationContext } from "contexts/integrationContext";
 import S from "./styles";
 
 type Props = {
@@ -32,6 +33,8 @@ function SignedInSection({
   const { donate } = useDonations(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
 
+  const { currentIntegrationId } = useIntegrationContext();
+
   const handleButtonPress = async () => {
     if (!currentUser?.email) return;
 
@@ -39,7 +42,7 @@ function SignedInSection({
 
     try {
       await donate(
-        RIBON_INTEGRATION_ID,
+        currentIntegrationId,
         nonProfit.id,
         currentUser.email,
         PLATFORM,
