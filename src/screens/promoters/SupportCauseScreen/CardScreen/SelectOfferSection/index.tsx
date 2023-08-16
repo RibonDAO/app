@@ -17,12 +17,17 @@ const { neutral } = theme.colors;
 
 type Props = {
   cause: Cause | undefined;
+  currentIndex?: number;
   onOfferChange: (offer: Offer, index: number) => void;
 };
 
 const CURRENT_OFFER_INDEX_KEY = "CURRENT_OFFER_INDEX_KEY";
 
-function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
+function SelectOfferPage({
+  cause,
+  onOfferChange,
+  currentIndex,
+}: Props): JSX.Element {
   const [maxRange, setMaxRange] = useState(0);
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const { setIsInCryptoPage } = useCryptoPayment();
@@ -32,6 +37,7 @@ function SelectOfferPage({ cause, onOfferChange }: Props): JSX.Element {
       CURRENT_OFFER_INDEX_KEY,
     );
     if (localstorageIndex) return Number(localstorageIndex);
+    if (currentIndex) return currentIndex;
 
     return 0;
   };

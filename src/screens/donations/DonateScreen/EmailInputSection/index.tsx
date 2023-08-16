@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import InputText from "components/atomics/inputs/InputText";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
-import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM } from "utils/constants/Application";
 import { openInWebViewer } from "lib/linkOpener";
 import { NonProfit } from "@ribon.io/shared/types";
 import { useDonations, useUsers } from "@ribon.io/shared/hooks";
@@ -24,6 +24,7 @@ import Image from "components/atomics/Image";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { perform } from "lib/timeoutHelpers";
 import usePageView from "hooks/usePageView";
+import { useIntegrationContext } from "contexts/integrationContext";
 import S from "./styles";
 
 type Props = {
@@ -49,6 +50,8 @@ function EmailInputSection({
   const { donate } = useDonations(undefined);
   const { formattedImpactText } = useFormattedImpactText();
 
+  const { currentIntegrationId } = useIntegrationContext();
+
   async function donateCallback() {
     try {
       const user = await findOrCreateUser(
@@ -58,7 +61,7 @@ function EmailInputSection({
       perform(() => {
         setCurrentUser(user);
       }).in(3000);
-      await donate(RIBON_INTEGRATION_ID, nonProfit.id, email, PLATFORM);
+      await donate(currentIntegrationId, nonProfit.id, email, PLATFORM);
       onDonationSuccess();
     } catch (error: any) {
       onDonationFail(error);
