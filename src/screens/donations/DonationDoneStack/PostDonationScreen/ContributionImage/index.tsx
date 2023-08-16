@@ -7,6 +7,7 @@ import Image from "components/atomics/Image";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
+import { useCausesContext } from "contexts/causesContext";
 import S from "./styles";
 
 type Props = {
@@ -22,7 +23,9 @@ function ContributionImage({
   idCause,
   isCause = false,
 }: Props) {
-  const { setChosenCauseId } = useCauseContributionContext();
+  const { setChosenCauseId, setChosenCauseIndex } =
+    useCauseContributionContext();
+  const { causes } = useCausesContext();
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen.contributionImage",
@@ -30,6 +33,7 @@ function ContributionImage({
 
   const handleClick = () => {
     setChosenCauseId(idCause);
+    setChosenCauseIndex(causes.findIndex((cause) => cause.id === idCause));
     navigateTo("PromotersScreen", { isInCommunity: !!isCause });
   };
 

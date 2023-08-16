@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { GooglePayButton, useGooglePay } from "@stripe/stripe-react-native";
 import { View } from "react-native";
 import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useTasksContext } from "contexts/tasksContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
@@ -10,6 +9,7 @@ import { logError } from "services/crashReport";
 import storePayApi from "services/api/storePayApi";
 import InputText from "components/atomics/inputs/InputText";
 import { useTranslation } from "react-i18next";
+import { useIntegrationContext } from "contexts/integrationContext";
 import S from "./styles";
 
 type Props = {
@@ -19,6 +19,8 @@ type Props = {
 };
 export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { registerAction } = useTasksContext();
+  const { currentIntegrationId } = useIntegrationContext();
+
   const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const { isGooglePaySupported, initGooglePay, createGooglePayPaymentMethod } =
@@ -72,7 +74,6 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
       return;
     } else if (paymentMethod) {
       const { email, name, address } = paymentMethod.billingDetails;
-      const integrationId = RIBON_INTEGRATION_ID;
 
       const data = {
         offerId: offer.id,
@@ -83,7 +84,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         country: address?.country,
         city: address?.city,
         state: address?.state,
-        integrationId,
+        currentIntegrationId,
         causeId: cause?.id,
         nonProfitId: nonProfit?.id,
         paymentMethodType: "google_pay",

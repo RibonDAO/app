@@ -9,7 +9,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM } from "utils/constants/Application";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
@@ -36,6 +36,7 @@ import usePageView from "hooks/usePageView";
 import { useCausesContext } from "contexts/causesContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import useDevice from "hooks/apiHooks/useDevice";
+import { useIntegrationContext } from "contexts/integrationContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
@@ -49,16 +50,18 @@ export default function CausesScreen() {
   const { nonProfitsWithPoolBalance: nonProfits, isLoading } =
     useNonProfitsContext();
   const { causesWithPoolBalance: causes } = useCausesContext();
+  const { currentIntegrationId } = useIntegrationContext();
   const {
     canDonate,
     isLoading: loadingCanDonate,
     refetch: refetchCanDonate,
-  } = useCanDonate(RIBON_INTEGRATION_ID, PLATFORM);
+  } = useCanDonate(currentIntegrationId, PLATFORM);
   const {
     isFirstAccessToIntegration,
     refetch: refetchFirstAccessToIntegration,
     isLoading: loadingFirstAccessToIntegration,
-  } = useFirstAccessToIntegration(RIBON_INTEGRATION_ID);
+  } = useFirstAccessToIntegration(currentIntegrationId);
+
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);

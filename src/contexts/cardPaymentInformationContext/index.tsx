@@ -22,12 +22,13 @@ import {
 import { showToast } from "lib/Toast";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { useNavigation } from "hooks/useNavigation";
-import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM } from "utils/constants/Application";
 import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { normalizedLanguage } from "lib/currentLanguage";
 import { logEvent } from "services/analytics";
 import { useTasksContext } from "contexts/tasksContext";
 import { countryByLanguage } from "lib/countryByLanguage";
+import { useIntegrationContext } from "contexts/integrationContext";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -109,8 +110,6 @@ function CardPaymentInformationProvider({ children }: Props) {
     if (currentCoin) setLocalStorageItem(CURRENT_COIN_KEY, currentCoin);
   }, [currentCoin]);
 
-  const integrationId = RIBON_INTEGRATION_ID;
-
   const [country, setCountry] = useState(currentContry);
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
@@ -135,7 +134,8 @@ function CardPaymentInformationProvider({ children }: Props) {
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const { findOrCreateUser } = useUsers();
   const { signedIn, setCurrentUser } = useCurrentUser();
-  const { integration } = useIntegration(integrationId);
+  const { currentIntegrationId } = useIntegrationContext();
+  const { integration } = useIntegration(currentIntegrationId);
   const { createSource } = useSources();
 
   const resetStates = () => {
@@ -180,7 +180,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       city,
       taxId,
       offerId,
-      integrationId: integrationId ?? 1,
+      integrationId: currentIntegrationId ?? 1,
       card: {
         number: number.replace(/\D/g, "").slice(0, 16),
         name,
