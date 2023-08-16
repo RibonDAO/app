@@ -1,11 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import { Text, View } from "react-native";
-import ArrowLeft from "components/vectors/ArrowLeft";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { Currencies } from "@ribon.io/shared/types";
 import { useCallback, useState } from "react";
+import Icon from "components/atomics/Icon";
+import { theme } from "@ribon.io/shared";
 import CurrencyExchangeIcon from "../../assets/CurrencyExchangeIcon";
 import ModalButtonSelector from "../ModalButtonSelector";
 import S from "./styles";
@@ -19,7 +20,9 @@ export default function Header() {
 
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
 
-  const currencyIndex = Object.values(Currencies).indexOf(currency);
+  const currencyIndex = Object.values(Currencies).indexOf(
+    currency?.toUpperCase() as Currencies,
+  );
 
   const { popNavigation } = useNavigation();
 
@@ -42,7 +45,7 @@ export default function Header() {
       <ModalButtonSelector
         title={t("selectCurrency")}
         key="currencyModal"
-        current={currencyIndex}
+        current={currencyIndex ?? 0}
         setCurrentIndex={setCurrencyByIndex}
         items={buttonCurrencyItems}
         visible={currencyModalVisible}
@@ -54,7 +57,12 @@ export default function Header() {
         onPress={popNavigation}
         style={S.backButton}
       >
-        <ArrowLeft />
+        <Icon
+          type="outlined"
+          name="arrow_back"
+          size={20}
+          color={theme.colors.brand.primary[900]}
+        />
       </TouchableOpacity>
       <TouchableOpacity
         accessibilityRole="button"

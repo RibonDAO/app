@@ -46,6 +46,7 @@ import NonProfitsProvider from "contexts/nonProfitsContext";
 import IntegrationProvider, {
   useIntegrationContext,
 } from "contexts/integrationContext";
+import RecurrenceScreen from "screens/promoters/RecurrenceScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -232,6 +233,14 @@ function RootNavigator() {
       <Stack.Screen
         name="CheckoutScreen"
         component={CheckoutScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="RecurrenceScreen"
+        component={RecurrenceScreen}
         options={{
           headerShown: false,
         }}

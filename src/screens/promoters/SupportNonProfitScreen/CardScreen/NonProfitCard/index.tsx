@@ -6,7 +6,6 @@ import { useCardPaymentInformation } from "contexts/cardPaymentInformationContex
 import { useNonProfitImpact } from "@ribon.io/shared/hooks";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
 import S from "../../styles";
 
 type Props = {
