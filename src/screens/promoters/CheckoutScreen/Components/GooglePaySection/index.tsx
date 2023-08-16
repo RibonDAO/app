@@ -10,6 +10,7 @@ import storePayApi from "services/api/storePayApi";
 import InputText from "components/atomics/inputs/InputText";
 import { useTranslation } from "react-i18next";
 import { useIntegrationContext } from "contexts/integrationContext";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 
 type Props = {
@@ -31,6 +32,10 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
     keyPrefix: "promoters.checkoutScreen.paymentMethodSection.creditCardFields",
   });
   const testEnv = false;
+
+  useEffect(() => {
+    logEvent("selectGooglePay_click");
+  }, []);
 
   const initialize = async () => {
     if (!(await isGooglePaySupported({ testEnv }))) return;

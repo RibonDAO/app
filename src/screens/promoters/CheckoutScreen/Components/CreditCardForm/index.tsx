@@ -17,6 +17,7 @@ import {
   countryByLanguage,
   countryCodeByLanguage,
 } from "lib/countryByLanguage";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 
 export type Props = {
@@ -56,6 +57,10 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
     setEmail,
   } = useCardPaymentInformation();
   const [maskedTaxId, setMaskedTaxId] = useState("999.999.999-99");
+
+  useEffect(() => {
+    logEvent("selectCreditCard_click");
+  }, []);
 
   useEffect(() => {
     setButtonDisabled(
