@@ -7,7 +7,10 @@ import { useNavigation } from "hooks/useNavigation";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { logError } from "services/crashReport";
 import storePayApi from "services/api/storePayApi";
+import InputText from "components/atomics/inputs/InputText";
+import { useTranslation } from "react-i18next";
 import { useIntegrationContext } from "contexts/integrationContext";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 
 type Props = {
@@ -24,7 +27,15 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { isGooglePaySupported, initGooglePay, createGooglePayPaymentMethod } =
     useGooglePay();
   const [initialized, setInitialized] = useState(false);
+  const [taxId, setTaxId] = useState("");
+  const { t: field } = useTranslation("translation", {
+    keyPrefix: "promoters.checkoutScreen.paymentMethodSection.creditCardFields",
+  });
   const testEnv = false;
+
+  useEffect(() => {
+    logEvent("selectGooglePay_click");
+  }, []);
 
   const initialize = async () => {
     if (!(await isGooglePaySupported({ testEnv }))) return;
@@ -53,6 +64,8 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
     initialize();
   }, []);
 
+  const showFiscalFields = () => offer.gateway === "stripe";
+
   const createPaymentMethod = async () => {
     showLoadingOverlay();
     const { error, paymentMethod } = await createGooglePayPaymentMethod({
@@ -72,6 +85,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         paymentMethodId: paymentMethod.id,
         email,
         name,
+        taxId,
         country: address?.country,
         city: address?.city,
         state: address?.state,
@@ -98,10 +112,28 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
     setInitialized(false);
   };
 
+  const googlePayButtonDisabled = () => showFiscalFields() && taxId.length < 14;
+
   return (
     <View>
+      {showFiscalFields() && (
+        <InputText
+          name="taxId"
+          placeholder={field("taxId")}
+          mask="999.999.999-99"
+          value={taxId}
+          onChangeText={(value) => setTaxId(value)}
+          maxLength={14}
+          keyboardType="numeric"
+          style={{ display: "flex", flex: 1 }}
+        />
+      )}
       {initialized && (
-        <GooglePayButton onPress={createPaymentMethod} style={S.payButton} />
+        <GooglePayButton
+          onPress={createPaymentMethod}
+          style={S.payButton}
+          disabled={googlePayButtonDisabled()}
+        />
       )}
     </View>
   );

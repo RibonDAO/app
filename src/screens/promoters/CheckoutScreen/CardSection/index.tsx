@@ -148,6 +148,10 @@ export default function CardSection() {
   }));
 
   const handlePayment = () => {
+    logEvent("confirmPaymentFormBtn_click", {
+      target,
+      targetId,
+    });
     handleSubmit();
   };
 
