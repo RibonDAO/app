@@ -28,7 +28,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { t: field } = useTranslation("translation", {
     keyPrefix: "promoters.checkoutScreen.paymentMethodSection.creditCardFields",
   });
-  const testEnv = true;
+  const testEnv = false;
 
   const initialize = async () => {
     if (!(await isGooglePaySupported({ testEnv }))) return;
