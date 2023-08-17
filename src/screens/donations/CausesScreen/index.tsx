@@ -37,6 +37,7 @@ import { useCausesContext } from "contexts/causesContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import useDevice from "hooks/apiHooks/useDevice";
 import { useIntegrationContext } from "contexts/integrationContext";
+import { useCauseDonationContext } from "contexts/causesDonationContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
 
@@ -50,6 +51,8 @@ export default function CausesScreen() {
   const { nonProfitsWithPoolBalance: nonProfits, isLoading } =
     useNonProfitsContext();
   const { causesWithPoolBalance: causes } = useCausesContext();
+  const { chosenCause, setChosenCauseIndex, setChosenCause, chosenCauseIndex } =
+    useCauseDonationContext();
   const { currentIntegrationId } = useIntegrationContext();
   const {
     canDonate,
@@ -62,7 +65,6 @@ export default function CausesScreen() {
     isLoading: loadingFirstAccessToIntegration,
   } = useFirstAccessToIntegration(currentIntegrationId);
 
-  const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
   const [currentNonProfit, setCurrentNonProfit] = useState<NonProfit>(
@@ -127,7 +129,13 @@ export default function CausesScreen() {
   };
 
   const handleCauseChange = (_element: any, index: number) => {
-    setSelectedButtonIndex(index);
+    const cause = _element;
+    setChosenCauseIndex(index);
+    if (cause.id !== 0) {
+      setChosenCause(cause);
+    } else {
+      setChosenCause(undefined);
+    }
 
     if (scrollViewRef.current) {
       scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
@@ -135,15 +143,30 @@ export default function CausesScreen() {
   };
 
   const nonProfitsFilter = () => {
-    if (selectedButtonIndex === 0) return nonProfits || [];
+    if (chosenCause) {
+      const nonProfitsFiltered = nonProfits?.filter(
+        (nonProfit) => nonProfit?.cause?.id === chosenCause?.id,
+      );
 
-    const nonProfitsFiltered = nonProfits?.filter(
-      (nonProfit) =>
-        nonProfit?.cause?.id === causesFilter()[selectedButtonIndex]?.id,
-    );
-
-    return nonProfitsFiltered || [];
+      return nonProfitsFiltered || [];
+    }
+    return nonProfits || [];
   };
+
+  const sortNonProfits = () => {
+    const filteredNonProfits = nonProfitsFilter();
+    const sorted = [...filteredNonProfits].sort((a, b) => {
+      const causeAIndex = causes.findIndex((cause) => cause.id === a.cause.id);
+      const causeBIndex = causes.findIndex((cause) => cause.id === b.cause.id);
+
+      return causeAIndex - causeBIndex;
+    });
+    return sorted;
+  };
+
+  useEffect(() => {
+    sortNonProfits();
+  }, [chosenCause]);
 
   const handleNonProfitImagePress = async (nonProfit: NonProfit) => {
     setCurrentNonProfit(nonProfit);
@@ -242,18 +265,19 @@ export default function CausesScreen() {
             elements={causesFilter()}
             onChange={handleCauseChange}
             nameExtractor={(cause) => cause.name}
+            indexSelected={chosenCauseIndex}
           />
         </ScrollView>
       </View>
 
-      {nonProfitsFilter()?.length > 0 ? (
+      {sortNonProfits()?.length > 0 ? (
         <ScrollView
           style={S.causesContainer}
           horizontal
           showsHorizontalScrollIndicator={false}
           ref={scrollViewRef}
         >
-          {nonProfitsFilter()?.map((nonProfit, index) => (
+          {sortNonProfits()?.map((nonProfit, index) => (
             <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
               <CardCenterImageButton
                 image={nonProfit.mainImage}
