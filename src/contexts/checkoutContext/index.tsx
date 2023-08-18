@@ -4,11 +4,11 @@ import { Currencies } from "types/enums/Currencies";
 export interface ICheckoutContext {
   target?: string;
   targetId?: string;
-  offer?: number;
+  offerPrice?: number;
   currency: Currencies;
   setTarget: (target: string) => void;
   setTargetId: (targetId: string) => void;
-  setOffer: (offer: number) => void;
+  setOfferPrice: (offerPrice: number) => void;
   setCurrency: (currency: Currencies) => void;
 }
 
@@ -23,21 +23,21 @@ export const CheckoutContext = createContext<ICheckoutContext>(
 function CheckoutProvider({ children }: Props) {
   const [target, setTarget] = useState<string>();
   const [targetId, setTargetId] = useState<string>();
-  const [offer, setOffer] = useState<number>();
+  const [offerPrice, setOfferPrice] = useState<number>();
   const [currency, setCurrency] = useState<Currencies>(Currencies.USD);
 
   const checkoutObject: ICheckoutContext = useMemo(
     () => ({
       target,
       targetId,
-      offer,
+      offerPrice,
       currency,
       setTarget,
       setTargetId,
-      setOffer,
+      setOfferPrice,
       setCurrency,
     }),
-    [target, targetId, offer, currency],
+    [target, targetId, offerPrice, currency],
   );
 
   return (

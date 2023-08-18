@@ -33,7 +33,8 @@ export default function CardSection() {
   // const { isApplePaySupported } = useApplePay();
   const { isGooglePaySupported } = useGooglePay();
 
-  const { target, targetId, currency, setOffer, offer } = useCheckoutContext();
+  const { target, targetId, currency, setOfferPrice, offerPrice } =
+    useCheckoutContext();
   const {
     handleSubmit,
     setOfferId,
@@ -66,7 +67,7 @@ export default function CardSection() {
     isSubscription,
   );
 
-  const resetOffer = () => setOffer(offers[0].priceCents);
+  const resetOffer = () => setOfferPrice(offers[0].priceCents);
 
   useEffect(() => {
     resetStates();
@@ -77,16 +78,16 @@ export default function CardSection() {
   }, []);
 
   useEffect(() => {
-    if (offers && offer !== undefined && !isLoadingOffers) {
+    if (offers && offerPrice !== undefined && !isLoadingOffers) {
       const actualOffer = offers.find(
-        (item: Offer) => item.priceCents === offer,
+        (item: Offer) => item.priceCents === offerPrice,
       );
 
       setCurrentOffer(actualOffer);
 
       if (!actualOffer) resetOffer();
     }
-  }, [offers, offer, isLoadingOffers, isSubscription]);
+  }, [offers, offerPrice, isLoadingOffers]);
 
   useEffect(() => {
     refetchOffers();
@@ -94,14 +95,14 @@ export default function CardSection() {
 
   useEffect(() => {
     if (offerParam != null) {
-      setOffer(offerParam);
+      setOfferPrice(offerParam);
     }
   }, [offerParam]);
 
   useEffect(() => {
     if (offers && currentIndex !== undefined && !isLoadingOffers) {
       const actualOffer = offers[currentIndex];
-      setOffer(actualOffer?.priceCents ?? offers[0].priceCents);
+      setOfferPrice(actualOffer?.priceCents ?? offers[0].priceCents);
     }
   }, [currentIndex, offers, isLoadingOffers]);
 
@@ -139,7 +140,7 @@ export default function CardSection() {
     const offerChanged = offers?.find(
       (item: Offer) => item.priceCents === offerItem.priceCents,
     );
-    setOffer(offerChanged?.priceCents ?? offers[0].priceCents);
+    setOfferPrice(offerChanged?.priceCents ?? offers[0].priceCents);
   };
 
   const buttonOfferItems = offers?.map((offerItem) => ({
@@ -173,7 +174,7 @@ export default function CardSection() {
       <ModalButtonSelector
         title={t("selectValue")}
         key="offerModal"
-        current={offers.findIndex((item) => item.priceCents === offer)}
+        current={offers.findIndex((item) => item.priceCents === offerPrice)}
         setCurrentIndex={setCurrentIndex}
         items={buttonOfferItems}
         visible={offersModalVisible}
@@ -213,12 +214,14 @@ export default function CardSection() {
         />
       </View>
 
-      <Text style={S.accordionTitle}>{t("payment")}</Text>
+      <Text style={S.accordionTitle}>
+        {isSubscription ? t("subscription") : t("payment")}
+      </Text>
       <RadioAccordion
         items={[
           {
             title: t("paymentMethodSection.creditCard"),
-            children: (
+            children: currentOffer && (
               <CreditCardForm
                 onSubmit={handlePayment}
                 showFiscalFields={currentOffer?.gateway === "stripe"}
@@ -228,7 +231,7 @@ export default function CardSection() {
           },
           {
             title: t("paymentMethodSection.googlePay"),
-            children: (
+            children: currentOffer && (
               <View>
                 <GooglePaySection
                   offer={currentOffer as Offer}
@@ -242,7 +245,7 @@ export default function CardSection() {
           },
           {
             title: t("paymentMethodSection.applePay"),
-            children: (
+            children: currentOffer && (
               <View>
                 <ApplePaySection
                   offer={currentOffer as Offer}
