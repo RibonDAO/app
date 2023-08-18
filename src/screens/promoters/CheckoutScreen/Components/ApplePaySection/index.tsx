@@ -72,7 +72,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         country: address?.country,
         city: address?.city,
         state: address?.state,
-        integration: currentIntegrationId,
+        integrationId: currentIntegrationId,
         causeId: cause?.id,
         nonProfitId: nonProfit?.id,
         paymentMethodType: "apple_pay",
