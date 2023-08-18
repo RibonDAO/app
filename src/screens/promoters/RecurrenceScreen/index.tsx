@@ -34,9 +34,9 @@ export default function RecurrenceScreen() {
   const {
     target,
     targetId,
-    offer,
+    offerPrice,
     currency,
-    setOffer,
+    setOfferPrice,
     setTarget,
     setTargetId,
     setCurrency,
@@ -63,7 +63,7 @@ export default function RecurrenceScreen() {
 
   useEffect(() => {
     if (offerParam != null) {
-      setOffer(offerParam);
+      setOfferPrice(offerParam);
     }
   }, [offerParam]);
 
@@ -86,27 +86,27 @@ export default function RecurrenceScreen() {
   useEffect(() => {
     if (offers && currentIndex !== undefined && !isLoadingOffers) {
       const actualOffer = offers[currentIndex];
-      setOffer(actualOffer.priceCents);
+      setOfferPrice(actualOffer.priceCents);
     }
   }, [currentIndex]);
 
-  const resetOffer = () => setOffer(offers[0].priceCents);
+  const resetOffer = () => setOfferPrice(offers[0].priceCents);
 
   useEffect(() => {
-    if (offers && offer !== undefined && !isLoadingOffers) {
+    if (offers && offerPrice !== undefined && !isLoadingOffers) {
       const actualOffer = offers.find(
-        (item: Offer) => item.priceCents === offer,
+        (item: Offer) => item.priceCents === offerPrice,
       );
       setCurrentOffer(actualOffer);
       if (!actualOffer) resetOffer();
     }
-  }, [offers, offer, isLoadingOffers]);
+  }, [offers, offerPrice, isLoadingOffers]);
 
   const handleOfferChange = (offerItem: any) => {
     const offerChanged = offers?.find(
       (item: Offer) => item.priceCents === offerItem.priceCents,
     );
-    setOffer(offerChanged?.priceCents ?? 0);
+    setOfferPrice(offerChanged?.priceCents ?? 0);
   };
 
   const buttonOfferItems = offers?.map((offerItem: any) => ({
@@ -167,7 +167,9 @@ export default function RecurrenceScreen() {
             <ModalButtonSelector
               title={t("selectValue")}
               key="offerModal"
-              current={offers.findIndex((item) => item.priceCents === offer)}
+              current={offers.findIndex(
+                (item) => item.priceCents === offerPrice,
+              )}
               setCurrentIndex={setCurrentIndex}
               items={buttonOfferItems}
               visible={offersModalVisible}
@@ -185,7 +187,6 @@ export default function RecurrenceScreen() {
               />
             )}
             <View>
-              <Text style={S.pageTitle}>{t("title")}</Text>
               <LinkAccordion items={linksItems} />
             </View>
           </View>
