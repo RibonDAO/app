@@ -27,13 +27,13 @@ function CheckoutScreen(): JSX.Element {
     currency: currencyParam,
   } = params;
 
-  const { setTarget, setTargetId, setCurrency, currency, setOffer } =
+  const { setTarget, setTargetId, setCurrency, currency, setOfferPrice } =
     useCheckoutContext();
 
   useEffect(() => {
     if (targetIdParam) setTargetId(targetIdParam);
     if (targetParam) setTarget(targetParam);
-    if (offerParam != null) setOffer(offerParam);
+    if (offerParam != null) setOfferPrice(offerParam);
     if (currencyParam) setCurrency(currencyParam);
   }, [targetParam, currencyParam, targetParam, offerParam]);
 

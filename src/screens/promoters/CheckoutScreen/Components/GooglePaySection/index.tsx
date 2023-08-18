@@ -89,7 +89,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         country: address?.country,
         city: address?.city,
         state: address?.state,
-        currentIntegrationId,
+        integrationId: currentIntegrationId,
         causeId: cause?.id,
         nonProfitId: nonProfit?.id,
         paymentMethodType: "google_pay",

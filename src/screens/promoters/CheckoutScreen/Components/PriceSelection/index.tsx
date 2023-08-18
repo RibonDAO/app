@@ -28,7 +28,9 @@ function PriceSelection({
   );
 
   const price = currentOffer?.price || `${tokenSymbol} ${priceValue}`;
-  const hasAdditionalTaxes = currentOffer?.currency === "usd";
+  const hasAdditionalTaxes =
+    currentOffer?.gateway === "stripe_global" &&
+    currentOffer?.currency === "brl";
   const isCrypto = tokenSymbol && priceValue && !currentOffer;
 
   const renderGivingFees = () => {
@@ -46,7 +48,7 @@ function PriceSelection({
             {cardGivingFees?.serviceFees}
           </Text>
         </View>
-        {!hasAdditionalTaxes && (
+        {hasAdditionalTaxes && (
           <Text style={S.infoText}>{t("additionalFeesText")}</Text>
         )}
       </>
