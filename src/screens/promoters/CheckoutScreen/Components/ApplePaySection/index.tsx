@@ -12,6 +12,11 @@ import { useTasksContext } from "contexts/tasksContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { useIntegrationContext } from "contexts/integrationContext";
+import { showToast } from "lib/Toast";
+import { useIntegration, useSources, useUsers } from "@ribon.io/shared";
+import { useTranslation } from "react-i18next";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { normalizedLanguage } from "lib/currentLanguage";
 import S from "./styles";
 
 type Props = {
@@ -48,6 +53,34 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
     useApplePay();
   const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "contexts.cardPaymentInformation",
+  });
+
+  const { findOrCreateUser } = useUsers();
+  const { signedIn, setCurrentUser } = useCurrentUser();
+  const { createSource } = useSources();
+  const { currentUser } = useCurrentUser();
+  const { integration } = useIntegration(currentIntegrationId);
+  const [email, setEmail] = useState(currentUser?.email ?? undefined);
+
+  useEffect(() => {
+    if (currentUser) setEmail(currentUser.email);
+  }, [JSON.stringify(currentUser)]);
+
+  const login = async () => {
+    if (!signedIn) {
+      const user = await findOrCreateUser(
+        email ?? "",
+        await normalizedLanguage(),
+      );
+      if (integration) {
+        createSource(user.id, integration.id);
+      }
+      setCurrentUser(user);
+    }
+  };
+
   const pay = async () => {
     showLoadingOverlay();
     const { error, paymentMethod } = await presentApplePay({
@@ -62,12 +95,13 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
     if (error) {
       hideLoadingOverlay();
     } else if (paymentMethod) {
-      const { email, name, address } = paymentMethod.billingDetails;
+      const { email: APayEmail, name, address } = paymentMethod.billingDetails;
+      login();
 
       const data = {
         offerId: offer.id,
         paymentMethodId: paymentMethod.id,
-        email,
+        email: email ?? APayEmail,
         name,
         country: address?.country,
         city: address?.city,
@@ -89,6 +123,10 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         });
       } catch (e) {
         logError(e);
+        showToast({
+          type: "error",
+          message: t("onErrorMessage", "error"),
+        });
       } finally {
         hideLoadingOverlay();
       }

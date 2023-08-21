@@ -168,7 +168,8 @@
       "walletConnectionErrorMessage": "Error connecting wallet"
     },
     "cardPaymentInformation": {
-      "successMessage": "You have successfully donated to this cause!"
+      "successMessage": "You have successfully donated to this cause!",
+      "onErrorMessage": "Payment failed. Try again."
     },
     "tasksContext": {
       "allTasksCompleted": "You completed all tasks!"

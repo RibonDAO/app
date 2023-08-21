@@ -11,6 +11,10 @@ import InputText from "components/atomics/inputs/InputText";
 import { useTranslation } from "react-i18next";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { logEvent } from "services/analytics";
+import { showToast } from "lib/Toast";
+import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { normalizedLanguage } from "lib/currentLanguage";
 import S from "./styles";
 
 type Props = {
@@ -21,7 +25,6 @@ type Props = {
 export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { registerAction } = useTasksContext();
   const { currentIntegrationId } = useIntegrationContext();
-
   const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const { isGooglePaySupported, initGooglePay, createGooglePayPaymentMethod } =
@@ -31,6 +34,18 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { t: field } = useTranslation("translation", {
     keyPrefix: "promoters.checkoutScreen.paymentMethodSection.creditCardFields",
   });
+
+  const { t } = useTranslation("translation", {
+    keyPrefix: "contexts.cardPaymentInformation",
+  });
+
+  const { findOrCreateUser } = useUsers();
+  const { signedIn, setCurrentUser } = useCurrentUser();
+  const { createSource } = useSources();
+  const { currentUser } = useCurrentUser();
+  const { integration } = useIntegration(currentIntegrationId);
+  const [email, setEmail] = useState(currentUser?.email ?? undefined);
+
   const testEnv = false;
 
   useEffect(() => {
@@ -66,6 +81,23 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
 
   const showFiscalFields = () => offer.gateway === "stripe";
 
+  useEffect(() => {
+    if (currentUser) setEmail(currentUser.email);
+  }, [JSON.stringify(currentUser)]);
+
+  const login = async () => {
+    if (!signedIn) {
+      const user = await findOrCreateUser(
+        email ?? "",
+        await normalizedLanguage(),
+      );
+      if (integration) {
+        createSource(user.id, integration.id);
+      }
+      setCurrentUser(user);
+    }
+  };
+
   const createPaymentMethod = async () => {
     showLoadingOverlay();
     const { error, paymentMethod } = await createGooglePayPaymentMethod({
@@ -76,14 +108,15 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
     if (error) {
       logError(error);
       hideLoadingOverlay();
-      return;
     } else if (paymentMethod) {
-      const { email, name, address } = paymentMethod.billingDetails;
+      const { email: GPayEmail, name, address } = paymentMethod.billingDetails;
+
+      login();
 
       const data = {
         offerId: offer.id,
         paymentMethodId: paymentMethod.id,
-        email,
+        email: email ?? GPayEmail,
         name,
         taxId,
         country: address?.country,
@@ -97,6 +130,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
 
       try {
         await storePayApi.postStorePay(data);
+
         registerAction("contribution_done_screen_view");
 
         navigateTo("ContributionDoneScreen", {
@@ -105,11 +139,14 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         });
       } catch (e) {
         logError(e);
+        showToast({
+          type: "error",
+          message: t("onErrorMessage", "error"),
+        });
       } finally {
         hideLoadingOverlay();
       }
     }
-    setInitialized(false);
   };
 
   const googlePayButtonDisabled = () => showFiscalFields() && taxId.length < 14;
