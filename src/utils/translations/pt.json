@@ -168,7 +168,8 @@
       "walletConnectionErrorMessage": "Erro ao conectar carteira"
     },
     "cardPaymentInformation": {
-      "successMessage": "Você doou com sucesso para a causa!"
+      "successMessage": "Você doou com sucesso para a causa!",
+      "onErrorMessage": "Falha no pagamento. Tente novamente."
     },
     "tasksContext": {
       "allTasksCompleted": "Você completou todas as tarefas!"
