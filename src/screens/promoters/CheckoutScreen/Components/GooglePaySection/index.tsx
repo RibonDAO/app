@@ -15,6 +15,7 @@ import { showToast } from "lib/Toast";
 import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { normalizedLanguage } from "lib/currentLanguage";
+import { PLATFORM } from "utils/constants/Application";
 import S from "./styles";
 
 type Props = {
@@ -126,6 +127,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         causeId: cause?.id,
         nonProfitId: nonProfit?.id,
         paymentMethodType: "google_pay",
+        platform: PLATFORM,
       };
 
       try {
