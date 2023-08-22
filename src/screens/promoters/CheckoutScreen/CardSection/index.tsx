@@ -67,7 +67,10 @@ export default function CardSection() {
     isSubscription,
   );
 
-  const resetOffer = () => setOfferPrice(offers[0].priceCents);
+  const resetOffer = () => {
+    setOfferPrice(offers[0].priceCents);
+    setCurrentOffer(offers[0]);
+  };
 
   useEffect(() => {
     resetStates();
