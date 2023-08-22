@@ -187,6 +187,7 @@ export default function RecurrenceScreen() {
               />
             )}
             <View>
+              <Text style={S.pageTitle}>{t("title")}</Text>
               <LinkAccordion items={linksItems} />
             </View>
           </View>
