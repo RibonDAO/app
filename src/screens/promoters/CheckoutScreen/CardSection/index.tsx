@@ -217,9 +217,7 @@ export default function CardSection() {
         />
       </View>
 
-      <Text style={S.accordionTitle}>
-        {isSubscription ? t("subscription") : t("payment")}
-      </Text>
+      <Text style={S.accordionTitle}>{t("payment")}</Text>
       <RadioAccordion
         items={[
           {
