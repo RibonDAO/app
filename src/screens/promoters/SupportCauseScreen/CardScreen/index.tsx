@@ -56,7 +56,7 @@ function CardScreen(): JSX.Element {
   };
 
   const handleDonateClick = () => {
-    if (Platform.OS === "ios") {
+    if (Platform.OS === "ios" && false) {
       const url = `https://dapp.ribon.io/promoters/recurrence?target=cause&target_id=${cause?.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}`;
       Linking.openURL(url);
     } else {

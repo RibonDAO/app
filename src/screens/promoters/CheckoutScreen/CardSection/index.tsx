@@ -15,6 +15,7 @@ import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared/styles";
 import { defaultBodyXsSemibold } from "styles/typography/default";
 import RadioAccordion from "components/moleculars/RadioAccordion";
+import PixSection from "screens/promoters/CheckoutScreen/Components/PixSection";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
@@ -224,6 +225,16 @@ export default function CardSection() {
             title: t("paymentMethodSection.creditCard"),
             children: currentOffer && (
               <CreditCardForm
+                onSubmit={handlePayment}
+                showFiscalFields={currentOffer?.gateway === "stripe"}
+              />
+            ),
+            rightIcon: <CreditCardIcon />,
+          },
+          {
+            title: t("paymentMethodSection.pix"),
+            children: currentOffer && (
+              <PixSection
                 onSubmit={handlePayment}
                 showFiscalFields={currentOffer?.gateway === "stripe"}
               />

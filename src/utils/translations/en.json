@@ -262,6 +262,7 @@
         "creditCard": "Credit card",
         "googlePay": "Google Pay",
         "applePay": "Apple Pay",
+        "pix": "Pix",
         "creditCardFields": {
           "email": "E-mail",
           "country": "Country",
