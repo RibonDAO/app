@@ -106,6 +106,7 @@ export type RootStackParamList = {
   OnboardingScreen: undefined;
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
+  MonthlyContributionsScreen: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

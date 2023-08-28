@@ -242,6 +242,17 @@
       "uniqueDonationDescription": "Contribuir uma vez",
       "selectValue": "Selecione o valor"
     },
+    "monthlyContributionsScreen": {
+      "title": "Contribuições mensais",
+      "to": "Para ",
+      "nextContribution": "Próxima contribuição em ",
+      "cancelContributionModal": {
+        "title": "Cancelar contribuição mensal",
+        "description": "Para efetuar o processo, confirme o cancelamento da contribuição mensal pelo e-mail que enviaremos para você.",
+        "cancelButton": "Receber e-mail de cancelamento",
+        "closeButton": "Fechar"
+      }
+    },
     "checkoutScreen": {
       "changeCurrency": "Mudar moeda",
       "back": "Voltar",

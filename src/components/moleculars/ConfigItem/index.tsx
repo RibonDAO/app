@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import S from "./styles";
 
 type Props = {
-  icon: () => JSX.Element;
+  icon: any;
   text: string;
   linkIcon?: () => JSX.Element;
   cta?: JSX.Element;

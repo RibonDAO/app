@@ -24,6 +24,8 @@ import ButtonSwitch from "components/atomics/buttons/ButtonSwitch";
 import { isNotificationsEnabled } from "lib/notifications";
 import { useFocusEffect } from "@react-navigation/native";
 import { logEvent } from "services/analytics";
+import { useSubscriptions } from "@ribon.io/shared/hooks";
+import VolunteerActivism from "components/vectors/VolunteerActivism";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
@@ -57,6 +59,8 @@ function LayoutHeader({
     : theme.colors.neutral[500];
   const ticketIcon = hasTickets() ? <TicketIcon /> : <GrayTicketIcon />;
   const { connectWallet, wallet, killSession } = useWalletContext();
+  const { userSubscriptions } = useSubscriptions();
+  const { subscriptions } = userSubscriptions();
 
   useEffect(() => {
     if (menuVisible) logEvent("P18_view");
@@ -144,6 +148,20 @@ function LayoutHeader({
     } else {
       toggleBlockedDonationModal();
     }
+  };
+
+  const handleMonthlyContributionClick = () => {
+    logEvent("manageSubscription_click", {
+      from: "configPage",
+    });
+
+    if (subscriptions?.length === 0 || !subscriptions) {
+      navigateTo("SupportCauseScreen");
+    } else {
+      navigateTo("MonthlyContributionsScreen");
+    }
+
+    return navigateTo("MonthlyContributionsScreen");
   };
 
   const linkToSupport = () => {
@@ -239,6 +257,21 @@ function LayoutHeader({
           icon={GlobeIcon}
           text={t("language")}
           linkIcon={ChangeLanguageItem}
+        />
+
+        <ConfigItem
+          icon={VolunteerActivism}
+          text={t("monthlyContributions")}
+          onPress={handleMonthlyContributionClick}
+          cta={
+            <Icon
+              type="rounded"
+              size={20}
+              color={theme.colors.brand.primary[300]}
+              name="arrow_forward_ios"
+              onPress={handleMonthlyContributionClick}
+            />
+          }
         />
 
         <ConfigItem

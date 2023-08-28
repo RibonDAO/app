@@ -47,6 +47,7 @@ import IntegrationProvider, {
   useIntegrationContext,
 } from "contexts/integrationContext";
 import RecurrenceScreen from "screens/promoters/RecurrenceScreen";
+import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -269,6 +270,18 @@ function RootNavigator() {
       <Stack.Screen
         name="ContributionStatsScreen"
         component={ContributionStatsScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
+          headerBackTitleVisible: true,
+          headerBackTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="MonthlyContributionsScreen"
+        component={MonthlyContributionsScreen}
         options={{
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
