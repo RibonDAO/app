@@ -3,9 +3,11 @@ import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { View, Text } from "react-native";
 import { useCurrentUser } from "contexts/currentUserContext";
 import Subscription from "@ribon.io/shared/types/entities/Subscription";
-import React from "react";
+import React, { useState } from "react";
 import Icon from "components/atomics/Icon";
+
 import S from "./styles";
+import CancelContributionModal from "./CancelContributionModal";
 
 export default function MonthlyContributionsScreen(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -16,6 +18,11 @@ export default function MonthlyContributionsScreen(): JSX.Element {
 
   const { userSubscriptions } = useSubscriptions();
   const { subscriptions } = userSubscriptions(currentUser?.id);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleCancelContribution = () => {
+    setModalVisible(!modalVisible);
+  };
 
   return (
     <View style={S.container}>
@@ -25,7 +32,12 @@ export default function MonthlyContributionsScreen(): JSX.Element {
           <View style={S.card}>
             <View style={S.iconTextContainer}>
               <Text style={S.amount}>{subscription.offer.price}</Text>
-              <Icon type="outlined" name="cancel" size={24} />
+              <Icon
+                type="outlined"
+                name="cancel"
+                size={24}
+                onPress={handleCancelContribution}
+              />
             </View>
             <Text style={S.text}>
               {t("to")}
@@ -39,6 +51,13 @@ export default function MonthlyContributionsScreen(): JSX.Element {
                 {new Date(subscription.createdAt).toLocaleDateString()}
               </Text>
             </Text>
+            {modalVisible && (
+              <CancelContributionModal
+                setVisible={setModalVisible}
+                visible={modalVisible}
+                contributionId={subscription.id}
+              />
+            )}
           </View>
         ))}
       </View>

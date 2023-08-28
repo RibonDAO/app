@@ -1,10 +1,11 @@
 import ModalDialog from "components/moleculars/modals/ModalDialog";
+import { showToast } from "lib/Toast";
 import { useTranslation } from "react-i18next";
 
 type Props = {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-  contributionId: string;
+  contributionId: string | number;
 };
 
 function CancelContributionModal({
@@ -12,13 +13,19 @@ function CancelContributionModal({
   setVisible,
   contributionId,
 }: Props): JSX.Element {
-  const dispose = () => {
-    setVisible(false);
-  };
-
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.monthlyContributionsScreen.cancelContributionModal",
   });
+
+  const dispose = () => {
+    setVisible(false);
+
+    showToast({
+      type: "success",
+      message: t("sendEmail"),
+      position: "bottom",
+    });
+  };
 
   const deletionDialogProps = {
     title: t("title"),

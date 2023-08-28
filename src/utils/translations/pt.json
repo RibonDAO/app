@@ -8,6 +8,7 @@
   "layoutHeader": {
     "exitButton": "Sair",
     "support": "Suporte ao usuário",
+    "monthlyContributions": "Contribuições mensais",
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0",
     "login": "Fazer login",
     "notifications": "Ativar notificações",
@@ -250,7 +251,8 @@
         "title": "Cancelar contribuição mensal",
         "description": "Para efetuar o processo, confirme o cancelamento da contribuição mensal pelo e-mail que enviaremos para você.",
         "cancelButton": "Receber e-mail de cancelamento",
-        "closeButton": "Fechar"
+        "closeButton": "Fechar",
+        "sendEmail": "Enviamos um e-mail para você."
       }
     },
     "checkoutScreen": {
