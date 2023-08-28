@@ -1,4 +1,4 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
   stylizedDisplayLg,
@@ -53,9 +53,10 @@ const styles = StyleSheet.create({
     ...defaultBodySmSemibold,
     color: theme.colors.brand.primary[600],
   },
-  keyboardView: {
-    height:
-      Platform.OS === "android" ? Dimensions.get("window").height : "100%",
+  iconContainer: {
+    backgroundColor: theme.colors.feedback.error[600],
+    borderRadius: 4,
+    padding: 4,
   },
 });
 

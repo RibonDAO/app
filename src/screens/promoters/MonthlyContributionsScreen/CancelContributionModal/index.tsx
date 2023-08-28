@@ -1,6 +1,9 @@
+import { useSubscriptions } from "@ribon.io/shared/hooks";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
 import { showToast } from "lib/Toast";
 import { useTranslation } from "react-i18next";
+import { logEvent } from "services/analytics";
+import { logError } from "services/crashReport";
 
 type Props = {
   visible: boolean;
@@ -17,14 +20,28 @@ function CancelContributionModal({
     keyPrefix: "promoters.monthlyContributionsScreen.cancelContributionModal",
   });
 
-  const dispose = () => {
-    setVisible(false);
+  const { sendCancelSubscriptionEmail } = useSubscriptions();
 
-    showToast({
-      type: "success",
-      message: t("sendEmail"),
-      position: "bottom",
-    });
+  const handleCancelSubscription = async () => {
+    if (!contributionId) {
+      return;
+    }
+
+    logEvent("cancelSubs_click");
+    try {
+      const response = await sendCancelSubscriptionEmail(contributionId);
+      if (response) {
+        showToast({
+          type: "success",
+          message: t("sendEmail"),
+          position: "bottom",
+        });
+      }
+    } catch (error) {
+      logError(error);
+    } finally {
+      setVisible(false);
+    }
   };
 
   const deletionDialogProps = {
@@ -34,11 +51,11 @@ function CancelContributionModal({
     type: "error",
     primaryButton: {
       text: t("cancelButton"),
-      onPress: dispose,
+      onPress: handleCancelSubscription,
     },
     secondaryButton: {
       text: t("closeButton"),
-      onPress: dispose,
+      onPress: () => setVisible(false),
     },
   };
 

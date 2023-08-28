@@ -2,9 +2,6 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useCallback, useEffect, useState } from "react";
 import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
-import GlobeIcon from "components/vectors/GlobeIcon";
-import SupportIcon from "components/vectors/SupportIcon";
-import LetterIcon from "components/vectors/LetterIcon";
 import { TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
 import RoundButton from "components/atomics/RoundButton";
@@ -25,7 +22,6 @@ import { isNotificationsEnabled } from "lib/notifications";
 import { useFocusEffect } from "@react-navigation/native";
 import { logEvent } from "services/analytics";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
-import VolunteerActivism from "components/vectors/VolunteerActivism";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
@@ -178,19 +174,15 @@ function LayoutHeader({
     />
   );
 
-  const notificationsIcon = () => (
-    <Icon
-      type="rounded"
-      size={25}
-      color={theme.colors.brand.primary[300]}
-      name="notifications"
-    />
-  );
-
   const renderLogoutConfigItem = () =>
     currentUser && (
       <ConfigItem
-        icon={LetterIcon}
+        icon={{
+          name: "logout",
+          type: "rounded",
+          color: theme.colors.brand.primary[600],
+          size: 24,
+        }}
         text={currentUser.email}
         onPress={handleLogout}
         cta={
@@ -205,38 +197,28 @@ function LayoutHeader({
       />
     );
 
-  const renderDeleteAccountConfigItem = () => {
-    const icon = useCallback(
-      () => (
-        <Icon
-          type="rounded"
-          size={26}
-          color={theme.colors.brand.tertiary[400]}
-          name="delete_forever"
-        />
-      ),
-      [],
+  const renderDeleteAccountConfigItem = () =>
+    currentUser && (
+      <ConfigItem
+        icon={{
+          name: "delete_forever",
+          type: "rounded",
+          color: theme.colors.brand.tertiary[400],
+          size: 24,
+        }}
+        text={t("deleteAccount")}
+        onPress={toggleDeleteAccountModal}
+        last={Boolean(currentUser)}
+        cta={
+          <Icon
+            type="rounded"
+            size={20}
+            color={theme.colors.brand.tertiary[400]}
+            name="arrow_forward_ios"
+          />
+        }
+      />
     );
-
-    return (
-      currentUser && (
-        <ConfigItem
-          icon={icon}
-          text={t("deleteAccount")}
-          onPress={toggleDeleteAccountModal}
-          last={Boolean(currentUser)}
-          cta={
-            <Icon
-              type="rounded"
-              size={20}
-              color={theme.colors.brand.tertiary[400]}
-              name="arrow_forward_ios"
-            />
-          }
-        />
-      )
-    );
-  };
   const renderConfigModal = () => (
     <Modal
       isVisible={menuVisible}
@@ -248,19 +230,34 @@ function LayoutHeader({
     >
       <View style={S.supportContainer}>
         <ConfigItem
-          icon={notificationsIcon}
+          icon={{
+            name: "notifications",
+            type: "rounded",
+            color: theme.colors.brand.primary[600],
+            size: 24,
+          }}
           text={t("notifications")}
           linkIcon={notificationsSwitch}
         />
 
         <ConfigItem
-          icon={GlobeIcon}
+          icon={{
+            name: "language",
+            type: "rounded",
+            color: theme.colors.brand.primary[600],
+            size: 24,
+          }}
           text={t("language")}
           linkIcon={ChangeLanguageItem}
         />
 
         <ConfigItem
-          icon={VolunteerActivism}
+          icon={{
+            name: "volunteer_activism",
+            type: "rounded",
+            color: theme.colors.brand.primary[600],
+            size: 24,
+          }}
           text={t("monthlyContributions")}
           onPress={handleMonthlyContributionClick}
           cta={
@@ -275,7 +272,12 @@ function LayoutHeader({
         />
 
         <ConfigItem
-          icon={SupportIcon}
+          icon={{
+            name: "support_agent",
+            type: "rounded",
+            color: theme.colors.brand.primary[600],
+            size: 24,
+          }}
           text={t("support")}
           onPress={linkToSupport}
           last={!currentUser}
