@@ -44,10 +44,12 @@ function CardScreen(): JSX.Element {
   }, [causes]);
 
   useEffect(() => {
-    logEvent("contributionCardsOrder_view", {
-      nonProfits: orderedNonProfits(),
-      causes: causes?.map((c) => c.name).join(", "),
-    });
+    if (nonProfits && causes) {
+      logEvent("contributionCardsOrder_view", {
+        nonProfits: orderedNonProfits(),
+        causes: causes?.map((c) => c.name).join(", "),
+      });
+    }
   }, [nonProfits, causes]);
 
   const handleCauseClick = (causeClicked: Cause, index: number) => {

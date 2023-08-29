@@ -69,9 +69,11 @@ function CryptoScreen(): JSX.Element {
   }, [cause]);
 
   useEffect(() => {
-    logEvent("contributionCardsOrder_view", {
-      causes: causes?.map((c) => c.name).join(", "),
-    });
+    if (causes) {
+      logEvent("contributionCardsOrder_view", {
+        causes: causes?.map((c) => c.name).join(", "),
+      });
+    }
   }, [causes]);
 
   const resetScreen = () => {

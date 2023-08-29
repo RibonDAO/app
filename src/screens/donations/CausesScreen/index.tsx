@@ -91,10 +91,12 @@ export default function CausesScreen() {
   }, [isLoading]);
 
   useEffect(() => {
-    logEvent("donationCardsOrder_view", {
-      nonProfits: nonProfits?.map((np) => np.name).join(", "),
-      causes: causes?.map((c) => c.name).join(", "),
-    });
+    if (nonProfits && causes) {
+      logEvent("donationCardsOrder_view", {
+        nonProfits: nonProfits?.map((np) => np.name).join(", "),
+        causes: causes?.map((c) => c.name).join(", "),
+      });
+    }
   }, [nonProfits, causes]);
 
   useFocusEffect(
