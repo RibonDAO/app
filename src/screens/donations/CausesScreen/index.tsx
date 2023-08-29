@@ -92,8 +92,8 @@ export default function CausesScreen() {
 
   useEffect(() => {
     logEvent("donationCardsOrder_view", {
-      nonProfits,
-      causes,
+      nonProfits: nonProfits?.map((np) => np.name).join(", "),
+      causes: causes?.map((c) => c.name).join(", "),
     });
   }, [nonProfits, causes]);
 

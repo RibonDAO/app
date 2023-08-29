@@ -45,7 +45,7 @@ function CardScreen(): JSX.Element {
 
   useEffect(() => {
     logEvent("contributionCardsOrder_view", {
-      causes,
+      causes: causes?.map((c) => c.name).join(", "),
     });
   }, [causes]);
 
