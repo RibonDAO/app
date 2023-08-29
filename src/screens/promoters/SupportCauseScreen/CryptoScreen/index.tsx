@@ -69,7 +69,7 @@ function CryptoScreen(): JSX.Element {
   }, [cause]);
 
   useEffect(() => {
-    if (causes) {
+    if (causes.length > 0) {
       logEvent("contributionCardsOrder_view", {
         causes: causes?.map((c) => c.name).join(", "),
       });

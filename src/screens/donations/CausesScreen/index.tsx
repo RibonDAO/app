@@ -91,7 +91,7 @@ export default function CausesScreen() {
   }, [isLoading]);
 
   useEffect(() => {
-    if (nonProfits && causes) {
+    if (nonProfits && causes.length > 0) {
       logEvent("donationCardsOrder_view", {
         nonProfits: nonProfits?.map((np) => np.name).join(", "),
         causes: causes?.map((c) => c.name).join(", "),
