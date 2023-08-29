@@ -56,7 +56,9 @@ function LayoutHeader({
   const ticketIcon = hasTickets() ? <TicketIcon /> : <GrayTicketIcon />;
   const { connectWallet, wallet, killSession } = useWalletContext();
   const { userSubscriptions } = useSubscriptions();
-  const { subscriptions } = userSubscriptions();
+  const { subscriptions, refetch: refetchSubscription } = userSubscriptions(
+    currentUser?.id,
+  );
 
   useEffect(() => {
     if (menuVisible) logEvent("P18_view");
@@ -147,18 +149,24 @@ function LayoutHeader({
   };
 
   const handleMonthlyContributionClick = () => {
+    refetchSubscription();
+
     logEvent("manageSubscription_click", {
       from: "configPage",
     });
 
     if (subscriptions?.length === 0 || !subscriptions) {
-      navigateTo("SupportCauseScreen");
+      return navigateTo("PromotersScreen");
     } else {
-      navigateTo("MonthlyContributionsScreen");
+      return navigateTo("MonthlyContributionsScreen");
     }
-
-    return navigateTo("MonthlyContributionsScreen");
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      refetchSubscription();
+    }, []),
+  );
 
   const linkToSupport = () => {
     openInWebViewer(t("supportLink"));
@@ -264,7 +272,7 @@ function LayoutHeader({
             <Icon
               type="rounded"
               size={20}
-              color={theme.colors.brand.primary[300]}
+              color={theme.colors.brand.primary[600]}
               name="arrow_forward_ios"
               onPress={handleMonthlyContributionClick}
             />
@@ -285,7 +293,7 @@ function LayoutHeader({
             <Icon
               type="rounded"
               size={20}
-              color={theme.colors.brand.primary[300]}
+              color={theme.colors.brand.primary[600]}
               name="arrow_forward_ios"
               onPress={linkToSupport}
             />

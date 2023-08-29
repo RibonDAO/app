@@ -57,6 +57,9 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.feedback.error[600],
     borderRadius: 4,
     padding: 4,
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
   },
 });
 
