@@ -7,6 +7,8 @@ import React, { useState } from "react";
 import Icon from "components/atomics/Icon";
 
 import { theme } from "@ribon.io/shared";
+import { useLanguage } from "contexts/languageContext";
+import { add30DaysAndFormatDate } from "lib/formatters/dateFormatter";
 import S from "./styles";
 import CancelContributionModal from "./CancelContributionModal";
 
@@ -20,6 +22,8 @@ export default function MonthlyContributionsScreen(): JSX.Element {
   const { userSubscriptions } = useSubscriptions();
   const { subscriptions } = userSubscriptions(currentUser?.id);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { currentLang } = useLanguage();
 
   const handleCancelContribution = () => {
     setModalVisible(!modalVisible);
@@ -51,7 +55,12 @@ export default function MonthlyContributionsScreen(): JSX.Element {
             </Text>
             <Text style={S.text}>
               {t("nextContribution")}
-              <Text style={S.highlightedText}>{subscription.createdAt}</Text>
+              <Text style={S.highlightedText}>
+                {add30DaysAndFormatDate(
+                  subscriptions![0].createdAt.toString(),
+                  currentLang,
+                )}
+              </Text>
             </Text>
             {modalVisible && (
               <CancelContributionModal
