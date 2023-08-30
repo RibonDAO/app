@@ -47,7 +47,7 @@ function CardScreen(): JSX.Element {
     if (nonProfits && causes.length > 0) {
       logEvent("contributionCardsOrder_view", {
         nonProfits: orderedNonProfits(),
-        causes: causes?.map((c) => c.name).join(", "),
+        causes: causes.map((c) => c.name).join(", "),
       });
     }
   }, [nonProfits, causes]);
