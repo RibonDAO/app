@@ -14,6 +14,8 @@ export interface IIntegrationContext {
   integration?: Integration;
   currentIntegrationId: string | number;
   setCurrentIntegrationId: (id: SetStateAction<string>) => void;
+  externalId: any;
+  setExternalId: (id: SetStateAction<string>) => void;
   refetch: () => void;
 }
 
@@ -24,6 +26,7 @@ export const IntegrationContext = createContext<IIntegrationContext>(
 function IntegrationProvider({ children }: any) {
   const [currentIntegrationId, setCurrentIntegrationId] =
     useState(RIBON_INTEGRATION_ID);
+  const [externalId, setExternalId] = useState<any>();
   const { integration, refetch } = useIntegration(currentIntegrationId);
 
   useEffect(() => {
@@ -36,8 +39,10 @@ function IntegrationProvider({ children }: any) {
     () => ({
       integration,
       refetch,
+      externalId,
       currentIntegrationId,
       setCurrentIntegrationId,
+      setExternalId,
     }),
     [integration, currentIntegrationId],
   );

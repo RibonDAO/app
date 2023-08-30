@@ -53,12 +53,12 @@ export default function CausesScreen() {
   const { causesWithPoolBalance: causes } = useCausesContext();
   const { chosenCause, setChosenCauseIndex, setChosenCause, chosenCauseIndex } =
     useCauseDonationContext();
-  const { currentIntegrationId } = useIntegrationContext();
+  const { currentIntegrationId, externalId } = useIntegrationContext();
   const {
     canDonate,
     isLoading: loadingCanDonate,
     refetch: refetchCanDonate,
-  } = useCanDonate(currentIntegrationId, PLATFORM);
+  } = useCanDonate(currentIntegrationId, PLATFORM, externalId);
   const {
     isFirstAccessToIntegration,
     refetch: refetchFirstAccessToIntegration,
