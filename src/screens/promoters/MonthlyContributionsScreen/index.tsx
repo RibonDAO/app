@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { View, Text } from "react-native";
-import { useCurrentUser } from "contexts/currentUserContext";
 import Subscription from "@ribon.io/shared/types/entities/Subscription";
 import React, { useState } from "react";
 import Icon from "components/atomics/Icon";
@@ -17,10 +16,8 @@ export default function MonthlyContributionsScreen(): JSX.Element {
     keyPrefix: "promoters.monthlyContributionsScreen",
   });
 
-  const { currentUser } = useCurrentUser();
-
   const { userSubscriptions } = useSubscriptions();
-  const { subscriptions } = userSubscriptions(currentUser?.id);
+  const { subscriptions } = userSubscriptions();
   const [modalVisible, setModalVisible] = useState(false);
 
   const { currentLang } = useLanguage();

@@ -56,9 +56,7 @@ function LayoutHeader({
   const ticketIcon = hasTickets() ? <TicketIcon /> : <GrayTicketIcon />;
   const { connectWallet, wallet, killSession } = useWalletContext();
   const { userSubscriptions } = useSubscriptions();
-  const { subscriptions, refetch: refetchSubscription } = userSubscriptions(
-    currentUser?.id,
-  );
+  const { subscriptions, refetch: refetchSubscription } = userSubscriptions();
 
   useEffect(() => {
     if (menuVisible) logEvent("P18_view");
@@ -155,10 +153,12 @@ function LayoutHeader({
       from: "configPage",
     });
 
-    if (subscriptions?.length === 0 || !subscriptions) {
-      return navigateTo("PromotersScreen");
-    } else {
+    if (!currentUser) return navigateTo("PromotersScreen");
+
+    if (subscriptions && subscriptions?.length > 0) {
       return navigateTo("MonthlyContributionsScreen");
+    } else {
+      return navigateTo("PromotersScreen");
     }
   };
 
