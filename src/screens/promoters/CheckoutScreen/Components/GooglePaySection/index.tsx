@@ -102,6 +102,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         navigateTo("ContributionDoneScreen", {
           cause,
           nonProfit,
+          offer,
         });
       } catch (e) {
         logError(e);

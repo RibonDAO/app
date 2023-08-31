@@ -283,11 +283,7 @@ function RootNavigator() {
         name="MonthlyContributionsScreen"
         component={MonthlyContributionsScreen}
         options={{
-          headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
-          headerTitle: "",
-          headerBackTitleVisible: true,
-          headerBackTitle: "",
+          headerShown: false,
         }}
       />
 

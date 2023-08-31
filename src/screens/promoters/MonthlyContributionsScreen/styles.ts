@@ -61,6 +61,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     display: "flex",
   },
+  arrow: {
+    alignSelf: "flex-start",
+    marginBottom: theme.spacingNative(16),
+  },
 });
 
 export default styles;

@@ -18,6 +18,7 @@ import {
   Currencies,
   Languages,
   NonProfit,
+  Offer,
 } from "@ribon.io/shared/types";
 import { showToast } from "lib/Toast";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
@@ -43,7 +44,7 @@ export interface ICardPaymentInformationContext {
   setCvv: (value: SetStateAction<string>) => void;
   setButtonDisabled: (value: SetStateAction<boolean>) => void;
   setCryptoGiving: (value: SetStateAction<string>) => void;
-  setOfferId: (value: SetStateAction<number>) => void;
+  setOffer: (value: SetStateAction<Offer | undefined>) => void;
   setFlow: (value: SetStateAction<"cause" | "nonProfit">) => void;
   buttonDisabled: boolean;
   currentCoin?: Currencies;
@@ -57,7 +58,7 @@ export interface ICardPaymentInformationContext {
   expirationDate: string;
   cvv: string;
   cryptoGiving: string;
-  offerId: number;
+  offer: Offer | undefined;
   flow: "cause" | "nonProfit";
   handleSubmit: () => void;
   cause: Cause | undefined;
@@ -121,7 +122,7 @@ function CardPaymentInformationProvider({ children }: Props) {
   const [cvv, setCvv] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [cryptoGiving, setCryptoGiving] = useState("");
-  const [offerId, setOfferId] = useState(1);
+  const [offer, setOffer] = useState<Offer>();
   const [cause, setCause] = useState<Cause>();
   const [nonProfit, setNonProfit] = useState<NonProfit>();
   const [flow, setFlow] = useState<"nonProfit" | "cause">("nonProfit");
@@ -179,7 +180,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       state,
       city,
       taxId,
-      offerId,
+      offerId: offer?.id ?? 1,
       integrationId: currentIntegrationId ?? 1,
       card: {
         number: number.replace(/\D/g, "").slice(0, 16),
@@ -199,12 +200,12 @@ function CardPaymentInformationProvider({ children }: Props) {
       if (flow === "nonProfit") {
         logEvent("ngoGave_end", {
           causeId: cause?.id,
-          offerId,
+          offerId: offer?.id,
         });
       } else {
         logEvent("causeGave_end", {
           causeId: cause?.id,
-          offerId,
+          offerId: offer?.id,
         });
       }
       registerAction("contribution_done_screen_view");
@@ -212,6 +213,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       navigateTo("ContributionDoneScreen", {
         cause,
         nonProfit,
+        offer,
       });
       resetStates();
     } catch (error: any) {
@@ -253,8 +255,8 @@ function CardPaymentInformationProvider({ children }: Props) {
       setButtonDisabled,
       setCryptoGiving,
       cryptoGiving,
-      setOfferId,
-      offerId,
+      setOffer,
+      offer,
       cause,
       setCause,
       nonProfit,
@@ -266,7 +268,7 @@ function CardPaymentInformationProvider({ children }: Props) {
     }),
     [
       currentCoin,
-      offerId,
+      offer,
       country,
       city,
       state,

@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export default function ContributionDoneScreen(): JSX.Element {
   const {
-    params: { cause, nonProfit },
+    params: { cause, nonProfit, offer },
   } = useRouteParams<"ContributionDoneScreen">();
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.contributionDoneScreen",
@@ -15,7 +15,11 @@ export default function ContributionDoneScreen(): JSX.Element {
 
   useEffect(() => {
     setTimeout(() => {
-      navigateTo("PromotersScreen");
+      if (offer?.subscription) {
+        navigateTo("MonthlyContributionsScreen");
+      } else {
+        navigateTo("PromotersScreen");
+      }
     }, 5000);
   }, []);
 

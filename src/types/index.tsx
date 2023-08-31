@@ -13,10 +13,12 @@ declare global {
 
 export type DonateScreenList = {
   nonProfit: NonProfit;
+  offer: Offer;
 };
 
 export type DonationDoneParamsList = {
   nonProfit: NonProfit;
+  offer: Offer;
 };
 
 export type ForYouScreenParamsList = {
@@ -26,6 +28,7 @@ export type ForYouScreenParamsList = {
 export type ContributionDoneParamsList = {
   nonProfit?: NonProfit;
   cause?: Cause;
+  offer?: Offer;
 };
 
 export type ContributionStatsScreenParamsList = {

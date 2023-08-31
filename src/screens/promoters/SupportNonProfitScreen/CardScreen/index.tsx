@@ -18,7 +18,7 @@ function CardScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
-  const { cause, setCause, setOfferId, setFlow } = useCardPaymentInformation();
+  const { cause, setCause, setOffer, setFlow } = useCardPaymentInformation();
   const { chosenCause, setChosenCause, chosenCauseIndex, setChosenCauseIndex } =
     useCauseContributionContext();
   const { nonProfits } = useNonProfitsContext();
@@ -70,7 +70,7 @@ function CardScreen(): JSX.Element {
 
   const handleOfferChange = (offer: Offer) => {
     setCurrentOffer(offer);
-    setOfferId(offer.id);
+    setOffer(offer);
   };
 
   const filteredNonProfits = useCallback(
