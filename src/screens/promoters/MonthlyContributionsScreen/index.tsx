@@ -10,6 +10,7 @@ import { useLanguage } from "contexts/languageContext";
 import { add30DaysAndFormatDate } from "lib/formatters/dateFormatter";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useNavigation } from "hooks/useNavigation";
+import { useRouteParams } from "hooks/useRouteParams";
 import S from "./styles";
 import CancelContributionModal from "./CancelContributionModal";
 
@@ -21,8 +22,9 @@ export default function MonthlyContributionsScreen(): JSX.Element {
   const { userSubscriptions } = useSubscriptions();
   const { subscriptions } = userSubscriptions();
   const [modalVisible, setModalVisible] = useState(false);
+  const { params } = useRouteParams<"MonthlyContributionsScreen">();
 
-  const { navigateTo } = useNavigation();
+  const { navigateTo, popNavigation } = useNavigation();
 
   const { currentLang } = useLanguage();
 
@@ -30,7 +32,11 @@ export default function MonthlyContributionsScreen(): JSX.Element {
     setModalVisible(!modalVisible);
   };
   const handleBackButtonClick = () => {
-    navigateTo("CausesScreen");
+    if (params?.from === "ContributionDoneScreen") {
+      navigateTo("PromotersScreen");
+    } else {
+      popNavigation();
+    }
   };
 
   return (

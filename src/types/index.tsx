@@ -88,6 +88,10 @@ export type RecurrenceScreenParamList = {
   currency: Currencies;
 };
 
+export type MonthlyContributionsScreenParamList = {
+  from: string;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   DonateScreen: DonateScreenList;
@@ -109,7 +113,7 @@ export type RootStackParamList = {
   OnboardingScreen: undefined;
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
-  MonthlyContributionsScreen: undefined;
+  MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
