@@ -67,7 +67,10 @@ export default function CardSection() {
     isSubscription,
   );
 
-  const resetOffer = () => setOfferPrice(offers[0].priceCents);
+  const resetOffer = () => {
+    setOfferPrice(offers[0].priceCents);
+    setCurrentOffer(offers[0]);
+  };
 
   useEffect(() => {
     resetStates();
@@ -214,9 +217,7 @@ export default function CardSection() {
         />
       </View>
 
-      <Text style={S.accordionTitle}>
-        {isSubscription ? t("subscription") : t("payment")}
-      </Text>
+      <Text style={S.accordionTitle}>{t("payment")}</Text>
       <RadioAccordion
         items={[
           {

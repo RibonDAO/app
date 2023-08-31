@@ -169,7 +169,8 @@
       "walletConnectionErrorMessage": "Erro ao conectar carteira"
     },
     "cardPaymentInformation": {
-      "successMessage": "Você doou com sucesso para a causa!"
+      "successMessage": "Você doou com sucesso para a causa!",
+      "onErrorMessage": "Falha no pagamento. Tente novamente."
     },
     "tasksContext": {
       "allTasksCompleted": "Você completou todas as tarefas!"
@@ -265,7 +266,6 @@
       "netDonation": "Doação líquida: ",
       "serviceFees": "Taxas de serviço: ",
       "payment": "Pagamento",
-      "subscription": "Recorrência",
       "selectCurrency": "Selecione a moeda",
       "selectValue": "Selecione o valor",
       "brazilName": "Brasil",

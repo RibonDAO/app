@@ -44,9 +44,11 @@ function CardScreen(): JSX.Element {
   }, [causes]);
 
   useEffect(() => {
-    logEvent("contributionCardsOrder_view", {
-      causes,
-    });
+    if (causes.length > 0) {
+      logEvent("contributionCardsOrder_view", {
+        causes: causes.map((c) => c.name).join(", "),
+      });
+    }
   }, [causes]);
 
   const handleCauseClick = (causeClicked: Cause, index: number) => {
