@@ -44,7 +44,7 @@ function IntegrationProvider({ children }: any) {
       setCurrentIntegrationId,
       setExternalId,
     }),
-    [integration, currentIntegrationId],
+    [integration, currentIntegrationId, externalId],
   );
 
   return (
