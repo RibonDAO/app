@@ -4,6 +4,7 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 export async function initializeDeeplink(
   navigateTo: (path: string) => void,
   setCurrentIntegrationId: (integrationId: string) => void,
+  setExternalId: (externalId: string) => void,
 ) {
   branch.subscribe({
     onOpenStart: ({ uri, cachedInitialEvent }) => {
@@ -17,7 +18,10 @@ export async function initializeDeeplink(
       const integrationId =
         (latestParams.integration_id as string) || RIBON_INTEGRATION_ID;
 
+      const externalId = (latestParams.external_id as string) || "";
+
       setCurrentIntegrationId(integrationId);
+      setExternalId(externalId);
 
       if (latestParams.$custom_meta_tags)
         navigateTo(latestParams.$custom_meta_tags as string);
