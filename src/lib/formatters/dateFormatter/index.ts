@@ -1,3 +1,5 @@
+import { formattedShortLanguage } from "lib/currentLanguage";
+
 export function stringToLocaleDateString(dateString: string) {
   return new Date(dateString).toLocaleDateString();
 }
@@ -36,7 +38,7 @@ export function add30DaysAndFormatDate(
 
   newDate.setDate(newDate.getDate() + 30);
 
-  const locale = currentLang === "en" ? "en-US" : "pt-BR";
+  const locale = formattedShortLanguage(currentLang);
 
   return newDate.toLocaleDateString(locale);
 }
