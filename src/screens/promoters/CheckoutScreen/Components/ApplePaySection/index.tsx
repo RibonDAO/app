@@ -122,6 +122,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         navigateTo("ContributionDoneScreen", {
           cause,
           nonProfit,
+          offer,
         });
       } catch (e) {
         logError(e);
