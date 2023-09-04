@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
   tabBarLabel: {
     ...defaultBodyXsRegular,
   },
+  logo: {
+    height: 24,
+    resizeMode: "contain",
+  },
 });
 
 export default styles;

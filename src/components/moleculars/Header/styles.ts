@@ -12,8 +12,15 @@ const styles = StyleSheet.create({
     paddingRight: theme.spacingNative(12),
   },
   logo: {
-    height: 34,
+    height: 24,
     resizeMode: "contain",
+    width: "33%",
+    marginLeft: theme.spacingNative(12),
+  },
+  logoContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
   },
   divider: {
     marginHorizontal: 8,
