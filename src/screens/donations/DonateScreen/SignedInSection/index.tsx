@@ -33,7 +33,7 @@ function SignedInSection({
   const { donate } = useDonations(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
 
-  const { currentIntegrationId } = useIntegrationContext();
+  const { currentIntegrationId, externalId } = useIntegrationContext();
 
   const handleButtonPress = async () => {
     if (!currentUser?.email) return;
@@ -46,6 +46,7 @@ function SignedInSection({
         nonProfit.id,
         currentUser.email,
         PLATFORM,
+        externalId,
       );
       onDonationSuccess();
     } catch (error: any) {

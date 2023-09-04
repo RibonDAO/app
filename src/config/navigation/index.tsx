@@ -199,9 +199,9 @@ function BottomTabNavigator() {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   const { navigateTo } = useNavigation();
-  const { setCurrentIntegrationId } = useIntegrationContext();
+  const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   useEffect(() => {
-    initializeDeeplink(navigateTo, setCurrentIntegrationId);
+    initializeDeeplink(navigateTo, setCurrentIntegrationId, setExternalId);
   }, []);
 
   return (
