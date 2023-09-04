@@ -7,10 +7,11 @@ import HeaderPlaceholder from "components/moleculars/Header/placeholder";
 import S from "./styles";
 
 export type Props = {
-  sideLogo?: string;
+  sideLogo?: JSX.Element;
   rightComponent?: JSX.Element;
   hasBackButton?: boolean;
   onBackButtonClick?: () => void;
+  onSideLogoClick?: () => void;
 };
 
 function Header({
@@ -18,6 +19,7 @@ function Header({
   rightComponent,
   hasBackButton = false,
   onBackButtonClick,
+  onSideLogoClick,
 }: Props): JSX.Element {
   const { navigateTo, popNavigation } = useNavigation();
 
@@ -38,26 +40,32 @@ function Header({
       <View style={S.insideContainer}>
         {hasBackButton ? (
           <TouchableOpacity
+            accessibilityRole="button"
             onPress={handleBackButtonClick}
             testID="arrow-back-button"
           >
             <ArrowLeft />
           </TouchableOpacity>
         ) : (
-          <>
-            <TouchableOpacity onPress={() => navigateToTicketsPage()}>
+          <View style={S.logoContainer}>
+            <TouchableOpacity
+              accessibilityRole="button"
+              onPress={() => navigateToTicketsPage()}
+            >
               <RibonLogo />
             </TouchableOpacity>
 
             {sideLogo && (
-              <>
-                <View style={S.divider}>|</View>
-                <TouchableOpacity onPress={() => navigateToTicketsPage()}>
-                  <RibonLogo />
-                </TouchableOpacity>
-              </>
+              <TouchableOpacity
+                accessibilityRole="button"
+                onPress={() => onSideLogoClick && onSideLogoClick()}
+                style={S.logo}
+                disabled={!onSideLogoClick}
+              >
+                {sideLogo}
+              </TouchableOpacity>
             )}
-          </>
+          </View>
         )}
       </View>
       {rightComponent && (

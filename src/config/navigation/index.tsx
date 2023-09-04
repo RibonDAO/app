@@ -35,7 +35,7 @@ import ForYouScreen from "screens/content/ForYouScreen";
 import { useCanDonate } from "@ribon.io/shared";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "lib/Toast";
-import { PLATFORM } from "utils/constants/Application";
+import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
@@ -47,6 +47,8 @@ import IntegrationProvider, {
   useIntegrationContext,
 } from "contexts/integrationContext";
 import RecurrenceScreen from "screens/promoters/RecurrenceScreen";
+import { Image } from "react-native";
+import { openInWebViewer } from "lib/linkOpener";
 import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -60,13 +62,6 @@ import ForYouIconOn from "./assets/ForYouIconOn";
 import ForYouIconOff from "./assets/ForYouIconOff";
 import { initializeDeeplink } from "../../services/deepLink";
 
-const header = () => <Header rightComponent={<LayoutHeader />} />;
-const headerWithoutTicket = () => (
-  <Header rightComponent={<LayoutHeader hideTicket />} />
-);
-const headerWithWallet = () => (
-  <Header rightComponent={<LayoutHeader hideTicket hideWallet={false} />} />
-);
 const { primary } = theme.colors.brand;
 const { neutral } = theme.colors;
 
@@ -78,11 +73,54 @@ function BottomTabNavigator() {
 
   const { currentUser } = useCurrentUser();
 
-  const { currentIntegrationId } = useIntegrationContext();
+  const { currentIntegrationId, integration } = useIntegrationContext();
+
+  const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
 
   const { canDonate, refetch: refetchCanDonate } = useCanDonate(
     currentIntegrationId,
     PLATFORM,
+  );
+
+  const navigateToIntegration = () => {
+    if (!integration?.integrationTask?.linkAddress) {
+      return;
+    }
+    openInWebViewer(integration?.integrationTask?.linkAddress ?? "");
+  };
+
+  const sideLogo = () => {
+    if (!isRibonIntegration && integration?.logo)
+      return (
+        <Image
+          source={{ uri: integration?.logo }}
+          accessibilityIgnoresInvertColors
+          style={S.logo}
+        />
+      );
+    return undefined;
+  };
+
+  const header = () => (
+    <Header
+      rightComponent={<LayoutHeader />}
+      sideLogo={sideLogo()}
+      onSideLogoClick={navigateToIntegration}
+    />
+  );
+  const headerWithoutTicket = () => (
+    <Header
+      rightComponent={<LayoutHeader hideTicket />}
+      sideLogo={sideLogo()}
+      onSideLogoClick={navigateToIntegration}
+    />
+  );
+  const headerWithWallet = () => (
+    <Header
+      rightComponent={<LayoutHeader hideTicket hideWallet={false} />}
+      sideLogo={sideLogo()}
+      onSideLogoClick={navigateToIntegration}
+    />
   );
 
   React.useEffect(() => {
