@@ -13,10 +13,12 @@ declare global {
 
 export type DonateScreenList = {
   nonProfit: NonProfit;
+  offer: Offer;
 };
 
 export type DonationDoneParamsList = {
   nonProfit: NonProfit;
+  offer: Offer;
 };
 
 export type ForYouScreenParamsList = {
@@ -26,6 +28,7 @@ export type ForYouScreenParamsList = {
 export type ContributionDoneParamsList = {
   nonProfit?: NonProfit;
   cause?: Cause;
+  offer?: Offer;
 };
 
 export type ContributionStatsScreenParamsList = {
@@ -85,6 +88,10 @@ export type RecurrenceScreenParamList = {
   currency: Currencies;
 };
 
+export type MonthlyContributionsScreenParamList = {
+  from: string;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   DonateScreen: DonateScreenList;
@@ -106,6 +113,7 @@ export type RootStackParamList = {
   OnboardingScreen: undefined;
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
+  MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

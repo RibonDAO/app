@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   text: {
-    color: theme.colors.brand.primary[300],
+    color: theme.colors.brand.primary[600],
   },
 });
 

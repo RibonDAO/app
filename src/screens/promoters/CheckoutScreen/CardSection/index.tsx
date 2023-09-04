@@ -37,7 +37,7 @@ export default function CardSection() {
     useCheckoutContext();
   const {
     handleSubmit,
-    setOfferId,
+    setOffer,
     setCurrentCoin,
     setCause,
     setNonProfit,
@@ -112,7 +112,7 @@ export default function CardSection() {
   useEffect(() => {
     if (currentOffer) {
       changePublishableKey(currentOffer.gateway);
-      setOfferId(currentOffer.id);
+      setOffer(currentOffer);
       setCurrentCoin(
         Currencies[currency?.toUpperCase() as keyof typeof Currencies],
       );

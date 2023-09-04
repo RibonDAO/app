@@ -8,6 +8,7 @@
   "layoutHeader": {
     "exitButton": "Exit",
     "support": "User Support",
+    "monthlyContributions": "Monthly contributions",
     "notifications": "Allow notifications",
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0",
     "login": "Login",
@@ -243,40 +244,53 @@
       "uniqueDonationDescription": "Contribute once",
       "selectValue": "Select value"
     },
-    "checkoutScreen": {
-      "changeCurrency": "Change currency",
-      "back": "Back",
-      "monthlyContribution": "Contributing monthly",
-      "uniqueContribution": "Contributing once",
-      "recurrenceButton": "Change",
-      "donatingTo": "Donating to ",
-      "netDonation": "Net donation: ",
-      "serviceFees": "Service fees: ",
-      "payment": "Payment",
-      "selectCurrency": "Select currency",
-      "selectValue": "Select value",
-      "brazilName": "Brazil",
-      "additionalFeesText": "Payment is processed in USD, the amount may vary slightly according to your bank's fees.",
-      "searchCountryPlaceholder": "Search country",
-      "paymentMethodSection": {
-        "creditCard": "Credit card",
-        "googlePay": "Google Pay",
-        "applePay": "Apple Pay",
-        "creditCardFields": {
-          "email": "E-mail",
-          "country": "Country",
-          "state": "State",
-          "city": "City",
-          "taxId": "Tax ID",
-          "cpf": "CPF",
-          "number": "Card number",
-          "name": "Cardholder name",
-          "expirationDate": "Expiration date",
-          "cvv": "CVV"
-        }
-      },
-      "confirmPayment": "Confirm payment"
+    "monthlyContributionsScreen": {
+      "title": "Monthly contributions",
+      "to": "To ",
+      "nextContribution": "Next contribution in ",
+      "cancelContributionModal": {
+        "title": "Cancel monthly contribution",
+        "description": "To finish this process, you'll need to confirm the cancelation request clicking in the link of the cancelation e-mail.",
+        "cancelButton": "Receive cancelation e-mail",
+        "closeButton": "Close",
+        "sendEmail": "We sent you an e-mail"
+      }
     }
+  },
+  "checkoutScreen": {
+    "changeCurrency": "Change currency",
+    "back": "Back",
+    "monthlyContribution": "Contributing monthly",
+    "uniqueContribution": "Contributing once",
+    "recurrenceButton": "Change",
+    "donatingTo": "Donating to ",
+    "netDonation": "Net donation: ",
+    "serviceFees": "Service fees: ",
+    "payment": "Payment",
+    "subscription": "Recurrence",
+    "selectCurrency": "Select currency",
+    "selectValue": "Select value",
+    "brazilName": "Brazil",
+    "additionalFeesText": "Payment is processed in USD, the amount may vary slightly according to your bank's fees.",
+    "searchCountryPlaceholder": "Search country",
+    "paymentMethodSection": {
+      "creditCard": "Credit card",
+      "googlePay": "Google Pay",
+      "applePay": "Apple Pay",
+      "creditCardFields": {
+        "email": "E-mail",
+        "country": "Country",
+        "state": "State",
+        "city": "City",
+        "taxId": "Tax ID",
+        "cpf": "CPF",
+        "number": "Card number",
+        "name": "Cardholder name",
+        "expirationDate": "Expiration date",
+        "cvv": "CVV"
+      }
+    },
+    "confirmPayment": "Confirm payment"
   },
   "users": {
     "impactScreen": {
