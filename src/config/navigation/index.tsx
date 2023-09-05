@@ -90,7 +90,7 @@ function BottomTabNavigator() {
   };
 
   const sideLogo = () => {
-    if (!isRibonIntegration && integration?.logo)
+    if (!isRibonIntegration && integration?.logo && !canDonate)
       return (
         <Image
           source={{ uri: integration?.logo }}
