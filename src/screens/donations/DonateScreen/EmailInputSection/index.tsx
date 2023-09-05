@@ -25,6 +25,7 @@ import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { perform } from "lib/timeoutHelpers";
 import usePageView from "hooks/usePageView";
 import { useIntegrationContext } from "contexts/integrationContext";
+import { useUtmContext } from "contexts/utmContext";
 import S from "./styles";
 
 type Props = {
@@ -52,6 +53,8 @@ function EmailInputSection({
 
   const { currentIntegrationId } = useIntegrationContext();
 
+  const { utmSource, utmMedium, utmCampaign } = useUtmContext();
+
   async function donateCallback() {
     try {
       const user = await findOrCreateUser(
@@ -61,7 +64,15 @@ function EmailInputSection({
       perform(() => {
         setCurrentUser(user);
       }).in(3000);
-      await donate(currentIntegrationId, nonProfit.id, email, PLATFORM);
+      await donate(
+        currentIntegrationId,
+        nonProfit.id,
+        email,
+        PLATFORM,
+        utmSource,
+        utmMedium,
+        utmCampaign,
+      );
       onDonationSuccess();
     } catch (error: any) {
       onDonationFail(error);

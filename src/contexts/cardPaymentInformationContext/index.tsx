@@ -30,6 +30,7 @@ import { logEvent } from "services/analytics";
 import { useTasksContext } from "contexts/tasksContext";
 import { countryByLanguage } from "lib/countryByLanguage";
 import { useIntegrationContext } from "contexts/integrationContext";
+import { useUtmContext } from "contexts/utmContext";
 
 export interface ICardPaymentInformationContext {
   setCurrentCoin: (value: SetStateAction<Currencies | undefined>) => void;
@@ -169,6 +170,8 @@ function CardPaymentInformationProvider({ children }: Props) {
     }
   };
 
+  const { utmSource, utmMedium, utmCampaign } = useUtmContext();
+
   const handleSubmit = async () => {
     showLoadingOverlay();
 
@@ -192,6 +195,9 @@ function CardPaymentInformationProvider({ children }: Props) {
       causeId: cause?.id,
       nonProfitId: nonProfit?.id,
       platform: PLATFORM,
+      utmSource,
+      utmMedium,
+      utmCampaign,
     };
 
     try {
