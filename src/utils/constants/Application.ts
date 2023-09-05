@@ -15,3 +15,6 @@ export const STRIPE_GLOBAL_PUBLISHABLE_KEY =
   Constants.expoConfig?.extra?.REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY;
 export const STRIPE_PUBLISHABLE_KEY =
   Constants.expoConfig?.extra?.REACT_APP_STRIPE_PUBLISHABLE_KEY;
+export const REACT_APP_ZENDESK_IOS_KEY =
+  Constants.expoConfig?.extra?.REACT_APP_ZENDESK_IOS_KEY;
+// export const REACT_APP_ZENDESK_ANDROID_KEY = Constants.expoConfig?.extra?.REACT_APP_ZENDESK_ANDROID_KEY;

@@ -103,6 +103,7 @@ export default () => ({
       "REACT_APP_MIXPANEL_TOKEN": process.env.REACT_APP_MIXPANEL_TOKEN,
       "REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY,
       "REACT_APP_STRIPE_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY,
+      "REACT_APP_ZENDESK_IOS_KEY": process.env.REACT_APP_ZENDESK_IOS_KEY
     },
     "runtimeVersion": {
       "policy": "appVersion"

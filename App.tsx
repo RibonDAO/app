@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import "./global";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -19,11 +19,20 @@ import useCachedResources from "./src/hooks/useCachedResources";
 import UnsafeAreaProvider, {
   useUnsafeAreaContext,
 } from "./src/contexts/unsafeAreaContext";
+// import { initZendeskSupportChat } from "./src/services/support/zendesk";
+import { REACT_APP_ZENDESK_IOS_KEY } from "./src/utils/constants/Application";
 import TasksProvider from "./src/contexts/tasksContext";
 
 function Main() {
   const isLoadingComplete = useCachedResources();
   const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
+
+  useEffect(() => {
+    if (Platform.OS === "ios") {
+      console.log(REACT_APP_ZENDESK_IOS_KEY);
+      // initZendeskSupportChat(REACT_APP_ZENDESK_IOS_KEY)
+    }
+  }, []);
 
   if (!isLoadingComplete) {
     return null;

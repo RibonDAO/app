@@ -6,6 +6,9 @@ import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
 import RibonSunLeft from "assets/images/ribon-sun-left.png";
+import { useLanguage } from "contexts/languageContext";
+import { Languages } from "types/enums/Languages";
+import startSupportChat from "services/support";
 import Banner from "../Banner";
 
 type Props = {
@@ -15,12 +18,17 @@ function UserSupportBanner({ from }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "userSupportBanner",
   });
+  const { currentLang } = useLanguage();
 
   const handleClick = () => {
     logEvent("supportBtn_click", {
       from,
     });
-    openInWebViewer(t("link"));
+    if (currentLang === Languages.PT) {
+      openInWebViewer(t("link"));
+    } else {
+      startSupportChat();
+    }
   };
 
   return (
