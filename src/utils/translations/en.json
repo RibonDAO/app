@@ -350,7 +350,7 @@
     "title": "Access user support",
     "text": "Questions, ideias, refunds. We’re here!",
     "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0",
-    "linkEN": "https://v2.zopim.com/widget/popout.html?key="
+    "linkEN": "https://v2.zopim.com/widget/popout.html?key={{key}}"
   },
   "contributionStatsPage": {
     "title": "You donated {{amount}} for {{cause}}",

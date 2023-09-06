@@ -349,7 +349,7 @@
     "title": "Suporte ao Usuário",
     "text": "Dúvidas, ideias, estornos. Estamos aqui!",
     "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0",
-    "linkEN": "https://v2.zopim.com/widget/popout.html?key="
+    "linkEN": "https://v2.zopim.com/widget/popout.html?key={{key}}"
   },
   "contributionStatsPage": {
     "title": "Você doou {{amount}} para {{cause}}",
