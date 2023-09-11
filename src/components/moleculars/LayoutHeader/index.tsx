@@ -22,6 +22,9 @@ import { isNotificationsEnabled } from "lib/notifications";
 import { useFocusEffect } from "@react-navigation/native";
 import { logEvent } from "services/analytics";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
+import { useLanguage } from "contexts/languageContext";
+import { Languages } from "@ribon.io/shared";
+import { REACT_APP_ZENDESK_KEY } from "utils/constants/Application";
 import ConfigItem from "../ConfigItem";
 import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
@@ -74,6 +77,7 @@ function LayoutHeader({
   const toggleModal = () => {
     setMenuVisible(!menuVisible);
   };
+  const { currentLang } = useLanguage();
 
   const handleLogout = () => {
     logoutCurrentUser();
@@ -169,7 +173,12 @@ function LayoutHeader({
   );
 
   const linkToSupport = () => {
-    openInWebViewer(t("supportLink"));
+    const key = REACT_APP_ZENDESK_KEY;
+    if (currentLang === Languages.PT) {
+      openInWebViewer(t("supportLink"));
+    } else {
+      openInWebViewer(t("supportLinkEN", { key }));
+    }
     logEvent("supportBtn_click", { from: "config_page" });
   };
 
