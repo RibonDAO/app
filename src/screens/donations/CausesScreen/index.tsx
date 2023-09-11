@@ -35,7 +35,6 @@ import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import usePageView from "hooks/usePageView";
 import { useCausesContext } from "contexts/causesContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
-import useDevice from "hooks/apiHooks/useDevice";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import Placeholder from "./placeholder";
@@ -83,8 +82,6 @@ export default function CausesScreen() {
       refetchCanDonate();
     },
   });
-  const { registerDevice } = useDevice();
-  registerDevice();
 
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
@@ -212,7 +209,6 @@ export default function CausesScreen() {
           message: t("enableNotification.successToastMessage"),
           position: "bottom",
         });
-        registerDevice();
         hideAlert();
       }
     } catch (e) {
