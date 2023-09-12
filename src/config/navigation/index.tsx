@@ -106,21 +106,21 @@ function BottomTabNavigator() {
     <Header
       rightComponent={<LayoutHeader />}
       sideLogo={sideLogo()}
-      onSideLogoClick={canDonate ? navigateToIntegration : undefined}
+      onSideLogoClick={!canDonate ? navigateToIntegration : undefined}
     />
   );
   const headerWithoutTicket = () => (
     <Header
       rightComponent={<LayoutHeader hideTicket />}
       sideLogo={sideLogo()}
-      onSideLogoClick={canDonate ? navigateToIntegration : undefined}
+      onSideLogoClick={!canDonate ? navigateToIntegration : undefined}
     />
   );
   const headerWithWallet = () => (
     <Header
       rightComponent={<LayoutHeader hideTicket hideWallet={false} />}
       sideLogo={sideLogo()}
-      onSideLogoClick={canDonate ? navigateToIntegration : undefined}
+      onSideLogoClick={!canDonate ? navigateToIntegration : undefined}
     />
   );
 
