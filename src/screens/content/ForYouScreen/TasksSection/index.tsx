@@ -16,7 +16,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
 
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
-import useDevice from "hooks/apiHooks/useDevice";
 import requestUserPermissionForNotifications from "lib/notifications";
 import { showToast } from "lib/Toast";
 import { logError } from "services/crashReport";
@@ -47,7 +46,6 @@ export default function TasksSection() {
     useState(false);
 
   const { index } = useForYouTabsContext();
-  const { registerDevice } = useDevice();
 
   useFocusEffect(
     useCallback(() => {
@@ -135,7 +133,6 @@ export default function TasksSection() {
           message: t("enableNotification.successToastMessage"),
           position: "bottom",
         });
-        registerDevice();
         hideAlert();
       }
     } catch (e) {
