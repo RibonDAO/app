@@ -90,7 +90,7 @@ function BottomTabNavigator() {
   };
 
   const sideLogo = () => {
-    if (!isRibonIntegration && integration?.logo && !canDonate)
+    if (!isRibonIntegration && integration?.logo)
       return (
         <Image
           source={{ uri: integration?.logo }}
@@ -105,21 +105,21 @@ function BottomTabNavigator() {
     <Header
       rightComponent={<LayoutHeader />}
       sideLogo={sideLogo()}
-      onSideLogoClick={navigateToIntegration}
+      onSideLogoClick={canDonate ? navigateToIntegration : undefined}
     />
   );
   const headerWithoutTicket = () => (
     <Header
       rightComponent={<LayoutHeader hideTicket />}
       sideLogo={sideLogo()}
-      onSideLogoClick={navigateToIntegration}
+      onSideLogoClick={canDonate ? navigateToIntegration : undefined}
     />
   );
   const headerWithWallet = () => (
     <Header
       rightComponent={<LayoutHeader hideTicket hideWallet={false} />}
       sideLogo={sideLogo()}
-      onSideLogoClick={navigateToIntegration}
+      onSideLogoClick={canDonate ? navigateToIntegration : undefined}
     />
   );
 
