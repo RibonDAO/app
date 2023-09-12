@@ -1,3 +1,4 @@
+/* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import { useNavigation } from "hooks/useNavigation";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,8 +10,14 @@ import ArrowLeft from "components/vectors/ArrowLeft";
 import Icon from "components/atomics/Icon";
 import Tooltip from "components/atomics/Tooltip";
 import { logEvent } from "services/analytics";
+import { useIntegrationContext } from "contexts/integrationContext";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import Image from "components/atomics/Image";
 import Ticket from "./assets/Ticket";
 import S from "./styles";
+import RibonLogo from "./assets/RibonLogo";
+import LeftShape from "./assets/LeftShape";
+import RightShape from "./assets/RightShape";
 
 export default function GiveTicketScreen() {
   const { params } = useRouteParams<"GiveTicketScreen">();
@@ -20,6 +27,10 @@ export default function GiveTicketScreen() {
   });
 
   const { navigateTo } = useNavigation();
+
+  const { currentIntegrationId, integration } = useIntegrationContext();
+
+  const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
 
   useEffect(() => {
     const eventName = isOnboarding ? "P10_view" : "P11_view";
@@ -38,6 +49,22 @@ export default function GiveTicketScreen() {
     navigateTo("CausesScreen");
   };
 
+  const titleOnboarding = isRibonIntegration
+    ? t("onboardingRibonTitle")
+    : t("onboardingIntegrationTitle", {
+        integrationName: integration?.name,
+      });
+
+  const handleSubtitle = isRibonIntegration
+    ? t("subtitle")
+    : t("integrationSubtitle", {
+        integrationName: integration?.name,
+      });
+
+  const subtitle = isOnboarding ? t("onboardingSubtitle") : handleSubtitle;
+
+  const buttonText = isOnboarding ? t("onboardingButtonText") : t("button");
+
   return (
     <View style={S.container}>
       {!isOnboarding && (
@@ -52,18 +79,36 @@ export default function GiveTicketScreen() {
         </View>
       )}
       <View style={S.content}>
-        <Ticket />
+        {isRibonIntegration ? (
+          <Ticket />
+        ) : (
+          <View style={S.imageContainer}>
+            <View style={S.leftImage}>
+              <LeftShape />
+            </View>
+            <View style={S.integrationContainer}>
+              <RibonLogo />
+              <Text style={S.logoText}>+</Text>
+              <Image
+                source={{ uri: integration?.logo }}
+                style={S.integrationLogo}
+              />
+            </View>
+            <View style={S.rightImage}>
+              <RightShape />
+            </View>
+          </View>
+        )}
+
         <View style={S.textContainer}>
           <Text style={S.title}>
-            {isOnboarding ? t("onboardingTitle") : t("title")}
+            {isOnboarding ? titleOnboarding : t("title")}
           </Text>
-          <Text style={S.subtitle}>
-            {isOnboarding ? t("onboardingSubtitle") : t("subtitle")}
-          </Text>
+          <Text style={S.subtitle}>{subtitle}</Text>
         </View>
 
         <Button
-          text={isOnboarding ? t("onboardingButton") : t("button")}
+          text={buttonText}
           onPress={isOnboarding ? receiveTicket : navigateToTicketsPage}
           borderColor={theme.colors.brand.primary[600]}
           backgroundColor={theme.colors.brand.primary[600]}
@@ -79,7 +124,6 @@ export default function GiveTicketScreen() {
             width: 328,
           }}
         />
-
         {!isOnboarding && (
           <Tooltip tooltipText={t("ticketExplanation")}>
             <View style={S.ticketExplanationSection}>

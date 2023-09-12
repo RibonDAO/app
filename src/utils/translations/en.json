@@ -116,9 +116,10 @@
       "continue": "Continue"
     },
     "giveTicketScreen": {
-      "title": "You have 1 ticket!",
+      "title": "You have 1 special ticket",
       "subtitle": "Every day when you login in Ribon you get a new ticket.",
-      "button": "Donate ticket",
+      "integrationSubtitle": "{{integrationName}} gave you a ticket and you can donate it here at Ribon!",
+      "button": "Donate my ticket",
       "onboardingTitle": "Welcome to Ribon!",
       "onboardingSubtitle": "Your donation ticket is available",
       "onboardingButton": "Get my ticket",
