@@ -4,9 +4,8 @@ import { logEvent } from "services/analytics";
 import { ImageBackground, Text, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { openInWebViewer } from "lib/linkOpener";
-import { useLanguage } from "contexts/languageContext";
-import { Languages, theme } from "@ribon.io/shared";
 import { REACT_APP_ZENDESK_KEY } from "utils/constants/Application";
+import { theme } from "@ribon.io/shared";
 import S from "./styles";
 import cardBackground from "./assets/cardBackground.png";
 
@@ -18,16 +17,11 @@ function UserSupportSection({ source }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen.userSupportSection",
   });
-  const { currentLang } = useLanguage();
   const key = REACT_APP_ZENDESK_KEY;
 
   const handleClick = (src?: string) => {
     logEvent("supportBtn_click", { from: src });
-    if (currentLang === Languages.PT) {
-      openInWebViewer(t("link"));
-    } else {
-      openInWebViewer(t("linkEN", { key }));
-    }
+    openInWebViewer(t("link", { key }));
   };
 
   return (

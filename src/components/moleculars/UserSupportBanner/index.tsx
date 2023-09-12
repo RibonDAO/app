@@ -6,8 +6,6 @@ import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
 import RibonSunLeft from "assets/images/ribon-sun-left.png";
-import { Languages } from "@ribon.io/shared/types";
-import { useLanguage } from "contexts/languageContext";
 import { REACT_APP_ZENDESK_KEY } from "utils/constants/Application";
 import Banner from "../Banner";
 
@@ -18,18 +16,13 @@ function UserSupportBanner({ from }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "userSupportBanner",
   });
-  const { currentLang } = useLanguage();
   const key = REACT_APP_ZENDESK_KEY;
 
   const handleClick = () => {
     logEvent("supportBtn_click", {
       from,
     });
-    if (currentLang === Languages.PT) {
-      openInWebViewer(t("link"));
-    } else {
-      openInWebViewer(t("linkEN", { key }));
-    }
+    openInWebViewer(t("link", { key }));
   };
 
   return (
