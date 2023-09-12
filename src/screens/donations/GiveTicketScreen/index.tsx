@@ -79,9 +79,7 @@ export default function GiveTicketScreen() {
         </View>
       )}
       <View style={S.content}>
-        {isRibonIntegration ? (
-          <Ticket />
-        ) : (
+        {!isRibonIntegration && integration?.logo ? (
           <View style={S.imageContainer}>
             <View style={S.leftImage}>
               <LeftShape />
@@ -98,6 +96,8 @@ export default function GiveTicketScreen() {
               <RightShape />
             </View>
           </View>
+        ) : (
+          <Ticket />
         )}
 
         <View style={S.textContainer}>

@@ -21,7 +21,7 @@ function ReceiveTicketScreen(): JSX.Element {
           <TransferTicketAnimation
             onAnimationEnd={() => {
               setTimeout(() => {
-                navigateTo("CausesScreen");
+                navigateTo("GiveTicketScreen");
               }, 500);
             }}
             senderIcon={<SupportersIcon />}
