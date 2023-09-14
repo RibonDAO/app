@@ -40,12 +40,14 @@ function PostDonationScreen({
           name={cause.name}
           coverImage={cause.coverImage}
           isCause
+          from="givePosDonation_page"
         />
         <ContributionImage
           key={2}
           idCause={nonProfit.cause.id}
           name={nonProfit.name}
           coverImage={nonProfit.mainImage}
+          from="givePosDonation_page"
         />
       </>
     ),

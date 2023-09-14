@@ -6,12 +6,12 @@ import { useTranslation } from "react-i18next";
 import Image from "components/atomics/Image";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
-import { useCauseContributionContext } from "contexts/causesContributionContext";
-import { useCausesContext } from "contexts/causesContext";
 import Button from "components/atomics/buttons/Button";
 import { useImpactConversion } from "hooks/useImpactConversion";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { useLanguage } from "contexts/languageContext";
+import { logEvent } from "services/analytics";
+import { useEffect } from "react";
 import S from "./styles";
 
 type Props = {
@@ -19,6 +19,7 @@ type Props = {
   name: string;
   coverImage?: string;
   isCause?: boolean;
+  from?: string;
 };
 
 function ContributionImage({
@@ -26,25 +27,41 @@ function ContributionImage({
   coverImage = "",
   idCause,
   isCause = false,
+  from,
 }: Props) {
-  const { setChosenCauseId, setChosenCauseIndex } =
-    useCauseContributionContext();
-  const { causes } = useCausesContext();
   const { navigateTo } = useNavigation();
   const { currentLang } = useLanguage();
-  const { offer, contribution } = useImpactConversion();
+  const { offer, contribution, nonProfit } = useImpactConversion();
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen.contributionImage",
   });
 
-  const handleClick = () => {
-    setChosenCauseId(idCause);
-    setChosenCauseIndex(causes.findIndex((cause) => cause.id === idCause));
-
-    navigateTo("CheckoutScreen", { offer: offer?.priceCents });
-  };
-
   const currentCurrency = currentLang === "pt-BR" ? "brl" : "usd";
+
+  useEffect(() => {
+    logEvent(!isCause ? "contributeNgoBtn_view" : "contributeCauseBtn_view", {
+      from,
+      platform: "web",
+    });
+  }, []);
+
+  const handleClick = () => {
+    logEvent(!isCause ? "giveNgoBtn_start" : "giveCauseBtn_start", {
+      from,
+      coin: offer?.currency,
+      nonProfitId: nonProfit?.id,
+      causeId: nonProfit?.cause?.id,
+      offerId: offer?.id,
+      platform: "web",
+    });
+
+    navigateTo("CheckoutScreen", {
+      target: isCause ? "cause" : "non_profit",
+      targetId: isCause ? idCause : nonProfit?.id,
+      offer: offer ? offer.priceCents.toString() : "0",
+      current: currentCurrency,
+    });
+  };
 
   return (
     <TouchableOpacity
