@@ -95,9 +95,8 @@
       "title": "If you want, you can do more",
       "buttonText": "Donate later",
       "contributionImage": {
-        "donateAsCommunity": "Donate in a community for",
-        "labelTitle": "Boosted donation",
-        "donateDirectly": "Donate directly to"
+        "donateFor": "Donate {{value}} for",
+        "labelTitle": "Boosted donation"
       }
     },
     "receiveTicketScreen": {

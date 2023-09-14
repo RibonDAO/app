@@ -95,9 +95,8 @@
       "title": "Se quiser, você pode fazer mais",
       "buttonText": "Doar depois",
       "contributionImage": {
-        "donateAsCommunity": "Doe em comunidade para",
-        "labelTitle": "Doação impulsionada",
-        "donateDirectly": "Doar diretamente para"
+        "donateFor": "Doe {{value}} para",
+        "labelTitle": "Doação impulsionada"
       }
     },
     "receiveTicketScreen": {
