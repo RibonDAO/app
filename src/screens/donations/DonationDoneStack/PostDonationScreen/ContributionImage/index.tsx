@@ -8,6 +8,10 @@ import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import { useCausesContext } from "contexts/causesContext";
+import Button from "components/atomics/buttons/Button";
+import { useImpactConversion } from "hooks/useImpactConversion";
+import { formatPrice } from "lib/formatters/currencyFormatter";
+import { useLanguage } from "contexts/languageContext";
 import S from "./styles";
 
 type Props = {
@@ -27,6 +31,8 @@ function ContributionImage({
     useCauseContributionContext();
   const { causes } = useCausesContext();
   const { navigateTo } = useNavigation();
+  const { currentLang } = useLanguage();
+  const { offer, contribution } = useImpactConversion();
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen.contributionImage",
   });
@@ -34,8 +40,11 @@ function ContributionImage({
   const handleClick = () => {
     setChosenCauseId(idCause);
     setChosenCauseIndex(causes.findIndex((cause) => cause.id === idCause));
-    navigateTo("PromotersScreen", { isInCommunity: !!isCause });
+
+    navigateTo("CheckoutScreen", { offer: offer?.priceCents });
   };
+
+  const currentCurrency = currentLang === "pt-BR" ? "brl" : "usd";
 
   return (
     <TouchableOpacity
@@ -59,10 +68,32 @@ function ContributionImage({
       )}
 
       <View style={S.contentContainer}>
-        <Text style={S.title}>
-          {isCause ? t("donateAsCommunity") : t("donateDirectly")}
-        </Text>
-        <Text style={S.name}>{name}</Text>
+        <View style={S.bottomContainer}>
+          <View style={S.textContainer}>
+            <Text style={S.title}>
+              {t("donateFor", {
+                value: formatPrice(
+                  contribution?.value ?? offer?.priceValue ?? 0,
+                  offer?.currency ?? currentCurrency,
+                ),
+              })}
+            </Text>
+            <Text style={S.name}>{name}</Text>
+          </View>
+          <Button
+            text="Doar agora"
+            onPress={handleClick}
+            backgroundColor={theme.colors.brand.primary[600]}
+            borderColor={theme.colors.brand.primary[600]}
+            textColor={theme.colors.neutral10}
+            customStyles={{
+              position: "absolute",
+              bottom: 0,
+              width: 116,
+              right: 36,
+            }}
+          />
+        </View>
       </View>
 
       <View style={S.overlay} />

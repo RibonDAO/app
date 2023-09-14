@@ -15,6 +15,7 @@ function PostDonationScreen({
   route,
 }: RootStackScreenProps<"PostDonationScreen">) {
   usePageView("P8_view");
+
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen",
   });
