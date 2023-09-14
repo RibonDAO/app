@@ -9,6 +9,12 @@ export const REACT_APP_RIBON_API =
 export const REACT_APP_MIXPANEL_TOKEN =
   Constants.expoConfig?.extra?.REACT_APP_MIXPANEL_TOKEN;
 
+export const REACT_APP_CIO_SITE_ID =
+  Constants.expoConfig?.extra?.REACT_APP_CIO_SITE_ID;
+
+export const REACT_APP_CIO_API_KEY =
+  Constants.expoConfig?.extra?.REACT_APP_CIO_API_KEY;
+
 export const PLATFORM = "app";
 
 export const STRIPE_GLOBAL_PUBLISHABLE_KEY =

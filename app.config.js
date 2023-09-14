@@ -24,7 +24,7 @@ export default () => ({
           "config": {
             "organization": "ribon",
             "project": "app",
-            "authToken": "4957af0e317f490ab4c702c5a88a881d3233f518f2764481879932cb51a278d0"
+            "authToken": process.env.REACT_APP_SENTRY_AUTH_TOKEN,
           }
         }
       ]
@@ -71,11 +71,12 @@ export default () => ({
             "buildToolsVersion": "33.0.0"
           },
           "ios": {
-            "useFrameworks": "static"
+            "useFrameworks": "static",
+            "deploymentTarget": "13.0"
           }
         }
       ],
-      "sentry-expo",
+      ["sentry-expo"],
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
       "@react-native-firebase/crashlytics",
@@ -93,6 +94,24 @@ export default () => ({
           "enableGooglePay": true
         }
       ],
+      [
+        "customerio-expo-plugin",
+        {
+            android: {
+              googleServicesFile: "./files/google-services.json"
+            },
+            ios: {
+              pushNotification: {
+                useRichPush: false,
+                env: {
+                    siteId: process.env.REACT_APP_CIO_SITE_ID,
+                    apiKey: process.env.REACT_APP_CIO_API_KEY,
+                    region: "us"
+                 }
+              }
+            }
+        }
+      ],
     ],
     "extra": {
       "eas": {
@@ -103,9 +122,21 @@ export default () => ({
       "REACT_APP_MIXPANEL_TOKEN": process.env.REACT_APP_MIXPANEL_TOKEN,
       "REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY,
       "REACT_APP_STRIPE_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY,
+      "REACT_APP_CIO_SITE_ID": process.env.REACT_APP_CIO_SITE_ID,
+      "REACT_APP_CIO_API_KEY": process.env.REACT_APP_CIO_API_KEY,
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    }
+    },
+    "build": {
+      "experimental": {
+         "ios": {
+            "appExtensions": [{
+               "targetName": "NotificationService",
+               "bundleIdentifier": "org.reactjs.native.example.Ribon.richpush",
+            }],
+         },
+      },
+   },
   }
 });
