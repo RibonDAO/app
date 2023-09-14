@@ -7,7 +7,10 @@ import Icon from "components/atomics/Icon";
 
 import { theme } from "@ribon.io/shared";
 import { useLanguage } from "contexts/languageContext";
-import { add30DaysAndFormatDate } from "lib/formatters/dateFormatter";
+import {
+  add30DaysAndFormatDate,
+  stringToLocaleDateString,
+} from "lib/formatters/dateFormatter";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useNavigation } from "hooks/useNavigation";
 import { useRouteParams } from "hooks/useRouteParams";
@@ -27,6 +30,11 @@ export default function MonthlyContributionsScreen(): JSX.Element {
   const { navigateTo, popNavigation } = useNavigation();
 
   const { currentLang } = useLanguage();
+
+  const nextPaymetAttempt = (subscription: any) =>
+    subscription.nextPaymentAttempt
+      ? stringToLocaleDateString(subscription.nextPaymentAttempt)
+      : add30DaysAndFormatDate(subscription.createdAt, currentLang);
 
   const handleCancelContribution = () => {
     setModalVisible(!modalVisible);
@@ -53,7 +61,7 @@ export default function MonthlyContributionsScreen(): JSX.Element {
       <Text style={S.title}>{t("title")}</Text>
       <View style={S.subscriptionsContainer}>
         {subscriptions?.map((subscription: Subscription) => (
-          <View style={S.card}>
+          <View style={S.card} key={subscription.id}>
             <View style={S.iconTextContainer}>
               <Text style={S.amount}>{subscription.offer.price}</Text>
               <View style={S.iconContainer}>
@@ -75,10 +83,7 @@ export default function MonthlyContributionsScreen(): JSX.Element {
             <Text style={S.text}>
               {t("nextContribution")}
               <Text style={S.highlightedText}>
-                {add30DaysAndFormatDate(
-                  subscriptions![0].createdAt.toString(),
-                  currentLang,
-                )}
+                {nextPaymetAttempt(subscription)}
               </Text>
             </Text>
             {modalVisible && (
