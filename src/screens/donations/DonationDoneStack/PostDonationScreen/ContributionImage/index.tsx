@@ -39,14 +39,14 @@ function ContributionImage({
   const currentCurrency = currentLang === "pt-BR" ? "brl" : "usd";
 
   useEffect(() => {
-    logEvent(!isCause ? "contributeNgoBtn_view" : "contributeCauseBtn_view", {
+    logEvent(isCause ? "contributeCauseBtn_view" : "contributeNgoBtn_view", {
       from,
       platform: "web",
     });
   }, []);
 
   const handleClick = () => {
-    logEvent(!isCause ? "giveNgoBtn_start" : "giveCauseBtn_start", {
+    logEvent(isCause ? "giveCauseBtn_start" : "giveNgoBtn_start", {
       from,
       coin: offer?.currency,
       nonProfitId: nonProfit?.id,
