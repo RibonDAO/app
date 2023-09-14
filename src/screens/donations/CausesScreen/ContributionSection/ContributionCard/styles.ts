@@ -8,12 +8,11 @@ import { stylizedDisplayXs } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
   container: {
-    width: "110%",
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     padding: theme.spacingNative(16),
     backgroundColor: theme.colors.brand.primary[50],
-    left: -16,
   },
   title: {
     ...defaultBodyXsBold,

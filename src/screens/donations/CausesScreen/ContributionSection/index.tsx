@@ -23,7 +23,10 @@ export default function ContributionSection() {
           })}
         </Text>
         <Image style={S.image} source={{ uri: contribution?.image }} />
-        <ContributionCard from="donateTickets_page" />
+        <ContributionCard
+          from="donateTickets_page"
+          customStyle={{ width: "110%", left: -16 }}
+        />
       </View>
       <Text style={S.nonProfitTitle}>{t("nonProfits")}</Text>
     </>

@@ -13,8 +13,16 @@ import S from "./styles";
 
 type Props = {
   from: string;
+  isCause?: boolean;
+  causeId?: number;
+  customStyle?: any;
 };
-function ContributionCard({ from }: Props): JSX.Element {
+function ContributionCard({
+  from,
+  isCause = false,
+  causeId,
+  customStyle,
+}: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "contributionCard",
   });
@@ -27,25 +35,25 @@ function ContributionCard({ from }: Props): JSX.Element {
   const currentCurrency = currentLang === "pt-BR" ? "brl" : "usd";
 
   useEffect(() => {
-    logEvent("contributeNgoBth_view", {
+    logEvent(isCause ? "contributeCauseBth_view" : "contributeNgoBth_view", {
       from,
     });
   }, []);
 
   const navigateToCheckout = () => {
     navigateTo("CheckoutScreen", {
-      target: "non_profit",
-      targetId: nonProfit?.id,
+      target: isCause ? "cause" : "non_profit",
+      targetId: isCause ? causeId : nonProfit?.id,
       offer: offer ? offer.priceCents.toString() : "0",
       current: currentCurrency,
     });
 
-    logEvent("giveNgoBtn_start", {
+    logEvent(isCause ? "giveCauseBtn_start" : "giveNgoBtn_start", {
       from,
     });
   };
   return (
-    <View style={S.container}>
+    <View style={[S.container, customStyle]}>
       <Text style={S.title}>{t("titleCard")}</Text>
 
       <Text style={S.subtitle}>
