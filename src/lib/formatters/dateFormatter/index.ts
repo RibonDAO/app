@@ -1,7 +1,12 @@
 import { formattedShortLanguage } from "lib/currentLanguage";
 
 export function stringToLocaleDateString(dateString: string) {
-  return new Date(dateString).toLocaleDateString();
+  const formattedDate = dateString
+    .replace(/( \+|-)\d{4}$/, "")
+    .split(" ")
+    .join("T")
+    .slice(0, -1);
+  return new Date(formattedDate).toLocaleDateString();
 }
 
 export function formatDateTime(dateString: string): string {
