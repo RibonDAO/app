@@ -54,7 +54,13 @@ function ContributionCard({
   };
   return (
     <View style={[S.container, customStyle]}>
-      <Text style={S.title}>{t("titleCard")}</Text>
+      <Text style={S.title}>
+        {from === "donateTickets_page"
+          ? t("titleCard")
+          : t("titleCardWithName", {
+              name: nonProfit?.name,
+            })}
+      </Text>
 
       <Text style={S.subtitle}>
         {t("donate", {

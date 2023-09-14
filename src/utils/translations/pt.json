@@ -384,7 +384,7 @@
     "donate": "Doe {{value}}",
     "titleCard": "Faça ainda mais",
     "donateAndImpact": "Doe {{value}} e impacte",
-    "livesAmount": "+{{value}} vidas",
+    "titleCardWithName": "Ajude a {{name}}",
     "impactDescription": "com {{value}}"
   }
 }
