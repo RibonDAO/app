@@ -41,7 +41,6 @@ function ContributionImage({
   useEffect(() => {
     logEvent(isCause ? "contributeCauseBtn_view" : "contributeNgoBtn_view", {
       from,
-      platform: "web",
     });
   }, []);
 
@@ -52,7 +51,6 @@ function ContributionImage({
       nonProfitId: nonProfit?.id,
       causeId: nonProfit?.cause?.id,
       offerId: offer?.id,
-      platform: "web",
     });
 
     navigateTo("CheckoutScreen", {
