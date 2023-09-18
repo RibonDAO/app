@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { Text, View } from "react-native";
 import { TASKS, useTasks } from "utils/constants/Tasks";
 import CheckBox from "components/atomics/inputs/Checkbox";
@@ -80,6 +79,7 @@ export default function MonthlyTasksSection() {
           const taskDone = tasksState.find((obj) => obj.id === task.id)?.done;
           const navigateToTask = task.navigationCallback;
           const isCurrentPage = navigateToTask === CURRENT_PAGE;
+          // eslint-disable-next-line no-nested-ternary
           const navigationCallback = taskDone
             ? undefined
             : isCurrentPage

@@ -1,4 +1,3 @@
-/* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import React from "react";
 import { Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
@@ -22,7 +21,11 @@ export default function ContributionSection() {
             nonProfitName: nonProfit?.name,
           })}
         </Text>
-        <Image style={S.image} source={{ uri: contribution?.image }} />
+        <Image
+          style={S.image}
+          source={{ uri: contribution?.image }}
+          accessibilityIgnoresInvertColors
+        />
         <ContributionCard
           from="donateTickets_page"
           customStyle={{ width: "110%", left: -16 }}
