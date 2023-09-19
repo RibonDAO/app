@@ -32,6 +32,7 @@ import { useAppState } from "hooks/useAppState";
 import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
+import IntegrationBanner from "components/moleculars/IntegrationBanner";
 import usePageView from "hooks/usePageView";
 import { useCausesContext } from "contexts/causesContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
@@ -63,6 +64,7 @@ export default function CausesScreen() {
     refetch: refetchFirstAccessToIntegration,
     isLoading: loadingFirstAccessToIntegration,
   } = useFirstAccessToIntegration(currentIntegrationId);
+  const { integration } = useIntegrationContext();
 
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
@@ -195,6 +197,12 @@ export default function CausesScreen() {
     navigateTo("PromotersScreen");
   };
 
+  const shouldShowIntegrationBanner =
+    !integration?.name?.toLowerCase()?.includes("ribon") &&
+    integration &&
+    canDonate &&
+    hasTickets;
+
   const handleHideNotificationClick = async () => {
     const hideAlert = () => {
       setLocalStorageItem(NOTIFICATION_CARD_VISIBLE_KEY, "false");
@@ -253,6 +261,9 @@ export default function CausesScreen() {
           isFirstAccessToIntegration={isFirstAccessToIntegration}
         />
         {renderNotificationCard()}
+        {shouldShowIntegrationBanner && (
+          <IntegrationBanner integration={integration} />
+        )}
         <Text style={S.title}>{t("title")}</Text>
         <ScrollView
           style={S.groupButtonsContainer}

@@ -350,6 +350,11 @@
     "text": "Dúvidas, ideias, estornos. Estamos aqui!",
     "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0"
   },
+  "integrationBanner": {
+    "title": "Ribon + {{integrationName}}",
+    "text": "Doe aqui na Ribon o ticket que você recebeu de {{integrationName}}",
+    "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0"
+  },
   "contributionStatsPage": {
     "title": "Você doou {{amount}} para {{cause}}",
     "engagementSection": {
