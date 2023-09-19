@@ -51,6 +51,12 @@
         "primaryButtonText": "Contact us",
         "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0"
       },
+      "contributionSection": {
+        "title": "Monthly contribution",
+        "description": "Donate monthly to your favorite projects",
+        "primaryButtonText": "Donate",
+        "link": "https://ribon.io/en/privacy-policy/#terms"
+      },
       "impactPrefix": "Donate",
       "labelText": "Learn more",
       "whatIsATicket": "What is a ticket?",
@@ -95,9 +101,8 @@
       "title": "If you want, you can do more",
       "buttonText": "Donate later",
       "contributionImage": {
-        "donateAsCommunity": "Donate in a community for",
-        "labelTitle": "Boosted donation",
-        "donateDirectly": "Donate directly to"
+        "donateFor": "Donate {{value}} for",
+        "labelTitle": "Boosted donation"
       }
     },
     "receiveTicketScreen": {
@@ -376,5 +381,17 @@
     "giftCycleSection": {
       "realTimeDonationLabel": "Updated in real time"
     }
+  },
+  "contributionSection": {
+    "title": "Amazing! Thank you for helping {{nonProfitName}}",
+    "nonProfits": "NGOs"
+  },
+  "contributionCard": {
+    "button": "Donate",
+    "donate": "Donate {{value}}",
+    "donateAndImpact": "Donate {{value}} and impact",
+    "titleCardWithName": "Help {{name}}",
+    "impactDescription": "with {{value}}",
+    "titleCard": "Do even more"
   }
 }

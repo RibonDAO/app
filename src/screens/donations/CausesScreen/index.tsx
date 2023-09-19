@@ -35,11 +35,11 @@ import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import usePageView from "hooks/usePageView";
 import { useCausesContext } from "contexts/causesContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
-import useDevice from "hooks/apiHooks/useDevice";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
+import ContributionSection from "./ContributionSection";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -83,8 +83,6 @@ export default function CausesScreen() {
       refetchCanDonate();
     },
   });
-  const { registerDevice } = useDevice();
-  registerDevice();
 
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
@@ -212,7 +210,6 @@ export default function CausesScreen() {
           message: t("enableNotification.successToastMessage"),
           position: "bottom",
         });
-        registerDevice();
         hideAlert();
       }
     } catch (e) {
@@ -252,12 +249,13 @@ export default function CausesScreen() {
             setStoriesVisible={setStoriesVisible}
           />
         )}
+        {!canDonate && <ContributionSection />}
         <TicketSection
           canDonate={canDonate}
           isFirstAccessToIntegration={isFirstAccessToIntegration}
         />
         {renderNotificationCard()}
-        <Text style={S.title}>{t("title")}</Text>
+        {canDonate && <Text style={S.title}>{t("title")}</Text>}
         <ScrollView
           style={S.groupButtonsContainer}
           horizontal

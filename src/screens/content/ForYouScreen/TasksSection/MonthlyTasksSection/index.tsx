@@ -12,7 +12,9 @@ import { useForYouTabsContext } from "contexts/forYouTabsContext";
 
 import Tag from "components/atomics/Tag";
 import { beginningOfToday } from "lib/dateUtils";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { useImpactConversion } from "hooks/useImpactConversion";
+import ContributionCard from "screens/donations/CausesScreen/ContributionSection/ContributionCard";
 import S from "./styles";
 
 export default function MonthlyTasksSection() {
@@ -25,6 +27,7 @@ export default function MonthlyTasksSection() {
   const { tasksState, tasksStatistics, registerAction } = useTasksContext();
   const { navigateTo } = useNavigation();
 
+  const { contribution } = useImpactConversion();
   const { setIndex } = useForYouTabsContext();
 
   const showTagNew = () =>
@@ -76,6 +79,7 @@ export default function MonthlyTasksSection() {
           const taskDone = tasksState.find((obj) => obj.id === task.id)?.done;
           const navigateToTask = task.navigationCallback;
           const isCurrentPage = navigateToTask === CURRENT_PAGE;
+          // eslint-disable-next-line no-nested-ternary
           const navigationCallback = taskDone
             ? undefined
             : isCurrentPage
@@ -98,6 +102,12 @@ export default function MonthlyTasksSection() {
             />
           );
         })}
+      {contribution && (
+        <ContributionCard
+          from="tasks_page"
+          customStyle={{ width: "110%", left: -16, marginTop: 24 }}
+        />
+      )}
     </View>
   );
 }

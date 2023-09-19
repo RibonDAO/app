@@ -1,5 +1,9 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import {
+  defaultBodyMdBold,
+  defaultBodySmRegular,
+} from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -52,13 +56,12 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   name: {
+    ...defaultBodyMdBold,
     color: theme.colors.neutral[25],
-    fontSize: 20,
   },
   title: {
-    fontSize: 14,
+    ...defaultBodySmRegular,
     color: theme.colors.neutral10,
-    marginBottom: 4,
   },
   intersection: {
     position: "absolute",
@@ -75,6 +78,15 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     elevation: 2,
     backgroundColor: theme.colors.neutral[800],
+  },
+  textContainer: {
+    width: "100%",
+  },
+  bottomContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 

@@ -6,8 +6,12 @@ import { useTranslation } from "react-i18next";
 import Image from "components/atomics/Image";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
-import { useCauseContributionContext } from "contexts/causesContributionContext";
-import { useCausesContext } from "contexts/causesContext";
+import Button from "components/atomics/buttons/Button";
+import { useImpactConversion } from "hooks/useImpactConversion";
+import { formatPrice } from "lib/formatters/currencyFormatter";
+import { useLanguage } from "contexts/languageContext";
+import { logEvent } from "services/analytics";
+import { useEffect } from "react";
 import S from "./styles";
 
 type Props = {
@@ -15,6 +19,7 @@ type Props = {
   name: string;
   coverImage?: string;
   isCause?: boolean;
+  from?: string;
 };
 
 function ContributionImage({
@@ -22,19 +27,38 @@ function ContributionImage({
   coverImage = "",
   idCause,
   isCause = false,
+  from,
 }: Props) {
-  const { setChosenCauseId, setChosenCauseIndex } =
-    useCauseContributionContext();
-  const { causes } = useCausesContext();
   const { navigateTo } = useNavigation();
+  const { currentLang } = useLanguage();
+  const { offer, contribution, nonProfit } = useImpactConversion();
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen.contributionImage",
   });
 
+  const currentCurrency = currentLang === "pt-BR" ? "brl" : "usd";
+
+  useEffect(() => {
+    logEvent(isCause ? "contributeCauseBtn_view" : "contributeNgoBtn_view", {
+      from,
+    });
+  }, []);
+
   const handleClick = () => {
-    setChosenCauseId(idCause);
-    setChosenCauseIndex(causes.findIndex((cause) => cause.id === idCause));
-    navigateTo("PromotersScreen", { isInCommunity: !!isCause });
+    logEvent(isCause ? "giveCauseBtn_start" : "giveNgoBtn_start", {
+      from,
+      coin: offer?.currency,
+      nonProfitId: nonProfit?.id,
+      causeId: nonProfit?.cause?.id,
+      offerId: offer?.id,
+    });
+
+    navigateTo("CheckoutScreen", {
+      target: isCause ? "cause" : "non_profit",
+      targetId: isCause ? idCause : nonProfit?.id,
+      offer: offer ? offer.priceCents.toString() : "0",
+      current: currentCurrency,
+    });
   };
 
   return (
@@ -59,10 +83,32 @@ function ContributionImage({
       )}
 
       <View style={S.contentContainer}>
-        <Text style={S.title}>
-          {isCause ? t("donateAsCommunity") : t("donateDirectly")}
-        </Text>
-        <Text style={S.name}>{name}</Text>
+        <View style={S.bottomContainer}>
+          <View style={S.textContainer}>
+            <Text style={S.title}>
+              {t("donateFor", {
+                value: formatPrice(
+                  contribution?.value ?? offer?.priceValue ?? 0,
+                  offer?.currency ?? currentCurrency,
+                ),
+              })}
+            </Text>
+            <Text style={S.name}>{name}</Text>
+          </View>
+          <Button
+            text="Doar agora"
+            onPress={handleClick}
+            backgroundColor={theme.colors.brand.primary[600]}
+            borderColor={theme.colors.brand.primary[600]}
+            textColor={theme.colors.neutral10}
+            customStyles={{
+              position: "absolute",
+              bottom: 0,
+              width: 116,
+              right: 36,
+            }}
+          />
+        </View>
       </View>
 
       <View style={S.overlay} />
