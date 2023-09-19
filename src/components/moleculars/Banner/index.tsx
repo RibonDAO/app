@@ -1,6 +1,5 @@
 /* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import { theme } from "@ribon.io/shared/styles";
-import React from "react";
 import Icon, { Props as IconProps } from "components/atomics/Icon";
 import ArrowRight from "components/vectors/ArrowRight";
 import { useState } from "react";

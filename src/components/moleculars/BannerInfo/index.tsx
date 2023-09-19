@@ -1,6 +1,5 @@
 /* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import { theme } from "@ribon.io/shared/styles";
-import React from "react";
 import { TouchableOpacity, View, Text, Image } from "react-native";
 import {
   defaultBodyMdSemibold,

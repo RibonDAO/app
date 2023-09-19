@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 
-import React from "react";
 import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
 import { Integration } from "@ribon.io/shared";

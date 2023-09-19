@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 
 import { logEvent } from "services/analytics";
-import React from "react";
 import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
