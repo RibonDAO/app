@@ -6,7 +6,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { View, Text } from "react-native";
+import { View, Text, Platform, Linking } from "react-native";
 import { logEvent } from "services/analytics";
 
 import S from "./styles";
@@ -50,18 +50,25 @@ function ContributionCard({
     });
   }, []);
 
+  const target = isCause ? "cause" : "non_profit";
+  const targetId = isCause ? cause?.id : nonProfit?.id;
+
   const navigateToCheckout = () => {
     logEvent(isCause ? "giveCauseBtn_start" : "giveNgoBtn_start", {
       from,
     });
 
-    navigateTo("CheckoutScreen", {
-      target: isCause ? "cause" : "non_profit",
-      targetId: isCause ? cause?.id : nonProfit?.id,
-      offer: offer ? offer.priceCents : 0,
-      currency: currentCurrency,
-      subscription: false,
-    });
+    if (Platform.OS === "ios") {
+      const url = `https://dapp.ribon.io/promoters/recurrence?target=${target}&target_id=${targetId}&currency=${offer?.currency}&offer=${offer?.priceCents}`;
+      Linking.openURL(url);
+    } else {
+      navigateTo("CheckoutScreen", {
+        targetId,
+        offer: offer ? offer.priceCents : 0,
+        currency: currentCurrency,
+        subscription: false,
+      });
+    }
   };
 
   const descriptionContribution = isCause ? description : descriptionImpact;

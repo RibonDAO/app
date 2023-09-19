@@ -65,16 +65,19 @@ function CommunityDonationsImpactCards(): JSX.Element {
           buttonText={t("community.buttonText")}
           image={<ImpactDonationsVector />}
         />
-        <ContributionCard
-          from="impact_page"
-          isCause
-          cause={nonProfit?.cause}
-          description={t("community.contributionDescription")}
-          impact={`+${formatPrice(
-            contribution?.communityValue ?? Number(offer?.priceValue ?? 0) / 5,
-            "brl",
-          )}`}
-        />
+        {contribution && (
+          <ContributionCard
+            from="impact_page"
+            isCause
+            cause={nonProfit?.cause}
+            description={t("community.contributionDescription")}
+            impact={`+${formatPrice(
+              contribution?.communityValue ??
+                Number(offer?.priceValue ?? 0) / 5,
+              "brl",
+            )}`}
+          />
+        )}
       </>
     );
   }
