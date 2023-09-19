@@ -267,6 +267,7 @@ export default function CausesScreen() {
           <IntegrationBanner integration={integration} />
         )}
         {canDonate && <Text style={S.title}>{t("title")}</Text>}
+
         <ScrollView
           style={S.groupButtonsContainer}
           horizontal
