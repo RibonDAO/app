@@ -101,6 +101,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   ReceiveTicketScreen: undefined;
   GiveTicketScreen: GiveTicketScreenParamList;
+  ZeroTicketScreen: undefined;
   CausesScreen: undefined;
   ForYouScreen: ForYouScreenParamsList;
   PostDonationScreen: PostDonationScreenParams;
