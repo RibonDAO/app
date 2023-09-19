@@ -1,23 +1,20 @@
 import { useNavigation } from "hooks/useNavigation";
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { View, Text, TouchableOpacity } from "react-native";
 import ArrowLeft from "components/vectors/ArrowLeft";
-import { logEvent } from "services/analytics";
 import ZeroTicket from "components/vectors/ZeroTicket";
+import usePageView from "hooks/usePageView";
 import S from "./styles";
 import ContributionCard from "../CausesScreen/ContributionSection/ContributionCard";
 
 export default function ZeroTicketScreen() {
+  usePageView("P14_view");
   const { t } = useTranslation("translation", {
     keyPrefix: "content.zeroTicketScreen",
   });
 
   const { navigateTo } = useNavigation();
-
-  useEffect(() => {
-    logEvent("P14_view");
-  }, []);
 
   const handleBackButtonClick = () => {
     navigateTo("CausesScreen");
