@@ -1,4 +1,4 @@
-import { Cause, theme } from "@ribon.io/shared";
+import { Cause, Currencies, theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
 import { useLanguage } from "contexts/languageContext";
 import { useImpactConversion } from "hooks/useImpactConversion";
@@ -41,7 +41,8 @@ function ContributionCard({
 
   const { navigateTo } = useNavigation();
 
-  const currentCurrency = currentLang === "pt-BR" ? "brl" : "usd";
+  const currentCurrency =
+    currentLang === "pt-BR" ? Currencies.BRL : Currencies.USD;
 
   useEffect(() => {
     logEvent(isCause ? "contributeCauseBth_view" : "contributeNgoBth_view", {
@@ -54,7 +55,7 @@ function ContributionCard({
       target: isCause ? "cause" : "non_profit",
       targetId: isCause ? cause?.id : nonProfit?.id,
       offer: offer ? offer.priceCents.toString() : "0",
-      current: currentCurrency,
+      currency: currentCurrency,
     });
 
     logEvent(isCause ? "giveCauseBtn_start" : "giveNgoBtn_start", {
