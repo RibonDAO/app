@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodySmRegular } from "styles/typography/default";
+import { defaultBodySmMedium } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacingNative(4),
   },
   text: {
-    ...defaultBodySmRegular,
+    ...defaultBodySmMedium,
     marginTop: theme.spacingNative(4),
     padding: theme.spacingNative(1),
   },
