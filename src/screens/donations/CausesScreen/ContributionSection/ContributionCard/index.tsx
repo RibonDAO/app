@@ -51,15 +51,16 @@ function ContributionCard({
   }, []);
 
   const navigateToCheckout = () => {
+    logEvent(isCause ? "giveCauseBtn_start" : "giveNgoBtn_start", {
+      from,
+    });
+
     navigateTo("CheckoutScreen", {
       target: isCause ? "cause" : "non_profit",
       targetId: isCause ? cause?.id : nonProfit?.id,
-      offer: offer ? offer.priceCents.toString() : "0",
+      offer: offer ? offer.priceCents : 0,
       currency: currentCurrency,
-    });
-
-    logEvent(isCause ? "giveCauseBtn_start" : "giveNgoBtn_start", {
-      from,
+      subscription: false,
     });
   };
 
