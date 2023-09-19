@@ -304,7 +304,8 @@
           "community": {
             "title": "Suas doações em comunidade aparecerão aqui.",
             "description": "Você não fez doações em comunidade ainda, que tal fazer sua primeira?",
-            "buttonText": "Doar em comunidade"
+            "buttonText": "Doar em comunidade",
+            "contributionDescription": "A comunidade impulsionará sua doação com"
           },
           "ticket": {
             "title": "Suas doações de tickets aparecerão aqui.",

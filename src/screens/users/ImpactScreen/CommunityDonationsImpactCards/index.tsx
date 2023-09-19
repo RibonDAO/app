@@ -14,6 +14,8 @@ import {
   useLegacyContributions,
 } from "@ribon.io/shared/hooks";
 import { useFocusEffect } from "@react-navigation/native";
+import ContributionCard from "screens/donations/CausesScreen/ContributionSection/ContributionCard";
+import { useImpactConversion } from "hooks/useImpactConversion";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import ZeroDonationsSection from "../ZeroDonationsSection";
 import S from "./styles";
@@ -23,6 +25,8 @@ function CommunityDonationsImpactCards(): JSX.Element {
   const { useLabelableContributions } = useContributions(currentUser?.id);
   const { data, isLoading, refetch } = useLabelableContributions();
   const { legacyContributions } = useLegacyContributions(currentUser?.id);
+
+  const { contribution, offer, nonProfit } = useImpactConversion();
 
   useFocusEffect(
     useCallback(() => {
@@ -53,13 +57,25 @@ function CommunityDonationsImpactCards(): JSX.Element {
 
   function renderZeroDonationsSection() {
     return (
-      <ZeroDonationsSection
-        title={t("community.title")}
-        onButtonPress={navigateToPromotersScreen}
-        description={t("community.description")}
-        buttonText={t("community.buttonText")}
-        image={<ImpactDonationsVector />}
-      />
+      <>
+        <ZeroDonationsSection
+          title={t("community.title")}
+          onButtonPress={navigateToPromotersScreen}
+          description={t("community.description")}
+          buttonText={t("community.buttonText")}
+          image={<ImpactDonationsVector />}
+        />
+        <ContributionCard
+          from="impact_page"
+          isCause
+          cause={nonProfit?.cause}
+          description={t("community.contributionDescription")}
+          impact={`+${formatPrice(
+            contribution?.communityValue ?? Number(offer?.priceValue ?? 0) / 5,
+            "brl",
+          )}`}
+        />
+      </>
     );
   }
 

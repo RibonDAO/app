@@ -1,4 +1,4 @@
-import { theme } from "@ribon.io/shared";
+import { Cause, theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
 import { useLanguage } from "contexts/languageContext";
 import { useImpactConversion } from "hooks/useImpactConversion";
@@ -14,21 +14,30 @@ import S from "./styles";
 type Props = {
   from: string;
   isCause?: boolean;
-  causeId?: number;
+  cause?: Cause;
   customStyle?: any;
+  impact?: string;
+  description?: any;
 };
 function ContributionCard({
   from,
   isCause = false,
-  causeId,
+  cause,
   customStyle,
+  impact,
+  description,
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "contributionCard",
   });
 
   const { currentLang } = useLanguage();
-  const { contribution, offer, description, nonProfit } = useImpactConversion();
+  const {
+    contribution,
+    offer,
+    description: descriptionImpact,
+    nonProfit,
+  } = useImpactConversion();
 
   const { navigateTo } = useNavigation();
 
@@ -43,7 +52,7 @@ function ContributionCard({
   const navigateToCheckout = () => {
     navigateTo("CheckoutScreen", {
       target: isCause ? "cause" : "non_profit",
-      targetId: isCause ? causeId : nonProfit?.id,
+      targetId: isCause ? cause?.id : nonProfit?.id,
       offer: offer ? offer.priceCents.toString() : "0",
       current: currentCurrency,
     });
@@ -52,13 +61,17 @@ function ContributionCard({
       from,
     });
   };
+
+  const descriptionContribution = isCause ? description : descriptionImpact;
+
+  const impactContribution = isCause ? impact : contribution?.impact;
   return (
     <View style={[S.container, customStyle]}>
       <Text style={S.title}>
         {from === "donateTickets_page"
           ? t("titleCard")
           : t("titleCardWithName", {
-              name: nonProfit?.name,
+              name: isCause ? cause?.name : nonProfit?.name,
             })}
       </Text>
 
@@ -72,7 +85,10 @@ function ContributionCard({
       </Text>
 
       <Text style={S.text}>
-        {description} {contribution?.impact && <b>{contribution.impact}</b>}
+        {descriptionContribution}{" "}
+        <Text style={{ fontWeight: "bold", fontFamily: "Inter700" }}>
+          {impactContribution}
+        </Text>
       </Text>
 
       <Button
