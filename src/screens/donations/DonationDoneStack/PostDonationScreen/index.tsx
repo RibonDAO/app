@@ -15,6 +15,7 @@ function PostDonationScreen({
   route,
 }: RootStackScreenProps<"PostDonationScreen">) {
   usePageView("P8_view");
+
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen",
   });
@@ -39,12 +40,14 @@ function PostDonationScreen({
           name={cause.name}
           coverImage={cause.coverImage}
           isCause
+          from="givePosDonation_page"
         />
         <ContributionImage
           key={2}
           idCause={nonProfit.cause.id}
           name={nonProfit.name}
           coverImage={nonProfit.mainImage}
+          from="givePosDonation_page"
         />
       </>
     ),

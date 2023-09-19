@@ -95,9 +95,8 @@
       "title": "Se quiser, você pode fazer mais",
       "buttonText": "Doar depois",
       "contributionImage": {
-        "donateAsCommunity": "Doe em comunidade para",
-        "labelTitle": "Doação impulsionada",
-        "donateDirectly": "Doar diretamente para"
+        "donateFor": "Doe {{value}} para",
+        "labelTitle": "Doação impulsionada"
       }
     },
     "receiveTicketScreen": {
@@ -380,5 +379,17 @@
     "giftCycleSection": {
       "realTimeDonationLabel": "Atualizado em tempo real"
     }
+  },
+  "contributionSection": {
+    "title": "Que incrível! Obrigado por ajudar {{nonProfitName}}",
+    "nonProfits": "ONGs"
+  },
+  "contributionCard": {
+    "button": "Doar",
+    "donate": "Doe {{value}}",
+    "titleCard": "Faça ainda mais",
+    "donateAndImpact": "Doe {{value}} e impacte",
+    "titleCardWithName": "Ajude a {{name}}",
+    "impactDescription": "com {{value}}"
   }
 }
