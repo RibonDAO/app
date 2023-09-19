@@ -374,5 +374,17 @@
     "giftCycleSection": {
       "realTimeDonationLabel": "Atualizado em tempo real"
     }
+  },
+  "contributionSection": {
+    "title": "Que incrível! Obrigado por ajudar {{nonProfitName}}",
+    "nonProfits": "ONGs"
+  },
+  "contributionCard": {
+    "button": "Doar",
+    "donate": "Doe {{value}}",
+    "titleCard": "Faça ainda mais",
+    "donateAndImpact": "Doe {{value}} e impacte",
+    "titleCardWithName": "Ajude a {{name}}",
+    "impactDescription": "com {{value}}"
   }
 }
