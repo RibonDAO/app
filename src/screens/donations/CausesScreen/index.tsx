@@ -39,6 +39,7 @@ import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
+import ContributionSection from "./ContributionSection";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -248,12 +249,13 @@ export default function CausesScreen() {
             setStoriesVisible={setStoriesVisible}
           />
         )}
+        {!canDonate && <ContributionSection />}
         <TicketSection
           canDonate={canDonate}
           isFirstAccessToIntegration={isFirstAccessToIntegration}
         />
         {renderNotificationCard()}
-        <Text style={S.title}>{t("title")}</Text>
+        {canDonate && <Text style={S.title}>{t("title")}</Text>}
         <ScrollView
           style={S.groupButtonsContainer}
           horizontal

@@ -23,8 +23,7 @@ export default () => ({
           "file": "sentry-expo/upload-sourcemaps",
           "config": {
             "organization": "ribon",
-            "project": "app",
-            "authToken": "4957af0e317f490ab4c702c5a88a881d3233f518f2764481879932cb51a278d0"
+            "project": "app"
           }
         }
       ]
