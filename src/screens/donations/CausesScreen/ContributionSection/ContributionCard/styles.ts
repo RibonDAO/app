@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     padding: theme.spacingNative(16),
+    paddingTop: theme.spacingNative(24),
+    paddingBottom: theme.spacingNative(24),
     backgroundColor: theme.colors.brand.primary[50],
   },
   title: {

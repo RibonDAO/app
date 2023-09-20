@@ -24,7 +24,6 @@ import { logEvent } from "services/analytics";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { REACT_APP_ZENDESK_KEY } from "utils/constants/Application";
 import ConfigItem from "../ConfigItem";
-import BlockedDonationModal from "./BlockedDonationModal";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import DeleteAccountModal from "./DeleteAccountModal";
@@ -43,8 +42,6 @@ function LayoutHeader({
   });
   const [menuVisible, setMenuVisible] = useState(false);
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
-  const [blockedDonationModalVisible, setBlockedDonationModalVisible] =
-    useState(false);
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
     useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
@@ -90,10 +87,6 @@ function LayoutHeader({
     }
   };
 
-  const toggleBlockedDonationModal = () => {
-    setBlockedDonationModalVisible(!ticketModalVisible);
-  };
-
   const toggleDeleteAccountModal = () => {
     toggleModal();
 
@@ -121,17 +114,6 @@ function LayoutHeader({
     );
   };
 
-  const renderBlockedDonationModal = () => {
-    if (hideTicket) return <View />;
-
-    return (
-      <BlockedDonationModal
-        visible={blockedDonationModalVisible}
-        setVisible={setBlockedDonationModalVisible}
-      />
-    );
-  };
-
   const renderDeleteAccountModal = () => (
     <DeleteAccountModal
       visible={deleteAccountModalVisible}
@@ -143,7 +125,7 @@ function LayoutHeader({
     if (hasTickets()) {
       navigateTo("GiveTicketScreen");
     } else {
-      toggleBlockedDonationModal();
+      navigateTo("ZeroTicketScreen");
     }
   };
 
@@ -349,8 +331,6 @@ function LayoutHeader({
       </TouchableOpacity>
 
       {renderTicketModal()}
-
-      {renderBlockedDonationModal()}
 
       {renderConfigModal()}
 

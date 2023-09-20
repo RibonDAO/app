@@ -130,6 +130,10 @@
       "whatIsATicket": "What is a ticket?",
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in."
     },
+    "zeroTicketScreen": {
+      "title": "You have used all your tickets",
+      "subtitle": "How about making a paid donation?"
+    },
     "forYouScreen": {
       "newsSection": {
         "title": "For you",

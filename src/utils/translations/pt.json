@@ -124,6 +124,10 @@
       "whatIsATicket": "O que é um ticket?",
       "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon."
     },
+    "zeroTicketScreen": {
+      "title": "Você usou todos seus tickets",
+      "subtitle": "Que tal fazer uma doação paga?"
+    },
     "forYouScreen": {
       "newsSection": {
         "title": "Para você",
