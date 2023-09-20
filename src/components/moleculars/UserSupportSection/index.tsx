@@ -17,6 +17,7 @@ function UserSupportSection({ source }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen.userSupportSection",
   });
+
   const key = REACT_APP_ZENDESK_KEY;
 
   const handleClick = (src?: string) => {

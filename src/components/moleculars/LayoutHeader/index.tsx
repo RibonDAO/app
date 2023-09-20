@@ -154,7 +154,9 @@ function LayoutHeader({
   const linkToSupport = () => {
     const key = REACT_APP_ZENDESK_KEY;
     openInWebViewer(t("supportLink", { key }));
-    logEvent("supportBtn_click", { from: "config_page" });
+    logEvent("supportBtn_click", {
+      from: "config_page",
+    });
   };
 
   const notificationsSwitch = () => (
