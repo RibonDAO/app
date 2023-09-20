@@ -62,8 +62,9 @@ function ContributionCard({
       const url = `https://dapp.ribon.io/promoters/recurrence?target=${target}&target_id=${targetId}&currency=${offer?.currency}&offer=${offer?.priceCents}`;
       Linking.openURL(url);
     } else {
-      navigateTo("CheckoutScreen", {
+      navigateTo("RecurrenceScreen", {
         targetId,
+        target,
         offer: offer ? offer.priceCents : 0,
         currency: currentCurrency,
         subscription: false,

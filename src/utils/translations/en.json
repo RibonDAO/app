@@ -130,6 +130,10 @@
       "whatIsATicket": "What is a ticket?",
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in."
     },
+    "zeroTicketScreen": {
+      "title": "You have used all your tickets",
+      "subtitle": "How about making a paid donation?"
+    },
     "forYouScreen": {
       "newsSection": {
         "title": "For you",
@@ -356,6 +360,10 @@
     "title": "Access user support",
     "text": "Questions, ideias, refunds. We’re here!",
     "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Hi+Ribon%2C+let's+talk%3F+&type=phone_number&app_absent=0"
+  },
+  "integrationBanner": {
+    "title": "Ribon + {{integrationName}}",
+    "text": "Here at Ribon you donate tickets gotten from {{integrationName}}"
   },
   "contributionStatsPage": {
     "title": "You donated {{amount}} for {{cause}}",
