@@ -1,5 +1,5 @@
-const version = "5.2.0";
-const buildNumber = 335;
+const version = "5.2.1";
+const buildNumber = 336;
 
 export default () => ({
   "expo": {
@@ -102,6 +102,7 @@ export default () => ({
       "REACT_APP_MIXPANEL_TOKEN": process.env.REACT_APP_MIXPANEL_TOKEN,
       "REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY,
       "REACT_APP_STRIPE_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY,
+      "REACT_APP_ZENDESK_KEY": process.env.REACT_APP_ZENDESK_KEY
     },
     "runtimeVersion": {
       "policy": "appVersion"
