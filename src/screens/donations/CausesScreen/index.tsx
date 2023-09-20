@@ -38,6 +38,7 @@ import { useCausesContext } from "contexts/causesContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
+import { useCurrentUser } from "contexts/currentUserContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
@@ -77,6 +78,7 @@ export default function CausesScreen() {
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets } = useTickets();
+  const { currentUser } = useCurrentUser();
   const [isNotificationCardVisible, setNotificationCardVisible] =
     useState(false);
 
@@ -266,8 +268,11 @@ export default function CausesScreen() {
         {shouldShowIntegrationBanner && (
           <IntegrationBanner integration={integration} />
         )}
-        {!canDonate && <ContributionSection />}
-        {canDonate ? <Text style={S.title}>{t("title")}</Text> : null}
+        {!canDonate && currentUser ? (
+          <ContributionSection />
+        ) : (
+          <Text style={S.title}>{t("title")}</Text>
+        )}
 
         <ScrollView
           style={S.groupButtonsContainer}
