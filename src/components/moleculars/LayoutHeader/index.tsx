@@ -156,7 +156,6 @@ function LayoutHeader({
     openInWebViewer(t("supportLink", { key }));
     logEvent("supportBtn_click", {
       from: "config_page",
-      email: currentUser?.email,
     });
   };
 

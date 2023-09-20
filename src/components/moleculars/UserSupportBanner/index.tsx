@@ -6,7 +6,6 @@ import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
 import RibonSunLeft from "assets/images/ribon-sun-left.png";
 import { REACT_APP_ZENDESK_KEY } from "utils/constants/Application";
-import { useCurrentUser } from "contexts/currentUserContext";
 import Banner from "../Banner";
 
 type Props = {
@@ -17,12 +16,10 @@ function UserSupportBanner({ from }: Props): JSX.Element {
     keyPrefix: "userSupportBanner",
   });
   const key = REACT_APP_ZENDESK_KEY;
-  const { currentUser } = useCurrentUser();
 
   const handleClick = () => {
     logEvent("supportBtn_click", {
       from,
-      email: currentUser?.email,
     });
     openInWebViewer(t("link", { key }));
   };
