@@ -360,6 +360,10 @@
     "text": "Questions, ideias, refunds. We’re here!",
     "link": "https://v2.zopim.com/widget/popout.html?key={{key}}"
   },
+  "integrationBanner": {
+    "title": "Ribon + {{integrationName}}",
+    "text": "Here at Ribon you donate tickets gotten from {{integrationName}}"
+  },
   "contributionStatsPage": {
     "title": "You donated {{amount}} for {{cause}}",
     "engagementSection": {

@@ -9,7 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-.tool-versiona
+.tool-versions
 
 # macOS
 .DS_Store
@@ -17,3 +17,4 @@ web-build/
 coverage/
 .env
 bin/
+
