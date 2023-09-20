@@ -315,7 +315,8 @@
           "community": {
             "title": "Your community donations will appear here.",
             "description": "You have not made community donations yet, why not try your first one?",
-            "buttonText": "Donate in community"
+            "buttonText": "Donate in community",
+            "contributionDescription": "The community will boost your donation with"
           },
           "ticket": {
             "title": "Your ticket donations will appear here.",

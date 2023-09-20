@@ -1,4 +1,4 @@
-import { theme } from "@ribon.io/shared";
+import { Cause, Currencies, theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
 import { useLanguage } from "contexts/languageContext";
 import { useImpactConversion } from "hooks/useImpactConversion";
@@ -6,7 +6,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { View, Text } from "react-native";
+import { View, Text, Platform, Linking } from "react-native";
 import { logEvent } from "services/analytics";
 
 import S from "./styles";
@@ -14,25 +14,35 @@ import S from "./styles";
 type Props = {
   from: string;
   isCause?: boolean;
-  causeId?: number;
+  cause?: Cause;
   customStyle?: any;
+  impact?: string;
+  description?: any;
 };
 function ContributionCard({
   from,
   isCause = false,
-  causeId,
+  cause,
   customStyle,
+  impact,
+  description,
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "contributionCard",
   });
 
   const { currentLang } = useLanguage();
-  const { contribution, offer, description, nonProfit } = useImpactConversion();
+  const {
+    contribution,
+    offer,
+    description: descriptionImpact,
+    nonProfit,
+  } = useImpactConversion();
 
   const { navigateTo } = useNavigation();
 
-  const currentCurrency = currentLang === "pt-BR" ? "brl" : "usd";
+  const currentCurrency =
+    currentLang === "pt-BR" ? Currencies.BRL : Currencies.USD;
 
   useEffect(() => {
     logEvent(isCause ? "contributeCauseBth_view" : "contributeNgoBth_view", {
@@ -40,25 +50,38 @@ function ContributionCard({
     });
   }, []);
 
-  const navigateToCheckout = () => {
-    navigateTo("CheckoutScreen", {
-      target: isCause ? "cause" : "non_profit",
-      targetId: isCause ? causeId : nonProfit?.id,
-      offer: offer ? offer.priceCents.toString() : "0",
-      current: currentCurrency,
-    });
+  const target = isCause ? "cause" : "non_profit";
+  const targetId = isCause ? cause?.id : nonProfit?.id;
 
+  const navigateToCheckout = () => {
     logEvent(isCause ? "giveCauseBtn_start" : "giveNgoBtn_start", {
       from,
     });
+
+    if (Platform.OS === "ios") {
+      const url = `https://dapp.ribon.io/promoters/recurrence?target=${target}&target_id=${targetId}&currency=${offer?.currency}&offer=${offer?.priceCents}`;
+      Linking.openURL(url);
+    } else {
+      navigateTo("RecurrenceScreen", {
+        targetId,
+        target,
+        offer: offer ? offer.priceCents : 0,
+        currency: currentCurrency,
+        subscription: false,
+      });
+    }
   };
+
+  const descriptionContribution = isCause ? description : descriptionImpact;
+
+  const impactContribution = isCause ? impact : contribution?.impact;
   return (
     <View style={[S.container, customStyle]}>
       <Text style={S.title}>
         {from === "donateTickets_page"
           ? t("titleCard")
           : t("titleCardWithName", {
-              name: nonProfit?.name,
+              name: isCause ? cause?.name : nonProfit?.name,
             })}
       </Text>
 
@@ -72,7 +95,10 @@ function ContributionCard({
       </Text>
 
       <Text style={S.text}>
-        {description} {contribution?.impact && <b>{contribution.impact}</b>}
+        {descriptionContribution}{" "}
+        <Text style={{ fontWeight: "bold", fontFamily: "Inter700" }}>
+          {impactContribution}
+        </Text>
       </Text>
 
       <Button

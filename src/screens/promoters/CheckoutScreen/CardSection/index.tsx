@@ -48,7 +48,7 @@ export default function CardSection() {
   const { changePublishableKey } = useStripeContext();
   const { params } = useRouteParams<"CheckoutScreen">();
 
-  const { offer: offerParam, subscription } = params;
+  const { offer: offerParam, subscription, currency: currencyParam } = params;
 
   const [isSubscription, setIsSubscription] = useState(subscription);
 
@@ -63,7 +63,9 @@ export default function CardSection() {
     refetch: refetchOffers,
     isLoading: isLoadingOffers,
   } = useOffers(
-    Currencies[currency?.toUpperCase() as keyof typeof Currencies],
+    Currencies[
+      currencyParam || (currency?.toUpperCase() as keyof typeof Currencies)
+    ],
     isSubscription,
   );
 
