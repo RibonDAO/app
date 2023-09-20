@@ -50,6 +50,8 @@ import RecurrenceScreen from "screens/promoters/RecurrenceScreen";
 import { Image } from "react-native";
 import { openInWebViewer } from "lib/linkOpener";
 import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsScreen";
+import UtmProvider, { useUtmContext } from "contexts/utmContext";
+import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -201,8 +203,14 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
+  const { setUtm } = useUtmContext();
   useEffect(() => {
-    initializeDeeplink(navigateTo, setCurrentIntegrationId, setExternalId);
+    initializeDeeplink(
+      navigateTo,
+      setCurrentIntegrationId,
+      setExternalId,
+      setUtm,
+    );
   }, []);
 
   return (
@@ -231,6 +239,12 @@ function RootNavigator() {
       <Stack.Screen
         name="GiveTicketScreen"
         component={GiveTicketScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="ZeroTicketScreen"
+        component={ZeroTicketScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
@@ -354,30 +368,32 @@ export default function Navigation() {
   return (
     <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
       <LoadingOverlayProvider>
-        <WalletProvider>
-          <NetworkProvider>
-            <CheckoutProvider>
-              <CryptoPaymentProvider>
-                <CardPaymentInformationProvider>
-                  <CausesProvider>
-                    <CauseDonationProvider>
-                      <CauseContributionProvider>
-                        <NonProfitsProvider>
-                          <TicketsProvider>
-                            <IntegrationProvider>
-                              <RootNavigator />
-                              <Toast config={toastConfig} />
-                            </IntegrationProvider>
-                          </TicketsProvider>
-                        </NonProfitsProvider>
-                      </CauseContributionProvider>
-                    </CauseDonationProvider>
-                  </CausesProvider>
-                </CardPaymentInformationProvider>
-              </CryptoPaymentProvider>
-            </CheckoutProvider>
-          </NetworkProvider>
-        </WalletProvider>
+        <UtmProvider>
+          <WalletProvider>
+            <NetworkProvider>
+              <CheckoutProvider>
+                <CryptoPaymentProvider>
+                  <CardPaymentInformationProvider>
+                    <CausesProvider>
+                      <CauseDonationProvider>
+                        <CauseContributionProvider>
+                          <NonProfitsProvider>
+                            <TicketsProvider>
+                              <IntegrationProvider>
+                                <RootNavigator />
+                                <Toast config={toastConfig} />
+                              </IntegrationProvider>
+                            </TicketsProvider>
+                          </NonProfitsProvider>
+                        </CauseContributionProvider>
+                      </CauseDonationProvider>
+                    </CausesProvider>
+                  </CardPaymentInformationProvider>
+                </CryptoPaymentProvider>
+              </CheckoutProvider>
+            </NetworkProvider>
+          </WalletProvider>
+        </UtmProvider>
       </LoadingOverlayProvider>
     </NavigationContainer>
   );

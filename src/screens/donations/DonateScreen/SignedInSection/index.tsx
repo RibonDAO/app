@@ -11,6 +11,7 @@ import { theme } from "@ribon.io/shared/styles";
 import BackgroundShapes from "components/vectors/BackgroundShapes";
 import usePageView from "hooks/usePageView";
 import { useIntegrationContext } from "contexts/integrationContext";
+import { useUtmContext } from "contexts/utmContext";
 import S from "./styles";
 
 type Props = {
@@ -35,6 +36,8 @@ function SignedInSection({
 
   const { currentIntegrationId, externalId } = useIntegrationContext();
 
+  const { utmSource, utmMedium, utmCampaign } = useUtmContext();
+
   const handleButtonPress = async () => {
     if (!currentUser?.email) return;
 
@@ -47,6 +50,9 @@ function SignedInSection({
         currentUser.email,
         PLATFORM,
         externalId,
+        utmSource,
+        utmMedium,
+        utmCampaign,
       );
       onDonationSuccess();
     } catch (error: any) {
