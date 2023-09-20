@@ -6,6 +6,7 @@ import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
 import RibonSunLeft from "assets/images/ribon-sun-left.png";
+import { useCurrentUser } from "contexts/currentUserContext";
 import Banner from "../Banner";
 
 type Props = {
@@ -16,9 +17,12 @@ function UserSupportBanner({ from }: Props): JSX.Element {
     keyPrefix: "userSupportBanner",
   });
 
+  const { currentUser } = useCurrentUser();
+
   const handleClick = () => {
     logEvent("supportBtn_click", {
       from,
+      email: currentUser?.email,
     });
     openInWebViewer(t("link"));
   };

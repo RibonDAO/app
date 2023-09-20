@@ -170,7 +170,10 @@ function LayoutHeader({
 
   const linkToSupport = () => {
     openInWebViewer(t("supportLink"));
-    logEvent("supportBtn_click", { from: "config_page" });
+    logEvent("supportBtn_click", {
+      from: "config_page",
+      email: currentUser?.email,
+    });
   };
 
   const notificationsSwitch = () => (
