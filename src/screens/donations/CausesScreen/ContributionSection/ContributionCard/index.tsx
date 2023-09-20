@@ -1,5 +1,6 @@
 import { Cause, Currencies, theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
+import { useCurrentUser } from "contexts/currentUserContext";
 import { useLanguage } from "contexts/languageContext";
 import { useImpactConversion } from "hooks/useImpactConversion";
 import { useNavigation } from "hooks/useNavigation";
@@ -38,6 +39,7 @@ function ContributionCard({
     description: descriptionImpact,
     nonProfit,
   } = useImpactConversion();
+  const { currentUser } = useCurrentUser();
 
   const { navigateTo } = useNavigation();
 
@@ -75,7 +77,7 @@ function ContributionCard({
   const descriptionContribution = isCause ? description : descriptionImpact;
 
   const impactContribution = isCause ? impact : contribution?.impact;
-  return (
+  return currentUser && contribution ? (
     <View style={[S.container, customStyle]}>
       <Text style={S.title}>
         {from === "donateTickets_page"
@@ -109,6 +111,8 @@ function ContributionCard({
         textColor={theme.colors.neutral10}
       />
     </View>
+  ) : (
+    <View />
   );
 }
 

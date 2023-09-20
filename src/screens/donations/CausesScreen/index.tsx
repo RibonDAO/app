@@ -257,7 +257,7 @@ export default function CausesScreen() {
             setStoriesVisible={setStoriesVisible}
           />
         )}
-        {!canDonate && <ContributionSection />}
+
         <TicketSection
           canDonate={canDonate}
           isFirstAccessToIntegration={isFirstAccessToIntegration}
@@ -266,7 +266,8 @@ export default function CausesScreen() {
         {shouldShowIntegrationBanner && (
           <IntegrationBanner integration={integration} />
         )}
-        {canDonate && <Text style={S.title}>{t("title")}</Text>}
+        {!canDonate && <ContributionSection />}
+        {canDonate ? <Text style={S.title}>{t("title")}</Text> : null}
 
         <ScrollView
           style={S.groupButtonsContainer}

@@ -36,6 +36,7 @@
   "donations": {
     "causesScreen": {
       "title": "Donate to a Project",
+      "titleNonProfits": "NGOs",
       "buttonText": "Donate",
       "allCauses": "All",
       "noTickets": "No tickets",
