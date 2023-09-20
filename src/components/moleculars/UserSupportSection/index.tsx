@@ -6,7 +6,6 @@ import Button from "components/atomics/buttons/Button";
 import { openInWebViewer } from "lib/linkOpener";
 import { REACT_APP_ZENDESK_KEY } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared";
-import { useCurrentUser } from "contexts/currentUserContext";
 import S from "./styles";
 import cardBackground from "./assets/cardBackground.png";
 
@@ -18,12 +17,11 @@ function UserSupportSection({ source }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen.userSupportSection",
   });
-  const { currentUser } = useCurrentUser();
 
   const key = REACT_APP_ZENDESK_KEY;
 
   const handleClick = (src?: string) => {
-    logEvent("supportBtn_click", { from: src, email: currentUser?.email });
+    logEvent("supportBtn_click", { from: src });
     openInWebViewer(t("link", { key }));
   };
 
