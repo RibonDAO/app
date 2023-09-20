@@ -5970,6 +5970,18 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.1.tgz#841b532c45c758ee546a11d5bd7b7b473c8c30b9"
   integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
 
+customerio-expo-plugin@^1.0.0-beta.13:
+  version "1.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/customerio-expo-plugin/-/customerio-expo-plugin-1.0.0-beta.13.tgz#181ed824dfab786c8c29b98ee6ef61c5d14052be"
+  integrity sha512-GzlE5m77M3lw6QooSrsCMt7IooBGnxIprqbqsDEQ9Mu5n5YTkJwPlTHYiCzTHBI2bzjt9l0fOjvwxqIpLuk4mw==
+  dependencies:
+    find-package-json "^1.2.0"
+
+customerio-reactnative@^3.1.10:
+  version "3.1.10"
+  resolved "https://registry.yarnpkg.com/customerio-reactnative/-/customerio-reactnative-3.1.10.tgz#ac7c56c9aa5bc4b5db651f681c15afb9ab4e719d"
+  integrity sha512-0XzZfupZqs54bplz0V0hovi/E9vXyYXXb//FG7W48TTtPXLYr1dvplrr4zjrUYF9/whMAALLm0qiovqkYpP79g==
+
 cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
@@ -8037,6 +8049,11 @@ find-cache-dir@^3.3.1:
     commondir "^1.0.1"
     make-dir "^3.0.2"
     pkg-dir "^4.1.0"
+
+find-package-json@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/find-package-json/-/find-package-json-1.2.0.tgz#4057d1b943f82d8445fe52dc9cf456f6b8b58083"
+  integrity sha512-+SOGcLGYDJHtyqHd87ysBhmaeQ95oWspDKnMXBrnQ9Eq4OkLNqejgoaD8xVWu6GPa0B6roa6KinCMEMcVeqONw==
 
 find-up@4.1.0, find-up@^4.0.0, find-up@^4.1.0:
   version "4.1.0"
