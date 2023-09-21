@@ -5,9 +5,10 @@ import { useTranslation } from "react-i18next";
 import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
 import { useTasksContext } from "contexts/tasksContext";
-import { theme } from "@ribon.io/shared";
+import { theme, useDonations } from "@ribon.io/shared";
 import { RootStackScreenProps } from "types";
 import usePageView from "hooks/usePageView";
+import { useCurrentUser } from "contexts/currentUserContext";
 import S from "./styles";
 import ContributionImage from "./ContributionImage";
 
@@ -21,9 +22,14 @@ function PostDonationScreen({
   });
   const { navigateTo } = useNavigation();
   const { nonProfit, cause } = route.params;
+  const { currentUser } = useCurrentUser();
+  const { appDonationsCount } = useDonations(currentUser?.id);
 
-  const navigateToAvailableArticleScreen = () =>
-    navigateTo("AvailableArticleScreen");
+  const navigateToAvailableArticleScreen = () => {
+    if (appDonationsCount && appDonationsCount < 3)
+      navigateTo("AvailableArticleScreen");
+    else navigateTo("ForYouScreen", { currentTab: 0 });
+  };
 
   const { registerAction } = useTasksContext();
 
