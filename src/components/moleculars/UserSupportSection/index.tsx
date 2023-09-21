@@ -4,6 +4,7 @@ import { logEvent } from "services/analytics";
 import { ImageBackground, Text, View } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { openInWebViewer } from "lib/linkOpener";
+import { REACT_APP_ZENDESK_KEY } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared";
 import S from "./styles";
 import cardBackground from "./assets/cardBackground.png";
@@ -17,9 +18,11 @@ function UserSupportSection({ source }: Props): JSX.Element {
     keyPrefix: "donations.causesScreen.userSupportSection",
   });
 
+  const key = REACT_APP_ZENDESK_KEY;
+
   const handleClick = (src?: string) => {
     logEvent("supportBtn_click", { from: src });
-    openInWebViewer(t("link"));
+    openInWebViewer(t("link", { key }));
   };
 
   return (

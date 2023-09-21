@@ -51,7 +51,7 @@ function EmailInputSection({
   const { donate } = useDonations(undefined);
   const { formattedImpactText } = useFormattedImpactText();
 
-  const { currentIntegrationId } = useIntegrationContext();
+  const { currentIntegrationId, externalId } = useIntegrationContext();
 
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
 
@@ -69,6 +69,7 @@ function EmailInputSection({
         nonProfit.id,
         email,
         PLATFORM,
+        externalId,
         utmSource,
         utmMedium,
         utmCampaign,
