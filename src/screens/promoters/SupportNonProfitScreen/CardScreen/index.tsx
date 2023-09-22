@@ -12,6 +12,7 @@ import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import { useCausesContext } from "contexts/causesContext";
+import { useLanguage } from "contexts/languageContext";
 import S from "../styles";
 
 function CardScreen(): JSX.Element {
@@ -25,6 +26,7 @@ function CardScreen(): JSX.Element {
   const { causes } = useCausesContext();
   const { tertiary } = theme.colors.brand;
   const { scrollEnabled } = useScrollEnabled();
+  const { currentLang } = useLanguage();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportNonProfitPage",
@@ -60,7 +62,7 @@ function CardScreen(): JSX.Element {
 
   const handleDonateClick = (nonProfit: NonProfit) => {
     if (Platform.OS === "ios") {
-      const url = `https://dapp.ribon.io/promoters/recurrence?target=non_profit&target_id=${nonProfit.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}`;
+      const url = `https://dapp.ribon.io/promoters/recurrence?target=non_profit&target_id=${nonProfit.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}&language=${currentLang}`;
       Linking.openURL(url);
     } else {
       setFlow("nonProfit");

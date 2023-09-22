@@ -61,7 +61,7 @@ function ContributionCard({
     });
 
     if (Platform.OS === "ios") {
-      const url = `https://dapp.ribon.io/promoters/recurrence?target=${target}&target_id=${targetId}&currency=${offer?.currency}&offer=${offer?.priceCents}`;
+      const url = `http://localhost:3000/promoters/recurrence?target=${target}&target_id=${targetId}&currency=${offer?.currency}&offer=${offer?.priceCents}&language=${currentLang}`;
       Linking.openURL(url);
     } else {
       navigateTo("RecurrenceScreen", {
