@@ -1,11 +1,11 @@
 /* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
-import { Text, TouchableOpacity } from "react-native";
+import { Linking, Platform, Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import Image from "components/atomics/Image";
 import Icon from "components/atomics/Icon";
-import { theme } from "@ribon.io/shared";
+import { Currencies, theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
 import { useImpactConversion } from "hooks/useImpactConversion";
 import { formatPrice } from "lib/formatters/currencyFormatter";
@@ -36,13 +36,17 @@ function ContributionImage({
     keyPrefix: "donations.postDonationScreen.contributionImage",
   });
 
-  const currentCurrency = currentLang === "pt-BR" ? "brl" : "usd";
+  const currentCurrency =
+    currentLang === "pt-BR" ? Currencies.BRL : Currencies.USD;
 
   useEffect(() => {
     logEvent(isCause ? "contributeCauseBtn_view" : "contributeNgoBtn_view", {
       from,
     });
   }, []);
+
+  const target = isCause ? "cause" : "non_profit";
+  const targetId = isCause ? idCause : nonProfit?.id;
 
   const handleClick = () => {
     logEvent(isCause ? "giveCauseBtn_start" : "giveNgoBtn_start", {
@@ -53,12 +57,18 @@ function ContributionImage({
       offerId: offer?.id,
     });
 
-    navigateTo("CheckoutScreen", {
-      target: isCause ? "cause" : "non_profit",
-      targetId: isCause ? idCause : nonProfit?.id,
-      offer: offer ? offer.priceCents.toString() : "0",
-      current: currentCurrency,
-    });
+    if (Platform.OS === "ios") {
+      const url = `https://dapp.ribon.io/promoters/recurrence?target=${target}&target_id=${targetId}&currency=${offer?.currency}&offer=${offer?.priceCents}&language=${currentLang}`;
+      Linking.openURL(url);
+    } else {
+      navigateTo("RecurrenceScreen", {
+        targetId,
+        target,
+        offer: offer ? offer.priceCents : 0,
+        currency: currentCurrency,
+        subscription: false,
+      });
+    }
   };
 
   return (
@@ -96,7 +106,7 @@ function ContributionImage({
             <Text style={S.name}>{name}</Text>
           </View>
           <Button
-            text="Doar agora"
+            text={t("buttonText")}
             onPress={handleClick}
             backgroundColor={theme.colors.brand.primary[600]}
             borderColor={theme.colors.brand.primary[600]}
