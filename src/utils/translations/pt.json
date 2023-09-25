@@ -97,7 +97,8 @@
       "buttonText": "Doar depois",
       "contributionImage": {
         "donateFor": "Doe {{value}} para",
-        "labelTitle": "Doação impulsionada"
+        "labelTitle": "Doação impulsionada",
+        "buttonText": "Doar agora"
       }
     },
     "receiveTicketScreen": {

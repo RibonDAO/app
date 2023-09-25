@@ -103,7 +103,8 @@
       "buttonText": "Donate later",
       "contributionImage": {
         "donateFor": "Donate {{value}} for",
-        "labelTitle": "Boosted donation"
+        "labelTitle": "Boosted donation",
+        "buttonText": "Donate now"
       }
     },
     "receiveTicketScreen": {
