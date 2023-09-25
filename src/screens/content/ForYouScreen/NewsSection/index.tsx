@@ -21,11 +21,11 @@ export default function NewsSection() {
   const [isOnboarding, setIsOnboarding] = useState(false);
   const { currentUser } = useCurrentUser();
 
-  const { getArticles } = useArticles();
+  const { getUserArticles } = useArticles();
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const currentArticles = await getArticles();
+      const currentArticles = await getUserArticles();
       setArticles(currentArticles);
     };
 
