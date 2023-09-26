@@ -3,6 +3,7 @@ import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodySmRegular,
   defaultBodySmSemibold,
+  defaultBodyXsRegular,
 } from "styles/typography/default";
 
 const styles = StyleSheet.create({
@@ -42,7 +43,13 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacingNative(16),
     marginTop: theme.spacingNative(8),
     display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
+  infoIcon: {
+    display: "flex",
     flexDirection: "row",
+    alignItems: "center",
   },
   bullet: {
     marginLeft: theme.spacingNative(4),
@@ -53,7 +60,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: theme.colors.neutral[800],
   },
-  info: {
+  infoTop: {
+    ...defaultBodySmSemibold,
+    textAlign: "center",
+    color: theme.colors.neutral[800],
+  },
+  infoBottom: {
+    ...defaultBodyXsRegular,
     textAlign: "center",
     color: theme.colors.neutral[800],
   },

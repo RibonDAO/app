@@ -143,6 +143,7 @@ export default function Button({
 
   return (
     <TouchableOpacity
+      accessibilityRole="button"
       style={[
         S.container,
         {
