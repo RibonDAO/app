@@ -299,8 +299,8 @@ export default function CausesScreen() {
             <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
               <CardCenterImageButton
                 image={nonProfit.mainImage}
-                infoTextLeft={nonProfit.name}
-                infoTextRight={nonProfit.cause.name}
+                infoTextTop={nonProfit.name}
+                infoTextBottom={nonProfit.cause.name}
                 imageDescription={formattedImpactText(
                   nonProfit,
                   undefined,

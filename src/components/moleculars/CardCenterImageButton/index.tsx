@@ -1,5 +1,4 @@
 import Button from "components/atomics/buttons/Button";
-import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import VerifiedBadge from "components/vectors/VerifiedBadge";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -14,8 +13,8 @@ export type Props = {
   onClickButton: () => void;
   onImagePress?: () => void;
   imageDescription?: string | JSX.Element;
-  infoTextLeft?: string;
-  infoTextRight?: string;
+  infoTextTop?: string;
+  infoTextBottom?: string;
   buttonDisabled?: boolean;
   labelText?: string;
 };
@@ -26,8 +25,8 @@ function CardCenterImageButton({
   imageDescription,
   onClickButton,
   onImagePress,
-  infoTextLeft,
-  infoTextRight,
+  infoTextTop,
+  infoTextBottom,
   buttonDisabled = false,
   labelText,
 }: Props): JSX.Element {
@@ -70,19 +69,16 @@ function CardCenterImageButton({
 
         <View style={S.containerText}>
           <View style={S.infoContainer}>
-            {infoTextLeft && (
-              <>
-                <Text style={S.info}>{infoTextLeft}</Text>
+            {infoTextTop && (
+              <View style={S.infoIcon}>
+                <Text style={S.infoTop}>{infoTextTop}</Text>
                 <View style={S.icon}>
                   <VerifiedBadge />
                 </View>
-              </>
+              </View>
             )}
-            {infoTextRight && (
-              <>
-                <Text style={S.bullet}>•</Text>
-                <Text style={S.info}>{infoTextRight}</Text>
-              </>
+            {infoTextBottom && (
+              <Text style={S.infoBottom}>{infoTextBottom}</Text>
             )}
           </View>
           <Button
@@ -93,6 +89,8 @@ function CardCenterImageButton({
               ...S.button,
               ...(buttonDisabled ? S.disabledButton : {}),
             }}
+            backgroundColor={theme.colors.brand.primary[600]}
+            textColor={theme.colors.neutral10}
           />
         </View>
       </View>
