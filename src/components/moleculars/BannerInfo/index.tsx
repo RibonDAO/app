@@ -60,7 +60,7 @@ function BannerInfo({
         <View style={S.squareImageContainer}>
           <Image
             source={{ uri: squareImage }}
-            style={{ width: 84, height: 84 }}
+            style={{ width: 84, height: 84, resizeMode: "contain" }}
           />
         </View>
       )}
