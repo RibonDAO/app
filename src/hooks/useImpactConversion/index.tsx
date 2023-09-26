@@ -72,10 +72,12 @@ export function useImpactConversion() {
   }, [setContribution, nonProfit, offer]);
 
   useEffect(() => {
-    setDescription(
-      formattedImpactText(nonProfit, undefined, true, true, nonProfitImpact),
-    );
-  }, [contribution, nonProfit]);
+    if (nonProfit && nonProfitImpact) {
+      setDescription(
+        formattedImpactText(nonProfit, undefined, true, true, nonProfitImpact),
+      );
+    }
+  }, [nonProfitImpact, nonProfit]);
 
   return {
     contribution,
