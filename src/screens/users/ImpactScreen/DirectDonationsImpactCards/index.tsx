@@ -10,7 +10,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import Button from "components/atomics/buttons/Button";
 import LoaderAnimated from "components/atomics/LoaderAnimated";
 import ContributionCard from "screens/donations/CausesScreen/ContributionSection/ContributionCard";
-import { useImpactConversion } from "hooks/useImpactConversion";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
@@ -31,8 +30,6 @@ function DirectDonationsImpactCards(): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "users.impactScreen.ngoImpactCards.zeroDonationsSection",
   });
-
-  const { contribution } = useImpactConversion();
 
   const hasDuplicatedIds = (items: any[]) => {
     const existentIds = new Set(impactCards.map((obj: any) => obj.id));
@@ -92,7 +89,7 @@ function DirectDonationsImpactCards(): JSX.Element {
             buttonText={t("direct.buttonText")}
             image={<ImpactDonationsVector />}
           />
-          {contribution && <ContributionCard from="impact_page" />}
+          <ContributionCard from="impact_page" />
         </>
       );
     }
