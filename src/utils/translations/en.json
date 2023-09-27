@@ -255,6 +255,41 @@
       "uniqueDonationDescription": "Contribute once",
       "selectValue": "Select value"
     },
+    "checkoutScreen": {
+      "changeCurrency": "Change currency",
+      "back": "Back",
+      "monthlyContribution": "Contributing monthly",
+      "uniqueContribution": "Contributing once",
+      "recurrenceButton": "Change",
+      "donatingTo": "Donating to ",
+      "netDonation": "Net donation: ",
+      "serviceFees": "Service fees: ",
+      "payment": "Payment",
+      "subscription": "Recurrence",
+      "selectCurrency": "Select currency",
+      "selectValue": "Select value",
+      "brazilName": "Brazil",
+      "additionalFeesText": "Payment is processed in USD, the amount may vary slightly according to your bank's fees.",
+      "searchCountryPlaceholder": "Search country",
+      "paymentMethodSection": {
+        "creditCard": "Credit card",
+        "googlePay": "Google Pay",
+        "applePay": "Apple Pay",
+        "creditCardFields": {
+          "email": "E-mail",
+          "country": "Country",
+          "state": "State",
+          "city": "City",
+          "taxId": "Tax ID",
+          "cpf": "CPF",
+          "number": "Card number",
+          "name": "Cardholder name",
+          "expirationDate": "Expiration date",
+          "cvv": "CVV"
+        }
+      },
+      "confirmPayment": "Confirm payment"
+    },
     "monthlyContributionsScreen": {
       "title": "Monthly contributions",
       "to": "To ",
@@ -267,41 +302,6 @@
         "sendEmail": "We sent you an e-mail"
       }
     }
-  },
-  "checkoutScreen": {
-    "changeCurrency": "Change currency",
-    "back": "Back",
-    "monthlyContribution": "Contributing monthly",
-    "uniqueContribution": "Contributing once",
-    "recurrenceButton": "Change",
-    "donatingTo": "Donating to ",
-    "netDonation": "Net donation: ",
-    "serviceFees": "Service fees: ",
-    "payment": "Payment",
-    "subscription": "Recurrence",
-    "selectCurrency": "Select currency",
-    "selectValue": "Select value",
-    "brazilName": "Brazil",
-    "additionalFeesText": "Payment is processed in USD, the amount may vary slightly according to your bank's fees.",
-    "searchCountryPlaceholder": "Search country",
-    "paymentMethodSection": {
-      "creditCard": "Credit card",
-      "googlePay": "Google Pay",
-      "applePay": "Apple Pay",
-      "creditCardFields": {
-        "email": "E-mail",
-        "country": "Country",
-        "state": "State",
-        "city": "City",
-        "taxId": "Tax ID",
-        "cpf": "CPF",
-        "number": "Card number",
-        "name": "Cardholder name",
-        "expirationDate": "Expiration date",
-        "cvv": "CVV"
-      }
-    },
-    "confirmPayment": "Confirm payment"
   },
   "users": {
     "impactScreen": {

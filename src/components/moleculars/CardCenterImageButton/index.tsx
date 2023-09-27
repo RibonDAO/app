@@ -91,6 +91,7 @@ function CardCenterImageButton({
             }}
             backgroundColor={theme.colors.brand.primary[600]}
             textColor={theme.colors.neutral10}
+            borderColor={theme.colors.brand.primary[600]}
           />
         </View>
       </View>

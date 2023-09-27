@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     width: "80%",
+    flexWrap: "wrap",
   },
   title: {},
   subTitle: {
@@ -29,7 +30,8 @@ const styles = StyleSheet.create({
   text: {
     ...defaultBodySmMedium,
     marginTop: theme.spacingNative(4),
-    padding: theme.spacingNative(1),
+    width: "80%",
+    flexWrap: "wrap",
   },
   childrenContainer: {
     marginTop: theme.spacingNative(12),

@@ -9,6 +9,7 @@ import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
 import Button from "components/atomics/buttons/Button";
 import LoaderAnimated from "components/atomics/LoaderAnimated";
+import ContributionCard from "screens/donations/CausesScreen/ContributionSection/ContributionCard";
 import ImpactDonationsVector from "./ImpactDonationsVector";
 import S from "./styles";
 import ZeroDonationsSection from "../ZeroDonationsSection";
@@ -80,13 +81,16 @@ function DirectDonationsImpactCards(): JSX.Element {
       return <Text />;
     } else {
       return (
-        <ZeroDonationsSection
-          title={t("direct.title")}
-          onButtonPress={navigateToPromotersScreen}
-          description={t("direct.description")}
-          buttonText={t("direct.buttonText")}
-          image={<ImpactDonationsVector />}
-        />
+        <>
+          <ZeroDonationsSection
+            title={t("direct.title")}
+            onButtonPress={navigateToPromotersScreen}
+            description={t("direct.description")}
+            buttonText={t("direct.buttonText")}
+            image={<ImpactDonationsVector />}
+          />
+          <ContributionCard from="impact_page" />
+        </>
       );
     }
   }
