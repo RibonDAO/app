@@ -12,7 +12,10 @@ function MaskedWaveCut({ image = "", imageStyles }: Props) {
   return (
     <MaskedView
       maskElement={
-        <WaveCut width={imageStyles?.width} height={imageStyles?.height} />
+        <WaveCut
+          width={imageStyles?.width as any}
+          height={imageStyles?.height as any}
+        />
       }
     >
       {image && (
