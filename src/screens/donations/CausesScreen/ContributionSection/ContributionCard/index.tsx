@@ -47,7 +47,7 @@ function ContributionCard({
     currentLang === "pt-BR" ? Currencies.BRL : Currencies.USD;
 
   useEffect(() => {
-    logEvent(isCause ? "contributeCauseBth_view" : "contributeNgoBth_view", {
+    logEvent(isCause ? "contributeCauseBtn_view" : "contributeNgoBtn_view", {
       from,
     });
   }, []);
