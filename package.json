@@ -46,10 +46,11 @@
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "@ribon.io/shared": "^1.0.94",
-    "@sentry/react-native": "4.15.2",
+    "@sentry/react-native": "4.13.0",
     "@stripe/stripe-react-native": "0.23.3",
     "@walletconnect/react-native-dapp": "^1.8.0",
     "@walletconnect/web3-provider": "^1.8.0",
+    "assert": "^2.1.0",
     "ethers": "^5.7.2",
     "expo": "^48.0.0",
     "expo-application": "~5.1.1",
@@ -100,7 +101,7 @@
     "react-native-webview": "11.26.0",
     "react-zendesk": "^0.1.13",
     "rn-placeholder": "^3.0.3",
-    "sentry-expo": "~6.2.0"
+    "sentry-expo": "6.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
