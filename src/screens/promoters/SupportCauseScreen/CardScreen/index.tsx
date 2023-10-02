@@ -20,6 +20,7 @@ import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import { useCausesContext } from "contexts/causesContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
+import { useLanguage } from "contexts/languageContext";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
 
@@ -28,7 +29,7 @@ function CardScreen(): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const { cause, setCause, setFlow } = useCardPaymentInformation();
-
+  const { currentLang } = useLanguage();
   const { causes } = useCausesContext();
   const { chosenCause, setChosenCause, chosenCauseIndex, setChosenCauseIndex } =
     useCauseContributionContext();
@@ -59,7 +60,7 @@ function CardScreen(): JSX.Element {
 
   const handleDonateClick = () => {
     if (Platform.OS === "ios") {
-      const url = `https://dapp.ribon.io/promoters/recurrence?target=cause&target_id=${cause?.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}`;
+      const url = `https://dapp.ribon.io/promoters/recurrence?target=cause&target_id=${cause?.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}&language=${currentLang}`;
       Linking.openURL(url);
     } else {
       setFlow("cause");

@@ -51,6 +51,7 @@ import { Image } from "react-native";
 import { openInWebViewer } from "lib/linkOpener";
 import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsScreen";
 import UtmProvider, { useUtmContext } from "contexts/utmContext";
+import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -238,6 +239,12 @@ function RootNavigator() {
       <Stack.Screen
         name="GiveTicketScreen"
         component={GiveTicketScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="ZeroTicketScreen"
+        component={ZeroTicketScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
