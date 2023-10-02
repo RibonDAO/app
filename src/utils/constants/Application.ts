@@ -18,3 +18,7 @@ export const STRIPE_PUBLISHABLE_KEY =
 
 export const REACT_APP_ZENDESK_KEY =
   Constants.expoConfig?.extra?.REACT_APP_ZENDESK_KEY;
+
+export const RIBON_GROWTHBOOK_URL =
+  Constants.expoConfig?.extra?.REACT_APP_RIBON_GROWTHBOOK_URL ||
+  "https://growthbook.ribon.io:444/api/features/staging_Crjm8K6L2Rzpl96doCeg0kBiurgT5T67YP84V8bIQ";
