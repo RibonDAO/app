@@ -1,4 +1,9 @@
-import { CustomerIO, CustomerIOEnv, Region } from "customerio-reactnative";
+import {
+  CustomerIO,
+  CustomerIOEnv,
+  CustomerioConfig,
+  Region,
+} from "customerio-reactnative";
 
 function initializeCRM() {
   const env = new CustomerIOEnv();
@@ -6,7 +11,10 @@ function initializeCRM() {
   env.apiKey = "cb51b8dd6005ba7065f6";
   env.region = Region.US;
 
-  CustomerIO.initialize(env);
+  const data = new CustomerioConfig();
+  data.enableInApp = true;
+
+  CustomerIO.initialize(env, data);
 }
 
 export function CRMidentifyUser(email: string) {

@@ -77,8 +77,6 @@ export default () => ({
       ],
       "sentry-expo",
       "@react-native-firebase/app",
-      "@react-native-firebase/perf",
-      "@react-native-firebase/crashlytics",
       [
         "@config-plugins/react-native-branch",
         {
@@ -99,6 +97,17 @@ export default () => ({
             "android": {
                "googleServicesFile": "./google-services.json"
             },
+            "ios": {
+              "pushNotification": {
+                 "useRichPush": false,
+                 "env": {
+                    "siteId": "73ff8cc7faa5e7d7e975",
+                    "apiKey": "cb51b8dd6005ba7065f6",
+                    "region": "us"
+                 }
+              }
+           }
+
          }
       ]
     ],

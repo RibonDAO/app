@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import "./global";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -25,7 +25,10 @@ import initializeCRM from "./src/services/crm";
 function Main() {
   const isLoadingComplete = useCachedResources();
   const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
-  initializeCRM();
+
+  useEffect(() => {
+    initializeCRM();
+  }, []);
 
   if (!isLoadingComplete) {
     return null;

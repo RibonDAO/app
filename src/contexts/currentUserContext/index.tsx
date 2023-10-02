@@ -64,7 +64,6 @@ function CurrentUserProvider({ children }: Props) {
       setCurrentUser(user);
       setUserLastDonation(lastDonation);
       if (user?.email) CRMidentifyUser(user.email);
-      console.log("user: ", user);
     }
 
     setInitialUser();
