@@ -4,7 +4,7 @@ export function useNavigation() {
   const { navigate, goBack } = useNavigationNative();
 
   function navigateTo(screenName: string, params?: Record<any, any>) {
-    navigate([screenName, params] as never);
+    (navigate as any)(screenName, params);
   }
 
   function popNavigation() {
