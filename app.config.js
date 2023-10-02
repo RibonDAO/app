@@ -77,6 +77,8 @@ export default () => ({
       ],
       "sentry-expo",
       "@react-native-firebase/app",
+      "@react-native-firebase/perf",
+      "@react-native-firebase/crashlytics",
       [
         "@config-plugins/react-native-branch",
         {

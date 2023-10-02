@@ -1,5 +1,4 @@
 import messaging from "@react-native-firebase/messaging";
-import { CustomerIO } from "customerio-reactnative";
 
 export default async function requestUserPermissionForNotifications() {
   const permissionStatus = await messaging().requestPermission();
@@ -16,18 +15,14 @@ export default async function requestUserPermissionForNotifications() {
 }
 
 export async function isNotificationsEnabled() {
-  const enabled = await CustomerIO.getPushPermissionStatus();
-  if (enabled === "Granted") {
-    return true;
-  } else {
-    return false;
-  }
+  const enabled = await messaging().hasPermission();
+  return enabled;
 }
 
 export async function setBackgroundMessageHandler() {
   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
     // eslint-disable-next-line no-console
-    console.log("remoteMessage: ", remoteMessage);
+    console.log("Message handled in the background!", remoteMessage);
   });
 }
 
