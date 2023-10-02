@@ -1,5 +1,5 @@
-const version = "5.2.3";
-const buildNumber = 338;
+const version = "5.3.0";
+const buildNumber = 339;
 
 export default () => ({
   "expo": {
@@ -72,8 +72,9 @@ export default () => ({
           "ios": {
             "useFrameworks": "static"
           }
-        }
+        },
       ],
+      "expo-localization",
       "sentry-expo",
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
