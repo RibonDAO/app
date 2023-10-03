@@ -120,7 +120,7 @@ export default function CausesScreen() {
   }, []);
 
   const causesFilter = () => {
-    const causesApi = causes.filter((cause) => cause.active);
+    const causesApi = causes.filter((cause) => cause.status === "active");
     return (
       [
         {
