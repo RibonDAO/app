@@ -1,5 +1,5 @@
-const version = "5.2.3";
-const buildNumber = 338;
+const version = "5.2.4";
+const buildNumber = 339;
 
 export default () => ({
   "expo": {
@@ -70,7 +70,8 @@ export default () => ({
             "buildToolsVersion": "33.0.0"
           },
           "ios": {
-            "useFrameworks": "static"
+            "useFrameworks": "static",
+            "deploymentTarget": "13.0"
           }
         }
       ],
@@ -92,10 +93,29 @@ export default () => ({
           "enableGooglePay": true
         }
       ],
+      [
+        "customerio-expo-plugin",
+        {
+            "android": {
+               "googleServicesFile": "./google-services.json"
+            },
+            "ios": {
+              "pushNotification": {
+                 "useRichPush": false,
+                 "env": {
+                    "siteId": "73ff8cc7faa5e7d7e975",
+                    "apiKey": "cb51b8dd6005ba7065f6",
+                    "region": "us"
+                 }
+              }
+           }
+
+         }
+      ]
     ],
     "extra": {
       "eas": {
-        "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960"
+        "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960",
       },
       "REACT_APP_RIBON_API": process.env.REACT_APP_RIBON_API,
       "REACT_APP_RIBON_INTEGRATION_ID": process.env.REACT_APP_RIBON_INTEGRATION_ID,

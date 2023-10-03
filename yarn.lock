@@ -2532,31 +2532,26 @@
     superstruct "^0.6.2"
 
 "@react-native-firebase/crashlytics@^17.0.0":
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/crashlytics/-/crashlytics-17.0.0.tgz#d877c28eebb84df1b6efd3a07fc1647c0cb18675"
-  integrity sha512-l72ttqJTjTWo77JOwxki8TDN2RznXGwOBb+89aQN6zqKN5muMSds6p4/38r7aGzFtyOWMBuFza/Hs1g8U5h0ow==
+  version "17.5.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/crashlytics/-/crashlytics-17.5.0.tgz#0685e262b99f67150b268f60a739e0a051fb2245"
+  integrity sha512-BknqnrsGceKDT1jm+gArIymXLguPw1AKkAKqEyH/XU+K0Np6M7+VsISipHjO2dizyGlkFjIN2lGdqTvfLzRC9Q==
   dependencies:
-    "@expo/config-plugins" "^5.0.4"
     stacktrace-js "^2.0.0"
 
 "@react-native-firebase/dynamic-links@^17.4.2":
-  version "17.4.2"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-17.4.2.tgz#b390cc854c39f3b1e86590a6668957ef1817533f"
-  integrity sha512-htllTe2MSdH8MdXZAZ6R4CCXuX3rCKWPDkZcbgy9XQMNfJkL6ekn64C8/lAix5Z76wRkQs+nDhzWh2fxX3QN4A==
-  dependencies:
-    "@expo/config-plugins" "^5.0.4"
+  version "17.5.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-17.5.0.tgz#54ac23fb9914ad6945d40ba3ab835d1791ccb0b6"
+  integrity sha512-3vuApAMSHpZkJ0oeAJNMt9gpkancVpVPyUkCuRubgOaeKXnYVEWpxvhbnxERx+ighV5/kVJTjmqfJiqyQXdOvw==
 
 "@react-native-firebase/messaging@^17.4.1":
-  version "17.4.1"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-17.4.1.tgz#11ed73db7eb5b026204a46760e1a1d3a3e8b2499"
-  integrity sha512-Sn4YVD2yOqAZfrY5KMeIFoh2f+JaQX/V/I7dSQX5vZ8RjP9cWVPJlA/CdLdORCe0DhusZMBJJfsJzCteQi8iiw==
+  version "17.5.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-17.5.0.tgz#9c6db50423c67760dd61e553189187b9e5a2b75e"
+  integrity sha512-9jB7jEt4ySdALio2qwquAkXI106GTdPEuGY+vUFuNT6Wwwc5VQhyiJ5yforaF0BEsppFgK151PLYQQdIhahgzA==
 
 "@react-native-firebase/perf@^17.0.0":
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-17.0.0.tgz#c7d991aa0afda4c9ddeeafa42d2f4805f8aba61b"
-  integrity sha512-nn2TIr98IvRAAgiFm6d8HE/mtRcqD/ypJXBQAF5V4z+D4i/rf37M7MQ5eNoVCAfnzakCDWAHhimg1qUbh5o6oA==
-  dependencies:
-    "@expo/config-plugins" "^5.0.4"
+  version "17.5.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-17.5.0.tgz#6c9e097d0884d5cd889aa08db7539920df30ce98"
+  integrity sha512-26dWvSPKuw3C7i3n4T/twZEo4QpTnDLUMtR8VBE2gLdDP7P5dbVt+JOu3+k9pLZBrIeIBWRwYpWGA2KpnY9/WQ==
 
 "@react-native-masked-view/masked-view@0.2.8":
   version "0.2.8"
@@ -5970,6 +5965,18 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.1.tgz#841b532c45c758ee546a11d5bd7b7b473c8c30b9"
   integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
 
+customerio-expo-plugin@^1.0.0-beta.13:
+  version "1.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/customerio-expo-plugin/-/customerio-expo-plugin-1.0.0-beta.13.tgz#181ed824dfab786c8c29b98ee6ef61c5d14052be"
+  integrity sha512-GzlE5m77M3lw6QooSrsCMt7IooBGnxIprqbqsDEQ9Mu5n5YTkJwPlTHYiCzTHBI2bzjt9l0fOjvwxqIpLuk4mw==
+  dependencies:
+    find-package-json "^1.2.0"
+
+customerio-reactnative@^3.1.10:
+  version "3.1.10"
+  resolved "https://registry.yarnpkg.com/customerio-reactnative/-/customerio-reactnative-3.1.10.tgz#ac7c56c9aa5bc4b5db651f681c15afb9ab4e719d"
+  integrity sha512-0XzZfupZqs54bplz0V0hovi/E9vXyYXXb//FG7W48TTtPXLYr1dvplrr4zjrUYF9/whMAALLm0qiovqkYpP79g==
+
 cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
@@ -8037,6 +8044,11 @@ find-cache-dir@^3.3.1:
     commondir "^1.0.1"
     make-dir "^3.0.2"
     pkg-dir "^4.1.0"
+
+find-package-json@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/find-package-json/-/find-package-json-1.2.0.tgz#4057d1b943f82d8445fe52dc9cf456f6b8b58083"
+  integrity sha512-+SOGcLGYDJHtyqHd87ysBhmaeQ95oWspDKnMXBrnQ9Eq4OkLNqejgoaD8xVWu6GPa0B6roa6KinCMEMcVeqONw==
 
 find-up@4.1.0, find-up@^4.0.0, find-up@^4.1.0:
   version "4.1.0"
