@@ -97,6 +97,7 @@ export default function RoundButton({
       onPress={handlePress}
       disabled={disabled}
       onLayout={(e: any) => handleLayout(e)}
+      accessibilityRole="button"
     >
       <View style={styles.progressBar}>
         <Animated.View
