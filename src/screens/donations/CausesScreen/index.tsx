@@ -46,7 +46,7 @@ import ContributionSection from "./ContributionSection";
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
 export default function CausesScreen() {
-  usePageView("P1_view");
+  usePageView("P26_view");
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
