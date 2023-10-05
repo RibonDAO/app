@@ -18,3 +18,9 @@ export const STRIPE_PUBLISHABLE_KEY =
 
 export const REACT_APP_ZENDESK_KEY =
   Constants.expoConfig?.extra?.REACT_APP_ZENDESK_KEY;
+
+export const REACT_APP_CIO_SITE_ID =
+  Constants.expoConfig?.extra?.REACT_APP_CIO_SITE_ID;
+
+export const REACT_APP_CIO_API_KEY =
+  Constants.expoConfig?.extra?.REACT_APP_CIO_API_KEY;

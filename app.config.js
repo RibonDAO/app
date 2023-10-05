@@ -103,8 +103,8 @@ export default () => ({
               "pushNotification": {
                  "useRichPush": false,
                  "env": {
-                    "siteId": "73ff8cc7faa5e7d7e975",
-                    "apiKey": "cb51b8dd6005ba7065f6",
+                    "siteId": process.env.REACT_APP_CIO_SITE_ID,
+                    "apiKey": process.env.REACT_APP_CIO_API_KEY,
                     "region": "us"
                  }
               }
@@ -122,7 +122,9 @@ export default () => ({
       "REACT_APP_MIXPANEL_TOKEN": process.env.REACT_APP_MIXPANEL_TOKEN,
       "REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY,
       "REACT_APP_STRIPE_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY,
-      "REACT_APP_ZENDESK_KEY": process.env.REACT_APP_ZENDESK_KEY
+      "REACT_APP_ZENDESK_KEY": process.env.REACT_APP_ZENDESK_KEY,
+      "REACT_APP_CIO_SITE_ID": process.env.REACT_APP_CIO_SITE_ID,
+      "REACT_APP_CIO_API_KEY": process.env.REACT_APP_CIO_API_KEY,
     },
     "runtimeVersion": {
       "policy": "appVersion"
