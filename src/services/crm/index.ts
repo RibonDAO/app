@@ -4,11 +4,15 @@ import {
   CustomerioConfig,
   Region,
 } from "customerio-reactnative";
+import {
+  REACT_APP_CIO_API_KEY,
+  REACT_APP_CIO_SITE_ID,
+} from "utils/constants/Application";
 
 function initializeCRM() {
   const env = new CustomerIOEnv();
-  env.siteId = "73ff8cc7faa5e7d7e975";
-  env.apiKey = "cb51b8dd6005ba7065f6";
+  env.siteId = REACT_APP_CIO_SITE_ID;
+  env.apiKey = REACT_APP_CIO_API_KEY;
   env.region = Region.US;
 
   const data = new CustomerioConfig();
