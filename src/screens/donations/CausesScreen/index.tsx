@@ -180,6 +180,10 @@ export default function CausesScreen() {
       if (nonProfitStories.length === 0) return;
       setStories(nonProfitStories);
       setStoriesVisible(true);
+      logEvent("storiesBtn_click", {
+        nonProfitId: nonProfit.id,
+        from: "NGOCard",
+      });
     } catch (e) {
       logError(e);
     }
