@@ -47,6 +47,11 @@ export default () => ({
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
       "buildNumber": buildNumber.toString(),
+      "associatedDomains": [
+        "applinks:dapp.ribon.io",
+        "applinks:ribon.io",
+        "applinks:donation.app.link",
+      ]
     },
     "android": {
       "googleServicesFile": "./google-services.json",
