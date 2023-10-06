@@ -70,7 +70,8 @@ export default () => ({
             "buildToolsVersion": "33.0.0"
           },
           "ios": {
-            "useFrameworks": "static"
+            "useFrameworks": "static",
+            "deploymentTarget": "13.0"
           }
         },
       ],
@@ -93,17 +94,38 @@ export default () => ({
           "enableGooglePay": true
         }
       ],
+      [
+        "customerio-expo-plugin",
+        {
+            "android": {
+               "googleServicesFile": "./google-services.json"
+            },
+            "ios": {
+              "pushNotification": {
+                 "useRichPush": false,
+                 "env": {
+                    "siteId": process.env.REACT_APP_CIO_SITE_ID,
+                    "apiKey": process.env.REACT_APP_CIO_API_KEY,
+                    "region": "us"
+                 }
+              }
+           }
+
+         }
+      ]
     ],
     "extra": {
       "eas": {
-        "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960"
+        "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960",
       },
       "REACT_APP_RIBON_API": process.env.REACT_APP_RIBON_API,
       "REACT_APP_RIBON_INTEGRATION_ID": process.env.REACT_APP_RIBON_INTEGRATION_ID,
       "REACT_APP_MIXPANEL_TOKEN": process.env.REACT_APP_MIXPANEL_TOKEN,
       "REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY,
       "REACT_APP_STRIPE_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY,
-      "REACT_APP_ZENDESK_KEY": process.env.REACT_APP_ZENDESK_KEY
+      "REACT_APP_ZENDESK_KEY": process.env.REACT_APP_ZENDESK_KEY,
+      "REACT_APP_CIO_SITE_ID": process.env.REACT_APP_CIO_SITE_ID,
+      "REACT_APP_CIO_API_KEY": process.env.REACT_APP_CIO_API_KEY,
     },
     "runtimeVersion": {
       "policy": "appVersion"
