@@ -9,8 +9,8 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { showToast } from "lib/Toast";
+import { useWalletConnectModal } from "@walletconnect/modal-react-native";
 
 export interface IWalletContext {
   wallet: string | null;
@@ -33,29 +33,27 @@ function WalletProvider({ children }: Props) {
     keyPrefix: "contexts.walletContext",
   });
 
-  const connector = useWalletConnect();
+  const { address, open, close } = useWalletConnectModal();
 
   useEffect(() => {
-    if (connector.accounts && connector.accounts[0])
-      setWallet(connector.accounts[0]);
-  }, [connector]);
+    if (address) setWallet(address);
+  }, [address]);
 
   const connectWallet = useCallback(async () => {
     try {
-      const connectorRequest = await connector.connect();
-      setWallet(connectorRequest.accounts[0]);
+      await open();
     } catch (error) {
       showToast({
         type: "error",
         message: t("walletConnectionErrorMessage", "error"),
       });
     }
-  }, [connector]);
+  }, [open]);
 
   const killSession = useCallback(async () => {
-    await connector.killSession();
+    await close();
     setWallet(null);
-  }, [connector]);
+  }, [close]);
 
   const walletObject: IWalletContext = useMemo(
     () => ({

@@ -2,12 +2,10 @@ import React, { Suspense, useEffect } from "react";
 import "./global";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import WalletConnectProvider from "@walletconnect/react-native-dapp";
+import { WalletConnectModal } from "@walletconnect/modal-react-native";
 import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
-import { Platform, View } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { View } from "react-native";
 import { debugEventsEnabled } from "./src/config/DebugEventsView/helpers";
 import DebugEventsView from "./src/config/DebugEventsView";
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
@@ -21,6 +19,20 @@ import UnsafeAreaProvider, {
 } from "./src/contexts/unsafeAreaContext";
 import TasksProvider from "./src/contexts/tasksContext";
 import initializeCRM from "./src/services/crm";
+import { WALLET_CONNECT_PROJECT_ID } from "./src/utils/constants/Application";
+
+const providerMetadata = {
+  name: "Ribon App",
+  description: "Donations that make new donors!",
+  url: "https://dapp.ribon.io/",
+  icons: [
+    "https://dapp.ribon.io/static/media/logo.a55fa47db5544540f8f9327782a45e5b.svg",
+  ],
+  redirect: {
+    native: "ribon://",
+    universal: "dapp.ribo.io",
+  },
+};
 
 function Main() {
   const isLoadingComplete = useCachedResources();
@@ -34,14 +46,11 @@ function Main() {
     return null;
   } else {
     return (
-      <WalletConnectProvider
-        redirectUrl={
-          Platform.OS === "web" ? window.location.origin : "ribon://"
-        }
-        storageOptions={{
-          asyncStorage: AsyncStorage as any,
-        }}
-      >
+      <>
+        <WalletConnectModal
+          projectId={WALLET_CONNECT_PROJECT_ID}
+          providerMetadata={providerMetadata}
+        />
         <QueryClientComponent>
           <TasksProvider>
             <SafeAreaProvider>
@@ -63,7 +72,7 @@ function Main() {
             </SafeAreaProvider>
           </TasksProvider>
         </QueryClientComponent>
-      </WalletConnectProvider>
+      </>
     );
   }
 }

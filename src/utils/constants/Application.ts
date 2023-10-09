@@ -24,3 +24,6 @@ export const REACT_APP_CIO_SITE_ID =
 
 export const REACT_APP_CIO_API_KEY =
   Constants.expoConfig?.extra?.REACT_APP_CIO_API_KEY;
+
+export const WALLET_CONNECT_PROJECT_ID =
+  process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID;
