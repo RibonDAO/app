@@ -5,6 +5,8 @@ module.exports = function (api) {
     plugins: [
       "react-native-reanimated/plugin",
       ["@babel/plugin-transform-flow-strip-types", { loose: true }],
+      "@babel/plugin-proposal-private-methods",
+      "@babel/plugin-proposal-class-properties",
       "transform-inline-environment-variables",
       [
         "module-resolver",
