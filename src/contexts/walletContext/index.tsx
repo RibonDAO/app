@@ -11,6 +11,7 @@ import React, {
 import { useTranslation } from "react-i18next";
 import { showToast } from "lib/Toast";
 import { useWalletConnectModal } from "@walletconnect/modal-react-native";
+import { logError } from "services/crashReport";
 
 export interface IWalletContext {
   wallet: string | null;
@@ -33,7 +34,7 @@ function WalletProvider({ children }: Props) {
     keyPrefix: "contexts.walletContext",
   });
 
-  const { address, open, close } = useWalletConnectModal();
+  const { address, open, provider } = useWalletConnectModal();
 
   useEffect(() => {
     if (address) setWallet(address);
@@ -51,9 +52,13 @@ function WalletProvider({ children }: Props) {
   }, [open]);
 
   const killSession = useCallback(async () => {
-    await close();
+    try {
+      await provider?.disconnect();
+    } catch (e) {
+      logError(e);
+    }
     setWallet(null);
-  }, [close]);
+  }, []);
 
   const walletObject: IWalletContext = useMemo(
     () => ({

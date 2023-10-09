@@ -19,11 +19,14 @@ export function useProvider({ onChainChanged }: Props = {}) {
   }, [isConnected, provider]);
 
   useEffect(() => {
+    const listener = (chainId: number) => {
+      if (onChainChanged) onChainChanged(chainId);
+    };
     if (provider?.on) {
-      (provider?.on as any)("chainChanged", (chainId: number) => {
-        onChainChanged?.(chainId);
-      });
+      (provider?.on as any)("chainChanged", listener);
     }
+
+    return () => provider?.removeListener("chainChanged", listener);
   }, [provider]);
 
   return client;
