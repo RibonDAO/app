@@ -1,5 +1,8 @@
 export const useWalletConnectModal = () => ({
-  provider: () => jest.fn(),
+  provider: {
+    on: jest.fn(),
+    removeListener: jest.fn(),
+  },
   isConnected: false,
   address: "0x123",
   open: jest.fn(),
