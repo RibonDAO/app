@@ -11,7 +11,9 @@ jest.mock("hooks/useProvider", () => ({
       chainId: 0x13881,
       ensAddress: "https://rpc-mumbai.maticvigil.com",
     }),
-    getSigner: jest.fn(),
+    getSigner: jest.fn(() => ({
+      call: jest.fn(),
+    })),
     on: jest.fn(),
   }),
 }));
@@ -26,7 +28,7 @@ function NetworkTestPage() {
 }
 
 describe("useNetwork", () => {
-  xit("renders without error", async () => {
+  it("renders without error", async () => {
     renderComponent(<NetworkTestPage />);
     await waitForPromises();
     expectTextToBeInTheDocument("Network");
