@@ -15,6 +15,6 @@ web-build/
 .DS_Store
 .idea/
 coverage/
-.env
+.env*
 bin/
 
