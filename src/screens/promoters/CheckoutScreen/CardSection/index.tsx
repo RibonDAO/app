@@ -64,7 +64,8 @@ export default function CardSection() {
     isLoading: isLoadingOffers,
   } = useOffers(
     Currencies[
-      currencyParam || (currency?.toUpperCase() as keyof typeof Currencies)
+      (currencyParam.toUpperCase() as keyof typeof Currencies) ||
+        (currency?.toUpperCase() as keyof typeof Currencies)
     ],
     isSubscription,
   );

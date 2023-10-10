@@ -52,6 +52,7 @@ import { openInWebViewer } from "lib/linkOpener";
 import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsScreen";
 import UtmProvider, { useUtmContext } from "contexts/utmContext";
 import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -158,6 +159,11 @@ function BottomTabNavigator() {
           header,
           lazy: false,
         }}
+        listeners={() => ({
+          tabPress: () => {
+            logEvent("homeNavBtn_click");
+          },
+        })}
       />
 
       <BottomTab.Screen
@@ -170,6 +176,11 @@ function BottomTabNavigator() {
           lazy: false,
           header: () => renderForYouScreenHeader(),
         }}
+        listeners={() => ({
+          tabPress: () => {
+            logEvent("forYouNavBtn_click");
+          },
+        })}
       />
 
       <BottomTab.Screen
@@ -182,6 +193,13 @@ function BottomTabNavigator() {
           header: headerWithWallet,
           lazy: false,
         }}
+        listeners={() => ({
+          tabPress: () => {
+            logEvent("giveNonProfitNavBtn_click", {
+              from: "header",
+            });
+          },
+        })}
       />
 
       <BottomTab.Screen
@@ -194,6 +212,11 @@ function BottomTabNavigator() {
           header: headerWithoutTicket,
           lazy: false,
         }}
+        listeners={() => ({
+          tabPress: () => {
+            logEvent("impactNavBtn_click");
+          },
+        })}
       />
     </BottomTab.Navigator>
   );

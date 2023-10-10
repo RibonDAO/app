@@ -132,7 +132,7 @@ function LayoutHeader({
   const handleMonthlyContributionClick = () => {
     refetchSubscription();
 
-    logEvent("manageSubscription_click", {
+    logEvent("manageSubs_click", {
       from: "configPage",
     });
 

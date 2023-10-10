@@ -36,23 +36,6 @@ function PaymentScreen(): JSX.Element {
   const { isKeyboardVisible } = useKeyboardVisibility();
 
   useEffect(() => {
-    if (flow === "cause") {
-      logEvent("P5_view", {
-        causeId: cause?.id,
-        price: offer.priceValue,
-        currency: offer.currency,
-      });
-    }
-    if (flow === "nonProfit") {
-      logEvent("P6_view", {
-        nonprofitId: nonProfit?.id,
-        price: offer.priceValue,
-        currency: offer.currency,
-      });
-    }
-  }, []);
-
-  useEffect(() => {
     setCause(cause);
   }, [cause]);
 
@@ -74,16 +57,9 @@ function PaymentScreen(): JSX.Element {
 
   const handleContinueClick = () => {
     if (isUserSection()) {
-      logEvent("continuePaymentFormBtn_click", {
-        flow,
-        causeId: cause?.id,
-        nonprofitId: nonProfit?.id,
-        price: offer.priceValue,
-        currency: offer.currency,
-      });
       setCurrentSection("card");
     } else if (isCardSection()) {
-      logEvent("sendPaymentFormBtn_click", {
+      logEvent("confirmPaymentFormBtn_click", {
         flow,
         causeId: cause?.id,
         nonprofitId: nonProfit?.id,
