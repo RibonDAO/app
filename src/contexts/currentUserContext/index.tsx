@@ -10,6 +10,7 @@ import React, {
 } from "react";
 import { User } from "@ribon.io/shared/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CRMclearIdentify, CRMidentifyUser } from "services/crm";
 
 export interface ICurrentUserContext {
   currentUser: User | undefined;
@@ -62,6 +63,7 @@ function CurrentUserProvider({ children }: Props) {
       const lastDonation = await getUserLastDonation();
       setCurrentUser(user);
       setUserLastDonation(lastDonation);
+      if (user?.email) CRMidentifyUser(user.email);
     }
 
     setInitialUser();
@@ -75,6 +77,7 @@ function CurrentUserProvider({ children }: Props) {
 
   async function logoutCurrentUser() {
     setCurrentUser(undefined);
+    CRMclearIdentify();
     await AsyncStorage.removeItem(CURRENT_USER_KEY);
   }
 

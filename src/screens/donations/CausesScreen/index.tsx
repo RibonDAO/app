@@ -46,7 +46,7 @@ import ContributionSection from "./ContributionSection";
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
 export default function CausesScreen() {
-  usePageView("P1_view");
+  usePageView("P26_view");
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
@@ -120,7 +120,7 @@ export default function CausesScreen() {
   }, []);
 
   const causesFilter = () => {
-    const causesApi = causes.filter((cause) => cause.active);
+    const causesApi = causes.filter((cause) => cause.status === "active");
     return (
       [
         {
@@ -180,6 +180,10 @@ export default function CausesScreen() {
       if (nonProfitStories.length === 0) return;
       setStories(nonProfitStories);
       setStoriesVisible(true);
+      logEvent("storiesBtn_click", {
+        nonProfitId: nonProfit.id,
+        from: "NGOCard",
+      });
     } catch (e) {
       logError(e);
     }
