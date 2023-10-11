@@ -4,7 +4,6 @@ import Image from "components/atomics/Image";
 import { openInWebViewer } from "lib/linkOpener";
 import Icon from "components/atomics/Icon";
 import { logEvent } from "services/analytics";
-import { useEffect } from "react";
 import VendorIcon from "./assets/VendorIcon";
 import styles from "./styles";
 
@@ -51,10 +50,6 @@ export default function ArticleLayout({ article, readMoreText }: Props) {
 
     return null;
   };
-
-  useEffect(() => {
-    logEvent("P20_post_view", { idPost: article.id });
-  }, []);
 
   const renderContentFooter = () => (
     <TouchableOpacity
