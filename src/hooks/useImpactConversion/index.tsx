@@ -12,10 +12,10 @@ import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useEffect, useState } from "react";
 
 export function useImpactConversion() {
-  // R$ 15,00 offer
-  const offerBrlId = 34;
-  // $ 15,00 offer
-  const offerUsdId = 31;
+  // R$ 10,00 offer
+  const offerBrlId = 33;
+  // $ 10,00 offer
+  const offerUsdId = 7;
 
   const [contribution, setContribution] = useState<any>();
   const [description, setDescription] = useState<
