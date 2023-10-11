@@ -12,6 +12,7 @@ import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/Tick
 import { useNavigation } from "hooks/useNavigation";
 import { showToast } from "lib/Toast";
 import { useTickets } from "contexts/ticketsContext";
+import { useTranslation } from "react-i18next";
 import Placeholder from "./placeholder";
 
 function DonateScreen() {
@@ -23,6 +24,9 @@ function DonateScreen() {
   const { signedIn } = useCurrentUser();
   const { navigateTo, popNavigation } = useNavigation();
   const { setTickets } = useTickets();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "donations.causesCausesScreen",
+  });
 
   const onContinue = () => {
     setIsDonating(true);
@@ -48,6 +52,12 @@ function DonateScreen() {
     if (donationSucceeded) {
       setTickets(0);
       navigateTo("DonationDoneScreen", { nonProfit });
+    } else {
+      const newState = {
+        failedDonation: true,
+        message: t("donationError"),
+      };
+      navigateTo("CausesScreen", { newState });
     }
   }, [donationSucceeded]);
 
