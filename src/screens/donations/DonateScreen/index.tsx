@@ -25,7 +25,7 @@ function DonateScreen() {
   const { navigateTo, popNavigation } = useNavigation();
   const { setTickets } = useTickets();
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.causesCausesScreen",
+    keyPrefix: "donations.causesScreen",
   });
 
   const onContinue = () => {
