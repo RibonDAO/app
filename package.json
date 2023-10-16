@@ -4,7 +4,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "yarn expo start",
-    "start-debug": "yarn DEBUG_VIEW_ENABLED=true expo start",
+    "start-debug": "DEBUG_VIEW_ENABLED=true yarn start",
     "android": "yarn start --android",
     "ios": "yarn start --ios",
     "web": "yarn start --web",
