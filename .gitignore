@@ -17,4 +17,4 @@ web-build/
 coverage/
 .env
 bin/
-
+.env*

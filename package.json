@@ -6,7 +6,7 @@
     "dev-env": "REACT_APP_RIBON_API=https://dapp-dev-api.ribon.io/ REACT_APP_RIBON_INTEGRATION_ID=3 REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY=pk_test_51N3fZvAvG66WJy8B3aSADu9NaLF6mcJhus6eiZztGYfSKQBY9q3AkQPQshONDA9oNOdA5Pz3YcX3tAaPjDERj8pc00JLUhEkzI REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_51JRgaRJuOnwQq9Qx2RrybIhE1vRgC5tNd32EJkINCTmgGZYSr3QXne9y5CAdEq36WULJPmWv2VvZZ0xA5MNTrY7C00KL9rq6Op",
     "prod-env": "REACT_APP_RIBON_API=https://dapp-api.ribon.io/ REACT_APP_RIBON_INTEGRATION_ID=1 REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY=pk_live_51N3fZvAvG66WJy8BrEnblBQfVseTzACclzqVj0D8xVhSXoOdIKwKfD6iWC6Qhl84jvoDxLPI9ekimrWATZoGTPrB00YH6VmdsL REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_live_51JRgaRJuOnwQq9Qx2B1C9Z7KwV43Qu1TZj96sjQrIpx9g2M59aHtSnVyVgQrmquJWYfgsKghsnExeCOmtepaDpYu00PlMsbojz",
     "start": "yarn dev-env expo start",
-    "start-debug": "yarn dev-env DEBUG_VIEW_ENABLED=true expo start",
+    "start-debug": "yarn dev-env REACT_APP_GROWTHBOOK_DEV_MODE=true DEBUG_VIEW_ENABLED=true expo start",
     "android": "yarn start --android",
     "ios": "yarn start --ios",
     "web": "yarn start --web",
