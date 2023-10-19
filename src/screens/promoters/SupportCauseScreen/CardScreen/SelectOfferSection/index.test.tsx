@@ -9,7 +9,7 @@ const mockOffer = offerFactory({ priceValue: 50, currency: "usd" });
 const mockCause = causeFactory({
   name: "Cause",
   id: 1,
-  active: true,
+  status: "active",
   pools: [],
 });
 jest.mock("@ribon.io/shared/hooks", () => ({

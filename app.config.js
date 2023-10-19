@@ -1,5 +1,5 @@
-const version = "5.2.3";
-const buildNumber = 338;
+const version = "5.2.5";
+const buildNumber = 340;
 
 export default () => ({
   "expo": {
@@ -70,7 +70,8 @@ export default () => ({
             "buildToolsVersion": "33.0.0"
           },
           "ios": {
-            "useFrameworks": "static"
+            "useFrameworks": "static",
+            "deploymentTarget": "13.0"
           }
         }
       ],
@@ -92,10 +93,29 @@ export default () => ({
           "enableGooglePay": true
         }
       ],
+      [
+        "customerio-expo-plugin",
+        {
+            "android": {
+               "googleServicesFile": "./google-services.json"
+            },
+            "ios": {
+              "pushNotification": {
+                 "useRichPush": false,
+                 "env": {
+                    "siteId": process.env.REACT_APP_CIO_SITE_ID,
+                    "apiKey": process.env.REACT_APP_CIO_API_KEY,
+                    "region": "us"
+                 }
+              }
+           }
+
+         }
+      ]
     ],
     "extra": {
       "eas": {
-        "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960"
+        "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960",
       },
       "REACT_APP_RIBON_API": process.env.REACT_APP_RIBON_API,
       "REACT_APP_RIBON_INTEGRATION_ID": process.env.REACT_APP_RIBON_INTEGRATION_ID,
@@ -105,7 +125,9 @@ export default () => ({
       "REACT_APP_ZENDESK_KEY": process.env.REACT_APP_ZENDESK_KEY,
       "REACT_APP_RIBON_GROWTHBOOK_URL": process.env.REACT_APP_RIBON_GROWTHBOOK_URL,
       "REACT_APP_GROWTHBOOK_CLIENT_KEY": process.env.REACT_APP_GROWTHBOOK_CLIENT_KEY,
-      "REACT_APP_GROWTHBOOK_DEV_MODE": process.env.REACT_APP_GROWTHBOOK_DEV_MODE
+      "REACT_APP_GROWTHBOOK_DEV_MODE": process.env.REACT_APP_GROWTHBOOK_DEV_MODE,
+      "REACT_APP_CIO_SITE_ID": process.env.REACT_APP_CIO_SITE_ID,
+      "REACT_APP_CIO_API_KEY": process.env.REACT_APP_CIO_API_KEY,
     },
     "runtimeVersion": {
       "policy": "appVersion"

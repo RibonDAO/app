@@ -7,8 +7,8 @@ import { useTranslation } from "react-i18next";
 import SupportNonProfitScreen from "screens/promoters/SupportNonProfitScreen";
 import SupportCauseScreen from "screens/promoters/SupportCauseScreen";
 import { useRouteParams } from "hooks/useRouteParams";
-import S from "./styles";
 import { logEvent } from "services/analytics";
+import S from "./styles";
 
 export default function PromotersScreen() {
   const { params } = useRouteParams<"PromotersScreen">();
@@ -29,6 +29,7 @@ export default function PromotersScreen() {
       <View style={S.container}>
         <View>
           <TouchableOpacity
+            accessibilityRole="button"
             style={S.collapsibleButton}
             onPress={() => {
               setSubmenuVisible(!submenuVisible);
@@ -58,6 +59,9 @@ export default function PromotersScreen() {
               onPress={() => {
                 setIsInCommunityDonationFlow(true);
                 setSubmenuVisible(false);
+                logEvent("giveCauseNavBtn_click", {
+                  from: "subheader",
+                });
               }}
               backgroundColor={
                 isInCommunityDonationFlow
@@ -78,6 +82,9 @@ export default function PromotersScreen() {
               onPress={() => {
                 setIsInCommunityDonationFlow(false);
                 setSubmenuVisible(false);
+                logEvent("giveNonProfitNavBtn_click", {
+                  from: "subheader",
+                });
               }}
               backgroundColor={
                 isInCommunityDonationFlow

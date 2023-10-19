@@ -11,6 +11,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useLanguage } from "contexts/languageContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
 import { perform } from "lib/timeoutHelpers";
+import { logEvent } from "services/analytics";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter400 from "../assets/fonts/inter/Inter-Regular.ttf";
 import Inter900 from "../assets/fonts/inter/Inter-Black.ttf";
@@ -68,6 +69,7 @@ export default function useCachedResources() {
         // eslint-disable-next-line
         console.warn(e);
       } finally {
+        logEvent("P1_view");
         setLoadingComplete(true);
         perform(SplashScreen.hideAsync).in(3000);
       }

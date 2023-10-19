@@ -9,7 +9,6 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { PLATFORM } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
 import BackgroundShapes from "components/vectors/BackgroundShapes";
-import usePageView from "hooks/usePageView";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useUtmContext } from "contexts/utmContext";
 import S from "./styles";
@@ -26,7 +25,6 @@ function SignedInSection({
   onDonationSuccess,
   onDonationFail,
 }: Props) {
-  usePageView("P13_view");
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donateScreen.signedInSection",
   });
