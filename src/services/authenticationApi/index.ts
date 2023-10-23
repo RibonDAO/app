@@ -14,7 +14,7 @@ import { REACT_APP_RIBON_API } from "utils/constants/Application";
 
 const RIBON_API = "https://dapp-api.ribon.io/";
 export const baseURL = REACT_APP_RIBON_API || RIBON_API;
-export const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_";
+export const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
 
 export function initializeApi() {
   const lang = normalizedLanguage();

@@ -1,12 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import {
-  REFRESH_TOKEN_KEY,
-  ACCESS_TOKEN_KEY,
-} from "@ribon.io/shared/utils/constants";
-import {
-  getCookiesItem,
-  removeCookiesItem,
-} from "@ribon.io/shared/lib/cookies";
+
+import { getCookiesItem, removeCookiesItem } from "@ribon.io/shared/lib";
 
 // todo: create goggle, apple and magic link login
 export interface IAuthenticationContext {
@@ -21,6 +15,9 @@ export type Props = {
 export const AuthenticationContext = createContext<IAuthenticationContext>(
   {} as IAuthenticationContext,
 );
+
+export const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
+export const REFRESH_TOKEN_KEY = "REFRESH_TOKEN_KEY";
 
 function AuthenticationProvider({ children }: Props) {
   const [accessToken] = useState(getCookiesItem(ACCESS_TOKEN_KEY));

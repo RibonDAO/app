@@ -10,6 +10,7 @@ import MaterialSymbolsOutlined from "assets/fonts/material/MaterialSymbolsOutlin
 import MaterialSymbolsSharp from "assets/fonts/material/MaterialSymbolsSharp.ttf";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useLanguage } from "contexts/languageContext";
+import { ACCESS_TOKEN_KEY } from "contexts/authenticationContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
 import { perform } from "lib/timeoutHelpers";
 import { logEvent } from "services/analytics";
@@ -27,7 +28,6 @@ import Inter100 from "../assets/fonts/inter/Inter-Thin.ttf";
 
 SplashScreen.preventAutoHideAsync();
 export default function useCachedResources() {
-  const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
