@@ -9,10 +9,13 @@ import {
 } from "@ribon.io/shared/services";
 import { initializeHooks } from "@ribon.io/shared/hooks";
 import { normalizedLanguage } from "lib/currentLanguage";
-import { RIBON_API, ACCESS_TOKEN_KEY } from "@ribon.io/shared/utils/constants";
-import { getCookiesItem } from "@ribon.io/shared/lib/cookies";
+import { getCookiesItem } from "@ribon.io/shared/lib";
+import { REACT_APP_RIBON_API } from "utils/constants/Application";
 
-export const baseURL = RIBON_API;
+const RIBON_API = "https://dapp-api.ribon.io/";
+export const baseURL = REACT_APP_RIBON_API || RIBON_API;
+export const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_";
+
 export function initializeApi() {
   const lang = normalizedLanguage();
   const authHeaders = {

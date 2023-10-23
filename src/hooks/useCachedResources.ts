@@ -13,8 +13,7 @@ import { useLanguage } from "contexts/languageContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
 import { perform } from "lib/timeoutHelpers";
 import { logEvent } from "services/analytics";
-import { ACCESS_TOKEN_KEY } from "@ribon.io/shared/utils/constants";
-import { getCookiesItem } from "@ribon.io/shared/lib/cookies";
+import { getCookiesItem } from "@ribon.io/shared/lib";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter400 from "../assets/fonts/inter/Inter-Regular.ttf";
 import Inter900 from "../assets/fonts/inter/Inter-Black.ttf";
@@ -28,6 +27,7 @@ import Inter100 from "../assets/fonts/inter/Inter-Thin.ttf";
 
 SplashScreen.preventAutoHideAsync();
 export default function useCachedResources() {
+  const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
@@ -41,8 +41,11 @@ export default function useCachedResources() {
   }, [JSON.stringify(currentUser), currentLang]);
 
   useEffect(() => {
-    initializeAuthApi();
-  }, [accessToken, currentLang, JSON.stringify(currentUser)]);
+    // todo: refactor with login logic
+    if (accessToken) {
+      initializeAuthApi();
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     Sentry.init({
