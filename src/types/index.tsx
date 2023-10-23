@@ -94,6 +94,7 @@ export type MonthlyContributionsScreenParamList = {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  PrivateStack: undefined;
   DonateScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;
   ContributionDoneScreen: ContributionDoneParamsList;
@@ -115,6 +116,12 @@ export type RootStackParamList = {
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
   MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
+};
+
+export type PrivateStackParamList = {
+  // todo: update with the screens that are private
+  Private: NavigatorScreenParams<RootTabParamList> | undefined;
+  DonateScreen: DonateScreenList;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

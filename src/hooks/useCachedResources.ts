@@ -3,6 +3,7 @@ import * as Font from "expo-font";
 import * as Sentry from "sentry-expo";
 import { useEffect, useState } from "react";
 import { initializeApi } from "services/api";
+import { initializeApi as initializeAuthApi } from "services/authenticationApi";
 import * as SplashScreen from "expo-splash-screen";
 import MaterialSymbolsRounded from "assets/fonts/material/MaterialSymbolsRounded.ttf";
 import MaterialSymbolsOutlined from "assets/fonts/material/MaterialSymbolsOutlined.ttf";
@@ -12,6 +13,8 @@ import { useLanguage } from "contexts/languageContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
 import { perform } from "lib/timeoutHelpers";
 import { logEvent } from "services/analytics";
+import { ACCESS_TOKEN_KEY } from "@ribon.io/shared/utils/constants";
+import { getCookiesItem } from "@ribon.io/shared/lib/cookies";
 import GambarinoRegular from "../assets/fonts/Gambarino-Regular.ttf";
 import Inter400 from "../assets/fonts/inter/Inter-Regular.ttf";
 import Inter900 from "../assets/fonts/inter/Inter-Black.ttf";
@@ -28,6 +31,7 @@ export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
+  const accessToken = getCookiesItem(ACCESS_TOKEN_KEY);
 
   useEffect(() => {
     initializeApi({
@@ -35,6 +39,10 @@ export default function useCachedResources() {
       language: formattedLanguage(currentLang),
     });
   }, [JSON.stringify(currentUser), currentLang]);
+
+  useEffect(() => {
+    initializeAuthApi();
+  }, [accessToken, currentLang, JSON.stringify(currentUser)]);
 
   useEffect(() => {
     Sentry.init({

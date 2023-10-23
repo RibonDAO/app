@@ -13,7 +13,11 @@ import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
 import ImpactScreen from "screens/users/ImpactScreen";
 import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
-import { RootStackParamList, RootTabParamList } from "types";
+import {
+  PrivateStackParamList,
+  RootStackParamList,
+  RootTabParamList,
+} from "types";
 import { theme } from "@ribon.io/shared/styles";
 import Header from "components/moleculars/Header";
 import LayoutHeader from "components/moleculars/LayoutHeader";
@@ -222,6 +226,35 @@ function BottomTabNavigator() {
   );
 }
 
+const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
+function PrivateNavigator() {
+  // todo: adds isAuthenticated logic to show the right screen
+
+  const { navigateTo } = useNavigation();
+  const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
+  const { setUtm } = useUtmContext();
+  useEffect(() => {
+    initializeDeeplink(
+      navigateTo,
+      setCurrentIntegrationId,
+      setExternalId,
+      setUtm,
+    );
+  }, []);
+
+  return (
+    /* todo: adds isAuthenticated logic to show the right screen in the component 
+     prop eg. component={isAuthenticated ? BottomTabNavigator : LoginScreen} */
+    <PrivateStack.Navigator>
+      <PrivateStack.Screen
+        name="Private"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+    </PrivateStack.Navigator>
+  );
+}
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   const { navigateTo } = useNavigation();
@@ -241,6 +274,12 @@ function RootNavigator() {
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="PrivateStack"
+        component={PrivateNavigator}
         options={{ headerShown: false }}
       />
 
