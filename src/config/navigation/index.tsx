@@ -228,8 +228,6 @@ function BottomTabNavigator() {
 
 const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
 function PrivateNavigator() {
-  // todo: adds isAuthenticated logic to show the right screen
-
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
@@ -248,7 +246,7 @@ function PrivateNavigator() {
     <PrivateStack.Navigator>
       <PrivateStack.Screen
         name="Private"
-        component={BottomTabNavigator}
+        component={PrivateNavigator}
         options={{ headerShown: false }}
       />
     </PrivateStack.Navigator>
@@ -274,12 +272,6 @@ function RootNavigator() {
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="PrivateStack"
-        component={PrivateNavigator}
         options={{ headerShown: false }}
       />
 
@@ -443,6 +435,7 @@ export default function Navigation() {
                             <TicketsProvider>
                               <IntegrationProvider>
                                 <RootNavigator />
+                                <PrivateNavigator />
                                 <Toast config={toastConfig} />
                               </IntegrationProvider>
                             </TicketsProvider>

@@ -120,8 +120,7 @@ export type RootStackParamList = {
 
 export type PrivateStackParamList = {
   // todo: update with the screens that are private
-  Private: NavigatorScreenParams<RootTabParamList> | undefined;
-  DonateScreen: DonateScreenList;
+  Private: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
