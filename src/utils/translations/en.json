@@ -360,7 +360,7 @@
   },
   "userSupportBanner": {
     "title": "Access user support",
-    "text": "Questions, ideias, refunds. We’re here!",
+    "text": "Questions, ideas, refunds. We’re here!",
     "link": "https://v2.zopim.com/widget/popout.html?key={{key}}"
   },
   "integrationBanner": {
