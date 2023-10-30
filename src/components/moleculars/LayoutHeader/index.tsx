@@ -22,7 +22,7 @@ import { isNotificationsEnabled } from "lib/notifications";
 import { useFocusEffect } from "@react-navigation/native";
 import { logEvent } from "services/analytics";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
-import { REACT_APP_ZENDESK_KEY } from "utils/constants/Application";
+import { EXPO_PUBLIC_ZENDESK_KEY } from "utils/constants/Application";
 import ConfigItem from "../ConfigItem";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
@@ -152,7 +152,7 @@ function LayoutHeader({
   );
 
   const linkToSupport = () => {
-    const key = REACT_APP_ZENDESK_KEY;
+    const key = EXPO_PUBLIC_ZENDESK_KEY;
     openInWebViewer(t("supportLink", { key }));
     logEvent("supportBtn_click", {
       from: "config_page",
