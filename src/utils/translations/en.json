@@ -69,7 +69,8 @@
       },
       "ticketSection": {
         "ticketToast": "You have a new ticket!"
-      }
+      },
+      "donationError":"Unable to donate now"
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",
