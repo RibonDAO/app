@@ -53,6 +53,8 @@ import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsSc
 import UtmProvider, { useUtmContext } from "contexts/utmContext";
 import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import { logEvent } from "services/analytics";
+import PixInstructionsScreen from "screens/promoters/CheckoutScreen/PixInstructionsScreen";
+import PixPaymentInformationProvider from "contexts/pixInformationContext";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -323,6 +325,14 @@ function RootNavigator() {
       />
 
       <Stack.Screen
+        name="PixInstructionsScreen"
+        component={PixInstructionsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
         name="OnboardingScreen"
         component={OnboardingScreen}
         options={{
@@ -397,20 +407,22 @@ export default function Navigation() {
               <CheckoutProvider>
                 <CryptoPaymentProvider>
                   <CardPaymentInformationProvider>
-                    <CausesProvider>
-                      <CauseDonationProvider>
-                        <CauseContributionProvider>
-                          <NonProfitsProvider>
-                            <TicketsProvider>
-                              <IntegrationProvider>
-                                <RootNavigator />
-                                <Toast config={toastConfig} />
-                              </IntegrationProvider>
-                            </TicketsProvider>
-                          </NonProfitsProvider>
-                        </CauseContributionProvider>
-                      </CauseDonationProvider>
-                    </CausesProvider>
+                    <PixPaymentInformationProvider>
+                      <CausesProvider>
+                        <CauseDonationProvider>
+                          <CauseContributionProvider>
+                            <NonProfitsProvider>
+                              <TicketsProvider>
+                                <IntegrationProvider>
+                                  <RootNavigator />
+                                  <Toast config={toastConfig} />
+                                </IntegrationProvider>
+                              </TicketsProvider>
+                            </NonProfitsProvider>
+                          </CauseContributionProvider>
+                        </CauseDonationProvider>
+                      </CausesProvider>
+                    </PixPaymentInformationProvider>
                   </CardPaymentInformationProvider>
                 </CryptoPaymentProvider>
               </CheckoutProvider>

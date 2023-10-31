@@ -24,6 +24,8 @@ import ModalButtonSelector from "../Components/ModalButtonSelector";
 import ApplePaySection from "../Components/ApplePaySection";
 import GooglePaySection from "../Components/GooglePaySection";
 import S from "./styles";
+import PixIcon from "../assets/PixIcon";
+import PixSection from "../Components/PixSection";
 
 export default function CardSection() {
   const { t } = useTranslation("translation", {
@@ -76,14 +78,6 @@ export default function CardSection() {
   };
 
   useEffect(() => {
-    resetStates();
-
-    return () => {
-      resetStates();
-    };
-  }, []);
-
-  useEffect(() => {
     if (offers && offerPrice !== undefined && !isLoadingOffers) {
       const actualOffer = offers.find(
         (item: Offer) => item.priceCents === offerPrice,
@@ -94,6 +88,14 @@ export default function CardSection() {
       if (!actualOffer) resetOffer();
     }
   }, [offers, offerPrice, isLoadingOffers]);
+
+  useEffect(() => {
+    resetStates();
+
+    return () => {
+      resetStates();
+    };
+  }, []);
 
   useEffect(() => {
     refetchOffers();
@@ -174,6 +176,9 @@ export default function CardSection() {
   const nonProfit = payable as NonProfit;
   const cause = target === "non_profit" ? nonProfit?.cause : payable;
   const actualNonProfit = target === "non_profit" ? nonProfit : undefined;
+
+  const showPix = () =>
+    currentOffer?.gateway === "stripe" && currentOffer?.currency === "brl";
 
   return (
     <View style={S.container}>
@@ -260,6 +265,19 @@ export default function CardSection() {
             ),
             rightIcon: <ApplePayIcon />,
             show: false,
+          },
+          {
+            title: t("paymentMethodSection.pix"),
+            children: currentOffer && (
+              <View>
+                <PixSection
+                  offer={currentOffer as Offer}
+                  nonProfit={actualNonProfit}
+                />
+              </View>
+            ),
+            rightIcon: <PixIcon />,
+            show: showPix(),
           },
         ]}
       />
