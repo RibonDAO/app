@@ -1,17 +1,16 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import Image from "components/atomics/Image";
 import { useImpactConversion } from "hooks/useImpactConversion";
+import CardCampaign from "components/moleculars/CardCampaign";
 import S from "./styles";
-import ContributionCard from "./ContributionCard";
 
 export default function ContributionSection() {
   const { t } = useTranslation("translation", {
     keyPrefix: "contributionSection",
   });
 
-  const { nonProfit, contribution } = useImpactConversion();
+  const { nonProfit } = useImpactConversion();
 
   return (
     <>
@@ -21,15 +20,7 @@ export default function ContributionSection() {
             nonProfitName: nonProfit?.name,
           })}
         </Text>
-        <Image
-          style={S.image}
-          source={{ uri: contribution?.image }}
-          accessibilityIgnoresInvertColors
-        />
-        <ContributionCard
-          from="donateTickets_page"
-          customStyle={{ width: "110%", left: -16 }}
-        />
+        <CardCampaign cardId={2} />
       </View>
       <Text style={S.nonProfitTitle}>{t("nonProfits")}</Text>
     </>
