@@ -14,7 +14,10 @@ import pixPaymentApi from "services/api/pixPaymentApi";
 import PaymentIntent from "types/entities/PaymentIntent";
 import { ConfirmPaymentResult, useStripe } from "@stripe/stripe-react-native";
 import { normalizedLanguage } from "lib/currentLanguage";
-import { PLATFORM } from "utils/constants/Application";
+import {
+  EXPO_PUBLIC_STRIPE_API_KEY,
+  PLATFORM,
+} from "utils/constants/Application";
 import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
 import { useIntegrationContext } from "contexts/integrationContext";
@@ -93,10 +96,8 @@ function PixPaymentInformationProvider({ children }: Props) {
 
   const { navigateTo } = useNavigation();
 
-  const stripeApiKey =
-    "sk_test_51JRgaRJuOnwQq9Qxy7krZHxhvBXkNnydWiXQ89CNg94TxASNpOondjVSf6Qh2ooM8lA35KsIjy1aX2KGQas9fgJd00vNPkFAx0";
   const headers = {
-    Authorization: `Bearer ${stripeApiKey}`,
+    Authorization: `Bearer ${EXPO_PUBLIC_STRIPE_API_KEY}}`,
     "Content-Type": "application/x-www-form-urlencoded",
   };
 
