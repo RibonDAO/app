@@ -69,7 +69,8 @@
       },
       "ticketSection": {
         "ticketToast": "You have a new ticket!"
-      }
+      },
+      "donationError":"Unable to donate now"
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",
@@ -373,7 +374,7 @@
   },
   "userSupportBanner": {
     "title": "Access user support",
-    "text": "Questions, ideias, refunds. We’re here!",
+    "text": "Questions, ideas, refunds. We’re here!",
     "link": "https://v2.zopim.com/widget/popout.html?key={{key}}"
   },
   "integrationBanner": {

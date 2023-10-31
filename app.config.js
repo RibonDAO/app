@@ -1,5 +1,5 @@
-const version = "5.2.5";
-const buildNumber = 340;
+const version = "5.3.0";
+const buildNumber = 341;
 
 export default () => ({
   "expo": {
@@ -73,8 +73,9 @@ export default () => ({
             "useFrameworks": "static",
             "deploymentTarget": "13.0"
           }
-        }
+        },
       ],
+      "expo-localization",
       "sentry-expo",
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
@@ -103,8 +104,8 @@ export default () => ({
               "pushNotification": {
                  "useRichPush": false,
                  "env": {
-                    "siteId": process.env.REACT_APP_CIO_SITE_ID,
-                    "apiKey": process.env.REACT_APP_CIO_API_KEY,
+                    "siteId": process.env.EXPO_PUBLIC_CIO_SITE_ID,
+                    "apiKey": process.env.EXPO_PUBLIC_CIO_API_KEY,
                     "region": "us"
                  }
               }
@@ -117,14 +118,15 @@ export default () => ({
       "eas": {
         "projectId": "5f34ae47-0c00-49ae-9893-125f3bea2960",
       },
-      "REACT_APP_RIBON_API": process.env.REACT_APP_RIBON_API,
-      "REACT_APP_RIBON_INTEGRATION_ID": process.env.REACT_APP_RIBON_INTEGRATION_ID,
-      "REACT_APP_MIXPANEL_TOKEN": process.env.REACT_APP_MIXPANEL_TOKEN,
-      "REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_GLOBAL_PUBLISHABLE_KEY,
-      "REACT_APP_STRIPE_PUBLISHABLE_KEY": process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY,
-      "REACT_APP_ZENDESK_KEY": process.env.REACT_APP_ZENDESK_KEY,
-      "REACT_APP_CIO_SITE_ID": process.env.REACT_APP_CIO_SITE_ID,
-      "REACT_APP_CIO_API_KEY": process.env.REACT_APP_CIO_API_KEY,
+      "EXPO_PUBLIC_RIBON_API": process.env.EXPO_PUBLIC_RIBON_API,
+      "EXPO_PUBLIC_RIBON_INTEGRATION_ID": process.env.EXPO_PUBLIC_RIBON_INTEGRATION_ID,
+      "EXPO_PUBLIC_MIXPANEL_TOKEN": process.env.EXPO_PUBLIC_MIXPANEL_TOKEN,
+      "EXPO_PUBLIC_STRIPE_GLOBAL_PUBLISHABLE_KEY": process.env.EXPO_PUBLIC_STRIPE_GLOBAL_PUBLISHABLE_KEY,
+      "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+      "EXPO_PUBLIC_ZENDESK_KEY": process.env.EXPO_PUBLIC_ZENDESK_KEY,
+      "EXPO_PUBLIC_CIO_SITE_ID": process.env.EXPO_PUBLIC_CIO_SITE_ID,
+      "EXPO_PUBLIC_CIO_API_KEY": process.env.EXPO_PUBLIC_CIO_API_KEY,
+      "EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID": process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID,
     },
     "runtimeVersion": {
       "policy": "appVersion"
