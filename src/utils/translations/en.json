@@ -274,6 +274,7 @@
       "searchCountryPlaceholder": "Search country",
       "paymentMethodSection": {
         "creditCard": "Credit card",
+        "pix": "Pix",
         "googlePay": "Google Pay",
         "applePay": "Apple Pay",
         "creditCardFields": {
@@ -290,6 +291,18 @@
         }
       },
       "confirmPayment": "Confirm payment"
+    },
+    "pixInstructionsScreen": {
+      "pixCode": "Pix code",
+      "instructions": "Instructions",
+      "firstInfo": "1. Open your bank app",
+      "secondInfo": "2. Select the option to pay with Pix",
+      "thirdInfo": "3. Scan the QR Code",
+      "copyCode": "Copy code",
+      "copyCodeSuccess": "Code copied!",
+      "expiresAt": "Expires at <b> 30 minutes </b>",
+      "donatingTo": "Donating to ",
+      "pixReceiverText": "Your Pix will go to <b>Stripe</b>, the platform that processes Ribon payments."
     },
     "monthlyContributionsScreen": {
       "title": "Monthly contributions",

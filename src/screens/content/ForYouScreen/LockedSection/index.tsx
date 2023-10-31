@@ -12,7 +12,7 @@ export default function LockedSection() {
   const { navigateTo } = useNavigation();
 
   const handleButtonClick = () => {
-    navigateTo("CausesScreen");
+    navigateTo("PixInstructionsScreen");
   };
 
   return (
