@@ -16,21 +16,21 @@ export default function ContributionSection() {
   const { nonProfit } = useImpactConversion();
   const { getImpressionCard } = useImpressionCards();
 
-  const hasImpressionCard = !!getImpressionCard(CURRENT_CARD_ID);
+  const hasImpressionCard = Boolean(getImpressionCard(CURRENT_CARD_ID));
 
-  return (
-    hasImpressionCard && (
-      <>
-        <View style={S.container}>
-          <Text style={S.title}>
-            {t("title", {
-              nonProfitName: nonProfit?.name,
-            })}
-          </Text>
-          <CardCampaign cardId={CURRENT_CARD_ID} />
-        </View>
-        <Text style={S.nonProfitTitle}>{t("nonProfits")}</Text>
-      </>
-    )
+  return hasImpressionCard ? (
+    <>
+      <View style={S.container}>
+        <Text style={S.title}>
+          {t("title", {
+            nonProfitName: nonProfit?.name,
+          })}
+        </Text>
+        <CardCampaign cardId={CURRENT_CARD_ID} />
+      </View>
+      <Text style={S.nonProfitTitle}>{t("nonProfits")}</Text>
+    </>
+  ) : (
+    <View />
   );
 }
