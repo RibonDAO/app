@@ -3349,10 +3349,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.0.95":
-  version "1.0.95"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.0.95.tgz#8b7d665a9ad10f997a964e78a0c325a14a5f771d"
-  integrity sha512-HL0NpVO49ns/1Ugh6g58pfwDb7toRGTvib+tFeYeiz2AmYh07ayPKcq9riFyWCG6qR30JR/5Cr/gfhRRZTiq/w==
+"@ribon.io/shared@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.6.tgz#a47c9a6b3bc7e90f48db46757aa093da34e2caeb"
+  integrity sha512-to2mgGvvwyEErtXoifDqN8lcdNrXj7jDlWsCD5ipY32Ia1euDSyKRqBd9+OpcqT6GYxynmxfs696V24eftIWBw==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -3364,6 +3364,7 @@
     react-query "^3.34.8"
     snakecase-keys "^5.4.4"
     styled-components "^5.3.6"
+    universal-cookie "^6.1.1"
 
 "@segment/loosely-validate-event@^2.0.0":
   version "2.0.0"
@@ -3843,6 +3844,11 @@
   integrity sha512-P63Zd/JUGq+PdrM1lv0Wv5SBYeA2+CORvbrXbngriYY0jzLUWfQMQQxOhjONEz/wlHOAxOdY7CY65rgQdTjq2w==
   dependencies:
     "@types/node" "*"
+
+"@types/cookie@^0.5.1":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.5.3.tgz#3f98076ede5e467783507284d3c19215327fff8f"
+  integrity sha512-SLg07AS9z1Ab2LU+QxzU8RCmzsja80ywjf/t5oqw+4NSH20gIGlhLOrBDm1L3PBWzPa4+wkgFQVZAjE6Ioj2ug==
 
 "@types/eslint-scope@^3.7.3":
   version "3.7.5"
@@ -6274,7 +6280,7 @@ cookie-signature@1.0.6:
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
   integrity sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==
 
-cookie@0.5.0:
+cookie@0.5.0, cookie@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
   integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
@@ -14889,6 +14895,14 @@ unique-string@^2.0.0:
   integrity sha512-uNaeirEPvpZWSgzwsPGtU2zVSTrn/8L5q/IexZmH0eH6SA73CmAA5U4GwORTxQAZs95TAXLNqeLoPPNO5gZfWg==
   dependencies:
     crypto-random-string "^2.0.0"
+
+universal-cookie@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-6.1.1.tgz#2d619e21804c93b39ff0c77fe47dafd7a492346d"
+  integrity sha512-33S9x3CpdUnnjwTNs2Fgc41WGve2tdLtvaK2kPSbZRc5pGpz2vQFbRWMxlATsxNNe/Cy8SzmnmbuBM85jpZPtA==
+  dependencies:
+    "@types/cookie" "^0.5.1"
+    cookie "^0.5.0"
 
 universalify@^0.1.0:
   version "0.1.2"
