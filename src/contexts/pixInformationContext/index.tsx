@@ -114,7 +114,9 @@ function PixPaymentInformationProvider({ children }: Props) {
       await pixPaymentApi.verifyPixPayment(id ?? "").then((response) => {
         if (response?.data.status === "succeeded") {
           clearInterval(interval);
-          login();
+          setPixInstructions(undefined);
+          setClientSecret(undefined);
+
           navigateTo("ContributionDoneScreen", {
             hasButton: true,
             offerId: offer?.id ?? 0,
@@ -126,7 +128,6 @@ function PixPaymentInformationProvider({ children }: Props) {
       });
     } catch (e) {
       logError(e);
-
       clearInterval(interval);
     }
   };
@@ -150,6 +151,7 @@ function PixPaymentInformationProvider({ children }: Props) {
       const response = await pixPaymentApi.postPixPayment(paymentInformation);
 
       setClientSecret(response.data.externalId);
+      login();
       generatePixPayment(response.data.externalId);
       showLoadingOverlay();
     } catch (error) {
