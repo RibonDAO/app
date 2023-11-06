@@ -3,7 +3,6 @@ import { View } from "react-native";
 import InputText from "components/atomics/inputs/InputText";
 import Button from "components/atomics/buttons/Button";
 import { useTranslation } from "react-i18next";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { theme } from "@ribon.io/shared/styles";
 import CountryPicker, {
   Country,
@@ -18,6 +17,7 @@ import {
   countryCodeByLanguage,
 } from "lib/countryByLanguage";
 import { logEvent } from "services/analytics";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import S from "./styles";
 
 export type Props = {
@@ -55,7 +55,8 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
     setTaxId,
     email,
     setEmail,
-  } = useCardPaymentInformation();
+  } = useCheckoutContext();
+
   const [maskedTaxId, setMaskedTaxId] = useState("999.999.999-99");
 
   useEffect(() => {

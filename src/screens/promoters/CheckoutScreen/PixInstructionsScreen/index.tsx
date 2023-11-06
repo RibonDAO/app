@@ -29,6 +29,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import usePayable from "hooks/usePayable";
 import Icon from "components/atomics/Icon";
+import renderBoldText from "lib/renderBoldText";
 import S from "./styles";
 import Placeholder from "../placeholder";
 import PriceSelection from "../Components/PriceSelection";
@@ -43,7 +44,9 @@ function PixInstructionsScreen(): JSX.Element {
     keyPrefix: "promoters.pixInstructionsScreen",
   });
 
-  const { verifyPayment, pixInstructions, offer } = usePixPaymentInformation();
+  const { offer } = useCheckoutContext();
+
+  const { verifyPayment, pixInstructions } = usePixPaymentInformation();
 
   const copyToClipboard = () => {
     Clipboard.setString(
@@ -67,10 +70,7 @@ function PixInstructionsScreen(): JSX.Element {
       let elapsedTime = 0;
 
       const intervalId = setInterval(async () => {
-        await verifyPayment(
-          pixInstructions.client_secret,
-          intervalId.toString(),
-        );
+        await verifyPayment(pixInstructions.id, intervalId.toString());
 
         elapsedTime += interval;
         if (elapsedTime >= totalTime) {
@@ -117,7 +117,7 @@ function PixInstructionsScreen(): JSX.Element {
                       ?.image_url_png,
                   }}
                 />
-                <Text style={S.info}>{t("expiresAt")}</Text>
+                <Text style={S.info}>{renderBoldText(t("expiresAt"))}</Text>
               </View>
               <InputText
                 name={t("pixCode")}
@@ -153,7 +153,9 @@ function PixInstructionsScreen(): JSX.Element {
                     size={24}
                     style={{ marginRight: 8 }}
                   />
-                  <Text style={S.info}>{t("pixReceiverText")}</Text>
+                  <Text style={S.info}>
+                    {renderBoldText(t("pixReceiverText"))}
+                  </Text>
                 </View>
                 <Text style={S.pixCode}>{t("instructions")}</Text>
                 <View style={S.instructionsContainer}>
