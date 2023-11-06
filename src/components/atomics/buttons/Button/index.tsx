@@ -11,7 +11,15 @@ import {
   Text,
 } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import Icon from "components/atomics/Icon";
 import S from "./styles";
+
+export type LeftIconProps = {
+  color?: string;
+  size?: number;
+  name: string;
+  type: "sharp" | "rounded" | "outlined";
+};
 
 export type Props = {
   text: string;
@@ -26,6 +34,7 @@ export type Props = {
   borderColorOutline?: string;
   textColorOutline?: string;
   textColor?: string;
+  leftIcon?: LeftIconProps;
   customStyles?: StyleProp<ViewStyle>;
   customTextStyles?: StyleProp<TextStyle>;
 };
@@ -48,6 +57,7 @@ export default function Button({
   textColor = primary[900],
   customStyles = {},
   customTextStyles = {},
+  leftIcon,
 }: Props): JSX.Element {
   const counter = useRef(new Animated.Value(0)).current;
   const [running, setRunning] = useState(false);
@@ -169,6 +179,7 @@ export default function Button({
           }}
         />
       </View>
+      {leftIcon && <Icon {...leftIcon} style={S.leftIcon} />}
       <Text style={[S.text, { color: textColorByState() }, customTextStyles]}>
         {text}
       </Text>

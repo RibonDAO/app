@@ -142,6 +142,21 @@ function PixInstructionsScreen(): JSX.Element {
                 }
                 borderColor={theme.colors.brand.primary[600]}
                 customStyles={{ height: 48, marginBottom: 16 }}
+                leftIcon={
+                  isCopy
+                    ? {
+                        name: "check_circle",
+                        color: theme.colors.brand.primary[600],
+                        size: 24,
+                        type: "outlined",
+                      }
+                    : {
+                        name: "content_copy",
+                        color: theme.colors.neutral10,
+                        size: 24,
+                        type: "outlined",
+                      }
+                }
               />
 
               <View>
