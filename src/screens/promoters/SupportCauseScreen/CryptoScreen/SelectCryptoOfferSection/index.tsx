@@ -5,7 +5,7 @@ import InputRange from "components/atomics/inputs/InputRange";
 import { useTranslation } from "react-i18next";
 import Dropdown from "components/moleculars/Dropdown";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import styles from "./styles";
 
 const { secondary } = theme.colors.brand;
@@ -24,7 +24,7 @@ function SelectCryptoOfferSection({
   });
   const { tokenSymbol, amount, setAmount, setIsInCryptoPage } =
     useCryptoPayment();
-  const { setCurrentCoin } = useCardPaymentInformation();
+  const { setCurrentCoin } = useCheckoutContext();
 
   const handleValueChange = (value: string) => {
     setAmount(value);
@@ -42,6 +42,8 @@ function SelectCryptoOfferSection({
       </Text>
       <View style={styles.inputsContainer}>
         <TextInput
+          accessibilityLabel="Text input field"
+          accessibilityHint="Text input field"
           value={amount.toString()}
           onChange={(e) => {
             handleValueChange(e.nativeEvent.text);

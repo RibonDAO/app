@@ -4,7 +4,6 @@ import { logEvent } from "services/analytics";
 import { Cause, Offer, NonProfit } from "@ribon.io/shared/types";
 import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { FlatList, Linking, Platform, Text, View } from "react-native";
 import NonProfitCard from "screens/promoters/SupportNonProfitScreen/CardScreen/NonProfitCard";
@@ -13,13 +12,14 @@ import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import { useCausesContext } from "contexts/causesContext";
 import { useLanguage } from "contexts/languageContext";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import S from "../styles";
 
 function CardScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
-  const { cause, setCause, setOffer, setFlow } = useCardPaymentInformation();
+  const { cause, setCause, setOffer, setFlow } = useCheckoutContext();
   const { chosenCause, setChosenCause, chosenCauseIndex, setChosenCauseIndex } =
     useCauseContributionContext();
   const { nonProfits } = useNonProfitsContext();

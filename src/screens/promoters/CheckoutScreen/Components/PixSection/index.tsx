@@ -19,6 +19,7 @@ import {
 import { logEvent } from "services/analytics";
 import { usePixPaymentInformation } from "contexts/pixInformationContext";
 import { NonProfit, Offer } from "@ribon.io/shared";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import S from "./styles";
 
 export type Props = {
@@ -35,8 +36,9 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
     keyPrefix: "promoters.checkoutScreen.paymentMethodSection.creditCardFields",
   });
 
+  const { handleSubmit } = usePixPaymentInformation();
+
   const {
-    handleSubmit: handlePixSubmit,
     name,
     setName,
     country,
@@ -47,12 +49,12 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
     setEmail,
     setOffer,
     setNonProfit,
-  } = usePixPaymentInformation();
+  } = useCheckoutContext();
 
   const [maskedTaxId, setMaskedTaxId] = useState("999.999.999-99");
 
   useEffect(() => {
-    logEvent("selectCreditCard_click");
+    logEvent("selectPix_click");
   }, []);
 
   function isBrazil(countryName: string) {
@@ -112,7 +114,6 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
           value={email}
           onChangeText={(value) => setEmail(value)}
           style={{ display: "flex", flex: 1 }}
-          testID=""
           autoCapitalize="none"
         />
       )}
@@ -138,7 +139,7 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
           }}
         />
         <InputText
-          name={taxId}
+          name="tax"
           placeholder={field("taxId")}
           mask={maskedTaxId}
           value={taxId}
@@ -155,13 +156,12 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
         value={name}
         onChangeText={(value) => setName(value)}
         style={{ display: "flex", flex: 1 }}
-        testID="name"
       />
 
       <Button
         text={t("confirmPayment")}
         onPress={() => {
-          handlePixSubmit();
+          handleSubmit();
         }}
         customStyles={S.button}
         textColor={theme.colors.neutral10}

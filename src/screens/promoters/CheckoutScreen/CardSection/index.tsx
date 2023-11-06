@@ -35,18 +35,24 @@ export default function CardSection() {
   // const { isApplePaySupported } = useApplePay();
   const { isGooglePaySupported } = useGooglePay();
 
-  const { target, targetId, currency, setOfferPrice, offerPrice } =
-    useCheckoutContext();
   const {
-    handleSubmit,
+    target,
+    targetId,
+    currency,
+    setOfferPrice,
+    offerPrice,
     setOffer,
-    setCurrentCoin,
     setCause,
     setNonProfit,
-    resetStates,
     setFlow,
-  } = useCardPaymentInformation();
+    setCurrentCoin,
+    resetStates,
+  } = useCheckoutContext();
+
+  const { handleSubmit } = useCardPaymentInformation();
+
   const payable = usePayable(target, targetId);
+
   const { changePublishableKey } = useStripeContext();
   const { params } = useRouteParams<"CheckoutScreen">();
 
