@@ -22,7 +22,6 @@ import { theme } from "@ribon.io/shared";
 import { useEffect, useState } from "react";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useTranslation } from "react-i18next";
-import { useNavigation } from "hooks/useNavigation";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import usePayable from "hooks/usePayable";
 import Icon from "components/atomics/Icon";
@@ -34,7 +33,6 @@ function PixInstructionsScreen(): JSX.Element {
   usePageView("P2x_view");
 
   const [isCopy, setIsCopy] = useState(false);
-  const { navigateTo } = useNavigation();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.pixInstructionsScreen",
@@ -42,7 +40,8 @@ function PixInstructionsScreen(): JSX.Element {
 
   const { offer } = useCheckoutContext();
 
-  const { verifyPayment, pixInstructions } = usePixPaymentInformation();
+  const { verifyPayment, pixInstructions, handleBackButtonClick } =
+    usePixPaymentInformation();
 
   const copyToClipboard = () => {
     Clipboard.setString(
@@ -55,10 +54,6 @@ function PixInstructionsScreen(): JSX.Element {
 
   const payable = usePayable(target, targetId);
 
-  const handleBackButtonClick = () => {
-    navigateTo("CausesScreen");
-  };
-
   useEffect(() => {
     if (pixInstructions && pixInstructions.clientSecret) {
       const totalTime = 5 * 60 * 1000;
@@ -66,15 +61,32 @@ function PixInstructionsScreen(): JSX.Element {
       let elapsedTime = 0;
 
       const intervalId = setInterval(async () => {
-        await verifyPayment(pixInstructions.id, intervalId.toString());
-
         elapsedTime += interval;
         if (elapsedTime >= totalTime) {
           clearInterval(intervalId);
         }
       }, interval);
     }
-  }, [pixInstructions]);
+  }, [pixInstructions, verifyPayment]);
+
+  useEffect(() => {
+    const requestInterval = 30000;
+    const totalTime = 5 * 60 * 1000;
+
+    const sendRequest = async () => {
+      await verifyPayment(pixInstructions?.id ?? "");
+    };
+
+    const intervalId = setInterval(sendRequest, requestInterval);
+
+    setTimeout(() => {
+      clearInterval(intervalId);
+    }, totalTime);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <KeyboardAvoidingView

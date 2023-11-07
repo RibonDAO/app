@@ -20,7 +20,8 @@ export interface IPixPaymentInformationContext {
   handleSubmit: () => void;
   clientSecret?: string;
   pixInstructions?: PaymentIntent & ConfirmPaymentResult;
-  verifyPayment: (clientSecret?: string, interval?: string) => void;
+  verifyPayment: (id: string) => void;
+  handleBackButtonClick: () => void;
 }
 
 export type Props = {
@@ -109,26 +110,26 @@ function PixPaymentInformationProvider({ children }: Props) {
     }
   };
 
-  const verifyPixPayment = async (id?: string, interval?: string) => {
+  const verifyPixPayment = async (id: string) => {
     try {
-      await pixPaymentApi.verifyPix(id ?? "").then((response) => {
-        if (response?.data.status === "succeeded") {
-          clearInterval(interval);
-          setPixInstructions(undefined);
-          setClientSecret(undefined);
+      const response = await pixPaymentApi.verifyPix(id ?? "");
 
-          navigateTo("ContributionDoneScreen", {
-            hasButton: true,
-            offerId: offer?.id ?? 0,
-            cause,
-            nonProfit,
-            flow,
-          });
-        }
-      });
+      if (response?.data.status === "succeeded") {
+        setPixInstructions(undefined);
+        setClientSecret(undefined);
+
+        navigateTo("ContributionDoneScreen", {
+          hasButton: true,
+          offerId: offer?.id ?? 0,
+          cause,
+          nonProfit,
+          flow,
+        });
+      }
     } catch (e) {
       logError(e);
-      clearInterval(interval);
+    } finally {
+      hideLoadingOverlay();
     }
   };
 
@@ -165,12 +166,19 @@ function PixPaymentInformationProvider({ children }: Props) {
     }
   };
 
+  const handleBackButtonClick = () => {
+    navigateTo("CausesScreen");
+    setClientSecret(undefined);
+    setPixInstructions(undefined);
+  };
+
   const pixPaymentInformationObject: IPixPaymentInformationContext = useMemo(
     () => ({
       handleSubmit,
       buttonDisabled,
       pixInstructions,
       verifyPayment: verifyPixPayment,
+      handleBackButtonClick,
     }),
     [buttonDisabled, clientSecret, handleSubmit, pixInstructions],
   );
