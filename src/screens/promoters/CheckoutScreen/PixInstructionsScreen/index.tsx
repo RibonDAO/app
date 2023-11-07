@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
-/* eslint-disable react/jsx-no-comment-textnodes */
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -50,7 +47,7 @@ function PixInstructionsScreen(): JSX.Element {
 
   const copyToClipboard = () => {
     Clipboard.setString(
-      pixInstructions?.next_action?.pix_display_qr_code?.data ?? "",
+      pixInstructions?.nextAction?.pixDisplayQrCode?.data ?? "",
     );
     setIsCopy(true);
   };
@@ -64,7 +61,7 @@ function PixInstructionsScreen(): JSX.Element {
   };
 
   useEffect(() => {
-    if (pixInstructions && pixInstructions.client_secret) {
+    if (pixInstructions && pixInstructions.clientSecret) {
       const totalTime = 5 * 60 * 1000;
       const interval = 30 * 1000;
       let elapsedTime = 0;
@@ -111,10 +108,11 @@ function PixInstructionsScreen(): JSX.Element {
               <View style={S.pixContainer}>
                 <Text style={S.pixCode}>{t("pixCode")}</Text>
                 <Image
+                  accessibilityIgnoresInvertColors
                   style={S.qrcode}
                   source={{
-                    uri: pixInstructions?.next_action?.pix_display_qr_code
-                      ?.image_url_png,
+                    uri: pixInstructions?.nextAction?.pixDisplayQrCode
+                      ?.imageUrlPng,
                   }}
                 />
                 <Text style={S.info}>{renderBoldText(t("expiresAt"))}</Text>
@@ -123,7 +121,7 @@ function PixInstructionsScreen(): JSX.Element {
                 name={t("pixCode")}
                 disabled
                 onChangeText={() => ({})}
-                value={pixInstructions?.next_action?.pix_display_qr_code?.data}
+                value={pixInstructions?.nextAction?.pixDisplayQrCode?.data}
                 containerStyle={{ marginTop: 16, alignItems: "center" }}
                 style={{ display: "flex", flex: 1 }}
               />

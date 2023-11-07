@@ -80,10 +80,10 @@ function PixPaymentInformationProvider({ children }: Props) {
       }
     }
   };
+
   const generatePixPayment = async (secret: string) => {
     try {
-      const response = await pixPaymentApi.generatePixPayment(secret);
-
+      const response = await pixPaymentApi.generatePix(secret);
       setPixInstructions(response.data);
       setTimeout(() => {
         hideLoadingOverlay();
@@ -111,7 +111,7 @@ function PixPaymentInformationProvider({ children }: Props) {
 
   const verifyPixPayment = async (id?: string, interval?: string) => {
     try {
-      await pixPaymentApi.verifyPixPayment(id ?? "").then((response) => {
+      await pixPaymentApi.verifyPix(id ?? "").then((response) => {
         if (response?.data.status === "succeeded") {
           clearInterval(interval);
           setPixInstructions(undefined);
@@ -152,8 +152,8 @@ function PixPaymentInformationProvider({ children }: Props) {
 
       setClientSecret(response.data.externalId);
       login();
-      generatePixPayment(response.data.externalId);
       showLoadingOverlay();
+      generatePixPayment(response.data.externalId);
     } catch (error) {
       hideLoadingOverlay();
       logError(error);
