@@ -10,7 +10,7 @@ import {
 } from "lib/formatters/currencyFormatter";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
-import { View, Text } from "react-native";
+import { View, Text, Platform, Linking } from "react-native";
 import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
@@ -20,6 +20,7 @@ import { useCausesContext } from "contexts/causesContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import { useCheckoutContext } from "contexts/checkoutContext";
+import { useLanguage } from "contexts/languageContext";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
 
@@ -28,6 +29,8 @@ function CardScreen(): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const { cause, setCause, setFlow } = useCheckoutContext();
+
+  const { currentLang } = useLanguage();
 
   const { causes } = useCausesContext();
   const { chosenCause, setChosenCause, chosenCauseIndex, setChosenCauseIndex } =
@@ -58,20 +61,25 @@ function CardScreen(): JSX.Element {
   };
 
   const handleDonateClick = () => {
-    setFlow("cause");
-    logEvent("giveCauseBtn_start", {
-      from: "giveCauseCC_page",
-      causeId: cause?.id,
-      price: currentOffer?.priceValue,
-      currency: currentOffer?.currency,
-    });
+    if (Platform.OS === "ios") {
+      const url = `https://dapp.ribon.io/promoters/recurrence?target=cause&target_id=${cause?.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}&language=${currentLang}`;
+      Linking.openURL(url);
+    } else {
+      setFlow("cause");
+      logEvent("giveCauseBtn_start", {
+        from: "giveCauseCC_page",
+        causeId: cause?.id,
+        price: currentOffer?.priceValue,
+        currency: currentOffer?.currency,
+      });
 
-    navigateTo("RecurrenceScreen", {
-      target: "cause",
-      targetId: cause?.id ?? causes[0].id,
-      offer: currentOffer?.priceCents,
-      currency: currentOffer?.currency,
-    });
+      navigateTo("RecurrenceScreen", {
+        target: "cause",
+        targetId: cause?.id ?? causes[0].id,
+        offer: currentOffer?.priceCents,
+        currency: currentOffer?.currency,
+      });
+    }
   };
 
   const handleCommunityAddClick = () => {
