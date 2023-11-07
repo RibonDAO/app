@@ -64,6 +64,11 @@ import NonProfitsProvider, {
   INonProfitsContext,
   NonProfitsContext,
 } from "contexts/nonProfitsContext";
+import PixInformationProvider, {
+  IPixPaymentInformationContext,
+  PixPaymentInformationContext,
+} from "contexts/pixInformationContext";
+
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -102,6 +107,7 @@ export type RenderComponentProps = {
   loadingOverlayValue?: Partial<ILoadingOverlayContext>;
   cryptoPaymentProviderValue?: Partial<ICryptoPaymentContext>;
   cardPaymentProviderValue?: Partial<ICardPaymentInformationContext>;
+  pixInformationProviderValue?: Partial<IPixPaymentInformationContext>;
   ticketsProviderValue?: Partial<ITicketsContext>;
   scrollEnabledProviderValue?: Partial<IScrollEnabledContext>;
   unsafeAreaProviderValue?: Partial<IUnsafeAreaContext>;
@@ -121,6 +127,7 @@ function renderAllProviders(
     cryptoPaymentProviderValue = {},
     loadingOverlayValue = {},
     cardPaymentProviderValue = {},
+    pixInformationProviderValue = {},
     ticketsProviderValue = {},
     scrollEnabledProviderValue = {},
     unsafeAreaProviderValue = {},
@@ -195,7 +202,12 @@ function renderAllProviders(
                                       NonProfitsProvider,
                                       NonProfitsContext,
                                       nonProfitsProviderValue,
-                                      children,
+                                      renderProvider(
+                                        PixInformationProvider,
+                                        PixPaymentInformationContext,
+                                        pixInformationProviderValue,
+                                        children,
+                                      ),
                                     ),
                                   ),
                                 ),

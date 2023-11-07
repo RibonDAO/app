@@ -10,11 +10,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
   },
   text: {
     fontSize: 16,
     fontWeight: "600",
     color: theme.colors.neutral10,
+  },
+  leftIcon: {
+    marginRight: 8,
   },
 });
 

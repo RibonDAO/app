@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import InputRange from "components/atomics/inputs/InputRange";
 import { useOffers } from "@ribon.io/shared/hooks";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { Cause, Currencies, Offer } from "@ribon.io/shared/types";
 import { useTranslation } from "react-i18next";
 import { theme } from "@ribon.io/shared/styles";
@@ -10,6 +9,7 @@ import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { Text, View } from "react-native";
 import Dropdown from "components/moleculars/Dropdown";
 import { useCryptoPayment } from "contexts/cryptoPaymentContext";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import styles from "./styles";
 
 const { secondary } = theme.colors.brand;
@@ -47,7 +47,7 @@ function SelectOfferPage({
   }, []);
 
   const [currentOffer, setCurrentOffer] = useState<Offer>();
-  const { currentCoin, setCurrentCoin, loading } = useCardPaymentInformation();
+  const { currentCoin, setCurrentCoin, loading } = useCheckoutContext();
   const { offers } = useOffers(currentCoin || Currencies.USD, false);
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportCauseScreen.selectOfferSection",

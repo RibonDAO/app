@@ -39,7 +39,7 @@ export default function ZeroTicketScreen() {
             <Text style={S.subtitle}>{t("subtitle")}</Text>
           </View>
         </View>
-        <ContributionCard from="zeroTickes_modal" />
+        <ContributionCard from="zeroTickets_modal" />
       </View>
     </>
   );
