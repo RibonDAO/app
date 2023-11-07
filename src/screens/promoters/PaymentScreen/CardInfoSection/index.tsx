@@ -1,10 +1,10 @@
 import InputText from "components/atomics/inputs/InputText";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import S from "./styles";
 
 function CardInfoSection() {
@@ -25,7 +25,7 @@ function CardInfoSection() {
     cvv,
     setCvv,
     setButtonDisabled,
-  } = useCardPaymentInformation();
+  } = useCheckoutContext();
 
   const { currentUser } = useCurrentUser();
 

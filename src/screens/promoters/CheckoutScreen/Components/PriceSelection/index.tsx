@@ -10,6 +10,7 @@ export type Props = {
   priceValue?: string;
   onEditClick?: () => void;
   tokenSymbol?: string;
+  isEdit?: boolean;
 };
 
 function PriceSelection({
@@ -17,6 +18,7 @@ function PriceSelection({
   priceValue,
   onEditClick,
   tokenSymbol,
+  isEdit = true,
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.checkoutScreen",
@@ -59,15 +61,17 @@ function PriceSelection({
     <View style={S.container}>
       <View style={S.offer}>
         <Text style={S.offerPrice}>{price}</Text>
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <TouchableOpacity
-            accessibilityRole="button"
-            onPress={onEditClick}
-            style={S.editButton}
-          >
-            <EditIcon />
-          </TouchableOpacity>
-        </View>
+        {isEdit && (
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <TouchableOpacity
+              accessibilityRole="button"
+              onPress={onEditClick}
+              style={S.editButton}
+            >
+              <EditIcon />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
       {!isCrypto && renderGivingFees()}
     </View>

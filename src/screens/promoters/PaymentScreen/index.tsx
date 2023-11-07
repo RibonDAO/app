@@ -14,6 +14,7 @@ import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentScreenPlaceholder from "screens/promoters/PaymentScreen/placeholder";
 import { logEvent } from "services/analytics";
 
+import { useCheckoutContext } from "contexts/checkoutContext";
 import styles from "./styles";
 import UserInfoSection from "./UserInfoSection";
 import CardInfoSection from "./CardInfoSection";
@@ -29,8 +30,10 @@ function PaymentScreen(): JSX.Element {
     offer.priceValue,
     offer.currency.toUpperCase() as Currencies,
   );
-  const { buttonDisabled, handleSubmit, setCause, setNonProfit, resetStates } =
-    useCardPaymentInformation();
+  const { buttonDisabled, setCause, setNonProfit, resetStates } =
+    useCheckoutContext();
+
+  const { handleSubmit } = useCardPaymentInformation();
 
   const colorTheme = getThemeByFlow(flow);
   const { isKeyboardVisible } = useKeyboardVisibility();

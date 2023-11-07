@@ -18,9 +18,11 @@ describe("PaymentPage", () => {
 
   beforeEach(async () => {
     renderComponent(<PaymentPage />, {
-      cardPaymentProviderValue: {
+      checkoutProviderValue: {
         country: "Brazil",
         state: "DF",
+      },
+      cardPaymentProviderValue: {
         handleSubmit: mockHandleSubmit,
       },
     });
