@@ -73,11 +73,11 @@ function PixInstructionsScreen(): JSX.Element {
     const requestInterval = 30000;
     const totalTime = 5 * 60 * 1000;
 
-    const sendRequest = async () => {
+    const verifyStatus = async () => {
       await verifyPayment(pixInstructions?.id ?? "");
     };
 
-    const intervalId = setInterval(sendRequest, requestInterval);
+    const intervalId = setInterval(verifyStatus, requestInterval);
 
     setTimeout(() => {
       clearInterval(intervalId);
