@@ -167,7 +167,7 @@ function PixPaymentInformationProvider({ children }: Props) {
   };
 
   const handleBackButtonClick = () => {
-    navigateTo("CausesScreen");
+    navigateTo("PromotersScreen");
     setClientSecret(undefined);
     setPixInstructions(undefined);
   };
