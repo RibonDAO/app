@@ -27,6 +27,3 @@ export const EXPO_PUBLIC_CIO_API_KEY =
 
 export const WALLET_CONNECT_PROJECT_ID =
   Constants.expoConfig?.extra?.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID;
-
-export const EXPO_PUBLIC_STRIPE_API_KEY =
-  Constants.expoConfig?.extra?.EXPO_PUBLIC_STRIPE_API_KEY;

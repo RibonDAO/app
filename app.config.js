@@ -127,7 +127,6 @@ export default () => ({
       "EXPO_PUBLIC_CIO_SITE_ID": process.env.EXPO_PUBLIC_CIO_SITE_ID,
       "EXPO_PUBLIC_CIO_API_KEY": process.env.EXPO_PUBLIC_CIO_API_KEY,
       "EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID": process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID,
-      "EXPO_PUBLIC_STRIPE_API_KEY": process.env.EXPO_PUBLIC_STRIPE_API_KEY,
     },
     "runtimeVersion": {
       "policy": "appVersion"
