@@ -64,7 +64,7 @@
       "ticketSection": {
         "ticketToast": "Você tem um novo ticket!"
       },
-      "donationError":"Não foi possível doar."
+      "donationError": "Não foi possível doar."
     },
     "donateScreen": {
       "nonProfitText": "Você está doando para",
@@ -257,8 +257,8 @@
       "secondInfo": "Escaneie o QR Code ou copie e cole o código",
       "thirdInfo": "Confirme sua doação",
       "copyCode": "Copiar código",
-      "copyCodeSuccess": "Code copied!",
-      "expiresAt": "Expira em <b>30 minutos</b>",
+      "copyCodeSuccess": "Codigo copiado!",
+      "expiresAt": "Expira em 30 minutos",
       "donatingTo": "Doando para ",
       "pixReceiverText": "O destino do seu Pix será o <b>Stripe</b>, plataforma que processa os pagamentos da Ribon."
     },

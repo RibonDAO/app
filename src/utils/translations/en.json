@@ -70,7 +70,7 @@
       "ticketSection": {
         "ticketToast": "You have a new ticket!"
       },
-      "donationError":"Unable to donate now"
+      "donationError": "Unable to donate now"
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",
@@ -300,9 +300,9 @@
       "thirdInfo": "3. Scan the QR Code",
       "copyCode": "Copy code",
       "copyCodeSuccess": "Code copied!",
-      "expiresAt": "Expires at <b> 30 minutes </b>",
+      "expiresAt": "Expires at 30 minutes",
       "donatingTo": "Donating to ",
-      "pixReceiverText": "Your Pix will go to <b>Stripe</b>, the platform that processes Ribon payments."
+      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments."
     },
     "monthlyContributionsScreen": {
       "title": "Monthly contributions",
