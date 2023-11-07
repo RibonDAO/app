@@ -37,7 +37,7 @@ function PixPaymentInformationProvider({ children }: Props) {
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
 
   const { t } = useTranslation("translation", {
-    keyPrefix: "contexts.pixPaymentInformation",
+    keyPrefix: "contexts.pixInformation",
   });
 
   const { findOrCreateUser } = useUsers();

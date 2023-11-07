@@ -180,6 +180,9 @@
     },
     "tasksContext": {
       "allTasksCompleted": "Você completou todas as tarefas!"
+    },
+    "pixInformation": {
+      "onErrorMessage": "Falha no pagamento. Tente novamente."
     }
   },
   "promoters": {
@@ -260,8 +263,7 @@
       "copyCodeSuccess": "Codigo copiado!",
       "expiresAt": "Expira em 30 minutos",
       "donatingTo": "Doando para ",
-      "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon.",
-      "onErrorMessage": "Falha no pagamento. Tente novamente."
+      "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon."
     },
     "monthlyContributionsScreen": {
       "title": "Contribuições mensais",

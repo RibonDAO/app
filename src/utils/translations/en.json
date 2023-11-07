@@ -186,6 +186,9 @@
     },
     "tasksContext": {
       "allTasksCompleted": "You completed all tasks!"
+    },
+    "pixInformation": {
+      "onErrorMessage": "Payment failed. Try again."
     }
   },
   "promoters": {
@@ -302,8 +305,7 @@
       "copyCodeSuccess": "Code copied!",
       "expiresAt": "Expires at 30 minutes",
       "donatingTo": "Donating to ",
-      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments.",
-      "onErrorMessage": "Payment failed. Try again."
+      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments."
     },
     "monthlyContributionsScreen": {
       "title": "Monthly contributions",
