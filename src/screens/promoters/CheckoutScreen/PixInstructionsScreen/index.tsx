@@ -28,6 +28,7 @@ import Icon from "components/atomics/Icon";
 import S from "./styles";
 import Placeholder from "../placeholder";
 import PriceSelection from "../Components/PriceSelection";
+import TrustSeal from "../Components/TrustSeal";
 
 function PixInstructionsScreen(): JSX.Element {
   usePageView("P2x_view");
@@ -168,34 +169,38 @@ function PixInstructionsScreen(): JSX.Element {
               }
             />
 
-            <View style={S.instructionsContainer}>
+            <View style={S.infoContainer}>
               <Icon
                 type="rounded"
                 name="error"
                 color={theme.colors.neutral[600]}
                 size={24}
+                style={{ marginRight: 4 }}
               />
-              <Text style={S.instructions}>{t("pixReceiverText")}</Text>
+              <Text style={S.info}>{t("pixReceiverText")}</Text>
             </View>
             <Text style={S.pixCode}>{t("instructions")}</Text>
-            <View style={S.instructionsContainer}>
-              <View style={S.circle}>
-                <Text style={S.number}>1</Text>
+            <View style={S.borderContainer}>
+              <View style={S.instructionsContainer}>
+                <View style={S.circle}>
+                  <Text style={S.number}>1</Text>
+                </View>
+                <Text style={S.info}>{t("firstInfo")}</Text>
               </View>
-              <Text style={S.info}>{t("firstInfo")}</Text>
-            </View>
-            <View style={S.instructionsContainer}>
-              <View style={S.circle}>
-                <Text style={S.number}>2</Text>
+              <View style={S.instructionsContainer}>
+                <View style={S.circle}>
+                  <Text style={S.number}>2</Text>
+                </View>
+                <Text style={S.info}>{t("secondInfo")}</Text>
               </View>
-              <Text style={S.info}>{t("secondInfo")}</Text>
-            </View>
-            <View style={S.instructionsContainer}>
-              <View style={S.circle}>
-                <Text style={S.number}>3</Text>
+              <View style={S.instructionsContainer}>
+                <View style={S.circle}>
+                  <Text style={S.number}>3</Text>
+                </View>
+                <Text style={S.info}>{t("thirdInfo")}</Text>
               </View>
-              <Text style={S.info}>{t("thirdInfo")}</Text>
             </View>
+            <TrustSeal />
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>

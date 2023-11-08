@@ -54,11 +54,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: theme.spacingNative(8),
   },
-  instructions: {
-    ...defaultBodyXsRegular,
-    color: theme.colors.neutral[800],
-    marginLeft: theme.spacingNative(6),
-  },
   arrow: {
     padding: theme.spacingNative(16),
     alignSelf: "flex-start",
@@ -75,6 +70,19 @@ const styles = StyleSheet.create({
   info: {
     ...defaultBodyXsRegular,
     color: theme.colors.neutral[800],
+  },
+  infoContainer: {
+    display: "flex",
+    flexDirection: "row",
+    maxWidth: "100%",
+    justifyContent: "flex-start",
+    paddingRight: theme.spacingNative(8),
+  },
+  borderContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.neutral[200],
+    paddingBottom: theme.spacingNative(20),
+    marginBottom: theme.spacingNative(16),
   },
 });
 

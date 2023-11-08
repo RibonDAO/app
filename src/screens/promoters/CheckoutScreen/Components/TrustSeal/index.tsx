@@ -2,13 +2,13 @@ import { useTranslation } from "react-i18next";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
 
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 import * as S from "./styles";
-import StripeIcon from "../../assets/StripeIcon";
+import StripeIcon from "../../assets/StripeIcon.png";
 
 function TrustSeal(): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.recurrencePage",
+    keyPrefix: "promoters.pixInstructionsScreen",
   });
 
   return (
@@ -19,8 +19,8 @@ function TrustSeal(): JSX.Element {
         color={theme.colors.brand.primary[600]}
         type="rounded"
       />
-      <Text style={S.default.text}>{t("trustSeal")}</Text>
-      <StripeIcon />
+      <Text style={S.default.text}>{t("sealText")}</Text>
+      <Image source={StripeIcon} accessibilityIgnoresInvertColors />
     </View>
   );
 }
