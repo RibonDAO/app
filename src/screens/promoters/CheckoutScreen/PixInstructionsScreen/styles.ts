@@ -52,9 +52,12 @@ const styles = StyleSheet.create({
   instructionsContainer: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    textAlign: "center",
     marginTop: theme.spacingNative(8),
+  },
+  instructions: {
+    ...defaultBodyXsRegular,
+    color: theme.colors.neutral[800],
+    marginLeft: theme.spacingNative(6),
   },
   arrow: {
     padding: theme.spacingNative(16),

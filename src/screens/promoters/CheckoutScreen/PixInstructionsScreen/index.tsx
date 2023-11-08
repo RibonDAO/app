@@ -115,90 +115,86 @@ function PixInstructionsScreen(): JSX.Element {
               <Text style={S.payableName}>{payable?.name}</Text>
             </Text>
             <PriceSelection currentOffer={offer} isEdit={false} />
-            <View>
-              <View style={S.pixContainer}>
-                <Text style={S.pixCode}>{t("pixCode")}</Text>
-                <Image
-                  accessibilityIgnoresInvertColors
-                  style={S.qrcode}
-                  source={{
-                    uri: pixInstructions?.nextAction?.pixDisplayQrCode
-                      ?.imageUrlPng,
-                  }}
-                />
-                <Text style={S.info}>{t("expiresAt")}</Text>
-              </View>
-              <InputText
-                name={t("pixCode")}
-                disabled
-                onChangeText={() => ({})}
-                value={pixInstructions?.nextAction?.pixDisplayQrCode?.data}
-                containerStyle={{ marginTop: 16, alignItems: "center" }}
-                style={{ display: "flex", flex: 1 }}
-              />
-              <Button
-                onPress={copyToClipboard}
-                text={isCopy ? t("copyCodeSuccess") : t("copyCode")}
-                backgroundColor={
-                  isCopy
-                    ? theme.colors.neutral10
-                    : theme.colors.brand.primary[600]
-                }
-                textColor={
-                  isCopy
-                    ? theme.colors.brand.primary[600]
-                    : theme.colors.neutral10
-                }
-                borderColor={theme.colors.brand.primary[600]}
-                customStyles={{ height: 48, marginBottom: 16 }}
-                leftIcon={
-                  isCopy
-                    ? {
-                        name: "check_circle",
-                        color: theme.colors.brand.primary[600],
-                        size: 24,
-                        type: "outlined",
-                      }
-                    : {
-                        name: "content_copy",
-                        color: theme.colors.neutral10,
-                        size: 24,
-                        type: "outlined",
-                      }
-                }
-              />
 
-              <View>
-                <View style={S.instructionsContainer}>
-                  <Icon
-                    type="rounded"
-                    name="error"
-                    color={theme.colors.neutral[600]}
-                    size={24}
-                    style={{ marginRight: 8 }}
-                  />
-                  <Text style={S.info}>{t("pixReceiverText")}</Text>
-                </View>
-                <Text style={S.pixCode}>{t("instructions")}</Text>
-                <View style={S.instructionsContainer}>
-                  <View style={S.circle}>
-                    <Text style={S.number}>1</Text>
-                  </View>
-                  <Text style={S.info}>{t("firstInfo")}</Text>
-                </View>
-                <View style={S.instructionsContainer}>
-                  <View style={S.circle}>
-                    <Text style={S.number}>2</Text>
-                  </View>
-                  <Text style={S.info}>{t("secondInfo")}</Text>
-                </View>
-                <View style={S.instructionsContainer}>
-                  <View style={S.circle}>
-                    <Text style={S.number}>3</Text>
-                  </View>
-                  <Text style={S.info}>{t("thirdInfo")}</Text>
-                </View>
+            <View style={S.pixContainer}>
+              <Text style={S.pixCode}>{t("pixCode")}</Text>
+              <Image
+                accessibilityIgnoresInvertColors
+                style={S.qrcode}
+                source={{
+                  uri: pixInstructions?.nextAction?.pixDisplayQrCode
+                    ?.imageUrlPng,
+                }}
+              />
+              <Text style={S.info}>{t("expiresAt")}</Text>
+            </View>
+            <InputText
+              name={t("pixCode")}
+              disabled
+              onChangeText={() => ({})}
+              value={pixInstructions?.nextAction?.pixDisplayQrCode?.data}
+              containerStyle={{ marginTop: 16, alignItems: "center" }}
+              style={{ display: "flex", flex: 1 }}
+            />
+            <Button
+              onPress={copyToClipboard}
+              text={isCopy ? t("copyCodeSuccess") : t("copyCode")}
+              backgroundColor={
+                isCopy
+                  ? theme.colors.neutral10
+                  : theme.colors.brand.primary[600]
+              }
+              textColor={
+                isCopy
+                  ? theme.colors.brand.primary[600]
+                  : theme.colors.neutral10
+              }
+              borderColor={theme.colors.brand.primary[600]}
+              customStyles={{ height: 48, marginBottom: 16 }}
+              leftIcon={
+                isCopy
+                  ? {
+                      name: "check_circle",
+                      color: theme.colors.brand.primary[600],
+                      size: 24,
+                      type: "outlined",
+                    }
+                  : {
+                      name: "content_copy",
+                      color: theme.colors.neutral10,
+                      size: 24,
+                      type: "outlined",
+                    }
+              }
+            />
+
+            <View style={S.instructionsContainer}>
+              <Icon
+                type="rounded"
+                name="error"
+                color={theme.colors.neutral[600]}
+                size={24}
+              />
+              <Text style={S.instructions}>{t("pixReceiverText")}</Text>
+            </View>
+            <Text style={S.pixCode}>{t("instructions")}</Text>
+            <View style={S.instructionsContainer}>
+              <View style={S.circle}>
+                <Text style={S.number}>1</Text>
               </View>
+              <Text style={S.info}>{t("firstInfo")}</Text>
+            </View>
+            <View style={S.instructionsContainer}>
+              <View style={S.circle}>
+                <Text style={S.number}>2</Text>
+              </View>
+              <Text style={S.info}>{t("secondInfo")}</Text>
+            </View>
+            <View style={S.instructionsContainer}>
+              <View style={S.circle}>
+                <Text style={S.number}>3</Text>
+              </View>
+              <Text style={S.info}>{t("thirdInfo")}</Text>
             </View>
           </View>
         </ScrollView>
