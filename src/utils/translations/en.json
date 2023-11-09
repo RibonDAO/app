@@ -305,7 +305,8 @@
       "copyCodeSuccess": "Code copied!",
       "expiresAt": "Expires at 30 minutes",
       "donatingTo": "Donating to ",
-      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments."
+      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments.",
+      "sealText": "Safe transaction by"
     },
     "monthlyContributionsScreen": {
       "title": "Monthly contributions",

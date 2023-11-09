@@ -52,8 +52,6 @@ const styles = StyleSheet.create({
   instructionsContainer: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    textAlign: "center",
     marginTop: theme.spacingNative(8),
   },
   arrow: {
@@ -72,6 +70,19 @@ const styles = StyleSheet.create({
   info: {
     ...defaultBodyXsRegular,
     color: theme.colors.neutral[800],
+  },
+  infoContainer: {
+    display: "flex",
+    flexDirection: "row",
+    maxWidth: "100%",
+    justifyContent: "flex-start",
+    paddingRight: theme.spacingNative(8),
+  },
+  borderContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.neutral[200],
+    paddingBottom: theme.spacingNative(20),
+    marginBottom: theme.spacingNative(16),
   },
 });
 
