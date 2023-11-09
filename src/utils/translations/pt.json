@@ -263,7 +263,8 @@
       "copyCodeSuccess": "Codigo copiado!",
       "expiresAt": "Expira em 30 minutos",
       "donatingTo": "Doando para ",
-      "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon."
+      "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon.",
+      "sealText": "Transação segura processada por"
     },
     "monthlyContributionsScreen": {
       "title": "Contribuições mensais",
