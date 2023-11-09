@@ -26,6 +26,7 @@ import GooglePaySection from "../Components/GooglePaySection";
 import S from "./styles";
 import PixIcon from "../assets/PixIcon";
 import PixSection from "../Components/PixSection";
+import TrustSeal from "../Components/TrustSeal";
 
 export default function CardSection() {
   const { t } = useTranslation("translation", {
@@ -184,106 +185,111 @@ export default function CardSection() {
     currentOffer?.gateway === "stripe" && currentOffer?.currency === "brl";
 
   return (
-    <View style={S.container}>
-      <ModalButtonSelector
-        title={t("selectValue")}
-        key="offerModal"
-        current={offers.findIndex((item) => item.priceCents === offerPrice)}
-        setCurrentIndex={setCurrentIndex}
-        items={buttonOfferItems}
-        visible={offersModalVisible}
-        setVisible={setOffersModalVisible}
-      />
-
-      <Text style={S.title}>
-        {t("donatingTo")}
-        <Text style={S.payableName}>{payable?.name}</Text>
-      </Text>
-      {currentOffer && (
-        <PriceSelection
-          currentOffer={currentOffer}
-          onEditClick={() => setOffersModalVisible(true)}
+    <>
+      <View style={S.container}>
+        <ModalButtonSelector
+          title={t("selectValue")}
+          key="offerModal"
+          current={offers.findIndex((item) => item.priceCents === offerPrice)}
+          setCurrentIndex={setCurrentIndex}
+          items={buttonOfferItems}
+          visible={offersModalVisible}
+          setVisible={setOffersModalVisible}
         />
-      )}
 
-      <View style={S.recurrenceContainer}>
-        <Icon
-          name={isSubscription ? "event_repeat" : "event_available"}
-          size={25}
-          color={theme.colors.brand.primary[600]}
-          type="outlined"
-        />
-        <Text style={S.recurrenceTitle}>
-          {isSubscription ? t("monthlyContribution") : t("uniqueContribution")}
+        <Text style={S.title}>
+          {t("donatingTo")}
+          <Text style={S.payableName}>{payable?.name}</Text>
         </Text>
-        <Button
-          text={t("recurrenceButton")}
-          customTextStyles={{
-            color: theme.colors.brand.primary[600],
-            ...defaultBodyXsSemibold,
-          }}
-          onPress={() => onSubscriptionClick()}
-          customStyles={S.donateButton}
-          outline
+        {currentOffer && (
+          <PriceSelection
+            currentOffer={currentOffer}
+            onEditClick={() => setOffersModalVisible(true)}
+          />
+        )}
+
+        <View style={S.recurrenceContainer}>
+          <Icon
+            name={isSubscription ? "event_repeat" : "event_available"}
+            size={25}
+            color={theme.colors.brand.primary[600]}
+            type="outlined"
+          />
+          <Text style={S.recurrenceTitle}>
+            {isSubscription
+              ? t("monthlyContribution")
+              : t("uniqueContribution")}
+          </Text>
+          <Button
+            text={t("recurrenceButton")}
+            customTextStyles={{
+              color: theme.colors.brand.primary[600],
+              ...defaultBodyXsSemibold,
+            }}
+            onPress={() => onSubscriptionClick()}
+            customStyles={S.donateButton}
+            outline
+          />
+        </View>
+
+        <Text style={S.accordionTitle}>{t("payment")}</Text>
+        <RadioAccordion
+          items={[
+            {
+              title: t("paymentMethodSection.creditCard"),
+              children: currentOffer && (
+                <CreditCardForm
+                  onSubmit={handlePayment}
+                  showFiscalFields={currentOffer?.gateway === "stripe"}
+                />
+              ),
+              rightIcon: <CreditCardIcon />,
+            },
+            {
+              title: t("paymentMethodSection.googlePay"),
+              children: currentOffer && (
+                <View>
+                  <GooglePaySection
+                    offer={currentOffer as Offer}
+                    nonProfit={actualNonProfit}
+                    cause={cause as Cause}
+                  />
+                </View>
+              ),
+              rightIcon: <GooglePayIcon />,
+              show: isGooglePaySupportedState,
+            },
+            {
+              title: t("paymentMethodSection.applePay"),
+              children: currentOffer && (
+                <View>
+                  <ApplePaySection
+                    offer={currentOffer as Offer}
+                    nonProfit={actualNonProfit}
+                    cause={cause as Cause}
+                  />
+                </View>
+              ),
+              rightIcon: <ApplePayIcon />,
+              show: false,
+            },
+            {
+              title: t("paymentMethodSection.pix"),
+              children: currentOffer && (
+                <View>
+                  <PixSection
+                    offer={currentOffer as Offer}
+                    nonProfit={actualNonProfit}
+                  />
+                </View>
+              ),
+              rightIcon: <PixIcon />,
+              show: showPix(),
+            },
+          ]}
         />
       </View>
-
-      <Text style={S.accordionTitle}>{t("payment")}</Text>
-      <RadioAccordion
-        items={[
-          {
-            title: t("paymentMethodSection.creditCard"),
-            children: currentOffer && (
-              <CreditCardForm
-                onSubmit={handlePayment}
-                showFiscalFields={currentOffer?.gateway === "stripe"}
-              />
-            ),
-            rightIcon: <CreditCardIcon />,
-          },
-          {
-            title: t("paymentMethodSection.googlePay"),
-            children: currentOffer && (
-              <View>
-                <GooglePaySection
-                  offer={currentOffer as Offer}
-                  nonProfit={actualNonProfit}
-                  cause={cause as Cause}
-                />
-              </View>
-            ),
-            rightIcon: <GooglePayIcon />,
-            show: isGooglePaySupportedState,
-          },
-          {
-            title: t("paymentMethodSection.applePay"),
-            children: currentOffer && (
-              <View>
-                <ApplePaySection
-                  offer={currentOffer as Offer}
-                  nonProfit={actualNonProfit}
-                  cause={cause as Cause}
-                />
-              </View>
-            ),
-            rightIcon: <ApplePayIcon />,
-            show: false,
-          },
-          {
-            title: t("paymentMethodSection.pix"),
-            children: currentOffer && (
-              <View>
-                <PixSection
-                  offer={currentOffer as Offer}
-                  nonProfit={actualNonProfit}
-                />
-              </View>
-            ),
-            rightIcon: <PixIcon />,
-            show: showPix(),
-          },
-        ]}
-      />
-    </View>
+      <TrustSeal />
+    </>
   );
 }

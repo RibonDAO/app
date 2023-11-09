@@ -9,7 +9,7 @@ import {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: theme.spacingNative(64),
+    marginBottom: theme.spacingNative(12),
   },
   title: {
     ...defaultBodyMdMedium,
