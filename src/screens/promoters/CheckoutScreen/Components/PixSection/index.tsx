@@ -72,10 +72,6 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
   );
 
   useEffect(() => {
-    logEvent("selectPix_click");
-  }, []);
-
-  useEffect(() => {
     if (country && currentLang) {
       setMaskedTaxId(maskForTaxId(country, currentLang));
     }
