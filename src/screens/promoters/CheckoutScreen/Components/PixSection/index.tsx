@@ -72,6 +72,10 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
   );
 
   useEffect(() => {
+    logEvent("selectCreditCard_click");
+  }, []);
+
+  useEffect(() => {
     if (country && currentLang) {
       setMaskedTaxId(maskForTaxId(country, currentLang));
     }
