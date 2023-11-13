@@ -72,7 +72,7 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
   );
 
   useEffect(() => {
-    logEvent("selectCreditCard_click");
+    logEvent("selectPix_click");
   }, []);
 
   useEffect(() => {
