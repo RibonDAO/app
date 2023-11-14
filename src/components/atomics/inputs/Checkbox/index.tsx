@@ -27,6 +27,10 @@ function CheckBox({
     if (!disabled) {
       setChecked(!isChecked);
     }
+
+    if (navigationCallback) {
+      navigationCallback();
+    }
   };
 
   useEffect(() => {
@@ -39,6 +43,7 @@ function CheckBox({
   return (
     <View style={{ ...styles.container, ...sectionStyle }}>
       <TouchableOpacity
+        accessibilityRole="button"
         onPress={onPressHandler}
         activeOpacity={1}
         style={styles.checkboxContainer}
@@ -72,6 +77,7 @@ function CheckBox({
       </TouchableOpacity>
       {navigationCallback && (
         <TouchableOpacity
+          accessibilityRole="button"
           onPress={() => navigationCallback()}
           activeOpacity={0.5}
           style={styles.navigationButton}
