@@ -14,6 +14,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { useCheckoutContext } from "contexts/checkoutContext";
+import { useTasksContext } from "contexts/tasksContext";
 
 export interface IPixPaymentInformationContext {
   buttonDisabled: boolean;
@@ -50,6 +51,8 @@ function PixPaymentInformationProvider({ children }: Props) {
   >();
 
   const { navigateTo } = useNavigation();
+
+  const { registerAction } = useTasksContext();
 
   const [clientSecret, setClientSecret] = useState();
   const {
@@ -117,7 +120,7 @@ function PixPaymentInformationProvider({ children }: Props) {
       if (response?.data.status === "succeeded") {
         setPixInstructions(undefined);
         setClientSecret(undefined);
-
+        registerAction("contribution_done_screen_view");
         navigateTo("ContributionDoneScreen", {
           hasButton: true,
           offerId: offer?.id ?? 0,

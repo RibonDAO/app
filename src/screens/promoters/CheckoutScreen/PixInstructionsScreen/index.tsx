@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import Clipboard from "@react-native-clipboard/clipboard";
 
-import usePageView from "hooks/usePageView";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import InputText from "components/atomics/inputs/InputText";
 import Button from "components/atomics/buttons/Button";
@@ -31,8 +30,6 @@ import PriceSelection from "../Components/PriceSelection";
 import TrustSeal from "../Components/TrustSeal";
 
 function PixInstructionsScreen(): JSX.Element {
-  usePageView("P2x_view");
-
   const [isCopy, setIsCopy] = useState(false);
 
   const { t } = useTranslation("translation", {
