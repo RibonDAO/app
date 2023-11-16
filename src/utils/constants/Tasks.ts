@@ -5,7 +5,7 @@
 
 import { beginningOfToday } from "lib/dateUtils";
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
   actions: string[];
@@ -47,6 +47,16 @@ export const TASKS = [
       }
 
       return false;
+    },
+  },
+  {
+    id: "c6b9765c-5652-430c-bd42-32f4bc2a2d62",
+    title: "whatsapp_channel",
+    actions: ["go_to_redirect_screen"],
+    type: "daily",
+    navigationCallback: "https://bit.ly/canal-whatsapp-ribon",
+    isVisible(this: Task) {
+      return true;
     },
   },
   {
