@@ -52,7 +52,7 @@ export const TASKS = [
   {
     id: "c6b9765c-5652-430c-bd42-32f4bc2a2d62",
     title: "whatsapp_channel",
-    actions: ["go_to_redirect_screen"],
+    actions: ["open_whatsapp_channel"],
     type: "daily",
     navigationCallback: "https://bit.ly/canal-whatsapp-ribon",
     isVisible(this: Task) {

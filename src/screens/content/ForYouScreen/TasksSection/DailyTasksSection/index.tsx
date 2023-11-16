@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { useTasks } from "utils/constants/Tasks";
+import { Task, useTasks } from "utils/constants/Tasks";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
@@ -10,6 +10,7 @@ import { useTasksContext } from "contexts/tasksContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
 
+import { openInWebViewer } from "lib/linkOpener";
 import S from "./styles";
 
 export default function DailyTasksSection() {
@@ -23,6 +24,26 @@ export default function DailyTasksSection() {
   const { navigateTo } = useNavigation();
 
   const { setIndex } = useForYouTabsContext();
+
+  const { registerAction } = useTasksContext();
+
+  const handleNavigationCallback = (task: Task) => {
+    const {navigationCallback} = task;
+    const isExternalLink = navigationCallback?.includes("://");
+
+    if (!isExternalLink) return navigateTo(navigationCallback);
+
+    registerAction(task.actions[0]);
+    return openInWebViewer(navigationCallback);
+  };
+
+  const handleInternalNavigation = (task: Task, isCurrentPage: boolean) => {
+    if (isCurrentPage) {
+      return setIndex(1);
+    }
+
+    return handleNavigationCallback(task);
+  };
 
   return (
     <View style={S.container}>
@@ -43,9 +64,7 @@ export default function DailyTasksSection() {
           const isCurrentPage = navigateToTask === CURRENT_PAGE;
           const navigationCallback = taskDone
             ? undefined
-            : isCurrentPage
-            ? () => setIndex(1)
-            : () => navigateTo(navigateToTask);
+            : () => handleInternalNavigation(task, isCurrentPage);
 
           if (!task.isVisible({ state: tasksState })) {
             return null;
