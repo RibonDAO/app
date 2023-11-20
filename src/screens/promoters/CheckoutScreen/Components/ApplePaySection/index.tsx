@@ -95,6 +95,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
 
     if (error) {
       hideLoadingOverlay();
+      console.log("error", error);
     } else if (paymentMethod) {
       const { email: APayEmail, name, address } = paymentMethod.billingDetails;
       login();
@@ -118,7 +119,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         const response = await storePayApi.postStorePay(data);
         await confirmApplePayPayment(response.data.clientSecret);
         registerAction("contribution_done_screen_view");
-
+        console.log(response);
         navigateTo("ContributionDoneScreen", {
           cause,
           nonProfit,
@@ -126,6 +127,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         });
       } catch (e) {
         logError(e);
+        console.log("e", e);
         showToast({
           type: "error",
           message: t("onErrorMessage", "error"),

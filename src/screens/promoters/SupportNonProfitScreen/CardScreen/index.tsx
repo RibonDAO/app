@@ -5,13 +5,12 @@ import { Cause, Offer, NonProfit } from "@ribon.io/shared/types";
 import { theme } from "@ribon.io/shared/styles";
 import { useNavigation } from "hooks/useNavigation";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { FlatList, Linking, Platform, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import NonProfitCard from "screens/promoters/SupportNonProfitScreen/CardScreen/NonProfitCard";
 import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import { useCausesContext } from "contexts/causesContext";
-import { useLanguage } from "contexts/languageContext";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import S from "../styles";
 
@@ -26,8 +25,6 @@ function CardScreen(): JSX.Element {
   const { causes } = useCausesContext();
   const { tertiary } = theme.colors.brand;
   const { scrollEnabled } = useScrollEnabled();
-  const { currentLang } = useLanguage();
-
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportNonProfitPage",
   });
@@ -61,24 +58,19 @@ function CardScreen(): JSX.Element {
   };
 
   const handleDonateClick = (nonProfit: NonProfit) => {
-    if (Platform.OS === "ios") {
-      const url = `https://dapp.ribon.io/promoters/recurrence?target=non_profit&target_id=${nonProfit.id}&currency=${currentOffer?.currency}&offer=${currentOffer?.priceCents}&language=${currentLang}`;
-      Linking.openURL(url);
-    } else {
-      setFlow("nonProfit");
-      logEvent("giveNgoBtn_start", {
-        from: "giveNonProfit_page",
-        nonprofitId: nonProfit.id,
-        price: currentOffer?.priceValue,
-        currency: currentOffer?.currency,
-      });
-      navigateTo("RecurrenceScreen", {
-        target: "non_profit",
-        targetId: nonProfit?.id,
-        offer: currentOffer?.priceCents,
-        currency: currentOffer?.currency,
-      });
-    }
+    setFlow("nonProfit");
+    logEvent("giveNgoBtn_start", {
+      from: "giveNonProfit_page",
+      nonprofitId: nonProfit.id,
+      price: currentOffer?.priceValue,
+      currency: currentOffer?.currency,
+    });
+    navigateTo("RecurrenceScreen", {
+      target: "non_profit",
+      targetId: nonProfit?.id,
+      offer: currentOffer?.priceCents,
+      currency: currentOffer?.currency,
+    });
   };
 
   const handleOfferChange = (offer: Offer) => {
