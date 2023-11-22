@@ -159,7 +159,8 @@
           "donate_ticket_on_native": "Baixar o app e doar um ticket",
           "check_daily_news": "Conferir publicações diárias",
           "see_more_ngo_infos": "Ver mais informações sobre uma ONG",
-          "make_contribution": "Fazer uma doação paga"
+          "make_contribution": "Fazer uma doação paga",
+          "giving_day": "Mudar a vida de alguém com apenas R$10"
         },
         "statisticsCardsSection": {
           "dailyTasksTitle": "tarefas diárias completas",
