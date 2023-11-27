@@ -92,6 +92,13 @@ export type MonthlyContributionsScreenParamList = {
   from: string;
 };
 
+export type PixInstructionsScreenParamList = {
+  target: string;
+  targetId: string;
+  offer: number;
+  currency: Currencies;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
@@ -112,6 +119,7 @@ export type RootStackParamList = {
   PromotersScreen: PromotersScreenParams;
   CheckoutScreen: CheckoutScreenParamList;
   RecurrenceScreen: RecurrenceScreenParamList;
+  PixInstructionsScreen: PixInstructionsScreenParamList;
   OnboardingScreen: undefined;
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;

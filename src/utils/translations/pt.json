@@ -63,7 +63,8 @@
       },
       "ticketSection": {
         "ticketToast": "Você tem um novo ticket!"
-      }
+      },
+      "donationError": "Não foi possível doar."
     },
     "donateScreen": {
       "nonProfitText": "Você está doando para",
@@ -179,6 +180,9 @@
     },
     "tasksContext": {
       "allTasksCompleted": "Você completou todas as tarefas!"
+    },
+    "pixInformation": {
+      "onErrorMessage": "Falha no pagamento. Tente novamente."
     }
   },
   "promoters": {
@@ -249,6 +253,19 @@
       "uniqueDonationDescription": "Contribuir uma vez",
       "selectValue": "Selecione o valor"
     },
+    "pixInstructionsScreen": {
+      "pixCode": " Código Pix",
+      "instructions": "Instruções",
+      "firstInfo": "No aplicativo de seu banco, escolha pagar com Pix",
+      "secondInfo": "Escaneie o QR Code ou copie e cole o código",
+      "thirdInfo": "Confirme sua doação",
+      "copyCode": "Copiar código",
+      "copyCodeSuccess": "Codigo copiado!",
+      "expiresAt": "Expira em 30 minutos",
+      "donatingTo": "Doando para ",
+      "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon.",
+      "sealText": "Transação segura processada por"
+    },
     "monthlyContributionsScreen": {
       "title": "Contribuições mensais",
       "to": "Para ",
@@ -278,6 +295,7 @@
       "searchCountryPlaceholder": "Procurar país",
       "paymentMethodSection": {
         "creditCard": "Cartão de crédito",
+        "pix": "Pix",
         "googlePay": "Google Pay",
         "applePay": "Apple Pay",
         "creditCardFields": {

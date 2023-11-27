@@ -2,10 +2,10 @@ import CardWaveImage from "components/moleculars/CardWaveImage";
 import SelectOfferSection from "screens/promoters/SupportNonProfitScreen/CardScreen/SelectOfferSection";
 import { View } from "react-native";
 import { NonProfit, Offer } from "@ribon.io/shared/types";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useNonProfitImpact } from "@ribon.io/shared/hooks";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useTranslation } from "react-i18next";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import S from "../../styles";
 
 type Props = {
@@ -30,7 +30,7 @@ export default function NonProfitCard({
     keyPrefix: "promoters.supportNonProfitPage",
   });
 
-  const { currentCoin } = useCardPaymentInformation();
+  const { currentCoin } = useCheckoutContext();
   const { formattedImpactText } = useFormattedImpactText();
   const { nonProfitImpact } = useNonProfitImpact(
     nonProfit?.id,

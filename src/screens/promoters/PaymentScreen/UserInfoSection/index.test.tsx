@@ -6,7 +6,7 @@ import UserInfoSection from ".";
 describe("UserInfoSection", () => {
   it("should fill billing information form", async () => {
     await renderComponentAsync(<UserInfoSection />, {
-      cardPaymentProviderValue: {
+      checkoutProviderValue: {
         country: "Brazil",
       },
     });

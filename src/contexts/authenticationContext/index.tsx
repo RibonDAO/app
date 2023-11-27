@@ -1,6 +1,9 @@
+import { getLocalStorageItem, removeLocalStorageItem } from "lib/localStorage";
+import {
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+} from "lib/localStorage/constants";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-
-import { getCookiesItem, removeCookiesItem } from "@ribon.io/shared/lib";
 
 // todo: create goggle, apple and magic link login
 export interface IAuthenticationContext {
@@ -16,17 +19,22 @@ export const AuthenticationContext = createContext<IAuthenticationContext>(
   {} as IAuthenticationContext,
 );
 
-export const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
-export const REFRESH_TOKEN_KEY = "REFRESH_TOKEN_KEY";
-
 function AuthenticationProvider({ children }: Props) {
-  const [accessToken] = useState(getCookiesItem(ACCESS_TOKEN_KEY));
+  const [accessToken, setAccessToken] = useState("");
 
   function logout() {
-    removeCookiesItem(ACCESS_TOKEN_KEY);
-    removeCookiesItem(REFRESH_TOKEN_KEY);
-    // todo: navigate to public page
+    removeLocalStorageItem(ACCESS_TOKEN_KEY);
+    removeLocalStorageItem(REFRESH_TOKEN_KEY);
   }
+
+  const fetchAcessToken = async () => {
+    const accessTokenKey = await getLocalStorageItem(ACCESS_TOKEN_KEY);
+    if (accessTokenKey) setAccessToken(accessTokenKey);
+  };
+
+  useEffect(() => {
+    fetchAcessToken();
+  }, []);
 
   useEffect(() => {
     if (!accessToken) {

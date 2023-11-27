@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import InputRange from "components/atomics/inputs/InputRange";
 import { useOffers } from "@ribon.io/shared/hooks";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { Currencies, Offer } from "@ribon.io/shared/types";
 import { theme } from "@ribon.io/shared/styles";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { Text, View } from "react-native";
 import Dropdown from "components/moleculars/Dropdown";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import S from "./styles";
 
 const { neutral } = theme.colors;
@@ -45,7 +45,7 @@ function SelectOfferSection({
     defaultCurrentOfferIndex().then((index) => setCurrentOfferIndex(index));
   }, []);
 
-  const { currentCoin, setCurrentCoin, loading } = useCardPaymentInformation();
+  const { currentCoin, setCurrentCoin, loading } = useCheckoutContext();
   const { offers } = useOffers(currentCoin || Currencies.USD, false);
 
   useEffect(() => {

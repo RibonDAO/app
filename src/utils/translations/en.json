@@ -69,7 +69,8 @@
       },
       "ticketSection": {
         "ticketToast": "You have a new ticket!"
-      }
+      },
+      "donationError": "Unable to donate now"
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",
@@ -185,6 +186,9 @@
     },
     "tasksContext": {
       "allTasksCompleted": "You completed all tasks!"
+    },
+    "pixInformation": {
+      "onErrorMessage": "Payment failed. Try again."
     }
   },
   "promoters": {
@@ -273,6 +277,7 @@
       "searchCountryPlaceholder": "Search country",
       "paymentMethodSection": {
         "creditCard": "Credit card",
+        "pix": "Pix",
         "googlePay": "Google Pay",
         "applePay": "Apple Pay",
         "creditCardFields": {
@@ -289,6 +294,19 @@
         }
       },
       "confirmPayment": "Confirm payment"
+    },
+    "pixInstructionsScreen": {
+      "pixCode": "Pix code",
+      "instructions": "Instructions",
+      "firstInfo": "1. Open your bank app",
+      "secondInfo": "2. Select the option to pay with Pix",
+      "thirdInfo": "3. Scan the QR Code",
+      "copyCode": "Copy code",
+      "copyCodeSuccess": "Code copied!",
+      "expiresAt": "Expires at 30 minutes",
+      "donatingTo": "Donating to ",
+      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments.",
+      "sealText": "Safe transaction by"
     },
     "monthlyContributionsScreen": {
       "title": "Monthly contributions",
@@ -360,7 +378,7 @@
   },
   "userSupportBanner": {
     "title": "Access user support",
-    "text": "Questions, ideias, refunds. We’re here!",
+    "text": "Questions, ideas, refunds. We’re here!",
     "link": "https://v2.zopim.com/widget/popout.html?key={{key}}"
   },
   "integrationBanner": {

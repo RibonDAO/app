@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   },
   message: {
     width: 224,
-    wordBreak: "break-word",
   },
   icon: {
     marginRight: theme.spacingNative(8),

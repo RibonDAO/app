@@ -8,7 +8,6 @@ import {
   formatPrice,
   removeInsignificantZeros,
 } from "lib/formatters/currencyFormatter";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
 import { View, Text, Platform, Linking } from "react-native";
@@ -20,6 +19,7 @@ import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import { useCausesContext } from "contexts/causesContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import { useLanguage } from "contexts/languageContext";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
@@ -28,8 +28,10 @@ function CardScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
-  const { cause, setCause, setFlow } = useCardPaymentInformation();
+  const { cause, setCause, setFlow } = useCheckoutContext();
+
   const { currentLang } = useLanguage();
+
   const { causes } = useCausesContext();
   const { chosenCause, setChosenCause, chosenCauseIndex, setChosenCauseIndex } =
     useCauseContributionContext();

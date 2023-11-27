@@ -16,18 +16,18 @@ import { logError } from "services/crashReport";
 import { useNavigation } from "hooks/useNavigation";
 import { useNetworkContext } from "contexts/networkContext";
 import { defaultNetwork } from "config/networks";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useCausesContext } from "contexts/causesContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import { logEvent } from "services/analytics";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
+import { useCheckoutContext } from "contexts/checkoutContext";
 import styles from "./styles";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 
 function CryptoScreen(): JSX.Element {
   const { connectWallet, wallet } = useWalletContext();
   const { isValidNetwork, getCurrentNetwork } = useNetworkContext();
-  const { cause: causeCard } = useCardPaymentInformation();
+  const { cause: causeCard } = useCheckoutContext();
 
   const {
     cause,

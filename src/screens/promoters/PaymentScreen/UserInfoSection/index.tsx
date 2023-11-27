@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "contexts/languageContext";
 import { maskForTaxId } from "@ribon.io/shared/lib";
-import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import InputText from "components/atomics/inputs/InputText";
 import { View } from "react-native";
 import S from "screens/promoters/PaymentScreen/UserInfoSection/styles";
@@ -16,6 +15,7 @@ import {
 } from "lib/countryByLanguage";
 import { Languages } from "types/enums/Languages";
 import { theme } from "@ribon.io/shared/styles";
+import { useCheckoutContext } from "contexts/checkoutContext";
 
 function UserInfoSection(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -33,7 +33,7 @@ function UserInfoSection(): JSX.Element {
     taxId,
     setTaxId,
     setButtonDisabled,
-  } = useCardPaymentInformation();
+  } = useCheckoutContext();
 
   const [currentCountryCode, setCurrentCountryCode] = useState(
     countryCodeByLanguage(currentLang),

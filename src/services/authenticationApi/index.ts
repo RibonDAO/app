@@ -9,18 +9,19 @@ import {
 } from "@ribon.io/shared/services";
 import { initializeHooks } from "@ribon.io/shared/hooks";
 import { normalizedLanguage } from "lib/currentLanguage";
-import { getCookiesItem } from "@ribon.io/shared/lib";
-import { REACT_APP_RIBON_API } from "utils/constants/Application";
+import { EXPO_PUBLIC_RIBON_API } from "utils/constants/Application";
+import { useAuthentication } from "contexts/authenticationContext";
 
 const RIBON_API = "https://dapp-api.ribon.io/";
-export const baseURL = REACT_APP_RIBON_API || RIBON_API;
+export const baseURL = EXPO_PUBLIC_RIBON_API || RIBON_API;
 export const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
 
 export function initializeApi() {
   const lang = normalizedLanguage();
+  const accessToken = useAuthentication();
   const authHeaders = {
     Language: lang,
-    Authorization: `Bearer ${getCookiesItem(ACCESS_TOKEN_KEY)}`,
+    Authorization: `Bearer ${accessToken}}`,
   };
 
   initializeSharedApi({ url: baseURL, headers: authHeaders });

@@ -16,7 +16,7 @@ import { formattedLanguage } from "lib/formatters/languageFormatter";
 import { PLATFORM } from "utils/constants/Application";
 import { openInWebViewer } from "lib/linkOpener";
 import { NonProfit } from "@ribon.io/shared/types";
-import { useDonations, useUsers } from "@ribon.io/shared/hooks";
+import { useDonations, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { useLanguage } from "contexts/languageContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import BackgroundShapes from "components/vectors/BackgroundShapes";
@@ -55,12 +55,17 @@ function EmailInputSection({
 
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
 
+  const { createSource } = useSources();
+
   async function donateCallback() {
     try {
       const user = await findOrCreateUser(
         email,
         formattedLanguage(currentLang),
       );
+      if (currentIntegrationId) {
+        createSource(user.id, currentIntegrationId);
+      }
       perform(() => {
         setCurrentUser(user);
       }).in(3000);
