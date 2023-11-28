@@ -5,7 +5,7 @@
 
 import { beginningOfToday } from "lib/dateUtils";
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
   actions: string[];
@@ -55,6 +55,17 @@ export const TASKS = [
     actions: ["for_you_news_tab_view"],
     type: "daily",
     navigationCallback: "ForYouScreen",
+    isVisible(this: Task) {
+      return true;
+    },
+  },
+  {
+    id: "f942f607-9f2d-4e91-a1d5-aad5e85c864c",
+    title: "giving_day",
+    actions: ["go_to_giving_day_screen"],
+    type: "daily",
+    navigationCallback:
+      "https://projetos.ribon.io/dia-de-doar?integration_id=96ba2ddd-1f49-4057-9c9d-b9d4a6e423a7&offer=1000&target=non_profit&target_id=10&currency=BRL&subscription=false&utm_source=organic&utm_medium=organic&utm_campaign=organic",
     isVisible(this: Task) {
       return true;
     },

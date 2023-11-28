@@ -1,8 +1,9 @@
 import { Text, View } from "react-native";
-import { useTasks } from "utils/constants/Tasks";
+import { Task, useTasks } from "utils/constants/Tasks";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
+import { openInWebViewer } from "lib/linkOpener";
 
 import { useTranslation } from "react-i18next";
 import { useTasksContext } from "contexts/tasksContext";
@@ -19,10 +20,27 @@ export default function DailyTasksSection() {
     keyPrefix: "content.forYouScreen.tasksSection",
   });
   const dailyTasks = useTasks("daily");
-  const { tasksState } = useTasksContext();
+  const { tasksState, registerAction } = useTasksContext();
   const { navigateTo } = useNavigation();
 
   const { setIndex } = useForYouTabsContext();
+
+  const handleNavigateTo = (task: Task) => {
+    const isCurrentPage = task.navigationCallback === CURRENT_PAGE;
+    const navigateToTask = task.navigationCallback;
+
+    if (isCurrentPage) return () => setIndex(1);
+
+    const isUrl = navigateToTask.includes("http");
+
+    if (isUrl)
+      return () => {
+        registerAction(task.actions[0]);
+        openInWebViewer(navigateToTask);
+      };
+
+    return () => navigateTo(navigateToTask);
+  };
 
   return (
     <View style={S.container}>
@@ -39,13 +57,10 @@ export default function DailyTasksSection() {
       {tasksState &&
         dailyTasks.map((task) => {
           const taskDone = tasksState.find((obj) => obj.id === task.id)?.done;
-          const navigateToTask = task.navigationCallback;
-          const isCurrentPage = navigateToTask === CURRENT_PAGE;
+
           const navigationCallback = taskDone
             ? undefined
-            : isCurrentPage
-            ? () => setIndex(1)
-            : () => navigateTo(navigateToTask);
+            : handleNavigateTo(task);
 
           if (!task.isVisible({ state: tasksState })) {
             return null;
