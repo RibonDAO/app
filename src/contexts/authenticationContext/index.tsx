@@ -1,14 +1,20 @@
-import { getLocalStorageItem, removeLocalStorageItem } from "lib/localStorage";
+import { userAuthenticationApi } from "@ribon.io/shared/services";
+import { useCurrentUser } from "contexts/currentUserContext";
+import {
+  getLocalStorageItem,
+  removeLocalStorageItem,
+  setLocalStorageItem,
+} from "lib/localStorage";
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
 } from "lib/localStorage/constants";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-// todo: create goggle, apple and magic link login
 export interface IAuthenticationContext {
   accessToken: string | null;
   logout: () => void;
+  signInWithGoogle: (response: any) => void;
 }
 
 export type Props = {
@@ -21,6 +27,7 @@ export const AuthenticationContext = createContext<IAuthenticationContext>(
 
 function AuthenticationProvider({ children }: Props) {
   const [accessToken, setAccessToken] = useState("");
+  const { setCurrentUser } = useCurrentUser();
 
   function logout() {
     removeLocalStorageItem(ACCESS_TOKEN_KEY);
@@ -31,6 +38,29 @@ function AuthenticationProvider({ children }: Props) {
     const accessTokenKey = await getLocalStorageItem(ACCESS_TOKEN_KEY);
     if (accessTokenKey) setAccessToken(accessTokenKey);
   };
+
+  function signIn(response: any) {
+    const token = response.headers["access-token"];
+    const refreshToken = response.headers["refresh-token"];
+
+    setLocalStorageItem(ACCESS_TOKEN_KEY, token);
+    setLocalStorageItem(REFRESH_TOKEN_KEY, refreshToken);
+    setAccessToken(token);
+    setCurrentUser(response.data.user);
+  }
+
+  async function signInWithGoogle(response: any) {
+    try {
+      const authResponse = await userAuthenticationApi.postAuthenticate(
+        response.access_token,
+        "google_oauth2_access",
+      );
+
+      signIn(authResponse);
+    } catch (error) {
+      throw new Error("google auth error");
+    }
+  }
 
   useEffect(() => {
     fetchAcessToken();
@@ -46,6 +76,7 @@ function AuthenticationProvider({ children }: Props) {
     () => ({
       logout,
       accessToken,
+      signInWithGoogle,
     }),
     [accessToken],
   );

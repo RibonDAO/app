@@ -112,7 +112,8 @@ export default () => ({
            }
 
          }
-      ]
+      ],
+      ["@react-native-google-signin/google-signin"]
     ],
     "extra": {
       "eas": {
