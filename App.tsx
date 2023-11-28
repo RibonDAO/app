@@ -30,7 +30,7 @@ const providerMetadata = {
   ],
   redirect: {
     native: "ribon://",
-    universal: "dapp.ribo.io",
+    universal: "dapp.ribon.io",
   },
 };
 
@@ -65,7 +65,10 @@ function Main() {
                   {debugEventsEnabled() && <DebugEventsView />}
                   <StripeProvider>
                     <Navigation />
-                    <StatusBar />
+                    <StatusBar
+                      // eslint-disable-next-line react/style-prop-object
+                      style="dark"
+                    />
                   </StripeProvider>
                 </SafeAreaView>
               </SafeAreaView>
