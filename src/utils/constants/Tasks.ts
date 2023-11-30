@@ -60,17 +60,6 @@ export const TASKS = [
     },
   },
   {
-    id: "f942f607-9f2d-4e91-a1d5-aad5e85c864c",
-    title: "giving_day",
-    actions: ["go_to_giving_day_screen"],
-    type: "daily",
-    navigationCallback:
-      "https://projetos.ribon.io/dia-de-doar?integration_id=96ba2ddd-1f49-4057-9c9d-b9d4a6e423a7&offer=1000&target=non_profit&target_id=10&currency=BRL&subscription=false&utm_source=organic&utm_medium=organic&utm_campaign=organic",
-    isVisible(this: Task) {
-      return true;
-    },
-  },
-  {
     id: "ed180aa8-e8e7-11ed-a05b-0242ac120003",
     title: "make_contribution",
     actions: ["contribution_done_screen_view"],
