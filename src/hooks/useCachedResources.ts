@@ -3,14 +3,12 @@ import * as Font from "expo-font";
 import * as Sentry from "sentry-expo";
 import { useEffect, useState } from "react";
 import { initializeApi } from "services/api";
-import { initializeApi as initializeAuthApi } from "services/authenticationApi";
 import * as SplashScreen from "expo-splash-screen";
 import MaterialSymbolsRounded from "assets/fonts/material/MaterialSymbolsRounded.ttf";
 import MaterialSymbolsOutlined from "assets/fonts/material/MaterialSymbolsOutlined.ttf";
 import MaterialSymbolsSharp from "assets/fonts/material/MaterialSymbolsSharp.ttf";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useLanguage } from "contexts/languageContext";
-import { useAuthentication } from "contexts/authenticationContext";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
 import { perform } from "lib/timeoutHelpers";
 import { logEvent } from "services/analytics";
@@ -30,7 +28,6 @@ export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const { currentUser } = useCurrentUser();
   const { currentLang } = useLanguage();
-  const accessToken = useAuthentication();
 
   useEffect(() => {
     initializeApi({
@@ -38,13 +35,6 @@ export default function useCachedResources() {
       language: formattedLanguage(currentLang),
     });
   }, [JSON.stringify(currentUser), currentLang]);
-
-  useEffect(() => {
-    // todo: refactor with login logic
-    if (accessToken) {
-      initializeAuthApi();
-    }
-  }, [accessToken]);
 
   useEffect(() => {
     Sentry.init({

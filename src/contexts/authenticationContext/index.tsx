@@ -53,7 +53,7 @@ function AuthenticationProvider({ children }: Props) {
     try {
       const authResponse = await userAuthenticationApi.postAuthenticate(
         response.access_token,
-        "google_oauth2_access",
+        "google_oauth2",
       );
 
       signIn(authResponse);

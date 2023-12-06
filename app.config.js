@@ -1,5 +1,5 @@
-const version = "5.3.3";
-const buildNumber = 344;
+const version = "5.4.0";
+const buildNumber = 345;
 
 export default () => ({
   "expo": {
@@ -128,6 +128,7 @@ export default () => ({
       "EXPO_PUBLIC_CIO_SITE_ID": process.env.EXPO_PUBLIC_CIO_SITE_ID,
       "EXPO_PUBLIC_CIO_API_KEY": process.env.EXPO_PUBLIC_CIO_API_KEY,
       "EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID": process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID,
+      "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
     },
     "runtimeVersion": {
       "policy": "appVersion"

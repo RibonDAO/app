@@ -415,5 +415,20 @@
     "donateAndImpact": "Doe {{value}} e impacte",
     "titleCardWithName": "Ajude a {{name}}",
     "impactDescription": "com {{value}}"
+  },
+  "components": {
+    "moleculars": {
+      "buttons": {
+        "AppleLogin": {
+          "buttonText": "Continuar com Apple"
+        },
+        "GoogleLogin": {
+          "buttonText": "Continuar com Google"
+        },
+        "MagicLinkLogin": {
+          "buttonText": "Continuar com e-mail"
+        }
+      }
+    }
   }
 }
