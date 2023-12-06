@@ -225,6 +225,25 @@ function LayoutHeader({
       <View style={S.supportContainer}>
         <ConfigItem
           icon={{
+            name: "account_circle",
+            type: "rounded",
+            color: theme.colors.brand.primary[600],
+            size: 24,
+          }}
+          text={t("signIn")}
+          onPress={() => navigateTo("SignInScreen")}
+          cta={
+            <Icon
+              type="rounded"
+              size={20}
+              color={theme.colors.brand.primary[600]}
+              name="arrow_forward_ios"
+              onPress={() => navigateTo("SignInScreen")}
+            />
+          }
+        />
+        <ConfigItem
+          icon={{
             name: "notifications",
             type: "rounded",
             color: theme.colors.brand.primary[600],

@@ -1,5 +1,4 @@
-/* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
-import { Linking, Platform, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
@@ -57,18 +56,13 @@ function ContributionImage({
       offerId: offer?.id,
     });
 
-    if (Platform.OS === "ios") {
-      const url = `https://dapp.ribon.io/promoters/recurrence?target=${target}&target_id=${targetId}&currency=${offer?.currency}&offer=${offer?.priceCents}&language=${currentLang}`;
-      Linking.openURL(url);
-    } else {
-      navigateTo("RecurrenceScreen", {
-        targetId,
-        target,
-        offer: offer ? offer.priceCents : 0,
-        currency: currentCurrency,
-        subscription: false,
-      });
-    }
+    navigateTo("RecurrenceScreen", {
+      targetId,
+      target,
+      offer: offer ? offer.priceCents : 0,
+      currency: currentCurrency,
+      subscription: false,
+    });
   };
 
   return (
@@ -78,7 +72,11 @@ function ContributionImage({
       onPress={handleClick}
       key={name}
     >
-      <Image style={S.imageContainer} source={{ uri: coverImage }} />
+      <Image
+        accessibilityIgnoresInvertColors
+        style={S.imageContainer}
+        source={{ uri: coverImage }}
+      />
 
       {isCause && (
         <View style={S.label}>

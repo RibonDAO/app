@@ -55,6 +55,7 @@ import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import { logEvent } from "services/analytics";
 import PixInstructionsScreen from "screens/promoters/CheckoutScreen/PixInstructionsScreen";
 import PixPaymentInformationProvider from "contexts/pixInformationContext";
+import SignInScreen from "screens/auth/SignInScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -369,6 +370,16 @@ function RootNavigator() {
         component={MonthlyContributionsScreen}
         options={{
           headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="SignInScreen"
+        component={SignInScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
         }}
       />
 

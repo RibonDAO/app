@@ -14,7 +14,6 @@ import { useTranslation } from "react-i18next";
 import InputText from "components/atomics/inputs/InputText";
 import { formattedLanguage } from "lib/formatters/languageFormatter";
 import { PLATFORM } from "utils/constants/Application";
-import { openInWebViewer } from "lib/linkOpener";
 import { NonProfit } from "@ribon.io/shared/types";
 import { useDonations, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { useLanguage } from "contexts/languageContext";
@@ -26,6 +25,7 @@ import { perform } from "lib/timeoutHelpers";
 import usePageView from "hooks/usePageView";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useUtmContext } from "contexts/utmContext";
+import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
 import S from "./styles";
 
 type Props = {
@@ -96,14 +96,6 @@ function EmailInputSection({
     setEmail(text);
   };
 
-  const linkToPrivacyPolicy = () => {
-    openInWebViewer(t("privacyPolicyLink"));
-  };
-
-  const linkToTerms = () => {
-    openInWebViewer(t("termsLink"));
-  };
-
   return (
     <KeyboardAvoidingView
       behavior="position"
@@ -150,16 +142,7 @@ function EmailInputSection({
               disabled={!isValidEmail(email)}
               customStyles={S.button}
             />
-            <Text style={S.privacyPolicyText}>
-              {t("agreementText")}{" "}
-              <Text style={S.privacyPolicyLink} onPress={linkToTerms}>
-                {t("termsText")}
-              </Text>
-              {t("and")}{" "}
-              <Text style={S.privacyPolicyLink} onPress={linkToPrivacyPolicy}>
-                {t("privacyPolicyText")}
-              </Text>
-            </Text>
+            <PrivacyPolicyLayout />
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>

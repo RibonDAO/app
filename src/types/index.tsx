@@ -123,6 +123,7 @@ export type RootStackParamList = {
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
   MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
+  SignInScreen: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
