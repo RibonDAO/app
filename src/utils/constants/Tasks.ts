@@ -5,7 +5,7 @@
 
 import { beginningOfToday } from "lib/dateUtils";
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
   actions: string[];
