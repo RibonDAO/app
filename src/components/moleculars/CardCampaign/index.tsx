@@ -47,7 +47,10 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
     openInWebViewer(impressionCard.ctaUrl);
   };
 
-  const imageUri = useMemo<string | undefined>(() => impressionCard?.image || youtubeThumbnail(impressionCard?.videoUrl), [impressionCard]);
+  const imageUri = useMemo<string | undefined>(
+    () => impressionCard?.image || youtubeThumbnail(impressionCard?.videoUrl),
+    [impressionCard],
+  );
 
   const openYouTubeVideo = () => {
     if (impressionCard?.videoUrl) openInWebViewer(impressionCard.videoUrl);
@@ -56,7 +59,8 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
   return impressionCard ? (
     <View style={S.container}>
       {imageUri && (
-        <TouchableOpacity accessibilityRole="button"
+        <TouchableOpacity
+          accessibilityRole="button"
           onPress={openYouTubeVideo}
           activeOpacity={0.8}
           style={S.imageContainer}
