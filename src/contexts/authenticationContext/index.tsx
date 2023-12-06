@@ -10,6 +10,7 @@ import {
   REFRESH_TOKEN_KEY,
 } from "lib/localStorage/constants";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { logError } from "services/crashReport";
 
 export interface IAuthenticationContext {
   accessToken: string | null;
@@ -58,6 +59,7 @@ function AuthenticationProvider({ children }: Props) {
 
       signIn(authResponse);
     } catch (error) {
+      logError("google auth error");
       throw new Error("google auth error");
     }
   }

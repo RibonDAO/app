@@ -20,8 +20,10 @@ function GoogleLogin({ onContinue }: Props): JSX.Element {
   async function loginGoogle() {
     const result = await signIn();
 
-    await signInWithGoogle({ access_token: result?.userInfo?.idToken });
-    onContinue();
+    if (result) {
+      await signInWithGoogle({ access_token: result.userInfo?.idToken });
+      onContinue();
+    }
   }
 
   function handleGoogle() {
