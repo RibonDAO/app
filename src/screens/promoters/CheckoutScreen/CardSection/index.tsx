@@ -271,7 +271,7 @@ export default function CardSection() {
                 </View>
               ),
               rightIcon: <ApplePayIcon />,
-              show: isApplePaySupported,
+              show: isApplePaySupported && !isSubscription,
             },
             {
               title: t("paymentMethodSection.pix"),
