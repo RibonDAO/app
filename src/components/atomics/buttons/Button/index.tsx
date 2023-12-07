@@ -37,6 +37,7 @@ export type Props = {
   leftIcon?: LeftIconProps;
   customStyles?: StyleProp<ViewStyle>;
   customTextStyles?: StyleProp<TextStyle>;
+  leftItem?: JSX.Element;
 };
 
 const { primary } = theme.colors.brand;
@@ -58,6 +59,7 @@ export default function Button({
   customStyles = {},
   customTextStyles = {},
   leftIcon,
+  leftItem,
 }: Props): JSX.Element {
   const counter = useRef(new Animated.Value(0)).current;
   const [running, setRunning] = useState(false);
@@ -180,6 +182,7 @@ export default function Button({
         />
       </View>
       {leftIcon && <Icon {...leftIcon} style={S.leftIcon} />}
+      <View style={S.leftItem}>{leftItem && leftItem}</View>
       <Text style={[S.text, { color: textColorByState() }, customTextStyles]}>
         {text}
       </Text>
