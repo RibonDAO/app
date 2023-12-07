@@ -101,6 +101,7 @@ export type PixInstructionsScreenParamList = {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  PrivateStack: undefined;
   DonateScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;
   ContributionDoneScreen: ContributionDoneParamsList;
@@ -124,6 +125,11 @@ export type RootStackParamList = {
   ContributionStatsScreen: ContributionStatsScreenParamsList;
   MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
   SignInScreen: undefined;
+};
+
+export type PrivateStackParamList = {
+  // todo: update with the screens that are private
+  Private: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

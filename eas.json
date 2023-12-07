@@ -14,7 +14,8 @@
         "EXPO_PUBLIC_RIBON_API": "https://dapp-dev-api.ribon.io/",
         "EXPO_PUBLIC_RIBON_INTEGRATION_ID": "3",
         "EXPO_PUBLIC_STRIPE_GLOBAL_PUBLISHABLE_KEY": "pk_test_51N3fZvAvG66WJy8B3aSADu9NaLF6mcJhus6eiZztGYfSKQBY9q3AkQPQshONDA9oNOdA5Pz3YcX3tAaPjDERj8pc00JLUhEkzI",
-        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_test_51JRgaRJuOnwQq9Qx2RrybIhE1vRgC5tNd32EJkINCTmgGZYSr3QXne9y5CAdEq36WULJPmWv2VvZZ0xA5MNTrY7C00KL9rq6Op"
+        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_test_51JRgaRJuOnwQq9Qx2RrybIhE1vRgC5tNd32EJkINCTmgGZYSr3QXne9y5CAdEq36WULJPmWv2VvZZ0xA5MNTrY7C00KL9rq6Op",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "243531812303-6d5g6l7io0n7mbd2vhoa0ht5mu9132ii.apps.googleusercontent.com"
       }
     },
     "preview": {
@@ -31,7 +32,8 @@
         "EXPO_PUBLIC_RIBON_API": "https://dapp-api.ribon.io/",
         "EXPO_PUBLIC_RIBON_INTEGRATION_ID": "1",
         "EXPO_PUBLIC_STRIPE_GLOBAL_PUBLISHABLE_KEY": "pk_live_51N3fZvAvG66WJy8BrEnblBQfVseTzACclzqVj0D8xVhSXoOdIKwKfD6iWC6Qhl84jvoDxLPI9ekimrWATZoGTPrB00YH6VmdsL",
-        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51JRgaRJuOnwQq9Qx2B1C9Z7KwV43Qu1TZj96sjQrIpx9g2M59aHtSnVyVgQrmquJWYfgsKghsnExeCOmtepaDpYu00PlMsbojz"
+        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51JRgaRJuOnwQq9Qx2B1C9Z7KwV43Qu1TZj96sjQrIpx9g2M59aHtSnVyVgQrmquJWYfgsKghsnExeCOmtepaDpYu00PlMsbojz",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "243531812303-6d5g6l7io0n7mbd2vhoa0ht5mu9132ii.apps.googleusercontent.com"
       }
     },
     "staging": {
@@ -47,7 +49,8 @@
         "EXPO_PUBLIC_RIBON_API": "https://dapp-api.ribon.io/",
         "EXPO_PUBLIC_RIBON_INTEGRATION_ID": "1",
         "EXPO_PUBLIC_STRIPE_GLOBAL_PUBLISHABLE_KEY": "pk_live_51N3fZvAvG66WJy8BrEnblBQfVseTzACclzqVj0D8xVhSXoOdIKwKfD6iWC6Qhl84jvoDxLPI9ekimrWATZoGTPrB00YH6VmdsL",
-        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51JRgaRJuOnwQq9Qx2B1C9Z7KwV43Qu1TZj96sjQrIpx9g2M59aHtSnVyVgQrmquJWYfgsKghsnExeCOmtepaDpYu00PlMsbojz"
+        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51JRgaRJuOnwQq9Qx2B1C9Z7KwV43Qu1TZj96sjQrIpx9g2M59aHtSnVyVgQrmquJWYfgsKghsnExeCOmtepaDpYu00PlMsbojz",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "243531812303-6d5g6l7io0n7mbd2vhoa0ht5mu9132ii.apps.googleusercontent.com"
       }
     },
     "production": {
@@ -60,7 +63,8 @@
         "EXPO_PUBLIC_RIBON_API": "https://dapp-api.ribon.io/",
         "EXPO_PUBLIC_RIBON_INTEGRATION_ID": "1",
         "EXPO_PUBLIC_STRIPE_GLOBAL_PUBLISHABLE_KEY": "pk_live_51N3fZvAvG66WJy8BrEnblBQfVseTzACclzqVj0D8xVhSXoOdIKwKfD6iWC6Qhl84jvoDxLPI9ekimrWATZoGTPrB00YH6VmdsL",
-        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51JRgaRJuOnwQq9Qx2B1C9Z7KwV43Qu1TZj96sjQrIpx9g2M59aHtSnVyVgQrmquJWYfgsKghsnExeCOmtepaDpYu00PlMsbojz"
+        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51JRgaRJuOnwQq9Qx2B1C9Z7KwV43Qu1TZj96sjQrIpx9g2M59aHtSnVyVgQrmquJWYfgsKghsnExeCOmtepaDpYu00PlMsbojz",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "243531812303-6d5g6l7io0n7mbd2vhoa0ht5mu9132ii.apps.googleusercontent.com"
       }
     }
   },

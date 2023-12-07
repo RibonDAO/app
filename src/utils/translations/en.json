@@ -423,5 +423,20 @@
     "titleCardWithName": "Help {{name}}",
     "impactDescription": "with {{value}}",
     "titleCard": "Do even more"
+  },
+  "components": {
+    "moleculars": {
+      "buttons": {
+        "AppleLogin": {
+          "buttonText": "Continue with Apple"
+        },
+        "GoogleLogin": {
+          "buttonText": "Continue with Google"
+        },
+        "MagicLinkLogin": {
+          "buttonText": "Continue with e-mail"
+        }
+      }
+    }
   }
 }

@@ -12,6 +12,7 @@ import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
 import StripeProvider from "./src/contexts/stripeContext";
 import LanguageProvider from "./src/contexts/languageContext";
 import CurrentUserProvider from "./src/contexts/currentUserContext";
+import AuthenticationProvider from "./src/contexts/authenticationContext";
 import Navigation from "./src/config/navigation";
 import useCachedResources from "./src/hooks/useCachedResources";
 import UnsafeAreaProvider, {
@@ -85,11 +86,13 @@ export default function App() {
     <Suspense fallback={<View />}>
       <ScrollEnabledProvider>
         <CurrentUserProvider>
-          <LanguageProvider>
-            <UnsafeAreaProvider>
-              <Main />
-            </UnsafeAreaProvider>
-          </LanguageProvider>
+          <AuthenticationProvider>
+            <LanguageProvider>
+              <UnsafeAreaProvider>
+                <Main />
+              </UnsafeAreaProvider>
+            </LanguageProvider>
+          </AuthenticationProvider>
         </CurrentUserProvider>
       </ScrollEnabledProvider>
     </Suspense>

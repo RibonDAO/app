@@ -27,3 +27,6 @@ export const EXPO_PUBLIC_CIO_API_KEY =
 
 export const WALLET_CONNECT_PROJECT_ID =
   Constants.expoConfig?.extra?.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID;
+
+export const GOOGLE_WEB_CLIENT_ID =
+  Constants.expoConfig?.extra?.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID;

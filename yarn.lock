@@ -3232,6 +3232,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-17.5.0.tgz#6c9e097d0884d5cd889aa08db7539920df30ce98"
   integrity sha512-26dWvSPKuw3C7i3n4T/twZEo4QpTnDLUMtR8VBE2gLdDP7P5dbVt+JOu3+k9pLZBrIeIBWRwYpWGA2KpnY9/WQ==
 
+"@react-native-google-signin/google-signin@^10.1.1":
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-10.1.1.tgz#1306aac8c32cb5deb994a1bfb05bed8172defed1"
+  integrity sha512-o6VufmUpdP174WY7r+ojVccyVHrTMjZEzCBJVa52r/wGJBzbxe8eD9MXdAYClkS2f4AGOdH6epNkySow89HRrA==
+
 "@react-native-masked-view/masked-view@0.2.9":
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.2.9.tgz#723a7a076d56b8f5f3fda076eaa5b6b82988e854"
@@ -3349,10 +3354,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.1.13":
-  version "1.1.13"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.13.tgz#a59f51d99a1e32eeacc8c552fc6d6559b812606b"
-  integrity sha512-ai1r5QrfVW1/S3pVkn+sOXw7fDNEggq+gOyq7JGkYsNRtiXNpxvfTwgvBD/pFdW/RQLoWPqpJTi49k/t0Q8yUg==
+"@ribon.io/shared@^1.1.8":
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.11.tgz#a1f1056403c32abe0d67e000bbd0a00a51eb6d4b"
+  integrity sha512-grVWZ1UkIsnYOucfLAfq7bQwToTJOYILhESLXAf18Co52G/oYGLdm9Q1kduSue6+7neQlcgHCSiSXruqOgj9gw==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
