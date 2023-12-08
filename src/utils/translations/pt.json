@@ -451,5 +451,22 @@
         }
       }
     }
+  },
+  "auth": {
+    "signInScreen": {
+      "title": "Entre na sua conta"
+    },
+    "insertEmailScreen": {
+      "title": "Entre com um e-mail",
+      "emailLabel": "E-mail",
+      "confirmText": "Continuar",
+      "emailPlaceholder": "Seu e-mail"
+    },
+    "sentMagicLinkEmailScreen": {
+      "title": "Link de entrada enviado",
+      "text": "Clique no link enviado para {{email}} para entrar",
+      "firstAccessTitle": "Você ganhou um ticket extra",
+      "firstAccessText": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra."
+    }
   }
 }

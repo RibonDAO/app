@@ -19,7 +19,7 @@ import UserAvatar from "../assets/user-avatar.svg";
 function SignInScreen() {
   usePageView("P12_view", { nonProfitId: "" });
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.signInScreen",
+    keyPrefix: "auth.signInScreen",
   });
 
   const { navigateTo } = useNavigation();
@@ -38,14 +38,12 @@ function SignInScreen() {
           <View style={S.imageContainer}>
             <Image
               style={S.mainImage}
-              source={UserAvatar}
+              source={{ uri: UserAvatar }}
               accessibilityIgnoresInvertColors
             />
           </View>
-
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
-
             <MagicLinkLogin
               onContinue={() => navigateTo("InsertEmailScreen")}
               from="donation_flow"

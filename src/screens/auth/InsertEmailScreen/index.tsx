@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   View,
+  Text,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import Image from "components/atomics/Image";
@@ -24,7 +25,7 @@ import UserAvatar from "../assets/user-avatar.svg";
 function InsertEmailScreen() {
   usePageView("P12_view", { nonProfitId: "" });
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.insertEmailScreen",
+    keyPrefix: "auth.insertEmailScreen",
   });
 
   const [email, setEmail] = useState("");
@@ -64,15 +65,15 @@ function InsertEmailScreen() {
           <View style={S.imageContainer}>
             <Image
               style={S.mainImage}
-              source={UserAvatar}
+              source={{ uri: UserAvatar }}
               accessibilityIgnoresInvertColors
             />
           </View>
-
           <View style={S.contentContainer}>
+            <Text style={S.title}>{t("title")}</Text>
             <InputText
               name="email"
-              placeholder={t("textInputPlaceholder") || ""}
+              placeholder={t("emailPlaceholder") || ""}
               keyboardType="email-address"
               onChangeText={handleTextChange}
               value={email}
@@ -84,7 +85,7 @@ function InsertEmailScreen() {
             />
 
             <Button
-              text={t("continueText")}
+              text={t("confirmText")}
               onPress={handleButtonPress}
               disabled={!isValidEmail(email)}
               customStyles={S.button}

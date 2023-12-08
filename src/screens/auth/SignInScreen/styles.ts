@@ -1,7 +1,6 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
 import { stylizedDisplayXs } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodySmRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,15 +14,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   contentContainer: {
-    marginTop: theme.spacingNative(24),
     alignItems: "center",
-  },
-  imageBackground: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
   },
   mainImage: {
     width: 200,
@@ -31,20 +22,10 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 8,
   },
-
   title: {
     ...stylizedDisplayXs,
     color: theme.colors.brand.primary[900],
-    marginBottom: theme.spacingNative(8),
-  },
-  privacyPolicyText: {
-    ...defaultBodySmRegular,
-    color: theme.colors.neutral[600],
-    textAlign: "center",
-    marginTop: theme.spacingNative(16),
-  },
-  privacyPolicyLink: {
-    color: theme.colors.brand.primary[600],
+    marginBottom: theme.spacingNative(24),
   },
   keyboardView: {
     height:
