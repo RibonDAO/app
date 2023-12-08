@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import Image from "components/atomics/Image";
 import Button from "components/atomics/buttons/Button";
 import { NonProfit } from "@ribon.io/shared/types";
@@ -59,7 +59,7 @@ function SignedInSection({
   };
 
   return (
-    <View style={S.container}>
+    <ScrollView contentContainerStyle={S.container}>
       <View style={S.imageContainer}>
         <View style={S.imageBackground}>
           <BackgroundShapes />
@@ -85,7 +85,7 @@ function SignedInSection({
           textColor={theme.colors.neutral[25]}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
