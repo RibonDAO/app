@@ -9,17 +9,18 @@ import {
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import Image from "components/atomics/Image";
-import usePageView from "hooks/usePageView";
-import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
+import { useRouteParams } from "hooks/useRouteParams";
 import S from "./styles";
 import UserAvatar from "../assets/user-avatar.svg";
 
 function SentMagicLinkEmailScreen() {
-  usePageView("P12_view", { nonProfitId: "" });
   const { t } = useTranslation("translation", {
-    keyPrefix: "auth.sentMagicLinkScreen",
+    keyPrefix: "auth.sentMagicLinkEmailScreen",
   });
 
+  const {
+    params: { email },
+  } = useRouteParams<"SentMagicLinkEmailScreen">();
   return (
     <KeyboardAvoidingView
       behavior="position"
@@ -34,14 +35,14 @@ function SentMagicLinkEmailScreen() {
           <View style={S.imageContainer}>
             <Image
               style={S.mainImage}
-              source={UserAvatar}
+              source={{ uri: UserAvatar }}
               accessibilityIgnoresInvertColors
             />
           </View>
 
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
-            <PrivacyPolicyLayout />
+            <Text style={S.description}>{t("text", { email })}</Text>
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>

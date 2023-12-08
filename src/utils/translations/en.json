@@ -130,7 +130,7 @@
         "impactDescription": "with {{value}}",
         "checkboxText": "I agree to receive emails with information about my donations"
       },
-      "insertEmailDonationScreen": {
+      "insertEmailAccountScreen": {
         "title": "Choose an e-mail to donate",
         "emailLabel": "E-mail",
         "confirmText": "Continue",

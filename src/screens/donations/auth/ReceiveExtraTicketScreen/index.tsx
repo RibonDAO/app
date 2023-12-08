@@ -18,13 +18,13 @@ import { useRouteParams } from "hooks/useRouteParams";
 import { useNavigation } from "hooks/useNavigation";
 import S from "./styles";
 
-function InsertEmailDonationScreen() {
+function InsertEmailAccountScreen() {
   const {
     params: { nonProfit },
-  } = useRouteParams<"InsertEmailDonationScreen">();
+  } = useRouteParams<"InsertEmailAccountScreen">();
   usePageView("P12_view", { nonProfitId: nonProfit.id });
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.auth.insertEmailDonationScreen",
+    keyPrefix: "donations.auth.insertEmailAccountScreen",
   });
 
   const { navigateTo } = useNavigation();
@@ -76,4 +76,4 @@ function InsertEmailDonationScreen() {
     </KeyboardAvoidingView>
   );
 }
-export default InsertEmailDonationScreen;
+export default InsertEmailAccountScreen;

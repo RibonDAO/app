@@ -4,13 +4,10 @@ import Button from "components/atomics/buttons/Button";
 import { NonProfit } from "@ribon.io/shared/types";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useTranslation } from "react-i18next";
-import { useDonations } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { PLATFORM } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
 import BackgroundShapes from "components/vectors/BackgroundShapes";
-import { useIntegrationContext } from "contexts/integrationContext";
-import { useUtmContext } from "contexts/utmContext";
+import useDonationFlow from "hooks/useDonationFlow";
 import S from "./styles";
 
 type Props = {
@@ -29,12 +26,8 @@ function SignedInSection({
     keyPrefix: "donations.donateScreen.signedInSection",
   });
   const { currentUser } = useCurrentUser();
-  const { donate } = useDonations(currentUser?.id);
+  const { handleDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
-
-  const { currentIntegrationId, externalId } = useIntegrationContext();
-
-  const { utmSource, utmMedium, utmCampaign } = useUtmContext();
 
   const handleButtonPress = async () => {
     if (!currentUser?.email) return;
@@ -42,16 +35,12 @@ function SignedInSection({
     onContinue();
 
     try {
-      await donate(
-        currentIntegrationId,
-        nonProfit.id,
-        currentUser.email,
-        PLATFORM,
-        externalId,
-        utmSource,
-        utmMedium,
-        utmCampaign,
-      );
+      await handleDonate({
+        nonProfit,
+        email: currentUser.email,
+        onError: onDonationFail,
+        onSuccess: onDonationSuccess,
+      });
       onDonationSuccess();
     } catch (error: any) {
       onDonationFail(error);

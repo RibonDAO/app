@@ -95,7 +95,7 @@ function SignInSection({
             </Text>
             <MagicLinkLogin
               onContinue={() =>
-                navigateTo("InsertEmailDonationScreen", {
+                navigateTo("InsertEmailAccountScreen", {
                   nonProfit,
                 })
               }

@@ -62,7 +62,7 @@ import PixPaymentInformationProvider from "contexts/pixInformationContext";
 import SignInScreen from "screens/auth/SignInScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
 import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
-import InsertEmailDonationScreen from "screens/donations/auth/InsertEmailDonationScreen";
+import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -429,8 +429,8 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="InsertEmailDonationScreen"
-        component={InsertEmailDonationScreen}
+        name="InsertEmailAccountScreen"
+        component={InsertEmailAccountScreen}
         options={{
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],

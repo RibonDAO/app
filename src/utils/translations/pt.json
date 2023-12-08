@@ -120,7 +120,7 @@
         "impactDescription": "com {{value}}",
         "checkboxText": "Aceito receber e-mails com informações sobre minhas doações"
       },
-      "insertEmailDonationScreen": {
+      "insertEmailAccountScreen": {
         "title": "Você está doando",
         "emailLabel": "E-mail",
         "confirmText": "Continuar",

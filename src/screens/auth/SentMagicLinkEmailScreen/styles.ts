@@ -1,7 +1,10 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
 import { stylizedDisplayXs } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodySmRegular } from "styles/typography/default";
+import {
+  defaultBodyMdSemibold,
+  defaultBodySmRegular,
+} from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,8 +18,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   contentContainer: {
-    marginTop: theme.spacingNative(24),
     alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center",
   },
   imageBackground: {
     position: "absolute",
@@ -31,7 +35,12 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 8,
   },
-
+  description: {
+    ...defaultBodyMdSemibold,
+    color: theme.colors.neutral[500],
+    marginBottom: theme.spacingNative(24),
+    textAlign: "center",
+  },
   title: {
     ...stylizedDisplayXs,
     color: theme.colors.brand.primary[900],

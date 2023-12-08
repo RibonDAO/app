@@ -28,13 +28,13 @@ import useDonationFlow from "hooks/useDonationFlow";
 import S from "./styles";
 import DonationInProgressSection from "../../DonateScreen/DonationInProgressSection";
 
-function InsertEmailDonationScreen() {
+function InsertEmailAccountScreen() {
   const {
     params: { nonProfit },
-  } = useRouteParams<"InsertEmailDonationScreen">();
+  } = useRouteParams<"InsertEmailAccountScreen">();
   usePageView("P12_view", { nonProfitId: nonProfit.id });
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.auth.insertEmailDonationScreen",
+    keyPrefix: "donations.auth.insertEmailAccountScreen",
   });
   const [email, setEmail] = useState("");
 
@@ -70,7 +70,7 @@ function InsertEmailDonationScreen() {
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       setTickets(0);
-      navigateTo("TicketDonationDoneScreen", { nonProfit });
+      navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {
         failedDonation: true,
@@ -175,4 +175,4 @@ function InsertEmailDonationScreen() {
   );
 }
 
-export default InsertEmailDonationScreen;
+export default InsertEmailAccountScreen;

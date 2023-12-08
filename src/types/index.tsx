@@ -99,8 +99,12 @@ export type PixInstructionsScreenParamList = {
   currency: Currencies;
 };
 
-export type InsertEmailDonationScreen = {
+export type InsertEmailAccountScreen = {
   nonProfit: NonProfit;
+};
+
+export type SentMagicLinkEmailScreen = {
+  email: string;
 };
 
 export type RootStackParamList = {
@@ -130,8 +134,8 @@ export type RootStackParamList = {
   MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
   SignInScreen: undefined;
   InsertEmailScreen: undefined;
-  SentMagicLinkEmailScreen: undefined;
-  InsertEmailDonationScreen: InsertEmailDonationScreen;
+  SentMagicLinkEmailScreen: SentMagicLinkEmailScreen;
+  InsertEmailAccountScreen: InsertEmailAccountScreen;
 };
 
 export type PrivateStackParamList = {
