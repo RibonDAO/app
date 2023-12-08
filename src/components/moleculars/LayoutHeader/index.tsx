@@ -168,6 +168,28 @@ function LayoutHeader({
     />
   );
 
+  const renderSignInConfigItem = () =>
+    !currentUser && (
+      <ConfigItem
+        icon={{
+          name: "account_circle",
+          type: "rounded",
+          color: theme.colors.brand.primary[600],
+          size: 24,
+        }}
+        text={t("signInOrCreateAccount")}
+        onPress={() => navigateTo("SignInScreen")}
+        cta={
+          <Icon
+            type="rounded"
+            size={20}
+            color={theme.colors.brand.primary[600]}
+            name="arrow_forward_ios"
+            onPress={() => navigateTo("SignInScreen")}
+          />
+        }
+      />
+    );
   const renderLogoutConfigItem = () =>
     currentUser && (
       <ConfigItem
@@ -223,25 +245,7 @@ function LayoutHeader({
       onBackdropPress={toggleModal}
     >
       <View style={S.supportContainer}>
-        <ConfigItem
-          icon={{
-            name: "account_circle",
-            type: "rounded",
-            color: theme.colors.brand.primary[600],
-            size: 24,
-          }}
-          text={t("signInOrCreateAccount")}
-          onPress={() => navigateTo("SignInScreen")}
-          cta={
-            <Icon
-              type="rounded"
-              size={20}
-              color={theme.colors.brand.primary[600]}
-              name="arrow_forward_ios"
-              onPress={() => navigateTo("SignInScreen")}
-            />
-          }
-        />
+        {renderSignInConfigItem()}
         <ConfigItem
           icon={{
             name: "notifications",
