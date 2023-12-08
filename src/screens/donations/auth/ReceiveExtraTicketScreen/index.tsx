@@ -7,22 +7,40 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import Button from "components/atomics/buttons/Button";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "components/atomics/Image";
 import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
-import MagicLinkLogin from "components/moleculars/MagicLinkLogin";
+import { logEvent } from "services/analytics";
+import { useRouteParams } from "hooks/useRouteParams";
 import { useNavigation } from "hooks/useNavigation";
 import S from "./styles";
-import UserAvatar from "../assets/user-avatar.svg";
 
-function SignInScreen() {
-  usePageView("P12_view", { nonProfitId: "" });
+function InsertEmailDonationScreen() {
+  const {
+    params: { nonProfit },
+  } = useRouteParams<"InsertEmailDonationScreen">();
+  usePageView("P12_view", { nonProfitId: nonProfit.id });
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.signInScreen",
+    keyPrefix: "donations.auth.insertEmailDonationScreen",
   });
 
   const { navigateTo } = useNavigation();
+
+  useEffect(() => {
+    if (nonProfit) {
+      logEvent("P28_view", {
+        nonProfitId: nonProfit.id,
+        from: "donation_flow",
+      });
+    }
+  }, [nonProfit]);
+
+  const handleButtonPress = () => {
+    navigateTo("CausesScreen");
+  };
 
   return (
     <KeyboardAvoidingView
@@ -38,17 +56,18 @@ function SignInScreen() {
           <View style={S.imageContainer}>
             <Image
               style={S.mainImage}
-              source={UserAvatar}
+              source={{ uri: nonProfit.mainImage }}
               accessibilityIgnoresInvertColors
             />
           </View>
-
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
+            <Text style={S.description}>desc</Text>
 
-            <MagicLinkLogin
-              onContinue={() => navigateTo("InsertEmailScreen")}
-              from="donation_flow"
+            <Button
+              text={t("confirmText")}
+              onPress={handleButtonPress}
+              customStyles={S.button}
             />
             <PrivacyPolicyLayout />
           </View>
@@ -57,5 +76,4 @@ function SignInScreen() {
     </KeyboardAvoidingView>
   );
 }
-
-export default SignInScreen;
+export default InsertEmailDonationScreen;

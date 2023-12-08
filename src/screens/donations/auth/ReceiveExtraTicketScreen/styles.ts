@@ -1,7 +1,7 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
 import { stylizedDisplayXs } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodySmRegular } from "styles/typography/default";
+import { defaultBodyMdSemibold } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -37,14 +37,13 @@ const styles = StyleSheet.create({
     color: theme.colors.brand.primary[900],
     marginBottom: theme.spacingNative(8),
   },
-  privacyPolicyText: {
-    ...defaultBodySmRegular,
-    color: theme.colors.neutral[600],
-    textAlign: "center",
-    marginTop: theme.spacingNative(16),
+  description: {
+    ...defaultBodyMdSemibold,
+    color: theme.colors.neutral[500],
+    marginBottom: theme.spacingNative(24),
   },
-  privacyPolicyLink: {
-    color: theme.colors.brand.primary[600],
+  button: {
+    height: 48,
   },
   keyboardView: {
     height:

@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     color: theme.colors.brand.primary[900],
     marginBottom: theme.spacingNative(8),
   },
+  button: {
+    height: 48,
+  },
   privacyPolicyText: {
     ...defaultBodySmRegular,
     color: theme.colors.neutral[600],

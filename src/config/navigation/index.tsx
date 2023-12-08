@@ -60,6 +60,9 @@ import { logEvent } from "services/analytics";
 import PixInstructionsScreen from "screens/promoters/CheckoutScreen/PixInstructionsScreen";
 import PixPaymentInformationProvider from "contexts/pixInformationContext";
 import SignInScreen from "screens/auth/SignInScreen";
+import InsertEmailScreen from "screens/auth/InsertEmailScreen";
+import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
+import InsertEmailDonationScreen from "screens/donations/auth/InsertEmailDonationScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -408,6 +411,35 @@ function RootNavigator() {
       <Stack.Screen
         name="SignInScreen"
         component={SignInScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="InsertEmailScreen"
+        component={InsertEmailScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="InsertEmailDonationScreen"
+        component={InsertEmailDonationScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
+        }}
+      />
+      <Stack.Screen
+        name="SentMagicLinkEmailScreen"
+        component={SentMagicLinkEmailScreen}
         options={{
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],

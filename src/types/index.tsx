@@ -99,6 +99,10 @@ export type PixInstructionsScreenParamList = {
   currency: Currencies;
 };
 
+export type InsertEmailDonationScreen = {
+  nonProfit: NonProfit;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
@@ -125,6 +129,9 @@ export type RootStackParamList = {
   ContributionStatsScreen: ContributionStatsScreenParamsList;
   MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
   SignInScreen: undefined;
+  InsertEmailScreen: undefined;
+  SentMagicLinkEmailScreen: undefined;
+  InsertEmailDonationScreen: InsertEmailDonationScreen;
 };
 
 export type PrivateStackParamList = {

@@ -3,43 +3,22 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Text,
   TouchableWithoutFeedback,
   View,
+  Text,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import Image from "components/atomics/Image";
 import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
-import { NonProfit } from "@ribon.io/shared/types";
-import MagicLinkButton from "components/moleculars/MagicLinkButton";
-import { useNavigation } from "hooks/useNavigation";
 import S from "./styles";
-import UserAvatar from "./assets/user-avatar.svg";
+import UserAvatar from "../assets/user-avatar.svg";
 
-type Props = {
-  nonProfit: NonProfit;
-  onContinue?: () => void;
-  onDonationSuccess: () => void;
-  onDonationFail: (error: any) => void;
-};
-
-function SignInSection({
-  nonProfit,
-  onContinue,
-  onDonationFail,
-  onDonationSuccess,
-}: Props) {
+function SentMagicLinkEmailScreen() {
   usePageView("P12_view", { nonProfitId: "" });
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.signInScreen",
+    keyPrefix: "auth.sentMagicLinkScreen",
   });
-
-  const { navigateTo } = useNavigation();
-
-  const onContinueM = (pathname: string) => {
-    navigateTo(pathname);
-  };
 
   return (
     <KeyboardAvoidingView
@@ -62,10 +41,6 @@ function SignInSection({
 
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
-            <MagicLinkButton
-              onContinue={() => onContinueM("InsertEmailScreen")}
-              from="donation_flow"
-            />
             <PrivacyPolicyLayout />
           </View>
         </ScrollView>
@@ -74,4 +49,4 @@ function SignInSection({
   );
 }
 
-export default SignInSection;
+export default SentMagicLinkEmailScreen;

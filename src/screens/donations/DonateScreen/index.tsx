@@ -4,7 +4,6 @@ import { View } from "react-native";
 import { useRouteParams } from "hooks/useRouteParams";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import DonationInProgressSection from "screens/donations/DonateScreen/DonationInProgressSection";
-import EmailInputSection from "screens/donations/DonateScreen/EmailInputSection";
 import SignedInSection from "screens/donations/DonateScreen/SignedInSection";
 import { logEvent } from "services/analytics";
 import { setLocalStorageItem } from "lib/localStorage";
@@ -13,6 +12,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { showToast } from "lib/Toast";
 import { useTickets } from "contexts/ticketsContext";
 import { useTranslation } from "react-i18next";
+import SignInSection from "../auth/SignInScreen";
 import Placeholder from "./placeholder";
 
 function DonateScreen() {
@@ -24,6 +24,7 @@ function DonateScreen() {
   const { signedIn } = useCurrentUser();
   const { navigateTo, popNavigation } = useNavigation();
   const { setTickets } = useTickets();
+
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
@@ -77,7 +78,7 @@ function DonateScreen() {
           onDonationSuccess={onDonationSuccess}
         />
       ) : (
-        <EmailInputSection
+        <SignInSection
           nonProfit={nonProfit}
           onContinue={onContinue}
           onDonationFail={onDonationFail}

@@ -11,11 +11,29 @@ import {
 } from "lib/localStorage/constants";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { logError } from "services/crashReport";
+import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 
+type authTokenProps = {
+  authToken: string;
+  id: string;
+  onSuccess?: () => void;
+  onError?: () => void;
+};
+
+type authenticationEmailProps = {
+  email?: string;
+  accountId?: string;
+  onSuccess?: () => void;
+  onError?: () => void;
+};
 export interface IAuthenticationContext {
   accessToken: string | null;
   logout: () => void;
   signInWithGoogle: (response: any) => void;
+  signInByMagicLink: (signInByMagicLinkProps: authTokenProps) => void;
+  sendAuthenticationEmail: (
+    sendAuthenticationEmailProps: authenticationEmailProps,
+  ) => void;
 }
 
 export type Props = {
@@ -64,6 +82,49 @@ function AuthenticationProvider({ children }: Props) {
     }
   }
 
+  async function signInByMagicLink({
+    authToken,
+    id,
+    onSuccess,
+    onError,
+  }: authTokenProps) {
+    try {
+      const response = await userAuthenticationApi.postAuthorizeFromAuthToken(
+        authToken,
+        id,
+      );
+
+      signIn(response);
+
+      if (onSuccess) onSuccess();
+    } catch (error: any) {
+      logError(error);
+      if (onError) onError();
+    }
+  }
+
+  async function sendAuthenticationEmail({
+    email,
+    accountId,
+    onSuccess,
+    onError,
+  }: authenticationEmailProps) {
+    try {
+      const response = await userAuthenticationApi.postSendAuthenticationEmail(
+        email,
+        accountId,
+        INTEGRATION_AUTH_ID,
+      );
+      if (onSuccess) onSuccess();
+      setCurrentUser(response.data.user);
+      return response.data.user.email;
+    } catch (error: any) {
+      logError(error);
+      if (onError) onError();
+    }
+    return "";
+  }
+
   useEffect(() => {
     fetchAcessToken();
   }, []);
@@ -79,6 +140,8 @@ function AuthenticationProvider({ children }: Props) {
       logout,
       accessToken,
       signInWithGoogle,
+      signInByMagicLink,
+      sendAuthenticationEmail,
     }),
     [accessToken],
   );

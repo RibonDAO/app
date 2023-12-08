@@ -230,7 +230,7 @@ function LayoutHeader({
             color: theme.colors.brand.primary[600],
             size: 24,
           }}
-          text={t("signIn")}
+          text={t("signInOrCreateAccount")}
           onPress={() => navigateTo("SignInScreen")}
           cta={
             <Icon

@@ -9,9 +9,9 @@ type Props = {
   from: string;
 };
 
-function MagicLinkButton({ onContinue, from }: Props): JSX.Element {
+function MagicLinkLogin({ onContinue, from }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "magicLinkButton",
+    keyPrefix: "components.moleculars.buttons.MagicLinkLogin",
   });
 
   const handleMagicLink = () => {
@@ -27,11 +27,11 @@ function MagicLinkButton({ onContinue, from }: Props): JSX.Element {
       onPress={() => handleMagicLink()}
       key={1}
       borderColorOutline={theme.colors.neutral[800]}
-      text={t("title")}
+      text={t("buttonText")}
       textColorOutline={theme.colors.neutral[800]}
       customStyles={{ height: 48 }}
     />
   );
 }
 
-export default MagicLinkButton;
+export default MagicLinkLogin;
