@@ -8,10 +8,9 @@ import {
   Text,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import Image from "components/atomics/Image";
 import { useRouteParams } from "hooks/useRouteParams";
+import UserAvatar from "../icons/UserAvatar";
 import S from "./styles";
-import UserAvatar from "../assets/user-avatar.svg";
 
 function SentMagicLinkEmailScreen() {
   const { t } = useTranslation("translation", {
@@ -33,11 +32,7 @@ function SentMagicLinkEmailScreen() {
       >
         <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
-            <Image
-              style={S.mainImage}
-              source={{ uri: UserAvatar }}
-              accessibilityIgnoresInvertColors
-            />
+            <UserAvatar />
           </View>
 
           <View style={S.contentContainer}>

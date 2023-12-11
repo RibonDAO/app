@@ -8,13 +8,12 @@ import {
   View,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import Image from "components/atomics/Image";
 import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
 import MagicLinkLogin from "components/moleculars/MagicLinkLogin";
 import { useNavigation } from "hooks/useNavigation";
+import UserAvatar from "screens/auth/icons/UserAvatar";
 import S from "./styles";
-import UserAvatar from "../assets/user-avatar.svg";
 
 function SignInScreen() {
   usePageView("P12_view", { nonProfitId: "" });
@@ -36,11 +35,7 @@ function SignInScreen() {
       >
         <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
-            <Image
-              style={S.mainImage}
-              source={{ uri: UserAvatar }}
-              accessibilityIgnoresInvertColors
-            />
+            <UserAvatar />
           </View>
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
