@@ -9,7 +9,9 @@ jest.mock("services/googleSignIn", () => ({
 const onContinue = jest.fn();
 describe("GoogleSection", () => {
   it("should render without error", () => {
-    renderComponent(<GoogleSection onContinue={onContinue} />);
+    renderComponent(
+      <GoogleSection onContinue={onContinue} from="donation_flow" />,
+    );
 
     expectTextToBeInTheDocument("Continue with Google");
   });
