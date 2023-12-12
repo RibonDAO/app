@@ -1,9 +1,8 @@
 import Button from "components/atomics/buttons/Button";
 import { useTranslation } from "react-i18next";
 import { theme } from "@ribon.io/shared/styles";
-
 import { useAuthentication } from "contexts/authenticationContext";
-import { signIn } from "services/googleSignIn";
+import { signIn } from "services/appleSignIn";
 import { logEvent } from "services/analytics";
 import AppleIcon from "./assets/AppleIcon";
 
@@ -21,7 +20,9 @@ function AppleLogin({ onContinue }: Props): JSX.Element {
     const result = await signIn();
 
     if (result) {
-      await signInWithApple({ access_token: result.userInfo?.idToken });
+      await signInWithApple({
+        access_token: result.userInfo?.identityToken,
+      });
       onContinue();
     }
   }
