@@ -1,35 +1,69 @@
-import {
-  authenticationApiGet as apiGet,
-  authenticationApiDelete as apiDelete,
-  authenticationApiPut as apiPut,
-  authenticationApiPost as apiPost,
-  authenticationApi as api,
-  initializeAuthenticationApi as initializeSharedApi,
-  emptyRequest,
-} from "@ribon.io/shared/services";
-import { initializeHooks } from "@ribon.io/shared/hooks";
-import { normalizedLanguage } from "lib/currentLanguage";
-import { EXPO_PUBLIC_RIBON_API } from "utils/constants/Application";
-import { useAuthentication } from "contexts/authenticationContext";
+import { userAuthenticationApi } from "@ribon.io/shared/services";
+import { authenticationApi } from "@ribon.io/shared/services";
 
-const RIBON_API = "https://dapp-api.ribon.io/";
-export const baseURL = EXPO_PUBLIC_RIBON_API || RIBON_API;
-export const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
+import camelCaseKeys from "camelcase-keys";
+import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
+import {
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+} from "lib/localStorage/constants";
+import { EXPO_PUBLIC_RIBON_API } from "utils/constants/Application";
+
+export const baseURL = EXPO_PUBLIC_RIBON_API;
+export const API_SCOPE = "/users/v1";
+
+export type InitializeApiProps = {
+  url: string;
+  headers: Record<any, any>;
+};
 
 export function initializeApi() {
-  const lang = normalizedLanguage();
-  const accessToken = useAuthentication();
-  const authHeaders = {
-    Language: lang,
-    Authorization: `Bearer ${accessToken}}`,
-  };
+  authenticationApi.interceptors.request.use(async (config) => {
+    const accessToken = await getLocalStorageItem(ACCESS_TOKEN_KEY);
+    // eslint-disable-next-line
+    config.baseURL = baseURL;
+    const authHeaders = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+    // eslint-disable-next-line
+    config.headers = { ...authHeaders, ...config.headers };
 
-  initializeSharedApi({ url: baseURL, headers: authHeaders });
-
-  initializeHooks({
-    initializeApiOptions: { url: baseURL, headers: authHeaders },
+    return config;
   });
 }
+async function requestNewToken() {
+  try {
+    const refreshToken = await getLocalStorageItem(REFRESH_TOKEN_KEY);
+    if (!refreshToken) return null;
 
-export { apiGet, apiDelete, apiPut, apiPost, emptyRequest };
-export default api;
+    const res = await userAuthenticationApi.postRefreshToken(refreshToken);
+    const newToken = res.headers["access-token"];
+    const newRefreshToken = res.headers["refresh-token"];
+
+    setLocalStorageItem(ACCESS_TOKEN_KEY, newToken);
+    setLocalStorageItem(REFRESH_TOKEN_KEY, newRefreshToken);
+
+    return newToken;
+  } catch (err) {
+    return null;
+  }
+}
+
+authenticationApi.interceptors.response.use(
+  (response) => ({
+    ...response,
+    data: camelCaseKeys(response.data, { deep: true }),
+  }),
+  async (error) => {
+    const originalRequest = error.config;
+    // eslint-disable-next-line no-underscore-dangle
+    if (error.response.status === 403 && !originalRequest._retry) {
+      // eslint-disable-next-line no-underscore-dangle
+      originalRequest._retry = true;
+      const newToken = await requestNewToken();
+      originalRequest.headers.Authorization = `Bearer ${newToken}`;
+      return authenticationApi(originalRequest);
+    }
+    return Promise.reject(error);
+  },
+);

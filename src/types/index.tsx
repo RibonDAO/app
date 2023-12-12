@@ -110,7 +110,9 @@ export type SentMagicLinkEmailScreen = {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
-  DonateScreen: DonateScreenList;
+  SignInScreen: undefined;
+  DonationSignInScreen: DonateScreenList;
+  SignedInScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;
   ContributionDoneScreen: ContributionDoneParamsList;
   AvailableArticleScreen: undefined;
@@ -132,7 +134,6 @@ export type RootStackParamList = {
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
   MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
-  SignInScreen: undefined;
   InsertEmailScreen: undefined;
   SentMagicLinkEmailScreen: SentMagicLinkEmailScreen;
   InsertEmailAccountScreen: InsertEmailAccountScreen;

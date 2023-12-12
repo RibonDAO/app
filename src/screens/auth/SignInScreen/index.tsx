@@ -10,13 +10,13 @@ import {
 import { useTranslation } from "react-i18next";
 import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
-import MagicLinkLogin from "components/moleculars/MagicLinkLogin";
 import { useNavigation } from "hooks/useNavigation";
-import UserAvatar from "screens/auth/icons/UserAvatar";
+import UserAvatarIcon from "assets/icons/userAvatarIcon";
+import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import S from "./styles";
 
 function SignInScreen() {
-  usePageView("P12_view", { nonProfitId: "" });
+  usePageView("P27_view", { from: "menu" });
   const { t } = useTranslation("translation", {
     keyPrefix: "auth.signInScreen",
   });
@@ -35,13 +35,13 @@ function SignInScreen() {
       >
         <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
-            <UserAvatar />
+            <UserAvatarIcon />
           </View>
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
-            <MagicLinkLogin
-              onContinue={() => navigateTo("InsertEmailScreen")}
-              from="donation_flow"
+            <GoogleLogin
+              onContinue={() => navigateTo("CausesScreen")}
+              from="menu"
             />
             <PrivacyPolicyLayout />
           </View>

@@ -190,6 +190,7 @@ function LayoutHeader({
         }
       />
     );
+
   const renderLogoutConfigItem = () =>
     currentUser && (
       <ConfigItem

@@ -78,7 +78,7 @@ export default function CausesScreen() {
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets } = useTickets();
-  const { currentUser } = useCurrentUser();
+  const { currentUser, signedIn } = useCurrentUser();
   const [isNotificationCardVisible, setNotificationCardVisible] =
     useState(false);
 
@@ -250,6 +250,18 @@ export default function CausesScreen() {
       </View>
     );
 
+  const handleButtonPress = (nonProfit: NonProfit) => {
+    logEvent("donateTicketBtn_start", {
+      nonProfitId: nonProfit.id,
+      from: "nonprofitCard",
+    });
+    if (signedIn) {
+      navigateTo("SignedInScreen", { nonProfit });
+    } else {
+      navigateTo("DonationSignInScreen", { nonProfit });
+    }
+  };
+
   return isLoading || loadingCanDonate || loadingFirstAccessToIntegration ? (
     <Placeholder />
   ) : (
@@ -317,13 +329,7 @@ export default function CausesScreen() {
                 onImagePress={() => {
                   handleNonProfitImagePress(nonProfit);
                 }}
-                onClickButton={() => {
-                  logEvent("donateTicketBtn_start", {
-                    nonProfitId: nonProfit.id,
-                    from: "nonprofitCard",
-                  });
-                  navigateTo("DonateScreen", { nonProfit });
-                }}
+                onClickButton={() => handleButtonPress(nonProfit)}
                 buttonDisabled={!hasTickets()}
                 labelText={t("labelText") || ""}
               />

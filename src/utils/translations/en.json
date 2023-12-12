@@ -90,7 +90,7 @@
       "privacyPolicyText": "Privacy Policy",
       "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
       "and": " and",
-      "signedInSection": {
+      "signedInScreen": {
         "title": "Your donation",
         "confirmDonation": "Confirm donation"
       }
