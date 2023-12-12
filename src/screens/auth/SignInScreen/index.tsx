@@ -16,7 +16,7 @@ import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import S from "./styles";
 
 function SignInScreen() {
-  usePageView("P27_view", { from: "menu" });
+  usePageView("P27_view", { from: "direct_flow" });
   const { t } = useTranslation("translation", {
     keyPrefix: "auth.signInScreen",
   });
@@ -41,7 +41,7 @@ function SignInScreen() {
             <Text style={S.title}>{t("title")}</Text>
             <GoogleLogin
               onContinue={() => navigateTo("CausesScreen")}
-              from="menu"
+              from="direct_flow"
             />
             <PrivacyPolicyLayout />
           </View>

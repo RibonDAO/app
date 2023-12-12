@@ -4,15 +4,15 @@ import {
   expectTextToBeInTheDocument,
 } from "config/testUtils/expects";
 import { waitForPromises } from "config/testUtils";
-import SignInPage from ".";
+import SignInScreen from ".";
 
 jest.mock("services/googleSignIn", () => ({
   signIn: () => {},
 }));
 
-describe("SignInPage", () => {
+describe("SignInScreen", () => {
   beforeEach(() => {
-    renderComponent(<SignInPage />);
+    renderComponent(<SignInScreen />);
   });
 
   it("should render without error", () => {
@@ -22,7 +22,7 @@ describe("SignInPage", () => {
   it("logs the P27_view event", async () => {
     waitForPromises();
     expectLogEventToHaveBeenCalledWith("P27_view", {
-      from: "menu",
+      from: "direct_flow",
     });
   });
 });
