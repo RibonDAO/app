@@ -14,6 +14,7 @@
     "login": "Login",
     "language": "Change language",
     "deleteAccount": "Delete account",
+    "signInOrCreateAccount": "Sign in or create a new account",
     "connectWallet": "Connect",
     "ticketModal": {
       "title": "Cool! You have 1 ticket to donate :)",
@@ -89,7 +90,7 @@
       "privacyPolicyText": "Privacy Policy",
       "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
       "and": " and",
-      "signedInSection": {
+      "signedInScreen": {
         "title": "Your donation",
         "confirmDonation": "Confirm donation"
       }
@@ -112,6 +113,23 @@
       "textOrigin": "Community",
       "textDestiny": "You",
       "description": "Receiving ticket..."
+    },
+    "auth": {
+      "signInScreen": {
+        "title": "you are donating",
+        "google": "Continue with Google",
+        "apple": "Continue with Apple",
+        "email": "Continue with e-mail",
+        "footerStartText": "By clicking 'Continue' I agree on Ribon’s",
+        "footerEndText": " and",
+        "termsText": "Terms",
+        "termsLink": "https://ribon.io/en/privacy-policy/#terms",
+        "privacyPolicyText": "Privacy Policy",
+        "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
+        "impactOneLife": "Impact 1 person",
+        "impactDescription": "with {{value}}",
+        "checkboxText": "I agree to receive emails with information about my donations"
+      }
     }
   },
   "content": {
@@ -440,6 +458,13 @@
           "buttonText": "Continue with e-mail"
         }
       }
+    }
+  },
+  "auth": {
+    "signInScreen": {
+      "title": "Sign in to your account",
+      "footerStartText": "By clicking 'Continue' I agree on Ribon’s",
+      "footerEndText": " and"
     }
   }
 }

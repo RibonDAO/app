@@ -14,6 +14,7 @@
     "notifications": "Ativar notificações",
     "language": "Alterar idioma",
     "deleteAccount": "Excluir conta",
+    "signInOrCreateAccount": "Entre ou crie uma nova conta",
     "connectWallet": "Conectar",
     "ticketModal": {
       "title": "Legal! Você tem 1 vale para doar :)",
@@ -106,6 +107,19 @@
       "textOrigin": "Comunidade",
       "textDestiny": "Você",
       "description": "Recebendo ticket..."
+    },
+    "auth": {
+      "signInScreen": {
+        "title": "Você está doando",
+        "google": "Continuar com Google",
+        "apple": "Continuar com Apple",
+        "email": "Continuar com e-mail",
+        "footerStartText": "Ao clicar em 'Continuar', eu concordo com os",
+        "footerEndText": " e a",
+        "impactOneLife": "Impacte 1 pessoa",
+        "impactDescription": "com {{value}}",
+        "checkboxText": "Aceito receber e-mails com informações sobre minhas doações"
+      }
     }
   },
   "content": {
@@ -433,6 +447,11 @@
           "buttonText": "Continuar com e-mail"
         }
       }
+    }
+  },
+  "auth": {
+    "signInScreen": {
+      "title": "Entre na sua conta"
     }
   }
 }
