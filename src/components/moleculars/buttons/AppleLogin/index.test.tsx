@@ -9,7 +9,9 @@ jest.mock("services/appleSignIn", () => ({
 const onContinue = jest.fn();
 describe("AppleSection", () => {
   it("should render without error", () => {
-    renderComponent(<AppleLogin onContinue={onContinue} />);
+    renderComponent(
+      <AppleLogin onContinue={onContinue} from="donation_flow" />,
+    );
 
     expectTextToBeInTheDocument("Continue with Apple");
   });
