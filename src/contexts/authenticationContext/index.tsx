@@ -77,7 +77,7 @@ function AuthenticationProvider({ children }: Props) {
     } catch (error: any) {
       if (error.response) {
         const apiErrorMessage =
-          error.response.data.formatted_message === emailDoesNotMatchMessage
+          error?.response?.data?.formatted_message === emailDoesNotMatchMessage
             ? emailDoesNotMatchMessage
             : "Unknown error";
         throw new Error(apiErrorMessage);
