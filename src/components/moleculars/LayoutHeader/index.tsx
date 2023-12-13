@@ -23,6 +23,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { logEvent } from "services/analytics";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { EXPO_PUBLIC_ZENDESK_KEY } from "utils/constants/Application";
+import { useAuthentication } from "contexts/authenticationContext";
 import ConfigItem from "../ConfigItem";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
@@ -54,6 +55,7 @@ function LayoutHeader({
   const ticketIcon = hasTickets() ? <TicketIcon /> : <GrayTicketIcon />;
   const { connectWallet, wallet, killSession } = useWalletContext();
   const { userSubscriptions } = useSubscriptions();
+  const { logout } = useAuthentication();
   const { subscriptions, refetch: refetchSubscription } = userSubscriptions();
 
   useEffect(() => {
@@ -75,6 +77,7 @@ function LayoutHeader({
 
   const handleLogout = () => {
     logoutCurrentUser();
+    logout();
     navigateTo("CausesScreen");
     toggleModal();
   };

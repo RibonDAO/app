@@ -6,6 +6,7 @@ import { useImpact, useStatistics } from "@ribon.io/shared/hooks";
 import usePageView from "hooks/usePageView";
 import TabViewSection from "./TabViewSection";
 import S from "./styles";
+import ProfileSection from "./ProfileSection";
 
 function ImpactScreen() {
   const { currentUser } = useCurrentUser();
@@ -24,6 +25,7 @@ function ImpactScreen() {
 
   return (
     <View style={S.container}>
+      <ProfileSection />
       <View style={{ paddingBottom: 40 }}>
         <TabViewSection />
       </View>
