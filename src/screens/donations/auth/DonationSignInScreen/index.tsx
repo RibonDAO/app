@@ -26,6 +26,7 @@ import { PLATFORM } from "utils/constants/Application";
 import { useUtmContext } from "contexts/utmContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import usePageView from "hooks/usePageView";
+import AppleLogin from "components/moleculars/buttons/AppleLogin";
 import S from "./styles";
 
 function DonationSignInScreen() {
@@ -129,7 +130,9 @@ function DonationSignInScreen() {
                   {formattedImpactText(nonProfit, undefined, false, true)}
                 </Text>
                 <GoogleLogin onContinue={onContinue} from="donation_flow" />
-
+                {Platform.OS === "ios" && (
+                  <AppleLogin onContinue={onContinue} from="donation_flow" />
+                )}
                 <PrivacyPolicyLayout />
               </View>
             </ScrollView>

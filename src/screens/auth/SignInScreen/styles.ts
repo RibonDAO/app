@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     alignItems: "center",
+    gap: theme.spacingNative(8),
   },
   mainImage: {
     width: 200,
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   title: {
     ...stylizedDisplayXs,
     color: theme.colors.brand.primary[900],
-    marginBottom: theme.spacingNative(24),
+    marginBottom: theme.spacingNative(16),
   },
   keyboardView: {
     height:

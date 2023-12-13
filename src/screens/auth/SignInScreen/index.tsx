@@ -13,6 +13,7 @@ import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayo
 import { useNavigation } from "hooks/useNavigation";
 import UserAvatarIcon from "assets/icons/userAvatarIcon";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
+import AppleLogin from "components/moleculars/buttons/AppleLogin";
 import S from "./styles";
 
 function SignInScreen() {
@@ -43,6 +44,12 @@ function SignInScreen() {
               onContinue={() => navigateTo("CausesScreen")}
               from="direct_flow"
             />
+            {Platform.OS === "ios" && (
+              <AppleLogin
+                onContinue={() => navigateTo("CausesScreen")}
+                from="direct_flow"
+              />
+            )}
             <PrivacyPolicyLayout />
           </View>
         </ScrollView>
