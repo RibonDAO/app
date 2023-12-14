@@ -34,6 +34,7 @@ export interface IAuthenticationContext {
   sendAuthenticationEmail: (
     sendAuthenticationEmailProps: authenticationEmailProps,
   ) => void;
+  signInWithApple: (response: any) => void;
 }
 
 export type Props = {
@@ -47,6 +48,7 @@ export const AuthenticationContext = createContext<IAuthenticationContext>(
 function AuthenticationProvider({ children }: Props) {
   const [accessToken, setAccessToken] = useState("");
   const { setCurrentUser } = useCurrentUser();
+  const emailDoesNotMatchMessage = "Email does not match";
 
   function logout() {
     removeLocalStorageItem(ACCESS_TOKEN_KEY);
@@ -124,6 +126,26 @@ function AuthenticationProvider({ children }: Props) {
     }
     return "";
   }
+  
+  async function signInWithApple(response: any) {
+    try {
+      const authResponse = await userAuthenticationApi.postAuthenticate(
+        response.access_token,
+        "apple",
+      );
+
+      signIn(authResponse);
+    } catch (error: any) {
+      if (error.response) {
+        const apiErrorMessage =
+          error?.response?.data?.formatted_message === emailDoesNotMatchMessage
+            ? emailDoesNotMatchMessage
+            : "Unknown error";
+        throw new Error(apiErrorMessage);
+      }
+      throw new Error("apple auth error");
+    }
+  }
 
   useEffect(() => {
     fetchAcessToken();
@@ -142,6 +164,7 @@ function AuthenticationProvider({ children }: Props) {
       signInWithGoogle,
       signInByMagicLink,
       sendAuthenticationEmail,
+      signInWithApple,
     }),
     [accessToken],
   );
