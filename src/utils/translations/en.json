@@ -96,9 +96,10 @@
       }
     },
     "donationDoneScreen": {
-      "title": "Congratulations!",
-      "buttonText": "Close",
-      "description": "You donated"
+      "title": "Thanks for donating!",
+      "description": "You donated",
+      "checkboxText":"I want to receive information about my donations by e-mail",
+      "buttonTitle": "Finish"
     },
     "postDonationScreen": {
       "title": "If you want, you can do more",
@@ -116,7 +117,7 @@
     },
     "auth": {
       "signInScreen": {
-        "title": "you are donating",
+        "title": "You are donating",
         "google": "Continue with Google",
         "apple": "Continue with Apple",
         "email": "Continue with e-mail",

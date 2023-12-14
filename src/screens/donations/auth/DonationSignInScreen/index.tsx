@@ -14,6 +14,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { logEvent } from "services/analytics";
 import DonationInProgressSection from "screens/donations/auth/DonationInProgressSection";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
+import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import { setLocalStorageItem } from "@ribon.io/shared";
 import { useUserV1Donations } from "@ribon.io/shared/hooks";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
@@ -81,6 +82,10 @@ function DonationSignInScreen() {
     donateCallback();
   };
 
+  const onContinueMagicLink = () => {
+    navigateTo("InsertEmailAccountScreen", { nonProfit });
+  };
+
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       setTickets(0);
@@ -127,7 +132,10 @@ function DonationSignInScreen() {
                   {formattedImpactText(nonProfit, undefined, false, true)}
                 </Text>
                 <GoogleLogin onContinue={onContinue} from="donation_flow" />
-
+                <MagicLinkLogin
+                  onContinue={onContinueMagicLink}
+                  from="donation_flow"
+                />
                 <PrivacyPolicyLayout />
               </View>
             </ScrollView>

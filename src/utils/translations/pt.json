@@ -90,9 +90,10 @@
       }
     },
     "donationDoneScreen": {
-      "title": "Parabéns!",
-      "buttonText": "Fechar",
-      "description": "Você doou"
+      "title": "Obrigada pela doação!",
+      "buttonTitle": "Finalizar",
+      "description": "Você doou",
+      "checkboxText": "Quero receber informações sobre minhas doações por e-mail"
     },
     "postDonationScreen": {
       "title": "Se quiser, você pode fazer mais",
