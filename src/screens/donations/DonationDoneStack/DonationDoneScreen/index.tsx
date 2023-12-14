@@ -101,6 +101,9 @@ export default function DonationDoneScreen({
           )}
           buttonTitle={t("buttonTitle") || ""}
           onButtonPress={handleNavigate}
+          checkboxText={t("checkboxText") || ""}
+          checked={allowedEmailMarketing}
+          onChecked={() => setAllowedEmailMarketing(!allowedEmailMarketing)}
         />
       ) : (
         <DoneScreenTemplate
@@ -119,9 +122,6 @@ export default function DonationDoneScreen({
           )}
           buttonTitle={t("buttonTitle") || ""}
           onButtonPress={handleNavigate}
-          checkboxText={t("checkboxText") || ""}
-          checked={allowedEmailMarketing}
-          onChecked={() => setAllowedEmailMarketing(!allowedEmailMarketing)}
         />
       )}
     </View>
