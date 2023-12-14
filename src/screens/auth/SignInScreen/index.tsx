@@ -13,6 +13,7 @@ import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayo
 import { useNavigation } from "hooks/useNavigation";
 import UserAvatarIcon from "assets/icons/userAvatarIcon";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
+import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import S from "./styles";
 
 function SignInScreen() {
@@ -41,6 +42,10 @@ function SignInScreen() {
             <Text style={S.title}>{t("title")}</Text>
             <GoogleLogin
               onContinue={() => navigateTo("CausesScreen")}
+              from="menu"
+            />
+            <MagicLinkLogin
+              onContinue={() => navigateTo("InsertEmailScreen")}
               from="menu"
             />
             <PrivacyPolicyLayout />

@@ -26,9 +26,9 @@ function MagicLinkLogin({ onContinue, from }: Props): JSX.Element {
       outline
       onPress={() => handleMagicLink()}
       key={1}
-      borderColorOutline={theme.colors.neutral[800]}
+      borderColorOutline={theme.colors.neutral[300]}
       text={t("buttonText")}
-      textColorOutline={theme.colors.neutral[800]}
+      textColorOutline={theme.colors.neutral[600]}
       customStyles={{ height: 48 }}
     />
   );
