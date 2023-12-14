@@ -44,7 +44,6 @@ function GoogleLogin({ onContinue, from }: Props): JSX.Element {
       leftItem={<GoogleIcon />}
       customStyles={{
         height: 48,
-        marginBottom: 16,
       }}
     />
   );
