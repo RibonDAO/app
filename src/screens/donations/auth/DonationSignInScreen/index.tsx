@@ -99,7 +99,6 @@ function DonationSignInScreen() {
 
   return (
     <View>
-      {/* eslint-disable-next-line no-nested-ternary */}
       {isDonating ? (
         <DonationInProgressSection
           nonProfit={nonProfit}
