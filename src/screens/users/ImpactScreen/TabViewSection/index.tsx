@@ -5,11 +5,12 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CollapsibleTabView } from "react-native-collapsible-tab-view";
 import * as React from "react";
-import ImpactCards from "screens/users/ImpactScreen/ImpactCards";
 import TicketDonationsTabView from "../TicketDonationsTabView";
 import CommunityDonationsTabView from "../CommunityDonationsTabView";
 import DirectDonationsTabView from "../DirectDonationsTabView";
+import ImpactCardsTabView from "../ImpactCardsTabView";
 import S from "./styles";
+import ProfileSection from "../ProfileSection";
 
 type Route = {
   key: string;
@@ -17,6 +18,7 @@ type Route = {
 };
 
 const renderScene = SceneMap({
+  ImpactCardsTabView,
   TicketDonationsTabView,
   CommunityDonationsTabView,
   DirectDonationsTabView,
@@ -55,6 +57,7 @@ function TabViewSection(): JSX.Element {
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
+    { key: "ImpactCardsTabView", title: t("ImpactCardsTitle") },
     { key: "TicketDonationsTabView", title: t("ticketDonationsTitle") },
     { key: "CommunityDonationsTabView", title: t("communityDonationsTitle") },
     { key: "DirectDonationsTabView", title: t("directDonationsTitle") },
@@ -66,12 +69,12 @@ function TabViewSection(): JSX.Element {
         navigationState={{ index, routes }}
         renderScene={renderScene}
         onIndexChange={setIndex}
-        renderHeader={() => <ImpactCards />}
+        renderHeader={() => <ProfileSection />}
         disableSnap
         tabBarProps={{
           scrollEnabled: true,
         }}
-        style={{ backgroundColor: theme.colors.neutral10, paddingBottom: 200 }}
+        style={{ backgroundColor: theme.colors.neutral10 }}
         initialLayout={{ width: layout.width }}
         renderTabBar={renderTabBar}
       />

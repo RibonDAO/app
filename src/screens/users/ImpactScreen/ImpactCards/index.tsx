@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { useCallback } from "react";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useStatistics } from "@ribon.io/shared/hooks";
@@ -65,9 +65,6 @@ function ImpactCards(): JSX.Element {
 
   return (
     <View>
-      <View style={S.container}>
-        <Text style={S.title}>{t("title")}</Text>
-      </View>
       <View style={S.cardsContainer}>
         {impacts().map((impact: any) => renderItem(impact))}
       </View>
