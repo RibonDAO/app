@@ -347,7 +347,8 @@
         "totalTickets": "Donated tickets",
         "totalDonated": "Donated money",
         "totalNonProfits": "Supported NGOs",
-        "totalCauses": "Supporter causes"
+        "totalCauses": "Supporter causes",
+        "title": "Impact"
       },
       "ngoImpactCards": {
         "zeroDonationsSection": {

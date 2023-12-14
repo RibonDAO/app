@@ -71,7 +71,7 @@ function TabViewSection(): JSX.Element {
         tabBarProps={{
           scrollEnabled: true,
         }}
-        style={{ backgroundColor: theme.colors.neutral10 }}
+        style={{ backgroundColor: theme.colors.neutral10, paddingBottom: 200 }}
         initialLayout={{ width: layout.width }}
         renderTabBar={renderTabBar}
       />

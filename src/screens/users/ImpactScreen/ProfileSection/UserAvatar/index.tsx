@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import Avatar from "../assets/Avatar";
+import ProfilePhoto from "../assets/ProfilePhoto";
 
 type Props = {
   userAvatar?: string;
@@ -13,7 +13,7 @@ function UserAvatar({ userAvatar, email, name }: Props) {
         {userAvatar ? (
           <S.Avatar source={{ uri: userAvatar }} alt="user-avatar" />
         ) : (
-          <Avatar />
+          <ProfilePhoto />
         )}
       </S.AvatarContainer>
       <S.ProfileSection>

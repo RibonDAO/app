@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import {
   defaultBodyLgSemibold,
   defaultBodySmRegular,
-} from "styles/typography/default";
+} from "styles/typography/defaultStyledComponents";
 import { theme } from "@ribon.io/shared/styles";
 
 export const AvatarSection = styled.View`

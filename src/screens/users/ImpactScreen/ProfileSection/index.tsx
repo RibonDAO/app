@@ -2,6 +2,8 @@ import { useTranslation } from "react-i18next";
 
 import { useUserProfile } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { useEffect } from "react";
+import { View } from "react-native";
 import BackgroundShapeLeft from "./assets/BackgroundShapeLeft";
 import BackgroundShapeRight from "./assets/BackgroundShapeRight";
 import * as S from "./styles";
@@ -15,7 +17,13 @@ function ProfileSection() {
   const { userProfile } = useUserProfile();
   const { currentUser } = useCurrentUser();
 
-  const { profile } = userProfile();
+  const { profile, refetch } = userProfile();
+
+  useEffect(() => {
+    refetch();
+  });
+
+  if (!currentUser) return <View />;
 
   return (
     <S.Container>

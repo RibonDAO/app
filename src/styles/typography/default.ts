@@ -1,16 +1,4 @@
 /* Inter */
-const inter100 = {
-  fontFamily: "Inter100",
-};
-
-const inter200 = {
-  fontFamily: "Inter200",
-};
-
-const inter300 = {
-  fontFamily: "Inter300",
-};
-
 const inter400 = {
   fontFamily: "Inter400",
 };
@@ -25,14 +13,6 @@ const inter600 = {
 
 const inter700 = {
   fontFamily: "Inter700",
-};
-
-const inter800 = {
-  fontFamily: "Inter800",
-};
-
-const inter900 = {
-  fontFamily: "Inter900",
 };
 
 /* Heading */
