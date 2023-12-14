@@ -4,7 +4,6 @@ import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import { TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
-import RoundButton from "components/atomics/RoundButton";
 import TicketIcon from "components/vectors/TicketIcon";
 import GrayTicketIcon from "components/vectors/GrayTicketIcon";
 import { useNavigation } from "hooks/useNavigation";
@@ -78,7 +77,7 @@ function LayoutHeader({
   const handleLogout = () => {
     logoutCurrentUser();
     logout();
-    navigateTo("CausesScreen");
+    navigateTo("SignInScreen");
     toggleModal();
   };
 
@@ -203,16 +202,16 @@ function LayoutHeader({
           color: theme.colors.brand.primary[600],
           size: 24,
         }}
-        text={currentUser.email}
+        text={t("logout")}
         onPress={handleLogout}
         cta={
-          <View style={{ width: 50 }}>
-            <RoundButton
-              active={false}
-              text={t("exitButton")}
-              onPress={handleLogout}
-            />
-          </View>
+          <Icon
+            type="rounded"
+            size={20}
+            color={theme.colors.brand.primary[600]}
+            name="arrow_forward_ios"
+            onPress={handleLogout}
+          />
         }
       />
     );

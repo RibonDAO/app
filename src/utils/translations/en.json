@@ -6,7 +6,7 @@
     "impact": "Impact"
   },
   "layoutHeader": {
-    "exitButton": "Exit",
+    "logout": "Sign out",
     "support": "User Support",
     "monthlyContributions": "Monthly contributions",
     "notifications": "Allow notifications",
