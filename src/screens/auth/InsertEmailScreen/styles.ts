@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 48,
+    backgroundColor: theme.colors.brand.primary[600],
+    borderColor: theme.colors.brand.primary[800],
   },
   inputContainer: {
     height: 48,
