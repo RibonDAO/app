@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginTop: theme.spacingNative(24),
     alignItems: "center",
+    gap: theme.spacingNative(8),
   },
   imageBackground: {
     position: "absolute",
@@ -38,7 +39,6 @@ const styles = StyleSheet.create({
   title: {
     ...stylizedDisplayXs,
     color: theme.colors.brand.primary[900],
-    marginBottom: theme.spacingNative(8),
   },
   button: {
     height: 48,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   description: {
     ...defaultBodyMdSemibold,
     color: theme.colors.neutral[500],
-    marginBottom: theme.spacingNative(24),
+    marginBottom: theme.spacingNative(16),
   },
 });
 

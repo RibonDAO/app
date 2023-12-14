@@ -26,9 +26,12 @@ import { useRouteParams } from "hooks/useRouteParams";
 import { PLATFORM } from "utils/constants/Application";
 import { useUtmContext } from "contexts/utmContext";
 import { useIntegrationContext } from "contexts/integrationContext";
+import usePageView from "hooks/usePageView";
+import AppleLogin from "components/moleculars/buttons/AppleLogin";
 import S from "./styles";
 
 function DonationSignInScreen() {
+  usePageView("P27_view", { from: "donation_flow" });
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.auth.signInScreen",
   });
@@ -101,7 +104,6 @@ function DonationSignInScreen() {
 
   return (
     <View>
-      {/* eslint-disable-next-line no-nested-ternary */}
       {isDonating ? (
         <DonationInProgressSection
           nonProfit={nonProfit}
@@ -132,6 +134,9 @@ function DonationSignInScreen() {
                   {formattedImpactText(nonProfit, undefined, false, true)}
                 </Text>
                 <GoogleLogin onContinue={onContinue} from="donation_flow" />
+                {Platform.OS === "ios" && (
+                  <AppleLogin onContinue={onContinue} from="donation_flow" />
+                )}
                 <MagicLinkLogin
                   onContinue={onContinueMagicLink}
                   from="donation_flow"
