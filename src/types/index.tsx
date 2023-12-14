@@ -102,7 +102,9 @@ export type PixInstructionsScreenParamList = {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
-  DonateScreen: DonateScreenList;
+  SignInScreen: undefined;
+  DonationSignInScreen: DonateScreenList;
+  SignedInScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;
   ContributionDoneScreen: ContributionDoneParamsList;
   AvailableArticleScreen: undefined;

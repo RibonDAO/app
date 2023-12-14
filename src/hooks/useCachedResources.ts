@@ -3,6 +3,7 @@ import * as Font from "expo-font";
 import * as Sentry from "sentry-expo";
 import { useEffect, useState } from "react";
 import { initializeApi } from "services/api";
+import { initializeApi as initializeAuthApi } from "services/authenticationApi";
 import * as SplashScreen from "expo-splash-screen";
 import MaterialSymbolsRounded from "assets/fonts/material/MaterialSymbolsRounded.ttf";
 import MaterialSymbolsOutlined from "assets/fonts/material/MaterialSymbolsOutlined.ttf";
@@ -30,6 +31,7 @@ export default function useCachedResources() {
   const { currentLang } = useLanguage();
 
   useEffect(() => {
+    initializeAuthApi();
     initializeApi({
       email: currentUser?.email,
       language: formattedLanguage(currentLang),
