@@ -25,7 +25,7 @@ function TransferTicketAnimation({
   receiverText,
   senderText,
 }: Props): JSX.Element {
-  const ANIMATION_TIME = 3000;
+  const ANIMATION_TIME = 4000;
   const left = useSharedValue(20);
   const opacity = useSharedValue(0);
 
