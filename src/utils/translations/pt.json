@@ -476,14 +476,16 @@
       "title": "Link de entrada enviado",
       "text": "Clique no link enviado para {{email}} para entrar",
       "firstAccessTitle": "Você ganhou um ticket extra",
-      "firstAccessText": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra."
+      "firstAccessText": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra.",
+      "buttonText": "Continuar"
     },
     "expiredLinkScreen": {
       "loading": "Carregando...",
       "invalidLink": "Link inválido",
       "expiredLink": "Este link expirou",
       "expiredLinkText": "Por favor, tente entrar ou se cadastrar novamente para receber um novo link de validação de conta",
-      "buttonText": "Me mande outro link"
+      "buttonText": "Me mande outro link",
+      "buttonTextWithoutEmail": "Continuar"
     },
     "extraTicketScreen": {
       "title": "Você ganhou um ticket extra",

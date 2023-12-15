@@ -18,12 +18,18 @@ function ExpiredLinkScreen() {
   const { navigateTo } = useNavigation();
   const { accountId } = useAuthentication();
 
+  const sendEmail = async (id: string) => {
+    const email = await sendAuthenticationEmail({
+      id,
+    });
+    navigateTo("SentMagicLinkEmailScreen", { email });
+  };
+
   const handleSendMeLinkButton = () => {
     if (accountId) {
-      const email = sendAuthenticationEmail({
-        id: accountId,
-      });
-      navigateTo("SentMagicLinkScreen", { email });
+      sendEmail(accountId);
+    } else {
+      navigateTo("CausesScreen");
     }
   };
 
@@ -35,15 +41,13 @@ function ExpiredLinkScreen() {
       <ExpiredLinkIcon />
       <S.Title>{t("expiredLink")}</S.Title>
       <S.Description>{t("expiredLinkText")}</S.Description>
-      {!accountId && (
-        <Button
-          text={t("buttonText")}
-          onPress={handleSendMeLinkButton}
-          textColor={theme.colors.neutral10}
-          borderColor={theme.colors.brand.primary[600]}
-          backgroundColor={theme.colors.brand.primary[600]}
-        />
-      )}
+      <Button
+        text={accountId ? t("buttonText") : t("buttonTextWithoutEmail")}
+        onPress={handleSendMeLinkButton}
+        textColor={theme.colors.neutral10}
+        borderColor={theme.colors.brand.primary[600]}
+        backgroundColor={theme.colors.brand.primary[600]}
+      />
     </S.Container>
   );
 }

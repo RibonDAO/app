@@ -15,7 +15,7 @@ describe("ExpiredLinkScreen", () => {
     expectTextToBeInTheDocument(
       "Please, try signing in or creating a new account with your e-mail to get a new account validation link",
     );
-    expectTextToBeInTheDocument("Send me a new link");
+    expectTextToBeInTheDocument("Continue");
   });
 
   it("should logs an event when renders", async () => {

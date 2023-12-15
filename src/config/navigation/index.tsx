@@ -68,6 +68,7 @@ import { useAuthentication } from "contexts/authenticationContext";
 import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
 import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
 import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
+import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -486,7 +487,7 @@ function RootNavigator() {
         name="ReceiveExtraTicketScreen"
         component={ReceiveExtraTicketScreen}
         options={{
-          headerShown: true,
+          headerShown: false,
         }}
       />
 
@@ -494,15 +495,15 @@ function RootNavigator() {
         name="ExtraTicketScreen"
         component={ExtraTicketScreen}
         options={{
-          headerShown: true,
+          headerShown: false,
         }}
       />
 
       <Stack.Screen
         name="ExpiredLinkScreen"
-        component={ExtraTicketScreen}
+        component={ExpiredLinkScreen}
         options={{
-          headerShown: true,
+          headerShown: false,
         }}
       />
 

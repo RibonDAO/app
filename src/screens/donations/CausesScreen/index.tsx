@@ -9,7 +9,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { PLATFORM } from "utils/constants/Application";
+import { INTEGRATION_AUTH_ID, PLATFORM } from "utils/constants/Application";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
@@ -208,7 +208,8 @@ export default function CausesScreen() {
     !integration?.name?.toLowerCase()?.includes("ribon") &&
     integration &&
     canDonate &&
-    hasTickets;
+    hasTickets() &&
+    integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
 
   const handleHideNotificationClick = async () => {
     const hideAlert = () => {

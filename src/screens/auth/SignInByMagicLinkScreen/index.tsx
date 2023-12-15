@@ -18,7 +18,7 @@ function SignInByMagicLinkScreen(): JSX.Element {
     signInByMagicLink({
       onSuccess: () => {
         if (extraTicket === "true" && isFirstAccessToIntegration) {
-          navigateTo("ReceiveTicketScreen");
+          navigateTo("ReceiveExtraTicketScreen");
         } else {
           navigateTo("CausesScreen");
         }
