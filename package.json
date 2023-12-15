@@ -106,7 +106,8 @@
     "react-native-webview": "13.2.2",
     "react-zendesk": "^0.1.13",
     "rn-placeholder": "^3.0.3",
-    "sentry-expo": "~7.0.0"
+    "sentry-expo": "~7.0.0",
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

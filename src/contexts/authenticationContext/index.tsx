@@ -57,15 +57,16 @@ function AuthenticationProvider({ children }: Props) {
   const { setCurrentUser } = useCurrentUser();
   const emailDoesNotMatchMessage = "Email does not match";
 
-  function logout() {
-    removeLocalStorageItem(ACCESS_TOKEN_KEY);
-    removeLocalStorageItem(REFRESH_TOKEN_KEY);
-  }
-
   const fetchAcessToken = async () => {
     const accessTokenKey = await getLocalStorageItem(ACCESS_TOKEN_KEY);
     if (accessTokenKey) setAccessToken(accessTokenKey);
   };
+
+  function logout() {
+    removeLocalStorageItem(ACCESS_TOKEN_KEY);
+    removeLocalStorageItem(REFRESH_TOKEN_KEY);
+    fetchAcessToken();
+  }
 
   function signIn(response: any) {
     const token = response.headers["access-token"];
@@ -152,12 +153,6 @@ function AuthenticationProvider({ children }: Props) {
   useEffect(() => {
     fetchAcessToken();
   }, []);
-
-  useEffect(() => {
-    if (!accessToken) {
-      logout();
-    }
-  }, [accessToken]);
 
   const authenticationObject: IAuthenticationContext = useMemo(
     () => ({
