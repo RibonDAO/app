@@ -30,6 +30,12 @@
       "emailSentTitle": "E-mail sent!",
       "emailSentDescription": "We sent you an e-mail with instructions to delete your account. If you don't receive it, please check your promotions/spam folder."
     },
+    "logoutModal": {
+      "title": "Do you want to sign out?",
+      "description": "If you want to donate again, you'll need to sign back in.",
+      "confirm": "Sign out",
+      "cancel": "Cancel"
+    },
     "disconnectWallet": "Disconnect wallet",
     "cancel": "cancel",
     "confirm": "confirm"

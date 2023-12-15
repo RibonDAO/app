@@ -30,6 +30,12 @@
       "emailSentTitle": "E-mail enviado",
       "emailSentDescription": "Você receberá um e-mail com o link para excluir sua conta em breve. Se você não receber, por favor, verifique sua caixa de promoções/spam."
     },
+    "logoutModal": {
+      "title": "Deseja mesmo sair?",
+      "description": "Se quiser doar, você deverá entrar novamente.",
+      "confirm": "Sair",
+      "cancel": "Cancelar"
+    },
     "disconnectWallet": "Desconectar carteira",
     "cancel": "cancelar",
     "confirm": "confirmar"

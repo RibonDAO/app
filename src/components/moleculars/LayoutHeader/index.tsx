@@ -27,6 +27,7 @@ import ConfigItem from "../ConfigItem";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import DeleteAccountModal from "./DeleteAccountModal";
+import LogoutModal from "./LogoutModal";
 import S from "./styles";
 
 type Props = {
@@ -44,6 +45,7 @@ function LayoutHeader({
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
     useState(false);
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const { navigateTo } = useNavigation();
   const { currentUser, logoutCurrentUser } = useCurrentUser();
@@ -97,6 +99,14 @@ function LayoutHeader({
     }, 800);
   };
 
+  const toggleLogoutModal = () => {
+    toggleModal();
+
+    setTimeout(() => {
+      setLogoutModalVisible(!logoutModalVisible);
+    }, 800);
+  };
+
   useFocusEffect(
     useCallback(() => {
       isNotificationsEnabled().then((enabled) =>
@@ -120,6 +130,13 @@ function LayoutHeader({
     <DeleteAccountModal
       visible={deleteAccountModalVisible}
       setVisible={setDeleteAccountModalVisible}
+    />
+  );
+
+  const renderLogoutModal = () => (
+    <LogoutModal
+      visible={logoutModalVisible}
+      setVisible={setLogoutModalVisible}
     />
   );
 
@@ -203,7 +220,7 @@ function LayoutHeader({
           size: 24,
         }}
         text={t("logout")}
-        onPress={handleLogout}
+        onPress={toggleLogoutModal}
         cta={
           <Icon
             type="rounded"
@@ -361,6 +378,8 @@ function LayoutHeader({
       {renderTicketModal()}
 
       {renderConfigModal()}
+
+      {renderLogoutModal()}
 
       {renderDeleteAccountModal()}
     </View>
