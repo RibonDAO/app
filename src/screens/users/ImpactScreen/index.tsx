@@ -24,9 +24,7 @@ function ImpactScreen() {
 
   return (
     <View style={S.container}>
-      <View style={{ paddingBottom: 40 }}>
-        <TabViewSection />
-      </View>
+      <TabViewSection />
     </View>
   );
 }
