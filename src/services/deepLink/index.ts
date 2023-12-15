@@ -6,6 +6,8 @@ export async function initializeDeeplink(
   setCurrentIntegrationId: (integrationId: string) => void,
   setExternalId: (externalId: string) => void,
   setUtm: (utmSource: string, utmMedium: string, utmCampaign: string) => void,
+  setMagicLinkToken: (magicLinkToken: string) => void,
+  setAccountId: (accountId: string) => void,
 ) {
   branch.subscribe({
     onOpenStart: ({ uri, cachedInitialEvent }) => {
@@ -24,10 +26,16 @@ export async function initializeDeeplink(
       const utmMedium = (latestParams.utm_medium as string) || "";
       const utmCampaign = (latestParams.utm_campaign as string) || "";
 
-      setUtm(utmSource, utmMedium, utmCampaign);
+      const magicLinkToken = (latestParams.authToken as string) || "";
+      const accountId = (latestParams.id as string) || "";
 
       setCurrentIntegrationId(integrationId);
       setExternalId(externalId);
+
+      setUtm(utmSource, utmMedium, utmCampaign);
+
+      setMagicLinkToken(magicLinkToken);
+      setAccountId(accountId);
 
       if (latestParams.$custom_meta_tags)
         navigateTo(latestParams.$custom_meta_tags as string);

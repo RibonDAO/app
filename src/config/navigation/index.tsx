@@ -64,6 +64,8 @@ import SignInScreen from "screens/auth/SignInScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
 import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
+import { useAuthentication } from "contexts/authenticationContext";
+import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -239,12 +241,15 @@ function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
+  const { setMagicLinkToken, setAccountId } = useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
+      setMagicLinkToken,
+      setAccountId,
     );
   }, []);
 
@@ -266,12 +271,15 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
+  const { setMagicLinkToken, setAccountId } = useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
+      setMagicLinkToken,
+      setAccountId,
     );
   }, []);
 
@@ -457,6 +465,14 @@ function RootNavigator() {
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
           headerTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="SignInByMagicLinkScreen"
+        component={SignInByMagicLinkScreen}
+        options={{
+          headerShown: false,
         }}
       />
 

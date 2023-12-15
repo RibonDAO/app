@@ -136,6 +136,7 @@ export type RootStackParamList = {
   MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
   InsertEmailScreen: undefined;
   SentMagicLinkEmailScreen: SentMagicLinkEmailScreen;
+  SignInByMagicLinkScreen: undefined;
   InsertEmailAccountScreen: InsertEmailAccountScreen;
 };
 
