@@ -9,7 +9,7 @@ type Props = {
   setVisible: (visible: boolean) => void;
 };
 
-function DeleteAccountModal({ visible, setVisible }: Props): JSX.Element {
+function LogoutModal({ visible, setVisible }: Props): JSX.Element {
   const { logoutCurrentUser } = useCurrentUser();
   const { navigateTo } = useNavigation();
   const { logout } = useAuthentication();
@@ -51,4 +51,4 @@ function DeleteAccountModal({ visible, setVisible }: Props): JSX.Element {
   );
 }
 
-export default DeleteAccountModal;
+export default LogoutModal;
