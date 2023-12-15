@@ -10,7 +10,7 @@ import S from "./styles";
 
 function SignInByMagicLinkScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
-  const { signInByMagicLink, accountId, extraTicket } = useAuthentication();
+  const { signInByMagicLink, extraTicket } = useAuthentication();
   const { isFirstAccessToIntegration, isLoading } =
     useFirstAccessToIntegration(INTEGRATION_AUTH_ID);
 
@@ -18,15 +18,13 @@ function SignInByMagicLinkScreen(): JSX.Element {
     signInByMagicLink({
       onSuccess: () => {
         if (extraTicket === "true" && isFirstAccessToIntegration) {
-          navigateTo("ReceiveTicketScreens");
+          navigateTo("ReceiveTicketScreen");
         } else {
           navigateTo("CausesScreen");
         }
       },
       onError: () => {
-        navigateTo("ExpiredLink", {
-          accountId,
-        });
+        navigateTo("ExpiredLinkScreen");
       },
     });
   };

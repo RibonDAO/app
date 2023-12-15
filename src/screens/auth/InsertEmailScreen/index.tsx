@@ -19,7 +19,7 @@ import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
-import UserAvatar from "../icons/UserAvatar";
+import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
 function InsertEmailScreen() {
@@ -63,7 +63,7 @@ function InsertEmailScreen() {
       >
         <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
-            <UserAvatar />
+            <UserAvatarIcon />
           </View>
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>

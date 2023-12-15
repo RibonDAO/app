@@ -70,7 +70,7 @@ function InsertEmailAccountScreen() {
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       setTickets(0);
-      navigateTo("DonationDoneScreen", { nonProfit });
+      navigateTo("DonationDoneScreen", { nonProfit, flow: "magicLink" });
     } else {
       const newState = {
         failedDonation: true,

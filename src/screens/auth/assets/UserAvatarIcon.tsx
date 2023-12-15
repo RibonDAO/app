@@ -1,9 +1,13 @@
-import * as React from "react";
-import Svg, { Path, G } from "react-native-svg";
+import Svg, { G, Path } from "react-native-svg";
 
-function UserAvatarIcon() {
+type Props = {
+  width?: number;
+  height?: number;
+};
+
+function UserAvatarIcon({ height = 160, width = 158 }: Props) {
   return (
-    <Svg width="158" height="160" viewBox="0 0 158 160" fill="none">
+    <Svg width={width} height={height} viewBox="0 0 158 160" fill="none">
       <Path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -34,7 +38,7 @@ function UserAvatarIcon() {
         d="M131.136 0.184962C133.029 0.813614 134.055 2.85854 133.426 4.75244C133.083 5.78838 132.738 6.77583 132.405 7.73136C131.407 10.5922 130.509 13.167 130.024 15.901C129.675 17.8658 127.799 19.1757 125.834 18.8267C123.87 18.4778 122.56 16.6022 122.909 14.6374C123.506 11.2763 124.671 7.94139 125.712 4.96378C126.014 4.10187 126.305 3.2699 126.568 2.47589C127.197 0.581991 129.242 -0.443691 131.136 0.184962Z"
         fill="#6DDFA6"
       />
-      <G>
+      <G style={{ mixBlendMode: "multiply" }}>
         <Path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -51,4 +55,5 @@ function UserAvatarIcon() {
     </Svg>
   );
 }
+
 export default UserAvatarIcon;

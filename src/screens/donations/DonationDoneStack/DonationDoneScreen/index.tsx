@@ -2,13 +2,18 @@ import { useCallback, useEffect, useState } from "react";
 import { RootStackScreenProps } from "types";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import { useStatistics, useUserConfig } from "@ribon.io/shared";
+import {
+  useFirstAccessToIntegration,
+  useStatistics,
+  useUserConfig,
+} from "@ribon.io/shared";
 import DoneScreenTemplate from "screens/templates/DoneScreenTemplate";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import useSound from "hooks/useSound";
 import { View } from "react-native";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
+import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 import donationDoneSound from "./assets/donation-done.mp3";
 
 export default function DonationDoneScreen({
@@ -17,7 +22,7 @@ export default function DonationDoneScreen({
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donationDoneScreen",
   });
-  const { nonProfit } = route.params;
+  const { nonProfit, flow } = route.params;
   const { navigateTo } = useNavigation();
   const { formattedImpactText } = useFormattedImpactText();
   const { playSound } = useSound();
@@ -25,6 +30,8 @@ export default function DonationDoneScreen({
   const { refetch: refetchUserConfig, config } = userConfig();
   const [allowedEmailMarketing, setAllowedEmailMarketing] = useState(false);
   const { currentUser } = useCurrentUser();
+  const { isFirstAccessToIntegration: isFirstAccessToAuthIntegration } =
+    useFirstAccessToIntegration(INTEGRATION_AUTH_ID);
 
   const {
     userStatistics,
@@ -59,7 +66,9 @@ export default function DonationDoneScreen({
       });
       updateUserConfig(currentUser.id, { allowedEmailMarketing });
     }
-    if (!isLoading && userStatistics) {
+    if (flow === "magicLink" && isFirstAccessToAuthIntegration) {
+      navigateTo("ExtraTicketScreen");
+    } else if (!isLoading && userStatistics) {
       navigateTo("PostDonationScreen", {
         nonProfit,
         cause: nonProfit.cause,

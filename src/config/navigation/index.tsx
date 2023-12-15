@@ -66,6 +66,8 @@ import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
 import { useAuthentication } from "contexts/authenticationContext";
 import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
+import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
+import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -241,7 +243,8 @@ function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId } = useAuthentication();
+  const { setMagicLinkToken, setAccountId, setExtraTicket } =
+    useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -250,6 +253,7 @@ function PrivateNavigator() {
       setUtm,
       setMagicLinkToken,
       setAccountId,
+      setExtraTicket,
     );
   }, []);
 
@@ -271,7 +275,8 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId } = useAuthentication();
+  const { setMagicLinkToken, setAccountId, setExtraTicket } =
+    useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -280,6 +285,7 @@ function RootNavigator() {
       setUtm,
       setMagicLinkToken,
       setAccountId,
+      setExtraTicket,
     );
   }, []);
 
@@ -473,6 +479,30 @@ function RootNavigator() {
         component={SignInByMagicLinkScreen}
         options={{
           headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ReceiveExtraTicketScreen"
+        component={ReceiveExtraTicketScreen}
+        options={{
+          headerShown: true,
+        }}
+      />
+
+      <Stack.Screen
+        name="ExtraTicketScreen"
+        component={ExtraTicketScreen}
+        options={{
+          headerShown: true,
+        }}
+      />
+
+      <Stack.Screen
+        name="ExpiredLinkScreen"
+        component={ExtraTicketScreen}
+        options={{
+          headerShown: true,
         }}
       />
 

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useRouteParams } from "hooks/useRouteParams";
-import UserAvatar from "../icons/UserAvatar";
+import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
 function SentMagicLinkEmailScreen() {
@@ -32,7 +32,7 @@ function SentMagicLinkEmailScreen() {
       >
         <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
-            <UserAvatar />
+            <UserAvatarIcon />
           </View>
 
           <View style={S.contentContainer}>

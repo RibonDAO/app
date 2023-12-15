@@ -11,10 +11,10 @@ import { useTranslation } from "react-i18next";
 import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
 import { useNavigation } from "hooks/useNavigation";
-import UserAvatarIcon from "assets/icons/userAvatarIcon";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
+import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
 function SignInScreen() {
