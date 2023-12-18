@@ -321,8 +321,8 @@
       "impactCards": {
         "totalTickets": "Tickets doados",
         "totalDonated": "Dinheiro doado",
-        "totalNonProfits": "ONGs auxiliadas",
-        "totalCauses": "Causas auxiliadas"
+        "totalNonProfits": "ONGs apoiadas",
+        "totalCauses": "Causas apoiadas"
       },
       "ngoImpactCards": {
         "zeroDonationsSection": {
