@@ -8,16 +8,17 @@ import {
   View,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import Image from "components/atomics/Image";
 import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
-import MagicLinkLogin from "components/moleculars/MagicLinkLogin";
 import { useNavigation } from "hooks/useNavigation";
+import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
+import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
+import AppleLogin from "components/moleculars/buttons/AppleLogin";
+import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
-import UserAvatar from "../assets/user-avatar.svg";
 
 function SignInScreen() {
-  usePageView("P12_view", { nonProfitId: "" });
+  usePageView("P27_view", { from: "direct_flow" });
   const { t } = useTranslation("translation", {
     keyPrefix: "auth.signInScreen",
   });
@@ -36,17 +37,23 @@ function SignInScreen() {
       >
         <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
-            <Image
-              style={S.mainImage}
-              source={{ uri: UserAvatar }}
-              accessibilityIgnoresInvertColors
-            />
+            <UserAvatarIcon />
           </View>
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
+            <GoogleLogin
+              onContinue={() => navigateTo("CausesScreen")}
+              from="direct_flow"
+            />
+            {Platform.OS === "ios" && (
+              <AppleLogin
+                onContinue={() => navigateTo("CausesScreen")}
+                from="direct_flow"
+              />
+            )}
             <MagicLinkLogin
               onContinue={() => navigateTo("InsertEmailScreen")}
-              from="donation_flow"
+              from="direct_flow"
             />
             <PrivacyPolicyLayout />
           </View>

@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Image from "components/atomics/Image";
 import Button from "components/atomics/buttons/Button";
 import { theme } from "@ribon.io/shared/styles";
 import { openInWebViewer } from "lib/linkOpener";
 import { ImpressionCard } from "@ribon.io/shared/types";
 import { useImpressionCards } from "@ribon.io/shared/hooks";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { logError } from "services/crashReport";
 import S from "./styles";
 

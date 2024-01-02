@@ -8,7 +8,6 @@ import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import CausesProvider from "contexts/causesContext";
 import CauseContributionProvider from "contexts/causesContributionContext";
 import CauseDonationProvider from "contexts/causesDonationContext";
-import DonateScreen from "screens/donations/DonateScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
 import ImpactScreen from "screens/users/ImpactScreen";
@@ -59,10 +58,17 @@ import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import { logEvent } from "services/analytics";
 import PixInstructionsScreen from "screens/promoters/CheckoutScreen/PixInstructionsScreen";
 import PixPaymentInformationProvider from "contexts/pixInformationContext";
+import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
+import SignedInScreen from "screens/donations/auth/SignedInScreen";
 import SignInScreen from "screens/auth/SignInScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
 import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
-import InsertEmailDonationScreen from "screens/donations/auth/InsertEmailDonationScreen";
+import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
+import { useAuthentication } from "contexts/authenticationContext";
+import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
+import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
+import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
+import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -233,17 +239,22 @@ function BottomTabNavigator() {
 }
 
 const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
+  const { setMagicLinkToken, setAccountId, setExtraTicket } =
+    useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
+      setMagicLinkToken,
+      setAccountId,
+      setExtraTicket,
     );
   }, []);
 
@@ -265,12 +276,17 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
+  const { setMagicLinkToken, setAccountId, setExtraTicket } =
+    useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
+      setMagicLinkToken,
+      setAccountId,
+      setExtraTicket,
     );
   }, []);
 
@@ -377,8 +393,20 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="DonateScreen"
-        component={DonateScreen}
+        name="SignedInScreen"
+        component={SignedInScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
+          headerBackTitleVisible: true,
+          headerBackTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="DonationSignInScreen"
+        component={DonationSignInScreen}
         options={{
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
@@ -429,8 +457,8 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="InsertEmailDonationScreen"
-        component={InsertEmailDonationScreen}
+        name="InsertEmailAccountScreen"
+        component={InsertEmailAccountScreen}
         options={{
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
@@ -444,6 +472,38 @@ function RootNavigator() {
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
           headerTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="SignInByMagicLinkScreen"
+        component={SignInByMagicLinkScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ReceiveExtraTicketScreen"
+        component={ReceiveExtraTicketScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ExtraTicketScreen"
+        component={ExtraTicketScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ExpiredLinkScreen"
+        component={ExpiredLinkScreen}
+        options={{
+          headerShown: false,
         }}
       />
 

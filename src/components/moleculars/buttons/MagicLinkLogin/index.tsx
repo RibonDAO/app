@@ -23,13 +23,14 @@ function MagicLinkLogin({ onContinue, from }: Props): JSX.Element {
 
   return (
     <Button
-      outline
-      onPress={() => handleMagicLink()}
-      key={1}
-      borderColorOutline={theme.colors.neutral[800]}
       text={t("buttonText")}
-      textColorOutline={theme.colors.neutral[800]}
-      customStyles={{ height: 48 }}
+      textColor={theme.colors.neutral[600]}
+      backgroundColor="transparent"
+      borderColor={theme.colors.neutral[300]}
+      customStyles={{
+        height: 48,
+      }}
+      onPress={() => handleMagicLink()}
     />
   );
 }

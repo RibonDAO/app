@@ -19,6 +19,7 @@ export type DonateScreenList = {
 export type DonationDoneParamsList = {
   nonProfit: NonProfit;
   offer: Offer;
+  flow: string;
 };
 
 export type ForYouScreenParamsList = {
@@ -99,14 +100,20 @@ export type PixInstructionsScreenParamList = {
   currency: Currencies;
 };
 
-export type InsertEmailDonationScreen = {
+export type InsertEmailAccountParamsList = {
   nonProfit: NonProfit;
+};
+
+export type SentMagicLinkEmailParamsList = {
+  email: string;
 };
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
-  DonateScreen: DonateScreenList;
+  SignInScreen: undefined;
+  DonationSignInScreen: DonateScreenList;
+  SignedInScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;
   ContributionDoneScreen: ContributionDoneParamsList;
   AvailableArticleScreen: undefined;
@@ -128,10 +135,13 @@ export type RootStackParamList = {
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
   MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
-  SignInScreen: undefined;
   InsertEmailScreen: undefined;
-  SentMagicLinkEmailScreen: undefined;
-  InsertEmailDonationScreen: InsertEmailDonationScreen;
+  SentMagicLinkEmailScreen: SentMagicLinkEmailParamsList;
+  SignInByMagicLinkScreen: undefined;
+  InsertEmailAccountScreen: InsertEmailAccountParamsList;
+  ReceiveExtraTicketScreen: undefined;
+  ExtraTicketScreen: undefined;
+  ExpiredLinkScreen: undefined;
 };
 
 export type PrivateStackParamList = {

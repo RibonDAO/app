@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     paddingLeft: 16,
     paddingRight: 8,
-    paddingTop: 8,
+    paddingTop: 16,
   },
 });
 

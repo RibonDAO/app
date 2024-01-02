@@ -6,7 +6,7 @@
     "impact": "Impacto"
   },
   "layoutHeader": {
-    "exitButton": "Sair",
+    "logout": "Sair",
     "support": "Suporte ao usuário",
     "monthlyContributions": "Contribuições mensais",
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0",
@@ -29,6 +29,12 @@
       "confirm": "Receber e-mail",
       "emailSentTitle": "E-mail enviado",
       "emailSentDescription": "Você receberá um e-mail com o link para excluir sua conta em breve. Se você não receber, por favor, verifique sua caixa de promoções/spam."
+    },
+    "logoutModal": {
+      "title": "Deseja mesmo sair?",
+      "description": "Se quiser doar, você deverá entrar novamente.",
+      "confirm": "Sair",
+      "cancel": "Cancelar"
     },
     "disconnectWallet": "Desconectar carteira",
     "cancel": "cancelar",
@@ -90,9 +96,10 @@
       }
     },
     "donationDoneScreen": {
-      "title": "Parabéns!",
-      "buttonText": "Fechar",
-      "description": "Você doou"
+      "title": "Obrigada pela doação!",
+      "buttonTitle": "Finalizar",
+      "description": "Você doou",
+      "checkboxText": "Quero receber informações sobre minhas doações por e-mail"
     },
     "postDonationScreen": {
       "title": "Se quiser, você pode fazer mais",
@@ -114,13 +121,11 @@
         "google": "Continuar com Google",
         "apple": "Continuar com Apple",
         "email": "Continuar com e-mail",
-        "footerStartText": "Ao clicar em 'Continuar', eu concordo com os",
-        "footerEndText": " e a",
         "impactOneLife": "Impacte 1 pessoa",
         "impactDescription": "com {{value}}",
         "checkboxText": "Aceito receber e-mails com informações sobre minhas doações"
       },
-      "insertEmailDonationScreen": {
+      "insertEmailAccountScreen": {
         "title": "Você está doando",
         "emailLabel": "E-mail",
         "confirmText": "Continuar",
@@ -342,7 +347,8 @@
         "totalTickets": "Tickets doados",
         "totalDonated": "Dinheiro doado",
         "totalNonProfits": "ONGs auxiliadas",
-        "totalCauses": "Causas auxiliadas"
+        "totalCauses": "Causas auxiliadas",
+        "title": "Impacto"
       },
       "ngoImpactCards": {
         "zeroDonationsSection": {
@@ -370,12 +376,16 @@
         }
       },
       "communityDonationsTitle": "Doações em Comunidade",
+      "ImpactCardsTitle": "Impacto",
       "ticketDonationsTitle": "Doações em Ticket",
       "directDonationsTitle": "Doações Diretas",
       "impactNotification": {
         "title": "Migramos seu impacto!",
         "description": "O seu histórico de doações feitas na plataforma antiga está na aba \"doações em ticket\".",
         "link": "Não mostrar novamente"
+      },
+      "profileSection": {
+        "userName": "Seu perfil"
       }
     }
   },
@@ -466,7 +476,26 @@
       "title": "Link de entrada enviado",
       "text": "Clique no link enviado para {{email}} para entrar",
       "firstAccessTitle": "Você ganhou um ticket extra",
-      "firstAccessText": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra."
+      "firstAccessText": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra.",
+      "buttonText": "Continuar"
+    },
+    "expiredLinkScreen": {
+      "loading": "Carregando...",
+      "invalidLink": "Link inválido",
+      "expiredLink": "Este link expirou",
+      "expiredLinkText": "Por favor, tente entrar ou se cadastrar novamente para receber um novo link de validação de conta",
+      "buttonText": "Me mande outro link",
+      "buttonTextWithoutEmail": "Continuar"
+    },
+    "extraTicketScreen": {
+      "title": "Você ganhou um ticket extra",
+      "description": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra",
+      "buttonText": "Continuar sem ticket extra"
+    },
+    "receiveExtraTicketScreen": {
+      "title": "Validar sua conta trouxe você aqui",
+      "description": "Seu ticket extra está disponível",
+      "buttonText": "Receber meu ticket"
     }
   }
 }

@@ -6,7 +6,7 @@
     "impact": "Impact"
   },
   "layoutHeader": {
-    "exitButton": "Exit",
+    "logout": "Sign out",
     "support": "User Support",
     "monthlyContributions": "Monthly contributions",
     "notifications": "Allow notifications",
@@ -29,6 +29,12 @@
       "confirm": "Receive e-mail",
       "emailSentTitle": "E-mail sent!",
       "emailSentDescription": "We sent you an e-mail with instructions to delete your account. If you don't receive it, please check your promotions/spam folder."
+    },
+    "logoutModal": {
+      "title": "Do you want to sign out?",
+      "description": "If you want to donate again, you'll need to sign back in.",
+      "confirm": "Sign out",
+      "cancel": "Cancel"
     },
     "disconnectWallet": "Disconnect wallet",
     "cancel": "cancel",
@@ -90,15 +96,16 @@
       "privacyPolicyText": "Privacy Policy",
       "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
       "and": " and",
-      "signedInSection": {
+      "signedInScreen": {
         "title": "Your donation",
         "confirmDonation": "Confirm donation"
       }
     },
     "donationDoneScreen": {
-      "title": "Congratulations!",
-      "buttonText": "Close",
-      "description": "You donated"
+      "title": "Thanks for donating!",
+      "description": "You donated",
+      "checkboxText": "I want to receive information about my donations by e-mail",
+      "buttonTitle": "Finish"
     },
     "postDonationScreen": {
       "title": "If you want, you can do more",
@@ -116,21 +123,15 @@
     },
     "auth": {
       "signInScreen": {
-        "title": "you are donating",
+        "title": "You are donating",
         "google": "Continue with Google",
         "apple": "Continue with Apple",
         "email": "Continue with e-mail",
-        "footerStartText": "By clicking 'Continue' I agree on Ribon’s",
-        "footerEndText": " and",
-        "termsText": "Terms",
-        "termsLink": "https://ribon.io/en/privacy-policy/#terms",
-        "privacyPolicyText": "Privacy Policy",
-        "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
         "impactOneLife": "Impact 1 person",
         "impactDescription": "with {{value}}",
         "checkboxText": "I agree to receive emails with information about my donations"
       },
-      "insertEmailDonationScreen": {
+      "insertEmailAccountScreen": {
         "title": "Choose an e-mail to donate",
         "emailLabel": "E-mail",
         "confirmText": "Continue",
@@ -353,7 +354,8 @@
         "totalTickets": "Donated tickets",
         "totalDonated": "Donated money",
         "totalNonProfits": "Supported NGOs",
-        "totalCauses": "Supporter causes"
+        "totalCauses": "Supporter causes",
+        "title": "Impact"
       },
       "ngoImpactCards": {
         "zeroDonationsSection": {
@@ -381,12 +383,16 @@
         }
       },
       "communityDonationsTitle": "Community Donations",
+      "ImpactCardsTitle": "Impact",
       "ticketDonationsTitle": "Ticket Donations",
       "directDonationsTitle": "Direct Donations",
       "impactNotification": {
         "title": "We have imported your impact!",
         "description": "Your history of donations from the old platform are in the \"Ticket donations\" tab.",
         "link": "Don’t show this again"
+      },
+      "profileSection": {
+        "userName": "Your profile"
       }
     }
   },
@@ -479,7 +485,26 @@
       "title": "We sent you a sign in link",
       "text": "Click the link sent to {{email}} to sign in",
       "firstAccessTitle": "You won an extra ticket",
-      "firstAccessText": "Validate your account clicking the link sent to {{email}} and get your extra ticket."
+      "firstAccessText": "Validate your account clicking the link sent to {{email}} and get your extra ticket.",
+      "buttonText": "Continue"
+    },
+    "expiredLinkScreen": {
+      "loading": "Loading...",
+      "invalidLink": "Invalid link",
+      "expiredLink": "This link has expired",
+      "expiredLinkText": "Please, try signing in or creating a new account with your e-mail to get a new account validation link",
+      "buttonText": "Send me a new link",
+      "buttonTextWithoutEmail": "Continue"
+    },
+    "extraTicketScreen": {
+      "title": "You won an extra ticket",
+      "description": "Validate your account clicking the link sent to {{email}} and get your extra ticket.",
+      "buttonText": "Continue without extra ticket"
+    },
+    "receiveExtraTicketScreen": {
+      "title": "Validating your account brought you here",
+      "description": "Your donation ticket is available",
+      "buttonText": "Get my ticket"
     }
   }
 }
