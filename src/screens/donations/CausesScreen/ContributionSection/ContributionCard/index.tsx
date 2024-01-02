@@ -7,7 +7,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { View, Text, Platform, Linking } from "react-native";
+import { View, Text } from "react-native";
 import { logEvent } from "services/analytics";
 
 import S from "./styles";
@@ -60,18 +60,13 @@ function ContributionCard({
       from,
     });
 
-    if (Platform.OS === "ios") {
-      const url = `https://dapp.ribon.io/promoters/recurrence?target=${target}&target_id=${targetId}&currency=${offer?.currency}&offer=${offer?.priceCents}&language=${currentLang}`;
-      Linking.openURL(url);
-    } else {
-      navigateTo("RecurrenceScreen", {
-        targetId,
-        target,
-        offer: offer ? offer.priceCents : 0,
-        currency: currentCurrency,
-        subscription: false,
-      });
-    }
+    navigateTo("RecurrenceScreen", {
+      targetId,
+      target,
+      offer: offer ? offer.priceCents : 0,
+      currency: currentCurrency,
+      subscription: false,
+    });
   };
 
   const descriptionContribution = isCause ? description : descriptionImpact;
