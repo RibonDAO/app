@@ -8,15 +8,14 @@ import {
   View,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import Image from "components/atomics/Image";
+import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
-import MagicLinkLogin from "components/moleculars/MagicLinkLogin";
 import { useNavigation } from "hooks/useNavigation";
 import UserAvatarIcon from "assets/icons/userAvatarIcon";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
-import UserAvatar from "../assets/user-avatar.svg";
+
 import S from "./styles";
 
 function SignInScreen() {
@@ -39,15 +38,6 @@ function SignInScreen() {
       >
         <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
-            <Image
-              style={S.mainImage}
-              source={{ uri: UserAvatar }}
-              accessibilityIgnoresInvertColors
-            />
-          </View>
-          <View style={S.contentContainer}>
-            <Text style={S.title}>{t("title")}</Text>
-
             <UserAvatarIcon />
           </View>
           <View style={S.contentContainer}>

@@ -12,7 +12,7 @@ import Image from "components/atomics/Image";
 import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
 import { NonProfit } from "@ribon.io/shared/types";
-import MagicLinkLogin from "components/moleculars/MagicLinkLogin";
+import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import { useNavigation } from "hooks/useNavigation";
 // import { useIntegrationContext } from "contexts/integrationContext";
 // import { useUserV1Donations } from "@ribon.io/shared";

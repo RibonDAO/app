@@ -8,7 +8,6 @@ import {
   Text,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import Image from "components/atomics/Image";
 import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
 
@@ -19,8 +18,8 @@ import { useEffect, useState } from "react";
 import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import Button from "components/atomics/buttons/Button";
+import UserAvatarIcon from "assets/icons/userAvatarIcon";
 import S from "./styles";
-import UserAvatar from "../assets/user-avatar.svg";
 
 function InsertEmailScreen() {
   usePageView("P12_view", { nonProfitId: "" });
@@ -63,11 +62,7 @@ function InsertEmailScreen() {
       >
         <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
-            <Image
-              style={S.mainImage}
-              source={{ uri: UserAvatar }}
-              accessibilityIgnoresInvertColors
-            />
+            <UserAvatarIcon />
           </View>
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>

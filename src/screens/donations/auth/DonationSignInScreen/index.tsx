@@ -27,6 +27,7 @@ import { useUtmContext } from "contexts/utmContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import usePageView from "hooks/usePageView";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
+import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import S from "./styles";
 
 function DonationSignInScreen() {
@@ -84,6 +85,10 @@ function DonationSignInScreen() {
     donateCallback();
   };
 
+  const onContinueMagicLink = () => {
+    navigateTo("InsertEmailAccountScreen", { nonProfit });
+  };
+
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       setTickets(0);
@@ -132,6 +137,10 @@ function DonationSignInScreen() {
                 {Platform.OS === "ios" && (
                   <AppleLogin onContinue={onContinue} from="donation_flow" />
                 )}
+                <MagicLinkLogin
+                  onContinue={onContinueMagicLink}
+                  from="donation_flow"
+                />
                 <PrivacyPolicyLayout />
               </View>
             </ScrollView>
