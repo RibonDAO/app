@@ -102,9 +102,10 @@
       }
     },
     "donationDoneScreen": {
-      "title": "Congratulations!",
-      "buttonText": "Close",
-      "description": "You donated"
+      "title": "Thanks for donating!",
+      "description": "You donated",
+      "checkboxText": "I want to receive information about my donations by e-mail",
+      "buttonTitle": "Finish"
     },
     "postDonationScreen": {
       "title": "If you want, you can do more",
@@ -122,16 +123,10 @@
     },
     "auth": {
       "signInScreen": {
-        "title": "you are donating",
+        "title": "You are donating",
         "google": "Continue with Google",
         "apple": "Continue with Apple",
         "email": "Continue with e-mail",
-        "footerStartText": "By clicking 'Continue' I agree on Ribon’s",
-        "footerEndText": " and",
-        "termsText": "Terms",
-        "termsLink": "https://ribon.io/en/privacy-policy/#terms",
-        "privacyPolicyText": "Privacy Policy",
-        "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
         "impactOneLife": "Impact 1 person",
         "impactDescription": "with {{value}}",
         "checkboxText": "I agree to receive emails with information about my donations"
@@ -490,7 +485,26 @@
       "title": "We sent you a sign in link",
       "text": "Click the link sent to {{email}} to sign in",
       "firstAccessTitle": "You won an extra ticket",
-      "firstAccessText": "Validate your account clicking the link sent to {{email}} and get your extra ticket."
+      "firstAccessText": "Validate your account clicking the link sent to {{email}} and get your extra ticket.",
+      "buttonText": "Continue"
+    },
+    "expiredLinkScreen": {
+      "loading": "Loading...",
+      "invalidLink": "Invalid link",
+      "expiredLink": "This link has expired",
+      "expiredLinkText": "Please, try signing in or creating a new account with your e-mail to get a new account validation link",
+      "buttonText": "Send me a new link",
+      "buttonTextWithoutEmail": "Continue"
+    },
+    "extraTicketScreen": {
+      "title": "You won an extra ticket",
+      "description": "Validate your account clicking the link sent to {{email}} and get your extra ticket.",
+      "buttonText": "Continue without extra ticket"
+    },
+    "receiveExtraTicketScreen": {
+      "title": "Validating your account brought you here",
+      "description": "Your donation ticket is available",
+      "buttonText": "Get my ticket"
     }
   }
 }

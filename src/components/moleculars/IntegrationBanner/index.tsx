@@ -20,9 +20,9 @@ function IntegrationBanner({ integration }: Props): JSX.Element {
       <BannerInfo
         title={{
           text: t("title", { integrationName }),
-          size: "large",
+          size: "medium",
           color: theme.colors.brand.primary[900],
-          stylized: true,
+          stylized: false,
         }}
         squareImage={integration?.logo}
         text={t("text", { integrationName }) ?? ""}

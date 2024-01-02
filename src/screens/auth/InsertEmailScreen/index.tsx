@@ -17,8 +17,9 @@ import { isValidEmail } from "lib/validators";
 import { useEffect, useState } from "react";
 import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
+import { theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
-import UserAvatarIcon from "assets/icons/userAvatarIcon";
+import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
 function InsertEmailScreen() {
@@ -84,6 +85,9 @@ function InsertEmailScreen() {
               onPress={handleButtonPress}
               disabled={!isValidEmail(email)}
               customStyles={S.button}
+              customTextStyles={{
+                color: theme.colors.neutral10,
+              }}
             />
             <PrivacyPolicyLayout />
           </View>

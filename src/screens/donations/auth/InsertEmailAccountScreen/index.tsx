@@ -25,8 +25,8 @@ import { useTickets } from "contexts/ticketsContext";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
-import S from "./styles";
 import DonationInProgressSection from "../DonationInProgressSection";
+import S from "./styles";
 
 function InsertEmailAccountScreen() {
   const {
@@ -70,7 +70,7 @@ function InsertEmailAccountScreen() {
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       setTickets(0);
-      navigateTo("DonationDoneScreen", { nonProfit });
+      navigateTo("DonationDoneScreen", { nonProfit, flow: "magicLink" });
     } else {
       const newState = {
         failedDonation: true,

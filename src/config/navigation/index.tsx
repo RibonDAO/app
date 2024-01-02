@@ -58,12 +58,17 @@ import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import { logEvent } from "services/analytics";
 import PixInstructionsScreen from "screens/promoters/CheckoutScreen/PixInstructionsScreen";
 import PixPaymentInformationProvider from "contexts/pixInformationContext";
+import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
+import SignedInScreen from "screens/donations/auth/SignedInScreen";
 import SignInScreen from "screens/auth/SignInScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
 import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
-import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
-import SignedInScreen from "screens/donations/auth/SignedInScreen";
+import { useAuthentication } from "contexts/authenticationContext";
+import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
+import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
+import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
+import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -239,12 +244,17 @@ function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
+  const { setMagicLinkToken, setAccountId, setExtraTicket } =
+    useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
+      setMagicLinkToken,
+      setAccountId,
+      setExtraTicket,
     );
   }, []);
 
@@ -266,12 +276,17 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
+  const { setMagicLinkToken, setAccountId, setExtraTicket } =
+    useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
+      setMagicLinkToken,
+      setAccountId,
+      setExtraTicket,
     );
   }, []);
 
@@ -457,6 +472,38 @@ function RootNavigator() {
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
           headerTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="SignInByMagicLinkScreen"
+        component={SignInByMagicLinkScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ReceiveExtraTicketScreen"
+        component={ReceiveExtraTicketScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ExtraTicketScreen"
+        component={ExtraTicketScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ExpiredLinkScreen"
+        component={ExpiredLinkScreen}
+        options={{
+          headerShown: false,
         }}
       />
 

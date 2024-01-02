@@ -14,6 +14,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { logEvent } from "services/analytics";
 import DonationInProgressSection from "screens/donations/auth/DonationInProgressSection";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
+import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import { setLocalStorageItem } from "@ribon.io/shared";
 import { useUserV1Donations } from "@ribon.io/shared/hooks";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
@@ -27,11 +28,11 @@ import { useUtmContext } from "contexts/utmContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import usePageView from "hooks/usePageView";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
-import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import S from "./styles";
 
 function DonationSignInScreen() {
   usePageView("P27_view", { from: "donation_flow" });
+
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.auth.signInScreen",
   });

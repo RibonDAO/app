@@ -3,6 +3,7 @@ import ModalDialog from "components/moleculars/modals/ModalDialog";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useTranslation } from "react-i18next";
 import { useAuthentication } from "contexts/authenticationContext";
+import { logEvent } from "services/analytics";
 
 type Props = {
   visible: boolean;
@@ -21,6 +22,7 @@ function LogoutModal({ visible, setVisible }: Props): JSX.Element {
   const handleLogout = () => {
     logoutCurrentUser();
     logout();
+    logEvent("signoutConfirmBtn_click");
     dispose();
     navigateTo("SignInScreen");
   };
