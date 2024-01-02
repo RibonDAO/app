@@ -87,8 +87,14 @@ function AuthenticationProvider({ children }: Props) {
       );
 
       signIn(authResponse);
-    } catch (error) {
-      logError("google auth error");
+    } catch (error: any) {
+      if (error.response) {
+        const apiErrorMessage =
+          error.response.data.formatted_message === emailDoesNotMatchMessage
+            ? emailDoesNotMatchMessage
+            : "Unknown error";
+        throw new Error(apiErrorMessage);
+      }
       throw new Error("google auth error");
     }
   }
