@@ -47,10 +47,7 @@ function SignInScreen() {
           </View>
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
-            <MagicLinkLogin
-              onContinue={() => navigateTo("InsertEmailScreen")}
-              from="donation_flow"
-            />
+
             <UserAvatarIcon />
           </View>
           <View style={S.contentContainer}>
@@ -65,6 +62,10 @@ function SignInScreen() {
                 from="direct_flow"
               />
             )}
+            <MagicLinkLogin
+              onContinue={() => navigateTo("InsertEmailScreen")}
+              from="donation_flow"
+            />
             <PrivacyPolicyLayout />
           </View>
         </ScrollView>

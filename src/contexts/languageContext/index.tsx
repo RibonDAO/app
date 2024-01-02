@@ -23,7 +23,7 @@ export const LanguageContext = createContext<ILanguageContext>(
 function LanguageProvider({ children }: Props) {
   const { i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState<Languages>(
-    formattedShortLanguage(i18n.resolvedLanguage),
+    formattedShortLanguage(i18n.resolvedLanguage ?? ""),
   );
   const [loadingLanguage, setLoadingLanguage] = useState(false);
 
