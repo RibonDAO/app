@@ -8,15 +8,22 @@ import {
   Text,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import Image from "components/atomics/Image";
 import { useRouteParams } from "hooks/useRouteParams";
+import Button from "components/atomics/buttons/Button";
+import { useNavigation } from "hooks/useNavigation";
+import { theme } from "@ribon.io/shared/styles";
+import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
+import { useFirstAccessToIntegration } from "@ribon.io/shared";
+import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
-import UserAvatar from "../assets/user-avatar.svg";
 
 function SentMagicLinkEmailScreen() {
   const { t } = useTranslation("translation", {
     keyPrefix: "auth.sentMagicLinkEmailScreen",
   });
+  const { navigateTo } = useNavigation();
+  const { isFirstAccessToIntegration } =
+    useFirstAccessToIntegration(INTEGRATION_AUTH_ID);
 
   const {
     params: { email },
@@ -33,17 +40,27 @@ function SentMagicLinkEmailScreen() {
       >
         <ScrollView contentContainerStyle={S.container}>
           <View style={S.imageContainer}>
-            <Image
-              style={S.mainImage}
-              source={{ uri: UserAvatar }}
-              accessibilityIgnoresInvertColors
-            />
+            <UserAvatarIcon />
           </View>
 
           <View style={S.contentContainer}>
-            <Text style={S.title}>{t("title")}</Text>
-            <Text style={S.description}>{t("text", { email })}</Text>
+            <Text style={S.title}>
+              {" "}
+              {isFirstAccessToIntegration ? t("firstAccessTitle") : t("title")}
+            </Text>
+            <Text style={S.description}>
+              {isFirstAccessToIntegration
+                ? t("firstAccessText", { email })
+                : t("text", { email })}
+            </Text>
           </View>
+          <Button
+            text={t("buttonText")}
+            onPress={() => navigateTo("CausesScreen")}
+            textColor={theme.colors.neutral10}
+            borderColor={theme.colors.brand.primary[600]}
+            backgroundColor={theme.colors.brand.primary[600]}
+          />
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

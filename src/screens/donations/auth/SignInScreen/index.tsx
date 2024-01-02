@@ -14,27 +14,14 @@ import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayo
 import { NonProfit } from "@ribon.io/shared/types";
 import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import { useNavigation } from "hooks/useNavigation";
-// import { useIntegrationContext } from "contexts/integrationContext";
-// import { useUserV1Donations } from "@ribon.io/shared";
-// import { useUtmContext } from "contexts/utmContext";
-// import { PLATFORM } from "utils/constants/Application";
-// import { logEvent } from "services/analytics";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import S from "./styles";
 
 type Props = {
   nonProfit: NonProfit;
-  onContinue: () => void;
-  onDonationSuccess: () => void;
-  onDonationFail: (error: any) => void;
 };
 
-function SignInSection({
-  nonProfit,
-  onContinue,
-  onDonationFail,
-  onDonationSuccess,
-}: Props) {
+function SignInSection({ nonProfit }: Props) {
   usePageView("P12_view", { nonProfitId: nonProfit.id });
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.auth.signInScreen",
@@ -42,32 +29,6 @@ function SignInSection({
 
   const { navigateTo } = useNavigation();
   const { formattedImpactText } = useFormattedImpactText();
-  // const { donate } = useUserV1Donations();
-  // const { currentIntegrationId, externalId } = useIntegrationContext();
-  // const { utmSource, utmMedium, utmCampaign } = useUtmContext();
-
-  // const onContinueProviderLogin = async () => {
-  //   try {
-  //     await donate(
-  //       currentIntegrationId,
-  //       nonProfit.id,
-  //       PLATFORM,
-  //       externalId,
-  //       utmSource,
-  //       utmMedium,
-  //       utmCampaign,
-  //     );
-  //     onDonationSuccess();
-  //   } catch (error: any) {
-  //     onDonationFail(error);
-  //   }
-
-  //   onContinue();
-  //   logEvent("authEmailFormBtn_click", {
-  //     nonProfitId: nonProfit.id,
-  //     from: "donation_flow",
-  //   });
-  // };
 
   return (
     <KeyboardAvoidingView
