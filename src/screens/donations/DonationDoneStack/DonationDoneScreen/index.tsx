@@ -14,6 +14,7 @@ import { View } from "react-native";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
 import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
+import { useAuthentication } from "contexts/authenticationContext";
 import donationDoneSound from "./assets/donation-done.mp3";
 
 export default function DonationDoneScreen({
@@ -32,6 +33,7 @@ export default function DonationDoneScreen({
   const { currentUser } = useCurrentUser();
   const { isFirstAccessToIntegration: isFirstAccessToAuthIntegration } =
     useFirstAccessToIntegration(INTEGRATION_AUTH_ID);
+  const { isAuthenticated } = useAuthentication();
 
   const {
     userStatistics,
@@ -68,6 +70,8 @@ export default function DonationDoneScreen({
     }
     if (flow === "magicLink" && isFirstAccessToAuthIntegration) {
       navigateTo("ExtraTicketScreen");
+    } else if (!isAuthenticated && isFirstAccessToAuthIntegration) {
+      navigateTo("SignInExtraTicketScreen");
     } else if (!isLoading && userStatistics) {
       navigateTo("PostDonationScreen", {
         nonProfit,

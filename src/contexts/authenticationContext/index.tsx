@@ -36,6 +36,7 @@ export interface IAuthenticationContext {
     sendAuthenticationEmailProps: authenticationEmailProps,
   ) => void;
   signInWithApple: (response: any) => void;
+  isAuthenticated: boolean;
   setMagicLinkToken: (token: string) => void;
   setAccountId: (id: string) => void;
   setExtraTicket: (extraTicket: string) => void;
@@ -162,6 +163,7 @@ function AuthenticationProvider({ children }: Props) {
       signInByMagicLink,
       sendAuthenticationEmail,
       signInWithApple,
+      isAuthenticated: !!accessToken,
       accountId,
       setAccountId,
       magicLinkToken,
