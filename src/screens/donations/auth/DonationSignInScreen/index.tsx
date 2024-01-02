@@ -32,6 +32,7 @@ import S from "./styles";
 
 function DonationSignInScreen() {
   usePageView("P27_view", { from: "donation_flow" });
+
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.auth.signInScreen",
   });
