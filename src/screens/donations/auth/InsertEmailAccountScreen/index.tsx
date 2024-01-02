@@ -26,7 +26,7 @@ import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/Tick
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
 import S from "./styles";
-import DonationInProgressSection from "../../DonateScreen/DonationInProgressSection";
+import DonationInProgressSection from "../DonationInProgressSection";
 
 function InsertEmailAccountScreen() {
   const {

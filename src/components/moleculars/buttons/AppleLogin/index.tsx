@@ -1,37 +1,38 @@
 import Button from "components/atomics/buttons/Button";
 import { useTranslation } from "react-i18next";
 import { theme } from "@ribon.io/shared/styles";
-
 import { useAuthentication } from "contexts/authenticationContext";
-import { signIn } from "services/googleSignIn";
+import { signIn } from "services/appleSignIn";
 import { logEvent } from "services/analytics";
-import GoogleIcon from "./assets/GoogleIcon";
+import AppleIcon from "./assets/AppleIcon";
 
 type Props = {
   onContinue: () => void;
   from: string;
 };
-function GoogleLogin({ onContinue, from }: Props): JSX.Element {
+function AppleLogin({ onContinue, from }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "components.moleculars.buttons.GoogleLogin",
+    keyPrefix: "components.moleculars.buttons.AppleLogin",
   });
 
-  const { signInWithGoogle } = useAuthentication();
+  const { signInWithApple } = useAuthentication();
 
-  async function loginGoogle() {
+  async function loginApple() {
     const result = await signIn();
 
     if (result) {
-      await signInWithGoogle({ access_token: result.userInfo?.idToken });
+      await signInWithApple({
+        access_token: result.userInfo?.identityToken,
+      });
       onContinue();
     }
   }
 
-  function handleGoogle() {
-    logEvent("authGoogleBtn_click", {
+  function handleApple() {
+    logEvent("authAppleBtn_click", {
       from,
     });
-    loginGoogle();
+    loginApple();
   }
 
   return (
@@ -40,8 +41,8 @@ function GoogleLogin({ onContinue, from }: Props): JSX.Element {
       textColor={theme.colors.neutral[600]}
       backgroundColor="transparent"
       borderColor={theme.colors.neutral[300]}
-      onPress={() => handleGoogle()}
-      leftItem={<GoogleIcon />}
+      onPress={() => handleApple()}
+      leftItem={<AppleIcon />}
       customStyles={{
         height: 48,
       }}
@@ -49,4 +50,4 @@ function GoogleLogin({ onContinue, from }: Props): JSX.Element {
   );
 }
 
-export default GoogleLogin;
+export default AppleLogin;

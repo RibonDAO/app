@@ -8,7 +8,6 @@ import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import CausesProvider from "contexts/causesContext";
 import CauseContributionProvider from "contexts/causesContributionContext";
 import CauseDonationProvider from "contexts/causesDonationContext";
-import DonateScreen from "screens/donations/DonateScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
 import ImpactScreen from "screens/users/ImpactScreen";
@@ -63,6 +62,8 @@ import SignInScreen from "screens/auth/SignInScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
 import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
+import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
+import SignedInScreen from "screens/donations/auth/SignedInScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -233,7 +234,7 @@ function BottomTabNavigator() {
 }
 
 const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
@@ -377,8 +378,20 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="DonateScreen"
-        component={DonateScreen}
+        name="SignedInScreen"
+        component={SignedInScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
+          headerBackTitleVisible: true,
+          headerBackTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="DonationSignInScreen"
+        component={DonationSignInScreen}
         options={{
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],

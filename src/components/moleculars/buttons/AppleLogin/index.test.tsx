@@ -1,18 +1,18 @@
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { renderComponent } from "config/testUtils/renders";
-import GoogleSection from ".";
+import AppleLogin from ".";
 
-jest.mock("services/googleSignIn", () => ({
+jest.mock("services/appleSignIn", () => ({
   signIn: () => {},
 }));
 
 const onContinue = jest.fn();
-describe("GoogleSection", () => {
+describe("AppleSection", () => {
   it("should render without error", () => {
     renderComponent(
-      <GoogleSection onContinue={onContinue} from="donation_flow" />,
+      <AppleLogin onContinue={onContinue} from="donation_flow" />,
     );
 
-    expectTextToBeInTheDocument("Continue with Google");
+    expectTextToBeInTheDocument("Continue with Apple");
   });
 });

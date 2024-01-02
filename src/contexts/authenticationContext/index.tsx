@@ -34,6 +34,7 @@ export interface IAuthenticationContext {
   sendAuthenticationEmail: (
     sendAuthenticationEmailProps: authenticationEmailProps,
   ) => void;
+  signInWithApple: (response: any) => void;
 }
 
 export type Props = {
@@ -47,16 +48,18 @@ export const AuthenticationContext = createContext<IAuthenticationContext>(
 function AuthenticationProvider({ children }: Props) {
   const [accessToken, setAccessToken] = useState("");
   const { setCurrentUser } = useCurrentUser();
-
-  function logout() {
-    removeLocalStorageItem(ACCESS_TOKEN_KEY);
-    removeLocalStorageItem(REFRESH_TOKEN_KEY);
-  }
+  const emailDoesNotMatchMessage = "Email does not match";
 
   const fetchAcessToken = async () => {
     const accessTokenKey = await getLocalStorageItem(ACCESS_TOKEN_KEY);
     if (accessTokenKey) setAccessToken(accessTokenKey);
   };
+
+  function logout() {
+    removeLocalStorageItem(ACCESS_TOKEN_KEY);
+    removeLocalStorageItem(REFRESH_TOKEN_KEY);
+    fetchAcessToken();
+  }
 
   function signIn(response: any) {
     const token = response.headers["access-token"];
@@ -125,15 +128,29 @@ function AuthenticationProvider({ children }: Props) {
     return "";
   }
 
+  async function signInWithApple(response: any) {
+    try {
+      const authResponse = await userAuthenticationApi.postAuthenticate(
+        response.access_token,
+        "apple",
+      );
+
+      signIn(authResponse);
+    } catch (error: any) {
+      if (error.response) {
+        const apiErrorMessage =
+          error?.response?.data?.formatted_message === emailDoesNotMatchMessage
+            ? emailDoesNotMatchMessage
+            : "Unknown error";
+        throw new Error(apiErrorMessage);
+      }
+      throw new Error("apple auth error");
+    }
+  }
+
   useEffect(() => {
     fetchAcessToken();
   }, []);
-
-  useEffect(() => {
-    if (!accessToken) {
-      logout();
-    }
-  }, [accessToken]);
 
   const authenticationObject: IAuthenticationContext = useMemo(
     () => ({
@@ -142,6 +159,7 @@ function AuthenticationProvider({ children }: Props) {
       signInWithGoogle,
       signInByMagicLink,
       sendAuthenticationEmail,
+      signInWithApple,
     }),
     [accessToken],
   );

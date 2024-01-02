@@ -57,6 +57,7 @@
     "customerio-reactnative": "^3.1.10",
     "ethers": "^5.7.2",
     "expo": "^49.0.0",
+    "expo-apple-authentication": "^6.1.2",
     "expo-application": "~5.3.0",
     "expo-asset": "~8.10.1",
     "expo-av": "~13.4.1",
@@ -105,7 +106,8 @@
     "react-native-webview": "13.2.2",
     "react-zendesk": "^0.1.13",
     "rn-placeholder": "^3.0.3",
-    "sentry-expo": "~7.0.0"
+    "sentry-expo": "~7.0.0",
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

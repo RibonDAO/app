@@ -6,10 +6,9 @@ import {
   api,
   initializeApi as initializeSharedApi,
 } from "@ribon.io/shared/services";
-import { initializeHooks } from "@ribon.io/shared/hooks";
 import { EXPO_PUBLIC_RIBON_API } from "utils/constants/Application";
 
-const RIBON_API = "https://dapp-api.ribon.io/";
+const RIBON_API = "https://dapp-dev-api.ribon.io/";
 export const baseURL = EXPO_PUBLIC_RIBON_API || RIBON_API;
 
 type initializeApiProps = {
@@ -22,10 +21,6 @@ export function initializeApi({ language, email }: initializeApiProps) {
   const authHeaders = { Language: language, Email: email };
 
   initializeSharedApi({ url: baseURL, headers: authHeaders });
-
-  initializeHooks({
-    initializeApiOptions: { url: baseURL, headers: authHeaders },
-  });
 }
 
 export { apiGet, apiDelete, apiPut, apiPost };

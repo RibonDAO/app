@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { NonProfit } from "@ribon.io/shared/types";
 import TopMountainShapes from "components/vectors/TopMountainShapes";
 import { useNavigation } from "@react-navigation/native";
+import { useUserProfile } from "@ribon.io/shared/hooks";
 import S from "./styles";
 
 type Props = {
@@ -18,6 +19,8 @@ function DonationInProgressSection({ nonProfit, onAnimationEnd }: Props) {
     keyPrefix: "donations.donateScreen",
   });
   const navigation = useNavigation();
+  const { userProfile } = useUserProfile();
+  const { profile } = userProfile();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -33,7 +36,17 @@ function DonationInProgressSection({ nonProfit, onAnimationEnd }: Props) {
       <View style={S.centerContainer}>
         <TransferTicketAnimation
           onAnimationEnd={onAnimationEnd}
-          senderIcon={<UserIcon />}
+          senderIcon={
+            profile?.photo ? (
+              <Image
+                style={S.nonProfitLogo}
+                source={{ uri: profile?.photo }}
+                accessibilityIgnoresInvertColors
+              />
+            ) : (
+              <UserIcon />
+            )
+          }
           receiverIcon={
             <Image
               style={S.nonProfitLogo}
