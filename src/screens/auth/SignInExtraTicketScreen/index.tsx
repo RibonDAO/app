@@ -14,6 +14,7 @@ import { useNavigation } from "hooks/useNavigation";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
+import { useCurrentUser } from "contexts/currentUserContext";
 import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
@@ -24,6 +25,7 @@ function SignInExtraTicketScreen() {
   });
 
   const { navigateTo } = useNavigation();
+  const { currentUser } = useCurrentUser();
 
   return (
     <KeyboardAvoidingView
@@ -41,7 +43,9 @@ function SignInExtraTicketScreen() {
           </View>
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
-            <Text style={S.description}>{t("description")}</Text>
+            <Text style={S.description}>
+              {t("description", { email: currentUser?.email })}
+            </Text>
             <GoogleLogin
               onContinue={() => navigateTo("CausesScreen")}
               from="direct_flow"

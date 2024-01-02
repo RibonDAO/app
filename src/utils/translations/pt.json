@@ -125,13 +125,6 @@
         "impactDescription": "com {{value}}",
         "checkboxText": "Aceito receber e-mails com informações sobre minhas doações"
       },
-      "signInExtraTicketScreen": {
-        "title": "Você ganhou um ticket extra",
-        "description": "Valide sua conta criada com {{email}} para receber seu ticket extra",
-        "google": "Continuar com Google",
-        "apple": "Continuar com Apple",
-        "email": "Continuar com e-mail"
-      },
       "insertEmailAccountScreen": {
         "title": "Você está doando",
         "emailLabel": "E-mail",
@@ -498,6 +491,13 @@
       "title": "Você ganhou um ticket extra",
       "description": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra",
       "buttonText": "Continuar sem ticket extra"
+    },
+    "signInExtraTicketScreen": {
+      "title": "Você ganhou um ticket extra",
+      "description": "Valide sua conta criada com {{email}} para receber seu ticket extra",
+      "google": "Continuar com Google",
+      "apple": "Continuar com Apple",
+      "email": "Continuar com e-mail"
     },
     "receiveExtraTicketScreen": {
       "title": "Validar sua conta trouxe você aqui",
