@@ -4,7 +4,6 @@ import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import { TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
-import RoundButton from "components/atomics/RoundButton";
 import TicketIcon from "components/vectors/TicketIcon";
 import GrayTicketIcon from "components/vectors/GrayTicketIcon";
 import { useNavigation } from "hooks/useNavigation";
@@ -27,6 +26,7 @@ import ConfigItem from "../ConfigItem";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import DeleteAccountModal from "./DeleteAccountModal";
+import LogoutModal from "./LogoutModal";
 import S from "./styles";
 
 type Props = {
@@ -44,9 +44,10 @@ function LayoutHeader({
   const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
     useState(false);
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const { navigateTo } = useNavigation();
-  const { currentUser, logoutCurrentUser } = useCurrentUser();
+  const { currentUser } = useCurrentUser();
   const { tickets, hasTickets } = useTickets();
   const ticketColor = hasTickets()
     ? theme.colors.brand.primary[600]
@@ -73,12 +74,6 @@ function LayoutHeader({
     setMenuVisible(!menuVisible);
   };
 
-  const handleLogout = () => {
-    logoutCurrentUser();
-    navigateTo("CausesScreen");
-    toggleModal();
-  };
-
   const handleOpenSettings = () => {
     if (Platform.OS === "ios") {
       Linking.openURL("app-settings:");
@@ -89,9 +84,19 @@ function LayoutHeader({
 
   const toggleDeleteAccountModal = () => {
     toggleModal();
+    logEvent("deleteAccountBtn_click");
 
     setTimeout(() => {
       setDeleteAccountModalVisible(!deleteAccountModalVisible);
+    }, 800);
+  };
+
+  const toggleLogoutModal = () => {
+    toggleModal();
+    logEvent("signoutBtn_click");
+
+    setTimeout(() => {
+      setLogoutModalVisible(!logoutModalVisible);
     }, 800);
   };
 
@@ -118,6 +123,13 @@ function LayoutHeader({
     <DeleteAccountModal
       visible={deleteAccountModalVisible}
       setVisible={setDeleteAccountModalVisible}
+    />
+  );
+
+  const renderLogoutModal = () => (
+    <LogoutModal
+      visible={logoutModalVisible}
+      setVisible={setLogoutModalVisible}
     />
   );
 
@@ -168,6 +180,29 @@ function LayoutHeader({
     />
   );
 
+  const renderSignInConfigItem = () =>
+    !currentUser && (
+      <ConfigItem
+        icon={{
+          name: "account_circle",
+          type: "rounded",
+          color: theme.colors.brand.primary[600],
+          size: 24,
+        }}
+        text={t("signInOrCreateAccount")}
+        onPress={() => navigateTo("SignInScreen")}
+        cta={
+          <Icon
+            type="rounded"
+            size={20}
+            color={theme.colors.brand.primary[600]}
+            name="arrow_forward_ios"
+            onPress={() => navigateTo("SignInScreen")}
+          />
+        }
+      />
+    );
+
   const renderLogoutConfigItem = () =>
     currentUser && (
       <ConfigItem
@@ -177,16 +212,16 @@ function LayoutHeader({
           color: theme.colors.brand.primary[600],
           size: 24,
         }}
-        text={currentUser.email}
-        onPress={handleLogout}
+        text={t("logout")}
+        onPress={toggleLogoutModal}
         cta={
-          <View style={{ width: 50 }}>
-            <RoundButton
-              active={false}
-              text={t("exitButton")}
-              onPress={handleLogout}
-            />
-          </View>
+          <Icon
+            type="rounded"
+            size={20}
+            color={theme.colors.brand.primary[600]}
+            name="arrow_forward_ios"
+            onPress={toggleLogoutModal}
+          />
         }
       />
     );
@@ -223,6 +258,7 @@ function LayoutHeader({
       onBackdropPress={toggleModal}
     >
       <View style={S.supportContainer}>
+        {renderSignInConfigItem()}
         <ConfigItem
           icon={{
             name: "notifications",
@@ -335,6 +371,8 @@ function LayoutHeader({
       {renderTicketModal()}
 
       {renderConfigModal()}
+
+      {renderLogoutModal()}
 
       {renderDeleteAccountModal()}
     </View>
