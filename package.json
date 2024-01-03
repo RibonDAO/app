@@ -149,7 +149,7 @@
     "@expo/config-plugins": "~7.2.2",
     "@expo/prebuild-config": "~6.2.4",
     "wrap-ansi": "~7.0.0",
-    "string-width": "4.1.0"
+    "string-width": "~4.1.0"
   },
   "private": true,
   "eslintConfig": {
