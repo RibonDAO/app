@@ -41,7 +41,6 @@ export default () => ({
          "UIBackgroundModes": [
            "fetch",
            "remote-notification",
-           "apple-authentication"
          ],
          "NSCameraUsageDescription": "This app requires access to your phone's camera."
       },
