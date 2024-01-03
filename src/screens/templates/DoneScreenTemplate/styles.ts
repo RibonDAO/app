@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...stylizedDisplayMd,
-    color: theme.colors.brand.primary[300],
+    color: theme.colors.brand.primary[800],
     marginTop: theme.spacingNative(10),
   },
   description: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacingNative(32),
   },
   highlightedDescription: {
-    color: theme.colors.brand.primary[300],
+    color: theme.colors.brand.primary[800],
     marginTop: theme.spacingNative(16),
     marginBottom: theme.spacingNative(32),
     textAlign: "center",
@@ -56,7 +56,18 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
+  checkboxContainer: {
+    width: "100%",
+    display: "flex",
+    marginBottom: theme.spacingNative(16),
+    marginRight: theme.spacingNative(12),
+    marginLeft: theme.spacingNative(12),
+    borderRadius: 4,
+    borderColor: theme.colors.neutral[300],
+    borderWidth: 1,
+    padding: theme.spacingNative(12),
+  },
 });
 
 export default styles;

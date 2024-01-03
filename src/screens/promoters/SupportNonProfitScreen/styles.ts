@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   defaultBodySmSemibold,
   defaultBodyXsRegular,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   supportSection: {
     paddingHorizontal: 20,
-    paddingBottom: 50,
+    marginBottom: 50,
   },
 });
 

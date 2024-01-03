@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   paragraph: {
     ...defaultBodySmRegular,
     color: theme.colors.neutral[600],
+    maxWidth: "98%",
   },
   checkbox: {
     width: 20,

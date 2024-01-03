@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { useCurrentUser } from "contexts/currentUserContext";
+import { createContext, useContext, useMemo, useState } from "react";
 
 export interface ITicketsContext {
   tickets: number;
@@ -19,11 +18,6 @@ export const TicketsContext = createContext<ITicketsContext>(
 
 function TicketsProvider({ children }: Props) {
   const [tickets, setTickets] = useState(0);
-  const { currentUser } = useCurrentUser();
-
-  useEffect(() => {
-    setTickets(0);
-  }, [JSON.stringify(currentUser)]);
 
   const addTicket = (ticketsNumber = 1) => {
     setTickets(tickets + ticketsNumber);

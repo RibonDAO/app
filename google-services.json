@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "243531812303-om91fji80r7lsh54hhcsv2rbgtr0k6fu.apps.googleusercontent.com",
+          "client_id": "243531812303-8fsa72e9oei0d5inaodbhal7llid6kmi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.ribon",
+            "certificate_hash": "4f41732dbe34936e600c72653a5e80d351784b99"
+          }
+        },
+        {
+          "client_id": "243531812303-6d5g6l7io0n7mbd2vhoa0ht5mu9132ii.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "243531812303-om91fji80r7lsh54hhcsv2rbgtr0k6fu.apps.googleusercontent.com",
+              "client_id": "243531812303-6d5g6l7io0n7mbd2vhoa0ht5mu9132ii.apps.googleusercontent.com",
               "client_type": 3
             },
             {

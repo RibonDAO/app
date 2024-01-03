@@ -1,4 +1,3 @@
-/* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import { Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
@@ -73,7 +72,11 @@ function ContributionImage({
       onPress={handleClick}
       key={name}
     >
-      <Image style={S.imageContainer} source={{ uri: coverImage }} />
+      <Image
+        accessibilityIgnoresInvertColors
+        style={S.imageContainer}
+        source={{ uri: coverImage }}
+      />
 
       {isCause && (
         <View style={S.label}>

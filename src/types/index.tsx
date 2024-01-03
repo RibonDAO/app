@@ -19,6 +19,7 @@ export type DonateScreenList = {
 export type DonationDoneParamsList = {
   nonProfit: NonProfit;
   offer: Offer;
+  flow: string;
 };
 
 export type ForYouScreenParamsList = {
@@ -99,9 +100,20 @@ export type PixInstructionsScreenParamList = {
   currency: Currencies;
 };
 
+export type InsertEmailAccountParamsList = {
+  nonProfit: NonProfit;
+};
+
+export type SentMagicLinkEmailParamsList = {
+  email: string;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  DonateScreen: DonateScreenList;
+  PrivateStack: undefined;
+  SignInScreen: undefined;
+  DonationSignInScreen: DonateScreenList;
+  SignedInScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;
   ContributionDoneScreen: ContributionDoneParamsList;
   AvailableArticleScreen: undefined;
@@ -123,6 +135,18 @@ export type RootStackParamList = {
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
   MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
+  InsertEmailScreen: undefined;
+  SentMagicLinkEmailScreen: SentMagicLinkEmailParamsList;
+  SignInByMagicLinkScreen: undefined;
+  InsertEmailAccountScreen: InsertEmailAccountParamsList;
+  ReceiveExtraTicketScreen: undefined;
+  ExtraTicketScreen: undefined;
+  ExpiredLinkScreen: undefined;
+};
+
+export type PrivateStackParamList = {
+  // todo: update with the screens that are private
+  Private: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

@@ -166,7 +166,9 @@ function CardScreen(): JSX.Element {
           />
         </View>
       </View>
-      <UserSupportBanner from="giveCauseCC_page" />
+      <View style={S.supportSection}>
+        <UserSupportBanner from="giveCauseCC_page" />
+      </View>
     </ScrollView>
   );
 }

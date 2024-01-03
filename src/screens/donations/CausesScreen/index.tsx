@@ -9,7 +9,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { PLATFORM } from "utils/constants/Application";
+import { INTEGRATION_AUTH_ID, PLATFORM } from "utils/constants/Application";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
@@ -78,7 +78,7 @@ export default function CausesScreen() {
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets } = useTickets();
-  const { currentUser } = useCurrentUser();
+  const { currentUser, signedIn } = useCurrentUser();
   const [isNotificationCardVisible, setNotificationCardVisible] =
     useState(false);
 
@@ -208,7 +208,8 @@ export default function CausesScreen() {
     !integration?.name?.toLowerCase()?.includes("ribon") &&
     integration &&
     canDonate &&
-    hasTickets;
+    hasTickets() &&
+    integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
 
   const handleHideNotificationClick = async () => {
     const hideAlert = () => {
@@ -249,6 +250,18 @@ export default function CausesScreen() {
         />
       </View>
     );
+
+  const handleButtonPress = (nonProfit: NonProfit) => {
+    logEvent("donateTicketBtn_start", {
+      nonProfitId: nonProfit.id,
+      from: "nonprofitCard",
+    });
+    if (signedIn) {
+      navigateTo("SignedInScreen", { nonProfit });
+    } else {
+      navigateTo("DonationSignInScreen", { nonProfit });
+    }
+  };
 
   return isLoading || loadingCanDonate || loadingFirstAccessToIntegration ? (
     <Placeholder />
@@ -317,13 +330,7 @@ export default function CausesScreen() {
                 onImagePress={() => {
                   handleNonProfitImagePress(nonProfit);
                 }}
-                onClickButton={() => {
-                  logEvent("donateTicketBtn_start", {
-                    nonProfitId: nonProfit.id,
-                    from: "nonprofitCard",
-                  });
-                  navigateTo("DonateScreen", { nonProfit });
-                }}
+                onClickButton={() => handleButtonPress(nonProfit)}
                 buttonDisabled={!hasTickets()}
                 labelText={t("labelText") || ""}
               />
