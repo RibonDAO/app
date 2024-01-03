@@ -1,5 +1,5 @@
 import ModalDialog from "components/moleculars/modals/ModalDialog";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
@@ -41,7 +41,7 @@ export default function ModalButtonSelector({
 
   return (
     <ModalDialog visible={visible} setVisible={setVisible} title={title}>
-      <View style={S.container}>
+      <ScrollView contentContainerStyle={S.container}>
         {items.map((item, index) => (
           <Button
             onPress={() => {
@@ -55,7 +55,7 @@ export default function ModalButtonSelector({
             borderColor={borderColor(index)}
           />
         ))}
-      </View>
+      </ScrollView>
     </ModalDialog>
   );
 }
