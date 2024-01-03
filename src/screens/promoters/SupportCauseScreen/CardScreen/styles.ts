@@ -126,6 +126,9 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     color: theme.colors.neutral[500],
   },
+  supportSection: {
+    paddingBottom: 72,
+  },
 });
 
 export default styles;

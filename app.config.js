@@ -1,5 +1,5 @@
-const version = "5.3.3";
-const buildNumber = 344;
+const version = "5.4.1";
+const buildNumber = 346;
 
 export default () => ({
   "expo": {
@@ -40,13 +40,15 @@ export default () => ({
       "infoPlist": {
          "UIBackgroundModes": [
            "fetch",
-           "remote-notification"
+           "remote-notification",
+           "apple-authentication"
          ],
          "NSCameraUsageDescription": "This app requires access to your phone's camera."
       },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
       "buildNumber": buildNumber.toString(),
+      "usesAppleSignIn": true
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -112,7 +114,9 @@ export default () => ({
            }
 
          }
-      ]
+      ],
+      ["@react-native-google-signin/google-signin"],
+      "expo-apple-authentication"
     ],
     "extra": {
       "eas": {
@@ -127,6 +131,7 @@ export default () => ({
       "EXPO_PUBLIC_CIO_SITE_ID": process.env.EXPO_PUBLIC_CIO_SITE_ID,
       "EXPO_PUBLIC_CIO_API_KEY": process.env.EXPO_PUBLIC_CIO_API_KEY,
       "EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID": process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID,
+      "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
     },
     "runtimeVersion": {
       "policy": "appVersion"

@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
   leftIcon: {
     marginRight: 8,
   },
+  leftItem: {
+    marginRight: 8,
+  },
 });
 
 export default styles;

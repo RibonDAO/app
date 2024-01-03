@@ -96,6 +96,9 @@ const styles = StyleSheet.create({
     marginTop: theme.spacingNative(4),
     textAlign: "center",
   },
+  supportSection: {
+    paddingBottom: 72,
+  },
 });
 
 export default styles;

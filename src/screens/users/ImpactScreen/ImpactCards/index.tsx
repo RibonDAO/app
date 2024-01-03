@@ -64,8 +64,10 @@ function ImpactCards(): JSX.Element {
   );
 
   return (
-    <View style={S.cardsContainer}>
-      {impacts().map((impact: any) => renderItem(impact))}
+    <View>
+      <View style={S.cardsContainer}>
+        {impacts().map((impact: any) => renderItem(impact))}
+      </View>
     </View>
   );
 }
