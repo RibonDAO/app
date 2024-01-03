@@ -11,12 +11,34 @@ import {
 } from "lib/localStorage/constants";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { logError } from "services/crashReport";
+import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 
+type authTokenProps = {
+  onSuccess?: () => void;
+  onError?: () => void;
+};
+
+type authenticationEmailProps = {
+  email?: string;
+  id?: string;
+  onSuccess?: () => void;
+  onError?: () => void;
+};
 export interface IAuthenticationContext {
   accessToken: string | null;
+  magicLinkToken: string | null;
+  accountId: string | null;
+  extraTicket: string | null;
   logout: () => void;
   signInWithGoogle: (response: any) => void;
+  signInByMagicLink: (signInByMagicLinkProps: authTokenProps) => void;
+  sendAuthenticationEmail: (
+    sendAuthenticationEmailProps: authenticationEmailProps,
+  ) => void;
   signInWithApple: (response: any) => void;
+  setMagicLinkToken: (token: string) => void;
+  setAccountId: (id: string) => void;
+  setExtraTicket: (extraTicket: string) => void;
 }
 
 export type Props = {
@@ -29,6 +51,9 @@ export const AuthenticationContext = createContext<IAuthenticationContext>(
 
 function AuthenticationProvider({ children }: Props) {
   const [accessToken, setAccessToken] = useState("");
+  const [magicLinkToken, setMagicLinkToken] = useState("");
+  const [accountId, setAccountId] = useState("");
+  const [extraTicket, setExtraTicket] = useState("");
   const { setCurrentUser } = useCurrentUser();
   const emailDoesNotMatchMessage = "Email does not match";
 
@@ -67,6 +92,44 @@ function AuthenticationProvider({ children }: Props) {
     }
   }
 
+  async function signInByMagicLink({ onSuccess, onError }: authTokenProps) {
+    try {
+      const response = await userAuthenticationApi.postAuthorizeFromAuthToken(
+        magicLinkToken,
+        accountId,
+      );
+
+      signIn(response);
+
+      if (onSuccess) onSuccess();
+    } catch (error: any) {
+      logError(error);
+      if (onError) onError();
+    }
+  }
+
+  async function sendAuthenticationEmail({
+    email,
+    id,
+    onSuccess,
+    onError,
+  }: authenticationEmailProps) {
+    try {
+      const response = await userAuthenticationApi.postSendAuthenticationEmail(
+        email,
+        id,
+        INTEGRATION_AUTH_ID,
+      );
+      if (onSuccess) onSuccess();
+      setCurrentUser(response.data.user);
+      return response.data.user.email;
+    } catch (error: any) {
+      logError(error);
+      if (onError) onError();
+    }
+    return "";
+  }
+
   async function signInWithApple(response: any) {
     try {
       const authResponse = await userAuthenticationApi.postAuthenticate(
@@ -96,9 +159,17 @@ function AuthenticationProvider({ children }: Props) {
       logout,
       accessToken,
       signInWithGoogle,
+      signInByMagicLink,
+      sendAuthenticationEmail,
       signInWithApple,
+      accountId,
+      setAccountId,
+      magicLinkToken,
+      setMagicLinkToken,
+      extraTicket,
+      setExtraTicket,
     }),
-    [accessToken],
+    [accessToken, magicLinkToken, accountId, extraTicket],
   );
 
   return (

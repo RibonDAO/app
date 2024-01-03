@@ -9,6 +9,9 @@ export type Props = {
   sectionStyle?: any;
   lineThroughOnChecked?: boolean;
   navigationCallback?: () => void;
+  checkedColor?: string;
+  unCheckedColor?: string;
+  onChecked?: () => void;
   disabled?: boolean;
   checked?: boolean;
 };
@@ -18,6 +21,9 @@ function CheckBox({
   lineThroughOnChecked = false,
   sectionStyle = {},
   navigationCallback,
+  checkedColor = theme.colors.brand.primary[900],
+  unCheckedColor = theme.colors.brand.primary[300],
+  onChecked,
   disabled,
   checked = false,
 }: Props): JSX.Element {
@@ -30,6 +36,10 @@ function CheckBox({
 
     if (navigationCallback) {
       navigationCallback();
+    }
+
+    if (onChecked) {
+      onChecked();
     }
   };
 
@@ -51,8 +61,8 @@ function CheckBox({
         <View
           style={{
             ...styles.checkbox,
-            backgroundColor: isChecked ? primary[900] : neutral10,
-            borderColor: isChecked ? primary[900] : primary[300],
+            backgroundColor: isChecked ? checkedColor : neutral10,
+            borderColor: isChecked ? checkedColor : unCheckedColor,
           }}
         >
           {isChecked && (

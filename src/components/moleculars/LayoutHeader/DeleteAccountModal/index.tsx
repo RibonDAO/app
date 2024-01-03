@@ -3,6 +3,7 @@ import ModalDialog from "components/moleculars/modals/ModalDialog";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { logEvent } from "services/analytics";
 
 type Props = {
   visible: boolean;
@@ -26,6 +27,7 @@ function DeleteAccountModal({ visible, setVisible }: Props): JSX.Element {
     setEmailSent(true);
     logoutCurrentUser();
     sendDeleteAccountEmail();
+    logEvent("deleteAccountConfirmBtn_click");
   };
 
   const { t } = useTranslation("translation", {

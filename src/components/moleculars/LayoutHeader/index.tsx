@@ -84,6 +84,7 @@ function LayoutHeader({
 
   const toggleDeleteAccountModal = () => {
     toggleModal();
+    logEvent("deleteAccountBtn_click");
 
     setTimeout(() => {
       setDeleteAccountModalVisible(!deleteAccountModalVisible);
@@ -92,6 +93,7 @@ function LayoutHeader({
 
   const toggleLogoutModal = () => {
     toggleModal();
+    logEvent("signoutBtn_click");
 
     setTimeout(() => {
       setLogoutModalVisible(!logoutModalVisible);

@@ -96,9 +96,10 @@
       }
     },
     "donationDoneScreen": {
-      "title": "Parabéns!",
-      "buttonText": "Fechar",
-      "description": "Você doou"
+      "title": "Obrigada pela doação!",
+      "buttonTitle": "Finalizar",
+      "description": "Você doou",
+      "checkboxText": "Quero receber informações sobre minhas doações por e-mail"
     },
     "postDonationScreen": {
       "title": "Se quiser, você pode fazer mais",
@@ -123,6 +124,12 @@
         "impactOneLife": "Impacte 1 pessoa",
         "impactDescription": "com {{value}}",
         "checkboxText": "Aceito receber e-mails com informações sobre minhas doações"
+      },
+      "insertEmailAccountScreen": {
+        "title": "Você está doando",
+        "emailLabel": "E-mail",
+        "confirmText": "Continuar",
+        "emailPlaceholder": "Seu e-mail"
       }
     }
   },
@@ -458,6 +465,37 @@
   "auth": {
     "signInScreen": {
       "title": "Entre na sua conta"
+    },
+    "insertEmailScreen": {
+      "title": "Entre com um e-mail",
+      "emailLabel": "E-mail",
+      "confirmText": "Continuar",
+      "emailPlaceholder": "Seu e-mail"
+    },
+    "sentMagicLinkEmailScreen": {
+      "title": "Link de entrada enviado",
+      "text": "Clique no link enviado para {{email}} para entrar",
+      "firstAccessTitle": "Você ganhou um ticket extra",
+      "firstAccessText": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra",
+      "buttonText": "Continuar"
+    },
+    "expiredLinkScreen": {
+      "loading": "Carregando...",
+      "invalidLink": "Link inválido",
+      "expiredLink": "Este link expirou",
+      "expiredLinkText": "Por favor, tente entrar ou se cadastrar novamente para receber um novo link de validação de conta",
+      "buttonText": "Me mande outro link",
+      "buttonTextWithoutEmail": "Continuar"
+    },
+    "extraTicketScreen": {
+      "title": "Você ganhou um ticket extra",
+      "description": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra",
+      "buttonText": "Continuar sem ticket extra"
+    },
+    "receiveExtraTicketScreen": {
+      "title": "Validar sua conta trouxe você aqui",
+      "description": "Seu ticket extra está disponível",
+      "buttonText": "Receber meu ticket"
     }
   }
 }

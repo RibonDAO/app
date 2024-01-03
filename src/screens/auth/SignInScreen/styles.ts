@@ -5,11 +5,11 @@ import { theme } from "@ribon.io/shared/styles";
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: theme.spacingNative(16),
+    paddingVertical: theme.spacingNative(48),
   },
   imageContainer: {
     marginTop: theme.spacingNative(24),
-    paddingHorizontal: theme.spacingNative(64),
-    paddingVertical: theme.spacingNative(48),
+    marginBottom: theme.spacingNative(24),
     alignItems: "center",
     justifyContent: "center",
   },

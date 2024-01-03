@@ -7,7 +7,6 @@ import { useDonations } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { PLATFORM } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
-import BackgroundShapes from "components/vectors/BackgroundShapes";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useUtmContext } from "contexts/utmContext";
 import { logEvent } from "services/analytics";
@@ -99,9 +98,6 @@ function SignedInScreen() {
       ) : (
         <View style={S.container}>
           <View style={S.imageContainer}>
-            <View style={S.imageBackground}>
-              <BackgroundShapes />
-            </View>
             <Image
               style={S.mainImage}
               source={{ uri: nonProfit.mainImage }}
