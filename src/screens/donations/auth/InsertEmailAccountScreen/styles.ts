@@ -4,7 +4,6 @@ import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyMdRegular,
   defaultBodyMdSemibold,
-  defaultBodySmRegular,
 } from "styles/typography/default";
 
 const styles = StyleSheet.create({
@@ -34,7 +33,6 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 8,
   },
-
   title: {
     ...stylizedDisplayXs,
     color: theme.colors.brand.primary[900],
@@ -44,18 +42,12 @@ const styles = StyleSheet.create({
     ...defaultBodyMdSemibold,
     color: theme.colors.neutral[500],
     marginBottom: theme.spacingNative(24),
+    textAlign: "center",
   },
   button: {
     height: 48,
-  },
-  privacyPolicyText: {
-    ...defaultBodySmRegular,
-    color: theme.colors.neutral[600],
-    textAlign: "center",
-    marginTop: theme.spacingNative(16),
-  },
-  privacyPolicyLink: {
-    color: theme.colors.brand.primary[600],
+    backgroundColor: theme.colors.brand.primary[600],
+    borderColor: theme.colors.brand.primary[800],
   },
   inputContainer: {
     height: 48,

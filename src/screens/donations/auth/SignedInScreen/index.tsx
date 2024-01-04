@@ -27,7 +27,7 @@ function SignedInScreen() {
   const { currentUser } = useCurrentUser();
   const { donate } = useDonations(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
-  const { navigateTo, popNavigation } = useNavigation();
+  const { navigateTo } = useNavigation();
 
   const { currentIntegrationId, externalId } = useIntegrationContext();
   const { setTickets } = useTickets();
@@ -48,9 +48,11 @@ function SignedInScreen() {
     setDonationSucceeded(false);
     showToast({
       type: "error",
-      message: error?.response?.data?.formatted_message,
+      message: error?.response?.data?.formatted_message || t("donationError"),
     });
-    popNavigation();
+
+    setTickets(0);
+    navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
 
   const handleButtonPress = async () => {
