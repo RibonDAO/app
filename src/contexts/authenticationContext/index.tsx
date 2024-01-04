@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { userAuthenticationApi } from "@ribon.io/shared/services";
 import { useCurrentUser } from "contexts/currentUserContext";
 import {
@@ -36,7 +37,7 @@ export interface IAuthenticationContext {
     sendAuthenticationEmailProps: authenticationEmailProps,
   ) => void;
   signInWithApple: (response: any) => void;
-  isAuthenticated: boolean;
+  isAuthenticated: () => boolean;
   setMagicLinkToken: (token: string) => void;
   setAccountId: (id: string) => void;
   setExtraTicket: (extraTicket: string) => void;
@@ -51,7 +52,7 @@ export const AuthenticationContext = createContext<IAuthenticationContext>(
 );
 
 function AuthenticationProvider({ children }: Props) {
-  const [accessToken, setAccessToken] = useState("");
+  const [accessToken, setAccessToken] = useState<string | null>("");
   const [magicLinkToken, setMagicLinkToken] = useState("");
   const [accountId, setAccountId] = useState("");
   const [extraTicket, setExtraTicket] = useState("");
@@ -60,12 +61,18 @@ function AuthenticationProvider({ children }: Props) {
 
   const fetchAcessToken = async () => {
     const accessTokenKey = await getLocalStorageItem(ACCESS_TOKEN_KEY);
-    if (accessTokenKey) setAccessToken(accessTokenKey);
+    setAccessToken(accessTokenKey);
   };
 
-  function logout() {
-    removeLocalStorageItem(ACCESS_TOKEN_KEY);
-    removeLocalStorageItem(REFRESH_TOKEN_KEY);
+  function isAuthenticated() {
+    return !!accessToken;
+  }
+
+  async function logout() {
+    await removeLocalStorageItem(ACCESS_TOKEN_KEY);
+    await removeLocalStorageItem(REFRESH_TOKEN_KEY);
+    await AsyncStorage.removeItem(ACCESS_TOKEN_KEY);
+    await AsyncStorage.removeItem(REFRESH_TOKEN_KEY);
     fetchAcessToken();
   }
 
@@ -169,7 +176,7 @@ function AuthenticationProvider({ children }: Props) {
       signInByMagicLink,
       sendAuthenticationEmail,
       signInWithApple,
-      isAuthenticated: !!accessToken,
+      isAuthenticated,
       accountId,
       setAccountId,
       magicLinkToken,
