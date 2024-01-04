@@ -6,7 +6,7 @@ import { useCardPaymentInformation } from "contexts/cardPaymentInformationContex
 import { useOffers } from "@ribon.io/shared/hooks";
 import { Currencies, Offer, NonProfit, Cause } from "@ribon.io/shared/types";
 import { useEffect, useState } from "react";
-import { useGooglePay } from "@stripe/stripe-react-native";
+import { useApplePay, useGooglePay } from "@stripe/stripe-react-native";
 import { useStripeContext } from "contexts/stripeContext";
 import { useRouteParams } from "hooks/useRouteParams";
 import Icon from "components/atomics/Icon";
@@ -33,7 +33,7 @@ export default function CardSection() {
     keyPrefix: "promoters.checkoutScreen",
   });
 
-  // const { isApplePaySupported } = useApplePay();
+  const { isApplePaySupported } = useApplePay();
   const { isGooglePaySupported } = useGooglePay();
 
   const {
@@ -271,7 +271,7 @@ export default function CardSection() {
                 </View>
               ),
               rightIcon: <ApplePayIcon />,
-              show: false,
+              show: isApplePaySupported && !isSubscription,
             },
             {
               title: t("paymentMethodSection.pix"),

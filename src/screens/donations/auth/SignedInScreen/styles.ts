@@ -6,24 +6,16 @@ import { defaultBodyMdSemibold } from "styles/typography/default";
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: theme.spacingNative(16),
+    paddingVertical: theme.spacingNative(48),
   },
   imageContainer: {
     marginTop: theme.spacingNative(24),
-    paddingHorizontal: theme.spacingNative(64),
-    paddingVertical: theme.spacingNative(48),
     alignItems: "center",
     justifyContent: "center",
   },
   contentContainer: {
     marginTop: theme.spacingNative(24),
     alignItems: "center",
-  },
-  imageBackground: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
   },
   mainImage: {
     width: 200,
