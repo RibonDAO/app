@@ -70,7 +70,7 @@ export default function DonationDoneScreen({
     }
     if (flow === "magicLink" && isFirstAccessToAuthIntegration) {
       navigateTo("ExtraTicketScreen");
-    } else if (!isAuthenticated && isFirstAccessToAuthIntegration) {
+    } else if (!isAuthenticated() && isFirstAccessToAuthIntegration) {
       navigateTo("SignInExtraTicketScreen");
     } else if (!isLoading && userStatistics) {
       navigateTo("PostDonationScreen", {
