@@ -436,8 +436,12 @@
     }
   },
   "contributionSection": {
+    "titleCard": "Faça ainda mais",
     "title": "Que incrível! Obrigado por ajudar {{nonProfitName}}",
-    "nonProfits": "ONGs"
+    "titleNewImpact": "Graças a você a {{nonProfitName}} poderá impactar 1 pessoa. Obrigado!",
+    "nonProfits": "ONGs",
+    "button": "Doar",
+    "donate": "Doe {{value}}"
   },
   "contributionCard": {
     "button": "Doar",
