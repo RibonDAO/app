@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import Subscription from "@ribon.io/shared/types/entities/Subscription";
 import React, { useState } from "react";
 import Icon from "components/atomics/Icon";
@@ -48,7 +48,7 @@ export default function MonthlyContributionsScreen(): JSX.Element {
   };
 
   return (
-    <View style={S.container}>
+    <ScrollView style={S.container}>
       <View style={S.arrow}>
         <TouchableOpacity
           accessibilityRole="button"
@@ -96,6 +96,6 @@ export default function MonthlyContributionsScreen(): JSX.Element {
           </View>
         ))}
       </View>
-    </View>
+    </ScrollView>
   );
 }
