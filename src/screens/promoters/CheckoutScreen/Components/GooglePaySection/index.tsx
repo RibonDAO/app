@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { GooglePayButton, useGooglePay } from "@stripe/stripe-react-native";
 import { View } from "react-native";
 import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
 import { useTasksContext } from "contexts/tasksContext";
@@ -16,6 +15,11 @@ import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { normalizedLanguage } from "lib/currentLanguage";
 import { PLATFORM } from "utils/constants/Application";
+import {
+  PlatformPay,
+  PlatformPayButton,
+  createPlatformPayPaymentMethod,
+} from "@stripe/stripe-react-native";
 import S from "./styles";
 
 type Props = {
@@ -28,9 +32,6 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { currentIntegrationId } = useIntegrationContext();
   const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
-  const { isGooglePaySupported, initGooglePay, createGooglePayPaymentMethod } =
-    useGooglePay();
-  const [initialized, setInitialized] = useState(false);
   const [taxId, setTaxId] = useState("");
   const { t: field } = useTranslation("translation", {
     keyPrefix: "promoters.checkoutScreen.paymentMethodSection.creditCardFields",
@@ -51,33 +52,6 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
 
   useEffect(() => {
     logEvent("selectGooglePay_click");
-  }, []);
-
-  const initialize = async () => {
-    if (!(await isGooglePaySupported({ testEnv }))) return;
-
-    const { error } = await initGooglePay({
-      testEnv,
-      merchantName: "Ribon",
-      countryCode: "BR",
-      billingAddressConfig: {
-        format: "FULL",
-        isPhoneNumberRequired: false,
-        isRequired: true,
-      },
-      existingPaymentMethodRequired: false,
-      isEmailRequired: true,
-    });
-
-    if (error) {
-      logError(error);
-      return;
-    }
-    setInitialized(true);
-  };
-
-  useEffect(() => {
-    initialize();
   }, []);
 
   const showFiscalFields = () => offer.gateway === "stripe";
@@ -101,9 +75,21 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
 
   const createPaymentMethod = async () => {
     showLoadingOverlay();
-    const { error, paymentMethod } = await createGooglePayPaymentMethod({
-      amount: offer.priceCents,
-      currencyCode: offer.currency,
+    const { error, paymentMethod } = await createPlatformPayPaymentMethod({
+      googlePay: {
+        amount: offer.priceCents,
+        currencyCode: offer.currency,
+        testEnv,
+        merchantName: "Ribon",
+        merchantCountryCode: "BR",
+        billingAddressConfig: {
+          format: PlatformPay.BillingAddressFormat.Full,
+          isPhoneNumberRequired: false,
+          isRequired: true,
+        },
+        existingPaymentMethodRequired: false,
+        isEmailRequired: true,
+      },
     });
 
     if (error) {
@@ -156,25 +142,27 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
 
   return (
     <View>
-      {showFiscalFields() && (
-        <InputText
-          name="taxId"
-          placeholder={field("taxId")}
-          mask="999.999.999-99"
-          value={taxId}
-          onChangeText={(value) => setTaxId(value)}
-          maxLength={14}
-          keyboardType="numeric"
-          style={{ display: "flex", flex: 1 }}
-        />
-      )}
-      {initialized && (
-        <GooglePayButton
+      <View>
+        {showFiscalFields() && (
+          <InputText
+            name="taxId"
+            placeholder={field("taxId")}
+            mask="999.999.999-99"
+            value={taxId}
+            onChangeText={(value) => setTaxId(value)}
+            maxLength={14}
+            keyboardType="numeric"
+            style={{ display: "flex", flex: 1 }}
+          />
+        )}
+
+        <PlatformPayButton
+          type={PlatformPay.ButtonType.Pay}
           onPress={createPaymentMethod}
           style={S.payButton}
           disabled={googlePayButtonDisabled()}
         />
-      )}
+      </View>
     </View>
   );
 }

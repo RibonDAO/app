@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   },
   description: {
     ...defaultBodyMdSemibold,
+    textAlign: "center",
     color: theme.colors.neutral[500],
     marginBottom: theme.spacingNative(24),
   },

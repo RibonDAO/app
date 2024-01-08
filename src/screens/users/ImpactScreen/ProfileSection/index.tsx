@@ -21,7 +21,7 @@ function ProfileSection() {
 
   useEffect(() => {
     refetch();
-  });
+  }, []);
 
   if (!currentUser) return <View />;
 
