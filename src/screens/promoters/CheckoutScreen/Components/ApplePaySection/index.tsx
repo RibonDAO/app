@@ -3,7 +3,6 @@ import { View } from "react-native";
 import {
   createPlatformPayPaymentMethod,
   PlatformPay,
-  confirmPlatformPayPayment,
   PlatformPayButton,
 } from "@stripe/stripe-react-native";
 import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
@@ -124,23 +123,8 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         taxId,
       };
       try {
-        const response = await storePayApi.postStorePay(data);
+        await storePayApi.postStorePay(data);
 
-        await confirmPlatformPayPayment(response.data.clientSecret, {
-          applePay: {
-            cartItems: cart,
-            merchantCountryCode: "BR",
-            currencyCode: offer.currency,
-            requiredShippingAddressFields: [
-              PlatformPay.ContactField.EmailAddress,
-            ],
-            requiredBillingContactFields: [
-              PlatformPay.ContactField.Name,
-              PlatformPay.ContactField.EmailAddress,
-              PlatformPay.ContactField.PostalAddress,
-            ],
-          },
-        });
         registerAction("contribution_done_screen_view");
         navigateTo("ContributionDoneScreen", {
           cause,
