@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     ...defaultBodyMdSemibold,
     color: theme.colors.neutral[500],
     marginBottom: theme.spacingNative(16),
+    textAlign: "center",
   },
 });
 

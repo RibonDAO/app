@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import usePayable from "hooks/usePayable";
@@ -6,7 +6,6 @@ import { useCardPaymentInformation } from "contexts/cardPaymentInformationContex
 import { useOffers } from "@ribon.io/shared/hooks";
 import { Currencies, Offer, NonProfit, Cause } from "@ribon.io/shared/types";
 import { useEffect, useState } from "react";
-import { useApplePay, useGooglePay } from "@stripe/stripe-react-native";
 import { useStripeContext } from "contexts/stripeContext";
 import { useRouteParams } from "hooks/useRouteParams";
 import Icon from "components/atomics/Icon";
@@ -32,9 +31,6 @@ export default function CardSection() {
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.checkoutScreen",
   });
-
-  const { isApplePaySupported } = useApplePay();
-  const { isGooglePaySupported } = useGooglePay();
 
   const {
     target,
@@ -64,8 +60,6 @@ export default function CardSection() {
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentIndex, setCurrentIndex] = useState<number>();
   const [offersModalVisible, setOffersModalVisible] = useState(false);
-  const [isGooglePaySupportedState, setIsGooglePaySupportedState] =
-    useState<boolean>(false);
 
   const {
     offers,
@@ -142,12 +136,6 @@ export default function CardSection() {
     }
   }, [payable]);
 
-  useEffect(() => {
-    isGooglePaySupported().then((result) => {
-      setIsGooglePaySupportedState(result);
-    });
-  }, []);
-
   const handleOfferChange = (offerItem: Offer) => {
     const offerChanged = offers?.find(
       (item: Offer) => item.priceCents === offerItem.priceCents,
@@ -183,6 +171,8 @@ export default function CardSection() {
 
   const showPix = () =>
     currentOffer?.gateway === "stripe" && currentOffer?.currency === "brl";
+
+  const showApplePay = () => Platform.OS === "ios";
 
   return (
     <>
@@ -257,7 +247,7 @@ export default function CardSection() {
                 </View>
               ),
               rightIcon: <GooglePayIcon />,
-              show: isGooglePaySupportedState,
+              show: !showApplePay(),
             },
             {
               title: t("paymentMethodSection.applePay"),
@@ -271,7 +261,7 @@ export default function CardSection() {
                 </View>
               ),
               rightIcon: <ApplePayIcon />,
-              show: isApplePaySupported && !isSubscription,
+              show: showApplePay(),
             },
             {
               title: t("paymentMethodSection.pix"),
