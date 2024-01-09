@@ -18,7 +18,7 @@ import { PLATFORM } from "utils/constants/Application";
 import {
   PlatformPay,
   PlatformPayButton,
-  createPlatformPayPaymentMethod,
+  usePlatformPay,
 } from "@stripe/stripe-react-native";
 import S from "./styles";
 
@@ -47,6 +47,8 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { currentUser } = useCurrentUser();
   const { integration } = useIntegration(currentIntegrationId);
   const [email, setEmail] = useState(currentUser?.email ?? undefined);
+
+  const { createPlatformPayPaymentMethod } = usePlatformPay();
 
   const testEnv = false;
 
