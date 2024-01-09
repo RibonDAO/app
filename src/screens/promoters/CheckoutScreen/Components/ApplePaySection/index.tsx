@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import {
-  ApplePayButton,
-  useApplePay,
-  ApplePay,
+  createPlatformPayPaymentMethod,
+  PlatformPay,
+  PlatformPayButton,
 } from "@stripe/stripe-react-native";
 import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
 import storePayApi from "services/api/storePayApi";
@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { normalizedLanguage } from "lib/currentLanguage";
 import { PLATFORM } from "utils/constants/Application";
+import InputText from "components/atomics/inputs/InputText";
 import S from "./styles";
 
 type Props = {
@@ -27,14 +28,20 @@ type Props = {
 };
 
 export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
-  const [cart, setCart] = useState<ApplePay.CartSummaryItem[]>([
+  const [cart, setCart] = useState<any>([
     {
       label: "Total",
       amount: offer.priceValue.toString(),
       isPending: false,
-      paymentType: "Immediate",
+      paymentType: PlatformPay.PaymentType.Immediate,
     },
   ]);
+  const [taxId, setTaxId] = useState("");
+  const { t: field } = useTranslation("translation", {
+    keyPrefix: "promoters.checkoutScreen.paymentMethodSection.creditCardFields",
+  });
+
+  const showFiscalFields = () => offer.gateway === "stripe";
 
   useEffect(() => {
     setCart([
@@ -42,7 +49,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         label: "Total",
         amount: offer.priceValue.toString(),
         isPending: false,
-        paymentType: "Immediate",
+        paymentType: PlatformPay.PaymentType.Immediate,
       },
     ]);
   }, [offer]);
@@ -50,8 +57,6 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
   const { registerAction } = useTasksContext();
   const { currentIntegrationId } = useIntegrationContext();
 
-  const { presentApplePay, isApplePaySupported, confirmApplePayPayment } =
-    useApplePay();
   const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const { t } = useTranslation("translation", {
@@ -84,21 +89,24 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
 
   const pay = async () => {
     showLoadingOverlay();
-    const { error, paymentMethod } = await presentApplePay({
-      cartItems: cart,
-      country: "BR",
-      currency: offer.currency,
-      requiredShippingAddressFields: ["emailAddress"],
-      requiredBillingContactFields: ["name", "emailAddress", "postalAddress"],
-      jcbEnabled: true,
+    const { error, paymentMethod } = await createPlatformPayPaymentMethod({
+      applePay: {
+        cartItems: cart,
+        merchantCountryCode: "BR",
+        currencyCode: offer.currency,
+        requiredShippingAddressFields: [PlatformPay.ContactField.EmailAddress],
+        requiredBillingContactFields: [
+          PlatformPay.ContactField.Name,
+          PlatformPay.ContactField.EmailAddress,
+          PlatformPay.ContactField.PostalAddress,
+        ],
+      },
     });
-
     if (error) {
       hideLoadingOverlay();
     } else if (paymentMethod) {
       const { email: APayEmail, name, address } = paymentMethod.billingDetails;
       login();
-
       const data = {
         offerId: offer.id,
         paymentMethodId: paymentMethod.id,
@@ -112,13 +120,12 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         nonProfitId: nonProfit?.id,
         paymentMethodType: "apple_pay",
         platform: PLATFORM,
+        taxId,
       };
-
       try {
-        const response = await storePayApi.postStorePay(data);
-        await confirmApplePayPayment(response.data.clientSecret);
-        registerAction("contribution_done_screen_view");
+        await storePayApi.postStorePay(data);
 
+        registerAction("contribution_done_screen_view");
         navigateTo("ContributionDoneScreen", {
           cause,
           nonProfit,
@@ -136,19 +143,32 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
     }
   };
 
+  const applePayButtonDisabled = () => showFiscalFields() && taxId.length < 14;
+
   return (
     <View>
-      {isApplePaySupported && (
-        <View>
-          <ApplePayButton
-            onPress={pay}
-            type="donate"
-            buttonStyle="black"
-            borderRadius={4}
-            style={S.payButton}
+      <View>
+        {showFiscalFields() && (
+          <InputText
+            name="taxId"
+            placeholder={field("taxId")}
+            mask="999.999.999-99"
+            value={taxId}
+            onChangeText={(value) => setTaxId(value)}
+            maxLength={14}
+            keyboardType="numeric"
+            style={{ display: "flex", flex: 1 }}
           />
-        </View>
-      )}
+        )}
+        <PlatformPayButton
+          onPress={pay}
+          type={PlatformPay.ButtonType.Pay}
+          borderRadius={4}
+          appearance={PlatformPay.ButtonStyle.Black}
+          style={S.payButton}
+          disabled={applePayButtonDisabled()}
+        />
+      </View>
     </View>
   );
 }

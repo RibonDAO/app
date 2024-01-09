@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexWrap: "wrap",
     marginTop: theme.spacingNative(16),
-    height: "100%",
   },
   button: {
     width: "49%",

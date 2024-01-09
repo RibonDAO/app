@@ -444,7 +444,11 @@
   },
   "contributionSection": {
     "title": "Amazing! Thank you for helping {{nonProfitName}}",
-    "nonProfits": "NGOs"
+    "titleNewImpact": "Thanks to you, {{nonProfitName}} will be able to impact 1 person. Thank you!",
+    "titleCard": "Do even more",
+    "nonProfits": "NGOs",
+    "button": "Donate",
+    "donate": "Donate {{value}}"
   },
   "contributionCard": {
     "button": "Donate",

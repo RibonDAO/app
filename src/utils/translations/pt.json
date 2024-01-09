@@ -90,9 +90,10 @@
       "privacyPolicyText": "Política de Privacidade",
       "privacyPolicyLink": "https://ribon.io/privacy-policy/#pol%C3%ADtica",
       "and": " e a",
-      "signedInSection": {
+      "signedInScreen": {
         "title": "Sua doação",
-        "confirmDonation": "Confirmar doação"
+        "confirmDonation": "Confirmar doação",
+        "donationError": "Não foi possível doar."
       }
     },
     "donationDoneScreen": {
@@ -129,7 +130,8 @@
         "title": "Você está doando",
         "emailLabel": "E-mail",
         "confirmText": "Continuar",
-        "emailPlaceholder": "Seu e-mail"
+        "emailPlaceholder": "Seu e-mail",
+        "donationError": "Não foi possível doar."
       }
     }
   },
@@ -436,8 +438,12 @@
     }
   },
   "contributionSection": {
+    "titleCard": "Faça ainda mais",
     "title": "Que incrível! Obrigado por ajudar {{nonProfitName}}",
-    "nonProfits": "ONGs"
+    "titleNewImpact": "Graças a você a {{nonProfitName}} poderá impactar 1 pessoa. Obrigado!",
+    "nonProfits": "ONGs",
+    "button": "Doar",
+    "donate": "Doe {{value}}"
   },
   "contributionCard": {
     "button": "Doar",
