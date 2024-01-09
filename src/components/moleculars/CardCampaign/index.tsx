@@ -98,6 +98,7 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
     ctaText: t("button"),
     image: nonProfit?.mainImage || nonProfit?.cause?.mainImage,
     active: true,
+    ctaUrl: "",
   };
 
   return (

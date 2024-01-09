@@ -29,6 +29,7 @@ function TicketSection({ canDonate, isFirstAccessToIntegration }: Props) {
       const alreadyReceivedTicket = await getLocalStorageItem(
         ALREADY_RECEIVED_TICKET_KEY,
       );
+
       if (canDonate) {
         if (alreadyReceivedTicket === "true") setTickets(1);
 
