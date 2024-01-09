@@ -77,6 +77,11 @@ export default function CardSection() {
     setCurrentOffer(offers[0]);
   };
 
+  async function checkPlatformPay() {
+    const isSupported = await isPlatformPaySupported();
+    setCheckPlatformPaySupport(isSupported);
+  }
+
   useEffect(() => {
     if (offers && offerPrice !== undefined && !isLoadingOffers) {
       const actualOffer = offers.find(
@@ -108,12 +113,8 @@ export default function CardSection() {
   }, [offerParam]);
 
   useEffect(() => {
-    async function checkPlatformPay() {
-      const isSupported = await isPlatformPaySupported();
-      setCheckPlatformPaySupport(isSupported);
-    }
     checkPlatformPay();
-  }, [isPlatformPaySupported, checkPlatformPaySupport]);
+  }, [isPlatformPaySupported]);
 
   useEffect(() => {
     if (offers && currentIndex !== undefined && !isLoadingOffers) {
