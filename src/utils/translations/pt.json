@@ -509,7 +509,8 @@
       "description": "Valide sua conta criada com {{email}} para receber seu ticket extra",
       "google": "Continuar com Google",
       "apple": "Continuar com Apple",
-      "email": "Continuar com e-mail"
+      "email": "Continuar com e-mail",
+      "toastSuccessMessage": "Seu ticket foi enviado por e-mail"
     },
     "receiveExtraTicketScreen": {
       "title": "Validar sua conta trouxe você aqui",

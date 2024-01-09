@@ -15,6 +15,9 @@ import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { showToast } from "lib/Toast";
+import { userAccountApi } from "@ribon.io/shared";
+import { useAuthentication } from "contexts/authenticationContext";
 import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
@@ -26,6 +29,21 @@ function SignInExtraTicketScreen() {
 
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
+  const { sendAuthenticationEmail } = useAuthentication();
+
+  const onContinue = async (pathname: string) => {
+    await userAccountApi.postSendValidatedEmail();
+    navigateTo(pathname);
+    showToast({
+      type: "success",
+      message: t("toastSuccessMessage"),
+    });
+  };
+
+  const onContinueMagicLink = (pathname: string) => {
+    sendAuthenticationEmail({ email: currentUser?.email });
+    navigateTo(pathname, { email: currentUser?.email });
+  };
 
   return (
     <KeyboardAvoidingView
@@ -47,18 +65,18 @@ function SignInExtraTicketScreen() {
               {t("description", { email: currentUser?.email })}
             </Text>
             <GoogleLogin
-              onContinue={() => navigateTo("CausesScreen")}
-              from="direct_flow"
+              onContinue={() => onContinue("CausesScreen")}
+              from="validation_flow"
             />
             {Platform.OS === "ios" && (
               <AppleLogin
-                onContinue={() => navigateTo("CausesScreen")}
-                from="direct_flow"
+                onContinue={() => onContinue("CausesScreen")}
+                from="validation_flow"
               />
             )}
             <MagicLinkLogin
-              onContinue={() => navigateTo("InsertEmailScreen")}
-              from="direct_flow"
+              onContinue={() => onContinueMagicLink("SentMagicLinkEmailScreen")}
+              from="validation_flow"
             />
             <PrivacyPolicyLayout />
           </View>

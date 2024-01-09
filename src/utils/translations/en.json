@@ -518,7 +518,8 @@
       "description": "Validate your account created with {{email}} to get your extra ticket",
       "google": "Continue with Google",
       "apple": "Continue with Apple",
-      "email": "Continue with e-mail"
+      "email": "Continue with e-mail",
+      "toastSuccessMessage": "Your ticket was sent by e-mail"
     },
     "receiveExtraTicketScreen": {
       "title": "Validating your account brought you here",
