@@ -91,7 +91,7 @@ export default function GiveTicketScreen() {
             textColor={theme.colors.neutral[600]}
             backgroundColor="transparent"
             borderColor={theme.colors.neutral[300]}
-            onPress={() => handleHasAccount()}
+            onPress={handleHasAccount}
             customStyles={{
               borderWidth: 1,
               borderRadius: 4,
