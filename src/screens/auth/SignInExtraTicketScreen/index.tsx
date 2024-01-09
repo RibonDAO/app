@@ -22,7 +22,7 @@ import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
 function SignInExtraTicketScreen() {
-  usePageView("P27_view", { from: "direct_flow" });
+  usePageView("P28_view", { from: "validation_flow" });
   const { t } = useTranslation("translation", {
     keyPrefix: "auth.signInExtraTicketScreen",
   });

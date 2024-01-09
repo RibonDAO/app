@@ -21,8 +21,8 @@ describe("SignInScreen", () => {
 
   it("logs the P27_view event", async () => {
     waitForPromises();
-    expectLogEventToHaveBeenCalledWith("P27_view", {
-      from: "direct_flow",
+    expectLogEventToHaveBeenCalledWith("P28_view", {
+      from: "validation_flow",
     });
   });
 });
