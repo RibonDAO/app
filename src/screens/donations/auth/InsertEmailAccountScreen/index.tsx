@@ -19,7 +19,7 @@ import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayo
 import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { useRouteParams } from "hooks/useRouteParams";
-import { setLocalStorageItem } from "@ribon.io/shared";
+import { setLocalStorageItem, theme } from "@ribon.io/shared";
 import { showToast } from "lib/Toast";
 import { useTickets } from "contexts/ticketsContext";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
@@ -41,7 +41,7 @@ function InsertEmailAccountScreen() {
   const { sendAuthenticationEmail } = useAuthentication();
   const { handleDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
-  const { navigateTo, popNavigation } = useNavigation();
+  const { navigateTo } = useNavigation();
   const { setTickets } = useTickets();
 
   const [isDonating, setIsDonating] = useState(false);
@@ -60,11 +60,13 @@ function InsertEmailAccountScreen() {
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
+    setTickets(0);
+    console.log("error", error.data);
     showToast({
       type: "error",
-      message: error?.response?.data?.formatted_message,
+      message: error?.response?.data?.formatted_message || t("donationError"),
     });
-    popNavigation();
+    navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
 
   const onAnimationEnd = useCallback(() => {
@@ -81,13 +83,13 @@ function InsertEmailAccountScreen() {
   }, [donationSucceeded]);
 
   async function donateCallback() {
-    try {
-      await sendAuthenticationEmail({ email });
-      await handleDonate({ nonProfit, email });
-      onDonationSuccess();
-    } catch (error: any) {
-      onDonationFail(error.message);
-    }
+    await sendAuthenticationEmail({ email });
+    await handleDonate({
+      nonProfit,
+      email,
+      onError: onDonationFail,
+      onSuccess: onDonationSuccess,
+    });
   }
 
   const handleTextChange = (text: string) => {
@@ -164,6 +166,9 @@ function InsertEmailAccountScreen() {
                   onPress={handleButtonPress}
                   disabled={!isValidEmail(email)}
                   customStyles={S.button}
+                  customTextStyles={{
+                    color: theme.colors.neutral10,
+                  }}
                 />
                 <PrivacyPolicyLayout />
               </View>
