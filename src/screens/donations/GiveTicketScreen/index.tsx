@@ -80,6 +80,23 @@ export default function GiveTicketScreen() {
           }}
         />
 
+        {isOnboarding && (
+          <Button
+            text={t("hasAccountButton")}
+            textColor={theme.colors.neutral[600]}
+            backgroundColor="transparent"
+            borderColor={theme.colors.neutral[300]}
+            onPress={() => navigateTo("SignInScreen")}
+            customStyles={{
+              borderWidth: 1,
+              borderRadius: 4,
+              marginBottom: 16,
+              height: 48,
+              width: 328,
+            }}
+          />
+        )}
+
         {!isOnboarding && (
           <Tooltip tooltipText={t("ticketExplanation")}>
             <View style={S.ticketExplanationSection}>
