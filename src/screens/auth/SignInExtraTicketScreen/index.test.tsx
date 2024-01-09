@@ -19,7 +19,7 @@ describe("SignInScreen", () => {
     expectTextToBeInTheDocument("Sign in to your account");
   });
 
-  it("logs the P27_view event", async () => {
+  it("logs the P28_view event", async () => {
     waitForPromises();
     expectLogEventToHaveBeenCalledWith("P28_view", {
       from: "validation_flow",
