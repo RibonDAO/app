@@ -38,6 +38,11 @@ export default function GiveTicketScreen() {
     navigateTo("CausesScreen");
   };
 
+  const handleHasAccount = () => {
+    logEvent("openAuthBtn_click", { from: "onboarding_page" });
+    navigateTo("SignInScreen");
+  };
+
   return (
     <View style={S.container}>
       {!isOnboarding && (
@@ -86,7 +91,7 @@ export default function GiveTicketScreen() {
             textColor={theme.colors.neutral[600]}
             backgroundColor="transparent"
             borderColor={theme.colors.neutral[300]}
-            onPress={() => navigateTo("SignInScreen")}
+            onPress={() => handleHasAccount()}
             customStyles={{
               borderWidth: 1,
               borderRadius: 4,
