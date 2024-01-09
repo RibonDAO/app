@@ -16,7 +16,10 @@ describe("SignInScreen", () => {
   });
 
   it("should render without error", () => {
-    expectTextToBeInTheDocument("Sign in to your account");
+    expectTextToBeInTheDocument("You won an extra ticket");
+    expectTextToBeInTheDocument(
+      "Validate your account created with  to get your extra ticket",
+    );
   });
 
   it("logs the P28_view event", async () => {
