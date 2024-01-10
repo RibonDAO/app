@@ -98,7 +98,8 @@
       "and": " and",
       "signedInScreen": {
         "title": "Your donation",
-        "confirmDonation": "Confirm donation"
+        "confirmDonation": "Confirm donation",
+        "donationError": "Unable to donate now"
       }
     },
     "donationDoneScreen": {
