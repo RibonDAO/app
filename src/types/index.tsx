@@ -112,6 +112,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
   SignInScreen: undefined;
+  SignInExtraTicketScreen: undefined;
   DonationSignInScreen: DonateScreenList;
   SignedInScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;

@@ -98,7 +98,8 @@
       "and": " and",
       "signedInScreen": {
         "title": "Your donation",
-        "confirmDonation": "Confirm donation"
+        "confirmDonation": "Confirm donation",
+        "donationError": "Unable to donate now"
       }
     },
     "donationDoneScreen": {
@@ -156,7 +157,8 @@
       "onboardingSubtitle": "Your donation ticket is available",
       "onboardingButton": "Get my ticket",
       "whatIsATicket": "What is a ticket?",
-      "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in."
+      "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
+      "hasAccountButton": "I have an account"
     },
     "zeroTicketScreen": {
       "title": "You have used all your tickets",
@@ -470,6 +472,18 @@
         "MagicLinkLogin": {
           "buttonText": "Continue with e-mail"
         }
+      },
+      "modals": {
+        "ModalWrongEmail": {
+          "title": "Oops, incorrect e-mail",
+          "description": "To continue with Google or Apple, please choose {{email}} as your validation e-mail. If you don't recognize this e-mail, please contact our support.",
+          "tryAgain": "Try again",
+          "contactSupport": "Contact support",
+          "userSupportLink": "https://v2.zopim.com/widget/popout.html?key={{key}}"
+        },
+        "modalDialog": {
+          "accessUserSupport": "Access user support"
+        }
       }
     }
   },
@@ -504,6 +518,14 @@
       "title": "You won an extra ticket",
       "description": "Validate your account clicking the link sent to {{email}} and get your extra ticket.",
       "buttonText": "Continue without extra ticket"
+    },
+    "signInExtraTicketScreen": {
+      "title": "You won an extra ticket",
+      "description": "Validate your account created with {{email}} to get your extra ticket",
+      "google": "Continue with Google",
+      "apple": "Continue with Apple",
+      "email": "Continue with e-mail",
+      "toastSuccessMessage": "Your ticket was sent by e-mail"
     },
     "receiveExtraTicketScreen": {
       "title": "Validating your account brought you here",

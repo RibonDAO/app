@@ -31,7 +31,10 @@ export default function useCachedResources() {
   const { currentLang } = useLanguage();
 
   useEffect(() => {
-    initializeAuthApi();
+    initializeAuthApi({
+      email: currentUser?.email || "",
+      language: formattedLanguage(currentLang),
+    });
     initializeApi({
       email: currentUser?.email,
       language: formattedLanguage(currentLang),

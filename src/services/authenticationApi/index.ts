@@ -13,17 +13,21 @@ export const baseURL = EXPO_PUBLIC_RIBON_API;
 export const API_SCOPE = "/users/v1";
 
 export type InitializeApiProps = {
-  url: string;
-  headers: Record<any, any>;
+  email: string;
+  language: "pt-BR" | "en";
 };
 
-export function initializeApi() {
+export function initializeApi({ language, email }: InitializeApiProps) {
+  // TODO update this to use the useLanguage hook / localstorage when it's available
+
   authenticationApi.interceptors.request.use(async (config) => {
     const accessToken = await getLocalStorageItem(ACCESS_TOKEN_KEY);
     // eslint-disable-next-line
     config.baseURL = baseURL;
     const authHeaders = {
       Authorization: `Bearer ${accessToken}`,
+      Email: email,
+      Language: language,
     };
     // eslint-disable-next-line
     config.headers = { ...authHeaders, ...config.headers };
