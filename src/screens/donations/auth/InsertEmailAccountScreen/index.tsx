@@ -61,7 +61,7 @@ function InsertEmailAccountScreen() {
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
     setTickets(0);
-    console.log("error", error.data);
+
     showToast({
       type: "error",
       message: error?.response?.data?.formatted_message || t("donationError"),

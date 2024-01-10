@@ -14,6 +14,7 @@ import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared/styles";
 import { defaultBodyXsSemibold } from "styles/typography/default";
 import RadioAccordion from "components/moleculars/RadioAccordion";
+import { usePlatformPay } from "@stripe/stripe-react-native";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
@@ -56,10 +57,11 @@ export default function CardSection() {
   const { offer: offerParam, subscription } = params;
 
   const [isSubscription, setIsSubscription] = useState(subscription);
-
+  const { isPlatformPaySupported } = usePlatformPay();
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentIndex, setCurrentIndex] = useState<number>();
   const [offersModalVisible, setOffersModalVisible] = useState(false);
+  const [checkPlatformPaySupport, setCheckPlatformPaySupport] = useState(false);
 
   const {
     offers,
@@ -74,6 +76,11 @@ export default function CardSection() {
     setOfferPrice(offers[0].priceCents);
     setCurrentOffer(offers[0]);
   };
+
+  async function checkPlatformPay() {
+    const isSupported = await isPlatformPaySupported();
+    setCheckPlatformPaySupport(isSupported);
+  }
 
   useEffect(() => {
     if (offers && offerPrice !== undefined && !isLoadingOffers) {
@@ -104,6 +111,10 @@ export default function CardSection() {
       setOfferPrice(offerParam);
     }
   }, [offerParam]);
+
+  useEffect(() => {
+    checkPlatformPay();
+  }, [isPlatformPaySupported]);
 
   useEffect(() => {
     if (offers && currentIndex !== undefined && !isLoadingOffers) {
@@ -247,7 +258,7 @@ export default function CardSection() {
                 </View>
               ),
               rightIcon: <GooglePayIcon />,
-              show: !showApplePay(),
+              show: !showApplePay() && checkPlatformPaySupport,
             },
             {
               title: t("paymentMethodSection.applePay"),
@@ -261,7 +272,7 @@ export default function CardSection() {
                 </View>
               ),
               rightIcon: <ApplePayIcon />,
-              show: showApplePay(),
+              show: showApplePay() && checkPlatformPaySupport,
             },
             {
               title: t("paymentMethodSection.pix"),

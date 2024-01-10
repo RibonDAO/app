@@ -2,8 +2,11 @@ import { useTranslation } from "react-i18next";
 
 import { useUserProfile } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useEffect } from "react";
+import { useCallback, useState } from "react";
 import { View } from "react-native";
+import { useAuthentication } from "contexts/authenticationContext";
+import { useFocusEffect } from "@react-navigation/native";
+import UserProfile from "@ribon.io/shared/types/entities/UserProfile";
 import BackgroundShapeLeft from "./assets/BackgroundShapeLeft";
 import BackgroundShapeRight from "./assets/BackgroundShapeRight";
 import * as S from "./styles";
@@ -16,12 +19,18 @@ function ProfileSection() {
 
   const { userProfile } = useUserProfile();
   const { currentUser } = useCurrentUser();
+  const { accessToken } = useAuthentication();
+  const [newProfile, setNewProfile] = useState<UserProfile>();
 
   const { profile, refetch } = userProfile();
 
-  useEffect(() => {
-    refetch();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+      setNewProfile(profile);
+      if (!accessToken) setNewProfile(undefined);
+    }, [profile, accessToken]),
+  );
 
   if (!currentUser) return <View />;
 
@@ -35,9 +44,11 @@ function ProfileSection() {
       </S.ContainerShapeRight>
       <S.CenterContainer>
         <UserAvatar
-          userAvatar={profile?.photo}
-          name={profile?.name ? profile.name : t("userName")}
-          email={profile?.user?.email ? profile.user.email : currentUser?.email}
+          userAvatar={newProfile?.photo}
+          name={newProfile?.name ? newProfile.name : t("userName")}
+          email={
+            newProfile?.user?.email ? newProfile.user.email : currentUser?.email
+          }
         />
       </S.CenterContainer>
     </S.Container>

@@ -61,6 +61,7 @@ import PixPaymentInformationProvider from "contexts/pixInformationContext";
 import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
 import SignedInScreen from "screens/donations/auth/SignedInScreen";
 import SignInScreen from "screens/auth/SignInScreen";
+import SignInExtraTicketScreen from "screens/auth/SignInExtraTicketScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
 import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
@@ -439,6 +440,16 @@ function RootNavigator() {
       <Stack.Screen
         name="SignInScreen"
         component={SignInScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="SignInExtraTicketScreen"
+        component={SignInExtraTicketScreen}
         options={{
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],

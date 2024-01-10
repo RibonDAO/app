@@ -105,7 +105,7 @@ export default function CausesScreen() {
     useCallback(() => {
       refetchCanDonate();
       refetchFirstAccessToIntegration();
-    }, []),
+    }, [currentUser, signedIn]),
   );
 
   useEffect(() => {

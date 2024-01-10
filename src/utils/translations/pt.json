@@ -466,6 +466,18 @@
         "MagicLinkLogin": {
           "buttonText": "Continuar com e-mail"
         }
+      },
+      "modals": {
+        "ModalWrongEmail": {
+          "title": "Opa, e-mail incorreto",
+          "description": "Para continuar com Google ou Apple, escolha {{email}} como seu e-mail de validação. Se não reconhecer este e-mail, por favor entre em contato com nosso suporte.",
+          "tryAgain": "Tentar novamente",
+          "contactSupport": "Falar com suporte",
+          "userSupportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0"
+        },
+        "modalDialog": {
+          "accessUserSupport": "Acessar o suporte ao usuário"
+        }
       }
     }
   },
@@ -498,6 +510,14 @@
       "title": "Você ganhou um ticket extra",
       "description": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra",
       "buttonText": "Continuar sem ticket extra"
+    },
+    "signInExtraTicketScreen": {
+      "title": "Você ganhou um ticket extra",
+      "description": "Valide sua conta criada com {{email}} para receber seu ticket extra",
+      "google": "Continuar com Google",
+      "apple": "Continuar com Apple",
+      "email": "Continuar com e-mail",
+      "toastSuccessMessage": "Seu ticket foi enviado por e-mail"
     },
     "receiveExtraTicketScreen": {
       "title": "Validar sua conta trouxe você aqui",
