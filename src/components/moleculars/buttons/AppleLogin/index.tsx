@@ -4,6 +4,8 @@ import { theme } from "@ribon.io/shared/styles";
 import { useAuthentication } from "contexts/authenticationContext";
 import { signIn } from "services/appleSignIn";
 import { logEvent } from "services/analytics";
+import { useState } from "react";
+import ModalWrongEmail from "components/moleculars/modals/ModalWrongEmail";
 import AppleIcon from "./assets/AppleIcon";
 
 type Props = {
@@ -16,15 +18,22 @@ function AppleLogin({ onContinue, from }: Props): JSX.Element {
   });
 
   const { signInWithApple } = useAuthentication();
+  const [modalVisible, setModalVisible] = useState(false);
 
   async function loginApple() {
     const result = await signIn();
 
     if (result) {
-      await signInWithApple({
-        access_token: result.userInfo?.identityToken,
-      });
-      onContinue();
+      try {
+        await signInWithApple({
+          access_token: result.userInfo?.identityToken,
+        });
+        onContinue();
+      } catch (error: any) {
+        if (error.message.includes("Email does not match")) {
+          setModalVisible(true);
+        }
+      }
     }
   }
 
@@ -36,17 +45,20 @@ function AppleLogin({ onContinue, from }: Props): JSX.Element {
   }
 
   return (
-    <Button
-      text={t("buttonText")}
-      textColor={theme.colors.neutral[600]}
-      backgroundColor="transparent"
-      borderColor={theme.colors.neutral[300]}
-      onPress={() => handleApple()}
-      leftItem={<AppleIcon />}
-      customStyles={{
-        height: 48,
-      }}
-    />
+    <>
+      <Button
+        text={t("buttonText")}
+        textColor={theme.colors.neutral[600]}
+        backgroundColor="transparent"
+        borderColor={theme.colors.neutral[300]}
+        onPress={() => handleApple()}
+        leftItem={<AppleIcon />}
+        customStyles={{
+          height: 48,
+        }}
+      />
+      <ModalWrongEmail visible={modalVisible} setVisible={setModalVisible} />
+    </>
   );
 }
 

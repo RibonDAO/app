@@ -5,6 +5,8 @@ import { theme } from "@ribon.io/shared/styles";
 import { useAuthentication } from "contexts/authenticationContext";
 import { signIn } from "services/googleSignIn";
 import { logEvent } from "services/analytics";
+import { useState } from "react";
+import ModalWrongEmail from "components/moleculars/modals/ModalWrongEmail";
 import GoogleIcon from "./assets/GoogleIcon";
 
 type Props = {
@@ -17,13 +19,20 @@ function GoogleLogin({ onContinue, from }: Props): JSX.Element {
   });
 
   const { signInWithGoogle } = useAuthentication();
+  const [modalVisible, setModalVisible] = useState(false);
 
   async function loginGoogle() {
     const result = await signIn();
 
     if (result) {
-      await signInWithGoogle({ access_token: result.userInfo?.idToken });
-      onContinue();
+      try {
+        await signInWithGoogle({ access_token: result.userInfo?.idToken });
+        onContinue();
+      } catch (error: any) {
+        if (error.message.includes("Email does not match")) {
+          setModalVisible(true);
+        }
+      }
     }
   }
 
@@ -35,17 +44,20 @@ function GoogleLogin({ onContinue, from }: Props): JSX.Element {
   }
 
   return (
-    <Button
-      text={t("buttonText")}
-      textColor={theme.colors.neutral[600]}
-      backgroundColor="transparent"
-      borderColor={theme.colors.neutral[300]}
-      onPress={() => handleGoogle()}
-      leftItem={<GoogleIcon />}
-      customStyles={{
-        height: 48,
-      }}
-    />
+    <>
+      <Button
+        text={t("buttonText")}
+        textColor={theme.colors.neutral[600]}
+        backgroundColor="transparent"
+        borderColor={theme.colors.neutral[300]}
+        onPress={() => handleGoogle()}
+        leftItem={<GoogleIcon />}
+        customStyles={{
+          height: 48,
+        }}
+      />
+      <ModalWrongEmail visible={modalVisible} setVisible={setModalVisible} />
+    </>
   );
 }
 

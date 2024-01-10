@@ -18,9 +18,7 @@ export function useImpactConversion() {
   const offerUsdId = 7;
 
   const [contribution, setContribution] = useState<any>();
-  const [description, setDescription] = useState<
-    string | JSX.Element | undefined
-  >();
+  const [description, setDescription] = useState<string | JSX.Element>();
   const [nonProfit, setNonProfit] = useState<NonProfit>();
   const [offer, setOffer] = useState<Offer>();
 
