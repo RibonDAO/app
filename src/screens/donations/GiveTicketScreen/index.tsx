@@ -38,6 +38,11 @@ export default function GiveTicketScreen() {
     navigateTo("CausesScreen");
   };
 
+  const handleHasAccount = () => {
+    logEvent("openAuthBtn_click", { from: "onboarding_page" });
+    navigateTo("SignInScreen");
+  };
+
   return (
     <View style={S.container}>
       {!isOnboarding && (
@@ -79,6 +84,23 @@ export default function GiveTicketScreen() {
             width: 328,
           }}
         />
+
+        {isOnboarding && (
+          <Button
+            text={t("hasAccountButton")}
+            textColor={theme.colors.neutral[600]}
+            backgroundColor="transparent"
+            borderColor={theme.colors.neutral[300]}
+            onPress={handleHasAccount}
+            customStyles={{
+              borderWidth: 1,
+              borderRadius: 4,
+              marginBottom: 16,
+              height: 48,
+              width: 328,
+            }}
+          />
+        )}
 
         {!isOnboarding && (
           <Tooltip tooltipText={t("ticketExplanation")}>

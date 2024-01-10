@@ -152,7 +152,8 @@
       "onboardingSubtitle": "Seu ticket doação está disponível",
       "onboardingButton": "Receber meu ticket",
       "whatIsATicket": "O que é um ticket?",
-      "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon."
+      "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
+      "hasAccountButton": "Já tenho uma conta"
     },
     "zeroTicketScreen": {
       "title": "Você usou todos seus tickets",
