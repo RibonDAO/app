@@ -82,7 +82,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         amount: offer.priceCents,
         currencyCode: offer.currency,
         testEnv,
-        merchantName: "Ribon",
+        merchantName: "Ribon Foundation Inc",
         merchantCountryCode: "BR",
         billingAddressConfig: {
           format: PlatformPay.BillingAddressFormat.Full,
