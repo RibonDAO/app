@@ -254,6 +254,7 @@ export default function CardSection() {
                     offer={currentOffer as Offer}
                     nonProfit={actualNonProfit}
                     cause={cause as Cause}
+                    isSubscription={isSubscription}
                   />
                 </View>
               ),
@@ -268,6 +269,7 @@ export default function CardSection() {
                     offer={currentOffer as Offer}
                     nonProfit={actualNonProfit}
                     cause={cause as Cause}
+                    isSubscription={isSubscription}
                   />
                 </View>
               ),
