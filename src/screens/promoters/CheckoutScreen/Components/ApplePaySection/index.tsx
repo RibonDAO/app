@@ -46,7 +46,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
   useEffect(() => {
     setCart([
       {
-        label: "Total",
+        label: "Ribon Foundation Inc",
         amount: offer.priceValue.toString(),
         isPending: false,
         paymentType: PlatformPay.PaymentType.Immediate,
