@@ -292,6 +292,7 @@
       "back": "Back",
       "monthlyContribution": "Contributing monthly",
       "uniqueContribution": "Contributing once",
+      "monthlyContributionInfo": "Your monthly donation is automatically renewed unless canceled before the billing period. Cancel anytime through the app settings menu, in “Monthly Contributions”.",
       "recurrenceButton": "Change",
       "donatingTo": "Donating to ",
       "netDonation": "Net donation: ",
