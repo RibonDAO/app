@@ -312,6 +312,7 @@
       "back": "Voltar",
       "monthlyContribution": "Contribuindo mensalmente",
       "uniqueContribution": "Contribuindo uma vez",
+      "monthlyContributionInfo": "Sua doação mensal é renovada automaticamente a não ser que seja cancelada antes do período de faturamento. Cancele a qualquer momento pelo menu de configurações do app, em “Contribuições mensais”.",
       "recurrenceButton": "Alterar",
       "donatingTo": "Doando para ",
       "netDonation": "Doação líquida: ",

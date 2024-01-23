@@ -296,6 +296,11 @@ export default function CardSection() {
         />
       </View>
       <TrustSeal />
+      {isSubscription && (
+        <View style={S.infoTextContainer}>
+          <Text style={S.infoText}>{t("monthlyContributionInfo")}</Text>
+        </View>
+      )}
     </>
   );
 }
