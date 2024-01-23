@@ -512,8 +512,8 @@
       "buttonText": "Continuar sem ticket extra"
     },
     "signInExtraTicketScreen": {
-      "title": "Você ganhou um ticket extra",
-      "description": "Valide sua conta criada com {{email}} para receber seu ticket extra",
+      "title": "Valide sua conta e ganhe um ticket",
+      "description": "Finalize seu login com {{email}} pra receber seu prêmio",
       "google": "Continuar com Google",
       "apple": "Continuar com Apple",
       "email": "Continuar com e-mail",
