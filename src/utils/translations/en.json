@@ -105,7 +105,7 @@
     "donationDoneScreen": {
       "title": "Thanks for donating!",
       "description": "You donated",
-      "checkboxText":"I want to receive information about my donations by e-mail",
+      "checkboxText": "I want to receive information about my donations by e-mail",
       "buttonTitle": "Finish"
     },
     "postDonationScreen": {
@@ -520,8 +520,8 @@
       "buttonText": "Continue without extra ticket"
     },
     "signInExtraTicketScreen": {
-      "title": "You won an extra ticket",
-      "description": "Validate your account created with {{email}} to get your extra ticket",
+      "title": "Validate your account and get a ticket",
+      "description": "Complete your login with {{email}} to receive your prize",
       "google": "Continue with Google",
       "apple": "Continue with Apple",
       "email": "Continue with e-mail",

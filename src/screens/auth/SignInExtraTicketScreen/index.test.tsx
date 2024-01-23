@@ -16,9 +16,9 @@ describe("SignInScreen", () => {
   });
 
   it("should render without error", () => {
-    expectTextToBeInTheDocument("You won an extra ticket");
+    expectTextToBeInTheDocument("Validate your account and get a ticket");
     expectTextToBeInTheDocument(
-      "Validate your account created with  to get your extra ticket",
+      "Complete your login with  to receive your prize",
     );
   });
 
