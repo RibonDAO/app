@@ -4,6 +4,7 @@ import {
   defaultBodyMdMedium,
   defaultBodyMdSemibold,
   defaultBodySmMedium,
+  defaultBodyXsRegular,
   defaultBodyXsSemibold,
 } from "styles/typography/default";
 
@@ -44,6 +45,21 @@ const styles = StyleSheet.create({
     paddingRight: theme.spacingNative(8),
     color: theme.colors.brand.primary[600],
     borderColor: theme.colors.brand.primary[600],
+  },
+  infoTextContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: theme.spacingNative(16),
+    justifyContent: "center",
+    padding: theme.spacingNative(16),
+  },
+  infoText: {
+    ...defaultBodyXsRegular,
+    color: theme.colors.neutral[500],
+    display: "flex",
+    alignSelf: "center",
+    textAlign: "center",
   },
 });
 

@@ -15,6 +15,7 @@ import { theme } from "@ribon.io/shared/styles";
 import { defaultBodyXsSemibold } from "styles/typography/default";
 import RadioAccordion from "components/moleculars/RadioAccordion";
 import { usePlatformPay } from "@stripe/stripe-react-native";
+import * as Device from "expo-device";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
@@ -79,7 +80,11 @@ export default function CardSection() {
 
   async function checkPlatformPay() {
     const isSupported = await isPlatformPaySupported();
-    setCheckPlatformPaySupport(isSupported);
+    const androidNotSupported =
+      Platform.OS === "android" &&
+      Device?.osVersion &&
+      parseInt(Device?.osVersion, 10) <= 10;
+    setCheckPlatformPaySupport(isSupported && !androidNotSupported);
   }
 
   useEffect(() => {
@@ -254,6 +259,7 @@ export default function CardSection() {
                     offer={currentOffer as Offer}
                     nonProfit={actualNonProfit}
                     cause={cause as Cause}
+                    isSubscription={isSubscription}
                   />
                 </View>
               ),
@@ -268,6 +274,7 @@ export default function CardSection() {
                     offer={currentOffer as Offer}
                     nonProfit={actualNonProfit}
                     cause={cause as Cause}
+                    isSubscription={isSubscription}
                   />
                 </View>
               ),
@@ -291,6 +298,11 @@ export default function CardSection() {
         />
       </View>
       <TrustSeal />
+      {isSubscription && (
+        <View style={S.infoTextContainer}>
+          <Text style={S.infoText}>{t("monthlyContributionInfo")}</Text>
+        </View>
+      )}
     </>
   );
 }
