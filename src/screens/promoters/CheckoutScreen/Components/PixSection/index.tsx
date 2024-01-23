@@ -68,7 +68,7 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
   const { currentLang } = useLanguage();
 
   const [currentCountryCode, setCurrentCountryCode] = useState(
-    countryCodeByLanguage(currentLang),
+    countryCodeByLanguage(Languages.PT),
   );
 
   useEffect(() => {
@@ -140,7 +140,7 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
         />
         <InputText
           name="tax"
-          placeholder={field("taxId")}
+          placeholder={field("cpf")}
           mask={maskedTaxId}
           value={taxId}
           onChangeText={(value) => setTaxId(value)}

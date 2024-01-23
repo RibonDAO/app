@@ -159,7 +159,7 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
           </View>
           <InputText
             name={taxId}
-            placeholder={field("taxId")}
+            placeholder={brazilFormatForTaxId ? field("cpf") : field("taxId")}
             mask={maskedTaxId}
             value={taxId}
             onChangeText={(value) => setTaxId(value)}
