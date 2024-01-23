@@ -151,7 +151,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         {showFiscalFields() && (
           <InputText
             name="taxId"
-            placeholder={field("taxId")}
+            placeholder={field("cpf")}
             mask="999.999.999-99"
             value={taxId}
             onChangeText={(value) => setTaxId(value)}
