@@ -101,6 +101,7 @@ export default function GooglePaySection({
         },
         existingPaymentMethodRequired: false,
         isEmailRequired: true,
+        label: "Ribon Foundation Inc",
       },
     });
 
