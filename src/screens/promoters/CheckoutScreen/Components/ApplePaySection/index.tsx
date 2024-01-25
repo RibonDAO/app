@@ -39,9 +39,11 @@ export default function ApplePaySection({
     {
       label: "Ribon Foundation Inc",
       amount: offer.priceValue.toString(),
-      intervalUnit: PlatformPay.IntervalUnit.Month,
-      intervalCount: 1,
-      paymentType: PlatformPay.PaymentType.Recurring,
+      intervalUnit: isSubscription ? PlatformPay.IntervalUnit.Month : null,
+      intervalCount: isSubscription ? 1 : null,
+      paymentType: isSubscription
+        ? PlatformPay.PaymentType.Recurring
+        : PlatformPay.PaymentType.Immediate,
     },
   ]);
   const [taxId, setTaxId] = useState("");
@@ -56,9 +58,11 @@ export default function ApplePaySection({
       {
         label: "Ribon Foundation Inc",
         amount: offer.priceValue.toString(),
-        intervalUnit: PlatformPay.IntervalUnit.Month,
-        intervalCount: 1,
-        paymentType: PlatformPay.PaymentType.Recurring,
+        intervalUnit: isSubscription ? PlatformPay.IntervalUnit.Month : null,
+        intervalCount: isSubscription ? 1 : null,
+        paymentType: isSubscription
+          ? PlatformPay.PaymentType.Recurring
+          : PlatformPay.PaymentType.Immediate,
       },
     ]);
   }, [offer]);
