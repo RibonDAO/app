@@ -2,13 +2,12 @@ import branch from "react-native-branch";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 
 export async function initializeDeeplink(
-  navigateTo: (path: string) => void,
+  navigateTo: (path: string, params?: Record<any, any>) => void,
   setCurrentIntegrationId: (integrationId: string) => void,
   setExternalId: (externalId: string) => void,
   setUtm: (utmSource: string, utmMedium: string, utmCampaign: string) => void,
   setMagicLinkToken: (magicLinkToken: string) => void,
   setAccountId: (accountId: string) => void,
-  setExtraTicket: (accountId: string) => void,
 ) {
   branch.subscribe({
     onOpenStart: ({ uri, cachedInitialEvent }) => {
@@ -29,7 +28,9 @@ export async function initializeDeeplink(
 
       const magicLinkToken = (latestParams.authToken as string) || "";
       const accountId = (latestParams.id as string) || "";
-      const extraTicket = (latestParams.extra_ticket as string) || "";
+
+      const extraTicketToken =
+        (latestParams.extra_ticket_token as string) || "";
 
       setCurrentIntegrationId(integrationId);
       setExternalId(externalId);
@@ -38,8 +39,11 @@ export async function initializeDeeplink(
 
       setMagicLinkToken(magicLinkToken);
       setAccountId(accountId);
-      setExtraTicket(extraTicket);
 
+      if (extraTicketToken) {
+        navigateTo("ValidateExtraTicketScreen", { extraTicketToken });
+        return;
+      }
       if (latestParams.$custom_meta_tags)
         navigateTo(latestParams.$custom_meta_tags as string);
     },
