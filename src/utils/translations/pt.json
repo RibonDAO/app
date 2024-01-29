@@ -133,6 +133,10 @@
         "emailPlaceholder": "Seu e-mail",
         "donationError": "Não foi possível doar."
       }
+    },
+    "selectTicketsScreen": {
+      "title": "Escolha o tamanho da sua ajuda",
+      "buttonText": "Continuar"
     }
   },
   "content": {

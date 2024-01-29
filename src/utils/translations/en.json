@@ -138,6 +138,10 @@
         "confirmText": "Continue",
         "emailPlaceholder": "Your e-mail"
       }
+    },
+    "selectTicketsScreen": {
+      "title": "Choose the size of your aid",
+      "buttonText": "Continue"
     }
   },
   "content": {

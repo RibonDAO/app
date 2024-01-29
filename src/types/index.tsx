@@ -89,6 +89,11 @@ export type RecurrenceScreenParamList = {
   currency: Currencies;
 };
 
+export type SelectTicketsScreenParamList = {
+  nonProfit: NonProfit;
+  cause: Cause;
+};
+
 export type MonthlyContributionsScreenParamList = {
   from: string;
 };
@@ -131,6 +136,7 @@ export type RootStackParamList = {
   PromotersScreen: PromotersScreenParams;
   CheckoutScreen: CheckoutScreenParamList;
   RecurrenceScreen: RecurrenceScreenParamList;
+  SelectTicketsScreen: SelectTicketsScreenParamList;
   PixInstructionsScreen: PixInstructionsScreenParamList;
   OnboardingScreen: undefined;
   DonateModal: undefined;
