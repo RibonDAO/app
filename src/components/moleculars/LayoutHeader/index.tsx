@@ -4,11 +4,9 @@ import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import { TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
-import TicketIcon from "components/vectors/TicketIcon";
-import GrayTicketIcon from "components/vectors/GrayTicketIcon";
+
 import { useNavigation } from "hooks/useNavigation";
 import { theme } from "@ribon.io/shared/styles";
-import { useTickets } from "contexts/ticketsContext";
 import Icon from "components/atomics/Icon";
 import { useTranslation } from "react-i18next";
 import { useWalletContext } from "contexts/walletContext";
@@ -22,12 +20,14 @@ import { useFocusEffect } from "@react-navigation/native";
 import { logEvent } from "services/analytics";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { EXPO_PUBLIC_ZENDESK_KEY } from "utils/constants/Application";
+
 import ConfigItem from "../ConfigItem";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import DeleteAccountModal from "./DeleteAccountModal";
 import LogoutModal from "./LogoutModal";
 import S from "./styles";
+import TicketSection from "./TicketSection";
 
 type Props = {
   hideTicket?: boolean;
@@ -48,11 +48,7 @@ function LayoutHeader({
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
-  const { tickets, hasTickets } = useTickets();
-  const ticketColor = hasTickets()
-    ? theme.colors.brand.primary[600]
-    : theme.colors.neutral[500];
-  const ticketIcon = hasTickets() ? <TicketIcon /> : <GrayTicketIcon />;
+
   const { connectWallet, wallet, killSession } = useWalletContext();
   const { userSubscriptions } = useSubscriptions();
   const { subscriptions, refetch: refetchSubscription } = userSubscriptions();
@@ -132,14 +128,6 @@ function LayoutHeader({
       setVisible={setLogoutModalVisible}
     />
   );
-
-  const handleTicketClick = () => {
-    if (hasTickets()) {
-      navigateTo("GiveTicketScreen");
-    } else {
-      navigateTo("ZeroTicketScreen");
-    }
-  };
 
   const handleMonthlyContributionClick = () => {
     refetchSubscription();
@@ -330,20 +318,7 @@ function LayoutHeader({
 
   return (
     <View style={S.configContainer}>
-      {!hideTicket && (
-        <TouchableOpacity
-          accessibilityRole="button"
-          style={S.container}
-          onPress={handleTicketClick}
-        >
-          <View style={{ ...S.ticketSection, borderColor: ticketColor }}>
-            <Text style={{ ...S.ticketCounter, color: ticketColor }}>
-              {tickets}
-            </Text>
-            {ticketIcon}
-          </View>
-        </TouchableOpacity>
-      )}
+      {!hideTicket && <TicketSection />}
 
       {!hideWallet && (
         <TouchableOpacity

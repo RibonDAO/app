@@ -1,10 +1,15 @@
 import { useEffect } from "react";
-import { useTickets } from "contexts/ticketsContext";
-import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
-import { theme } from "@ribon.io/shared";
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+  theme,
+} from "@ribon.io/shared";
+import { useTickets } from "@ribon.io/shared/hooks";
 import { useTranslation } from "react-i18next";
+import { useIntegrationContext } from "contexts/integrationContext";
+import { useCurrentUser } from "contexts/currentUserContext";
 
 type Props = {
   canDonate: boolean;
@@ -16,44 +21,44 @@ function TicketSection({ canDonate, isFirstAccessToIntegration }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen.ticketSection",
   });
-  const { setTickets } = useTickets();
+  const { currentUser } = useCurrentUser();
   const { navigateTo } = useNavigation();
-
-  const handleTicketReceived = () => {
-    setTickets(1);
-    setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "true");
-  };
+  const { currentIntegrationId } = useIntegrationContext();
+  const { collectByIntegration, canCollectByIntegration } = useTickets();
 
   async function fetchTicketReceived() {
     const alreadyReceivedTicket = await getLocalStorageItem(
       ALREADY_RECEIVED_TICKET_KEY,
     );
 
-    if (canDonate) {
-      if (alreadyReceivedTicket === "true") setTickets(1);
+    const { canCollect } = await canCollectByIntegration(
+      currentIntegrationId,
+      currentUser?.email ?? "",
+    );
 
+    if (canCollect) {
       if (alreadyReceivedTicket !== "true") {
-        handleTicketReceived();
-        if (!isFirstAccessToIntegration) {
-          showToast({
-            type: "custom",
-            message: t("ticketToast"),
-            position: "bottom",
-            navigate: "GiveTicketScreen",
-            icon: "confirmation_number",
-            backgroundColor: theme.colors.brand.primary[50],
-            iconColor: theme.colors.brand.primary[600],
-            borderColor: theme.colors.brand.primary[600],
-            textColor: theme.colors.brand.primary[600],
-          });
-        } else {
-          navigateTo("GiveTicketScreen", {
-            isOnboarding: true,
-          });
-        }
+        setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "true");
+        collectByIntegration(currentIntegrationId, currentUser?.email ?? "");
       }
-    } else {
-      setTickets(0);
+
+      if (!isFirstAccessToIntegration) {
+        showToast({
+          type: "custom",
+          message: t("ticketToast"),
+          position: "bottom",
+          navigate: "GiveTicketScreen",
+          icon: "confirmation_number",
+          backgroundColor: theme.colors.brand.primary[50],
+          iconColor: theme.colors.brand.primary[600],
+          borderColor: theme.colors.brand.primary[600],
+          textColor: theme.colors.brand.primary[600],
+        });
+      } else {
+        navigateTo("GiveTicketScreen", {
+          isOnboarding: true,
+        });
+      }
     }
   }
 

@@ -42,7 +42,7 @@ function DonationSignInScreen() {
     params: { nonProfit },
   } = useRouteParams<"DonationSignInScreen">();
   const { navigateTo, popNavigation } = useNavigation();
-  const { setTickets } = useTickets();
+  const { setTicketsCounter } = useTickets();
   const { formattedImpactText } = useFormattedImpactText();
   const { donate } = useUserV1Donations();
   const { currentIntegrationId, externalId } = useIntegrationContext();
@@ -91,7 +91,7 @@ function DonationSignInScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTickets(0);
+      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {

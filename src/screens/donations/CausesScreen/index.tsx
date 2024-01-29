@@ -208,7 +208,7 @@ export default function CausesScreen() {
     !integration?.name?.toLowerCase()?.includes("ribon") &&
     integration &&
     canDonate &&
-    hasTickets() &&
+    hasTickets &&
     integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
 
   const handleHideNotificationClick = async () => {
@@ -326,12 +326,12 @@ export default function CausesScreen() {
                   undefined,
                   t("impactPrefix") || "",
                 )}
-                buttonText={hasTickets() ? t("buttonText") : t("noTickets")}
+                buttonText={hasTickets ? t("buttonText") : t("noTickets")}
                 onImagePress={() => {
                   handleNonProfitImagePress(nonProfit);
                 }}
                 onClickButton={() => handleButtonPress(nonProfit)}
-                buttonDisabled={!hasTickets()}
+                buttonDisabled={!hasTickets}
                 labelText={t("labelText") || ""}
               />
             </View>
