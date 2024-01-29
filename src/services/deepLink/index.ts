@@ -45,9 +45,8 @@ export async function initializeDeeplink(
       setExtraTicket(extraTicket);
       setExtraTicketToken(extraTicketToken);
 
-      if (latestParams.$custom_meta_tags) {
+      if (latestParams.$custom_meta_tags)
         navigateTo(latestParams.$custom_meta_tags as string);
-      }
     },
   });
 }
