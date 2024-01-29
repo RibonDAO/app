@@ -1,32 +1,34 @@
-import userAccountApi from "@ribon.io/shared/services/user/userAccountApi";
+import { userAccountApi } from "@ribon.io/shared";
 import LoaderAnimated from "components/atomics/LoaderAnimated";
+import { useAuthentication } from "contexts/authenticationContext";
 import { useNavigation } from "hooks/useNavigation";
-import { useRouteParams } from "hooks/useRouteParams";
 import { showToast } from "lib/Toast";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 function ValidateExtraTicketScreen() {
   const { navigateTo } = useNavigation();
-  const { params } = useRouteParams<"ValidateExtraTicketScreen">();
-  const { extraTicketToken } = params;
+  const { extraTicketToken } = useAuthentication();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "auth.validateExtraTicketScreen",
+  });
 
-  async function validateExtraTicket() {
+  async function validateExtraTicket(token: string) {
     try {
-      await userAccountApi.postValidateExtraTicket(extraTicketToken);
-
-      // navigateTo("ReceiveExtraTicketScreen");
+      const result = await userAccountApi.postValidateExtraTicket(token);
+      if (result.status === 200) navigateTo("ReceiveExtraTicketScreen");
     } catch (error: any) {
       showToast({
         type: "error",
-        message: "onErrorMessage",
+        message: t("error"),
       });
-      navigateTo("CausesScreen");
+      navigateTo("Root");
     }
   }
 
   useEffect(() => {
-    validateExtraTicket();
-  }, []);
+    if (extraTicketToken) validateExtraTicket(extraTicketToken);
+  }, [extraTicketToken]);
 
   return <LoaderAnimated width={160} height={160} />;
 }

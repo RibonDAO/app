@@ -68,9 +68,9 @@ import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountS
 import { useAuthentication } from "contexts/authenticationContext";
 import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
 import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
-import ValidateExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
 import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
 import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
+import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -246,7 +246,12 @@ function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId } = useAuthentication();
+  const {
+    setMagicLinkToken,
+    setAccountId,
+    setExtraTicket,
+    setExtraTicketToken,
+  } = useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -255,6 +260,8 @@ function PrivateNavigator() {
       setUtm,
       setMagicLinkToken,
       setAccountId,
+      setExtraTicket,
+      setExtraTicketToken,
     );
   }, []);
 
@@ -276,7 +283,12 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId } = useAuthentication();
+  const {
+    setMagicLinkToken,
+    setAccountId,
+    setExtraTicket,
+    setExtraTicketToken,
+  } = useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -285,6 +297,8 @@ function RootNavigator() {
       setUtm,
       setMagicLinkToken,
       setAccountId,
+      setExtraTicket,
+      setExtraTicketToken,
     );
   }, []);
 
