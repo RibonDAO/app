@@ -1,11 +1,12 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useUserTickets } from "@ribon.io/shared/hooks";
+import { useAuthentication } from "contexts/authenticationContext";
 
 export interface ITicketsContext {
-  tickets: number;
-  addTicket: (ticketsNumber?: number) => void;
-  removeTicket: (ticketsNumber?: number) => void;
-  setTickets: (tickets: number) => void;
-  hasTickets: () => boolean;
+  ticketsCounter: number;
+  setTicketsCounter: (tickets: number) => void;
+  refetch: () => void;
+  hasTickets: boolean;
 }
 
 export type Props = {
@@ -17,25 +18,26 @@ export const TicketsContext = createContext<ITicketsContext>(
 );
 
 function TicketsProvider({ children }: Props) {
-  const [tickets, setTickets] = useState(0);
+  const { ticketsAvailable } = useUserTickets();
+  const { tickets, refetch } = ticketsAvailable();
 
-  const addTicket = (ticketsNumber = 1) => {
-    setTickets(tickets + ticketsNumber);
-  };
+  const { accessToken } = useAuthentication();
+  const [ticketsCounter, setTicketsCounter] = useState(1);
 
-  const removeTicket = (ticketsNumber = 1) => {
-    setTickets(tickets - ticketsNumber);
-  };
+  const hasTickets = ticketsCounter > 0;
 
-  const hasTickets = () => tickets > 0;
+  useEffect(() => {
+    refetch();
+    setTicketsCounter(tickets ?? 1);
+    if (!accessToken) setTicketsCounter(1);
+  }, [tickets, accessToken]);
 
   const ticketsObject: ITicketsContext = useMemo(
     () => ({
-      tickets,
-      addTicket,
-      removeTicket,
-      setTickets,
+      ticketsCounter,
+      setTicketsCounter,
       hasTickets,
+      refetch,
     }),
     [tickets],
   );

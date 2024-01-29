@@ -42,7 +42,7 @@ function InsertEmailAccountScreen() {
   const { handleDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
-  const { setTickets } = useTickets();
+  const { setTicketsCounter } = useTickets();
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(false);
@@ -60,7 +60,7 @@ function InsertEmailAccountScreen() {
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
-    setTickets(0);
+    setTicketsCounter(0);
 
     showToast({
       type: "error",
@@ -71,7 +71,7 @@ function InsertEmailAccountScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTickets(0);
+      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit, flow: "magicLink" });
     } else {
       const newState = {

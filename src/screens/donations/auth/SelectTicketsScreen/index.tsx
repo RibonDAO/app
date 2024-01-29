@@ -13,7 +13,6 @@ import { logEvent } from "services/analytics";
 import { PLATFORM } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useUtmContext } from "contexts/utmContext";
-import { useTickets } from "contexts/ticketsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import SliderButton from "components/moleculars/SliderButton";
 import * as S from "./styles";
@@ -32,7 +31,7 @@ export default function SelectTicketsScreen() {
   const { currentUser } = useCurrentUser();
   const { donate } = useDonations(currentUser?.id);
   const { currentIntegrationId, externalId } = useIntegrationContext();
-  const { tickets, setTickets } = useTickets();
+  const [tickets, setTickets] = useState(1);
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
 
   const { nonProfit } = params;

@@ -30,7 +30,7 @@ function SignedInScreen() {
   const { navigateTo } = useNavigation();
 
   const { currentIntegrationId, externalId } = useIntegrationContext();
-  const { setTickets } = useTickets();
+  const { setTicketsCounter } = useTickets();
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const {
@@ -51,7 +51,7 @@ function SignedInScreen() {
       message: error?.response?.data?.formatted_message || t("donationError"),
     });
 
-    setTickets(0);
+    setTicketsCounter(0);
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
 
@@ -79,7 +79,7 @@ function SignedInScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTickets(0);
+      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {
