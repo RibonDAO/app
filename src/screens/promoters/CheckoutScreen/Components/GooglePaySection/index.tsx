@@ -20,14 +20,22 @@ import {
   PlatformPayButton,
   usePlatformPay,
 } from "@stripe/stripe-react-native";
+import { useLanguage } from "contexts/languageContext";
+import { Languages } from "types/enums/Languages";
 import S from "./styles";
 
 type Props = {
   offer: Offer;
   cause?: Cause;
   nonProfit?: NonProfit;
+  isSubscription?: boolean;
 };
-export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
+export default function GooglePaySection({
+  offer,
+  cause,
+  nonProfit,
+  isSubscription,
+}: Props) {
   const { registerAction } = useTasksContext();
   const { currentIntegrationId } = useIntegrationContext();
   const { navigateTo } = useNavigation();
@@ -51,6 +59,8 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
   const { createPlatformPayPaymentMethod } = usePlatformPay();
 
   const testEnv = false;
+
+  const { currentLang } = useLanguage();
 
   useEffect(() => {
     logEvent("selectGooglePay_click");
@@ -82,8 +92,8 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         amount: offer.priceCents,
         currencyCode: offer.currency,
         testEnv,
-        merchantName: "Ribon",
-        merchantCountryCode: "BR",
+        merchantName: "Ribon Foundation Inc",
+        merchantCountryCode: isSubscription ? "US" : "BR",
         billingAddressConfig: {
           format: PlatformPay.BillingAddressFormat.Full,
           isPhoneNumberRequired: false,
@@ -91,6 +101,7 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         },
         existingPaymentMethodRequired: false,
         isEmailRequired: true,
+        label: "Ribon Foundation Inc",
       },
     });
 
@@ -148,7 +159,9 @@ export default function GooglePaySection({ offer, cause, nonProfit }: Props) {
         {showFiscalFields() && (
           <InputText
             name="taxId"
-            placeholder={field("taxId")}
+            placeholder={
+              currentLang === Languages.PT ? field("cpf") : field("taxId")
+            }
             mask="999.999.999-99"
             value={taxId}
             onChangeText={(value) => setTaxId(value)}

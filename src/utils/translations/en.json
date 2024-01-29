@@ -292,6 +292,7 @@
       "back": "Back",
       "monthlyContribution": "Contributing monthly",
       "uniqueContribution": "Contributing once",
+      "monthlyContributionInfo": "Your monthly donation will be automatically renewed every month unless canceled at least 24 hours before the billing period. Cancel anytime through the Ribon app settings menu, in “Monthly Contributions”.",
       "recurrenceButton": "Change",
       "donatingTo": "Donating to ",
       "netDonation": "Net donation: ",

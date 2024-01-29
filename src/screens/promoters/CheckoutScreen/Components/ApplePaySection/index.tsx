@@ -5,7 +5,7 @@ import {
   PlatformPay,
   PlatformPayButton,
 } from "@stripe/stripe-react-native";
-import { Cause, NonProfit, Offer } from "@ribon.io/shared/types";
+import { Cause, Languages, NonProfit, Offer } from "@ribon.io/shared/types";
 import storePayApi from "services/api/storePayApi";
 import { logError } from "services/crashReport";
 import { useTasksContext } from "contexts/tasksContext";
@@ -19,21 +19,31 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { normalizedLanguage } from "lib/currentLanguage";
 import { PLATFORM } from "utils/constants/Application";
 import InputText from "components/atomics/inputs/InputText";
+import { useLanguage } from "contexts/languageContext";
 import S from "./styles";
 
 type Props = {
   offer: Offer;
   cause?: Cause;
   nonProfit?: NonProfit;
+  isSubscription?: boolean;
 };
 
-export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
+export default function ApplePaySection({
+  offer,
+  cause,
+  nonProfit,
+  isSubscription,
+}: Props) {
   const [cart, setCart] = useState<any>([
     {
-      label: "Total",
+      label: "Ribon Foundation Inc",
       amount: offer.priceValue.toString(),
-      isPending: false,
-      paymentType: PlatformPay.PaymentType.Immediate,
+      intervalUnit: isSubscription ? PlatformPay.IntervalUnit.Month : null,
+      intervalCount: isSubscription ? 1 : null,
+      paymentType: isSubscription
+        ? PlatformPay.PaymentType.Recurring
+        : PlatformPay.PaymentType.Immediate,
     },
   ]);
   const [taxId, setTaxId] = useState("");
@@ -46,10 +56,13 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
   useEffect(() => {
     setCart([
       {
-        label: "Total",
+        label: "Ribon Foundation Inc",
         amount: offer.priceValue.toString(),
-        isPending: false,
-        paymentType: PlatformPay.PaymentType.Immediate,
+        intervalUnit: isSubscription ? PlatformPay.IntervalUnit.Month : null,
+        intervalCount: isSubscription ? 1 : null,
+        paymentType: isSubscription
+          ? PlatformPay.PaymentType.Recurring
+          : PlatformPay.PaymentType.Immediate,
       },
     ]);
   }, [offer]);
@@ -68,6 +81,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
   const { createSource } = useSources();
   const { currentUser } = useCurrentUser();
   const { integration } = useIntegration(currentIntegrationId);
+  const { currentLang } = useLanguage();
   const [email, setEmail] = useState(currentUser?.email ?? undefined);
 
   useEffect(() => {
@@ -92,7 +106,7 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
     const { error, paymentMethod } = await createPlatformPayPaymentMethod({
       applePay: {
         cartItems: cart,
-        merchantCountryCode: "BR",
+        merchantCountryCode: isSubscription ? "US" : "BR",
         currencyCode: offer.currency,
         requiredShippingAddressFields: [PlatformPay.ContactField.EmailAddress],
         requiredBillingContactFields: [
@@ -151,7 +165,9 @@ export default function ApplePaySection({ offer, cause, nonProfit }: Props) {
         {showFiscalFields() && (
           <InputText
             name="taxId"
-            placeholder={field("taxId")}
+            placeholder={
+              currentLang === Languages.PT ? field("cpf") : field("taxId")
+            }
             mask="999.999.999-99"
             value={taxId}
             onChangeText={(value) => setTaxId(value)}

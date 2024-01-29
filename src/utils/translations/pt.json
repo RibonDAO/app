@@ -312,6 +312,7 @@
       "back": "Voltar",
       "monthlyContribution": "Contribuindo mensalmente",
       "uniqueContribution": "Contribuindo uma vez",
+      "monthlyContributionInfo": "Sua doação mensal será renovada automaticamente todos os meses, a menos que seja cancelada pelo menos 24 horas antes do período de faturamento. Cancele a qualquer momento pelo menu de configurações do app da Ribon, em “Contribuições mensais”.",
       "recurrenceButton": "Alterar",
       "donatingTo": "Doando para ",
       "netDonation": "Doação líquida: ",
