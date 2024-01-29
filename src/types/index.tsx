@@ -82,10 +82,6 @@ export type CheckoutScreenParamList = {
   subscription?: boolean;
 };
 
-export type ValidateExtraTicketParamList = {
-  extraTicketToken: string;
-};
-
 export type RecurrenceScreenParamList = {
   target: string;
   targetId: string;
@@ -134,7 +130,7 @@ export type RootStackParamList = {
   SupportNonProfitScreen: SupportNonProfitParamList;
   PromotersScreen: PromotersScreenParams;
   CheckoutScreen: CheckoutScreenParamList;
-  ValidateExtraTicketScreen: ValidateExtraTicketParamList;
+  ValidateExtraTicketScreen: undefined;
   RecurrenceScreen: RecurrenceScreenParamList;
   PixInstructionsScreen: PixInstructionsScreenParamList;
   OnboardingScreen: undefined;
