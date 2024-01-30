@@ -15,8 +15,12 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useUtmContext } from "contexts/utmContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import SliderButton from "components/moleculars/SliderButton";
-import * as S from "./styles";
+import TicketSection from "components/moleculars/LayoutHeader/TicketSection";
+import TicketIconText from "components/moleculars/TicketIconText";
+import { useTickets } from "contexts/ticketsContext";
+import { useFocusEffect } from "@react-navigation/native";
 import DonationInProgressSection from "../DonationInProgressSection";
+import * as S from "./styles";
 
 export default function SelectTicketsScreen() {
   const { t } = useTranslation("translation", {
@@ -26,22 +30,27 @@ export default function SelectTicketsScreen() {
   const { navigateTo } = useNavigation();
   const { params } = useRouteParams<"SelectTicketsScreen">();
   const { formattedImpactText } = useFormattedImpactText();
-  const [donationSucceeded, setDonationSucceeded] = useState(true);
-  const [ticketsQuantity, setTicketsQuantity] = useState(1);
-  const { currentUser } = useCurrentUser();
+  const { currentUser, signedIn } = useCurrentUser();
   const { donate } = useDonations(currentUser?.id);
   const { currentIntegrationId, externalId } = useIntegrationContext();
-  const [tickets, setTickets] = useState(1);
+  const { ticketsCounter: tickets, refetch } = useTickets();
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
-
   const { nonProfit } = params;
 
   const [isDonating, setIsDonating] = useState(false);
+  const [donationSucceeded, setDonationSucceeded] = useState(true);
+  const [ticketsQuantity, setTicketsQuantity] = useState(1);
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [tickets]),
+  );
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
@@ -54,7 +63,7 @@ export default function SelectTicketsScreen() {
   };
 
   const handleButtonPress = async () => {
-    if (!currentUser?.email) return;
+    if (!signedIn || !currentUser?.email) return;
 
     setIsDonating(true);
 
@@ -77,7 +86,6 @@ export default function SelectTicketsScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTickets(tickets - ticketsQuantity);
       navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {
@@ -103,6 +111,7 @@ export default function SelectTicketsScreen() {
           <Header
             hasBackButton
             backButtonColor={theme.colors.brand.primary[600]}
+            rightComponent={<TicketSection hasDividerBorder={false} />}
           />
           <S.Container accessibilityRole="button" onPress={Keyboard.dismiss}>
             <S.MainContainer>
@@ -117,7 +126,15 @@ export default function SelectTicketsScreen() {
                 <S.Subtitle>
                   {formattedImpactText(nonProfit, undefined, false, true)}
                 </S.Subtitle>
-                <SliderButton rangeSize={3} setValue={setTicketsQuantity} />
+                <TicketIconText
+                  tickets={ticketsQuantity}
+                  hasDividerBorder={false}
+                  buttonDisabled
+                />
+                <SliderButton
+                  rangeSize={tickets}
+                  setValue={setTicketsQuantity}
+                />
                 <Button
                   text={t("buttonText")}
                   textColor={theme.colors.neutral10}
@@ -126,6 +143,7 @@ export default function SelectTicketsScreen() {
                   onPress={handleButtonPress}
                   customStyles={{
                     height: 48,
+                    marginTop: 32,
                   }}
                 />
               </S.ContentContainer>

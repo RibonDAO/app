@@ -19,8 +19,7 @@ export const Title = styled.Text`
 
 export const SliderContainer = styled.View`
   flex: 2;
-  padding: ${theme.spacing(16)};
-  margin-vertical: ${theme.spacing(16)};
+  padding-horizontal: ${theme.spacing(16)};
 `;
 
 export const SliderValueText = styled.Text`

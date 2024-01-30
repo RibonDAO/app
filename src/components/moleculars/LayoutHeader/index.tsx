@@ -318,7 +318,7 @@ function LayoutHeader({
 
   return (
     <View style={S.configContainer}>
-      {!hideTicket && <TicketSection />}
+      {!hideTicket && <TicketSection hasDividerBorder />}
 
       {!hideWallet && (
         <TouchableOpacity
