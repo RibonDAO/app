@@ -4,7 +4,6 @@ import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import { TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
-
 import { useNavigation } from "hooks/useNavigation";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
@@ -20,14 +19,13 @@ import { useFocusEffect } from "@react-navigation/native";
 import { logEvent } from "services/analytics";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { EXPO_PUBLIC_ZENDESK_KEY } from "utils/constants/Application";
-
 import ConfigItem from "../ConfigItem";
 import TicketModal from "./TicketModal";
 import ChangeLanguageItem from "./ChangeLanguageItem";
 import DeleteAccountModal from "./DeleteAccountModal";
 import LogoutModal from "./LogoutModal";
-import S from "./styles";
 import TicketSection from "./TicketSection";
+import S from "./styles";
 
 type Props = {
   hideTicket?: boolean;
@@ -48,7 +46,6 @@ function LayoutHeader({
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
-
   const { connectWallet, wallet, killSession } = useWalletContext();
   const { userSubscriptions } = useSubscriptions();
   const { subscriptions, refetch: refetchSubscription } = userSubscriptions();

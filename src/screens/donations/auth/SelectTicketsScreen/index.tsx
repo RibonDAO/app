@@ -29,7 +29,7 @@ export default function SelectTicketsScreen() {
   const { navigateTo } = useNavigation();
   const { params } = useRouteParams<"SelectTicketsScreen">();
   const { formattedImpactText } = useFormattedImpactText();
-  const { currentUser, signedIn } = useCurrentUser();
+  const { signedIn } = useCurrentUser();
   const { donate } = useUserTickets();
   const { ticketsCounter: tickets, refetch } = useTickets();
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
@@ -61,7 +61,7 @@ export default function SelectTicketsScreen() {
   };
 
   const handleButtonPress = async () => {
-    if (!signedIn || !currentUser?.email) return;
+    if (!signedIn) return;
 
     setIsDonating(true);
 

@@ -22,13 +22,6 @@ export const SliderContainer = styled.View`
   padding-horizontal: ${theme.spacing(16)};
 `;
 
-export const SliderValueText = styled.Text`
-  font-size: 16px;
-  color: ${theme.colors.brand.primary[900]};
-  text-align: center;
-  margin-top: ${theme.spacing(8)};
-`;
-
 export const Button = styled.TouchableOpacity`
   width: 40px;
   height: 40px;

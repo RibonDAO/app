@@ -3,7 +3,7 @@ import { renderComponent } from "config/testUtils/renders";
 import { screen } from "@testing-library/react-native";
 import SliderButton from ".";
 
-describe("RadioAccordion", () => {
+describe("SliderButton", () => {
   describe("renders", () => {
     beforeEach(() => {
       const props = {
@@ -13,8 +13,8 @@ describe("RadioAccordion", () => {
       renderComponent(<SliderButton {...props} />);
     });
     it("should render without error", () => {
-      screen.getByTestId("addButton");
-      screen.getByTestId("removeButton");
+      expect(screen.getByTestId("addButton")).toBeTruthy();
+      expect(screen.getByTestId("removeButton")).toBeTruthy();
     });
   });
 
