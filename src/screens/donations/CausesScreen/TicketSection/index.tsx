@@ -10,6 +10,7 @@ import { useTickets } from "@ribon.io/shared/hooks";
 import { useTranslation } from "react-i18next";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { PLATFORM } from "utils/constants/Application";
 
 type Props = {
   canDonate: boolean;
@@ -34,12 +35,17 @@ function TicketSection({ canDonate, isFirstAccessToIntegration }: Props) {
     const { canCollect } = await canCollectByIntegration(
       currentIntegrationId,
       currentUser?.email ?? "",
+      PLATFORM,
     );
 
     if (canCollect) {
       if (alreadyReceivedTicket !== "true") {
         setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "true");
-        collectByIntegration(currentIntegrationId, currentUser?.email ?? "");
+        collectByIntegration(
+          currentIntegrationId,
+          currentUser?.email ?? "",
+          PLATFORM,
+        );
       }
 
       if (!isFirstAccessToIntegration) {

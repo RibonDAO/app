@@ -7,18 +7,17 @@ import useFormattedImpactText from "hooks/useFormattedImpactText";
 import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
 import { useCallback, useState } from "react";
-import { useDonations } from "@ribon.io/shared";
 import { showToast } from "lib/Toast";
 import { logEvent } from "services/analytics";
 import { PLATFORM } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useUtmContext } from "contexts/utmContext";
-import { useIntegrationContext } from "contexts/integrationContext";
 import SliderButton from "components/moleculars/SliderButton";
 import TicketSection from "components/moleculars/LayoutHeader/TicketSection";
 import TicketIconText from "components/moleculars/TicketIconText";
 import { useTickets } from "contexts/ticketsContext";
 import { useFocusEffect } from "@react-navigation/native";
+import { useUserTickets } from "@ribon.io/shared/hooks";
 import DonationInProgressSection from "../DonationInProgressSection";
 import * as S from "./styles";
 
@@ -31,8 +30,7 @@ export default function SelectTicketsScreen() {
   const { params } = useRouteParams<"SelectTicketsScreen">();
   const { formattedImpactText } = useFormattedImpactText();
   const { currentUser, signedIn } = useCurrentUser();
-  const { donate } = useDonations(currentUser?.id);
-  const { currentIntegrationId, externalId } = useIntegrationContext();
+  const { donate } = useUserTickets();
   const { ticketsCounter: tickets, refetch } = useTickets();
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
   const { nonProfit } = params;
@@ -69,11 +67,9 @@ export default function SelectTicketsScreen() {
 
     try {
       await donate(
-        currentIntegrationId,
         nonProfit.id,
-        currentUser.email,
+        ticketsQuantity,
         PLATFORM,
-        externalId,
         utmSource,
         utmMedium,
         utmCampaign,
