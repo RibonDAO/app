@@ -40,6 +40,7 @@ export const ContentContainer = styled.View`
 
 export const Subtitle = styled.Text`
   ${defaultBodyMdSemibold}
+  text-align: center;
   color: ${theme.colors.neutral[600]};
   margin-bottom: 24px;
 `;

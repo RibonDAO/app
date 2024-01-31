@@ -39,6 +39,7 @@ import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { useAuthentication } from "contexts/authenticationContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
@@ -73,14 +74,15 @@ export default function CausesScreen() {
   const [currentNonProfit, setCurrentNonProfit] = useState<NonProfit>(
     {} as NonProfit,
   );
+  const [isNotificationCardVisible, setNotificationCardVisible] =
+    useState(false);
   const { navigateTo } = useNavigation();
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets } = useTickets();
   const { currentUser, signedIn } = useCurrentUser();
-  const [isNotificationCardVisible, setNotificationCardVisible] =
-    useState(false);
+  const { isAuthenticated } = useAuthentication();
 
   useAppState({
     onComeToForeground: () => {
@@ -256,12 +258,13 @@ export default function CausesScreen() {
       nonProfitId: nonProfit.id,
       from: "nonprofitCard",
     });
-    if (signedIn) {
+    if (isAuthenticated()) {
       navigateTo("SelectTicketsScreen", {
         nonProfit,
         cause: nonProfit.cause,
       });
-      // navigateTo("SignedInScreen", { nonProfit });
+    } else if (signedIn) {
+      navigateTo("SignedInScreen", { nonProfit });
     } else {
       navigateTo("DonationSignInScreen", { nonProfit });
     }
