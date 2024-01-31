@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
   ticketSection: {
     paddingVertical: 5,
     paddingHorizontal: 7,
-    borderRightWidth: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

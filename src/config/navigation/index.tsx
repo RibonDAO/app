@@ -70,6 +70,7 @@ import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
 import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
 import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
 import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
+import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -348,6 +349,14 @@ function RootNavigator() {
         name="ContributionDoneScreen"
         component={ContributionDoneScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="SelectTicketsScreen"
+        component={SelectTicketsScreen}
+        options={{
+          headerShown: false,
+        }}
       />
 
       <Stack.Screen

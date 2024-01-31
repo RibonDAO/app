@@ -257,7 +257,11 @@ export default function CausesScreen() {
       from: "nonprofitCard",
     });
     if (signedIn) {
-      navigateTo("SignedInScreen", { nonProfit });
+      navigateTo("SelectTicketsScreen", {
+        nonProfit,
+        cause: nonProfit.cause,
+      });
+      // navigateTo("SignedInScreen", { nonProfit });
     } else {
       navigateTo("DonationSignInScreen", { nonProfit });
     }
@@ -278,7 +282,6 @@ export default function CausesScreen() {
         )}
 
         <TicketSection
-          canDonate={canDonate}
           isFirstAccessToIntegration={isFirstAccessToIntegration}
         />
         {renderNotificationCard()}

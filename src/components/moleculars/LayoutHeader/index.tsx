@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Alert, Text, View } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import { TouchableOpacity } from "react-native";
-
 import { useTranslation } from "react-i18next";
 import { useWalletContext } from "contexts/walletContext";
 import WalletIcon from "components/vectors/WalletIcon";
@@ -48,7 +47,7 @@ function LayoutHeader({
 
   return (
     <View style={S.configContainer}>
-      {!hideTicket && <TicketSection />}
+      {!hideTicket && <TicketSection hasDividerBorder />}
 
       {!hideWallet && (
         <TouchableOpacity

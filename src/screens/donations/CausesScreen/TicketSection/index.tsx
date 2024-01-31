@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { showToast } from "lib/Toast";
-import { useNavigation } from "hooks/useNavigation";
 import {
   getLocalStorageItem,
   setLocalStorageItem,
@@ -19,22 +18,20 @@ import { useAuthentication } from "contexts/authenticationContext";
 import { todayDate } from "lib/dateUtils";
 
 type Props = {
-  canDonate: boolean;
   isFirstAccessToIntegration: boolean | undefined;
 };
 
 export const ALREADY_RECEIVED_TICKET_KEY = "ALREADY_RECEIVED_TICKET_KEY";
-function TicketSection({ canDonate, isFirstAccessToIntegration }: Props) {
+function TicketSection({ isFirstAccessToIntegration }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen.ticketSection",
   });
   const { currentUser } = useCurrentUser();
-  const { navigateTo } = useNavigation();
   const { currentIntegrationId } = useIntegrationContext();
   const { collectByIntegration, canCollectByIntegration } = useTickets();
   const { accessToken } = useAuthentication();
 
-  async function hasReceivedTicketToday() {
+  function hasReceivedTicketToday() {
     const donationToastSeenAtKey = getLocalStorageItem(
       DONATION_TOAST_SEEN_AT_KEY,
     );
@@ -83,10 +80,6 @@ function TicketSection({ canDonate, isFirstAccessToIntegration }: Props) {
         borderColor: theme.colors.brand.primary[600],
         textColor: theme.colors.brand.primary[600],
       });
-    } else {
-      navigateTo("GiveTicketScreen", {
-        isOnboarding: true,
-      });
     }
   }
 
@@ -94,7 +87,7 @@ function TicketSection({ canDonate, isFirstAccessToIntegration }: Props) {
     if (isFirstAccessToIntegration !== undefined) {
       receiveTicket();
     }
-  }, [isFirstAccessToIntegration, currentIntegrationId]);
+  }, [currentIntegrationId]);
 
   return null;
 }
