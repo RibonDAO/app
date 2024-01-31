@@ -6,7 +6,7 @@ import { theme } from "@ribon.io/shared/styles";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { showToast } from "lib/Toast";
 import { logEvent } from "services/analytics";
 import { PLATFORM } from "utils/constants/Application";
@@ -38,6 +38,9 @@ export default function SelectTicketsScreen() {
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const [ticketsQuantity, setTicketsQuantity] = useState(1);
+  const [currentImpact, setCurrentImpact] = useState(
+    nonProfit?.impactByTicket || undefined,
+  );
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
@@ -92,6 +95,14 @@ export default function SelectTicketsScreen() {
     }
   }, [donationSucceeded]);
 
+  useEffect(() => {
+    setCurrentImpact(
+      nonProfit?.impactByTicket
+        ? nonProfit.impactByTicket * ticketsQuantity
+        : undefined,
+    );
+  }, [nonProfit, ticketsQuantity]);
+
   return (
     <S.KeyboardView
       behavior="position"
@@ -120,7 +131,7 @@ export default function SelectTicketsScreen() {
               <S.ContentContainer>
                 <S.Title>{t("title")}</S.Title>
                 <S.Subtitle>
-                  {formattedImpactText(nonProfit, undefined, false, true)}
+                  {formattedImpactText(nonProfit, currentImpact, false, true)}
                 </S.Subtitle>
                 <TicketIconText
                   tickets={ticketsQuantity}
