@@ -9,24 +9,16 @@ import { theme } from "@ribon.io/shared/styles";
 
 import { useNavigation } from "hooks/useNavigation";
 import { useTickets } from "contexts/ticketsContext";
-import { useFocusEffect } from "@react-navigation/native";
-import { useCallback } from "react";
 import S from "./styles";
 
 function TicketSection(): JSX.Element {
-  const { ticketsCounter: tickets, refetch } = useTickets();
+  const { ticketsCounter: tickets } = useTickets();
   const hasTickets = tickets > 0;
   const ticketColor = hasTickets
     ? theme.colors.brand.primary[600]
     : theme.colors.neutral[500];
   const ticketIcon = hasTickets ? <TicketIcon /> : <GrayTicketIcon />;
   const { navigateTo } = useNavigation();
-
-  useFocusEffect(
-    useCallback(() => {
-      refetch();
-    }, [tickets]),
-  );
 
   const handleTicketClick = () => {
     if (hasTickets) {
