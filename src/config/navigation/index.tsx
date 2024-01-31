@@ -70,7 +70,7 @@ import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
 import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
 import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
 import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
-import SelectTicketsScreen from "screens/donations/auth/SelectTicketsScreen";
+import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";

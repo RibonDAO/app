@@ -18,7 +18,7 @@ import TicketIconText from "components/moleculars/TicketIconText";
 import { useTickets } from "contexts/ticketsContext";
 import { useFocusEffect } from "@react-navigation/native";
 import { useUserTickets } from "@ribon.io/shared/hooks";
-import DonationInProgressSection from "../DonationInProgressSection";
+import DonationInProgressSection from "../auth/DonationInProgressSection";
 import * as S from "./styles";
 
 export default function SelectTicketsScreen() {
