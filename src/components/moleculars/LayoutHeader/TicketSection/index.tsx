@@ -11,16 +11,15 @@ type TicketSectionProps = {
 function TicketSection({
   hasDividerBorder = false,
 }: TicketSectionProps): JSX.Element {
-  const { ticketsCounter: tickets, refetch } = useTickets();
+  const { ticketsCounter: tickets, refetchTickets } = useTickets();
   const hasTickets = tickets > 0;
   const { navigateTo } = useNavigation();
 
   useFocusEffect(
     useCallback(() => {
-      refetch();
+      refetchTickets();
     }, [tickets]),
   );
-
   const handleTicketClick = () => {
     if (hasTickets) {
       navigateTo("GiveTicketScreen");

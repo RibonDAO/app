@@ -285,7 +285,6 @@ export default function CausesScreen() {
         )}
 
         <TicketSection
-          canDonate={canDonate}
           isFirstAccessToIntegration={isFirstAccessToIntegration}
         />
         {renderNotificationCard()}

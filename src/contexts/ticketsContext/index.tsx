@@ -1,11 +1,17 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { useUserTickets } from "@ribon.io/shared/hooks";
+import {
+  useUserTickets,
+  useTickets as useTicketsHook,
+} from "@ribon.io/shared/hooks";
 import { useAuthentication } from "contexts/authenticationContext";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { PLATFORM } from "utils/constants/Application";
+import { useIntegrationContext } from "contexts/integrationContext";
 
 export interface ITicketsContext {
   ticketsCounter: number;
   setTicketsCounter: (tickets: number) => void;
-  refetch: () => void;
+  refetchTickets: () => void;
   hasTickets: boolean;
 }
 
@@ -19,27 +25,47 @@ export const TicketsContext = createContext<ITicketsContext>(
 
 function TicketsProvider({ children }: Props) {
   const { ticketsAvailable } = useUserTickets();
-  const { tickets, refetch } = ticketsAvailable();
-
-  const { accessToken } = useAuthentication();
-  const [ticketsCounter, setTicketsCounter] = useState(1);
+  const { tickets: userTickets, refetch } = ticketsAvailable();
+  const { currentIntegrationId: integrationId } = useIntegrationContext();
+  const { isAuthenticated } = useAuthentication();
+  const { currentUser } = useCurrentUser();
+  const [ticketsCounter, setTicketsCounter] = useState<number>(1);
+  const { canCollectByIntegration } = useTicketsHook();
 
   const hasTickets = ticketsCounter > 0;
 
   useEffect(() => {
     refetch();
-    setTicketsCounter(tickets ?? 1);
-    if (!accessToken) setTicketsCounter(1);
-  }, [tickets, accessToken]);
+
+    if (!isAuthenticated()) {
+      if (
+        !canCollectByIntegration(
+          integrationId ?? "",
+          currentUser?.email ?? "",
+          PLATFORM,
+        )
+      ) {
+        setTicketsCounter(0);
+      } else {
+        setTicketsCounter(1);
+      }
+    }
+  }, [isAuthenticated, integrationId, currentUser]);
+
+  useEffect(() => {
+    if (userTickets !== undefined) {
+      setTicketsCounter(userTickets);
+    }
+  }, [userTickets]);
 
   const ticketsObject: ITicketsContext = useMemo(
     () => ({
       ticketsCounter,
       setTicketsCounter,
       hasTickets,
-      refetch,
+      refetchTickets: refetch,
     }),
-    [tickets],
+    [ticketsCounter],
   );
 
   return (

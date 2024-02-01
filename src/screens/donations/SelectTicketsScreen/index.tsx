@@ -31,7 +31,7 @@ export default function SelectTicketsScreen() {
   const { formattedImpactText } = useFormattedImpactText();
   const { signedIn } = useCurrentUser();
   const { donate } = useUserTickets();
-  const { ticketsCounter: tickets, refetch } = useTickets();
+  const { ticketsCounter: tickets, refetchTickets } = useTickets();
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
   const { nonProfit } = params;
 
@@ -49,7 +49,7 @@ export default function SelectTicketsScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      refetch();
+      refetchTickets();
     }, [tickets]),
   );
 

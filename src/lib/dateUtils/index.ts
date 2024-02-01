@@ -24,3 +24,10 @@ export function nextMonth() {
   nextMonthDate.setHours(0, 0, 0, 0);
   return nextMonthDate;
 }
+
+export function todayDate() {
+  const dateNow = Date.now();
+  const date = new Date(dateNow);
+
+  return date.toLocaleDateString().toString();
+}
