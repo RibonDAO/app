@@ -3371,10 +3371,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.1.15":
-  version "1.1.15"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.15.tgz#13ccd15a343e3d99abfad5bcfd1f312800de3707"
-  integrity sha512-6twZKg2sdllP3dsfdpcsuDki6c88b6m9iwiWrzua9dYqPmb58fhpSTVjlYX8jnE4u6T25l5HpRsVwNIn9lcTkQ==
+"@ribon.io/shared@^1.1.18":
+  version "1.1.18"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.18.tgz#807f8e30d1542addd36899399c937fef1b646a87"
+  integrity sha512-7PnGfRKKokOxIFD0Sqn06H5nNlFTC9BNje1wCmjNRsBQd3cL29gvkmM9tidt1lKxbzkQVLh1kf5ZL3Z6Y64Euw==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
