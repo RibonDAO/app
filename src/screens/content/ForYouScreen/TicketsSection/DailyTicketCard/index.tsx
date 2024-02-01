@@ -1,6 +1,6 @@
 import { theme } from "@ribon.io/shared";
 import TicketIllustration from "assets/illustrations/TicketIllustration";
-import Button from "components/atomics/buttons/Button";
+import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
 import CardTicket from "components/moleculars/CardTicket";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
 import { useTranslation } from "react-i18next";
@@ -20,7 +20,7 @@ export default function DailyTicketCard() {
       }}
       icon={<TicketIllustration />}
     >
-      <Button
+      <ButtonNonClickable
         text={t("dailyTicketCard.buttonText")}
         textColor={theme.colors.brand.primary[600]}
         borderColor={theme.colors.brand.primary[50]}
