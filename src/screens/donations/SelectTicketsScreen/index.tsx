@@ -134,7 +134,7 @@ export default function SelectTicketsScreen() {
                   {formattedImpactText(nonProfit, currentImpact, false, true)}
                 </S.Subtitle>
                 <TicketIconText
-                  tickets={ticketsQuantity}
+                  quantity={ticketsQuantity}
                   hasDividerBorder={false}
                   buttonDisabled
                 />
