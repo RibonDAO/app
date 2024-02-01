@@ -7,7 +7,7 @@ describe("Button", () => {
   const mockFn = jest.fn();
 
   beforeEach(async () => {
-    await renderComponentAsync(<Button text="text" onPress={mockFn} />);
+    await renderComponentAsync(<Button text="text" />);
   });
 
   it("renders without error", () => {

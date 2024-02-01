@@ -31,7 +31,6 @@ export default function DailyTicketCard() {
           type: "outlined",
           size: 24,
         }}
-        onPress={() => {}}
       />
     </CardTicket>
   );
