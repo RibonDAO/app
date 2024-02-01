@@ -21,7 +21,7 @@ import { logEvent } from "services/analytics";
 import { useRouteParams } from "hooks/useRouteParams";
 import { setLocalStorageItem, theme } from "@ribon.io/shared";
 import { showToast } from "lib/Toast";
-import { useTickets } from "contexts/ticketsContext";
+import { useTicketsContext } from "contexts/ticketsContext";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
@@ -42,7 +42,7 @@ function InsertEmailAccountScreen() {
   const { handleDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
-  const { setTicketsCounter } = useTickets();
+  const { setTicketsCounter } = useTicketsContext();
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(false);

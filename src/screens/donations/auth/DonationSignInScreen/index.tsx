@@ -20,7 +20,7 @@ import { useUserV1Donations } from "@ribon.io/shared/hooks";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { showToast } from "lib/Toast";
 import { useCallback, useState } from "react";
-import { useTickets } from "contexts/ticketsContext";
+import { useTicketsContext } from "contexts/ticketsContext";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useRouteParams } from "hooks/useRouteParams";
 import { PLATFORM } from "utils/constants/Application";
@@ -42,7 +42,7 @@ function DonationSignInScreen() {
     params: { nonProfit },
   } = useRouteParams<"DonationSignInScreen">();
   const { navigateTo, popNavigation } = useNavigation();
-  const { setTicketsCounter } = useTickets();
+  const { setTicketsCounter } = useTicketsContext();
   const { formattedImpactText } = useFormattedImpactText();
   const { donate } = useUserV1Donations();
   const { currentIntegrationId, externalId } = useIntegrationContext();

@@ -16,7 +16,7 @@ import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/Tick
 import { useRouteParams } from "hooks/useRouteParams";
 import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
-import { useTickets } from "contexts/ticketsContext";
+import { useTicketsContext } from "contexts/ticketsContext";
 import S from "./styles";
 import DonationInProgressSection from "../DonationInProgressSection";
 
@@ -30,7 +30,7 @@ function SignedInScreen() {
   const { navigateTo } = useNavigation();
 
   const { currentIntegrationId, externalId } = useIntegrationContext();
-  const { setTicketsCounter } = useTickets();
+  const { setTicketsCounter } = useTicketsContext();
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const {

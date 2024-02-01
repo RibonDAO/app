@@ -1,8 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import {
-  useUserTickets,
-  useTickets as useTicketsHook,
-} from "@ribon.io/shared/hooks";
+import { useUserTickets, useTickets } from "@ribon.io/shared/hooks";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { PLATFORM } from "utils/constants/Application";
@@ -26,31 +23,34 @@ export const TicketsContext = createContext<ITicketsContext>(
 function TicketsProvider({ children }: Props) {
   const { ticketsAvailable } = useUserTickets();
   const { tickets: userTickets, refetch } = ticketsAvailable();
-  const { currentIntegrationId: integrationId } = useIntegrationContext();
+  const { currentIntegrationId } = useIntegrationContext();
   const { isAuthenticated } = useAuthentication();
   const { currentUser } = useCurrentUser();
   const [ticketsCounter, setTicketsCounter] = useState<number>(1);
-  const { canCollectByIntegration } = useTicketsHook();
+  const { canCollectByIntegration } = useTickets();
 
   const hasTickets = ticketsCounter > 0;
 
-  useEffect(() => {
-    refetch();
+  async function hasTicketToCollect() {
+    const { canCollect } = await canCollectByIntegration(
+      currentIntegrationId ?? "",
+      currentUser?.email ?? "",
+      PLATFORM,
+    );
 
     if (!isAuthenticated()) {
-      if (
-        !canCollectByIntegration(
-          integrationId ?? "",
-          currentUser?.email ?? "",
-          PLATFORM,
-        )
-      ) {
+      if (!canCollect) {
         setTicketsCounter(0);
       } else {
         setTicketsCounter(1);
       }
     }
-  }, [isAuthenticated, integrationId, currentUser]);
+  }
+
+  useEffect(() => {
+    refetch();
+    hasTicketToCollect();
+  }, [isAuthenticated, currentIntegrationId, currentUser]);
 
   useEffect(() => {
     if (userTickets !== undefined) {
@@ -77,11 +77,11 @@ function TicketsProvider({ children }: Props) {
 
 export default TicketsProvider;
 
-export const useTickets = () => {
+export const useTicketsContext = () => {
   const context = useContext(TicketsContext);
 
   if (!context) {
-    throw new Error("useTickets must be used within TicketsProvider");
+    throw new Error("useTicketsContext must be used within TicketsProvider");
   }
 
   return context;

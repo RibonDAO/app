@@ -567,12 +567,12 @@ export default function Navigation() {
                         <CauseDonationProvider>
                           <CauseContributionProvider>
                             <NonProfitsProvider>
-                              <TicketsProvider>
-                                <IntegrationProvider>
+                              <IntegrationProvider>
+                                <TicketsProvider>
                                   <RootNavigator />
                                   <Toast config={toastConfig} />
-                                </IntegrationProvider>
-                              </TicketsProvider>
+                                </TicketsProvider>
+                              </IntegrationProvider>
                             </NonProfitsProvider>
                           </CauseContributionProvider>
                         </CauseDonationProvider>

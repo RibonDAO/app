@@ -2,10 +2,10 @@ import { Text, View } from "react-native";
 import { renderComponent } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { waitForPromises } from "config/testUtils";
-import { useTickets } from ".";
+import { useTicketsContext } from ".";
 
 function TicketsTestPage() {
-  const { ticketsCounter: tickets, hasTickets } = useTickets();
+  const { ticketsCounter: tickets, hasTickets } = useTicketsContext();
   return (
     <View>
       <Text>Tickets</Text>

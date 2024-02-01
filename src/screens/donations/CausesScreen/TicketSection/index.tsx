@@ -29,19 +29,19 @@ function TicketSection({ isFirstAccessToIntegration }: Props) {
   const { currentUser } = useCurrentUser();
   const { currentIntegrationId } = useIntegrationContext();
   const { collectByIntegration, canCollectByIntegration } = useTickets();
-  const { accessToken } = useAuthentication();
+  const { isAuthenticated } = useAuthentication();
 
-  function hasReceivedTicketToday() {
-    const donationToastSeenAtKey = getLocalStorageItem(
+  async function hasReceivedTicketToday() {
+    const donationToastSeenAtKey = await getLocalStorageItem(
       DONATION_TOAST_SEEN_AT_KEY,
     );
-    const donationToastIntegration = getLocalStorageItem(
+    const donationToastIntegration = await getLocalStorageItem(
       DONATION_TOAST_INTEGRATION,
     );
 
     if (
       donationToastSeenAtKey &&
-      donationToastIntegration === currentIntegrationId
+      donationToastIntegration === currentIntegrationId.toLocaleString()
     ) {
       const dateUserSawToast = new Date(parseInt(donationToastSeenAtKey, 10));
       return dateUserSawToast.toLocaleDateString() === todayDate();
@@ -57,18 +57,22 @@ function TicketSection({ isFirstAccessToIntegration }: Props) {
     );
 
     if (canCollect && !hasReceivedTicketToday()) {
-      if (!accessToken) {
+      if (isAuthenticated()) {
         await collectByIntegration(
           currentIntegrationId ?? "",
           currentUser?.email ?? "",
           PLATFORM,
         );
       }
-      setLocalStorageItem(DONATION_TOAST_SEEN_AT_KEY, Date.now().toString());
-      setLocalStorageItem(
+      await setLocalStorageItem(
+        DONATION_TOAST_SEEN_AT_KEY,
+        Date.now().toString(),
+      );
+      await setLocalStorageItem(
         DONATION_TOAST_INTEGRATION,
         currentIntegrationId?.toLocaleString(),
       );
+
       showToast({
         type: "custom",
         message: t("ticketToast"),

@@ -1,8 +1,8 @@
 import { logError } from "services/crashReport";
 import { useCurrentUser } from "contexts/currentUserContext";
 import {
-  useDonations,
   useSources,
+  useTickets,
   useUserConfig,
   useUsers,
 } from "@ribon.io/shared/hooks";
@@ -22,14 +22,14 @@ type HandleDonateProps = {
   onError?: (error: any) => void;
 };
 function useDonationFlow() {
-  const { currentUser, signedIn, setCurrentUser } = useCurrentUser();
+  const { signedIn, setCurrentUser } = useCurrentUser();
   const { findOrCreateUser } = useUsers();
   const { createSource } = useSources();
-  const { donate } = useDonations(currentUser?.id);
-  const { currentIntegrationId, externalId } = useIntegrationContext();
+
+  const { currentIntegrationId } = useIntegrationContext();
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
   const { updateUserConfig } = useUserConfig();
-
+  const { collectAndDonateByIntegration } = useTickets();
   async function handleDonate({
     nonProfit,
     email,
@@ -48,12 +48,11 @@ function useDonationFlow() {
 
     if (currentIntegrationId) {
       try {
-        await donate(
+        await collectAndDonateByIntegration(
           currentIntegrationId,
           nonProfit.id,
           email,
           PLATFORM,
-          externalId,
           utmSource,
           utmMedium,
           utmCampaign,

@@ -14,7 +14,7 @@ import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { logError } from "services/crashReport";
-import { useTickets } from "contexts/ticketsContext";
+import { useTicketsContext } from "contexts/ticketsContext";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import Tooltip from "components/atomics/Tooltip";
@@ -39,6 +39,7 @@ import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { useAuthentication } from "contexts/authenticationContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
@@ -73,14 +74,15 @@ export default function CausesScreen() {
   const [currentNonProfit, setCurrentNonProfit] = useState<NonProfit>(
     {} as NonProfit,
   );
+  const [isNotificationCardVisible, setNotificationCardVisible] =
+    useState(false);
   const { navigateTo } = useNavigation();
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
-  const { hasTickets } = useTickets();
+  const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
-  const [isNotificationCardVisible, setNotificationCardVisible] =
-    useState(false);
+  const { isAuthenticated } = useAuthentication();
 
   useAppState({
     onComeToForeground: () => {
@@ -106,6 +108,12 @@ export default function CausesScreen() {
       refetchCanDonate();
       refetchFirstAccessToIntegration();
     }, [currentUser, signedIn]),
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      refetchTickets();
+    }, []),
   );
 
   useEffect(() => {
@@ -256,12 +264,13 @@ export default function CausesScreen() {
       nonProfitId: nonProfit.id,
       from: "nonprofitCard",
     });
-    if (signedIn) {
+    if (isAuthenticated()) {
       navigateTo("SelectTicketsScreen", {
         nonProfit,
         cause: nonProfit.cause,
       });
-      // navigateTo("SignedInScreen", { nonProfit });
+    } else if (signedIn) {
+      navigateTo("SignedInScreen", { nonProfit });
     } else {
       navigateTo("DonationSignInScreen", { nonProfit });
     }
