@@ -60,7 +60,6 @@ function InsertEmailAccountScreen() {
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
-    setTicketsCounter(0);
 
     showToast({
       type: "error",

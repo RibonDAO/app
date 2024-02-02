@@ -51,7 +51,6 @@ function SignedInScreen() {
       message: error?.response?.data?.formatted_message || t("donationError"),
     });
 
-    setTicketsCounter(0);
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
 

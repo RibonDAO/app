@@ -68,7 +68,7 @@ export default function CausesScreen() {
     isLoading: loadingFirstAccessToIntegration,
   } = useFirstAccessToIntegration(currentIntegrationId);
   const { integration } = useIntegrationContext();
-
+  const { ticketsCounter } = useTicketsContext();
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
   const [currentNonProfit, setCurrentNonProfit] = useState<NonProfit>(
@@ -87,6 +87,7 @@ export default function CausesScreen() {
   useAppState({
     onComeToForeground: () => {
       refetchCanDonate();
+      refetchTickets();
     },
   });
 
@@ -113,7 +114,13 @@ export default function CausesScreen() {
   useFocusEffect(
     useCallback(() => {
       refetchTickets();
-    }, []),
+    }, [
+      currentUser,
+      signedIn,
+      ticketsCounter,
+      isAuthenticated,
+      currentIntegrationId,
+    ]),
   );
 
   useEffect(() => {
