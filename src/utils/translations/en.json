@@ -201,6 +201,13 @@
           "streakTitle": "days in a row completing tasks"
         },
         "countdown": "until task reset"
+      },
+      "ticketsSection": {
+        "dailyTicketCard": {
+          "title": "Daily Ticket (Free)",
+          "subtitle": "Earn 1 per day",
+          "buttonText": "Collected automatically"
+        }
       }
     }
   },

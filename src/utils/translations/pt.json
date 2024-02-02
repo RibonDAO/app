@@ -196,6 +196,13 @@
           "streakTitle": "dias seguidos completando tarefas"
         },
         "countdown": "até reiniciar tarefas"
+      },
+      "ticketsSection": {
+        "dailyTicketCard": {
+          "title": "Ticket diário (grátis)",
+          "subtitle": "Ganhe 1 por dia",
+          "buttonText": "Coletado automaticamente"
+        }
       }
     }
   },
