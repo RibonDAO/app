@@ -6,19 +6,19 @@ import { theme } from "@ribon.io/shared/styles";
 import S from "./styles";
 
 type TicketIconTextProps = {
-  tickets: number;
+  quantity: number;
   hasDividerBorder?: boolean;
   buttonDisabled?: boolean;
   onClick?: () => void;
 };
 
 function TicketIconText({
-  tickets,
+  quantity,
   hasDividerBorder = false,
   buttonDisabled = false,
   onClick,
 }: TicketIconTextProps): JSX.Element {
-  const hasTickets = tickets > 0;
+  const hasTickets = quantity > 0;
   const ticketColor = hasTickets
     ? theme.colors.brand.primary[600]
     : theme.colors.neutral[500];
@@ -50,7 +50,7 @@ function TicketIconText({
       >
         {ticketIcon}
         <Text style={{ ...S.ticketCounter, color: ticketColor }}>
-          {String(tickets)}
+          {String(quantity)}
         </Text>
       </View>
     </TouchableOpacity>

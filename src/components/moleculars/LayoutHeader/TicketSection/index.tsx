@@ -30,7 +30,7 @@ function TicketSection({
 
   return (
     <TicketIconText
-      tickets={tickets}
+      quantity={tickets}
       hasDividerBorder={hasDividerBorder}
       onClick={handleTicketClick}
     />

@@ -23,7 +23,7 @@ export default function DonationDoneScreen({
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donationDoneScreen",
   });
-  const { nonProfit, flow } = route.params;
+  const { nonProfit, flow, impact } = route.params;
   const { navigateTo } = useNavigation();
   const { formattedImpactText } = useFormattedImpactText();
   const { playSound } = useSound();
@@ -108,7 +108,7 @@ export default function DonationDoneScreen({
           description={t("description") || ""}
           highlightedDescription={formattedImpactText(
             nonProfit,
-            undefined,
+            impact ?? undefined,
             false,
             false,
           )}

@@ -85,7 +85,7 @@ export default function SelectTicketsScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      navigateTo("DonationDoneScreen", { nonProfit });
+      navigateTo("DonationDoneScreen", { nonProfit, impact: currentImpact });
     } else {
       const newState = {
         failedDonation: true,
@@ -93,7 +93,7 @@ export default function SelectTicketsScreen() {
       };
       navigateTo("CausesScreen", { newState });
     }
-  }, [donationSucceeded]);
+  }, [donationSucceeded, currentImpact]);
 
   useEffect(() => {
     setCurrentImpact(
@@ -134,7 +134,7 @@ export default function SelectTicketsScreen() {
                   {formattedImpactText(nonProfit, currentImpact, false, true)}
                 </S.Subtitle>
                 <TicketIconText
-                  tickets={ticketsQuantity}
+                  quantity={ticketsQuantity}
                   hasDividerBorder={false}
                   buttonDisabled
                 />

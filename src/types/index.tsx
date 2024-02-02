@@ -20,6 +20,7 @@ export type DonationDoneParamsList = {
   nonProfit: NonProfit;
   offer: Offer;
   flow: string;
+  impact?: number;
 };
 
 export type ForYouScreenParamsList = {
