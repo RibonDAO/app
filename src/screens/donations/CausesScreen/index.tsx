@@ -87,7 +87,6 @@ export default function CausesScreen() {
   useAppState({
     onComeToForeground: () => {
       refetchCanDonate();
-      refetchTickets();
     },
   });
 
@@ -106,14 +105,9 @@ export default function CausesScreen() {
 
   useFocusEffect(
     useCallback(() => {
+      refetchTickets();
       refetchCanDonate();
       refetchFirstAccessToIntegration();
-    }, [currentUser, signedIn]),
-  );
-
-  useFocusEffect(
-    useCallback(() => {
-      refetchTickets();
     }, [
       currentUser,
       signedIn,

@@ -34,16 +34,22 @@ function TicketsProvider({ children }: Props) {
 
   async function hasTicketToCollect() {
     try {
-      const { canCollect } = await canCollectByIntegration(
-        currentIntegrationId ?? "",
-        currentUser?.email ?? "",
-        PLATFORM,
-      );
-      if (!isAuthenticated()) {
+      if (!isAuthenticated() && currentUser?.email) {
+        const { canCollect } = await canCollectByIntegration(
+          currentIntegrationId ?? "",
+          currentUser?.email ?? "",
+          PLATFORM,
+        );
+
         if (!canCollect) {
+          console.log("entrou aq");
           setTicketsCounter(0);
         } else {
           setTicketsCounter(1);
+        }
+      } else if (currentUser?.email && isAuthenticated()) {
+        if (userTickets !== undefined) {
+          setTicketsCounter(userTickets);
         }
       }
     } catch (error) {
@@ -51,10 +57,15 @@ function TicketsProvider({ children }: Props) {
     }
   }
 
+  const refetchTickets = async () => {
+    await refetch();
+    await hasTicketToCollect();
+  };
+
   useEffect(() => {
     refetch();
     hasTicketToCollect();
-  }, [isAuthenticated, currentIntegrationId, currentUser]);
+  }, [isAuthenticated, currentIntegrationId, currentUser, ticketsCounter]);
 
   useEffect(() => {
     if (userTickets !== undefined) {
@@ -67,9 +78,9 @@ function TicketsProvider({ children }: Props) {
       ticketsCounter,
       setTicketsCounter,
       hasTickets,
-      refetchTickets: refetch,
+      refetchTickets,
     }),
-    [ticketsCounter],
+    [ticketsCounter, currentIntegrationId, isAuthenticated, userTickets],
   );
 
   return (

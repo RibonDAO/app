@@ -155,6 +155,7 @@
     },
     "giveTicketScreen": {
       "title": "You have 1 ticket!",
+      "titlePlural": "You have {{ticketCounter}} tickets!",
       "subtitle": "Every day when you login in Ribon you get a new ticket.",
       "button": "Donate ticket",
       "onboardingTitle": "Welcome to Ribon!",
