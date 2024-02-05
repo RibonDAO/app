@@ -27,27 +27,28 @@ export const KeyboardView = styled.View`
 `;
 
 export const ImageContainer = styled.View`
-  margintop: ${theme.spacingNative(24)};
+  margin-top: ${theme.spacing(24)};
   align-items: center;
   justify-content: center;
 `;
 
 export const ContentContainer = styled.View`
-  margin-top: ${theme.spacingNative(24)};
+  margin-top: ${theme.spacing(24)};
   align-items: center;
-  gap: ${theme.spacingNative(8)};
+  gap: ${theme.spacing(8)};
 `;
 
 export const Subtitle = styled.Text`
   ${defaultBodyMdSemibold}
+  height: 48px;
   text-align: center;
   color: ${theme.colors.neutral[600]};
-  margin-bottom: 24px;
+  margin-bottom: ${theme.spacing(4)};
 `;
 
 export const Image = styled.Image`
   width: 132px;
   height: 132px;
   resize-mode: cover;
-  border-radius: 8px;
+  border-radius: ${theme.spacing(8)};
 `;

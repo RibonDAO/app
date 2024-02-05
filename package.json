@@ -35,7 +35,6 @@
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-clipboard/clipboard": "^1.12.1",
     "@react-native-community/netinfo": "9.3.10",
-    "@react-native-community/slider": "4.4.2",
     "@react-native-firebase/analytics": "^17.0.0",
     "@react-native-firebase/app": "^17.4.1",
     "@react-native-firebase/crashlytics": "^17.0.0",

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Slider from "@react-native-community/slider";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
-import * as S from "./styles"; // Import styles from the separate file
+import { Slider } from "@miblanchard/react-native-slider";
+import * as S from "./styles";
 
 type SliderButtonProps = {
   rangeSize: number;
@@ -12,9 +12,10 @@ type SliderButtonProps = {
 function SliderButton({ rangeSize, setValue }: SliderButtonProps): JSX.Element {
   const [sliderValue, setSliderValue] = useState(1);
 
-  const handleSliderChange = (value: number) => {
-    setSliderValue(Math.round(value));
-    setValue(Math.round(value));
+  const handleSliderChange = (value: number | number[]) => {
+    const newValue = Array.isArray(value) ? value[0] : value;
+    setSliderValue(Math.round(newValue));
+    setValue(Math.round(newValue));
   };
 
   const handleButtonClick = (increment: number) => {
@@ -34,6 +35,14 @@ function SliderButton({ rangeSize, setValue }: SliderButtonProps): JSX.Element {
   const plusBorderColor = plusDisabled
     ? theme.colors.neutral[400]
     : theme.colors.brand.primary[600];
+
+  const thumbStyle = {
+    backgroundColor: theme.colors.brand.primary[600],
+    borderColor: theme.colors.neutral10,
+    borderWidth: 2,
+    height: 16,
+    width: 16,
+  };
 
   return (
     <S.Container>
@@ -56,20 +65,15 @@ function SliderButton({ rangeSize, setValue }: SliderButtonProps): JSX.Element {
       </S.Button>
       <S.SliderContainer>
         <Slider
-          style={{
-            width: "100%",
-            borderColor: theme.colors.brand.primary[600],
-            paddingHorizontal: 16,
-          }}
           minimumValue={rangeSize === 1 ? 0 : 1}
           maximumValue={rangeSize}
           step={1}
-          minimumTrackTintColor={theme.colors.brand.primary[600]}
-          maximumTrackTintColor={theme.colors.neutral[200]}
-          thumbTintColor={theme.colors.brand.primary[600]}
           value={sliderValue}
           onValueChange={handleSliderChange}
           disabled={rangeSize === 1}
+          minimumTrackTintColor={theme.colors.brand.primary[600]}
+          maximumTrackTintColor={theme.colors.neutral[200]}
+          thumbStyle={thumbStyle}
         />
       </S.SliderContainer>
       <S.Button
