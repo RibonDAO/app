@@ -3,8 +3,8 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import {
   useSources,
   useTickets,
-  useUserConfig,
   useUsers,
+  useUserTickets,
 } from "@ribon.io/shared/hooks";
 
 import { NonProfit } from "@ribon.io/shared/types";
@@ -14,13 +14,20 @@ import { PLATFORM } from "utils/constants/Application";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useUtmContext } from "contexts/utmContext";
 
-type HandleDonateProps = {
+type HandleCollectAndDonateProps = {
   nonProfit: NonProfit;
   email: string;
-  allowedEmailMarketing?: boolean;
   onSuccess?: () => void;
   onError?: (error: any) => void;
 };
+
+type HandleDonateProps = {
+  nonProfit: NonProfit;
+  ticketsQuantity: number;
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+};
+
 function useDonationFlow() {
   const { signedIn, setCurrentUser } = useCurrentUser();
   const { findOrCreateUser } = useUsers();
@@ -28,31 +35,32 @@ function useDonationFlow() {
 
   const { currentIntegrationId } = useIntegrationContext();
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
-  const { updateUserConfig } = useUserConfig();
   const { collectAndDonateByIntegration } = useTickets();
-  async function handleDonate({
+
+  async function handleCollectAndDonate({
     nonProfit,
     email,
-    allowedEmailMarketing,
     onError,
     onSuccess,
-  }: HandleDonateProps) {
+  }: HandleCollectAndDonateProps) {
     if (!signedIn) {
       const user = await findOrCreateUser(email, await normalizedLanguage());
       if (currentIntegrationId) createSource(user.id, currentIntegrationId);
       setCurrentUser(user);
-      if (allowedEmailMarketing) {
-        updateUserConfig(user.id, { allowedEmailMarketing });
-      }
     }
 
     if (currentIntegrationId) {
       try {
+        // if(externalId){
+        //   await collectAndDonateByExternalId{
+
+        //   }
+        // }
         await collectAndDonateByIntegration(
           currentIntegrationId,
           nonProfit.id,
-          email,
           PLATFORM,
+          email,
           utmSource,
           utmMedium,
           utmCampaign,
@@ -65,7 +73,31 @@ function useDonationFlow() {
     }
   }
 
-  return { handleDonate };
+  async function handleDonate({
+    nonProfit,
+    ticketsQuantity,
+    onError,
+    onSuccess,
+  }: HandleDonateProps) {
+    const { donate } = useUserTickets();
+
+    try {
+      await donate(
+        nonProfit.id,
+        ticketsQuantity,
+        PLATFORM,
+        utmSource,
+        utmMedium,
+        utmCampaign,
+      );
+      if (onSuccess) onSuccess();
+    } catch (e: any) {
+      logError(e);
+      if (onError) onError(e);
+    }
+  }
+
+  return { handleCollectAndDonate, handleDonate };
 }
 
 export default useDonationFlow;

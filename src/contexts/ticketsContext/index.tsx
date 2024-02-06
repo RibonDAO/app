@@ -32,7 +32,7 @@ function TicketsProvider({ children }: Props) {
 
   const hasTickets = ticketsCounter > 0;
 
-  async function hasTicketToCollect() {
+  async function updateTicketsCounter() {
     try {
       if (!isAuthenticated() && currentUser?.email) {
         const { canCollect } = await canCollectByIntegration(
@@ -42,7 +42,6 @@ function TicketsProvider({ children }: Props) {
         );
 
         if (!canCollect) {
-          console.log("entrou aq");
           setTicketsCounter(0);
         } else {
           setTicketsCounter(1);
@@ -59,12 +58,12 @@ function TicketsProvider({ children }: Props) {
 
   const refetchTickets = async () => {
     await refetch();
-    await hasTicketToCollect();
+    await updateTicketsCounter();
   };
 
   useEffect(() => {
     refetch();
-    hasTicketToCollect();
+    updateTicketsCounter();
   }, [isAuthenticated, currentIntegrationId, currentUser, ticketsCounter]);
 
   useEffect(() => {

@@ -3,12 +3,8 @@ import Image from "components/atomics/Image";
 import Button from "components/atomics/buttons/Button";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useTranslation } from "react-i18next";
-import { useDonations } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { PLATFORM } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
-import { useIntegrationContext } from "contexts/integrationContext";
-import { useUtmContext } from "contexts/utmContext";
 import { logEvent } from "services/analytics";
 import { useCallback, useState } from "react";
 import { setLocalStorageItem } from "lib/localStorage";
@@ -17,6 +13,7 @@ import { useRouteParams } from "hooks/useRouteParams";
 import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
 import { useTicketsContext } from "contexts/ticketsContext";
+import useDonationFlow from "hooks/useDonationFlow";
 import S from "./styles";
 import DonationInProgressSection from "../DonationInProgressSection";
 
@@ -25,13 +22,11 @@ function SignedInScreen() {
     keyPrefix: "donations.donateScreen.signedInScreen",
   });
   const { currentUser } = useCurrentUser();
-  const { donate } = useDonations(currentUser?.id);
+  const { handleCollectAndDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
 
-  const { currentIntegrationId, externalId } = useIntegrationContext();
   const { setTicketsCounter } = useTicketsContext();
-  const { utmSource, utmMedium, utmCampaign } = useUtmContext();
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const {
     params: { nonProfit },
@@ -59,21 +54,14 @@ function SignedInScreen() {
 
     setIsDonating(true);
 
-    try {
-      await donate(
-        currentIntegrationId,
-        nonProfit.id,
-        currentUser.email,
-        PLATFORM,
-        externalId,
-        utmSource,
-        utmMedium,
-        utmCampaign,
-      );
-      onDonationSuccess();
-    } catch (error: any) {
-      onDonationFail(error);
-    }
+    await handleCollectAndDonate({
+      nonProfit,
+      email: currentUser.email,
+      onSuccess: () => onDonationSuccess,
+      onError: (error) => {
+        onDonationFail(error);
+      },
+    });
   };
 
   const onAnimationEnd = useCallback(() => {

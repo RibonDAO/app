@@ -9,15 +9,13 @@ import { useNavigation } from "hooks/useNavigation";
 import { useCallback, useEffect, useState } from "react";
 import { showToast } from "lib/Toast";
 import { logEvent } from "services/analytics";
-import { PLATFORM } from "utils/constants/Application";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useUtmContext } from "contexts/utmContext";
 import SliderButton from "components/moleculars/SliderButton";
 import TicketSection from "components/moleculars/LayoutHeader/TicketSection";
 import TicketIconText from "components/moleculars/TicketIconText";
 import { useTicketsContext } from "contexts/ticketsContext";
 import { useFocusEffect } from "@react-navigation/native";
-import { useUserTickets } from "@ribon.io/shared/hooks";
+import useDonationFlow from "hooks/useDonationFlow";
 import DonationInProgressSection from "../auth/DonationInProgressSection";
 import * as S from "./styles";
 
@@ -30,9 +28,8 @@ export default function SelectTicketsScreen() {
   const { params } = useRouteParams<"SelectTicketsScreen">();
   const { formattedImpactText } = useFormattedImpactText();
   const { signedIn } = useCurrentUser();
-  const { donate } = useUserTickets();
+  const { handleDonate } = useDonationFlow();
   const { ticketsCounter: tickets, refetchTickets } = useTicketsContext();
-  const { utmSource, utmMedium, utmCampaign } = useUtmContext();
   const { nonProfit } = params;
 
   const [isDonating, setIsDonating] = useState(false);
@@ -68,19 +65,14 @@ export default function SelectTicketsScreen() {
 
     setIsDonating(true);
 
-    try {
-      await donate(
-        nonProfit.id,
-        ticketsQuantity,
-        PLATFORM,
-        utmSource,
-        utmMedium,
-        utmCampaign,
-      );
-      onDonationSuccess();
-    } catch (error: any) {
-      onDonationFail(error);
-    }
+    await handleDonate({
+      nonProfit,
+      ticketsQuantity,
+      onSuccess: () => onDonationSuccess(),
+      onError: (error) => {
+        onDonationFail(error);
+      },
+    });
   };
 
   const onAnimationEnd = useCallback(() => {
