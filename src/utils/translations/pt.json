@@ -133,6 +133,10 @@
         "emailPlaceholder": "Seu e-mail",
         "donationError": "Não foi possível doar."
       }
+    },
+    "selectTicketsScreen": {
+      "title": "Escolha o tamanho da sua ajuda",
+      "buttonText": "Continuar"
     }
   },
   "content": {
@@ -146,6 +150,7 @@
     },
     "giveTicketScreen": {
       "title": "Você tem 1 ticket!",
+      "titlePlural": "Você tem {{ticketsCounter}} tickets!",
       "subtitle": "Você recebe um novo ticket sempre que entra na Ribon pela primeira vez no dia",
       "button": "Doar ticket",
       "onboardingTitle": "Que bom ter você na Ribon!",
