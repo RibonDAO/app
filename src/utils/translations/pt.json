@@ -529,6 +529,9 @@
       "title": "Validar sua conta trouxe você aqui",
       "description": "Seu ticket extra está disponível",
       "buttonText": "Receber meu ticket"
+    },
+    "validateExtraTicketScreen": {
+      "error": "Link inválido"
     }
   }
 }
