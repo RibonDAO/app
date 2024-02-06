@@ -71,6 +71,7 @@ import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
 import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
 import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
+import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -362,6 +363,14 @@ function RootNavigator() {
       />
 
       <Stack.Screen
+        name="SelectTicketsScreen"
+        component={SelectTicketsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
         name="PaymentScreen"
         component={PaymentScreen}
         options={{
@@ -577,12 +586,12 @@ export default function Navigation() {
                         <CauseDonationProvider>
                           <CauseContributionProvider>
                             <NonProfitsProvider>
-                              <TicketsProvider>
-                                <IntegrationProvider>
+                              <IntegrationProvider>
+                                <TicketsProvider>
                                   <RootNavigator />
                                   <Toast config={toastConfig} />
-                                </IntegrationProvider>
-                              </TicketsProvider>
+                                </TicketsProvider>
+                              </IntegrationProvider>
                             </NonProfitsProvider>
                           </CauseContributionProvider>
                         </CauseDonationProvider>
