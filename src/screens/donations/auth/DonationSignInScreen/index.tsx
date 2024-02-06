@@ -25,7 +25,6 @@ import { useRouteParams } from "hooks/useRouteParams";
 import usePageView from "hooks/usePageView";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
 import useDonationFlow from "hooks/useDonationFlow";
-import { useCurrentUser } from "contexts/currentUserContext";
 import S from "./styles";
 
 function DonationSignInScreen() {
@@ -42,8 +41,7 @@ function DonationSignInScreen() {
   const { navigateTo, popNavigation } = useNavigation();
   const { setTicketsCounter } = useTicketsContext();
   const { formattedImpactText } = useFormattedImpactText();
-  const { handleCollectAndDonate } = useDonationFlow();
-  const { currentUser } = useCurrentUser();
+  const { handleDonate } = useDonationFlow();
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
@@ -61,9 +59,9 @@ function DonationSignInScreen() {
   };
 
   async function donateCallback() {
-    await handleCollectAndDonate({
+    await handleDonate({
       nonProfit,
-      email: currentUser?.email || "",
+      ticketsQuantity: 1,
       onSuccess: () => onDonationSuccess,
       onError: (error) => {
         onDonationFail(error);
