@@ -136,6 +136,7 @@ export type RootStackParamList = {
   SupportNonProfitScreen: SupportNonProfitParamList;
   PromotersScreen: PromotersScreenParams;
   CheckoutScreen: CheckoutScreenParamList;
+  ValidateExtraTicketScreen: undefined;
   RecurrenceScreen: RecurrenceScreenParamList;
   SelectTicketsScreen: SelectTicketsScreenParamList;
   PixInstructionsScreen: PixInstructionsScreenParamList;

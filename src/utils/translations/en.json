@@ -537,6 +537,9 @@
       "title": "Validating your account brought you here",
       "description": "Your donation ticket is available",
       "buttonText": "Get my ticket"
+    },
+    "validateExtraTicketScreen": {
+      "error": "Invalid link"
     }
   }
 }

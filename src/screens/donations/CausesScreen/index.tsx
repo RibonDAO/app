@@ -100,15 +100,6 @@ export default function CausesScreen() {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
   }, [isLoading]);
 
-  useEffect(() => {
-    if (nonProfits && causes.length > 0) {
-      logEvent("donationCardsOrder_view", {
-        nonProfits: nonProfits.map((np) => np.name).join(", "),
-        causes: causes.map((c) => c.name).join(", "),
-      });
-    }
-  }, [nonProfits, causes]);
-
   useFocusEffect(
     useCallback(() => {
       refetchTickets();
