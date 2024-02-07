@@ -18,7 +18,6 @@ import { useNetworkContext } from "contexts/networkContext";
 import { defaultNetwork } from "config/networks";
 import { useCausesContext } from "contexts/causesContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
-import { logEvent } from "services/analytics";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import styles from "./styles";
@@ -67,14 +66,6 @@ function CryptoScreen(): JSX.Element {
     if (cause?.pools && cause?.pools[0])
       setCurrentPool(cause?.pools[0].address);
   }, [cause]);
-
-  useEffect(() => {
-    if (causes.length > 0) {
-      logEvent("contributionCardsOrder_view", {
-        causes: causes.map((c) => c.name).join(", "),
-      });
-    }
-  }, [causes]);
 
   const resetScreen = () => {
     async function reset() {

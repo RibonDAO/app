@@ -14,7 +14,7 @@ import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { logError } from "services/crashReport";
-import { useTickets } from "contexts/ticketsContext";
+import { useTicketsContext } from "contexts/ticketsContext";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import Tooltip from "components/atomics/Tooltip";
@@ -39,6 +39,7 @@ import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { useAuthentication } from "contexts/authenticationContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
@@ -67,20 +68,21 @@ export default function CausesScreen() {
     isLoading: loadingFirstAccessToIntegration,
   } = useFirstAccessToIntegration(currentIntegrationId);
   const { integration } = useIntegrationContext();
-
+  const { ticketsCounter } = useTicketsContext();
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
   const [currentNonProfit, setCurrentNonProfit] = useState<NonProfit>(
     {} as NonProfit,
   );
+  const [isNotificationCardVisible, setNotificationCardVisible] =
+    useState(false);
   const { navigateTo } = useNavigation();
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
-  const { hasTickets } = useTickets();
+  const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
-  const [isNotificationCardVisible, setNotificationCardVisible] =
-    useState(false);
+  const { isAuthenticated } = useAuthentication();
 
   useAppState({
     onComeToForeground: () => {
@@ -92,20 +94,18 @@ export default function CausesScreen() {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
   }, [isLoading]);
 
-  useEffect(() => {
-    if (nonProfits && causes.length > 0) {
-      logEvent("donationCardsOrder_view", {
-        nonProfits: nonProfits.map((np) => np.name).join(", "),
-        causes: causes.map((c) => c.name).join(", "),
-      });
-    }
-  }, [nonProfits, causes]);
-
   useFocusEffect(
     useCallback(() => {
+      refetchTickets();
       refetchCanDonate();
       refetchFirstAccessToIntegration();
-    }, [currentUser, signedIn]),
+    }, [
+      currentUser,
+      signedIn,
+      ticketsCounter,
+      isAuthenticated,
+      currentIntegrationId,
+    ]),
   );
 
   useEffect(() => {
@@ -208,7 +208,7 @@ export default function CausesScreen() {
     !integration?.name?.toLowerCase()?.includes("ribon") &&
     integration &&
     canDonate &&
-    hasTickets() &&
+    hasTickets &&
     integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
 
   const handleHideNotificationClick = async () => {
@@ -256,7 +256,12 @@ export default function CausesScreen() {
       nonProfitId: nonProfit.id,
       from: "nonprofitCard",
     });
-    if (signedIn) {
+    if (isAuthenticated()) {
+      navigateTo("SelectTicketsScreen", {
+        nonProfit,
+        cause: nonProfit.cause,
+      });
+    } else if (signedIn) {
       navigateTo("SignedInScreen", { nonProfit });
     } else {
       navigateTo("DonationSignInScreen", { nonProfit });
@@ -278,7 +283,6 @@ export default function CausesScreen() {
         )}
 
         <TicketSection
-          canDonate={canDonate}
           isFirstAccessToIntegration={isFirstAccessToIntegration}
         />
         {renderNotificationCard()}
@@ -326,12 +330,12 @@ export default function CausesScreen() {
                   undefined,
                   t("impactPrefix") || "",
                 )}
-                buttonText={hasTickets() ? t("buttonText") : t("noTickets")}
+                buttonText={hasTickets ? t("buttonText") : t("noTickets")}
                 onImagePress={() => {
                   handleNonProfitImagePress(nonProfit);
                 }}
                 onClickButton={() => handleButtonPress(nonProfit)}
-                buttonDisabled={!hasTickets()}
+                buttonDisabled={!hasTickets}
                 labelText={t("labelText") || ""}
               />
             </View>

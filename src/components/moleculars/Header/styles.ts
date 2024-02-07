@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   },
   insideContainer: {
     display: "flex",
-    alignItems: "center",
   },
 });
 

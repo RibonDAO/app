@@ -21,7 +21,7 @@ import { logEvent } from "services/analytics";
 import { useRouteParams } from "hooks/useRouteParams";
 import { setLocalStorageItem, theme } from "@ribon.io/shared";
 import { showToast } from "lib/Toast";
-import { useTickets } from "contexts/ticketsContext";
+import { useTicketsContext } from "contexts/ticketsContext";
 import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
@@ -39,10 +39,10 @@ function InsertEmailAccountScreen() {
   const [email, setEmail] = useState("");
 
   const { sendAuthenticationEmail } = useAuthentication();
-  const { handleDonate } = useDonationFlow();
+  const { handleCollectAndDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
-  const { setTickets } = useTickets();
+  const { setTicketsCounter } = useTicketsContext();
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(false);
@@ -60,7 +60,6 @@ function InsertEmailAccountScreen() {
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
-    setTickets(0);
 
     showToast({
       type: "error",
@@ -71,7 +70,7 @@ function InsertEmailAccountScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTickets(0);
+      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit, flow: "magicLink" });
     } else {
       const newState = {
@@ -84,11 +83,11 @@ function InsertEmailAccountScreen() {
 
   async function donateCallback() {
     await sendAuthenticationEmail({ email });
-    await handleDonate({
+    await handleCollectAndDonate({
       nonProfit,
       email,
-      onError: onDonationFail,
-      onSuccess: onDonationSuccess,
+      onError: (error) => onDonationFail(error),
+      onSuccess: () => onDonationSuccess,
     });
   }
 

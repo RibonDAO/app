@@ -70,6 +70,8 @@ import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
 import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
 import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
 import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
+import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
+import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -245,8 +247,12 @@ function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId, setExtraTicket } =
-    useAuthentication();
+  const {
+    setMagicLinkToken,
+    setAccountId,
+    setExtraTicket,
+    setExtraTicketToken,
+  } = useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -256,6 +262,7 @@ function PrivateNavigator() {
       setMagicLinkToken,
       setAccountId,
       setExtraTicket,
+      setExtraTicketToken,
     );
   }, []);
 
@@ -277,8 +284,12 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId, setExtraTicket } =
-    useAuthentication();
+  const {
+    setMagicLinkToken,
+    setAccountId,
+    setExtraTicket,
+    setExtraTicketToken,
+  } = useAuthentication();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -288,6 +299,7 @@ function RootNavigator() {
       setMagicLinkToken,
       setAccountId,
       setExtraTicket,
+      setExtraTicketToken,
     );
   }, []);
 
@@ -348,6 +360,14 @@ function RootNavigator() {
         name="ContributionDoneScreen"
         component={ContributionDoneScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="SelectTicketsScreen"
+        component={SelectTicketsScreen}
+        options={{
+          headerShown: false,
+        }}
       />
 
       <Stack.Screen
@@ -503,6 +523,14 @@ function RootNavigator() {
       />
 
       <Stack.Screen
+        name="ValidateExtraTicketScreen"
+        component={ValidateExtraTicketScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
         name="ExtraTicketScreen"
         component={ExtraTicketScreen}
         options={{
@@ -558,12 +586,12 @@ export default function Navigation() {
                         <CauseDonationProvider>
                           <CauseContributionProvider>
                             <NonProfitsProvider>
-                              <TicketsProvider>
-                                <IntegrationProvider>
+                              <IntegrationProvider>
+                                <TicketsProvider>
                                   <RootNavigator />
                                   <Toast config={toastConfig} />
-                                </IntegrationProvider>
-                              </TicketsProvider>
+                                </TicketsProvider>
+                              </IntegrationProvider>
                             </NonProfitsProvider>
                           </CauseContributionProvider>
                         </CauseDonationProvider>
