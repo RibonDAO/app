@@ -40,6 +40,10 @@ import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useTickets } from "hooks/useTickets";
+import {
+  DONATION_TOAST_INTEGRATION,
+  DONATION_TOAST_SEEN_AT_KEY,
+} from "lib/localStorage/constants";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
@@ -83,7 +87,8 @@ export default function CausesScreen() {
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
   const { isAuthenticated } = useAuthentication();
-  const { receiveTicket } = useTickets();
+  const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
+    useTickets();
 
   useAppState({
     onComeToForeground: () => {
@@ -115,7 +120,48 @@ export default function CausesScreen() {
       ticketsCounter,
       isAuthenticated,
       currentIntegrationId,
+      isFirstAccessToIntegration,
     ]),
+  );
+
+  async function receiveTicket() {
+    const canCollect = await handleCanCollect();
+    const receivedTicketToday = await hasReceivedTicketToday();
+    if (canCollect) {
+      if (isAuthenticated()) {
+        await handleCollect();
+        refetchTickets();
+      }
+    }
+    if (canCollect && !receivedTicketToday) {
+      showToast({
+        type: "custom",
+        message: t("ticketToast"),
+        position: "bottom",
+        navigate: "GiveTicketScreen",
+        icon: "confirmation_number",
+        backgroundColor: theme.colors.brand.primary[50],
+        iconColor: theme.colors.brand.primary[600],
+        borderColor: theme.colors.brand.primary[600],
+        textColor: theme.colors.brand.primary[600],
+      });
+      await setLocalStorageItem(
+        DONATION_TOAST_SEEN_AT_KEY,
+        Date.now().toString(),
+      );
+      await setLocalStorageItem(
+        DONATION_TOAST_INTEGRATION,
+        currentIntegrationId?.toLocaleString(),
+      );
+    }
+  }
+  useFocusEffect(
+    useCallback(() => {
+      if (isFirstAccessToIntegration !== undefined) {
+        console.log("isAuthenticated", isAuthenticated());
+        receiveTicket();
+      }
+    }, [isFirstAccessToIntegration, isAuthenticated, externalId]),
   );
 
   useEffect(() => {
@@ -181,12 +227,6 @@ export default function CausesScreen() {
   useEffect(() => {
     sortNonProfits();
   }, [chosenCause]);
-
-  useEffect(() => {
-    if (isFirstAccessToIntegration !== undefined) {
-      receiveTicket();
-    }
-  }, [currentIntegrationId]);
 
   const handleNonProfitImagePress = async (nonProfit: NonProfit) => {
     setCurrentNonProfit(nonProfit);
