@@ -7,8 +7,6 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { theme } from "@ribon.io/shared/styles";
 import { logEvent } from "services/analytics";
 import { useCallback, useState } from "react";
-import { setLocalStorageItem } from "lib/localStorage";
-import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { useRouteParams } from "hooks/useRouteParams";
 import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
@@ -35,7 +33,6 @@ function SignedInScreen() {
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
-    setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 

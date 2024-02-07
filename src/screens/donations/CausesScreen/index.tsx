@@ -18,7 +18,6 @@ import { useTicketsContext } from "contexts/ticketsContext";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import Tooltip from "components/atomics/Tooltip";
-import TicketSection from "screens/donations/CausesScreen/TicketSection";
 import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
 import { logEvent } from "services/analytics";
@@ -40,6 +39,7 @@ import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useAuthentication } from "contexts/authenticationContext";
+import { useTickets } from "hooks/useTickets";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
@@ -83,6 +83,7 @@ export default function CausesScreen() {
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
   const { isAuthenticated } = useAuthentication();
+  const { receiveTicket } = useTickets();
 
   useAppState({
     onComeToForeground: () => {
@@ -180,6 +181,12 @@ export default function CausesScreen() {
   useEffect(() => {
     sortNonProfits();
   }, [chosenCause]);
+
+  useEffect(() => {
+    if (isFirstAccessToIntegration !== undefined) {
+      receiveTicket();
+    }
+  }, [currentIntegrationId]);
 
   const handleNonProfitImagePress = async (nonProfit: NonProfit) => {
     setCurrentNonProfit(nonProfit);
@@ -291,9 +298,6 @@ export default function CausesScreen() {
           />
         )}
 
-        <TicketSection
-          isFirstAccessToIntegration={isFirstAccessToIntegration}
-        />
         {renderNotificationCard()}
         {shouldShowIntegrationBanner && (
           <IntegrationBanner integration={integration} />

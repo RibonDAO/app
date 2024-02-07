@@ -19,10 +19,9 @@ import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayo
 import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { useRouteParams } from "hooks/useRouteParams";
-import { setLocalStorageItem, theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared";
 import { showToast } from "lib/Toast";
 import { useTicketsContext } from "contexts/ticketsContext";
-import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
 import DonationInProgressSection from "../DonationInProgressSection";
@@ -54,7 +53,6 @@ function InsertEmailAccountScreen() {
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
-    setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 

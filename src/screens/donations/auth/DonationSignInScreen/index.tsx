@@ -15,8 +15,6 @@ import { logEvent } from "services/analytics";
 import DonationInProgressSection from "screens/donations/auth/DonationInProgressSection";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
-import { setLocalStorageItem } from "@ribon.io/shared";
-import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { showToast } from "lib/Toast";
 import { useCallback, useState } from "react";
 import { useTicketsContext } from "contexts/ticketsContext";
@@ -45,7 +43,6 @@ function DonationSignInScreen() {
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
-    setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 

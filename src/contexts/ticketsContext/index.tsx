@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useUserTickets, useTickets } from "@ribon.io/shared/hooks";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { PLATFORM } from "utils/constants/Application";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { logError } from "services/crashReport";
 
@@ -38,7 +37,6 @@ function TicketsProvider({ children }: Props) {
         const { canCollect } = await canCollectByIntegration(
           currentIntegrationId ?? "",
           currentUser?.email ?? "",
-          PLATFORM,
         );
 
         if (!canCollect) {
