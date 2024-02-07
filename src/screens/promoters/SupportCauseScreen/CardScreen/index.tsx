@@ -43,14 +43,6 @@ function CardScreen(): JSX.Element {
     setCause(causeCrypto || chosenCause || causes[chosenCauseIndex ?? 0]);
   }, [causes]);
 
-  useEffect(() => {
-    if (causes.length > 0) {
-      logEvent("contributionCardsOrder_view", {
-        causes: causes.map((c) => c.name).join(", "),
-      });
-    }
-  }, [causes]);
-
   const handleCauseClick = (causeClicked: Cause, index: number) => {
     setCause(causeClicked);
     setChosenCauseIndex(index);
