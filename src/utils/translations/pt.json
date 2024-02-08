@@ -47,6 +47,7 @@
       "buttonText": "Doar ticket",
       "noTickets": "Sem tickets",
       "allCauses": "Todas",
+      "ticketToast": "Você tem um novo ticket!",
       "enableNotification": {
         "title": "Não perca seu ticket diário!",
         "link": "Ligar notificações",

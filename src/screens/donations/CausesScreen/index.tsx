@@ -124,6 +124,8 @@ export default function CausesScreen() {
         refetchTickets();
       }
     }
+    console.log("canCollect", canCollect);
+    console.log("receivedTicketToday", receivedTicketToday);
     if (canCollect && !receivedTicketToday) {
       showToast({
         type: "custom",
@@ -149,7 +151,6 @@ export default function CausesScreen() {
   useFocusEffect(
     useCallback(() => {
       if (isFirstAccessToIntegration !== undefined) {
-        console.log("isAuthenticated", isAuthenticated());
         receiveTicket();
       }
     }, [isFirstAccessToIntegration, isAuthenticated, externalId]),

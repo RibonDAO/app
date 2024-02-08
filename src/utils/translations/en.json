@@ -47,6 +47,7 @@
       "buttonText": "Donate",
       "allCauses": "All",
       "noTickets": "No tickets",
+      "ticketToast": "You have a new ticket!",
       "enableNotification": {
         "title": "Don't miss your daily ticket!",
         "link": "Enable notifications",

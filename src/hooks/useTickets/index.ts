@@ -6,10 +6,10 @@ import {
   DONATION_TOAST_SEEN_AT_KEY,
 } from "lib/localStorage/constants";
 
-import { getLocalStorageItem } from "@ribon.io/shared/lib";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { PLATFORM } from "utils/constants/Application";
 import { todayDate } from "lib/dateUtils";
+import { getLocalStorageItem } from "lib/localStorage";
 
 export function useTickets() {
   const { currentUser } = useCurrentUser();
@@ -43,9 +43,8 @@ export function useTickets() {
 
   async function handleCanCollect() {
     if (externalIds && externalIds.length > 0) {
-      console.log(externalIds);
       const { canCollect } = await canCollectByExternalIds(externalIds);
-      console.log("canCollect", canCollect);
+
       return canCollect;
     } else if (currentIntegrationId) {
       const { canCollect } = await canCollectByIntegration(
@@ -59,7 +58,6 @@ export function useTickets() {
   }
 
   async function handleCollect() {
-    console.log("collect");
     if (externalIds && externalIds.length > 0 && currentIntegrationId) {
       await collectByExternalIds(
         externalIds,
