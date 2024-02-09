@@ -10,7 +10,6 @@ import { useCallback, useState } from "react";
 import { useRouteParams } from "hooks/useRouteParams";
 import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
-import { useTicketsContext } from "contexts/ticketsContext";
 import useDonationFlow from "hooks/useDonationFlow";
 import S from "./styles";
 import DonationInProgressSection from "../DonationInProgressSection";
@@ -24,7 +23,6 @@ function SignedInScreen() {
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
 
-  const { setTicketsCounter } = useTicketsContext();
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const {
     params: { nonProfit },
@@ -63,7 +61,6 @@ function SignedInScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {

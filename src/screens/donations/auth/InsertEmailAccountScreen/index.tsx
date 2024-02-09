@@ -21,7 +21,6 @@ import { logEvent } from "services/analytics";
 import { useRouteParams } from "hooks/useRouteParams";
 import { theme } from "@ribon.io/shared";
 import { showToast } from "lib/Toast";
-import { useTicketsContext } from "contexts/ticketsContext";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
 import DonationInProgressSection from "../DonationInProgressSection";
@@ -41,7 +40,6 @@ function InsertEmailAccountScreen() {
   const { handleCollectAndDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
-  const { setTicketsCounter } = useTicketsContext();
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(false);
@@ -68,7 +66,6 @@ function InsertEmailAccountScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit, flow: "magicLink" });
     } else {
       const newState = {

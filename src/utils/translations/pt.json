@@ -72,7 +72,13 @@
       "ticketSection": {
         "ticketToast": "Você tem um novo ticket!"
       },
-      "donationError": "Não foi possível doar."
+      "donationError": "Não foi possível doar.",
+      "errorModalTitle": "Doação falhou",
+      "errorModalText": "Não foi possível doar agora, espere sua próxima doação",
+      "errorModalButtonText": "Ok",
+      "unauthorizedModalTitle": "Conta não validada",
+      "unauthorizedModalText": "Para completar a sua doação com segurança é necessário que você valide sua conta.",
+      "unauthorizedModalButtonText": "Prosseguir para validação"
     },
     "donateScreen": {
       "nonProfitText": "Você está doando para",
@@ -533,6 +539,11 @@
     },
     "validateExtraTicketScreen": {
       "error": "Link inválido"
+    },
+    "validateAccountScreen": {
+      "title": "Valide sua conta",
+      "description": "Valide sua conta criada com {{email}} para completar sua doação.",
+      "toastSuccessMessage": "Email enviado"
     }
   }
 }

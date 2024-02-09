@@ -78,7 +78,13 @@
       "ticketSection": {
         "ticketToast": "You have a new ticket!"
       },
-      "donationError": "Unable to donate now"
+      "donationError": "Unable to donate now",
+      "errorModalTitle": "Donation failed",
+      "errorModalText": "Unable to donate now, wait for you next donation",
+      "errorModalButtonText": "Ok",
+      "unauthorizedModalTitle": "Email not validated",
+      "unauthorizedModalText": "To securely complete your donation, it is necessary for you to validate your email.",
+      "unauthorizedModalButtonText": "Proceed to validation"
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",
@@ -541,6 +547,11 @@
     },
     "validateExtraTicketScreen": {
       "error": "Invalid link"
+    },
+    "validateAccountScreen": {
+      "title": "Validate your account",
+      "description": "Validate your account created with {{email}} to complete your donation.",
+      "toastSuccessMessage": "Email sent"
     }
   }
 }

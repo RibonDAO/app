@@ -4,15 +4,15 @@ import {
   expectTextToBeInTheDocument,
 } from "config/testUtils/expects";
 import { waitForPromises } from "config/testUtils";
-import SignInExtraTicketScreen from ".";
+import ValidateAccountScreen from ".";
 
 jest.mock("services/googleSignIn", () => ({
   signIn: () => {},
 }));
 
-describe("SignInExtraTicketScreen", () => {
+describe("ValidateAccountScreen", () => {
   beforeEach(() => {
-    renderComponent(<SignInExtraTicketScreen />);
+    renderComponent(<ValidateAccountScreen />);
   });
 
   it("should render without error", () => {
