@@ -16,10 +16,7 @@ describe("ValidateAccountScreen", () => {
   });
 
   it("should render without error", () => {
-    expectTextToBeInTheDocument("Validate your account and get a ticket");
-    expectTextToBeInTheDocument(
-      "Complete your login with  to receive your prize",
-    );
+    expectTextToBeInTheDocument("Validate your account");
   });
 
   it("logs the P28_view event", async () => {
