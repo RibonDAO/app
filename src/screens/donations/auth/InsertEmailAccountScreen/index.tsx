@@ -20,7 +20,6 @@ import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { useRouteParams } from "hooks/useRouteParams";
 import { theme } from "@ribon.io/shared";
-import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
 import DonationInProgressSection from "../DonationInProgressSection";
@@ -54,13 +53,9 @@ function InsertEmailAccountScreen() {
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
-  const onDonationFail = (error: any) => {
+  const onDonationFail = () => {
     setDonationSucceeded(false);
 
-    showToast({
-      type: "error",
-      message: error?.response?.data?.formatted_message || t("donationError"),
-    });
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
 
@@ -81,7 +76,7 @@ function InsertEmailAccountScreen() {
     await handleCollectAndDonate({
       nonProfit,
       email,
-      onError: (error) => onDonationFail(error),
+      onError: () => onDonationFail(),
       onSuccess: () => onDonationSuccess,
     });
   }

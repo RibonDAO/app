@@ -8,7 +8,6 @@ import { theme } from "@ribon.io/shared/styles";
 import { logEvent } from "services/analytics";
 import { useCallback, useState } from "react";
 import { useRouteParams } from "hooks/useRouteParams";
-import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
 import S from "./styles";
@@ -34,12 +33,8 @@ function SignedInScreen() {
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
-  const onDonationFail = (error: any) => {
+  const onDonationFail = () => {
     setDonationSucceeded(false);
-    showToast({
-      type: "error",
-      message: error?.response?.data?.formatted_message || t("donationError"),
-    });
 
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
@@ -53,8 +48,8 @@ function SignedInScreen() {
       nonProfit,
       email: currentUser.email,
       onSuccess: () => onDonationSuccess,
-      onError: (error) => {
-        onDonationFail(error);
+      onError: () => {
+        onDonationFail();
       },
     });
   };

@@ -118,8 +118,10 @@ export default function CausesScreen() {
     const canCollect = await handleCanCollect();
     const receivedTicketToday = await hasReceivedTicketToday();
     if (canCollect) {
-      await handleCollect();
-      refetchTickets();
+      if (currentUser) {
+        await handleCollect();
+        refetchTickets();
+      }
       if (!receivedTicketToday) {
         showToast({
           type: "custom",

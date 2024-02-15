@@ -20,14 +20,14 @@ function ValidateAccountScreen() {
   const onContinue = async (pathname: string) => {
     await userAccountApi.postSendValidatedEmail();
     navigateTo(pathname);
-    showToast({
-      type: "success",
-      message: t("toastSuccessMessage"),
-    });
   };
 
   const onContinueMagicLink = (pathname: string) => {
     sendAuthenticationEmail({ email: currentUser?.email });
+    showToast({
+      type: "success",
+      message: t("toastSuccessMessage"),
+    });
     navigateTo(pathname, { email: currentUser?.email });
   };
 

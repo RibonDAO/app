@@ -29,6 +29,7 @@ export default function DonationErrorModal({ newState }: Props): JSX.Element {
   return (
     <>
       <ModalDialog
+        type="error"
         visible={failedModalVisible}
         setVisible={setFailedModalVisible}
         title={t("errorModalTitle")}
@@ -41,6 +42,7 @@ export default function DonationErrorModal({ newState }: Props): JSX.Element {
         }}
       />
       <ModalDialog
+        type="error"
         visible={unauthorizedModalVisible}
         setVisible={setUnauthorizedModalVisible}
         title={t("unauthorizedModalTitle")}
@@ -48,6 +50,7 @@ export default function DonationErrorModal({ newState }: Props): JSX.Element {
         primaryButton={{
           text: t("unauthorizedModalButtonText"),
           onPress: () => {
+            setUnauthorizedModalVisible(false);
             navigateTo("ValidateAccountScreen");
           },
         }}
