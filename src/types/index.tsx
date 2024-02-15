@@ -20,6 +20,7 @@ export type DonationDoneParamsList = {
   nonProfit: NonProfit;
   offer: Offer;
   flow: string;
+  impact?: number;
 };
 
 export type ForYouScreenParamsList = {
@@ -89,6 +90,11 @@ export type RecurrenceScreenParamList = {
   currency: Currencies;
 };
 
+export type SelectTicketsScreenParamList = {
+  nonProfit: NonProfit;
+  cause: Cause;
+};
+
 export type MonthlyContributionsScreenParamList = {
   from: string;
 };
@@ -132,6 +138,7 @@ export type RootStackParamList = {
   CheckoutScreen: CheckoutScreenParamList;
   ValidateExtraTicketScreen: undefined;
   RecurrenceScreen: RecurrenceScreenParamList;
+  SelectTicketsScreen: SelectTicketsScreenParamList;
   PixInstructionsScreen: PixInstructionsScreenParamList;
   OnboardingScreen: undefined;
   DonateModal: undefined;

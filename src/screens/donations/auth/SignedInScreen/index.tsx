@@ -3,12 +3,8 @@ import Image from "components/atomics/Image";
 import Button from "components/atomics/buttons/Button";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useTranslation } from "react-i18next";
-import { useDonations } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { PLATFORM } from "utils/constants/Application";
 import { theme } from "@ribon.io/shared/styles";
-import { useIntegrationContext } from "contexts/integrationContext";
-import { useUtmContext } from "contexts/utmContext";
 import { logEvent } from "services/analytics";
 import { useCallback, useState } from "react";
 import { setLocalStorageItem } from "lib/localStorage";
@@ -16,7 +12,8 @@ import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/Tick
 import { useRouteParams } from "hooks/useRouteParams";
 import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
-import { useTickets } from "contexts/ticketsContext";
+import { useTicketsContext } from "contexts/ticketsContext";
+import useDonationFlow from "hooks/useDonationFlow";
 import S from "./styles";
 import DonationInProgressSection from "../DonationInProgressSection";
 
@@ -25,13 +22,11 @@ function SignedInScreen() {
     keyPrefix: "donations.donateScreen.signedInScreen",
   });
   const { currentUser } = useCurrentUser();
-  const { donate } = useDonations(currentUser?.id);
+  const { handleCollectAndDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
 
-  const { currentIntegrationId, externalId } = useIntegrationContext();
-  const { setTickets } = useTickets();
-  const { utmSource, utmMedium, utmCampaign } = useUtmContext();
+  const { setTicketsCounter } = useTicketsContext();
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const {
     params: { nonProfit },
@@ -51,7 +46,6 @@ function SignedInScreen() {
       message: error?.response?.data?.formatted_message || t("donationError"),
     });
 
-    setTickets(0);
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
 
@@ -60,26 +54,19 @@ function SignedInScreen() {
 
     setIsDonating(true);
 
-    try {
-      await donate(
-        currentIntegrationId,
-        nonProfit.id,
-        currentUser.email,
-        PLATFORM,
-        externalId,
-        utmSource,
-        utmMedium,
-        utmCampaign,
-      );
-      onDonationSuccess();
-    } catch (error: any) {
-      onDonationFail(error);
-    }
+    await handleCollectAndDonate({
+      nonProfit,
+      email: currentUser.email,
+      onSuccess: () => onDonationSuccess,
+      onError: (error) => {
+        onDonationFail(error);
+      },
+    });
   };
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTickets(0);
+      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {

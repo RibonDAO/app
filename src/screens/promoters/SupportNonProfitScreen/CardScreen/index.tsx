@@ -30,27 +30,9 @@ function CardScreen(): JSX.Element {
     keyPrefix: "promoters.supportNonProfitPage",
   });
 
-  const orderedNonProfits = () => {
-    const ordered = causes
-      .map((c) => nonProfits?.filter((np) => np.cause.name === c?.name))
-      .flat(Infinity)
-      .map((np: any) => np?.name)
-      .join(", ");
-    return ordered;
-  };
-
   useEffect(() => {
     setCause(chosenCause);
   }, [causes]);
-
-  useEffect(() => {
-    if (nonProfits && causes.length > 0) {
-      logEvent("contributionCardsOrder_view", {
-        nonProfits: orderedNonProfits(),
-        causes: causes.map((c) => c.name).join(", "),
-      });
-    }
-  }, [nonProfits, causes]);
 
   const handleCauseClick = (causeClicked: Cause, index: number) => {
     setCause(causeClicked);
