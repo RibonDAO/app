@@ -106,6 +106,13 @@ function CryptoScreen(): JSX.Element {
 
   const onDonationToContractSuccess = () => {
     resetScreen();
+
+    logEvent("causeGave_end", {
+      causeId: cause?.id,
+      amount,
+      source: "crypto",
+    });
+
     navigateTo("ContributionDoneScreen", {
       cause,
     });
