@@ -20,6 +20,7 @@ import { useCausesContext } from "contexts/causesContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import { useCheckoutContext } from "contexts/checkoutContext";
+import { logEvent } from "services/analytics";
 import styles from "./styles";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 
