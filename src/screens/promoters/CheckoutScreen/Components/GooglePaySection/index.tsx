@@ -134,6 +134,20 @@ export default function GooglePaySection({
 
         registerAction("contribution_done_screen_view");
 
+        if (nonProfit?.id) {
+          logEvent("ngoGave_end", {
+            causeId: cause?.id,
+            offerId: offer?.id,
+            source: "googlePay",
+          });
+        } else {
+          logEvent("causeGave_end", {
+            causeId: cause?.id,
+            offerId: offer?.id,
+            source: "googlePay",
+          });
+        }
+
         navigateTo("ContributionDoneScreen", {
           cause,
           nonProfit,

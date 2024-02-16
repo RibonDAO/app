@@ -7,12 +7,8 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { theme } from "@ribon.io/shared/styles";
 import { logEvent } from "services/analytics";
 import { useCallback, useState } from "react";
-import { setLocalStorageItem } from "lib/localStorage";
-import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { useRouteParams } from "hooks/useRouteParams";
-import { showToast } from "lib/Toast";
 import { useNavigation } from "hooks/useNavigation";
-import { useTicketsContext } from "contexts/ticketsContext";
 import useDonationFlow from "hooks/useDonationFlow";
 import S from "./styles";
 import DonationInProgressSection from "../DonationInProgressSection";
@@ -26,7 +22,6 @@ function SignedInScreen() {
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
 
-  const { setTicketsCounter } = useTicketsContext();
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const {
     params: { nonProfit },
@@ -35,16 +30,11 @@ function SignedInScreen() {
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
-    setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
-  const onDonationFail = (error: any) => {
+  const onDonationFail = () => {
     setDonationSucceeded(false);
-    showToast({
-      type: "error",
-      message: error?.response?.data?.formatted_message || t("donationError"),
-    });
 
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
@@ -58,15 +48,14 @@ function SignedInScreen() {
       nonProfit,
       email: currentUser.email,
       onSuccess: () => onDonationSuccess,
-      onError: (error) => {
-        onDonationFail(error);
+      onError: () => {
+        onDonationFail();
       },
     });
   };
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {

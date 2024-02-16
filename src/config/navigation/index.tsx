@@ -35,11 +35,9 @@ import PromotersScreen from "screens/promoters/PromotersScreen";
 import TicketsProvider from "contexts/ticketsContext";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 import ForYouScreen from "screens/content/ForYouScreen";
-import { useCanDonate } from "@ribon.io/shared";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "lib/Toast";
-import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
-import { useCurrentUser } from "contexts/currentUserContext";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import GiveTicketScreen from "screens/donations/GiveTicketScreen";
@@ -72,6 +70,7 @@ import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
 import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
+import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -93,16 +92,9 @@ function BottomTabNavigator() {
   const activeColor = neutral[900];
   const { t } = useTranslation();
 
-  const { currentUser } = useCurrentUser();
-
   const { currentIntegrationId, integration } = useIntegrationContext();
 
   const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
-
-  const { canDonate, refetch: refetchCanDonate } = useCanDonate(
-    currentIntegrationId,
-    PLATFORM,
-  );
 
   const navigateToIntegration = () => {
     if (!integration?.integrationTask?.linkAddress) {
@@ -145,18 +137,8 @@ function BottomTabNavigator() {
     />
   );
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      refetchCanDonate();
-    }, 500);
-  }, [JSON.stringify(currentUser)]);
-
   function renderTabBarIcon(color: any, iconOn: any, iconOff: any) {
     return color === activeColor ? iconOn : iconOff;
-  }
-
-  function renderForYouScreenHeader() {
-    return canDonate ? null : headerWithoutTicket();
   }
 
   return (
@@ -193,7 +175,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) =>
             renderTabBarIcon(color, <ForYouIconOn />, <ForYouIconOff />),
           lazy: false,
-          header: () => renderForYouScreenHeader(),
+          header,
         }}
         listeners={() => ({
           tabPress: () => {
@@ -543,6 +525,16 @@ function RootNavigator() {
         component={ExpiredLinkScreen}
         options={{
           headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ValidateAccountScreen"
+        component={ValidateAccountScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: theme.colors.brand.primary[800],
+          headerTitle: "",
         }}
       />
 
