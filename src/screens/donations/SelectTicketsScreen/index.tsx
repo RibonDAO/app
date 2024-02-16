@@ -7,7 +7,6 @@ import useFormattedImpactText from "hooks/useFormattedImpactText";
 import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
 import { useCallback, useEffect, useState } from "react";
-import { showToast } from "lib/Toast";
 import { logEvent } from "services/analytics";
 import { useCurrentUser } from "contexts/currentUserContext";
 import SliderButton from "components/moleculars/SliderButton";
@@ -39,6 +38,20 @@ export default function SelectTicketsScreen() {
     nonProfit?.impactByTicket || undefined,
   );
 
+  const errorType = (type: number) => {
+    switch (type) {
+      case 403: {
+        return "blockedDonation";
+      }
+      case 401: {
+        return "unauthorizedDonation";
+      }
+      default: {
+        return "failedDonation";
+      }
+    }
+  };
+
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
@@ -52,12 +65,13 @@ export default function SelectTicketsScreen() {
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
-    showToast({
-      type: "error",
-      message: error?.response?.data?.formatted_message || t("donationError"),
-    });
+    const failedKey = errorType(error.response?.status);
+    const newState = {
+      [failedKey]: true,
+      message: error.response?.data?.formatted_message || error.message,
+    };
 
-    navigateTo("CausesScreen", { newState: { failedDonation: true } });
+    navigateTo("CausesScreen", { newState });
   };
 
   const handleButtonPress = async () => {

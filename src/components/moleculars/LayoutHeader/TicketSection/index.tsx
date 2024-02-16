@@ -1,7 +1,5 @@
 import { useNavigation } from "hooks/useNavigation";
 import { useTicketsContext } from "contexts/ticketsContext";
-import { useFocusEffect } from "@react-navigation/native";
-import { useCallback } from "react";
 import TicketIconText from "components/moleculars/TicketIconText";
 
 type TicketSectionProps = {
@@ -11,15 +9,10 @@ type TicketSectionProps = {
 function TicketSection({
   hasDividerBorder = false,
 }: TicketSectionProps): JSX.Element {
-  const { ticketsCounter: tickets, refetchTickets } = useTicketsContext();
+  const { ticketsCounter: tickets } = useTicketsContext();
   const hasTickets = tickets > 0;
   const { navigateTo } = useNavigation();
 
-  useFocusEffect(
-    useCallback(() => {
-      refetchTickets();
-    }, [tickets]),
-  );
   const handleTicketClick = () => {
     if (hasTickets) {
       navigateTo("GiveTicketScreen");

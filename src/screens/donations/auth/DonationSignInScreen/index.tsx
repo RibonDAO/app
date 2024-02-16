@@ -15,11 +15,8 @@ import { logEvent } from "services/analytics";
 import DonationInProgressSection from "screens/donations/auth/DonationInProgressSection";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
-import { setLocalStorageItem } from "@ribon.io/shared";
-import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { showToast } from "lib/Toast";
 import { useCallback, useState } from "react";
-import { useTicketsContext } from "contexts/ticketsContext";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useRouteParams } from "hooks/useRouteParams";
 import usePageView from "hooks/usePageView";
@@ -39,13 +36,11 @@ function DonationSignInScreen() {
     params: { nonProfit },
   } = useRouteParams<"DonationSignInScreen">();
   const { navigateTo, popNavigation } = useNavigation();
-  const { setTicketsCounter } = useTicketsContext();
   const { formattedImpactText } = useFormattedImpactText();
   const { handleDonate } = useDonationFlow();
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
-    setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
@@ -80,7 +75,6 @@ function DonationSignInScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {
