@@ -20,6 +20,7 @@ import { normalizedLanguage } from "lib/currentLanguage";
 import { PLATFORM } from "utils/constants/Application";
 import InputText from "components/atomics/inputs/InputText";
 import { useLanguage } from "contexts/languageContext";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 
 type Props = {
@@ -140,6 +141,20 @@ export default function ApplePaySection({
         await storePayApi.postStorePay(data);
 
         registerAction("contribution_done_screen_view");
+        if (nonProfit?.id) {
+          logEvent("ngoGave_end", {
+            causeId: cause?.id,
+            offerId: offer?.id,
+            source: "applePay",
+          });
+        } else {
+          logEvent("causeGave_end", {
+            causeId: cause?.id,
+            offerId: offer?.id,
+            source: "applePay",
+          });
+        }
+
         navigateTo("ContributionDoneScreen", {
           cause,
           nonProfit,
