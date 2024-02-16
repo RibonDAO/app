@@ -13,7 +13,6 @@ import { TASKS } from "utils/constants/Tasks";
 import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
 
-import { useCurrentUser } from "contexts/currentUserContext";
 import TasksSection from "../TasksSection";
 import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
@@ -26,11 +25,10 @@ type Route = {
 
 function NewsSectionTabView(): JSX.Element {
   const { donatedToday } = useDonatedToday();
-  const { currentUser } = useCurrentUser();
-  const showNews = currentUser !== undefined ? donatedToday : false;
+
   return (
     <ParallaxTabViewContainer routeKey="NewsSectionTabView">
-      {!showNews ? <LockedSection /> : <NewsSection />}
+      {!donatedToday ? <LockedSection /> : <NewsSection />}
     </ParallaxTabViewContainer>
   );
 }
@@ -75,7 +73,7 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
     useCallback(() => {
       const eventName =
         // eslint-disable-next-line no-nested-ternary
-        index === 0 ? "P21_view" : donatedToday ? "P16_view" : "P20_view";
+        index === 0 ? "P21_view" : !donatedToday ? "P16_view" : "P20_view";
       logEvent(eventName);
     }, [index]),
   );
@@ -99,7 +97,7 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
     const done = tasksState?.find(
       (task) => task.id === taskDownloadApp.id,
     )?.done;
-    if (index === 1 && !donatedToday && !done) {
+    if (index === 1 && donatedToday && !done) {
       registerAction("for_you_news_tab_view");
     }
   }, [index]);
