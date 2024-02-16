@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
-  useCanDonate,
   useStories,
   useFirstAccessToIntegration,
+  useDonatedToday,
 } from "@ribon.io/shared/hooks";
 import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { INTEGRATION_AUTH_ID, PLATFORM } from "utils/constants/Application";
+import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
@@ -27,7 +27,6 @@ import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
 import { useFocusEffect } from "@react-navigation/native";
-import { useAppState } from "hooks/useAppState";
 import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
@@ -62,11 +61,8 @@ export default function CausesScreen() {
   const { chosenCause, setChosenCauseIndex, setChosenCause, chosenCauseIndex } =
     useCauseDonationContext();
   const { currentIntegrationId, externalId } = useIntegrationContext();
-  const {
-    canDonate,
-    isLoading: loadingCanDonate,
-    refetch: refetchCanDonate,
-  } = useCanDonate(currentIntegrationId, PLATFORM, externalId);
+
+  const { donatedToday } = useDonatedToday();
   const {
     isFirstAccessToIntegration,
     refetch: refetchFirstAccessToIntegration,
@@ -91,19 +87,13 @@ export default function CausesScreen() {
     useTickets();
   const { params } = useRouteParams<"CausesScreen">();
 
-  useAppState({
-    onComeToForeground: () => {
-      refetchCanDonate();
-    },
-  });
-
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
   }, [isLoading]);
 
   useFocusEffect(
     useCallback(() => {
-      refetchCanDonate();
+      refetchTickets();
       refetchFirstAccessToIntegration();
     }, [
       currentUser,
@@ -254,7 +244,7 @@ export default function CausesScreen() {
   const shouldShowIntegrationBanner =
     !integration?.name?.toLowerCase()?.includes("ribon") &&
     integration &&
-    canDonate &&
+    !donatedToday &&
     hasTickets &&
     integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
 
@@ -313,7 +303,7 @@ export default function CausesScreen() {
     }
   };
 
-  return isLoading || loadingCanDonate || loadingFirstAccessToIntegration ? (
+  return isLoading || loadingFirstAccessToIntegration ? (
     <Placeholder />
   ) : (
     <>
@@ -332,7 +322,7 @@ export default function CausesScreen() {
           {shouldShowIntegrationBanner && (
             <IntegrationBanner integration={integration} />
           )}
-          {!canDonate && currentUser ? (
+          {donatedToday && currentUser ? (
             <ContributionSection />
           ) : (
             <Text style={S.title}>{t("title")}</Text>
