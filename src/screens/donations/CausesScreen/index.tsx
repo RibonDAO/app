@@ -93,6 +93,7 @@ export default function CausesScreen() {
 
   useFocusEffect(
     useCallback(() => {
+      refetchTickets();
       refetchFirstAccessToIntegration();
     }, [
       currentUser,

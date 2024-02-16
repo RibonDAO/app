@@ -25,7 +25,6 @@ type Route = {
 
 function NewsSectionTabView(): JSX.Element {
   const { donatedToday } = useDonatedToday();
-
   return (
     <ParallaxTabViewContainer routeKey="NewsSectionTabView">
       {!donatedToday ? <LockedSection /> : <NewsSection />}
