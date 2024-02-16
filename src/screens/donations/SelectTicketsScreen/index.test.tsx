@@ -20,7 +20,7 @@ describe("SelectTicketsScreen", () => {
   });
 
   it("should render without error", async () => {
-    expectTextToBeInTheDocument("Choose the size of your aid");
+    expectTextToBeInTheDocument("Choose the size of your help");
     expectTextToBeInTheDocument("Continue");
   });
 });

@@ -37,15 +37,16 @@ import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useAuthentication } from "contexts/authenticationContext";
 import { useTickets } from "hooks/useTickets";
 import {
   DONATION_TOAST_INTEGRATION,
   DONATION_TOAST_SEEN_AT_KEY,
 } from "lib/localStorage/constants";
+import { useRouteParams } from "hooks/useRouteParams";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
+import DonationErrorModal from "./errorModalSection";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -82,9 +83,9 @@ export default function CausesScreen() {
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
-  const { isAuthenticated } = useAuthentication();
   const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
     useTickets();
+  const { params } = useRouteParams<"CausesScreen">();
 
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
@@ -98,7 +99,6 @@ export default function CausesScreen() {
       currentUser,
       signedIn,
       ticketsCounter,
-      isAuthenticated,
       currentIntegrationId,
       isFirstAccessToIntegration,
     ]),
@@ -108,32 +108,33 @@ export default function CausesScreen() {
     const canCollect = await handleCanCollect();
     const receivedTicketToday = await hasReceivedTicketToday();
     if (canCollect) {
-      if (isAuthenticated()) {
+      if (currentUser) {
         await handleCollect();
         refetchTickets();
       }
-    }
-
-    if (canCollect && !receivedTicketToday) {
-      showToast({
-        type: "custom",
-        message: t("ticketToast"),
-        position: "bottom",
-        navigate: "GiveTicketScreen",
-        icon: "confirmation_number",
-        backgroundColor: theme.colors.brand.primary[50],
-        iconColor: theme.colors.brand.primary[600],
-        borderColor: theme.colors.brand.primary[600],
-        textColor: theme.colors.brand.primary[600],
-      });
-      await setLocalStorageItem(
-        DONATION_TOAST_SEEN_AT_KEY,
-        Date.now().toString(),
-      );
-      await setLocalStorageItem(
-        DONATION_TOAST_INTEGRATION,
-        currentIntegrationId?.toLocaleString(),
-      );
+      if (!receivedTicketToday) {
+        showToast({
+          type: "custom",
+          message: t("ticketToast"),
+          position: "bottom",
+          navigate: "GiveTicketScreen",
+          icon: "confirmation_number",
+          backgroundColor: theme.colors.brand.primary[50],
+          iconColor: theme.colors.brand.primary[600],
+          borderColor: theme.colors.brand.primary[600],
+          textColor: theme.colors.brand.primary[600],
+        });
+        await setLocalStorageItem(
+          DONATION_TOAST_SEEN_AT_KEY,
+          Date.now().toString(),
+        );
+        await setLocalStorageItem(
+          DONATION_TOAST_INTEGRATION,
+          currentIntegrationId?.toLocaleString(),
+        );
+      }
+    } else {
+      refetchTickets();
     }
   }
   useFocusEffect(
@@ -141,7 +142,7 @@ export default function CausesScreen() {
       if (isFirstAccessToIntegration !== undefined) {
         receiveTicket();
       }
-    }, [isFirstAccessToIntegration, isAuthenticated, externalId]),
+    }, [isFirstAccessToIntegration, externalId]),
   );
 
   useEffect(() => {
@@ -292,13 +293,11 @@ export default function CausesScreen() {
       nonProfitId: nonProfit.id,
       from: "nonprofitCard",
     });
-    if (isAuthenticated()) {
+    if (signedIn) {
       navigateTo("SelectTicketsScreen", {
         nonProfit,
         cause: nonProfit.cause,
       });
-    } else if (signedIn) {
-      navigateTo("SignedInScreen", { nonProfit });
     } else {
       navigateTo("DonationSignInScreen", { nonProfit });
     }
@@ -307,104 +306,107 @@ export default function CausesScreen() {
   return isLoading || loadingFirstAccessToIntegration ? (
     <Placeholder />
   ) : (
-    <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
-      <View style={S.containerPadding}>
-        {currentNonProfit && (
-          <StoriesSection
-            stories={stories}
-            nonProfit={currentNonProfit}
-            storiesVisible={storiesVisible}
-            setStoriesVisible={setStoriesVisible}
-          />
-        )}
+    <>
+      <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
+        <View style={S.containerPadding}>
+          {currentNonProfit && (
+            <StoriesSection
+              stories={stories}
+              nonProfit={currentNonProfit}
+              storiesVisible={storiesVisible}
+              setStoriesVisible={setStoriesVisible}
+            />
+          )}
 
-        {renderNotificationCard()}
-        {shouldShowIntegrationBanner && (
-          <IntegrationBanner integration={integration} />
-        )}
-        {donatedToday && currentUser ? (
-          <ContributionSection />
-        ) : (
-          <Text style={S.title}>{t("title")}</Text>
-        )}
+          {renderNotificationCard()}
+          {shouldShowIntegrationBanner && (
+            <IntegrationBanner integration={integration} />
+          )}
+          {donatedToday && currentUser ? (
+            <ContributionSection />
+          ) : (
+            <Text style={S.title}>{t("title")}</Text>
+          )}
 
-        <ScrollView
-          style={S.groupButtonsContainer}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        >
-          <GroupButtons
-            elements={causesFilter()}
-            onChange={handleCauseChange}
-            nameExtractor={(cause) => cause.name}
-            indexSelected={chosenCauseIndex}
-          />
-        </ScrollView>
-      </View>
-
-      {sortNonProfits()?.length > 0 ? (
-        <ScrollView
-          style={S.causesContainer}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          ref={scrollViewRef}
-        >
-          {sortNonProfits()?.map((nonProfit, index) => (
-            <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
-              <CardCenterImageButton
-                image={nonProfit.mainImage}
-                infoTextTop={nonProfit.name}
-                infoTextBottom={nonProfit.cause.name}
-                imageDescription={formattedImpactText(
-                  nonProfit,
-                  undefined,
-                  false,
-                  false,
-                  undefined,
-                  t("impactPrefix") || "",
-                )}
-                buttonText={hasTickets ? t("buttonText") : t("noTickets")}
-                onImagePress={() => {
-                  handleNonProfitImagePress(nonProfit);
-                }}
-                onClickButton={() => handleButtonPress(nonProfit)}
-                buttonDisabled={!hasTickets}
-                labelText={t("labelText") || ""}
-              />
-            </View>
-          ))}
-        </ScrollView>
-      ) : (
-        <View style={S.noCausesContainer}>
-          <ZeroDonationsSection
-            title={t("noCauses.title")}
-            onButtonPress={navigateToPromotersScreen}
-            description={t("noCauses.text")}
-            buttonText={t("noCauses.button")}
-            image={<ImpactDonationsVector />}
-          />
+          <ScrollView
+            style={S.groupButtonsContainer}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            <GroupButtons
+              elements={causesFilter()}
+              onChange={handleCauseChange}
+              nameExtractor={(cause) => cause.name}
+              indexSelected={chosenCauseIndex}
+            />
+          </ScrollView>
         </View>
-      )}
 
-      <Tooltip tooltipText={t("ticketExplanation")}>
-        <View style={S.ticketExplanationSection}>
-          <Icon
-            type="rounded"
-            name="help"
-            size={20}
-            color={theme.colors.gray30}
-          />
-          <View style={{ overflow: "hidden" }}>
-            <View style={S.ticketTextContainer}>
-              <Text style={S.ticketText}>{t("whatIsATicket")}</Text>
+        {sortNonProfits()?.length > 0 ? (
+          <ScrollView
+            style={S.causesContainer}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ref={scrollViewRef}
+          >
+            {sortNonProfits()?.map((nonProfit, index) => (
+              <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
+                <CardCenterImageButton
+                  image={nonProfit.mainImage}
+                  infoTextTop={nonProfit.name}
+                  infoTextBottom={nonProfit.cause.name}
+                  imageDescription={formattedImpactText(
+                    nonProfit,
+                    undefined,
+                    false,
+                    false,
+                    undefined,
+                    t("impactPrefix") || "",
+                  )}
+                  buttonText={hasTickets ? t("buttonText") : t("noTickets")}
+                  onImagePress={() => {
+                    handleNonProfitImagePress(nonProfit);
+                  }}
+                  onClickButton={() => handleButtonPress(nonProfit)}
+                  buttonDisabled={!hasTickets}
+                  labelText={t("labelText") || ""}
+                />
+              </View>
+            ))}
+          </ScrollView>
+        ) : (
+          <View style={S.noCausesContainer}>
+            <ZeroDonationsSection
+              title={t("noCauses.title")}
+              onButtonPress={navigateToPromotersScreen}
+              description={t("noCauses.text")}
+              buttonText={t("noCauses.button")}
+              image={<ImpactDonationsVector />}
+            />
+          </View>
+        )}
+
+        <Tooltip tooltipText={t("ticketExplanation")}>
+          <View style={S.ticketExplanationSection}>
+            <Icon
+              type="rounded"
+              name="help"
+              size={20}
+              color={theme.colors.gray30}
+            />
+            <View style={{ overflow: "hidden" }}>
+              <View style={S.ticketTextContainer}>
+                <Text style={S.ticketText}>{t("whatIsATicket")}</Text>
+              </View>
             </View>
           </View>
-        </View>
-      </Tooltip>
+        </Tooltip>
 
-      <View style={S.supportContainer}>
-        <UserSupportBanner from="donateTickets_page" />
-      </View>
-    </ScrollView>
+        <View style={S.supportContainer}>
+          <UserSupportBanner from="donateTickets_page" />
+        </View>
+      </ScrollView>
+      <DonationErrorModal newState={params?.newState} />
+    </>
   );
 }

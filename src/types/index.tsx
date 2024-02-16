@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Cause, Currencies, NonProfit, Offer } from "@ribon.io/shared/types";
+import { LocationStateType } from "screens/donations/CausesScreen/LocationStateType";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -63,8 +64,12 @@ export type PostDonationScreenParams = {
   cause: Cause;
 };
 
+export type CausesScreenParamList = {
+  newState: LocationStateType;
+};
+
 export type RootTabParamList = {
-  CausesScreen: undefined;
+  CausesScreen: CausesScreenParamList;
   ForYouScreen: undefined;
   ImpactScreen: undefined;
   PromotersScreen: PromotersScreenParams;
@@ -128,7 +133,7 @@ export type RootStackParamList = {
   ReceiveTicketScreen: undefined;
   GiveTicketScreen: GiveTicketScreenParamList;
   ZeroTicketScreen: undefined;
-  CausesScreen: undefined;
+  CausesScreen: CausesScreenParamList;
   ForYouScreen: ForYouScreenParamsList;
   PostDonationScreen: PostDonationScreenParams;
   CommunityAddModal: CommunityAddModalParamList;
@@ -151,6 +156,7 @@ export type RootStackParamList = {
   ReceiveExtraTicketScreen: undefined;
   ExtraTicketScreen: undefined;
   ExpiredLinkScreen: undefined;
+  ValidateAccountScreen: undefined;
 };
 
 export type PrivateStackParamList = {

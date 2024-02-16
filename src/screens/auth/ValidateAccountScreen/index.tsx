@@ -7,10 +7,10 @@ import { userAccountApi } from "@ribon.io/shared";
 import { useAuthentication } from "contexts/authenticationContext";
 import ValidateAccount from "components/moleculars/validateAccount";
 
-function SignInExtraTicketScreen() {
+function ValidateAccountScreen() {
   usePageView("P28_view", { from: "validation_flow" });
   const { t } = useTranslation("translation", {
-    keyPrefix: "auth.signInExtraTicketScreen",
+    keyPrefix: "auth.validateAccountScreen",
   });
 
   const { navigateTo } = useNavigation();
@@ -20,14 +20,14 @@ function SignInExtraTicketScreen() {
   const onContinue = async (pathname: string) => {
     await userAccountApi.postSendValidatedEmail();
     navigateTo(pathname);
-    showToast({
-      type: "success",
-      message: t("toastSuccessMessage"),
-    });
   };
 
   const onContinueMagicLink = (pathname: string) => {
     sendAuthenticationEmail({ email: currentUser?.email });
+    showToast({
+      type: "success",
+      message: t("toastSuccessMessage"),
+    });
     navigateTo(pathname, { email: currentUser?.email });
   };
 
@@ -43,4 +43,4 @@ function SignInExtraTicketScreen() {
   );
 }
 
-export default SignInExtraTicketScreen;
+export default ValidateAccountScreen;

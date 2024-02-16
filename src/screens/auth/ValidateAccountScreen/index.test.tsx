@@ -4,22 +4,19 @@ import {
   expectTextToBeInTheDocument,
 } from "config/testUtils/expects";
 import { waitForPromises } from "config/testUtils";
-import SignInExtraTicketScreen from ".";
+import ValidateAccountScreen from ".";
 
 jest.mock("services/googleSignIn", () => ({
   signIn: () => {},
 }));
 
-describe("SignInExtraTicketScreen", () => {
+describe("ValidateAccountScreen", () => {
   beforeEach(() => {
-    renderComponent(<SignInExtraTicketScreen />);
+    renderComponent(<ValidateAccountScreen />);
   });
 
   it("should render without error", () => {
-    expectTextToBeInTheDocument("Validate your account and get a ticket");
-    expectTextToBeInTheDocument(
-      "Complete your login with  to receive your prize",
-    );
+    expectTextToBeInTheDocument("Validate your account");
   });
 
   it("logs the P28_view event", async () => {

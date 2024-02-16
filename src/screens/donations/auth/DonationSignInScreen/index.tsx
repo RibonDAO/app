@@ -17,7 +17,6 @@ import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
 import { showToast } from "lib/Toast";
 import { useCallback, useState } from "react";
-import { useTicketsContext } from "contexts/ticketsContext";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useRouteParams } from "hooks/useRouteParams";
 import usePageView from "hooks/usePageView";
@@ -37,7 +36,6 @@ function DonationSignInScreen() {
     params: { nonProfit },
   } = useRouteParams<"DonationSignInScreen">();
   const { navigateTo, popNavigation } = useNavigation();
-  const { setTicketsCounter } = useTicketsContext();
   const { formattedImpactText } = useFormattedImpactText();
   const { handleDonate } = useDonationFlow();
 
@@ -77,7 +75,6 @@ function DonationSignInScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {

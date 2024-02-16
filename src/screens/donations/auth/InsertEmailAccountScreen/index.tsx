@@ -20,8 +20,6 @@ import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { useRouteParams } from "hooks/useRouteParams";
 import { theme } from "@ribon.io/shared";
-import { showToast } from "lib/Toast";
-import { useTicketsContext } from "contexts/ticketsContext";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
 import DonationInProgressSection from "../DonationInProgressSection";
@@ -41,7 +39,6 @@ function InsertEmailAccountScreen() {
   const { handleCollectAndDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
-  const { setTicketsCounter } = useTicketsContext();
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(false);
@@ -56,19 +53,14 @@ function InsertEmailAccountScreen() {
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
-  const onDonationFail = (error: any) => {
+  const onDonationFail = () => {
     setDonationSucceeded(false);
 
-    showToast({
-      type: "error",
-      message: error?.response?.data?.formatted_message || t("donationError"),
-    });
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTicketsCounter(0);
       navigateTo("DonationDoneScreen", { nonProfit, flow: "magicLink" });
     } else {
       const newState = {
@@ -84,7 +76,7 @@ function InsertEmailAccountScreen() {
     await handleCollectAndDonate({
       nonProfit,
       email,
-      onError: (error) => onDonationFail(error),
+      onError: () => onDonationFail(),
       onSuccess: () => onDonationSuccess,
     });
   }

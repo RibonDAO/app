@@ -78,7 +78,13 @@
       "ticketSection": {
         "ticketToast": "You have a new ticket!"
       },
-      "donationError": "Unable to donate now"
+      "donationError": "Unable to donate now",
+      "errorModalTitle": "Donation failed",
+      "errorModalText": "Unable to donate now, wait for you next donation",
+      "errorModalButtonText": "Ok",
+      "unauthorizedModalTitle": "Email not validated",
+      "unauthorizedModalText": "To securely complete your donation, it is necessary for you to validate your email.",
+      "unauthorizedModalButtonText": "Proceed to validation"
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",
@@ -141,7 +147,7 @@
       }
     },
     "selectTicketsScreen": {
-      "title": "Choose the size of your aid",
+      "title": "Choose the size of your help",
       "buttonText": "Continue"
     }
   },
@@ -156,7 +162,7 @@
     },
     "giveTicketScreen": {
       "title": "You have 1 ticket!",
-      "titlePlural": "You have {{ticketCounter}} tickets!",
+      "titlePlural": "You have {{ticketsCounter}} tickets!",
       "subtitle": "Every day when you login in Ribon you get a new ticket.",
       "button": "Donate ticket",
       "onboardingTitle": "Welcome to Ribon!",
@@ -541,6 +547,11 @@
     },
     "validateExtraTicketScreen": {
       "error": "Invalid link"
+    },
+    "validateAccountScreen": {
+      "title": "Validate your account",
+      "description": "Validate your account created with {{email}} to complete your donation.",
+      "toastSuccessMessage": "Email sent"
     }
   }
 }
