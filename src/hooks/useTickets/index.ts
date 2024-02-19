@@ -21,7 +21,8 @@ export function useTickets() {
   } = useTicketShared();
 
   const { currentIntegrationId, externalId } = useIntegrationContext();
-  const externalIds = externalId?.split(",");
+  const externalIds =
+    externalId && externalId?.length > 0 ? externalId?.split(",") : null;
 
   async function hasReceivedTicketToday() {
     const donationToastSeenAtKey = await getLocalStorageItem(

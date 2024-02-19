@@ -57,7 +57,7 @@ function DonationSignInScreen() {
     await handleDonate({
       nonProfit,
       ticketsQuantity: 1,
-      onSuccess: () => onDonationSuccess,
+      onSuccess: () => onDonationSuccess(),
       onError: (error) => {
         onDonationFail(error);
       },
