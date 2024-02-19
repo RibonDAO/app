@@ -77,7 +77,7 @@ function InsertEmailAccountScreen() {
       nonProfit,
       email,
       onError: () => onDonationFail(),
-      onSuccess: () => onDonationSuccess,
+      onSuccess: () => onDonationSuccess(),
     });
   }
 
