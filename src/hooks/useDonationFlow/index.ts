@@ -37,8 +37,8 @@ function useDonationFlow() {
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
   const { collectAndDonateByIntegration, collectAndDonateByExternalIds } =
     useTickets();
-
-  const externalIds = externalId?.split(",");
+  const externalIds =
+    externalId && externalId?.length > 0 ? externalId?.split(",") : null;
 
   async function handleCollectAndDonate({
     nonProfit,
@@ -76,6 +76,7 @@ function useDonationFlow() {
             utmCampaign,
           );
         }
+
         if (onSuccess) onSuccess();
       } catch (e: any) {
         logError(e);
