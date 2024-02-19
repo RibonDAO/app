@@ -112,7 +112,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       login();
       if (flow === "nonProfit") {
         logEvent("ngoGave_end", {
-          causeId: cause?.id,
+          nonProfitId: cause?.id,
           offerId: offer?.id,
           source: "creditCard",
         });
