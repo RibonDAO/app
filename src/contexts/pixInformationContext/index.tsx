@@ -124,7 +124,7 @@ function PixPaymentInformationProvider({ children }: Props) {
         registerAction("contribution_done_screen_view");
         if (flow === "nonProfit") {
           logEvent("ngoGave_end", {
-            causeId: cause?.id,
+            nonProfitId: nonProfit?.id,
             offerId: offer?.id,
             source: "pix",
           });

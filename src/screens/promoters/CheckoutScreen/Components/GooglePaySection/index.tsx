@@ -136,7 +136,7 @@ export default function GooglePaySection({
 
         if (nonProfit?.id) {
           logEvent("ngoGave_end", {
-            causeId: cause?.id,
+            nonProfitId: nonProfit?.id,
             offerId: offer?.id,
             source: "googlePay",
           });
