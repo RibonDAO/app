@@ -143,7 +143,7 @@ export default function ApplePaySection({
         registerAction("contribution_done_screen_view");
         if (nonProfit?.id) {
           logEvent("ngoGave_end", {
-            causeId: cause?.id,
+            nonProfitId: nonProfit?.id,
             offerId: offer?.id,
             source: "applePay",
           });
