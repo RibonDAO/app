@@ -7,6 +7,7 @@ import { useRouteParams } from "hooks/useRouteParams";
 import { useFocusEffect } from "@react-navigation/native";
 
 import { useCurrentUser } from "contexts/currentUserContext";
+import { useTicketsContext } from "contexts/ticketsContext";
 import TabViewSection from "./TabViewSection";
 import styles from "./styles";
 
@@ -15,10 +16,12 @@ export default function ForYouScreen(): JSX.Element {
 
   const { refetch: refetchDonatedToday } = useDonatedToday();
   const { currentUser } = useCurrentUser();
+  const { refetchTickets } = useTicketsContext();
 
   useFocusEffect(
     useCallback(() => {
       refetchDonatedToday();
+      refetchTickets();
     }, [currentUser]),
   );
 
