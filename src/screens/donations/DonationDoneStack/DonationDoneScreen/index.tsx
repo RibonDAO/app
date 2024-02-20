@@ -129,7 +129,7 @@ export default function DonationDoneScreen({
           description={t("description") || ""}
           highlightedDescription={formattedImpactText(
             nonProfit,
-            undefined,
+            impact ?? undefined,
             false,
             false,
           )}
