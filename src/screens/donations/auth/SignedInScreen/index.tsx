@@ -23,6 +23,7 @@ function SignedInScreen() {
   const { navigateTo } = useNavigation();
 
   const [donationSucceeded, setDonationSucceeded] = useState(true);
+  const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
   const {
     params: { nonProfit },
   } = useRouteParams<"SignedInScreen">();
@@ -30,11 +31,13 @@ function SignedInScreen() {
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
+    setShouldRepeatAnimation(false);
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
   const onDonationFail = () => {
     setDonationSucceeded(false);
+    setShouldRepeatAnimation(false);
 
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
@@ -72,6 +75,7 @@ function SignedInScreen() {
         <DonationInProgressSection
           nonProfit={nonProfit}
           onAnimationEnd={onAnimationEnd}
+          shouldRepeatAnimation={shouldRepeatAnimation}
         />
       ) : (
         <View style={S.container}>

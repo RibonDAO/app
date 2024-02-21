@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { isValidEmail } from "lib/validators";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import InputText from "components/atomics/inputs/InputText";
 import Image from "components/atomics/Image";
@@ -42,6 +42,7 @@ function InsertEmailAccountScreen() {
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(false);
+  const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
 
   const onContinue = () => {
     setIsDonating(true);
@@ -50,11 +51,13 @@ function InsertEmailAccountScreen() {
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
+    setShouldRepeatAnimation(false);
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
   const onDonationFail = () => {
     setDonationSucceeded(false);
+    setShouldRepeatAnimation(false);
 
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
@@ -112,6 +115,7 @@ function InsertEmailAccountScreen() {
         <DonationInProgressSection
           nonProfit={nonProfit}
           onAnimationEnd={onAnimationEnd}
+          shouldRepeatAnimation={shouldRepeatAnimation}
         />
       ) : (
         <KeyboardAvoidingView

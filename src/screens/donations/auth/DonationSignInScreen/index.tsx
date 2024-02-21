@@ -32,6 +32,7 @@ function DonationSignInScreen() {
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(true);
+  const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
   const {
     params: { nonProfit },
   } = useRouteParams<"DonationSignInScreen">();
@@ -41,11 +42,13 @@ function DonationSignInScreen() {
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
+    setShouldRepeatAnimation(false);
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
+    setShouldRepeatAnimation(false);
     showToast({
       type: "error",
       message: error?.response?.data?.formatted_message,
@@ -91,6 +94,7 @@ function DonationSignInScreen() {
         <DonationInProgressSection
           nonProfit={nonProfit}
           onAnimationEnd={onAnimationEnd}
+          shouldRepeatAnimation={shouldRepeatAnimation}
         />
       ) : (
         <KeyboardAvoidingView

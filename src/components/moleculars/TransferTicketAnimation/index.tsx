@@ -1,6 +1,6 @@
 import { Dimensions, View, Text } from "react-native";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Animated, {
   useSharedValue,
   withTiming,
@@ -15,6 +15,7 @@ type Props = {
   description?: string;
   receiverText?: string | null;
   senderText?: string | null;
+  shouldRepeat?: boolean;
 };
 
 function TransferTicketAnimation({
@@ -24,24 +25,54 @@ function TransferTicketAnimation({
   description,
   receiverText,
   senderText,
+  shouldRepeat,
 }: Props): JSX.Element {
   const ANIMATION_TIME = 4000;
   const left = useSharedValue(20);
   const opacity = useSharedValue(0);
+  const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
 
-  useEffect(() => {
+  const animate = () => {
+    left.value = withTiming(Dimensions.get("window").width - 150, {
+      duration: ANIMATION_TIME,
+    });
+    opacity.value = withTiming(1, { duration: ANIMATION_TIME });
+  };
+
+  const repeatAnimation = () => {
+    if (shouldRepeatAnimation) {
+      left.value = withTiming(20, { duration: 0 });
+      opacity.value = withTiming(0, { duration: 0 });
+      animate();
+    }
+  };
+
+  const handleAnimationEnd = () => {
     const timeout = setTimeout(() => {
       onAnimationEnd();
     }, ANIMATION_TIME);
 
     return () => clearTimeout(timeout);
-  }, [onAnimationEnd]);
+  };
 
   useEffect(() => {
-    left.value = withTiming(Dimensions.get("window").width - 150, {
-      duration: ANIMATION_TIME,
-    });
-    opacity.value = withTiming(1, { duration: ANIMATION_TIME });
+    setShouldRepeatAnimation(shouldRepeat ?? true);
+  }, [shouldRepeat]);
+
+  useEffect(() => {
+    if (shouldRepeatAnimation) {
+      const interval = setInterval(() => {
+        repeatAnimation();
+      }, ANIMATION_TIME);
+
+      return clearInterval(interval);
+    } else {
+      return handleAnimationEnd();
+    }
+  }, [shouldRepeatAnimation]);
+
+  useEffect(() => {
+    animate();
   }, []);
 
   const boxStyle = useAnimatedStyle(() => ({
