@@ -54,6 +54,7 @@ function ReceiveTicketScreen(): JSX.Element {
       <ImageBackground source={topBackground} style={S.topBackground}>
         <View style={S.animationContainer}>
           <TransferTicketAnimation
+            shouldRepeat={false}
             onAnimationEnd={() => {
               navigate();
             }}
