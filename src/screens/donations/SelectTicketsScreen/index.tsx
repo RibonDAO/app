@@ -33,6 +33,7 @@ export default function SelectTicketsScreen() {
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(true);
+  const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
   const [ticketsQuantity, setTicketsQuantity] = useState(1);
   const [currentImpact, setCurrentImpact] = useState(
     nonProfit?.impactByTicket || undefined,
@@ -54,6 +55,7 @@ export default function SelectTicketsScreen() {
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
+    setShouldRepeatAnimation(false);
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
@@ -65,6 +67,7 @@ export default function SelectTicketsScreen() {
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
+    setShouldRepeatAnimation(false);
     const failedKey = errorType(error.response?.status);
     const newState = {
       [failedKey]: true,
@@ -118,6 +121,7 @@ export default function SelectTicketsScreen() {
         <DonationInProgressSection
           nonProfit={nonProfit}
           onAnimationEnd={onAnimationEnd}
+          shouldRepeatAnimation={shouldRepeatAnimation}
         />
       ) : (
         <View>

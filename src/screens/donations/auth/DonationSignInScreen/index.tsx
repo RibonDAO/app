@@ -22,6 +22,7 @@ import { useRouteParams } from "hooks/useRouteParams";
 import usePageView from "hooks/usePageView";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
 import useDonationFlow from "hooks/useDonationFlow";
+import { useTickets } from "hooks/useTickets";
 import S from "./styles";
 
 function DonationSignInScreen() {
@@ -32,20 +33,24 @@ function DonationSignInScreen() {
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(true);
+  const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
   const {
     params: { nonProfit },
   } = useRouteParams<"DonationSignInScreen">();
   const { navigateTo, popNavigation } = useNavigation();
   const { formattedImpactText } = useFormattedImpactText();
   const { handleDonate } = useDonationFlow();
+  const { handleCollect } = useTickets();
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
+    setShouldRepeatAnimation(false);
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
+    setShouldRepeatAnimation(false);
     showToast({
       type: "error",
       message: error?.response?.data?.formatted_message,
@@ -54,6 +59,7 @@ function DonationSignInScreen() {
   };
 
   async function donateCallback() {
+    await handleCollect();
     await handleDonate({
       nonProfit,
       ticketsQuantity: 1,
@@ -91,6 +97,7 @@ function DonationSignInScreen() {
         <DonationInProgressSection
           nonProfit={nonProfit}
           onAnimationEnd={onAnimationEnd}
+          shouldRepeatAnimation={shouldRepeatAnimation}
         />
       ) : (
         <KeyboardAvoidingView
