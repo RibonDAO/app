@@ -27,7 +27,7 @@ function TransferTicketAnimation({
   senderText,
   shouldRepeat,
 }: Props): JSX.Element {
-  const ANIMATION_TIME = 4000;
+  const ANIMATION_TIME = 3000;
   const left = useSharedValue(20);
   const opacity = useSharedValue(0);
   const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);

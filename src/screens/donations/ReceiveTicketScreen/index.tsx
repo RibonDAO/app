@@ -14,7 +14,6 @@ import {
   DONATION_TOAST_SEEN_AT_KEY,
 } from "lib/localStorage/constants";
 import { RIBON_COMPANY_ID, setLocalStorageItem } from "@ribon.io/shared";
-import { useState } from "react";
 import S from "./styles";
 import topBackground from "./assets/topBackground.png";
 
@@ -31,7 +30,6 @@ function ReceiveTicketScreen(): JSX.Element {
   const { isAuthenticated } = useAuthentication();
   const { currentIntegrationId } = useIntegrationContext();
   const { collectByIntegration } = useTickets();
-  const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
 
   const navigate = () => {
     setTimeout(() => {
@@ -49,7 +47,6 @@ function ReceiveTicketScreen(): JSX.Element {
       );
       navigateTo("CausesScreen");
     }, 3000);
-    setShouldRepeatAnimation(false);
   };
 
   return (
@@ -57,7 +54,7 @@ function ReceiveTicketScreen(): JSX.Element {
       <ImageBackground source={topBackground} style={S.topBackground}>
         <View style={S.animationContainer}>
           <TransferTicketAnimation
-            shouldRepeat={shouldRepeatAnimation}
+            shouldRepeat={false}
             onAnimationEnd={() => {
               navigate();
             }}
