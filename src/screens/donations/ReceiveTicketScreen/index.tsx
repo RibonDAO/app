@@ -36,8 +36,8 @@ function ReceiveTicketScreen(): JSX.Element {
       if (isAuthenticated()) {
         collectByIntegration(
           currentIntegrationId ?? "",
-          currentUser?.email ?? "",
           PLATFORM,
+          currentUser?.email ?? "",
         );
       }
       setLocalStorageItem(DONATION_TOAST_SEEN_AT_KEY, Date.now().toString());
