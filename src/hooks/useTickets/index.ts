@@ -69,8 +69,8 @@ export function useTickets() {
     } else if (currentIntegrationId) {
       await collectByIntegration(
         currentIntegrationId,
-        currentUser?.email ?? "",
         PLATFORM,
+        currentUser?.email ?? "",
       );
     }
   }
