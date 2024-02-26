@@ -68,12 +68,14 @@ function CardCheckbox({
           <S.DescriptionText>{firstDescription}</S.DescriptionText>
         </S.IconWithText>
         <S.IconWithText>
-          <Icon
-            type="outlined"
-            name={secondIconName}
-            color={theme.colors.neutral[700]}
-            size={24}
-          />
+          <S.Icon>
+            <Icon
+              type="outlined"
+              name={secondIconName}
+              color={theme.colors.neutral[700]}
+              size={24}
+            />
+          </S.Icon>
           <S.DescriptionText>{secondDescription}</S.DescriptionText>
         </S.IconWithText>
       </S.MainContent>

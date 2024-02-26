@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import {
   defaultBodyLgSemibold,
   defaultBodySmMedium,
+  defaultBodyMdMedium,
 } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
@@ -19,7 +20,6 @@ export const Container = styled.TouchableOpacity<{ checked: boolean }>`
 `;
 
 export const Tag = styled.View`
-  width: fit-content;
   padding: ${theme.spacing(0, 16)};
   border-radius: ${theme.spacing(12, 0)};
   align-self: flex-start;
@@ -73,10 +73,17 @@ export const IconWithText = styled.View`
   margin-top: ${theme.spacing(8)};
 `;
 
-export const DescriptionText = styled.Text``;
+export const DescriptionText = styled.Text`
+  ${defaultBodyMdMedium}
+`;
 
 export const Text = styled.Text`
   display: flex;
   align-items: center;
   color: ${theme.colors.brand.tertiary[600]};
+`;
+
+export const Icon = styled.View`
+  width: ${theme.spacing(24)};
+  align-items: center;
 `;
