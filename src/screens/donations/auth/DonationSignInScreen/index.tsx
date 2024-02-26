@@ -15,19 +15,14 @@ import { logEvent } from "services/analytics";
 import DonationInProgressSection from "screens/donations/auth/DonationInProgressSection";
 import GoogleLogin from "components/moleculars/buttons/GoogleLogin";
 import MagicLinkLogin from "components/moleculars/buttons/MagicLinkLogin";
-import { setLocalStorageItem } from "@ribon.io/shared";
-import { useUserV1Donations } from "@ribon.io/shared/hooks";
-import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
 import { showToast } from "lib/Toast";
 import { useCallback, useState } from "react";
-import { useTickets } from "contexts/ticketsContext";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { useRouteParams } from "hooks/useRouteParams";
-import { PLATFORM } from "utils/constants/Application";
-import { useUtmContext } from "contexts/utmContext";
-import { useIntegrationContext } from "contexts/integrationContext";
 import usePageView from "hooks/usePageView";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
+import useDonationFlow from "hooks/useDonationFlow";
+import { useTickets } from "hooks/useTickets";
 import S from "./styles";
 
 function DonationSignInScreen() {
@@ -38,24 +33,24 @@ function DonationSignInScreen() {
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(true);
+  const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
   const {
     params: { nonProfit },
   } = useRouteParams<"DonationSignInScreen">();
   const { navigateTo, popNavigation } = useNavigation();
-  const { setTickets } = useTickets();
   const { formattedImpactText } = useFormattedImpactText();
-  const { donate } = useUserV1Donations();
-  const { currentIntegrationId, externalId } = useIntegrationContext();
-  const { utmSource, utmMedium, utmCampaign } = useUtmContext();
+  const { handleDonate } = useDonationFlow();
+  const { handleCollect } = useTickets();
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
-    setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
+    setShouldRepeatAnimation(false);
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
   const onDonationFail = (error: any) => {
     setDonationSucceeded(false);
+    setShouldRepeatAnimation(false);
     showToast({
       type: "error",
       message: error?.response?.data?.formatted_message,
@@ -64,20 +59,15 @@ function DonationSignInScreen() {
   };
 
   async function donateCallback() {
-    try {
-      await donate(
-        currentIntegrationId,
-        nonProfit.id,
-        PLATFORM,
-        externalId,
-        utmSource,
-        utmMedium,
-        utmCampaign,
-      );
-      onDonationSuccess();
-    } catch (error: any) {
-      onDonationFail(error);
-    }
+    await handleCollect();
+    await handleDonate({
+      nonProfit,
+      ticketsQuantity: 1,
+      onSuccess: () => onDonationSuccess(),
+      onError: (error) => {
+        onDonationFail(error);
+      },
+    });
   }
 
   const onContinue = () => {
@@ -91,7 +81,6 @@ function DonationSignInScreen() {
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTickets(0);
       navigateTo("DonationDoneScreen", { nonProfit });
     } else {
       const newState = {
@@ -108,6 +97,7 @@ function DonationSignInScreen() {
         <DonationInProgressSection
           nonProfit={nonProfit}
           onAnimationEnd={onAnimationEnd}
+          shouldRepeatAnimation={shouldRepeatAnimation}
         />
       ) : (
         <KeyboardAvoidingView

@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { useNavigation } from "hooks/useNavigation";
 import { logError } from "services/crashReport";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 
 export type Props = {
@@ -50,6 +51,12 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
   }, [cardId]);
 
   useEffect(() => {
+    logEvent("giveNgoBtn_view", {
+      from: "cardCampaign",
+      nonProfitId: nonProfit?.id,
+      offer: offer?.priceCents,
+      currency: offer?.currency,
+    });
     fetchImpressionCard();
   }, []);
 
@@ -78,6 +85,13 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
   };
 
   const checkoutLink = () => {
+    logEvent("giveNgoBtn_start", {
+      from: "cardCampaign",
+      nonProfitId: nonProfit?.id,
+      offer: offer?.priceCents,
+      currency: offer?.currency,
+    });
+
     navigateTo("RecurrenceScreen", {
       target: "non_profit",
       targetId: nonProfit?.id,

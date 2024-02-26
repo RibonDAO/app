@@ -6,14 +6,13 @@ import { useTranslation } from "react-i18next";
 import { CollapsibleTabView } from "react-native-collapsible-tab-view";
 import React, { useEffect } from "react";
 import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
-import { useCanDonate } from "@ribon.io/shared";
-import { PLATFORM } from "utils/constants/Application";
+import { useDonatedToday } from "@ribon.io/shared";
 import { useForYouTabsContext } from "contexts/forYouTabsContext";
 import { useTasksContext } from "contexts/tasksContext";
 import { TASKS } from "utils/constants/Tasks";
 import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
-import { useIntegrationContext } from "contexts/integrationContext";
+
 import TasksSection from "../TasksSection";
 import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
@@ -25,11 +24,10 @@ type Route = {
 };
 
 function NewsSectionTabView(): JSX.Element {
-  const { currentIntegrationId } = useIntegrationContext();
-  const { canDonate } = useCanDonate(currentIntegrationId, PLATFORM);
+  const { donatedToday } = useDonatedToday();
   return (
     <ParallaxTabViewContainer routeKey="NewsSectionTabView">
-      {canDonate ? <LockedSection /> : <NewsSection />}
+      {!donatedToday ? <LockedSection /> : <NewsSection />}
     </ParallaxTabViewContainer>
   );
 }
@@ -57,8 +55,7 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
   });
 
   const layout = useWindowDimensions();
-  const { currentIntegrationId } = useIntegrationContext();
-  const { canDonate } = useCanDonate(currentIntegrationId, PLATFORM);
+  const { donatedToday } = useDonatedToday();
   const { registerAction, hasCompletedATask, tasksState } = useTasksContext();
 
   const { index, setIndex } = useForYouTabsContext();
@@ -75,7 +72,7 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
     useCallback(() => {
       const eventName =
         // eslint-disable-next-line no-nested-ternary
-        index === 0 ? "P21_view" : canDonate ? "P16_view" : "P20_view";
+        index === 0 ? "P21_view" : !donatedToday ? "P16_view" : "P20_view";
       logEvent(eventName);
     }, [index]),
   );
@@ -99,7 +96,7 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
     const done = tasksState?.find(
       (task) => task.id === taskDownloadApp.id,
     )?.done;
-    if (index === 1 && !canDonate && !done) {
+    if (index === 1 && donatedToday && !done) {
       registerAction("for_you_news_tab_view");
     }
   }, [index]);

@@ -15,26 +15,9 @@ export const API_SCOPE = "/users/v1";
 export type InitializeApiProps = {
   email: string;
   language: "pt-BR" | "en";
+  platform: "app";
 };
 
-export function initializeApi({ language, email }: InitializeApiProps) {
-  // TODO update this to use the useLanguage hook / localstorage when it's available
-
-  authenticationApi.interceptors.request.use(async (config) => {
-    const accessToken = await getLocalStorageItem(ACCESS_TOKEN_KEY);
-    // eslint-disable-next-line
-    config.baseURL = baseURL;
-    const authHeaders = {
-      Authorization: `Bearer ${accessToken}`,
-      Email: email,
-      Language: language,
-    };
-    // eslint-disable-next-line
-    config.headers = { ...authHeaders, ...config.headers };
-
-    return config;
-  });
-}
 async function requestNewToken() {
   try {
     const refreshToken = await getLocalStorageItem(REFRESH_TOKEN_KEY);
@@ -53,21 +36,45 @@ async function requestNewToken() {
   }
 }
 
-authenticationApi.interceptors.response.use(
-  (response) => ({
-    ...response,
-    data: camelCaseKeys(response.data, { deep: true }),
-  }),
-  async (error) => {
-    const originalRequest = error.config;
-    // eslint-disable-next-line no-underscore-dangle
-    if (error.response.status === 403 && !originalRequest._retry) {
+export function initializeApi({
+  language,
+  email,
+  platform,
+}: InitializeApiProps) {
+  // TODO update this to use the useLanguage hook / localstorage when it's available
+
+  authenticationApi.interceptors.request.use(async (config) => {
+    const accessToken = await getLocalStorageItem(ACCESS_TOKEN_KEY);
+
+    // eslint-disable-next-line
+    config.baseURL = baseURL;
+    const authHeaders = {
+      Authorization: `Bearer ${accessToken}`,
+      Email: email,
+      Language: language,
+      Platform: platform,
+    };
+    // eslint-disable-next-line
+    config.headers = { ...authHeaders, ...config.headers };
+
+    return config;
+  });
+  authenticationApi.interceptors.response.use(
+    (response) => ({
+      ...response,
+      data: camelCaseKeys(response.data, { deep: true }),
+    }),
+    async (error) => {
+      const originalRequest = error.config;
       // eslint-disable-next-line no-underscore-dangle
-      originalRequest._retry = true;
-      const newToken = await requestNewToken();
-      originalRequest.headers.Authorization = `Bearer ${newToken}`;
-      return authenticationApi(originalRequest);
-    }
-    return Promise.reject(error);
-  },
-);
+      if (error.response.status === 403 && !originalRequest._retry) {
+        // eslint-disable-next-line no-underscore-dangle
+        originalRequest._retry = true;
+        const newToken = await requestNewToken();
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        return authenticationApi(originalRequest);
+      }
+      return Promise.reject(error);
+    },
+  );
+}

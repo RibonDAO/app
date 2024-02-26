@@ -1,10 +1,10 @@
 import { logError } from "services/crashReport";
 import { useCurrentUser } from "contexts/currentUserContext";
 import {
-  useDonations,
   useSources,
-  useUserConfig,
+  useTickets,
   useUsers,
+  useUserTickets,
 } from "@ribon.io/shared/hooks";
 
 import { NonProfit } from "@ribon.io/shared/types";
@@ -14,50 +14,69 @@ import { PLATFORM } from "utils/constants/Application";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useUtmContext } from "contexts/utmContext";
 
-type HandleDonateProps = {
+type HandleCollectAndDonateProps = {
   nonProfit: NonProfit;
   email: string;
-  allowedEmailMarketing?: boolean;
   onSuccess?: () => void;
   onError?: (error: any) => void;
 };
+
+type HandleDonateProps = {
+  nonProfit: NonProfit;
+  ticketsQuantity: number;
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+};
+
 function useDonationFlow() {
-  const { currentUser, signedIn, setCurrentUser } = useCurrentUser();
+  const { signedIn, setCurrentUser } = useCurrentUser();
   const { findOrCreateUser } = useUsers();
   const { createSource } = useSources();
-  const { donate } = useDonations(currentUser?.id);
+
   const { currentIntegrationId, externalId } = useIntegrationContext();
   const { utmSource, utmMedium, utmCampaign } = useUtmContext();
-  const { updateUserConfig } = useUserConfig();
+  const { collectAndDonateByIntegration, collectAndDonateByExternalIds } =
+    useTickets();
+  const externalIds =
+    externalId && externalId?.length > 0 ? externalId?.split(",") : null;
 
-  async function handleDonate({
+  async function handleCollectAndDonate({
     nonProfit,
     email,
-    allowedEmailMarketing,
     onError,
     onSuccess,
-  }: HandleDonateProps) {
+  }: HandleCollectAndDonateProps) {
     if (!signedIn) {
       const user = await findOrCreateUser(email, await normalizedLanguage());
       if (currentIntegrationId) createSource(user.id, currentIntegrationId);
       setCurrentUser(user);
-      if (allowedEmailMarketing) {
-        updateUserConfig(user.id, { allowedEmailMarketing });
-      }
     }
 
     if (currentIntegrationId) {
       try {
-        await donate(
-          currentIntegrationId,
-          nonProfit.id,
-          email,
-          PLATFORM,
-          externalId,
-          utmSource,
-          utmMedium,
-          utmCampaign,
-        );
+        if (externalIds && externalIds.length > 0) {
+          await collectAndDonateByExternalIds(
+            currentIntegrationId,
+            nonProfit.id,
+            PLATFORM,
+            externalIds,
+            email,
+            utmSource,
+            utmMedium,
+            utmCampaign,
+          );
+        } else {
+          await collectAndDonateByIntegration(
+            currentIntegrationId,
+            nonProfit.id,
+            PLATFORM,
+            email,
+            utmSource,
+            utmMedium,
+            utmCampaign,
+          );
+        }
+
         if (onSuccess) onSuccess();
       } catch (e: any) {
         logError(e);
@@ -66,7 +85,35 @@ function useDonationFlow() {
     }
   }
 
-  return { handleDonate };
+  async function handleDonate({
+    nonProfit,
+    ticketsQuantity,
+    onError,
+    onSuccess,
+  }: HandleDonateProps) {
+    const { donate } = useUserTickets();
+
+    try {
+      const result = await donate(
+        nonProfit.id,
+        ticketsQuantity,
+        PLATFORM,
+        utmSource,
+        utmMedium,
+        utmCampaign,
+      );
+      if (result.status === 200 && onSuccess) onSuccess();
+      if (result.status === 401 && onError)
+        onError({
+          reponse: { status: 401 },
+        });
+    } catch (e: any) {
+      logError(e);
+      if (onError) onError(e);
+    }
+  }
+
+  return { handleCollectAndDonate, handleDonate };
 }
 
 export default useDonationFlow;

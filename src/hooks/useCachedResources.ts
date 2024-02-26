@@ -34,10 +34,12 @@ export default function useCachedResources() {
     initializeAuthApi({
       email: currentUser?.email || "",
       language: formattedLanguage(currentLang),
+      platform: "app",
     });
     initializeApi({
       email: currentUser?.email,
       language: formattedLanguage(currentLang),
+      platform: "app",
     });
   }, [JSON.stringify(currentUser), currentLang]);
 

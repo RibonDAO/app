@@ -1,0 +1,33 @@
+import { useNavigation } from "hooks/useNavigation";
+import { useTicketsContext } from "contexts/ticketsContext";
+import TicketIconText from "components/moleculars/TicketIconText";
+
+type TicketSectionProps = {
+  hasDividerBorder?: boolean;
+};
+
+function TicketSection({
+  hasDividerBorder = false,
+}: TicketSectionProps): JSX.Element {
+  const { ticketsCounter: tickets } = useTicketsContext();
+  const hasTickets = tickets > 0;
+  const { navigateTo } = useNavigation();
+
+  const handleTicketClick = () => {
+    if (hasTickets) {
+      navigateTo("GiveTicketScreen");
+    } else {
+      navigateTo("ZeroTicketScreen");
+    }
+  };
+
+  return (
+    <TicketIconText
+      quantity={tickets}
+      hasDividerBorder={hasDividerBorder}
+      onClick={handleTicketClick}
+    />
+  );
+}
+
+export default TicketSection;

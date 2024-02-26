@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
-  defaultBodySmSemibold,
+  defaultBodyMdBold,
   defaultBodyXsSemibold,
 } from "styles/typography/default";
 
@@ -61,17 +61,17 @@ const styles = StyleSheet.create({
   ticketSection: {
     paddingVertical: 5,
     paddingHorizontal: 7,
-    borderRadius: 4,
-    borderWidth: 1,
+    borderRightWidth: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     marginRight: theme.spacingNative(12),
   },
   ticketCounter: {
-    ...defaultBodySmSemibold,
+    ...defaultBodyMdBold,
     lineHeight: 17,
     marginRight: theme.spacingNative(4),
+    marginLeft: theme.spacingNative(4),
   },
   walletContainer: {
     paddingVertical: 5,

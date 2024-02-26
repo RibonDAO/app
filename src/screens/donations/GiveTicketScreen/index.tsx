@@ -9,6 +9,7 @@ import ArrowLeft from "components/vectors/ArrowLeft";
 import Icon from "components/atomics/Icon";
 import Tooltip from "components/atomics/Tooltip";
 import { logEvent } from "services/analytics";
+import { useTicketsContext } from "contexts/ticketsContext";
 import Ticket from "./assets/Ticket";
 import S from "./styles";
 
@@ -20,6 +21,7 @@ export default function GiveTicketScreen() {
   });
 
   const { navigateTo } = useNavigation();
+  const { ticketsCounter } = useTicketsContext();
 
   useEffect(() => {
     const eventName = isOnboarding ? "P10_view" : "P11_view";
@@ -43,6 +45,8 @@ export default function GiveTicketScreen() {
     navigateTo("SignInScreen");
   };
 
+  const title = isOnboarding ? t("onboardingTitle") : t("title");
+
   return (
     <View style={S.container}>
       {!isOnboarding && (
@@ -60,7 +64,7 @@ export default function GiveTicketScreen() {
         <Ticket />
         <View style={S.textContainer}>
           <Text style={S.title}>
-            {isOnboarding ? t("onboardingTitle") : t("title")}
+            {ticketsCounter > 1 ? t("titlePlural", { ticketsCounter }) : title}
           </Text>
           <Text style={S.subtitle}>
             {isOnboarding ? t("onboardingSubtitle") : t("subtitle")}

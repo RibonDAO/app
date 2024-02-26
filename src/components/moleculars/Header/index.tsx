@@ -1,15 +1,17 @@
 import RibonLogo from "components/vectors/RibonLogo";
 import { TouchableOpacity, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
-import ArrowLeft from "components/vectors/ArrowLeft";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import HeaderPlaceholder from "components/moleculars/Header/placeholder";
+import { theme } from "@ribon.io/shared/styles";
+import Icon from "components/atomics/Icon";
 import S from "./styles";
 
 export type Props = {
   sideLogo?: JSX.Element;
   rightComponent?: JSX.Element;
   hasBackButton?: boolean;
+  backButtonColor?: string;
   onBackButtonClick?: () => void;
   onSideLogoClick?: () => void;
 };
@@ -20,6 +22,7 @@ function Header({
   hasBackButton = false,
   onBackButtonClick,
   onSideLogoClick,
+  backButtonColor = theme.colors.brand.primary[900],
 }: Props): JSX.Element {
   const { navigateTo, popNavigation } = useNavigation();
 
@@ -44,7 +47,12 @@ function Header({
             onPress={handleBackButtonClick}
             testID="arrow-back-button"
           >
-            <ArrowLeft />
+            <Icon
+              type="outlined"
+              name="arrow_back"
+              size={24}
+              color={backButtonColor}
+            />
           </TouchableOpacity>
         ) : (
           <View style={S.logoContainer}>

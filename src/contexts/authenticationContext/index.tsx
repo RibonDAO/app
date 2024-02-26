@@ -30,6 +30,7 @@ export interface IAuthenticationContext {
   magicLinkToken: string | null;
   accountId: string | null;
   extraTicket: string | null;
+  extraTicketToken: string | null;
   logout: () => void;
   signInWithGoogle: (response: any) => void;
   signInByMagicLink: (signInByMagicLinkProps: authTokenProps) => void;
@@ -41,6 +42,7 @@ export interface IAuthenticationContext {
   setMagicLinkToken: (token: string) => void;
   setAccountId: (id: string) => void;
   setExtraTicket: (extraTicket: string) => void;
+  setExtraTicketToken: (extraTicketToken: string) => void;
 }
 
 export type Props = {
@@ -56,6 +58,7 @@ function AuthenticationProvider({ children }: Props) {
   const [magicLinkToken, setMagicLinkToken] = useState("");
   const [accountId, setAccountId] = useState("");
   const [extraTicket, setExtraTicket] = useState("");
+  const [extraTicketToken, setExtraTicketToken] = useState("");
   const { setCurrentUser } = useCurrentUser();
   const emailDoesNotMatchMessage = "Email does not match";
 
@@ -183,8 +186,10 @@ function AuthenticationProvider({ children }: Props) {
       setMagicLinkToken,
       extraTicket,
       setExtraTicket,
+      extraTicketToken,
+      setExtraTicketToken,
     }),
-    [accessToken, magicLinkToken, accountId, extraTicket],
+    [accessToken, magicLinkToken, accountId, extraTicket, extraTicketToken],
   );
 
   return (

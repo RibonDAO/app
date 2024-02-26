@@ -4,6 +4,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useTranslation } from "react-i18next";
 import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
+import { useTicketsContext } from "contexts/ticketsContext";
 
 type Props = {
   visible: boolean;
@@ -14,7 +15,7 @@ function LogoutModal({ visible, setVisible }: Props): JSX.Element {
   const { logoutCurrentUser } = useCurrentUser();
   const { navigateTo } = useNavigation();
   const { logout } = useAuthentication();
-
+  const { setTicketsCounter } = useTicketsContext();
   const dispose = () => {
     setVisible(false);
   };
@@ -23,6 +24,7 @@ function LogoutModal({ visible, setVisible }: Props): JSX.Element {
     logoutCurrentUser();
     logout();
     logEvent("signoutConfirmBtn_click");
+    setTicketsCounter(1);
     dispose();
     navigateTo("SignInScreen");
   };
