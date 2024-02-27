@@ -4,14 +4,22 @@ import { logEvent } from "services/analytics";
 import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
-import RibonSunLeft from "assets/images/ribon-sun-left.png";
 import { EXPO_PUBLIC_ZENDESK_KEY } from "utils/constants/Application";
+import RibonSunLeft from "./assets/SunLeft.svg";
 import Banner from "../Banner";
 
 type Props = {
   from: string;
+  title?: string;
+  description?: string;
+  backgroundColor?: string;
 };
-function UserSupportBanner({ from }: Props): JSX.Element {
+function UserSupportBanner({
+  from,
+  title,
+  description,
+  backgroundColor,
+}: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "userSupportBanner",
   });
@@ -29,11 +37,11 @@ function UserSupportBanner({ from }: Props): JSX.Element {
       <Banner
         onArrowClick={handleClick}
         title={{
-          text: t("title"),
+          text: title ?? t("title"),
           size: "medium",
           color: theme.colors.neutral[900],
         }}
-        text={t("text") ?? ""}
+        text={description ?? t("text") ?? ""}
         icon={{
           type: "rounded",
           name: "support_agent",
@@ -43,7 +51,7 @@ function UserSupportBanner({ from }: Props): JSX.Element {
         withCircle
         cardBackground={RibonSunLeft}
         textColor={theme.colors.neutral[900]}
-        backgroundColor={theme.colors.brand.secondary[100]}
+        backgroundColor={backgroundColor ?? theme.colors.brand.secondary[100]}
         arrowLinkColor={theme.colors.brand.secondary[900]}
       />
     </View>

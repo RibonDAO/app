@@ -1,7 +1,6 @@
 import Constants from "expo-constants";
 
-export const RIBON_INTEGRATION_ID =
-  Constants.expoConfig?.extra?.EXPO_PUBLIC_RIBON_INTEGRATION_ID || 1;
+export const RIBON_INTEGRATION_ID = 60;
 
 export const EXPO_PUBLIC_RIBON_API =
   Constants.expoConfig?.extra?.EXPO_PUBLIC_RIBON_API;
