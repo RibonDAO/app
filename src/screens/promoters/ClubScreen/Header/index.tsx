@@ -8,6 +8,7 @@ import UserProfile from "@ribon.io/shared/types/entities/UserProfile";
 import { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import UserAvatar from "screens/users/ImpactScreen/ProfileSection/UserAvatar";
+
 import Sparkles from "./assets/Sparkles";
 import VerifiedIcon from "./assets/VerifiedIcon";
 import S from "./styles";
@@ -34,21 +35,21 @@ function Header(): JSX.Element {
   );
   return (
     <View style={S.container}>
-      <View>
+      <View style={S.sparkles}>
         <Sparkles />
-        {currentUser && newProfile ? (
-          <UserAvatar
-            userAvatar={newProfile?.photo}
-            email={
-              newProfile?.user?.email
-                ? newProfile.user.email
-                : currentUser?.email
-            }
-          />
-        ) : (
-          <RibonFlag />
-        )}
       </View>
+
+      {currentUser && newProfile ? (
+        <UserAvatar
+          userAvatar={newProfile?.photo}
+          email={
+            newProfile?.user?.email ? newProfile.user.email : currentUser?.email
+          }
+        />
+      ) : (
+        <RibonFlag />
+      )}
+
       <View style={S.textContainer}>
         <View style={S.tag}>
           <Text style={S.text}>{t("ribonClub")}</Text>
