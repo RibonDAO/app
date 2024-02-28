@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    alignSelf: "center",
+    alignItems: "center",
     marginBottom: theme.spacingNative(12),
   },
   tag: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   sparkles: {
     position: "absolute",
-    top: 20,
+    top: 24,
   },
 });
 

@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, ImageBackground } from "react-native";
 
 import { useTranslation } from "react-i18next";
 import { useUserProfile } from "@ribon.io/shared/hooks";
@@ -13,6 +13,7 @@ import Sparkles from "./assets/Sparkles";
 import VerifiedIcon from "./assets/VerifiedIcon";
 import S from "./styles";
 import RibonFlag from "./assets/RibonFlag";
+import PinkSun from "./assets/pink-sun.png";
 
 function Header(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -34,7 +35,7 @@ function Header(): JSX.Element {
     }, [profile, accessToken]),
   );
   return (
-    <View style={S.container}>
+    <ImageBackground source={PinkSun} style={S.container} resizeMode="contain">
       {currentUser && newProfile ? (
         <UserAvatar
           userAvatar={newProfile?.photo}
@@ -55,7 +56,7 @@ function Header(): JSX.Element {
         </View>
         <VerifiedIcon />
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 

@@ -17,6 +17,7 @@ import AmexIcon from "./assets/AmexIcon";
 import PixIcon from "./assets/PixIcon";
 import BenefitsSection from "./components/BenefitsSection";
 import Header from "./Header";
+import LeftSun from "./assets/left-sun.png";
 
 function ClubScreen(): JSX.Element {
   usePageView("P23_view");
@@ -85,6 +86,7 @@ function ClubScreen(): JSX.Element {
                 title={t("userSupportBannerTitle") ?? ""}
                 description={t("userSupportBannerDescription") ?? ""}
                 backgroundColor={theme.colors.brand.tertiary[25]}
+                cardBackground={LeftSun}
               />
             </View>
           </View>
