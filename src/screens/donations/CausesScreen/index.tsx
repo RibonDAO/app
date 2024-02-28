@@ -1,24 +1,23 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
-  useCanDonate,
   useStories,
   useFirstAccessToIntegration,
+  useDonatedToday,
 } from "@ribon.io/shared/hooks";
 import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { INTEGRATION_AUTH_ID, PLATFORM } from "utils/constants/Application";
+import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { logError } from "services/crashReport";
-import { useTickets } from "contexts/ticketsContext";
+import { useTicketsContext } from "contexts/ticketsContext";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import Tooltip from "components/atomics/Tooltip";
-import TicketSection from "screens/donations/CausesScreen/TicketSection";
 import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
 import { logEvent } from "services/analytics";
@@ -28,7 +27,6 @@ import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { showToast } from "lib/Toast";
 import { useFocusEffect } from "@react-navigation/native";
-import { useAppState } from "hooks/useAppState";
 import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
@@ -39,9 +37,16 @@ import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
+import { useTickets } from "hooks/useTickets";
+import {
+  DONATION_TOAST_INTEGRATION,
+  DONATION_TOAST_SEEN_AT_KEY,
+} from "lib/localStorage/constants";
+import { useRouteParams } from "hooks/useRouteParams";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
+import DonationErrorModal from "./errorModalSection";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -56,56 +61,88 @@ export default function CausesScreen() {
   const { chosenCause, setChosenCauseIndex, setChosenCause, chosenCauseIndex } =
     useCauseDonationContext();
   const { currentIntegrationId, externalId } = useIntegrationContext();
-  const {
-    canDonate,
-    isLoading: loadingCanDonate,
-    refetch: refetchCanDonate,
-  } = useCanDonate(currentIntegrationId, PLATFORM, externalId);
+
+  const { donatedToday } = useDonatedToday();
   const {
     isFirstAccessToIntegration,
     refetch: refetchFirstAccessToIntegration,
     isLoading: loadingFirstAccessToIntegration,
   } = useFirstAccessToIntegration(currentIntegrationId);
   const { integration } = useIntegrationContext();
-
+  const { ticketsCounter } = useTicketsContext();
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
   const [currentNonProfit, setCurrentNonProfit] = useState<NonProfit>(
     {} as NonProfit,
   );
+  const [isNotificationCardVisible, setNotificationCardVisible] =
+    useState(false);
   const { navigateTo } = useNavigation();
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
-  const { hasTickets } = useTickets();
+  const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
-  const [isNotificationCardVisible, setNotificationCardVisible] =
-    useState(false);
-
-  useAppState({
-    onComeToForeground: () => {
-      refetchCanDonate();
-    },
-  });
+  const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
+    useTickets();
+  const { params } = useRouteParams<"CausesScreen">();
 
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
   }, [isLoading]);
 
-  useEffect(() => {
-    if (nonProfits && causes.length > 0) {
-      logEvent("donationCardsOrder_view", {
-        nonProfits: nonProfits.map((np) => np.name).join(", "),
-        causes: causes.map((c) => c.name).join(", "),
-      });
-    }
-  }, [nonProfits, causes]);
-
   useFocusEffect(
     useCallback(() => {
-      refetchCanDonate();
+      refetchTickets();
       refetchFirstAccessToIntegration();
-    }, [currentUser, signedIn]),
+    }, [
+      currentUser,
+      signedIn,
+      ticketsCounter,
+      currentIntegrationId,
+      isFirstAccessToIntegration,
+    ]),
+  );
+
+  async function receiveTicket() {
+    const canCollect = await handleCanCollect();
+    const receivedTicketToday = await hasReceivedTicketToday();
+    if (canCollect) {
+      if (currentUser) {
+        await handleCollect();
+        refetchTickets();
+      }
+      if (!receivedTicketToday) {
+        showToast({
+          type: "custom",
+          message: t("ticketToast"),
+          position: "bottom",
+          navigate: "GiveTicketScreen",
+          icon: "confirmation_number",
+          backgroundColor: theme.colors.brand.primary[50],
+          iconColor: theme.colors.brand.primary[600],
+          borderColor: theme.colors.brand.primary[600],
+          textColor: theme.colors.brand.primary[600],
+        });
+        await setLocalStorageItem(
+          DONATION_TOAST_SEEN_AT_KEY,
+          Date.now().toString(),
+        );
+        await setLocalStorageItem(
+          DONATION_TOAST_INTEGRATION,
+          currentIntegrationId?.toLocaleString(),
+        );
+      }
+    } else {
+      refetchTickets();
+    }
+  }
+  useFocusEffect(
+    useCallback(() => {
+      if (isFirstAccessToIntegration !== undefined) {
+        receiveTicket();
+      }
+    }, [isFirstAccessToIntegration, externalId]),
   );
 
   useEffect(() => {
@@ -207,8 +244,8 @@ export default function CausesScreen() {
   const shouldShowIntegrationBanner =
     !integration?.name?.toLowerCase()?.includes("ribon") &&
     integration &&
-    canDonate &&
-    hasTickets() &&
+    !donatedToday &&
+    hasTickets &&
     integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
 
   const handleHideNotificationClick = async () => {
@@ -257,117 +294,119 @@ export default function CausesScreen() {
       from: "nonprofitCard",
     });
     if (signedIn) {
-      navigateTo("SignedInScreen", { nonProfit });
+      navigateTo("SelectTicketsScreen", {
+        nonProfit,
+        cause: nonProfit.cause,
+      });
     } else {
       navigateTo("DonationSignInScreen", { nonProfit });
     }
   };
 
-  return isLoading || loadingCanDonate || loadingFirstAccessToIntegration ? (
+  return isLoading || loadingFirstAccessToIntegration ? (
     <Placeholder />
   ) : (
-    <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
-      <View style={S.containerPadding}>
-        {currentNonProfit && (
-          <StoriesSection
-            stories={stories}
-            nonProfit={currentNonProfit}
-            storiesVisible={storiesVisible}
-            setStoriesVisible={setStoriesVisible}
-          />
-        )}
+    <>
+      <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
+        <View style={S.containerPadding}>
+          {currentNonProfit && (
+            <StoriesSection
+              stories={stories}
+              nonProfit={currentNonProfit}
+              storiesVisible={storiesVisible}
+              setStoriesVisible={setStoriesVisible}
+            />
+          )}
 
-        <TicketSection
-          canDonate={canDonate}
-          isFirstAccessToIntegration={isFirstAccessToIntegration}
-        />
-        {renderNotificationCard()}
-        {shouldShowIntegrationBanner && (
-          <IntegrationBanner integration={integration} />
-        )}
-        {!canDonate && currentUser ? (
-          <ContributionSection />
-        ) : (
-          <Text style={S.title}>{t("title")}</Text>
-        )}
+          {renderNotificationCard()}
+          {shouldShowIntegrationBanner && (
+            <IntegrationBanner integration={integration} />
+          )}
+          {donatedToday && currentUser ? (
+            <ContributionSection />
+          ) : (
+            <Text style={S.title}>{t("title")}</Text>
+          )}
 
-        <ScrollView
-          style={S.groupButtonsContainer}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        >
-          <GroupButtons
-            elements={causesFilter()}
-            onChange={handleCauseChange}
-            nameExtractor={(cause) => cause.name}
-            indexSelected={chosenCauseIndex}
-          />
-        </ScrollView>
-      </View>
-
-      {sortNonProfits()?.length > 0 ? (
-        <ScrollView
-          style={S.causesContainer}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          ref={scrollViewRef}
-        >
-          {sortNonProfits()?.map((nonProfit, index) => (
-            <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
-              <CardCenterImageButton
-                image={nonProfit.mainImage}
-                infoTextTop={nonProfit.name}
-                infoTextBottom={nonProfit.cause.name}
-                imageDescription={formattedImpactText(
-                  nonProfit,
-                  undefined,
-                  false,
-                  false,
-                  undefined,
-                  t("impactPrefix") || "",
-                )}
-                buttonText={hasTickets() ? t("buttonText") : t("noTickets")}
-                onImagePress={() => {
-                  handleNonProfitImagePress(nonProfit);
-                }}
-                onClickButton={() => handleButtonPress(nonProfit)}
-                buttonDisabled={!hasTickets()}
-                labelText={t("labelText") || ""}
-              />
-            </View>
-          ))}
-        </ScrollView>
-      ) : (
-        <View style={S.noCausesContainer}>
-          <ZeroDonationsSection
-            title={t("noCauses.title")}
-            onButtonPress={navigateToPromotersScreen}
-            description={t("noCauses.text")}
-            buttonText={t("noCauses.button")}
-            image={<ImpactDonationsVector />}
-          />
+          <ScrollView
+            style={S.groupButtonsContainer}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            <GroupButtons
+              elements={causesFilter()}
+              onChange={handleCauseChange}
+              nameExtractor={(cause) => cause.name}
+              indexSelected={chosenCauseIndex}
+            />
+          </ScrollView>
         </View>
-      )}
 
-      <Tooltip tooltipText={t("ticketExplanation")}>
-        <View style={S.ticketExplanationSection}>
-          <Icon
-            type="rounded"
-            name="help"
-            size={20}
-            color={theme.colors.gray30}
-          />
-          <View style={{ overflow: "hidden" }}>
-            <View style={S.ticketTextContainer}>
-              <Text style={S.ticketText}>{t("whatIsATicket")}</Text>
+        {sortNonProfits()?.length > 0 ? (
+          <ScrollView
+            style={S.causesContainer}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ref={scrollViewRef}
+          >
+            {sortNonProfits()?.map((nonProfit, index) => (
+              <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
+                <CardCenterImageButton
+                  image={nonProfit.mainImage}
+                  infoTextTop={nonProfit.name}
+                  infoTextBottom={nonProfit.cause.name}
+                  imageDescription={formattedImpactText(
+                    nonProfit,
+                    undefined,
+                    false,
+                    false,
+                    undefined,
+                    t("impactPrefix") || "",
+                  )}
+                  buttonText={hasTickets ? t("buttonText") : t("noTickets")}
+                  onImagePress={() => {
+                    handleNonProfitImagePress(nonProfit);
+                  }}
+                  onClickButton={() => handleButtonPress(nonProfit)}
+                  buttonDisabled={!hasTickets}
+                  labelText={t("labelText") || ""}
+                />
+              </View>
+            ))}
+          </ScrollView>
+        ) : (
+          <View style={S.noCausesContainer}>
+            <ZeroDonationsSection
+              title={t("noCauses.title")}
+              onButtonPress={navigateToPromotersScreen}
+              description={t("noCauses.text")}
+              buttonText={t("noCauses.button")}
+              image={<ImpactDonationsVector />}
+            />
+          </View>
+        )}
+
+        <Tooltip tooltipText={t("ticketExplanation")}>
+          <View style={S.ticketExplanationSection}>
+            <Icon
+              type="rounded"
+              name="help"
+              size={20}
+              color={theme.colors.gray30}
+            />
+            <View style={{ overflow: "hidden" }}>
+              <View style={S.ticketTextContainer}>
+                <Text style={S.ticketText}>{t("whatIsATicket")}</Text>
+              </View>
             </View>
           </View>
-        </View>
-      </Tooltip>
+        </Tooltip>
 
-      <View style={S.supportContainer}>
-        <UserSupportBanner from="donateTickets_page" />
-      </View>
-    </ScrollView>
+        <View style={S.supportContainer}>
+          <UserSupportBanner from="donateTickets_page" />
+        </View>
+      </ScrollView>
+      <DonationErrorModal newState={params?.newState} />
+    </>
   );
 }

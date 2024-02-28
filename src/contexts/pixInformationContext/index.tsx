@@ -15,6 +15,7 @@ import { useIntegrationContext } from "contexts/integrationContext";
 import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import { useTasksContext } from "contexts/tasksContext";
+import { logEvent } from "services/analytics";
 
 export interface IPixPaymentInformationContext {
   buttonDisabled: boolean;
@@ -121,6 +122,19 @@ function PixPaymentInformationProvider({ children }: Props) {
         setPixInstructions(undefined);
         setClientSecret(undefined);
         registerAction("contribution_done_screen_view");
+        if (flow === "nonProfit") {
+          logEvent("ngoGave_end", {
+            nonProfitId: nonProfit?.id,
+            offerId: offer?.id,
+            source: "pix",
+          });
+        } else {
+          logEvent("causeGave_end", {
+            causeId: cause?.id,
+            offerId: offer?.id,
+            source: "pix",
+          });
+        }
         navigateTo("ContributionDoneScreen", {
           hasButton: true,
           offerId: offer?.id ?? 0,

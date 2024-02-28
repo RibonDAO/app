@@ -2,7 +2,7 @@ import TransferTicketAnimation from "components/moleculars/TransferTicketAnimati
 import UserIcon from "components/vectors/UserIcon";
 import Image from "components/atomics/Image";
 import { View } from "react-native";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NonProfit } from "@ribon.io/shared/types";
 import TopMountainShapes from "components/vectors/TopMountainShapes";
@@ -13,8 +13,13 @@ import S from "./styles";
 type Props = {
   nonProfit: NonProfit;
   onAnimationEnd: () => void;
+  shouldRepeatAnimation: boolean;
 };
-function DonationInProgressSection({ nonProfit, onAnimationEnd }: Props) {
+function DonationInProgressSection({
+  nonProfit,
+  onAnimationEnd,
+  shouldRepeatAnimation,
+}: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donateScreen",
   });
@@ -35,6 +40,7 @@ function DonationInProgressSection({ nonProfit, onAnimationEnd }: Props) {
       <TopMountainShapes />
       <View style={S.centerContainer}>
         <TransferTicketAnimation
+          shouldRepeat={shouldRepeatAnimation}
           onAnimationEnd={onAnimationEnd}
           senderIcon={
             profile?.photo ? (

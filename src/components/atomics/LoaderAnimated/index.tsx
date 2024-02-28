@@ -1,6 +1,7 @@
 import { StyleProp } from "react-native";
 import LottieAnimation from "../LottieAnimation";
 import animationData from "./loader.json";
+import * as S from "./styles";
 
 export type Props = {
   width: number;
@@ -16,13 +17,15 @@ function LoaderAnimated({
   speed = 1,
 }: Props): JSX.Element {
   return (
-    <LottieAnimation
-      animationData={animationData}
-      style={{ ...style }}
-      height={height}
-      width={width}
-      speed={speed}
-    />
+    <S.Container>
+      <LottieAnimation
+        animationData={animationData}
+        style={{ ...style }}
+        height={height}
+        width={width}
+        speed={speed}
+      />
+    </S.Container>
   );
 }
 

@@ -4,9 +4,18 @@ import UserIcon from "components/vectors/UserIcon";
 import { useNavigation } from "hooks/useNavigation";
 import { View, Text, ImageBackground, Image } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useUserProfile } from "@ribon.io/shared/hooks";
-import topBackground from "./assets/topBackground.png";
+import { useTickets, useUserProfile } from "@ribon.io/shared/hooks";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { useAuthentication } from "contexts/authenticationContext";
+import { useIntegrationContext } from "contexts/integrationContext";
+import { PLATFORM } from "utils/constants/Application";
+import {
+  DONATION_TOAST_INTEGRATION,
+  DONATION_TOAST_SEEN_AT_KEY,
+} from "lib/localStorage/constants";
+import { RIBON_COMPANY_ID, setLocalStorageItem } from "@ribon.io/shared";
 import S from "./styles";
+import topBackground from "./assets/topBackground.png";
 
 function ReceiveTicketScreen(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -17,15 +26,37 @@ function ReceiveTicketScreen(): JSX.Element {
   const { userProfile } = useUserProfile();
   const { profile } = userProfile();
 
+  const { currentUser } = useCurrentUser();
+  const { isAuthenticated } = useAuthentication();
+  const { currentIntegrationId } = useIntegrationContext();
+  const { collectByIntegration } = useTickets();
+
+  const navigate = () => {
+    setTimeout(() => {
+      if (isAuthenticated()) {
+        collectByIntegration(
+          currentIntegrationId ?? "",
+          PLATFORM,
+          currentUser?.email ?? "",
+        );
+      }
+      setLocalStorageItem(DONATION_TOAST_SEEN_AT_KEY, Date.now().toString());
+      setLocalStorageItem(
+        DONATION_TOAST_INTEGRATION,
+        (currentIntegrationId ?? RIBON_COMPANY_ID).toString(),
+      );
+      navigateTo("CausesScreen");
+    }, 3000);
+  };
+
   return (
     <View style={S.container}>
       <ImageBackground source={topBackground} style={S.topBackground}>
         <View style={S.animationContainer}>
           <TransferTicketAnimation
+            shouldRepeat={false}
             onAnimationEnd={() => {
-              setTimeout(() => {
-                navigateTo("CausesScreen");
-              }, 500);
+              navigate();
             }}
             senderIcon={<SupportersIcon />}
             receiverIcon={

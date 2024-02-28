@@ -15,6 +15,7 @@ export const API_SCOPE = "/users/v1";
 export type InitializeApiProps = {
   email: string;
   language: "pt-BR" | "en";
+  platform: "app";
 };
 
 async function requestNewToken() {
@@ -35,7 +36,11 @@ async function requestNewToken() {
   }
 }
 
-export function initializeApi({ language, email }: InitializeApiProps) {
+export function initializeApi({
+  language,
+  email,
+  platform,
+}: InitializeApiProps) {
   // TODO update this to use the useLanguage hook / localstorage when it's available
 
   authenticationApi.interceptors.request.use(async (config) => {
@@ -47,6 +52,7 @@ export function initializeApi({ language, email }: InitializeApiProps) {
       Authorization: `Bearer ${accessToken}`,
       Email: email,
       Language: language,
+      Platform: platform,
     };
     // eslint-disable-next-line
     config.headers = { ...authHeaders, ...config.headers };

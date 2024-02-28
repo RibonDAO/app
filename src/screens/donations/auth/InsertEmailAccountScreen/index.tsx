@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import { isValidEmail } from "lib/validators";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import InputText from "components/atomics/inputs/InputText";
 import Image from "components/atomics/Image";
@@ -19,10 +19,7 @@ import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayo
 import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { useRouteParams } from "hooks/useRouteParams";
-import { setLocalStorageItem, theme } from "@ribon.io/shared";
-import { showToast } from "lib/Toast";
-import { useTickets } from "contexts/ticketsContext";
-import { ALREADY_RECEIVED_TICKET_KEY } from "screens/donations/CausesScreen/TicketSection";
+import { theme } from "@ribon.io/shared";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
 import DonationInProgressSection from "../DonationInProgressSection";
@@ -39,13 +36,13 @@ function InsertEmailAccountScreen() {
   const [email, setEmail] = useState("");
 
   const { sendAuthenticationEmail } = useAuthentication();
-  const { handleDonate } = useDonationFlow();
+  const { handleCollectAndDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
-  const { setTickets } = useTickets();
 
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(false);
+  const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
 
   const onContinue = () => {
     setIsDonating(true);
@@ -54,24 +51,19 @@ function InsertEmailAccountScreen() {
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
-    setLocalStorageItem(ALREADY_RECEIVED_TICKET_KEY, "false");
+    setShouldRepeatAnimation(false);
     logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
   };
 
-  const onDonationFail = (error: any) => {
+  const onDonationFail = () => {
     setDonationSucceeded(false);
-    setTickets(0);
+    setShouldRepeatAnimation(false);
 
-    showToast({
-      type: "error",
-      message: error?.response?.data?.formatted_message || t("donationError"),
-    });
     navigateTo("CausesScreen", { newState: { failedDonation: true } });
   };
 
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
-      setTickets(0);
       navigateTo("DonationDoneScreen", { nonProfit, flow: "magicLink" });
     } else {
       const newState = {
@@ -84,11 +76,11 @@ function InsertEmailAccountScreen() {
 
   async function donateCallback() {
     await sendAuthenticationEmail({ email });
-    await handleDonate({
+    await handleCollectAndDonate({
       nonProfit,
       email,
-      onError: onDonationFail,
-      onSuccess: onDonationSuccess,
+      onError: () => onDonationFail(),
+      onSuccess: () => onDonationSuccess(),
     });
   }
 
@@ -123,6 +115,7 @@ function InsertEmailAccountScreen() {
         <DonationInProgressSection
           nonProfit={nonProfit}
           onAnimationEnd={onAnimationEnd}
+          shouldRepeatAnimation={shouldRepeatAnimation}
         />
       ) : (
         <KeyboardAvoidingView

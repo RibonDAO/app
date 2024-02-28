@@ -1,11 +1,15 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useTickets } from "@ribon.io/shared/hooks";
+import { useAuthentication } from "contexts/authenticationContext";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { useIntegrationContext } from "contexts/integrationContext";
+import { logError } from "services/crashReport";
 
 export interface ITicketsContext {
-  tickets: number;
-  addTicket: (ticketsNumber?: number) => void;
-  removeTicket: (ticketsNumber?: number) => void;
-  setTickets: (tickets: number) => void;
-  hasTickets: () => boolean;
+  ticketsCounter: number;
+  setTicketsCounter: (tickets: number) => void;
+  refetchTickets: () => void;
+  hasTickets: boolean;
 }
 
 export type Props = {
@@ -17,27 +21,49 @@ export const TicketsContext = createContext<ITicketsContext>(
 );
 
 function TicketsProvider({ children }: Props) {
-  const [tickets, setTickets] = useState(0);
+  const { ticketsAvailable } = useTickets();
+  const { tickets: userTickets, refetch } = ticketsAvailable();
+  const { currentIntegrationId } = useIntegrationContext();
+  const { isAuthenticated } = useAuthentication();
+  const { currentUser } = useCurrentUser();
+  const [ticketsCounter, setTicketsCounter] = useState<number>(1);
 
-  const addTicket = (ticketsNumber = 1) => {
-    setTickets(tickets + ticketsNumber);
-  };
+  const hasTickets = ticketsCounter > 0;
 
-  const removeTicket = (ticketsNumber = 1) => {
-    setTickets(tickets - ticketsNumber);
-  };
+  function updateTicketsCounterForLoggedInUser() {
+    if (userTickets !== undefined) {
+      setTicketsCounter(userTickets);
+    }
+  }
+  function updateTicketsCounterForNotLoggedInUser() {
+    try {
+      if (!currentUser) {
+        setTicketsCounter(1);
+      } else if (userTickets !== undefined) {
+        setTicketsCounter(userTickets);
+      }
+    } catch (error) {
+      logError(error);
+    }
+  }
 
-  const hasTickets = () => tickets > 0;
+  useEffect(() => {
+    updateTicketsCounterForLoggedInUser();
+  }, [userTickets]);
+
+  useEffect(() => {
+    refetch();
+    updateTicketsCounterForNotLoggedInUser();
+  }, [currentIntegrationId, currentUser]);
 
   const ticketsObject: ITicketsContext = useMemo(
     () => ({
-      tickets,
-      addTicket,
-      removeTicket,
-      setTickets,
+      ticketsCounter,
+      setTicketsCounter,
       hasTickets,
+      refetchTickets: refetch,
     }),
-    [tickets],
+    [ticketsCounter, currentIntegrationId, isAuthenticated, userTickets],
   );
 
   return (
@@ -49,11 +75,11 @@ function TicketsProvider({ children }: Props) {
 
 export default TicketsProvider;
 
-export const useTickets = () => {
+export const useTicketsContext = () => {
   const context = useContext(TicketsContext);
 
   if (!context) {
-    throw new Error("useTickets must be used within TicketsProvider");
+    throw new Error("useTicketsContext must be used within TicketsProvider");
   }
 
   return context;
