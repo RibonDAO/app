@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, TouchableOpacity } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity, Image } from "react-native";
 import usePageView from "hooks/usePageView";
 
 import Button from "components/atomics/buttons/Button";
@@ -18,6 +18,7 @@ import PixIcon from "./assets/PixIcon";
 import BenefitsSection from "./components/BenefitsSection";
 import Header from "./Header";
 import LeftSun from "./assets/left-sun.png";
+import PinkCircle from "./assets/pink-circle.png";
 
 function ClubScreen(): JSX.Element {
   usePageView("P23_view");
@@ -67,7 +68,12 @@ function ClubScreen(): JSX.Element {
         <View style={S.innerContainer}>
           <Header />
           <Text style={S.title}>{currentTab.title}</Text>
-
+          <Image
+            source={PinkCircle}
+            resizeMode="stretch"
+            style={S.circle}
+            accessibilityIgnoresInvertColors
+          />
           {currentTab.component}
 
           <View style={S.footer}>

@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: theme.spacingNative(24),
     marginBottom: theme.spacingNative(98),
+    width: "100%",
   },
   cardsContainer: {
     display: "flex",
@@ -60,8 +61,14 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   supportBanner: {
-    marginBottom: 98,
+    marginBottom: 124,
     width: "100%",
+  },
+  circle: {
+    position: "absolute",
+    bottom: -120,
+    left: -16,
+    width: "108%",
   },
 });
 
