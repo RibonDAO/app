@@ -34,7 +34,7 @@ function ClubScreen(): JSX.Element {
     {
       title: t("benefitsSection.title"),
       component: <BenefitsSection />,
-      handleBack: () => navigateTo("PromotersScreen"),
+      handleBack: () => navigateTo("CausesScreen"),
       handleNext: () => setTabIndex(tabIndex + 1),
       buttonText: t("benefitsSection.buttonText"),
     },
