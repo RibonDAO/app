@@ -1,28 +1,28 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import { stylizedDisplayMd } from "styles/typography/stylized";
 import { defaultBodySmMedium } from "styles/typography/default";
 
 const styles = StyleSheet.create({
-  outerContainer: {
-    height: "100%",
-  },
   container: {
-    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
     padding: theme.spacingNative(16),
-    backgroundColor: theme.colors.brand.tertiary[50],
-  },
-  keyboardView: {
-    height:
-      Platform.OS === "android" ? Dimensions.get("window").height : "100%",
   },
   donateButtonContainer: {
-    marginTop: theme.spacingNative(24),
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    display: "flex",
     backgroundColor: theme.colors.neutral10,
     padding: theme.spacingNative(16),
-    marginHorizontal: -theme.spacingNative(16),
   },
-  innerContainer: {},
+  innerContainer: {
+    position: "relative",
+    backgroundColor: theme.colors.brand.tertiary[50],
+    width: "100%",
+  },
   donateButton: {
     height: 48,
   },

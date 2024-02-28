@@ -1,13 +1,4 @@
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  TouchableWithoutFeedback,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import usePageView from "hooks/usePageView";
 
 import Button from "components/atomics/buttons/Button";
@@ -59,62 +50,52 @@ function ClubScreen(): JSX.Element {
   ];
 
   return (
-    <KeyboardAvoidingView
-      behavior="position"
-      style={S.keyboardView}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -20}
-    >
-      <TouchableWithoutFeedback
-        accessibilityRole="button"
-        onPress={Keyboard.dismiss}
-        style={S.outerContainer}
-      >
-        <ScrollView style={S.container}>
-          <View style={S.arrow}>
-            <TouchableOpacity
-              accessibilityRole="button"
-              onPress={tabs[currentTab].handleBack}
-              testID="arrow-back-button"
-            >
-              <ArrowLeft color={theme.colors.brand.tertiary[800]} />
-            </TouchableOpacity>
-          </View>
-          <View style={S.innerContainer}>
-            <Header />
-            <Text style={S.title}>{tabs[currentTab].title}</Text>
+    <View style={S.innerContainer}>
+      <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
+        <View style={S.arrow}>
+          <TouchableOpacity
+            accessibilityRole="button"
+            onPress={tabs[currentTab].handleBack}
+            testID="arrow-back-button"
+          >
+            <ArrowLeft color={theme.colors.brand.tertiary[800]} />
+          </TouchableOpacity>
+        </View>
+        <View style={S.innerContainer}>
+          <Header />
+          <Text style={S.title}>{tabs[currentTab].title}</Text>
 
-            {tabs[currentTab].component}
+          {tabs[currentTab].component}
 
-            <View style={S.footer}>
-              <Text style={S.subtitle}>{t("subtitle")}</Text>
-              <View style={S.cardsContainer}>
-                <VisaIcon />
-                <MasterCardIcon />
-                <AmexIcon />
-                <PixIcon />
-                <AppleIcon />
-                <GoogleIcon />
-              </View>
+          <View style={S.footer}>
+            <Text style={S.subtitle}>{t("subtitle")}</Text>
+            <View style={S.cardsContainer}>
+              <VisaIcon />
+              <MasterCardIcon />
+              <AmexIcon />
+              <PixIcon />
+              <AppleIcon />
+              <GoogleIcon />
             </View>
-            <UserSupportBanner
-              from="ribon-club"
-              title={t("userSupportBannerTitle") ?? ""}
-              description={t("userSupportBannerDescription") ?? ""}
-              backgroundColor={theme.colors.brand.tertiary[25]}
-            />
           </View>
-          <View style={S.donateButtonContainer}>
-            <Button
-              text={tabs[currentTab].buttonText}
-              onPress={tabs[currentTab].handleNext}
-              backgroundColor={theme.colors.brand.tertiary[600]}
-              borderColor={theme.colors.brand.tertiary[600]}
-              textColor={theme.colors.neutral10}
-            />
-          </View>
-        </ScrollView>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+          <UserSupportBanner
+            from="ribon-club"
+            title={t("userSupportBannerTitle") ?? ""}
+            description={t("userSupportBannerDescription") ?? ""}
+            backgroundColor={theme.colors.brand.tertiary[25]}
+          />
+        </View>
+      </ScrollView>
+      <View style={S.donateButtonContainer}>
+        <Button
+          text={tabs[currentTab].buttonText}
+          onPress={tabs[currentTab].handleNext}
+          backgroundColor={theme.colors.brand.tertiary[600]}
+          borderColor={theme.colors.brand.tertiary[600]}
+          textColor={theme.colors.neutral10}
+        />
+      </View>
+    </View>
   );
 }
 
