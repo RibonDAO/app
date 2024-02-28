@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignSelf: "center",
-    marginBottom: theme.spacingNative(40),
+    marginBottom: theme.spacingNative(12),
   },
   tag: {
     backgroundColor: theme.colors.brand.tertiary[25],

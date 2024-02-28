@@ -21,7 +21,7 @@ import Header from "./Header";
 function ClubScreen(): JSX.Element {
   usePageView("P23_view");
 
-  const [currentTab, setCurrentTab] = useState(0);
+  const [tabIndex, setTabIndex] = useState(0);
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.clubScreen",
@@ -33,7 +33,7 @@ function ClubScreen(): JSX.Element {
       title: t("benefitsSection.title"),
       component: <BenefitsSection />,
       handleBack: () => navigateTo("PromotersScreen"),
-      handleNext: () => setCurrentTab(currentTab + 1),
+      handleNext: () => setTabIndex(tabIndex + 1),
       buttonText: t("benefitsSection.buttonText"),
     },
     {
@@ -43,11 +43,13 @@ function ClubScreen(): JSX.Element {
           <Text>texto</Text>
         </View>
       ),
-      handleBack: () => setCurrentTab(currentTab - 1),
-      handleNext: () => setCurrentTab(currentTab - 1),
+      handleBack: () => setTabIndex(tabIndex - 1),
+      handleNext: () => setTabIndex(tabIndex - 1),
       buttonText: t("benefitsSection.buttonText"),
     },
   ];
+
+  const currentTab = tabs[tabIndex];
 
   return (
     <View style={S.innerContainer}>
@@ -55,7 +57,7 @@ function ClubScreen(): JSX.Element {
         <View style={S.arrow}>
           <TouchableOpacity
             accessibilityRole="button"
-            onPress={tabs[currentTab].handleBack}
+            onPress={currentTab.handleBack}
             testID="arrow-back-button"
           >
             <ArrowLeft color={theme.colors.brand.tertiary[800]} />
@@ -63,9 +65,9 @@ function ClubScreen(): JSX.Element {
         </View>
         <View style={S.innerContainer}>
           <Header />
-          <Text style={S.title}>{tabs[currentTab].title}</Text>
+          <Text style={S.title}>{currentTab.title}</Text>
 
-          {tabs[currentTab].component}
+          {currentTab.component}
 
           <View style={S.footer}>
             <Text style={S.subtitle}>{t("subtitle")}</Text>
@@ -77,19 +79,21 @@ function ClubScreen(): JSX.Element {
               <AppleIcon />
               <GoogleIcon />
             </View>
+            <View style={S.supportBanner}>
+              <UserSupportBanner
+                from="ribon-club"
+                title={t("userSupportBannerTitle") ?? ""}
+                description={t("userSupportBannerDescription") ?? ""}
+                backgroundColor={theme.colors.brand.tertiary[25]}
+              />
+            </View>
           </View>
-          <UserSupportBanner
-            from="ribon-club"
-            title={t("userSupportBannerTitle") ?? ""}
-            description={t("userSupportBannerDescription") ?? ""}
-            backgroundColor={theme.colors.brand.tertiary[25]}
-          />
         </View>
       </ScrollView>
       <View style={S.donateButtonContainer}>
         <Button
-          text={tabs[currentTab].buttonText}
-          onPress={tabs[currentTab].handleNext}
+          text={currentTab.buttonText}
+          onPress={currentTab.handleNext}
           backgroundColor={theme.colors.brand.tertiary[600]}
           borderColor={theme.colors.brand.tertiary[600]}
           textColor={theme.colors.neutral10}

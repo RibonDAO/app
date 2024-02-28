@@ -35,21 +35,20 @@ function Header(): JSX.Element {
   );
   return (
     <View style={S.container}>
-      <View style={S.sparkles}>
-        <Sparkles />
-      </View>
-
       {currentUser && newProfile ? (
         <UserAvatar
           userAvatar={newProfile?.photo}
           email={
             newProfile?.user?.email ? newProfile.user.email : currentUser?.email
           }
+          showInfo={false}
         />
       ) : (
         <RibonFlag />
       )}
-
+      <View style={S.sparkles}>
+        <Sparkles />
+      </View>
       <View style={S.textContainer}>
         <View style={S.tag}>
           <Text style={S.text}>{t("ribonClub")}</Text>

@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.brand.tertiary[50],
     width: "100%",
   },
+
   donateButton: {
     height: 48,
   },
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
     ...stylizedDisplayMd,
     color: theme.colors.neutral[800],
     textAlign: "center",
+    marginBottom: theme.spacingNative(40),
   },
   subtitle: {
     ...defaultBodySmMedium,
@@ -41,6 +43,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: theme.spacingNative(24),
+    marginBottom: theme.spacingNative(98),
   },
   cardsContainer: {
     display: "flex",
@@ -49,13 +52,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexWrap: "wrap-reverse",
-    width: "100%",
     gap: 18,
     marginBottom: theme.spacingNative(24),
   },
   arrow: {
     padding: theme.spacingNative(16),
     alignSelf: "flex-start",
+  },
+  supportBanner: {
+    marginBottom: 98,
+    width: "100%",
   },
 });
 

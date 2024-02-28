@@ -13,12 +13,14 @@ type Props = {
   title?: string;
   description?: string;
   backgroundColor?: string;
+  cardBackground?: any;
 };
 function UserSupportBanner({
   from,
   title,
   description,
   backgroundColor,
+  cardBackground,
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "userSupportBanner",
@@ -49,7 +51,7 @@ function UserSupportBanner({
           size: 24,
         }}
         withCircle
-        cardBackground={RibonSunLeft}
+        cardBackground={cardBackground ?? RibonSunLeft}
         textColor={theme.colors.neutral[900]}
         backgroundColor={backgroundColor ?? theme.colors.brand.secondary[100]}
         arrowLinkColor={theme.colors.brand.secondary[900]}
