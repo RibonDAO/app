@@ -367,6 +367,12 @@
         "closeButton": "Close",
         "sendEmail": "We sent you an e-mail"
       }
+    },
+    "clubContributionDoneScreen": {
+      "title": "Welcome!",
+      "buttonText": "Finish",
+      "description": "Now you’re part of Ribon Club",
+      "highlightedDescription": "Enjoy your extra tickets"
     }
   },
   "users": {
