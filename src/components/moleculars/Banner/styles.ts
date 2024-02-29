@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   arrowContainer: {
     display: "flex",
     flexDirection: "row",
-    marginLeft: theme.spacingNative(16),
   },
   textContainer: {
     display: "flex",
