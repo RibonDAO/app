@@ -85,7 +85,9 @@ function ClubScreen(): JSX.Element {
             </View>
             <View style={S.supportBanner}>
               <UserSupportBanner
-                from="ribon-club"
+                from={
+                  tabIndex === 0 ? "clubDescription_page" : "clubPlans_page"
+                }
                 title={t("userSupportBannerTitle") ?? ""}
                 description={t("userSupportBannerDescription") ?? ""}
                 backgroundColor={theme.colors.brand.tertiary[25]}
