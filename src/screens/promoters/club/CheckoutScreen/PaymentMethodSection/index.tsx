@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
 import { useOffers } from "@ribon.io/shared/hooks";
-import { Currencies, Offer } from "@ribon.io/shared/types";
+import { Categories, Currencies, Offer } from "@ribon.io/shared/types";
 import { useEffect, useState } from "react";
 import { useStripeContext } from "contexts/stripeContext";
 import { useRouteParams } from "hooks/useRouteParams";
@@ -56,6 +56,7 @@ export default function PaymentMethodSection() {
   } = useOffers(
     Currencies[currency?.toUpperCase() as keyof typeof Currencies],
     isSubscription,
+    Categories.CLUB,
   );
 
   const resetOffer = () => {
