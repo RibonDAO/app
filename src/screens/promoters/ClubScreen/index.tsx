@@ -21,7 +21,7 @@ import LeftSun from "./assets/left-sun.png";
 import PinkCircle from "./assets/pink-circle.png";
 
 function ClubScreen(): JSX.Element {
-  usePageView("P23_view");
+  usePageView("P32_view");
 
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -88,7 +88,7 @@ function ClubScreen(): JSX.Element {
             </View>
             <View style={S.supportBanner}>
               <UserSupportBanner
-                from="ribon-club"
+                from="clubDescription_page"
                 title={t("userSupportBannerTitle") ?? ""}
                 description={t("userSupportBannerDescription") ?? ""}
                 backgroundColor={theme.colors.brand.tertiary[25]}

@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    width: "90%",
   },
   circle: {
     width: 36,
