@@ -21,7 +21,7 @@ import PurchaseSection from "./components/PurchaseSection";
 import LeftSun from "./assets/left-sun.png";
 
 function ClubScreen(): JSX.Element {
-  usePageView("P23_view");
+  usePageView("P32_view");
 
   const [tabIndex, setTabIndex] = useState(0);
 
