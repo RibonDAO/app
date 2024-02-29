@@ -367,6 +367,16 @@
         "closeButton": "Close",
         "sendEmail": "We sent you an e-mail"
       }
+    },
+    "clubScreen": {
+      "purchaseSection": {
+        "title": "Escolha a melhor forma de espalhar seu amor diário",
+        "buttonText": "Ir para pagamento",
+        "firstDescription": "{{dailyTickets}} extra tickets every day",
+        "secondDescription": "Monthly {{monthlyTickets}} tickets package",
+        "recurrenceMonthly": "mês",
+        "recurrenceDaily": "ano"
+      }
     }
   },
   "users": {

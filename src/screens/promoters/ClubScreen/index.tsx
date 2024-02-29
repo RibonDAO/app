@@ -26,6 +26,7 @@ import AmexIcon from "./assets/AmexIcon";
 import PixIcon from "./assets/PixIcon";
 import BenefitsSection from "./components/BenefitsSection";
 import Header from "./Header";
+import PurchaseSection from "./components/PurchaseSection";
 
 function ClubScreen(): JSX.Element {
   usePageView("P23_view");
@@ -37,6 +38,7 @@ function ClubScreen(): JSX.Element {
   });
 
   const { navigateTo } = useNavigation();
+
   const tabs = [
     {
       title: t("benefitsSection.title"),
@@ -46,12 +48,8 @@ function ClubScreen(): JSX.Element {
       buttonText: t("benefitsSection.buttonText"),
     },
     {
-      title: "Forma de pagamento",
-      component: (
-        <View>
-          <Text>texto</Text>
-        </View>
-      ),
+      title: t("purchaseSection.title"),
+      component: <PurchaseSection />,
       handleBack: () => setCurrentTab(currentTab - 1),
       handleNext: () => setCurrentTab(currentTab - 1),
       buttonText: t("benefitsSection.buttonText"),

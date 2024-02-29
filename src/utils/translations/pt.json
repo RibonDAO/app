@@ -381,6 +381,14 @@
       },
       "depoimentsSection": {
         "title": "O que falam da gente"
+      },
+      "purchaseSection": {
+        "title": "Escolha a melhor forma de espalhar seu amor diário",
+        "buttonText": "Ir para pagamento",
+        "firstDescription": "{{dailyTickets}} tickets extras por dia",
+        "secondDescription": "Pacote de {{monthlyTickets}} tickets todo mês",
+        "recurrenceMonthly": "mês",
+        "recurrenceDaily": "ano"
       }
     }
   },
