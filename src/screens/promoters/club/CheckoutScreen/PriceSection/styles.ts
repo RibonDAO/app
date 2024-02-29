@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodySmSemibold } from "styles/typography/default";
+import {
+  defaultBodySmMedium,
+  defaultBodySmSemibold,
+} from "styles/typography/default";
 import { stylizedDisplayMd } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
@@ -22,7 +25,7 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacingNative(8),
   },
   title: {
-    ...defaultBodySmSemibold,
+    ...defaultBodySmMedium,
   },
   receiver: {
     ...defaultBodySmSemibold,
