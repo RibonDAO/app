@@ -390,7 +390,8 @@
         "firstDescription": "{{dailyTickets}} tickets extras por dia",
         "secondDescription": "Pacote de {{monthlyTickets}} tickets todo mês",
         "recurrenceMonthly": "mês",
-        "recurrenceDaily": "ano"
+        "recurrenceDaily": "ano",
+        "tagText": "Mais popular"
       }
     }
   },

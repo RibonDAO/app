@@ -7,8 +7,14 @@ import { useLanguage } from "contexts/languageContext";
 import { Categories, Currencies } from "@ribon.io/shared/types";
 import { useEffect, useState } from "react";
 import { formatPrice } from "lib/formatters/currencyFormatter";
+import LoaderAnimated from "components/atomics/LoaderAnimated";
+import S from "./styles";
 
-function PurchaseSection(): JSX.Element {
+type Props = {
+  setCurrentOffer: (element: any) => void;
+};
+
+function PurchaseSection({ setCurrentOffer }: Props): JSX.Element {
   usePageView("P33_view");
 
   const { t } = useTranslation("translation", {
@@ -17,12 +23,13 @@ function PurchaseSection(): JSX.Element {
   const { currentLang } = useLanguage();
 
   const [currency, setCurrency] = useState<Currencies>(Currencies.BRL);
+  const [currentElement, setCurrentElement] = useState(0);
 
-  const { offers, refetch: refetchOffers } = useOffers(
-    currency,
-    true,
-    Categories.CLUB,
-  );
+  const {
+    offers,
+    isLoading,
+    refetch: refetchOffers,
+  } = useOffers(currency, true, Categories.CLUB);
 
   useEffect(() => {
     setCurrency(currentLang === "pt-BR" ? Currencies.BRL : Currencies.USD);
@@ -32,24 +39,47 @@ function PurchaseSection(): JSX.Element {
     refetchOffers();
   }, [currency]);
 
+  useEffect(() => {
+    setCurrentOffer(offers[currentElement]);
+  }, [currentElement]);
+
+  const middleElementIndex = Math.floor(offers.length / 2);
+
   const cardsElements = offers.map((offer) => ({
     firstDescription: t("firstDescription", {
-      dailyTickets: offer.plan?.dailyTickets,
+      dailyTickets: offer?.plan?.dailyTickets,
     }),
     firstIconName: "confirmation_number",
     secondDescription: t("secondDescription", {
-      ribons: offer.plan?.monthlyTickets,
+      monthlyTickets: offer?.plan?.monthlyTickets,
     }),
-    secondIconName: "confirmation_number",
-    value: formatPrice(offer.priceValue, offer.currency),
-    recurrence: t("monthly"),
+    secondIconName: "inventory_2",
+    value: formatPrice(offer?.priceValue, offer.currency),
+    recurrence: t("recurrenceMonthly"),
+    tagText: offers[middleElementIndex] === offer ? t("tagText") : undefined,
   }));
 
-  return (
-    <View>
-      <GroupCardsCheckbox elements={cardsElements} />
-    </View>
-  );
+  function renderLoadingAnimation() {
+    return (
+      <View style={S.loaderContainer}>
+        <LoaderAnimated width={160} height={160} speed={1.5} />
+      </View>
+    );
+  }
+
+  function renderGroupCardsCheckbox(): JSX.Element {
+    return isLoading ? (
+      renderLoadingAnimation()
+    ) : (
+      <GroupCardsCheckbox
+        elements={cardsElements}
+        setCurrentElement={setCurrentElement}
+        indexSelected={middleElementIndex}
+      />
+    );
+  }
+
+  return renderGroupCardsCheckbox();
 }
 
 export default PurchaseSection;

@@ -1,13 +1,13 @@
-import { ScrollView, View, Text, TouchableOpacity, Image } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import usePageView from "hooks/usePageView";
-
 import Button from "components/atomics/buttons/Button";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import { useState } from "react";
-import { theme } from "@ribon.io/shared";
+import { Offer, theme } from "@ribon.io/shared";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
+import { logEvent } from "services/analytics";
 import AppleIcon from "./assets/AppleIcon";
 import GoogleIcon from "./assets/GoogleIcon";
 import S from "./styles";
@@ -19,7 +19,6 @@ import BenefitsSection from "./components/BenefitsSection";
 import Header from "./Header";
 import PurchaseSection from "./components/PurchaseSection";
 import LeftSun from "./assets/left-sun.png";
-import PinkCircle from "./assets/pink-circle.png";
 
 function ClubScreen(): JSX.Element {
   usePageView("P23_view");
@@ -31,6 +30,7 @@ function ClubScreen(): JSX.Element {
   });
 
   const { navigateTo } = useNavigation();
+  const [offer, setOffer] = useState<Offer>();
 
   const tabs = [
     {
@@ -42,10 +42,15 @@ function ClubScreen(): JSX.Element {
     },
     {
       title: t("purchaseSection.title"),
-      component: <PurchaseSection />,
+      component: <PurchaseSection setCurrentOffer={setOffer} />,
       handleBack: () => setTabIndex(tabIndex - 1),
-      handleNext: () => setTabIndex(tabIndex - 1),
-      buttonText: t("benefitsSection.buttonText"),
+      handleNext: () => {
+        logEvent("giveClubBtn_start", {
+          from: "clubPlans_page",
+        });
+        navigateTo("ClubCheckoutScreen", { offer, currency: offer?.currency });
+      },
+      buttonText: t("purchaseSection.buttonText"),
     },
   ];
 
@@ -66,12 +71,6 @@ function ClubScreen(): JSX.Element {
         <View style={S.innerContainer}>
           <Header />
           <Text style={S.title}>{currentTab.title}</Text>
-          <Image
-            source={PinkCircle}
-            resizeMode="stretch"
-            style={S.circle}
-            accessibilityIgnoresInvertColors
-          />
           {currentTab.component}
 
           <View style={S.footer}>

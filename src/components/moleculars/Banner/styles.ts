@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     display: "flex",
     flexDirection: "column",
+    overflow: "hidden",
   },
   content: {
     padding: theme.spacingNative(16),

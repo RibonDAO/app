@@ -6,17 +6,14 @@ import {
 } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
-export const Container = styled.TouchableOpacity<{ checked: boolean }>`
+export const Container = styled.TouchableOpacity`
   display: flex;
   width: 328px;
   border-radius: ${theme.spacing(16)};
   background-color: ${(props: { checked: boolean }) =>
     props.checked ? theme.colors.brand.tertiary[25] : theme.colors.neutral10};
-  border: 4px solid
-    ${(props: { checked: boolean }) =>
-      props.checked
-        ? theme.colors.brand.tertiary[600]
-        : theme.colors.neutral10};
+  border: ${(props: { checked: boolean }) =>
+    props.checked ? `4px solid ${theme.colors.brand.tertiary[600]}` : "none"};
 `;
 
 export const Tag = styled.View`
