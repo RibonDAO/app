@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
   description: {
     ...defaultBodyMdMedium,
     color: theme.colors.neutral[500],
-    marginTop: theme.spacingNative(16),
+    marginTop: theme.spacingNative(12),
   },
   highlightedDescription: {
     ...defaultBodyLgBold,
     color: theme.colors.brand.primary[800],
-    marginTop: theme.spacingNative(16),
+    marginTop: theme.spacingNative(8),
     marginBottom: theme.spacingNative(32),
     textAlign: "center",
   },
