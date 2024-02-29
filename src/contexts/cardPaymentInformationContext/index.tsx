@@ -61,6 +61,7 @@ function CardPaymentInformationProvider({ children }: Props) {
     nonProfit,
     flow,
     offer,
+    target,
     resetStates,
   } = useCheckoutContext();
 
@@ -81,6 +82,10 @@ function CardPaymentInformationProvider({ children }: Props) {
 
   const handleSubmit = async () => {
     showLoadingOverlay();
+    logEvent("confirmPaymentFormBtn_click", {
+      source: "creditCard",
+      target,
+    });
 
     const expiration = expirationDate.split("/");
 
@@ -116,9 +121,14 @@ function CardPaymentInformationProvider({ children }: Props) {
           offerId: offer?.id,
           source: "creditCard",
         });
-      } else {
+      } else if (cause?.id) {
         logEvent("causeGave_end", {
           causeId: cause?.id,
+          offerId: offer?.id,
+          source: "creditCard",
+        });
+      } else {
+        logEvent("clubGave_end", {
           offerId: offer?.id,
           source: "creditCard",
         });

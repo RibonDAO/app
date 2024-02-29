@@ -26,7 +26,7 @@ function RadioAccordion({ current, items }: Props): JSX.Element {
   }, [current]);
 
   useEffect(() => {
-    if (!currentIndex) return;
+    if (currentIndex === undefined) return;
 
     const { onClick } = items[currentIndex];
     if (onClick) onClick();

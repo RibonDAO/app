@@ -24,10 +24,9 @@ import { useTranslation } from "react-i18next";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import usePayable from "hooks/usePayable";
 import Icon from "components/atomics/Icon";
+import TrustSeal from "components/moleculars/TrustSeal";
+import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
 import S from "./styles";
-import Placeholder from "../placeholder";
-import PriceSelection from "../Components/PriceSelection";
-import TrustSeal from "../Components/TrustSeal";
 
 function PixInstructionsScreen(): JSX.Element {
   const [isCopy, setIsCopy] = useState(false);
@@ -35,8 +34,6 @@ function PixInstructionsScreen(): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.pixInstructionsScreen",
   });
-
-  const { offer } = useCheckoutContext();
 
   const { verifyPayment, pixInstructions, handleBackButtonClick } =
     usePixPaymentInformation();
@@ -112,7 +109,6 @@ function PixInstructionsScreen(): JSX.Element {
               {t("donatingTo")}
               <Text style={S.payableName}>{payable?.name}</Text>
             </Text>
-            <PriceSelection currentOffer={offer} isEdit={false} />
 
             <View style={S.pixContainer}>
               <Text style={S.pixCode}>{t("pixCode")}</Text>
@@ -205,4 +201,4 @@ function PixInstructionsScreen(): JSX.Element {
   );
 }
 
-export default withPlaceholder(PixInstructionsScreen, Placeholder);
+export default withPlaceholder(PixInstructionsScreen, PaymentPlaceholder);

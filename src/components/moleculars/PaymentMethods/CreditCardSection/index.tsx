@@ -25,7 +25,7 @@ export type Props = {
   showFiscalFields: boolean;
 };
 
-function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
+function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.checkoutScreen",
   });
@@ -231,4 +231,4 @@ function CreditCardForm({ onSubmit, showFiscalFields }: Props): JSX.Element {
   );
 }
 
-export default CreditCardForm;
+export default CreditCardSection;

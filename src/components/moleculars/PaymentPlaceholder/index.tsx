@@ -6,7 +6,7 @@ import {
   Fade,
 } from "rn-placeholder";
 
-function PaymentScreenPlaceholder() {
+function PaymentPlaceholder() {
   return (
     <View style={{ flex: 1, padding: 16 }}>
       <Placeholder Animation={Fade}>
@@ -25,4 +25,4 @@ function PaymentScreenPlaceholder() {
   );
 }
 
-export default PaymentScreenPlaceholder;
+export default PaymentPlaceholder;

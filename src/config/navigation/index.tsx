@@ -28,6 +28,7 @@ import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAd
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
 import PaymentScreen from "screens/promoters/PaymentScreen";
 import CheckoutScreen from "screens/promoters/CheckoutScreen";
+import ClubCheckoutScreen from "screens/promoters/club/CheckoutScreen";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
@@ -54,7 +55,7 @@ import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsSc
 import UtmProvider, { useUtmContext } from "contexts/utmContext";
 import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import { logEvent } from "services/analytics";
-import PixInstructionsScreen from "screens/promoters/CheckoutScreen/PixInstructionsScreen";
+import PixInstructionsScreen from "screens/promoters/PixInstructionsScreen";
 import PixPaymentInformationProvider from "contexts/pixInformationContext";
 import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
 import SignedInScreen from "screens/donations/auth/SignedInScreen";
@@ -374,6 +375,14 @@ function RootNavigator() {
       <Stack.Screen
         name="RecurrenceScreen"
         component={RecurrenceScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ClubCheckoutScreen"
+        component={ClubCheckoutScreen}
         options={{
           headerShown: false,
         }}
