@@ -77,10 +77,13 @@ export default () => ({
         },
       ],
       "expo-localization",
-      "expo-updates", 
-      {
-        "username": "thais.correa"
-      },
+      [
+        "expo-updates", 
+        {
+          "username": "thais.correa"
+        },
+
+      ],
       "sentry-expo",
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
