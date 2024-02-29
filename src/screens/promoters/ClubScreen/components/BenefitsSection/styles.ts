@@ -40,6 +40,19 @@ const styles = StyleSheet.create({
     ...defaultBodySmMedium,
     color: theme.colors.neutral[700],
   },
+
+  circle: {
+    position: "absolute",
+    left: 0,
+    top: "25%",
+    bottom: 0,
+    right: 0,
+    resizeMode: "stretch",
+    width: "110%",
+    marginLeft: -theme.spacingNative(16),
+    marginRight: -theme.spacingNative(16),
+    zIndex: -1,
+  },
 });
 
 export default styles;

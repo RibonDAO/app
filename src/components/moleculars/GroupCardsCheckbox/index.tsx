@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardCheckbox from "../CardCheckbox";
 import * as S from "./styles";
 
@@ -6,12 +6,14 @@ type GroupCardsCheckboxProps = {
   elements: any[];
   onChange?: (element: any, index: number) => void;
   indexSelected?: number;
+  setCurrentElement?: (element: any) => void;
 };
 
 function GroupCardsCheckbox({
   elements,
   onChange,
   indexSelected,
+  setCurrentElement,
 }: GroupCardsCheckboxProps): JSX.Element {
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(
     indexSelected || 0,
@@ -21,6 +23,10 @@ function GroupCardsCheckbox({
     setSelectedButtonIndex(index);
     if (onChange) onChange(element, index);
   };
+
+  useEffect(() => {
+    if (setCurrentElement) setCurrentElement(selectedButtonIndex);
+  }, [selectedButtonIndex]);
 
   function renderGroupCardsCheckbox() {
     return elements.map((element: any, index: number) => (

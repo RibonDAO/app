@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
   subtitle: {
     ...defaultBodySmMedium,
     color: theme.colors.neutral[700],
+    marginTop: theme.spacingNative(16),
+    marginBottom: theme.spacingNative(8),
   },
   footer: {
     display: "flex",
@@ -62,13 +64,7 @@ const styles = StyleSheet.create({
   },
   supportBanner: {
     marginBottom: 124,
-    width: "100%",
-  },
-  circle: {
-    position: "absolute",
-    bottom: -120,
-    left: -16,
-    width: "108%",
+    width: 328,
   },
 });
 

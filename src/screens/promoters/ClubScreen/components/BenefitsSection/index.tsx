@@ -1,9 +1,10 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { useTranslation } from "react-i18next";
 import S from "./styles";
 import TicketIcon from "./assets/TicketIcon";
 import BoxIcon from "./assets/BoxIcon";
 import SmileIcon from "./assets/SmileIcon";
+import PinkCircle from "../../assets/pink-circle.png";
 import DepoimentsSection from "../DepoimentsSection";
 
 function BenefitsSection(): JSX.Element {
@@ -12,7 +13,7 @@ function BenefitsSection(): JSX.Element {
   });
 
   return (
-    <>
+    <View>
       <View style={S.container}>
         <View style={S.innerContainer}>
           <TicketIcon />
@@ -36,8 +37,14 @@ function BenefitsSection(): JSX.Element {
           </View>
         </View>
       </View>
+      <Image
+        source={PinkCircle}
+        resizeMode="stretch"
+        style={S.circle}
+        accessibilityIgnoresInvertColors
+      />
       <DepoimentsSection />
-    </>
+    </View>
   );
 }
 

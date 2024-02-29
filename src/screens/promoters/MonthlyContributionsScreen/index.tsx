@@ -63,7 +63,7 @@ export default function MonthlyContributionsScreen(): JSX.Element {
         {subscriptions?.map((subscription: Subscription) => (
           <View style={S.card} key={subscription.id}>
             <View style={S.iconTextContainer}>
-              <Text style={S.amount}>{subscription.offer.price}</Text>
+              <Text style={S.amount}>{subscription.offer?.price}</Text>
               <View style={S.iconContainer}>
                 <Icon
                   type="outlined"

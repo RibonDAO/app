@@ -383,6 +383,15 @@
         "title": "O que falam da gente",
         "firstDepoimentTitle": "Matheus Morales",
         "firstDepoimentDescription": "Reconheço a importância de doar de forma eficaz e a Ribon tem o altruísmo eficaz como filosofia. Deu match! Ver o impacto que causo é muitíssimo gratificante, a ponto de querer contribuir financeiramente sempre que possível."
+      },
+      "purchaseSection": {
+        "title": "Escolha a melhor forma de espalhar seu amor diário",
+        "buttonText": "Ir para pagamento",
+        "firstDescription": "{{dailyTickets}} tickets extras por dia",
+        "secondDescription": "Pacote de {{monthlyTickets}} tickets todo mês",
+        "recurrenceMonthly": "mês",
+        "recurrenceDaily": "ano",
+        "tagText": "Mais popular"
       }
     }
   },

@@ -42,6 +42,7 @@ function CardCheckbox({
       onPress={handleClick}
       testID="card-checkbox"
     >
+      <S.Border checked={onClick !== undefined ? checked : selected} />
       {tagText && (
         <S.Tag>
           <S.TagText>{tagText}</S.TagText>
