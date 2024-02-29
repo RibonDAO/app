@@ -12,8 +12,19 @@ export const Container = styled.TouchableOpacity`
   border-radius: ${theme.spacing(16)};
   background-color: ${(props: { checked: boolean }) =>
     props.checked ? theme.colors.brand.tertiary[25] : theme.colors.neutral10};
-  border: ${(props: { checked: boolean }) =>
-    props.checked ? `4px solid ${theme.colors.brand.tertiary[600]}` : "none"};
+  position: relative;
+`;
+
+export const Border = styled.View`
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: ${theme.spacing(16)};
+  border: 4px solid
+    ${(props: { checked: boolean }) =>
+      props.checked ? theme.colors.brand.tertiary[600] : "transparent"};
 `;
 
 export const Tag = styled.View`
