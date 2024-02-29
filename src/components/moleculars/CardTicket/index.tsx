@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import S from "./styles";
 
 export type Props = {
-  icon: JSX.Element;
+  icon?: JSX.Element;
   title: string;
   subtitle: {
     icon?: JSX.Element;

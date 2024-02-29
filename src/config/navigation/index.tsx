@@ -71,6 +71,7 @@ import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
+import ClubScreen from "screens/promoters/ClubScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -535,6 +536,14 @@ function RootNavigator() {
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
           headerTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="ClubScreen"
+        component={ClubScreen}
+        options={{
+          headerShown: false,
         }}
       />
 

@@ -2,7 +2,7 @@
 import { theme } from "@ribon.io/shared/styles";
 import Icon, { Props as IconProps } from "components/atomics/Icon";
 import ArrowRight from "components/vectors/ArrowRight";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TouchableOpacity, View, Text, Image } from "react-native";
 import {
   defaultBodyMdSemibold,
@@ -59,6 +59,14 @@ function Banner({
   const pressStyle = {
     backgroundColor: isPressed ? darken(0.1, backgroundColor) : backgroundColor,
   };
+
+  useEffect(() => {
+    if (isPressed) {
+      setTimeout(() => {
+        setIsPressed(false);
+      }, 100);
+    }
+  }, [isPressed]);
   const titleSize = () => {
     switch (title?.size) {
       case "small":
