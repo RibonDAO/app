@@ -158,6 +158,7 @@ export type RootStackParamList = {
   ExpiredLinkScreen: undefined;
   ValidateAccountScreen: undefined;
   ClubContributionDoneScreen: undefined;
+  ClubScreen: undefined;
 };
 
 export type PrivateStackParamList = {

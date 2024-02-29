@@ -3,7 +3,7 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 
 export async function initializeDeeplink(
   navigateTo: (path: string, params?: Record<any, any>) => void,
-  setCurrentIntegrationId: (integrationId: string) => void,
+  setCurrentIntegrationId: (integrationId: string | number) => void,
   setExternalId: (externalId: string) => void,
   setUtm: (utmSource: string, utmMedium: string, utmCampaign: string) => void,
   setMagicLinkToken: (magicLinkToken: string) => void,
