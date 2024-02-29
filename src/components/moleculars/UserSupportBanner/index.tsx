@@ -5,7 +5,7 @@ import { openInWebViewer } from "lib/linkOpener";
 import { theme } from "@ribon.io/shared/styles";
 import { View } from "react-native";
 import { EXPO_PUBLIC_ZENDESK_KEY } from "utils/constants/Application";
-import RibonSunLeft from "./assets/SunLeft.svg";
+import RibonSunLeft from "assets/images/ribon-sun-left.png";
 import Banner from "../Banner";
 
 type Props = {
@@ -13,12 +13,14 @@ type Props = {
   title?: string;
   description?: string;
   backgroundColor?: string;
+  cardBackground?: any;
 };
 function UserSupportBanner({
   from,
   title,
   description,
   backgroundColor,
+  cardBackground,
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "userSupportBanner",
@@ -49,7 +51,7 @@ function UserSupportBanner({
           size: 24,
         }}
         withCircle
-        cardBackground={RibonSunLeft}
+        cardBackground={cardBackground ?? RibonSunLeft}
         textColor={theme.colors.neutral[900]}
         backgroundColor={backgroundColor ?? theme.colors.brand.secondary[100]}
         arrowLinkColor={theme.colors.brand.secondary[900]}

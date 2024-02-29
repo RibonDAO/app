@@ -1,28 +1,29 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import { stylizedDisplayMd } from "styles/typography/stylized";
 import { defaultBodySmMedium } from "styles/typography/default";
 
 const styles = StyleSheet.create({
-  outerContainer: {
-    height: "100%",
-  },
   container: {
-    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
     padding: theme.spacingNative(16),
-    backgroundColor: theme.colors.brand.tertiary[50],
-  },
-  keyboardView: {
-    height:
-      Platform.OS === "android" ? Dimensions.get("window").height : "100%",
   },
   donateButtonContainer: {
-    marginTop: theme.spacingNative(24),
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    display: "flex",
     backgroundColor: theme.colors.neutral10,
     padding: theme.spacingNative(16),
-    marginHorizontal: -theme.spacingNative(16),
   },
-  innerContainer: {},
+  innerContainer: {
+    position: "relative",
+    backgroundColor: theme.colors.brand.tertiary[50],
+    width: "100%",
+  },
+
   donateButton: {
     height: 48,
   },
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
     ...stylizedDisplayMd,
     color: theme.colors.neutral[800],
     textAlign: "center",
+    marginBottom: theme.spacingNative(40),
   },
   subtitle: {
     ...defaultBodySmMedium,
@@ -41,6 +43,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: theme.spacingNative(24),
+    marginBottom: theme.spacingNative(98),
+    width: "100%",
   },
   cardsContainer: {
     display: "flex",
@@ -49,13 +53,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexWrap: "wrap-reverse",
-    width: "100%",
     gap: 18,
     marginBottom: theme.spacingNative(24),
   },
   arrow: {
     padding: theme.spacingNative(16),
     alignSelf: "flex-start",
+  },
+  supportBanner: {
+    marginBottom: 124,
+    width: "100%",
+  },
+  circle: {
+    position: "absolute",
+    bottom: -120,
+    left: -16,
+    width: "108%",
   },
 });
 

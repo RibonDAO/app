@@ -15,8 +15,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "flex-start",
     borderColor: theme.colors.brand.tertiary[25],
-    backgroundColor: theme.colors.neutral10,
-    marginVertical: theme.spacingNative(24),
+    backgroundColor: theme.colors.brand.tertiary[25],
+    width: "100%",
+    marginBottom: theme.spacingNative(40),
   },
   innerContainer: {
     display: "flex",
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     marginLeft: theme.spacingNative(12),
+    width: "80%",
   },
   title: {
     ...defaultBodyMdSemibold,

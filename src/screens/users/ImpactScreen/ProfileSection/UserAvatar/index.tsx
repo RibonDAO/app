@@ -5,8 +5,9 @@ type Props = {
   userAvatar?: string;
   email?: string;
   name?: string | null;
+  showInfo?: boolean;
 };
-function UserAvatar({ userAvatar, email, name }: Props) {
+function UserAvatar({ userAvatar, email, name, showInfo = true }: Props) {
   return (
     <S.AvatarSection>
       <S.AvatarContainer>
@@ -16,10 +17,12 @@ function UserAvatar({ userAvatar, email, name }: Props) {
           <ProfilePhoto />
         )}
       </S.AvatarContainer>
-      <S.ProfileSection>
-        <S.Username>{name}</S.Username>
-        <S.Email>{email}</S.Email>
-      </S.ProfileSection>
+      {showInfo && (
+        <S.ProfileSection>
+          <S.Username>{name}</S.Username>
+          <S.Email>{email}</S.Email>
+        </S.ProfileSection>
+      )}
     </S.AvatarSection>
   );
 }
