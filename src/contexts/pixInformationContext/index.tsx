@@ -129,25 +129,33 @@ function PixPaymentInformationProvider({ children }: Props) {
             offerId: offer?.id,
             source: "pix",
           });
+          navigateTo("ContributionDoneScreen", {
+            hasButton: true,
+            offerId: offer?.id ?? 0,
+            cause,
+            nonProfit,
+            flow,
+          });
         } else if (cause?.id) {
           logEvent("causeGave_end", {
             causeId: cause?.id,
             offerId: offer?.id,
             source: "pix",
           });
+          navigateTo("ContributionDoneScreen", {
+            hasButton: true,
+            offerId: offer?.id ?? 0,
+            cause,
+            nonProfit,
+            flow,
+          });
         } else {
           logEvent("clubGave_end", {
             offerId: offer?.id,
             source: "googlePay",
           });
+          navigateTo("ClubContributionDoneScreen");
         }
-        navigateTo("ContributionDoneScreen", {
-          hasButton: true,
-          offerId: offer?.id ?? 0,
-          cause,
-          nonProfit,
-          flow,
-        });
       }
     } catch (e) {
       logError(e);

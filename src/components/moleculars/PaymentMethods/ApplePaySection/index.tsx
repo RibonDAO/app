@@ -152,24 +152,29 @@ export default function ApplePaySection({
             offerId: offer?.id,
             source: "applePay",
           });
+          navigateTo("ContributionDoneScreen", {
+            cause,
+            nonProfit,
+            offer,
+          });
         } else if (cause?.id) {
           logEvent("causeGave_end", {
             causeId: cause?.id,
             offerId: offer?.id,
             source: "applePay",
           });
+          navigateTo("ContributionDoneScreen", {
+            cause,
+            nonProfit,
+            offer,
+          });
         } else {
           logEvent("clubGave_end", {
             offerId: offer?.id,
             source: "applePay",
           });
+          navigateTo("ClubContributionDoneScreen");
         }
-
-        navigateTo("ContributionDoneScreen", {
-          cause,
-          nonProfit,
-          offer,
-        });
       } catch (e) {
         logError(e);
         showToast({
