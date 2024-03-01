@@ -14,10 +14,8 @@ export default function ClubContributionDoneScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
 
   const handleNavigate = () => {
-    logEvent("afterPaymentBtn_click");
-    navigateTo("ForYouScreen", {
-      from: "club",
-    });
+    logEvent("afterPaymentBtn_click", { from: "club" });
+    navigateTo("ForYouScreen", {});
   };
 
   return (
