@@ -55,11 +55,13 @@ export default function PaymentMethodSection() {
     isLoading: isLoadingOffers,
   } = useOffers(
     Currencies[currency?.toUpperCase() as keyof typeof Currencies],
-    isSubscription,
+    // it has to be true and we can not use isSubscription
+    true,
     Categories.CLUB,
   );
 
   const resetOffer = () => {
+    console.log(offers, currentOffer);
     setOfferPrice(offers[0].priceCents);
     setCurrentOffer(offers[0]);
   };
