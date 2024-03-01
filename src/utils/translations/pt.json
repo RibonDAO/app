@@ -371,6 +371,12 @@
       } 
     },
     "sealText": "Transação segura processada por",
+    "clubContributionDoneScreen": {
+      "title": "Boas vindas!",
+      "buttonText": "Finalizar",
+      "description": "Agora você faz parte do Clube Ribon!",
+      "highlightedDescription": "Aproveite seus tickets extras!"
+    },
     "clubScreen": {
       "subtitle": "Cancele qualquer plano quando quiser!",
       "userSupportBannerTitle": "Grandes doações",
