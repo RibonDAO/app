@@ -157,6 +157,7 @@ export type RootStackParamList = {
   ExtraTicketScreen: undefined;
   ExpiredLinkScreen: undefined;
   ValidateAccountScreen: undefined;
+  ClubContributionDoneScreen: undefined;
   ClubScreen: undefined;
 };
 
