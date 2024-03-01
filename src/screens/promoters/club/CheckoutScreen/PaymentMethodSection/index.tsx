@@ -61,7 +61,6 @@ export default function PaymentMethodSection() {
   );
 
   const resetOffer = () => {
-    console.log(offers, currentOffer);
     setOfferPrice(offers[0].priceCents);
     setCurrentOffer(offers[0]);
   };
