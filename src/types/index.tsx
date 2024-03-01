@@ -88,6 +88,14 @@ export type CheckoutScreenParamList = {
   subscription?: boolean;
 };
 
+export type ClubCheckoutScreenParamList = {
+  target: string;
+  targetId: string;
+  offer: number;
+  currency: Currencies;
+  subscription?: boolean;
+};
+
 export type RecurrenceScreenParamList = {
   target: string;
   targetId: string;
@@ -141,6 +149,7 @@ export type RootStackParamList = {
   SupportNonProfitScreen: SupportNonProfitParamList;
   PromotersScreen: PromotersScreenParams;
   CheckoutScreen: CheckoutScreenParamList;
+  ClubCheckoutScreen: ClubCheckoutScreenParamList;
   ValidateExtraTicketScreen: undefined;
   RecurrenceScreen: RecurrenceScreenParamList;
   SelectTicketsScreen: SelectTicketsScreenParamList;

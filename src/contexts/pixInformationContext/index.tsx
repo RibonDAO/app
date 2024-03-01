@@ -67,6 +67,7 @@ function PixPaymentInformationProvider({ children }: Props) {
     taxId,
     flow,
     country,
+    target,
   } = useCheckoutContext();
 
   const login = async () => {
@@ -128,11 +129,16 @@ function PixPaymentInformationProvider({ children }: Props) {
             offerId: offer?.id,
             source: "pix",
           });
-        } else {
+        } else if (cause?.id) {
           logEvent("causeGave_end", {
             causeId: cause?.id,
             offerId: offer?.id,
             source: "pix",
+          });
+        } else {
+          logEvent("clubGave_end", {
+            offerId: offer?.id,
+            source: "googlePay",
           });
         }
         navigateTo("ContributionDoneScreen", {
@@ -151,6 +157,10 @@ function PixPaymentInformationProvider({ children }: Props) {
   };
 
   const handleSubmit = async () => {
+    logEvent("confirmPaymentFormBtn_click", {
+      source: "pix",
+      target,
+    });
     try {
       const paymentInformation = {
         email: email ?? "",

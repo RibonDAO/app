@@ -11,31 +11,28 @@ import { useCheckoutContext } from "contexts/checkoutContext";
 import usePageView from "hooks/usePageView";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
-import Header from "./Components/Header";
-import CryptoSection from "./CryptoSection";
-import CardSection from "./CardSection";
+import Header from "./Header";
+import PaymentMethodSection from "./PaymentMethodSection";
 import S from "./styles";
+import PriceSection from "./PriceSection";
 
 function CheckoutScreen(): JSX.Element {
-  usePageView("P23_view");
   const { params } = useRouteParams<"CheckoutScreen">();
 
   const {
     target: targetParam,
-    targetId: targetIdParam,
     offer: offerParam,
     currency: currencyParam,
   } = params;
 
-  const { setTarget, setTargetId, setCurrency, currency, setOfferPrice } =
-    useCheckoutContext();
+  const { setTarget, setCurrency, setOfferPrice } = useCheckoutContext();
+  usePageView("P23_view", { from: "club", offerParam });
 
   useEffect(() => {
-    if (targetIdParam) setTargetId(targetIdParam);
     if (targetParam) setTarget(targetParam);
     if (offerParam != null) setOfferPrice(offerParam);
     if (currencyParam) setCurrency(currencyParam);
-  }, [targetParam, currencyParam, targetParam, offerParam]);
+  }, [targetParam, currencyParam, offerParam]);
 
   return (
     <KeyboardAvoidingView
@@ -50,7 +47,8 @@ function CheckoutScreen(): JSX.Element {
       >
         <ScrollView style={S.container}>
           <Header />
-          {currency === "USDC" ? <CryptoSection /> : <CardSection />}
+          <PriceSection />
+          <PaymentMethodSection />
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

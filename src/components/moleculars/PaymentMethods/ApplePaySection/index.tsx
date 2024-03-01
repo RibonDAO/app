@@ -104,6 +104,11 @@ export default function ApplePaySection({
 
   const pay = async () => {
     showLoadingOverlay();
+    logEvent("confirmPaymentFormBtn_click", {
+      source: "applePay",
+      // eslint-disable-next-line no-nested-ternary
+      target: nonProfit?.id ? "nonProfit" : cause?.id ? "cause" : "club",
+    });
     const { error, paymentMethod } = await createPlatformPayPaymentMethod({
       applePay: {
         cartItems: cart,
@@ -147,9 +152,14 @@ export default function ApplePaySection({
             offerId: offer?.id,
             source: "applePay",
           });
-        } else {
+        } else if (cause?.id) {
           logEvent("causeGave_end", {
             causeId: cause?.id,
+            offerId: offer?.id,
+            source: "applePay",
+          });
+        } else {
+          logEvent("clubGave_end", {
             offerId: offer?.id,
             source: "applePay",
           });

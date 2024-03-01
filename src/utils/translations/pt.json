@@ -311,8 +311,7 @@
       "copyCodeSuccess": "Codigo copiado!",
       "expiresAt": "Expira em 30 minutos",
       "donatingTo": "Doando para ",
-      "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon.",
-      "sealText": "Transação segura processada por"
+      "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon."
     },
     "monthlyContributionsScreen": {
       "title": "Contribuições mensais",
@@ -362,6 +361,16 @@
       },
       "confirmPayment": "Confirmar pagamento"
     },
+    "club": {
+      "checkoutScreen": {
+        "title": "Pagamento do ",
+        "receiver": "Clube Ribon",
+        "monthlyContribution": "Assinatura mensal",
+        "uniqueContribution": "Compra única",
+        "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
+      } 
+    },
+    "sealText": "Transação segura processada por",
     "clubContributionDoneScreen": {
       "title": "Boas vindas!",
       "buttonText": "Finalizar",
