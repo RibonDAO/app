@@ -121,25 +121,30 @@ function CardPaymentInformationProvider({ children }: Props) {
           offerId: offer?.id,
           source: "creditCard",
         });
+        navigateTo("ContributionDoneScreen", {
+          cause,
+          nonProfit,
+          offer,
+        });
       } else if (cause?.id) {
         logEvent("causeGave_end", {
           causeId: cause?.id,
           offerId: offer?.id,
           source: "creditCard",
         });
+        navigateTo("ContributionDoneScreen", {
+          cause,
+          nonProfit,
+          offer,
+        });
       } else {
         logEvent("clubGave_end", {
           offerId: offer?.id,
           source: "creditCard",
         });
+        navigateTo("ClubContributionDoneScreen");
       }
       registerAction("contribution_done_screen_view");
-
-      navigateTo("ContributionDoneScreen", {
-        cause,
-        nonProfit,
-        offer,
-      });
       resetStates();
     } catch (error: any) {
       logError(error);

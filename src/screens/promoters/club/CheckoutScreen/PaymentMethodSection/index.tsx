@@ -55,7 +55,8 @@ export default function PaymentMethodSection() {
     isLoading: isLoadingOffers,
   } = useOffers(
     Currencies[currency?.toUpperCase() as keyof typeof Currencies],
-    isSubscription,
+    // it has to be true and we can not use isSubscription
+    true,
     Categories.CLUB,
   );
 

@@ -48,7 +48,12 @@ function ClubScreen(): JSX.Element {
         logEvent("giveClubBtn_start", {
           from: "clubPlans_page",
         });
-        navigateTo("ClubCheckoutScreen", { offer, currency: offer?.currency });
+        navigateTo("ClubCheckoutScreen", {
+          target: "club",
+          offer: offer?.priceCents,
+          currency: offer?.currency,
+          subscription: true,
+        });
       },
       buttonText: t("purchaseSection.buttonText"),
     },
