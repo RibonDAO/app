@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   accordionTitle: {
     ...defaultBodyMdSemibold,
-    marginTop: theme.spacingNative(16),
+    marginTop: theme.spacingNative(24),
     marginBottom: theme.spacingNative(8),
   },
   recurrenceContainer: {

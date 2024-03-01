@@ -7,9 +7,6 @@ import {
 import { stylizedDisplayMd } from "styles/typography/stylized";
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: theme.spacingNative(8),
-  },
   offer: {
     display: "flex",
     flexDirection: "row",
@@ -18,6 +15,7 @@ const styles = StyleSheet.create({
     ...stylizedDisplayMd,
     color: theme.colors.brand.primary[800],
     marginRight: theme.spacingNative(8),
+    marginBottom: theme.spacingNative(12),
   },
   titleContainer: {
     display: "flex",
@@ -26,6 +24,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...defaultBodySmMedium,
+    color: theme.colors.neutral[600],
   },
   receiver: {
     ...defaultBodySmSemibold,

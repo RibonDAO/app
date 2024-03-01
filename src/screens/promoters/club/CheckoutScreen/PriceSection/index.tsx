@@ -9,7 +9,7 @@ export default function PriceSection() {
     keyPrefix: "promoters.club.checkoutScreen",
   });
   return (
-    <View style={S.container}>
+    <View>
       <View style={S.titleContainer}>
         <Text style={S.title}>{t("title")}</Text>
         <Text style={S.receiver}>{t("receiver")}</Text>
