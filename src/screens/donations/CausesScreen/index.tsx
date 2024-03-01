@@ -347,7 +347,6 @@ export default function CausesScreen() {
             style={S.causesContainer}
             horizontal
             showsHorizontalScrollIndicator={false}
-            ref={scrollViewRef}
           >
             {sortNonProfits()?.map((nonProfit, index) => (
               <View style={nonProfitStylesFor(index)} key={nonProfit.id}>

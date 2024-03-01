@@ -208,6 +208,13 @@
           "streakTitle": "dias seguidos completando tarefas"
         },
         "countdown": "até reiniciar tarefas"
+      },
+      "ticketsSection": {
+        "dailyTicketCard": {
+          "title": "Ticket diário (grátis)",
+          "subtitle": "Ganhe 1 por dia",
+          "buttonText": "Coletado automaticamente"
+        }
       }
     }
   },
@@ -363,7 +370,39 @@
         "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
       } 
     },
-    "sealText": "Transação segura processada por"
+    "sealText": "Transação segura processada por",
+    "clubScreen": {
+      "subtitle": "Cancele qualquer plano quando quiser!",
+      "userSupportBannerTitle": "Grandes doações",
+      "userSupportBannerDescription": "Se quiser fazer uma doação ainda maior, entre em contato direto com a nossa equipe :)",
+      "header": {
+        "ribonClub": "Clube Ribon"
+      },
+      "benefitsSection": {
+        "title": "Com o Clube Ribon você pode doar e ajudar muito mais!",
+        "buttonText": "Faça parte do clube",
+        "firstBenefitTitle": "Mais tickets diários!",
+        "secondBenefitTitle": "Pacote de tickets todo mês",
+        "thirdBenefitTitle": "Seu coração mais quentinho",
+        "firstBenefitDescription": "Até 20 tickets extras todos os dias.",
+        "secondBenefitDescription": "Até 60 tickets para usar na hora.",
+        "thirdBenefitDescription": "Doar aquece o coração. Mais tickets, mais você ajuda!"
+      },
+      "depoimentsSection": {
+        "title": "O que falam da gente",
+        "firstDepoimentTitle": "Matheus Morales",
+        "firstDepoimentDescription": "Reconheço a importância de doar de forma eficaz e a Ribon tem o altruísmo eficaz como filosofia. Deu match! Ver o impacto que causo é muitíssimo gratificante, a ponto de querer contribuir financeiramente sempre que possível."
+      },
+      "purchaseSection": {
+        "title": "Escolha a melhor forma de espalhar seu amor diário",
+        "buttonText": "Ir para pagamento",
+        "firstDescription": "{{dailyTickets}} tickets extras por dia",
+        "secondDescription": "Pacote de {{monthlyTickets}} tickets todo mês",
+        "recurrenceMonthly": "mês",
+        "recurrenceDaily": "ano",
+        "tagText": "Mais popular"
+      }
+    }
   },
   "users": {
     "impactScreen": {

@@ -16,7 +16,7 @@ export const AvatarSection = styled.View`
 export const AvatarContainer = styled.View`
   width: 96px;
   height: 96px;
-  margin-bottom: ${theme.spacing(12)};
+
   border: 2px solid ${theme.colors.neutral[25]};
   border-radius: 8px;
   position: relative;
@@ -49,4 +49,5 @@ export const ProfileSection = styled.View`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: ${theme.spacing(12)};
 `;
