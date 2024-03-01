@@ -3,7 +3,6 @@ import { useNavigation } from "hooks/useNavigation";
 import { View, Text } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import Button from "components/atomics/buttons/Button";
-import { useEffect } from "react";
 import { logEvent } from "services/analytics";
 import S from "./styles";
 import Illustration from "./assets/Illustration";
@@ -14,14 +13,10 @@ export default function ClubContributionDoneScreen(): JSX.Element {
   });
   const { navigateTo } = useNavigation();
 
-  useEffect(() => {
-    logEvent("clubGave_end");
-  }, []);
-
   const handleNavigate = () => {
     logEvent("afterPaymentBtn_click");
     navigateTo("ForYouScreen", {
-      from: "ClubContributionDoneScreen",
+      from: "club",
     });
   };
 
