@@ -1,4 +1,4 @@
-const version = "5.6.0";
+const version = "5.6.1";
 const buildNumber = 363;
 
 export default () => ({
