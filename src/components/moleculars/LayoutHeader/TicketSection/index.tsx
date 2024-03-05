@@ -20,6 +20,8 @@ function TicketSection({
     if (hasTickets) {
       navigateTo("GiveTicketScreen");
     } else {
+      // TODO: check if user has club
+      // if true navigate to for you screen, if not show modal
       setZeroTicketModalVisible(true);
     }
   };
