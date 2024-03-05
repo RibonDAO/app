@@ -1,6 +1,8 @@
 import { useNavigation } from "hooks/useNavigation";
 import { useTicketsContext } from "contexts/ticketsContext";
 import TicketIconText from "components/moleculars/TicketIconText";
+import { useState } from "react";
+import ZeroTicketsModal from "../modals/ZeroTicketsModal";
 
 type TicketSectionProps = {
   hasDividerBorder?: boolean;
@@ -12,21 +14,29 @@ function TicketSection({
   const { ticketsCounter: tickets } = useTicketsContext();
   const hasTickets = tickets > 0;
   const { navigateTo } = useNavigation();
+  const [zeroTicketModalVisible, setZeroTicketModalVisible] = useState(false);
 
   const handleTicketClick = () => {
     if (hasTickets) {
       navigateTo("GiveTicketScreen");
     } else {
-      navigateTo("ZeroTicketScreen");
+      setZeroTicketModalVisible(true);
     }
   };
 
   return (
-    <TicketIconText
-      quantity={tickets}
-      hasDividerBorder={hasDividerBorder}
-      onClick={handleTicketClick}
-    />
+    <>
+      <TicketIconText
+        quantity={tickets}
+        hasDividerBorder={hasDividerBorder}
+        onClick={handleTicketClick}
+      />
+
+      <ZeroTicketsModal
+        visible={zeroTicketModalVisible}
+        setVisible={setZeroTicketModalVisible}
+      />
+    </>
   );
 }
 

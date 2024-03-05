@@ -36,6 +36,11 @@
       "confirm": "Sair",
       "cancel": "Cancelar"
     },
+    "zeroTicketsModal": {
+      "title": "Você usou todos seus tickets.",
+      "description": "Volte amanhã para receber mais.\n\nOu assine o Clube Ribon e receba agora mesmo 30 tickets extras!",
+      "confirm": "Conhecer Clube Ribon"
+    },
     "disconnectWallet": "Desconectar carteira",
     "cancel": "cancelar",
     "confirm": "confirmar"
