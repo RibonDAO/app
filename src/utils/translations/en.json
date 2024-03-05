@@ -177,10 +177,6 @@
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "hasAccountButton": "I have an account"
     },
-    "zeroTicketScreen": {
-      "title": "You have used all your tickets",
-      "subtitle": "How about making a paid donation?"
-    },
     "forYouScreen": {
       "newsSection": {
         "title": "For you",
@@ -379,7 +375,7 @@
         "monthlyContribution": "Monthly subscription",
         "uniqueContribution": "Contributing once",
         "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
-      } 
+      }
     },
     "sealText": "Safe transaction by",
     "clubContributionDoneScreen": {

@@ -172,10 +172,6 @@
       "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
       "hasAccountButton": "Já tenho uma conta"
     },
-    "zeroTicketScreen": {
-      "title": "Você usou todos seus tickets",
-      "subtitle": "Que tal fazer uma doação paga?"
-    },
     "forYouScreen": {
       "newsSection": {
         "title": "Para você",
@@ -373,7 +369,7 @@
         "monthlyContribution": "Assinatura mensal",
         "uniqueContribution": "Compra única",
         "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
-      } 
+      }
     },
     "sealText": "Transação segura processada por",
     "clubContributionDoneScreen": {
