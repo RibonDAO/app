@@ -5,8 +5,8 @@ import { useScrollEnabled } from "contexts/scrollEnabledContext";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 
 import usePageView from "hooks/usePageView";
+import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
 import CardScreen from "./CardScreen";
-import Placeholder from "./placeholder";
 import S from "./styles";
 
 function SupportNonProfitScreen(): JSX.Element {
@@ -24,4 +24,4 @@ function SupportNonProfitScreen(): JSX.Element {
   );
 }
 
-export default withPlaceholder(SupportNonProfitScreen, Placeholder);
+export default withPlaceholder(SupportNonProfitScreen, PaymentPlaceholder);

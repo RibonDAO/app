@@ -10,11 +10,11 @@ import { useEffect } from "react";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import usePageView from "hooks/usePageView";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
+import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
 import Header from "./Components/Header";
 import CryptoSection from "./CryptoSection";
 import CardSection from "./CardSection";
 import S from "./styles";
-import Placeholder from "./placeholder";
 
 function CheckoutScreen(): JSX.Element {
   usePageView("P23_view");
@@ -57,4 +57,4 @@ function CheckoutScreen(): JSX.Element {
   );
 }
 
-export default withPlaceholder(CheckoutScreen, Placeholder);
+export default withPlaceholder(CheckoutScreen, PaymentPlaceholder);

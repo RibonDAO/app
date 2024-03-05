@@ -60,41 +60,42 @@ export default function MonthlyContributionsScreen(): JSX.Element {
       </View>
       <Text style={S.title}>{t("title")}</Text>
       <View style={S.subscriptionsContainer}>
-        {subscriptions?.map((subscription: Subscription) => (
-          <View style={S.card} key={subscription.id}>
-            <View style={S.iconTextContainer}>
-              <Text style={S.amount}>{subscription.offer.price}</Text>
-              <View style={S.iconContainer}>
-                <Icon
-                  type="outlined"
-                  name="delete"
-                  size={24}
-                  color={theme.colors.neutral10}
-                  onPress={handleCancelContribution}
-                />
+        {subscriptions &&
+          subscriptions.map((subscription: Subscription) => (
+            <View style={S.card} key={subscription.id}>
+              <View style={S.iconTextContainer}>
+                <Text style={S.amount}>{subscription.offer?.price}</Text>
+                <View style={S.iconContainer}>
+                  <Icon
+                    type="outlined"
+                    name="delete"
+                    size={24}
+                    color={theme.colors.neutral10}
+                    onPress={handleCancelContribution}
+                  />
+                </View>
               </View>
+              <Text style={S.text}>
+                {t("to")}
+                <Text style={S.highlightedText}>
+                  {subscription.receiver.name}
+                </Text>
+              </Text>
+              <Text style={S.text}>
+                {t("nextContribution")}
+                <Text style={S.highlightedText}>
+                  {nextPaymetAttempt(subscription)}
+                </Text>
+              </Text>
+              {modalVisible && (
+                <CancelContributionModal
+                  setVisible={setModalVisible}
+                  visible={modalVisible}
+                  contributionId={subscription.id}
+                />
+              )}
             </View>
-            <Text style={S.text}>
-              {t("to")}
-              <Text style={S.highlightedText}>
-                {subscription.receiver.name}
-              </Text>
-            </Text>
-            <Text style={S.text}>
-              {t("nextContribution")}
-              <Text style={S.highlightedText}>
-                {nextPaymetAttempt(subscription)}
-              </Text>
-            </Text>
-            {modalVisible && (
-              <CancelContributionModal
-                setVisible={setModalVisible}
-                visible={modalVisible}
-                contributionId={subscription.id}
-              />
-            )}
-          </View>
-        ))}
+          ))}
       </View>
     </ScrollView>
   );

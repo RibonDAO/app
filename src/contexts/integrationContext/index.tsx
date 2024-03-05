@@ -13,7 +13,7 @@ import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 export interface IIntegrationContext {
   integration?: Integration;
   currentIntegrationId: string | number;
-  setCurrentIntegrationId: (id: SetStateAction<string>) => void;
+  setCurrentIntegrationId: (id: SetStateAction<string | number>) => void;
   externalId: string | undefined;
   setExternalId: (id: SetStateAction<string | undefined>) => void;
   refetch: () => void;
@@ -24,8 +24,9 @@ export const IntegrationContext = createContext<IIntegrationContext>(
 );
 
 function IntegrationProvider({ children }: any) {
-  const [currentIntegrationId, setCurrentIntegrationId] =
-    useState(RIBON_INTEGRATION_ID);
+  const [currentIntegrationId, setCurrentIntegrationId] = useState<
+    string | number
+  >(RIBON_INTEGRATION_ID);
   const [externalId, setExternalId] = useState<string>();
   const { integration, refetch } = useIntegration(currentIntegrationId);
 

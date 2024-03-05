@@ -24,6 +24,7 @@ import { useIntegrationContext } from "contexts/integrationContext";
 import StatisticsCardsSection from "./StatisticsCardsSection";
 import DailyTasksSection from "./DailyTasksSection";
 import MonthlyTasksSection from "./MonthlyTasksSection";
+import TicketsSection from "../TicketsSection";
 import S from "./styles";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
@@ -187,6 +188,7 @@ export default function TasksSection() {
     <View style={S.container}>
       <View style={S.paddingContainer}>
         <View style={S.progressBar}>
+          <TicketsSection />
           <ProgressBar
             value={progressBarValue().length}
             min={0}

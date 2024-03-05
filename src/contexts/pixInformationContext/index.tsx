@@ -67,6 +67,7 @@ function PixPaymentInformationProvider({ children }: Props) {
     taxId,
     flow,
     country,
+    target,
   } = useCheckoutContext();
 
   const login = async () => {
@@ -128,20 +129,33 @@ function PixPaymentInformationProvider({ children }: Props) {
             offerId: offer?.id,
             source: "pix",
           });
-        } else {
+          navigateTo("ContributionDoneScreen", {
+            hasButton: true,
+            offerId: offer?.id ?? 0,
+            cause,
+            nonProfit,
+            flow,
+          });
+        } else if (cause?.id) {
           logEvent("causeGave_end", {
             causeId: cause?.id,
             offerId: offer?.id,
             source: "pix",
           });
+          navigateTo("ContributionDoneScreen", {
+            hasButton: true,
+            offerId: offer?.id ?? 0,
+            cause,
+            nonProfit,
+            flow,
+          });
+        } else {
+          logEvent("clubGave_end", {
+            offerId: offer?.id,
+            source: "googlePay",
+          });
+          navigateTo("ClubContributionDoneScreen");
         }
-        navigateTo("ContributionDoneScreen", {
-          hasButton: true,
-          offerId: offer?.id ?? 0,
-          cause,
-          nonProfit,
-          flow,
-        });
       }
     } catch (e) {
       logError(e);
@@ -151,6 +165,10 @@ function PixPaymentInformationProvider({ children }: Props) {
   };
 
   const handleSubmit = async () => {
+    logEvent("confirmPaymentFormBtn_click", {
+      source: "pix",
+      target,
+    });
     try {
       const paymentInformation = {
         email: email ?? "",

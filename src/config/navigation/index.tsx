@@ -28,6 +28,7 @@ import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAd
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
 import PaymentScreen from "screens/promoters/PaymentScreen";
 import CheckoutScreen from "screens/promoters/CheckoutScreen";
+import ClubCheckoutScreen from "screens/promoters/club/CheckoutScreen";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
@@ -54,7 +55,7 @@ import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsSc
 import UtmProvider, { useUtmContext } from "contexts/utmContext";
 import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import { logEvent } from "services/analytics";
-import PixInstructionsScreen from "screens/promoters/CheckoutScreen/PixInstructionsScreen";
+import PixInstructionsScreen from "screens/promoters/PixInstructionsScreen";
 import PixPaymentInformationProvider from "contexts/pixInformationContext";
 import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
 import SignedInScreen from "screens/donations/auth/SignedInScreen";
@@ -71,6 +72,8 @@ import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
+import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
+import ClubScreen from "screens/promoters/ClubScreen";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -380,6 +383,14 @@ function RootNavigator() {
       />
 
       <Stack.Screen
+        name="ClubCheckoutScreen"
+        component={ClubCheckoutScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
         name="PixInstructionsScreen"
         component={PixInstructionsScreen}
         options={{
@@ -535,6 +546,22 @@ function RootNavigator() {
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
           headerTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="ClubScreen"
+        component={ClubScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ClubContributionDoneScreen"
+        component={ClubContributionDoneScreen}
+        options={{
+          headerShown: false,
         }}
       />
 
