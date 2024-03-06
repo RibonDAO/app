@@ -84,15 +84,11 @@ export default function PaymentMethodSection() {
 
   useEffect(() => {
     resetStates();
-
-    return () => {
-      resetStates();
-    };
   }, []);
 
   useEffect(() => {
     refetchOffers();
-  }, [currency, isSubscription]);
+  }, [currency]);
 
   useEffect(() => {
     if (offerParam != null) {
