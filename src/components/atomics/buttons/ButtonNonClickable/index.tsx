@@ -60,7 +60,7 @@ export default function ButtonNonClickable({
       testID={`button-${text}`}
     >
       {leftIcon && <Icon {...leftIcon} style={S.leftIcon} />}
-      <View style={S.leftItem}>{leftItem && leftItem}</View>
+      {leftItem && <View style={S.leftItem}>{leftItem && leftItem}</View>}
       <Text style={[S.text, { color: textColor }, customTextStyles]}>
         {text}
       </Text>

@@ -220,6 +220,22 @@
           "subtitle": "Earn 1 per day",
           "buttonText": "Collected automatically"
         }
+      },
+      "clubTicketsSection": {
+        "dailyTicketCard": {
+          "title": "Ribon Club tickets",
+          "subtitle": "Earn up to {{value}} per day",
+          "buttonText": "Collect {{value}} tickets",
+          "buttonTextCollected": "Collected",
+          "buttonTextNoClub": "Unlock collection"
+        },
+        "monthlyTicketCard": {
+          "title": "Monthly Ribon Club package",
+          "subtitle": "Earn up to {{value}} per day",
+          "buttonText": "Collect {{value}} tickets",
+          "buttonTextCollected": "Collected",
+          "buttonTextNoClub": "Unlock collection"
+        }
       }
     }
   },
@@ -374,7 +390,7 @@
         "monthlyContribution": "Monthly subscription",
         "uniqueContribution": "Contributing once",
         "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
-      } 
+      }
     },
     "sealText": "Safe transaction by",
     "clubContributionDoneScreen": {

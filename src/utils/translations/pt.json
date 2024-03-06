@@ -215,6 +215,22 @@
           "subtitle": "Ganhe 1 por dia",
           "buttonText": "Coletado automaticamente"
         }
+      },
+      "clubTicketsSection": {
+        "dailyTicketCard": {
+          "title": "Tickets do Clube Ribon",
+          "subtitle": "Ganhe até {{value}} por dia",
+          "buttonText": "Coletar {{value}} tickets",
+          "buttonTextCollected": "Coletado",
+          "buttonTextNoClub": "Desbloquear coleta"
+        },
+        "monthlyTicketCard": {
+          "title": "Pacote mensal do Clube Ribon",
+          "subtitle": "Ganhe até {{value}} por dia",
+          "buttonText": "Coletar {{value}} tickets",
+          "buttonTextCollected": "Coletado",
+          "buttonTextNoClub": "Desbloquear coleta"
+        }
       }
     }
   },
@@ -368,7 +384,7 @@
         "monthlyContribution": "Assinatura mensal",
         "uniqueContribution": "Compra única",
         "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
-      } 
+      }
     },
     "sealText": "Transação segura processada por",
     "clubContributionDoneScreen": {

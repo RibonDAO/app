@@ -19,11 +19,9 @@ const styles = StyleSheet.create({
     color: theme.colors.neutral10,
   },
   leftIcon: {
-    marginRight: 8,
+    marginRight: 4,
   },
-  leftItem: {
-    marginRight: 8,
-  },
+  leftItem: {},
 });
 
 export default styles;

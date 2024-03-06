@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: theme.spacingNative(16),
     alignItems: "flex-start",
-    maxWidth: 300,
+    maxWidth: 328,
   },
   header: {
     display: "flex",
