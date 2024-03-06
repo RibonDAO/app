@@ -52,6 +52,8 @@ function ModalDialog({
         return "warning";
       case "info":
         return "info";
+      case "club":
+        return "club";
       default:
         return "info";
     }
@@ -78,6 +80,8 @@ function ModalDialog({
         return theme.colors.brand.quaternary[200];
       case "info":
         return theme.colors.feedback.informational[500];
+      case "club":
+        return theme.colors.brand.tertiary[600];
       default:
         return theme.colors.feedback.informational[500];
     }
@@ -87,7 +91,6 @@ function ModalDialog({
     switch (type) {
       case "warning":
         return theme.colors.neutral[900];
-
       default:
         return theme.colors.neutral10;
     }
@@ -101,6 +104,8 @@ function ModalDialog({
         return theme.colors.brand.quaternary[200];
       case "info":
         return theme.colors.brand.primary[600];
+      case "club":
+        return theme.colors.brand.tertiary[600];
       default:
         return theme.colors.brand.primary[600];
     }

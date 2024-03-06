@@ -8,7 +8,6 @@ import WalletIcon from "components/vectors/WalletIcon";
 import { walletTruncate } from "lib/formatters/walletTruncate";
 import { logEvent } from "services/analytics";
 
-import TicketModal from "./modals/TicketModal";
 import S from "./styles";
 import TicketSection from "./TicketSection";
 import ConfigMenu from "./ConfigMenu";
@@ -25,7 +24,6 @@ function LayoutHeader({
     keyPrefix: "layoutHeader",
   });
   const [menuVisible, setMenuVisible] = useState(false);
-  const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const { connectWallet, wallet, killSession } = useWalletContext();
 
   useEffect(() => {
@@ -62,13 +60,6 @@ function LayoutHeader({
             <WalletIcon />
           </View>
         </TouchableOpacity>
-      )}
-
-      {!hideTicket && (
-        <TicketModal
-          visible={ticketModalVisible}
-          setVisible={setTicketModalVisible}
-        />
       )}
 
       <TouchableOpacity

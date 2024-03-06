@@ -36,6 +36,11 @@
       "confirm": "Sign out",
       "cancel": "Cancel"
     },
+    "zeroTicketsModal": {
+      "title": "You have used all your tickets.",
+      "description": "Come back tomorrow for more.\n\nOr subscribe to Clube Ribon and receive 30 extra tickets right now!",
+      "confirm": "Get to know Ribon Club"
+    },
     "disconnectWallet": "Disconnect wallet",
     "cancel": "cancel",
     "confirm": "confirm"
@@ -171,10 +176,6 @@
       "whatIsATicket": "What is a ticket?",
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "hasAccountButton": "I have an account"
-    },
-    "zeroTicketScreen": {
-      "title": "You have used all your tickets",
-      "subtitle": "How about making a paid donation?"
     },
     "forYouScreen": {
       "newsSection": {
@@ -374,7 +375,7 @@
         "monthlyContribution": "Monthly subscription",
         "uniqueContribution": "Contributing once",
         "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
-      } 
+      }
     },
     "sealText": "Safe transaction by",
     "clubContributionDoneScreen": {
