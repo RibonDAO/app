@@ -84,7 +84,7 @@
       "errorModalButtonText": "Ok",
       "unauthorizedModalTitle": "Validate your e-mail",
       "unauthorizedModalText": "Please, validate your e-mail to ensure your donation arrives safely.",
-      "unauthorizedModalButtonText": "validate my account"
+      "unauthorizedModalButtonText": "Validate my account"
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",

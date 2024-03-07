@@ -78,7 +78,7 @@
       "errorModalButtonText": "Ok",
       "unauthorizedModalTitle": "Confirme seu e-mail",
       "unauthorizedModalText": "Por favor, confirme seu e-mail para continuar a doação com segurança.",
-      "unauthorizedModalButtonText": "confirmar e-mail"
+      "unauthorizedModalButtonText": "Confirmar e-mail"
     },
     "donateScreen": {
       "nonProfitText": "Você está doando para",
