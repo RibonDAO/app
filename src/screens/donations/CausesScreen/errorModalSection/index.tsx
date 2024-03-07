@@ -42,7 +42,7 @@ export default function DonationErrorModal({ newState }: Props): JSX.Element {
         }}
       />
       <ModalDialog
-        type="error"
+        type="success"
         visible={unauthorizedModalVisible}
         setVisible={setUnauthorizedModalVisible}
         title={t("unauthorizedModalTitle")}
