@@ -2,6 +2,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTicketsContext } from "contexts/ticketsContext";
 import TicketIconText from "components/moleculars/TicketIconText";
 import { useState } from "react";
+import { useUserSubscription } from "@ribon.io/shared";
 import ZeroTicketsModal from "../modals/ZeroTicketsModal";
 
 type TicketSectionProps = {
@@ -15,15 +16,16 @@ function TicketSection({
   const hasTickets = tickets > 0;
   const { navigateTo } = useNavigation();
   const [zeroTicketModalVisible, setZeroTicketModalVisible] = useState(false);
+  const { userIsMember } = useUserSubscription();
 
   const handleTicketClick = () => {
     if (hasTickets) {
       navigateTo("GiveTicketScreen");
-    } else {
-      // TODO: check if user has club
-      // if true navigate to for you screen, if not show modal
-      setZeroTicketModalVisible(true);
-    }
+    } else if (userIsMember()) {
+        navigateTo("ForYouScreen");
+      } else {
+        setZeroTicketModalVisible(true);
+      }
   };
 
   return (
