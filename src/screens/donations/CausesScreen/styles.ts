@@ -10,15 +10,6 @@ const styles = StyleSheet.create({
   containerPadding: {
     paddingHorizontal: 16,
   },
-  imageContainer: {
-    width: "100%",
-    marginTop: theme.spacingNative(40),
-  },
-  image: {
-    width: "100%",
-    height: 384,
-    resizeMode: "cover",
-  },
   containerTicket: {
     height: 350,
     width: "100%",
