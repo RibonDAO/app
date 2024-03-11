@@ -21,6 +21,7 @@ import UnsafeAreaProvider, {
 import TasksProvider from "./src/contexts/tasksContext";
 import initializeCRM from "./src/services/crm";
 import { WALLET_CONNECT_PROJECT_ID } from "./src/utils/constants/Application";
+import { initAppsFlyer } from "./src/services/appsFlyer";
 
 const providerMetadata = {
   name: "Ribon App",
@@ -41,6 +42,7 @@ function Main() {
 
   useEffect(() => {
     initializeCRM();
+    initAppsFlyer();
   }, []);
 
   if (!isLoadingComplete) {

@@ -63,6 +63,9 @@ export default () => ({
     },
     "plugins": [
       [
+        "react-native-appsflyer",{}
+      ],
+      [
         "expo-build-properties",
         {
           "android": {
