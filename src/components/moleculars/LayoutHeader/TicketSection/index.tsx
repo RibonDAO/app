@@ -17,15 +17,16 @@ function TicketSection({
   const { navigateTo } = useNavigation();
   const [zeroTicketModalVisible, setZeroTicketModalVisible] = useState(false);
   const { userIsMember } = useUserSubscription();
+  const { isMember } = userIsMember();
 
   const handleTicketClick = () => {
     if (hasTickets) {
       navigateTo("GiveTicketScreen");
-    } else if (userIsMember()) {
-        navigateTo("ForYouScreen");
-      } else {
-        setZeroTicketModalVisible(true);
-      }
+    } else if (isMember) {
+      navigateTo("ForYouScreen");
+    } else {
+      setZeroTicketModalVisible(true);
+    }
   };
 
   return (
