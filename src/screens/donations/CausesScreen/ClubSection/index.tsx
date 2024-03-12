@@ -24,7 +24,7 @@ export default function ClubSection(): JSX.Element | null {
   );
 
   useEffect(() => {
-    setIsNotMember(!isMember?.isMember);
+    setIsNotMember(!isMember);
   }, [isMember]);
 
   useEffect(() => {
