@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   useStories,
   useFirstAccessToIntegration,
   useDonatedToday,
 } from "@ribon.io/shared/hooks";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
@@ -15,13 +15,11 @@ import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { logError } from "services/crashReport";
 import { useTicketsContext } from "contexts/ticketsContext";
-import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
-import Tooltip from "components/atomics/Tooltip";
 import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
 import { logEvent } from "services/analytics";
-import { Image } from "expo-image";
+import { Image as ExpoImage } from "expo-image";
 import InlineNotification from "components/moleculars/notifications/InlineNotification";
 import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
@@ -29,7 +27,6 @@ import { showToast } from "lib/Toast";
 import { useFocusEffect } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
-import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import IntegrationBanner from "components/moleculars/IntegrationBanner";
 import usePageView from "hooks/usePageView";
 import { useCausesContext } from "contexts/causesContext";
@@ -43,6 +40,7 @@ import {
   DONATION_TOAST_SEEN_AT_KEY,
 } from "lib/localStorage/constants";
 import { useRouteParams } from "hooks/useRouteParams";
+import { useLanguage } from "contexts/languageContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
@@ -86,6 +84,8 @@ export default function CausesScreen() {
   const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
     useTickets();
   const { params } = useRouteParams<"CausesScreen">();
+  const { currentLang } = useLanguage();
+  const ctaClub = `https://ribon-produto.s3.amazonaws.com/cta_club_${currentLang}.png`;
 
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
@@ -213,7 +213,7 @@ export default function CausesScreen() {
     setCurrentNonProfit(nonProfit);
     try {
       const nonProfitStories = await fetchNonProfitStories(nonProfit.id);
-      Image.prefetch(nonProfitStories.map((story) => story.image));
+      ExpoImage.prefetch(nonProfitStories.map((story) => story.image));
       if (nonProfitStories.length === 0) return;
       setStories(nonProfitStories);
       setStoriesVisible(true);
@@ -385,25 +385,19 @@ export default function CausesScreen() {
           </View>
         )}
 
-        <Tooltip tooltipText={t("ticketExplanation")}>
-          <View style={S.ticketExplanationSection}>
-            <Icon
-              type="rounded"
-              name="help"
-              size={20}
-              color={theme.colors.gray30}
-            />
-            <View style={{ overflow: "hidden" }}>
-              <View style={S.ticketTextContainer}>
-                <Text style={S.ticketText}>{t("whatIsATicket")}</Text>
-              </View>
-            </View>
-          </View>
-        </Tooltip>
-
-        <View style={S.supportContainer}>
-          <UserSupportBanner from="donateTickets_page" />
-        </View>
+        <TouchableOpacity
+          accessibilityRole="button"
+          style={S.imageContainer}
+          onPress={() => navigateTo("ClubScreen")}
+        >
+          <Image
+            accessibilityIgnoresInvertColors
+            source={{
+              uri: ctaClub,
+            }}
+            style={S.image}
+          />
+        </TouchableOpacity>
       </ScrollView>
       <DonationErrorModal newState={params?.newState} />
     </>

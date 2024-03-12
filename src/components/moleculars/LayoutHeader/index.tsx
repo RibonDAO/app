@@ -8,7 +8,6 @@ import { walletTruncate } from "lib/formatters/walletTruncate";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
-import TicketModal from "./modals/TicketModal";
 import TicketSection from "./TicketSection";
 import ConfigMenu from "./ConfigMenu";
 import * as S from "./styles";
@@ -27,7 +26,6 @@ function LayoutHeader({
     keyPrefix: "layoutHeader",
   });
   const [menuVisible, setMenuVisible] = useState(false);
-  const [ticketModalVisible, setTicketModalVisible] = useState(false);
   const { connectWallet, wallet, killSession } = useWalletContext();
 
   useEffect(() => {
@@ -65,13 +63,6 @@ function LayoutHeader({
             <WalletIcon />
           </S.WalletContainer>
         </S.Container>
-      )}
-
-      {!hideTicket && (
-        <TicketModal
-          visible={ticketModalVisible}
-          setVisible={setTicketModalVisible}
-        />
       )}
 
       <S.Container accessibilityRole="button" onPress={toggleModal}>

@@ -36,6 +36,11 @@
       "confirm": "Sign out",
       "cancel": "Cancel"
     },
+    "zeroTicketsModal": {
+      "title": "You have used all your tickets.",
+      "description": "Come back tomorrow for more.\n\nOr subscribe to Clube Ribon and receive 30 extra tickets right now!",
+      "confirm": "Get to know Ribon Club"
+    },
     "disconnectWallet": "Disconnect wallet",
     "cancel": "cancel",
     "confirm": "confirm"
@@ -82,9 +87,9 @@
       "errorModalTitle": "Donation failed",
       "errorModalText": "Unable to donate now, wait for you next donation",
       "errorModalButtonText": "Ok",
-      "unauthorizedModalTitle": "Email not validated",
-      "unauthorizedModalText": "To securely complete your donation, it is necessary for you to validate your email.",
-      "unauthorizedModalButtonText": "Proceed to validation"
+      "unauthorizedModalTitle": "Validate your e-mail",
+      "unauthorizedModalText": "Please, validate your e-mail to ensure your donation arrives safely.",
+      "unauthorizedModalButtonText": "Validate my account"
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",
@@ -171,10 +176,6 @@
       "whatIsATicket": "What is a ticket?",
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "hasAccountButton": "I have an account"
-    },
-    "zeroTicketScreen": {
-      "title": "You have used all your tickets",
-      "subtitle": "How about making a paid donation?"
     },
     "forYouScreen": {
       "newsSection": {

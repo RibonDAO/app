@@ -165,6 +165,7 @@ function PixPaymentInformationProvider({ children }: Props) {
   };
 
   const handleSubmit = async () => {
+    showLoadingOverlay();
     logEvent("confirmPaymentFormBtn_click", {
       source: "pix",
       target,
@@ -188,7 +189,6 @@ function PixPaymentInformationProvider({ children }: Props) {
 
       setClientSecret(response.data.externalId);
       login();
-      showLoadingOverlay();
       generatePixPayment(response.data.externalId);
     } catch (error) {
       hideLoadingOverlay();

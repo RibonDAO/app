@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as React from "react";
 import WalletProvider from "contexts/walletContext";
 import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
@@ -32,7 +31,6 @@ import ClubCheckoutScreen from "screens/promoters/club/CheckoutScreen";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
-import PromotersScreen from "screens/promoters/PromotersScreen";
 import TicketsProvider from "contexts/ticketsContext";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 import ForYouScreen from "screens/content/ForYouScreen";
@@ -53,7 +51,6 @@ import { Image } from "react-native";
 import { openInWebViewer } from "lib/linkOpener";
 import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsScreen";
 import UtmProvider, { useUtmContext } from "contexts/utmContext";
-import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import { logEvent } from "services/analytics";
 import PixInstructionsScreen from "screens/promoters/PixInstructionsScreen";
 import PixPaymentInformationProvider from "contexts/pixInformationContext";
@@ -77,8 +74,6 @@ import ClubScreen from "screens/promoters/ClubScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
-import GivingIconOff from "./assets/GivingIconOff";
-import GivingIconOn from "./assets/GivingIconOn";
 import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
@@ -136,14 +131,6 @@ function BottomTabNavigator() {
     />
   );
 
-  const headerWithWallet = () => (
-    <Header
-      rightComponent={<LayoutHeader hideTicket hideWallet={false} />}
-      sideLogo={sideLogo()}
-      onSideLogoClick={navigateToIntegration}
-    />
-  );
-
   function renderTabBarIcon(color: any, iconOn: any, iconOff: any) {
     return color === activeColor ? iconOn : iconOff;
   }
@@ -187,25 +174,6 @@ function BottomTabNavigator() {
         listeners={() => ({
           tabPress: () => {
             logEvent("forYouNavBtn_click");
-          },
-        })}
-      />
-
-      <BottomTab.Screen
-        name="PromotersScreen"
-        component={PromotersScreen}
-        options={{
-          title: t("tabs.giving") || "Donations",
-          tabBarIcon: ({ color }: any) =>
-            renderTabBarIcon(color, <GivingIconOn />, <GivingIconOff />),
-          header: headerWithWallet,
-          lazy: false,
-        }}
-        listeners={() => ({
-          tabPress: () => {
-            logEvent("giveNonProfitNavBtn_click", {
-              from: "header",
-            });
           },
         })}
       />
@@ -318,12 +286,6 @@ function RootNavigator() {
       <Stack.Screen
         name="GiveTicketScreen"
         component={GiveTicketScreen}
-        options={{ headerShown: false, animation: "slide_from_bottom" }}
-      />
-
-      <Stack.Screen
-        name="ZeroTicketScreen"
-        component={ZeroTicketScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
