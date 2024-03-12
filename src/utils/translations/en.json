@@ -374,7 +374,7 @@
         "monthlyContribution": "Monthly subscription",
         "uniqueContribution": "Contributing once",
         "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
-      } 
+      }
     },
     "sealText": "Safe transaction by",
     "clubContributionDoneScreen": {
@@ -461,7 +461,10 @@
         "link": "Don’t show this again"
       },
       "profileSection": {
-        "userName": "Your profile"
+        "userName": "Your profile",
+        "noClubTagText": "No Ribon Club",
+        "clubTagText": "Ribon Club",
+        "ctaClubText": "Club benefits →"
       }
     }
   },

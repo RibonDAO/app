@@ -74,6 +74,7 @@ import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
 import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
 import ClubScreen from "screens/promoters/ClubScreen";
+import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import GivingIconOff from "./assets/GivingIconOff";
@@ -84,7 +85,6 @@ import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import ForYouIconOn from "./assets/ForYouIconOn";
 import ForYouIconOff from "./assets/ForYouIconOff";
-import { initializeDeeplink } from "../../services/deepLink";
 
 const { primary } = theme.colors.brand;
 const { neutral } = theme.colors;
@@ -96,6 +96,7 @@ function BottomTabNavigator() {
   const { t } = useTranslation();
 
   const { currentIntegrationId, integration } = useIntegrationContext();
+  const { isAuthenticated } = useAuthentication();
 
   const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
 
@@ -125,13 +126,16 @@ function BottomTabNavigator() {
       onSideLogoClick={navigateToIntegration}
     />
   );
-  const headerWithoutTicket = () => (
+
+  const headerOutline = () => (
     <Header
-      rightComponent={<LayoutHeader hideTicket />}
+      outline={isAuthenticated()}
+      rightComponent={<LayoutHeader outline />}
       sideLogo={sideLogo()}
       onSideLogoClick={navigateToIntegration}
     />
   );
+
   const headerWithWallet = () => (
     <Header
       rightComponent={<LayoutHeader hideTicket hideWallet={false} />}
@@ -213,7 +217,7 @@ function BottomTabNavigator() {
           title: t("tabs.impact") || "Impact",
           tabBarIcon: ({ color }: any) =>
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
-          header: headerWithoutTicket,
+          header: headerOutline,
           lazy: false,
         }}
         listeners={() => ({

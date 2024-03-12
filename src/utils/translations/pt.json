@@ -368,7 +368,7 @@
         "monthlyContribution": "Assinatura mensal",
         "uniqueContribution": "Compra única",
         "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
-      } 
+      }
     },
     "sealText": "Transação segura processada por",
     "clubContributionDoneScreen": {
@@ -455,7 +455,10 @@
         "link": "Não mostrar novamente"
       },
       "profileSection": {
-        "userName": "Seu perfil"
+        "userName": "Seu perfil",
+        "noClubTagText": "Sem Clube Ribon",
+        "clubTagText": "Clube Ribon",
+        "ctaClubText": "Benefícios do Clube →"
       }
     }
   },

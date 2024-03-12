@@ -9,8 +9,8 @@ import { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import UserAvatar from "screens/users/ImpactScreen/ProfileSection/UserAvatar";
 
+import VerifiedIcon from "components/vectors/VerifiedIcon";
 import Sparkles from "./assets/Sparkles";
-import VerifiedIcon from "./assets/VerifiedIcon";
 import S from "./styles";
 import RibonFlag from "./assets/RibonFlag";
 import PinkSun from "./assets/pink-sun.png";

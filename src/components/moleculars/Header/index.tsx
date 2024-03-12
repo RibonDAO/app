@@ -1,17 +1,20 @@
 import RibonLogo from "components/vectors/RibonLogo";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
+import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
-import HeaderPlaceholder from "components/moleculars/Header/placeholder";
 import { theme } from "@ribon.io/shared/styles";
+import HeaderPlaceholder from "components/moleculars/Header/placeholder";
+import BackgroundShapeLeft from "components/vectors/BackgroundShapes/BackgroundShapeLeft";
 import Icon from "components/atomics/Icon";
-import S from "./styles";
+import * as S from "./styles";
 
 export type Props = {
   sideLogo?: JSX.Element;
   rightComponent?: JSX.Element;
   hasBackButton?: boolean;
   backButtonColor?: string;
+  outline?: boolean;
   onBackButtonClick?: () => void;
   onSideLogoClick?: () => void;
 };
@@ -23,8 +26,11 @@ function Header({
   onBackButtonClick,
   onSideLogoClick,
   backButtonColor = theme.colors.brand.primary[900],
+  outline = false,
 }: Props): JSX.Element {
   const { navigateTo, popNavigation } = useNavigation();
+  const { userIsMember } = useSubscriptions();
+  const { isMember } = userIsMember();
 
   const navigateToTicketsPage = () => {
     navigateTo("CausesScreen");
@@ -39,8 +45,15 @@ function Header({
   };
 
   return (
-    <View style={S.container}>
-      <View style={S.insideContainer}>
+    <S.Container outline={outline} member={isMember}>
+      {outline && (
+        <S.ContainerShapeLeft>
+          <BackgroundShapeLeft
+            color={isMember ? theme.colors.brand.tertiary[800] : undefined}
+          />
+        </S.ContainerShapeLeft>
+      )}
+      <S.InsideContainer>
         {hasBackButton ? (
           <TouchableOpacity
             accessibilityRole="button"
@@ -55,7 +68,7 @@ function Header({
             />
           </TouchableOpacity>
         ) : (
-          <View style={S.logoContainer}>
+          <S.LogoContainer>
             <TouchableOpacity
               accessibilityRole="button"
               onPress={() => navigateToTicketsPage()}
@@ -73,13 +86,13 @@ function Header({
                 {sideLogo}
               </TouchableOpacity>
             )}
-          </View>
+          </S.LogoContainer>
         )}
-      </View>
+      </S.InsideContainer>
       {rightComponent && (
-        <View style={S.insideContainer}>{rightComponent}</View>
+        <S.InsideContainer>{rightComponent}</S.InsideContainer>
       )}
-    </View>
+    </S.Container>
   );
 }
 export default withPlaceholder(Header, HeaderPlaceholder);
