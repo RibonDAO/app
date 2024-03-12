@@ -7,6 +7,7 @@ import { signIn } from "services/googleSignIn";
 import { logEvent } from "services/analytics";
 import { useState } from "react";
 import ModalWrongEmail from "components/moleculars/modals/ModalWrongEmail";
+import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import GoogleIcon from "./assets/GoogleIcon";
 
 type Props = {
@@ -20,14 +21,17 @@ function GoogleLogin({ onContinue, from }: Props): JSX.Element {
 
   const { signInWithGoogle } = useAuthentication();
   const [modalVisible, setModalVisible] = useState(false);
+  const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
 
   async function loginGoogle() {
     const result = await signIn();
 
     if (result) {
       try {
+        showLoadingOverlay();
         await signInWithGoogle({ access_token: result.userInfo?.idToken });
         onContinue();
+        hideLoadingOverlay();
       } catch (error: any) {
         if (error.message.includes("Email does not match")) {
           setModalVisible(true);
