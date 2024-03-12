@@ -87,9 +87,9 @@
       "errorModalTitle": "Donation failed",
       "errorModalText": "Unable to donate now, wait for you next donation",
       "errorModalButtonText": "Ok",
-      "unauthorizedModalTitle": "Email not validated",
-      "unauthorizedModalText": "To securely complete your donation, it is necessary for you to validate your email.",
-      "unauthorizedModalButtonText": "Proceed to validation"
+      "unauthorizedModalTitle": "Validate your e-mail",
+      "unauthorizedModalText": "Please, validate your e-mail to ensure your donation arrives safely.",
+      "unauthorizedModalButtonText": "Validate my account"
     },
     "donateScreen": {
       "nonProfitText": "You are donating to",
