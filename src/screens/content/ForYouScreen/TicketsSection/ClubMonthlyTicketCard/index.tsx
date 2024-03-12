@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import { theme } from "@ribon.io/shared";
+import { theme, useUserTickets, TicketsCategories } from "@ribon.io/shared";
+import IsMember from "@ribon.io/shared/types/apiResponses/IsMember";
 import PinkBoxIllustration from "assets/illustrations/PinkBoxIllustration";
 import Button from "components/atomics/buttons/Button";
 import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
@@ -8,29 +9,40 @@ import CardTicket from "components/moleculars/CardTicket";
 
 import TicketPinkIcon from "components/vectors/TicketPinkIcon";
 import { useNavigation } from "hooks/useNavigation";
-
 import { useTranslation } from "react-i18next";
+import { PLATFORM } from "utils/constants/Application";
 
-export default function ClubMonthlyTicketCard() {
+type Props = {
+  tickets?: number;
+  isMember?: IsMember;
+  refetchTickets: () => void;
+};
+export default function ClubMonthlyTicketCard({
+  tickets = 0,
+  isMember,
+  refetchTickets,
+}: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "content.forYouScreen.clubTicketsSection",
   });
 
-  const hasCollected = false;
-  const hasClub = true;
+  const hasCollected = isMember && tickets === 0;
 
   const buttonTextHasClub = hasCollected
     ? t("monthlyTicketCard.buttonTextCollected")
-    : t("monthlyTicketCard.buttonText", { value: 2 });
+    : t("monthlyTicketCard.buttonText", { value: tickets });
 
   const { navigateTo } = useNavigation();
 
-  const handleButtonPress = () => {
-    if (!hasClub) {
-      navigateTo("ClubScreen");
-    }
+  const { collectByClub } = useUserTickets();
 
-    // collect ticket
+  const handleButtonPress = async () => {
+    if (!isMember) {
+      navigateTo("ClubScreen");
+    } else {
+      await collectByClub(PLATFORM, TicketsCategories.MONTHLY);
+      refetchTickets();
+    }
   };
 
   return (
@@ -46,7 +58,7 @@ export default function ClubMonthlyTicketCard() {
     >
       {hasCollected ? (
         <ButtonNonClickable
-          text={t("monthlyTicketCard.buttonText")}
+          text={t("monthlyTicketCard.buttonTextCollected")}
           textColor={theme.colors.brand.tertiary[600]}
           borderColor={theme.colors.brand.tertiary[50]}
           backgroundColor={theme.colors.brand.tertiary[50]}
@@ -60,7 +72,7 @@ export default function ClubMonthlyTicketCard() {
       ) : (
         <Button
           text={
-            hasClub
+            isMember
               ? buttonTextHasClub
               : t("monthlyTicketCard.buttonTextNoClub")
           }
@@ -77,7 +89,7 @@ export default function ClubMonthlyTicketCard() {
                   type: "outlined",
                   size: 24,
                 }
-              : hasClub
+              : isMember
               ? undefined
               : {
                   name: "lock",

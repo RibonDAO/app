@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: theme.spacingNative(16),
     alignItems: "flex-start",
-    maxWidth: 328,
+    width: 328,
   },
   header: {
     display: "flex",
@@ -19,12 +19,14 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignSelf: "center",
+    width: 200,
   },
   title: {
     color: theme.colors.neutral[800],
     fontSize: 16,
     fontWeight: "600",
     marginBottom: 4,
+    width: "auto",
   },
   subtitleContainer: {
     display: "flex",

@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import { theme } from "@ribon.io/shared";
+import { TicketsCategories, theme, useUserTickets } from "@ribon.io/shared";
+import IsMember from "@ribon.io/shared/types/apiResponses/IsMember";
 import PinkTicketIllustration from "assets/illustrations/PinkTicketIllustration";
 import Button from "components/atomics/buttons/Button";
 import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
@@ -8,30 +9,40 @@ import CardTicket from "components/moleculars/CardTicket";
 
 import TicketPinkIcon from "components/vectors/TicketPinkIcon";
 import { useNavigation } from "hooks/useNavigation";
-
 import { useTranslation } from "react-i18next";
+import { PLATFORM } from "utils/constants/Application";
 
-export default function ClubDailyTicketCard() {
+type Props = {
+  tickets?: number;
+  isMember?: IsMember;
+  refetchTickets: () => void;
+};
+export default function ClubDailyTicketCard({
+  tickets = 0,
+  isMember,
+  refetchTickets,
+}: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "content.forYouScreen.clubTicketsSection",
   });
 
-  const hasCollected = false;
-
-  const hasClub = false;
+  const hasCollected = isMember && tickets === 0;
 
   const buttonTextHasClub = hasCollected
     ? t("dailyTicketCard.buttonTextCollected")
-    : t("dailyTicketCard.buttonText", { value: 2 });
+    : t("dailyTicketCard.buttonText", { value: tickets });
 
   const { navigateTo } = useNavigation();
 
-  const handleButtonPress = () => {
-    if (!hasClub) {
-      navigateTo("ClubScreen");
-    }
+  const { collectByClub } = useUserTickets();
 
-    // collect ticket
+  const handleButtonPress = async () => {
+    if (!isMember) {
+      navigateTo("ClubScreen");
+    } else {
+      await collectByClub(PLATFORM, TicketsCategories.DAILY);
+      refetchTickets();
+    }
   };
 
   return (
@@ -47,7 +58,7 @@ export default function ClubDailyTicketCard() {
     >
       {hasCollected ? (
         <ButtonNonClickable
-          text={t("dailyTicketCard.buttonText")}
+          text={t("dailyTicketCard.buttonTextCollected")}
           textColor={theme.colors.brand.tertiary[600]}
           borderColor={theme.colors.brand.tertiary[50]}
           backgroundColor={theme.colors.brand.tertiary[50]}
@@ -61,7 +72,7 @@ export default function ClubDailyTicketCard() {
       ) : (
         <Button
           text={
-            hasClub ? buttonTextHasClub : t("dailyTicketCard.buttonTextNoClub")
+            isMember ? buttonTextHasClub : t("dailyTicketCard.buttonTextNoClub")
           }
           textColor={theme.colors.neutral10}
           borderColor={theme.colors.brand.tertiary[600]}
@@ -76,7 +87,7 @@ export default function ClubDailyTicketCard() {
                   type: "outlined",
                   size: 24,
                 }
-              : hasClub
+              : isMember
               ? undefined
               : {
                   name: "lock",
