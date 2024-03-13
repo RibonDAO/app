@@ -7,6 +7,7 @@ import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
 import CardTicket from "components/moleculars/CardTicket";
 
 import TicketPinkIcon from "components/vectors/TicketPinkIcon";
+import { useAuthentication } from "contexts/authenticationContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import { PLATFORM } from "utils/constants/Application";
@@ -16,12 +17,14 @@ type Props = {
   isMember?: boolean;
   refetchTickets: () => void;
   plan?: number;
+  setUnauthorizedModalVisible: (value: boolean) => void;
 };
 export default function ClubMonthlyTicketCard({
   tickets = 0,
   isMember,
   refetchTickets,
   plan,
+  setUnauthorizedModalVisible,
 }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "content.forYouScreen.clubTicketsSection",
@@ -42,9 +45,13 @@ export default function ClubMonthlyTicketCard({
 
   const { collectByClub } = useUserTickets();
 
+  const { isAuthenticated } = useAuthentication();
+
   const handleButtonPress = async () => {
     if (!isMember) {
       navigateTo("ClubScreen");
+    } else if (!isAuthenticated()) {
+      setUnauthorizedModalVisible(true);
     } else {
       await collectByClub(PLATFORM, TicketsCategories.MONTHLY);
       refetchTickets();

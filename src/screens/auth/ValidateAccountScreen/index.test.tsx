@@ -9,6 +9,9 @@ import ValidateAccountScreen from ".";
 jest.mock("services/googleSignIn", () => ({
   signIn: () => {},
 }));
+jest.mock("hooks/useRouteParams", () => ({
+  useRouteParams: () => ({ params: { from: "auth" } }),
+}));
 
 describe("ValidateAccountScreen", () => {
   beforeEach(() => {

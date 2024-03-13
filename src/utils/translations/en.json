@@ -223,6 +223,15 @@
         }
       },
       "clubTicketsSection": {
+        "unauthorizedModalTitle": "Validate your account",
+        "unauthorizedModalText": "Please, validate your account to collect your Ribon Club tickets.",
+        "unauthorizedModalButtonText": "Validate my account",
+        "validateAccountScreen": {
+          "title": "Validate your account",
+          "description": "Validate your account created with {{email}} to collect your Ribon Club tickets.",
+          "descriptionWithoutEmail": "Validate your account to collect your Ribon Club tickets.",
+          "toastSuccessMessage": "Email sent"
+        },
         "dailyTicketCard": {
           "title": "Ribon Club tickets",
           "subtitle": "Earn up to 20 per day",
@@ -434,6 +443,15 @@
         "recurrenceMonthly": "month",
         "recurrenceDaily": "year",
         "tagText": "Most popular"
+      },
+      "unauthorizedModalTitle": "Validate your account",
+      "unauthorizedModalText": "Please, validate your account to continue with payment.",
+      "unauthorizedModalButtonText": "Validate my account",
+      "validateAccountScreen": {
+        "title": "Validate your account",
+        "description": "Validate your account created with {{email}} to continue with payment.",
+        "descriptionWithoutEmail": "Validate your account to continue with payment.",
+        "toastSuccessMessage": "Email sent"
       }
     }
   },
@@ -626,6 +644,7 @@
     "validateAccountScreen": {
       "title": "Validate your account",
       "description": "Validate your account created with {{email}} to complete your donation.",
+      "descriptionWithoutEmail": "Validate your account to complete your donation.",
       "toastSuccessMessage": "Email sent"
     }
   }
