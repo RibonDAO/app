@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { TicketsCategories, theme, useUserTickets } from "@ribon.io/shared";
-import IsMember from "@ribon.io/shared/types/apiResponses/IsMember";
 import PinkTicketIllustration from "assets/illustrations/PinkTicketIllustration";
 import Button from "components/atomics/buttons/Button";
 import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
@@ -14,7 +13,7 @@ import { PLATFORM } from "utils/constants/Application";
 
 type Props = {
   tickets?: number;
-  isMember?: IsMember;
+  isMember?: boolean;
   refetchTickets: () => void;
 };
 export default function ClubDailyTicketCard({
