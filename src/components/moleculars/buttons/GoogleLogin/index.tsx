@@ -30,10 +30,9 @@ function GoogleLogin({ onContinue, from }: Props): JSX.Element {
       try {
         showLoadingOverlay();
         await signInWithGoogle({ access_token: result.userInfo?.idToken });
-        hideLoadingOverlay();
         onContinue();
-      } catch (error: any) {
         hideLoadingOverlay();
+      } catch (error: any) {
         if (error.message.includes("Email does not match")) {
           setModalVisible(true);
         }
