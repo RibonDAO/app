@@ -17,6 +17,7 @@ export const Container = styled.View`
       : theme.colors.brand.primary[800]};
   overflow: hidden;
   padding-bottom: 40px;
+  padding-top: 58px;
 `;
 
 export const CenterContainer = styled.View`
@@ -24,6 +25,11 @@ export const CenterContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+export const ContainerShapeLeft = styled.View`
+  position: absolute;
+  left: 0;
 `;
 
 export const ContainerShapeRight = styled.View`

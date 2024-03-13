@@ -8,11 +8,13 @@ import { useAuthentication } from "contexts/authenticationContext";
 import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "hooks/useNavigation";
 import { theme } from "@ribon.io/shared";
+import { logEvent } from "services/analytics";
 import UserProfile from "@ribon.io/shared/types/entities/UserProfile";
 import Sparkles from "screens/promoters/ClubScreen/Header/assets/Sparkles";
 import BackgroundShapeRight from "components/vectors/BackgroundShapes/BackgroundShapeRight";
 import VerifiedIcon from "components/vectors/VerifiedIcon";
-import { logEvent } from "services/analytics";
+import BackgroundShapeLeft from "components/vectors/BackgroundShapes/BackgroundShapeLeft";
+import LoadingOverlay from "components/moleculars/modals/LoadingOverlay";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
 
@@ -52,10 +54,16 @@ function ProfileSection() {
     navigateTo("ClubScreen");
   };
 
-  if (!currentUser || isLoading || isMemberLoading) return <View />;
+  if (!currentUser) return <View />;
+  if (isLoading || isMemberLoading) return <LoadingOverlay />;
 
   return (
     <S.Container member={isMember}>
+      <S.ContainerShapeLeft>
+        <BackgroundShapeLeft
+          color={isMember ? theme.colors.brand.tertiary[800] : undefined}
+        />
+      </S.ContainerShapeLeft>
       <S.ContainerShapeRight>
         <BackgroundShapeRight
           color={isMember ? theme.colors.brand.tertiary[800] : undefined}

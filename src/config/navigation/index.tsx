@@ -43,6 +43,7 @@ import GiveTicketScreen from "screens/donations/GiveTicketScreen";
 import ContributionStatsScreen from "screens/users/ContributionStatsScreen";
 import CheckoutProvider from "contexts/checkoutContext";
 import NonProfitsProvider from "contexts/nonProfitsContext";
+import { useCurrentUser } from "contexts/currentUserContext";
 import IntegrationProvider, {
   useIntegrationContext,
 } from "contexts/integrationContext";
@@ -91,9 +92,8 @@ function BottomTabNavigator() {
   const { t } = useTranslation();
 
   const { currentIntegrationId, integration } = useIntegrationContext();
-  const { isAuthenticated } = useAuthentication();
-
   const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
+  const { currentUser } = useCurrentUser();
 
   const navigateToIntegration = () => {
     if (!integration?.integrationTask?.linkAddress) {
@@ -124,8 +124,8 @@ function BottomTabNavigator() {
 
   const headerOutline = () => (
     <Header
-      outline={isAuthenticated()}
-      rightComponent={<LayoutHeader outline />}
+      outline={!!currentUser}
+      rightComponent={<LayoutHeader outline={!!currentUser} />}
       sideLogo={sideLogo()}
       onSideLogoClick={navigateToIntegration}
     />

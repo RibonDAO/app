@@ -5,15 +5,9 @@ export const Container = styled.View`
   display: flex;
   align-items: flex-start;
   flex-direction: row;
-  background-color: ${(props: { outline: boolean; member: boolean }) => {
-    if (props.outline && props.member) {
-      return theme.colors.brand.tertiary[600];
-    } else if (props.outline && !props.member) {
-      return theme.colors.brand.primary[800];
-    } else {
-      return theme.colors.neutral10;
-    }
-  }};
+  background-color: ${(props: { outline: boolean }) =>
+    props.outline ? "transparent" : theme.colors.neutral10};
+
   justify-content: space-between;
   padding: ${theme.spacing(16)};
   padding-right: ${theme.spacing(12)};

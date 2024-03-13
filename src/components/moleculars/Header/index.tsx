@@ -1,11 +1,9 @@
 import RibonLogo from "components/vectors/RibonLogo";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
-import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import { theme } from "@ribon.io/shared/styles";
 import HeaderPlaceholder from "components/moleculars/Header/placeholder";
-import BackgroundShapeLeft from "components/vectors/BackgroundShapes/BackgroundShapeLeft";
 import Icon from "components/atomics/Icon";
 import * as S from "./styles";
 
@@ -29,8 +27,6 @@ function Header({
   outline = false,
 }: Props): JSX.Element {
   const { navigateTo, popNavigation } = useNavigation();
-  const { userIsMember } = useSubscriptions();
-  const { isMember } = userIsMember();
 
   const navigateToTicketsPage = () => {
     navigateTo("CausesScreen");
@@ -45,14 +41,7 @@ function Header({
   };
 
   return (
-    <S.Container outline={outline} member={isMember}>
-      {outline && (
-        <S.ContainerShapeLeft>
-          <BackgroundShapeLeft
-            color={isMember ? theme.colors.brand.tertiary[800] : undefined}
-          />
-        </S.ContainerShapeLeft>
-      )}
+    <S.Container outline={outline}>
       <S.InsideContainer>
         {hasBackButton ? (
           <TouchableOpacity
