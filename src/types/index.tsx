@@ -127,6 +127,10 @@ export type SentMagicLinkEmailParamsList = {
   email: string;
 };
 
+export type ValidateAccountScreenParamsList = {
+  from: string;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
@@ -164,7 +168,7 @@ export type RootStackParamList = {
   ReceiveExtraTicketScreen: undefined;
   ExtraTicketScreen: undefined;
   ExpiredLinkScreen: undefined;
-  ValidateAccountScreen: undefined;
+  ValidateAccountScreen: ValidateAccountScreenParamsList;
   ClubContributionDoneScreen: undefined;
   ClubScreen: undefined;
 };

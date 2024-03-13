@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { useFocusEffect } from "@react-navigation/native";
+import { logEvent } from "services/analytics";
 import S from "./styles";
 
 export default function ClubSection(): JSX.Element | null {
@@ -23,17 +24,26 @@ export default function ClubSection(): JSX.Element | null {
   );
 
   useEffect(() => {
+    logEvent("clubCTA_view", { from: "donateTickets_page" });
+  }, []);
+
+  useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
   }, [currentUser]);
 
+  function handleClick() {
+    logEvent("clubCTA_click", { from: "donateTickets_page" });
+    navigateTo("ClubScreen");
+  }
+
   return !isLoading && !isMember ? (
     <TouchableOpacity
       accessibilityRole="button"
       style={S.imageContainer}
-      onPress={() => navigateTo("ClubScreen")}
+      onPress={() => handleClick()}
     >
       <Image
         accessibilityIgnoresInvertColors
