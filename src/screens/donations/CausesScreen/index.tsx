@@ -4,7 +4,7 @@ import {
   useFirstAccessToIntegration,
   useDonatedToday,
 } from "@ribon.io/shared/hooks";
-import { ScrollView, Text, View, TouchableOpacity, Image } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
@@ -40,11 +40,11 @@ import {
   DONATION_TOAST_SEEN_AT_KEY,
 } from "lib/localStorage/constants";
 import { useRouteParams } from "hooks/useRouteParams";
-import { useLanguage } from "contexts/languageContext";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
+import ClubSection from "./ClubSection";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -84,8 +84,6 @@ export default function CausesScreen() {
   const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
     useTickets();
   const { params } = useRouteParams<"CausesScreen">();
-  const { currentLang } = useLanguage();
-  const ctaClub = `https://ribon-produto.s3.amazonaws.com/cta_club_${currentLang}.png`;
 
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
@@ -385,19 +383,7 @@ export default function CausesScreen() {
           </View>
         )}
 
-        <TouchableOpacity
-          accessibilityRole="button"
-          style={S.imageContainer}
-          onPress={() => navigateTo("ClubScreen")}
-        >
-          <Image
-            accessibilityIgnoresInvertColors
-            source={{
-              uri: ctaClub,
-            }}
-            style={S.image}
-          />
-        </TouchableOpacity>
+        <ClubSection />
       </ScrollView>
       <DonationErrorModal newState={params?.newState} />
     </>
