@@ -13,8 +13,7 @@ export default function ClubSection(): JSX.Element | null {
   const { isMember, refetch } = userIsMember();
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
-  const [isNotMember, setIsNotMember] = useState(false);
-
+  const [isNotMember, setIsNotMember] = useState(true);
   const ctaClub = `https://ribon-produto.s3.amazonaws.com/cta_club_${currentLang}.png`;
 
   useFocusEffect(
@@ -28,7 +27,7 @@ export default function ClubSection(): JSX.Element | null {
   }, [isMember]);
 
   useEffect(() => {
-    setIsNotMember(false);
+    if (currentUser) setIsNotMember(false);
   }, [currentUser]);
 
   return isNotMember ? (
