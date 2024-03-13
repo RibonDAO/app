@@ -411,7 +411,13 @@
       },
       "unauthorizedModalTitle": "Confirme sua conta",
       "unauthorizedModalText": "Por favor, confirme sua conta para continuar com o pagamento.",
-      "unauthorizedModalButtonText": "Confirmar conta"
+      "unauthorizedModalButtonText": "Confirmar conta",
+      "validateAccountScreen": {
+        "title": "Confirme sua conta",
+        "description": "Confirme sua conta criada com {{email}} para continuar com o pagamento.",
+        "descriptionWithoutEmail": "Confirme sua conta para continuar com o pagamento.",
+        "toastSuccessMessage": "Email enviado"
+      }
     }
   },
   "users": {
@@ -601,6 +607,7 @@
     "validateAccountScreen": {
       "title": "Valide sua conta",
       "description": "Valide sua conta criada com {{email}} para completar sua doação.",
+      "descriptionWithoutEmail": "Valide sua conta para completar sua doação.",
       "toastSuccessMessage": "Email enviado"
     }
   }

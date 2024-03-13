@@ -139,7 +139,9 @@ function ClubScreen(): JSX.Element {
           text: t("unauthorizedModalButtonText"),
           onPress: () => {
             setUnauthorizedModalVisible(false);
-            navigateTo("ValidateAccountScreen");
+            navigateTo("ValidateAccountScreen", {
+              from: "promoters.clubScreen",
+            });
           },
         }}
       />
