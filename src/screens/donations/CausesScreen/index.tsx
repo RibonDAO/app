@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   useStories,
   useFirstAccessToIntegration,
@@ -15,13 +15,11 @@ import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { logError } from "services/crashReport";
 import { useTicketsContext } from "contexts/ticketsContext";
-import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
-import Tooltip from "components/atomics/Tooltip";
 import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
 import { logEvent } from "services/analytics";
-import { Image } from "expo-image";
+import { Image as ExpoImage } from "expo-image";
 import InlineNotification from "components/moleculars/notifications/InlineNotification";
 import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
@@ -29,7 +27,6 @@ import { showToast } from "lib/Toast";
 import { useFocusEffect } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
-import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import IntegrationBanner from "components/moleculars/IntegrationBanner";
 import usePageView from "hooks/usePageView";
 import { useCausesContext } from "contexts/causesContext";
@@ -47,6 +44,7 @@ import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
+import ClubSection from "./ClubSection";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -213,7 +211,7 @@ export default function CausesScreen() {
     setCurrentNonProfit(nonProfit);
     try {
       const nonProfitStories = await fetchNonProfitStories(nonProfit.id);
-      Image.prefetch(nonProfitStories.map((story) => story.image));
+      ExpoImage.prefetch(nonProfitStories.map((story) => story.image));
       if (nonProfitStories.length === 0) return;
       setStories(nonProfitStories);
       setStoriesVisible(true);
@@ -385,25 +383,7 @@ export default function CausesScreen() {
           </View>
         )}
 
-        <Tooltip tooltipText={t("ticketExplanation")}>
-          <View style={S.ticketExplanationSection}>
-            <Icon
-              type="rounded"
-              name="help"
-              size={20}
-              color={theme.colors.gray30}
-            />
-            <View style={{ overflow: "hidden" }}>
-              <View style={S.ticketTextContainer}>
-                <Text style={S.ticketText}>{t("whatIsATicket")}</Text>
-              </View>
-            </View>
-          </View>
-        </Tooltip>
-
-        <View style={S.supportContainer}>
-          <UserSupportBanner from="donateTickets_page" />
-        </View>
+        <ClubSection />
       </ScrollView>
       <DonationErrorModal newState={params?.newState} />
     </>

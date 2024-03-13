@@ -40,8 +40,8 @@ function PurchaseSection({ setCurrentOffer }: Props): JSX.Element {
   }, [currency]);
 
   useEffect(() => {
-    setCurrentOffer(offers[currentElement]);
-  }, [currentElement]);
+    if (!isLoading) setCurrentOffer(offers[currentElement]);
+  }, [currentElement, isLoading]);
 
   const middleElementIndex = Math.floor(offers.length / 2);
 
