@@ -15,11 +15,13 @@ type Props = {
   tickets?: number;
   isMember?: boolean;
   refetchTickets: () => void;
+  plan?: number;
 };
 export default function ClubMonthlyTicketCard({
   tickets = 0,
   isMember,
   refetchTickets,
+  plan,
 }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "content.forYouScreen.clubTicketsSection",
@@ -27,9 +29,14 @@ export default function ClubMonthlyTicketCard({
 
   const hasCollected = isMember && tickets === 0;
 
+  const buttonText =
+    tickets > 1
+      ? t("monthlyTicketCard.buttonTextPlural", { value: tickets })
+      : t("monthlyTicketCard.buttonText", { value: tickets });
+
   const buttonTextHasClub = hasCollected
     ? t("monthlyTicketCard.buttonTextCollected")
-    : t("monthlyTicketCard.buttonText", { value: tickets });
+    : buttonText;
 
   const { navigateTo } = useNavigation();
 
@@ -49,7 +56,9 @@ export default function ClubMonthlyTicketCard({
       title={t("monthlyTicketCard.title")}
       subtitle={{
         icon: <TicketPinkIcon />,
-        text: t("monthlyTicketCard.subtitle", { value: 2 }),
+        text: plan
+          ? t("monthlyTicketCard.subtitleWithValue", { value: plan })
+          : t("monthlyTicketCard.subtitle"),
         color: theme.colors.brand.tertiary[900],
       }}
       borderColor={theme.colors.brand.tertiary[300]}

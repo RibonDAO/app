@@ -15,11 +15,13 @@ type Props = {
   tickets?: number;
   isMember?: boolean;
   refetchTickets: () => void;
+  plan?: number;
 };
 export default function ClubDailyTicketCard({
   tickets = 0,
   isMember,
   refetchTickets,
+  plan,
 }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "content.forYouScreen.clubTicketsSection",
@@ -27,9 +29,14 @@ export default function ClubDailyTicketCard({
 
   const hasCollected = isMember && tickets === 0;
 
+  const buttonText =
+    tickets > 1
+      ? t("dailyTicketCard.buttonTextPlural", { value: tickets })
+      : t("dailyTicketCard.buttonText", { value: tickets });
+
   const buttonTextHasClub = hasCollected
     ? t("dailyTicketCard.buttonTextCollected")
-    : t("dailyTicketCard.buttonText", { value: tickets });
+    : buttonText;
 
   const { navigateTo } = useNavigation();
 
@@ -49,7 +56,9 @@ export default function ClubDailyTicketCard({
       title={t("dailyTicketCard.title")}
       subtitle={{
         icon: <TicketPinkIcon />,
-        text: t("dailyTicketCard.subtitle", { value: 2 }),
+        text: plan
+          ? t("dailyTicketCard.subtitleWithValue", { value: plan })
+          : t("dailyTicketCard.subtitle"),
         color: theme.colors.brand.tertiary[900],
       }}
       borderColor={theme.colors.brand.tertiary[300]}

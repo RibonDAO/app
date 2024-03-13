@@ -220,15 +220,19 @@
       "clubTicketsSection": {
         "dailyTicketCard": {
           "title": "Tickets do Clube Ribon",
-          "subtitle": "Ganhe até {{value}} por dia",
-          "buttonText": "Coletar {{value}} tickets",
+          "subtitle": "Ganhe até 20 por dia",
+          "subtitleWithValue": "Ganhe até {{value}} por dia",
+          "buttonText": "Coletar {{value}} ticket",
+          "buttonTextPlural": "Coletar {{value}} tickets",
           "buttonTextCollected": "Coletado",
           "buttonTextNoClub": "Desbloquear coleta"
         },
         "monthlyTicketCard": {
           "title": "Pacote mensal do Clube Ribon",
-          "subtitle": "Ganhe até {{value}} por dia",
-          "buttonText": "Coletar {{value}} tickets",
+          "subtitle": "Ganhe até 60 por dia",
+          "subtitleWithValue": "Ganhe até {{value}} por dia",
+          "buttonText": "Coletar {{value}} ticket",
+          "buttonTextPlural": "Coletar {{value}} tickets",
           "buttonTextCollected": "Coletado",
           "buttonTextNoClub": "Desbloquear coleta"
         }
