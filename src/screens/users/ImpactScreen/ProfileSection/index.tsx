@@ -34,7 +34,7 @@ function ProfileSection() {
     refetch: refetchIsMember,
   } = userIsMember();
 
-  const { profile, refetch, isLoading } = userProfile();
+  const { profile, refetch } = userProfile();
 
   useFocusEffect(
     useCallback(() => {
@@ -55,7 +55,7 @@ function ProfileSection() {
   };
 
   if (!currentUser) return <View />;
-  if (isLoading || isMemberLoading) return <LoadingOverlay />;
+  if (isMemberLoading) return <LoadingOverlay />;
 
   return (
     <S.Container member={isMember}>
