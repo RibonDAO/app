@@ -227,8 +227,8 @@
           "title": "Ribon Club tickets",
           "subtitle": "Earn up to 20 per day",
           "subtitleWithValue": "Earn up to {{value}} per day",
-          "buttonText": "Collect {{value}} tickets",
-          "buttonTextPlural": "Collect {{value}} ticket",
+          "buttonText": "Collect {{value}} ticket",
+          "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Collected",
           "buttonTextNoClub": "Unlock collection"
         },
@@ -236,7 +236,7 @@
           "title": "Monthly Ribon Club package",
           "subtitle": "Earn up to 60 per day",
           "subtitleWithValue": "Earn up to {{value}} per day",
-          "buttonText": "Collect {{value}} tickets",
+          "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Collected",
           "buttonTextNoClub": "Unlock collection"
