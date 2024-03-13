@@ -408,7 +408,10 @@
         "recurrenceMonthly": "mês",
         "recurrenceDaily": "ano",
         "tagText": "Mais popular"
-      }
+      },
+      "unauthorizedModalTitle": "Confirme sua conta",
+      "unauthorizedModalText": "Por favor, confirme sua conta para continuar com o pagamento.",
+      "unauthorizedModalButtonText": "Confirmar conta"
     }
   },
   "users": {

@@ -414,7 +414,10 @@
         "recurrenceMonthly": "month",
         "recurrenceDaily": "year",
         "tagText": "Most popular"
-      }
+      },
+      "unauthorizedModalTitle": "Validate your account",
+      "unauthorizedModalText": "Please, validate your account to continue with payment.",
+      "unauthorizedModalButtonText": "Validate my account"
     }
   },
   "users": {

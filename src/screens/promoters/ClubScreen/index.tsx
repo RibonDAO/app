@@ -2,12 +2,15 @@ import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import usePageView from "hooks/usePageView";
 import Button from "components/atomics/buttons/Button";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
-import { useState } from "react";
-import { Offer, theme } from "@ribon.io/shared";
+import { useCallback, useState } from "react";
+import { Offer, theme, useSubscriptions } from "@ribon.io/shared";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
 import { logEvent } from "services/analytics";
+import { useFocusEffect } from "@react-navigation/native";
+import { useAuthentication } from "contexts/authenticationContext";
+import ModalDialog from "components/moleculars/modals/ModalDialog";
 import AppleIcon from "./assets/AppleIcon";
 import GoogleIcon from "./assets/GoogleIcon";
 import S from "./styles";
@@ -24,6 +27,11 @@ function ClubScreen(): JSX.Element {
   usePageView("P32_view");
 
   const [tabIndex, setTabIndex] = useState(0);
+  const { userIsMember } = useSubscriptions();
+  const { isMember, refetch } = userIsMember();
+  const { isAuthenticated } = useAuthentication();
+  const [unauthorizedModalVisible, setUnauthorizedModalVisible] =
+    useState(false);
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.clubScreen",
@@ -48,12 +56,16 @@ function ClubScreen(): JSX.Element {
         logEvent("giveClubBtn_start", {
           from: "clubPlans_page",
         });
-        navigateTo("ClubCheckoutScreen", {
-          target: "club",
-          offer: offer?.priceCents,
-          currency: offer?.currency,
-          subscription: true,
-        });
+        if (isAuthenticated()) {
+          navigateTo("ClubCheckoutScreen", {
+            target: "club",
+            offer: offer?.priceCents,
+            currency: offer?.currency,
+            subscription: true,
+          });
+        } else {
+          setUnauthorizedModalVisible(true);
+        }
       },
       buttonText: t("purchaseSection.buttonText"),
     },
@@ -61,7 +73,13 @@ function ClubScreen(): JSX.Element {
 
   const currentTab = tabs[tabIndex];
 
-  return (
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, []),
+  );
+
+  return !isMember ? (
     <View style={S.innerContainer}>
       <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
         <View style={S.arrow}>
@@ -111,7 +129,23 @@ function ClubScreen(): JSX.Element {
           textColor={theme.colors.neutral10}
         />
       </View>
+      <ModalDialog
+        type="success"
+        visible={unauthorizedModalVisible}
+        setVisible={setUnauthorizedModalVisible}
+        title={t("unauthorizedModalTitle")}
+        description={t("unauthorizedModalText")}
+        primaryButton={{
+          text: t("unauthorizedModalButtonText"),
+          onPress: () => {
+            setUnauthorizedModalVisible(false);
+            navigateTo("ValidateAccountScreen");
+          },
+        }}
+      />
     </View>
+  ) : (
+    <View />
   );
 }
 
