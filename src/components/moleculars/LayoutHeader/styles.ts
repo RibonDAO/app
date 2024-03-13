@@ -1,96 +1,96 @@
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
 import { theme } from "@ribon.io/shared/styles";
-import {
-  defaultBodyMdBold,
-  defaultBodyXsSemibold,
-} from "styles/typography/default";
 
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    height: 30,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  supportContainer: {
-    position: "absolute",
-    right: -5,
-    top: 50,
-    width: 300,
-    borderRadius: 16,
-    borderColor: theme.colors.neutral[200],
-    backgroundColor: theme.colors.neutral10,
-    borderWidth: 1,
-    shadowColor: "rgba(40, 36, 28, 0.2)",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowRadius: 10,
-    shadowOpacity: 0.8,
-    display: "flex",
-    flexDirection: "column",
-    paddingHorizontal: 12,
-  },
-  configItem: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    height: 53,
-    borderColor: theme.colors.neutral[200],
-    borderBottomWidth: 2,
-  },
-  text: {
-    paddingLeft: theme.spacingNative(8),
-  },
-  iconContainer: {
-    width: "10%",
-  },
-  textContainer: {
-    width: "60%",
-  },
-  ctaContainer: {
-    width: "30%",
-    paddingRight: theme.spacingNative(8),
-  },
-  configContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    height: 24,
-  },
-  ticketSection: {
-    paddingVertical: 5,
-    paddingHorizontal: 7,
-    borderRightWidth: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: theme.spacingNative(12),
-  },
-  ticketCounter: {
-    ...defaultBodyMdBold,
-    lineHeight: 17,
-    marginRight: theme.spacingNative(4),
-    marginLeft: theme.spacingNative(4),
-  },
-  walletContainer: {
-    paddingVertical: 5,
-    paddingHorizontal: 7,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: theme.colors.brand.primary[600],
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: theme.spacingNative(12),
-  },
-  walletText: {
-    ...defaultBodyXsSemibold,
-    marginRight: theme.spacingNative(4),
-    color: theme.colors.brand.primary[600],
-    textAlign: "center",
-    lineHeight: 16,
-  },
-});
+export const Container = styled.TouchableOpacity`
+  display: flex;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+`;
 
-export default styles;
+export const SupportContainer = styled.View`
+  position: absolute;
+  right: -5px;
+  top: 50px;
+  width: 300px;
+  border-radius: ${theme.spacing(16)};
+  border-color: ${theme.colors.neutral[200]};
+  background-color: ${theme.colors.neutral10};
+  border-width: 1px;
+  shadow-color: rgba(40, 36, 28, 0.2);
+  shadow-offset: 0px 2px;
+  shadow-radius: 10px;
+  shadow-opacity: 0.8;
+  display: flex;
+  flex-direction: column;
+  padding-horizontal: ${theme.spacing(12)};
+`;
+
+export const ConfigItem = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 53px;
+  border-color: ${theme.colors.neutral[200]};
+  border-bottom-width: ${theme.spacing(2)};
+`;
+
+export const Text = styled.Text`
+  padding-left: ${theme.spacing(8)};
+`;
+
+export const IconContainer = styled.View`
+  width: 10%;
+`;
+
+export const TextContainer = styled.View`
+  width: 60%;
+`;
+
+export const CtaContainer = styled.View`
+  width: 30%;
+  padding-right: ${theme.spacing(8)};
+`;
+
+export const ConfigContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  height: ${theme.spacing(24)};
+`;
+
+export const TicketSection = styled.View`
+  padding-vertical: 5px;
+  padding-horizontal: 7px;
+  border-right-width: 1px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: ${theme.spacing(12)};
+`;
+
+export const TicketCounter = styled.Text`
+  font-size: 14px;
+  line-height: 17px;
+  margin-right: ${theme.spacing(4)};
+  margin-left: ${theme.spacing(4)};
+`;
+
+export const WalletContainer = styled.View`
+  padding-vertical: 5px;
+  padding-horizontal: 7px;
+  border-radius: ${theme.spacing(4)};
+  border-width: 1px;
+  border-color: ${theme.colors.brand.primary[600]};
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: ${theme.spacing(12)};
+`;
+
+export const WalletText = styled.Text`
+  font-size: ${theme.spacing(12)};
+  margin-right: ${theme.spacing(4)};
+  color: ${theme.colors.brand.primary[600]};
+  text-align: center;
+  line-height: 16px;
+`;

@@ -6,10 +6,12 @@ import ZeroTicketsModal from "../modals/ZeroTicketsModal";
 
 type TicketSectionProps = {
   hasDividerBorder?: boolean;
+  outline?: boolean;
 };
 
 function TicketSection({
   hasDividerBorder = false,
+  outline = false,
 }: TicketSectionProps): JSX.Element {
   const { ticketsCounter: tickets } = useTicketsContext();
   const hasTickets = tickets > 0;
@@ -32,6 +34,7 @@ function TicketSection({
         quantity={tickets}
         hasDividerBorder={hasDividerBorder}
         onClick={handleTicketClick}
+        outline={outline}
       />
 
       <ZeroTicketsModal

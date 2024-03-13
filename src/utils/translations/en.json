@@ -471,7 +471,10 @@
         "link": "Don’t show this again"
       },
       "profileSection": {
-        "userName": "Your profile"
+        "userName": "Your profile",
+        "noClubTagText": "No Ribon Club",
+        "clubTagText": "Ribon Club",
+        "ctaClubText": "Club benefits →"
       }
     }
   },
