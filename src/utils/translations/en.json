@@ -243,7 +243,7 @@
         },
         "monthlyTicketCard": {
           "title": "Monthly Ribon Club package",
-          "subtitle": "Earn up to 60 per day",
+          "subtitle": "Earn up to 60 per month",
           "subtitleWithValue": "Earn up to {{value}} per month",
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",

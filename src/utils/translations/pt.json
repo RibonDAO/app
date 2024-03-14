@@ -238,7 +238,7 @@
         },
         "monthlyTicketCard": {
           "title": "Pacote mensal do Clube Ribon",
-          "subtitle": "Ganhe até 60 por dia",
+          "subtitle": "Ganhe até 60 por mês",
           "subtitleWithValue": "Ganhe até {{value}} por mês",
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
