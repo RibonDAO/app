@@ -37,9 +37,9 @@ export default function TicketsSection() {
     if (subscriptions) {
       const currentPlan = subscriptions?.find(
         (subscription) =>
-          subscription.offer.category === "club" &&
+          subscription.offer?.category === "club" &&
           subscription.status === "active" &&
-          subscription.offer.plan,
+          subscription.offer?.plan,
       )?.offer.plan;
       setPlan(currentPlan);
     } else {
