@@ -80,7 +80,7 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
       from: "configPage",
     });
 
-    if (!currentUser) return navigateTo("PromotersScreen");
+    if (!currentUser) return navigateTo("ClubScreen");
 
     if (subscriptions && subscriptions?.length > 0) {
       return navigateTo("MonthlyContributionsScreen");

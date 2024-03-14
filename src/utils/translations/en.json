@@ -221,6 +221,35 @@
           "subtitle": "Earn 1 per day",
           "buttonText": "Collected automatically"
         }
+      },
+      "clubTicketsSection": {
+        "unauthorizedModalTitle": "Validate your account",
+        "unauthorizedModalText": "Please, validate your account to collect your Ribon Club tickets.",
+        "unauthorizedModalButtonText": "Validate my account",
+        "validateAccountScreen": {
+          "title": "Validate your account",
+          "description": "Validate your account created with {{email}} to collect your Ribon Club tickets.",
+          "descriptionWithoutEmail": "Validate your account to collect your Ribon Club tickets.",
+          "toastSuccessMessage": "Email sent"
+        },
+        "dailyTicketCard": {
+          "title": "Ribon Club tickets",
+          "subtitle": "Earn up to 20 per day",
+          "subtitleWithValue": "Earn up to {{value}} per day",
+          "buttonText": "Collect {{value}} ticket",
+          "buttonTextPlural": "Collect {{value}} tickets",
+          "buttonTextCollected": "Collected",
+          "buttonTextNoClub": "Unlock collection"
+        },
+        "monthlyTicketCard": {
+          "title": "Monthly Ribon Club package",
+          "subtitle": "Earn up to 60 per month",
+          "subtitleWithValue": "Earn up to {{value}} per month",
+          "buttonText": "Collect {{value}} ticket",
+          "buttonTextPlural": "Collect {{value}} tickets",
+          "buttonTextCollected": "Collected",
+          "buttonTextNoClub": "Unlock collection"
+        }
       }
     }
   },
