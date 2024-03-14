@@ -10,6 +10,7 @@ import TicketPinkIcon from "components/vectors/TicketPinkIcon";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
+import { logEvent } from "services/analytics";
 import { PLATFORM } from "utils/constants/Application";
 
 type Props = {
@@ -50,10 +51,12 @@ export default function ClubDailyTicketCard({
   const handleButtonPress = async () => {
     if (!isMember) {
       navigateTo("ClubScreen");
+      logEvent("clubCTA_click", { from: "clubDailyTicket_card" });
     } else if (!isAuthenticated()) {
       setUnauthorizedModalVisible(true);
     } else {
       await collectByClub(PLATFORM, TicketsCategories.DAILY);
+      logEvent("collectDailyClubTickets_click", { amount: tickets });
       refetchTickets();
     }
   };
