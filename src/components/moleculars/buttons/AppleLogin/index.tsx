@@ -34,6 +34,7 @@ function AppleLogin({ onContinue, from }: Props): JSX.Element {
         hideLoadingOverlay();
         onContinue();
       } catch (error: any) {
+        hideLoadingOverlay();
         if (error.message.includes("Email does not match")) {
           setModalVisible(true);
         }

@@ -10,6 +10,12 @@ import { useIntegrationContext } from "contexts/integrationContext";
 import { PLATFORM } from "utils/constants/Application";
 import { todayDate } from "lib/dateUtils";
 import { getLocalStorageItem } from "lib/localStorage";
+import { logError } from "services/crashReport";
+
+type HandleCollectProps = {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+};
 
 export function useTickets() {
   const { currentUser } = useCurrentUser();
@@ -58,20 +64,27 @@ export function useTickets() {
     }
   }
 
-  async function handleCollect() {
-    if (externalIds && externalIds.length > 0 && currentIntegrationId) {
-      await collectByExternalIds(
-        externalIds,
-        currentIntegrationId ?? "",
-        PLATFORM,
-        currentUser?.email ?? "",
-      );
-    } else if (currentIntegrationId) {
-      await collectByIntegration(
-        currentIntegrationId,
-        PLATFORM,
-        currentUser?.email ?? "",
-      );
+  async function handleCollect({ onError, onSuccess }: HandleCollectProps) {
+    try {
+      if (externalIds && externalIds.length > 0 && currentIntegrationId) {
+        await collectByExternalIds(
+          externalIds,
+          currentIntegrationId ?? "",
+          PLATFORM,
+          currentUser?.email ?? "",
+        );
+        if (onSuccess) onSuccess();
+      } else if (currentIntegrationId) {
+        await collectByIntegration(
+          currentIntegrationId,
+          PLATFORM,
+          currentUser?.email ?? "",
+        );
+        if (onSuccess) onSuccess();
+      }
+    } catch (e: any) {
+      logError(e);
+      if (onError) onError(e);
     }
   }
 

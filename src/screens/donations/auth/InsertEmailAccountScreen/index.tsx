@@ -80,7 +80,10 @@ function InsertEmailAccountScreen() {
       nonProfit,
       email,
       onError: () => onDonationFail(),
-      onSuccess: () => onDonationSuccess(),
+      onSuccess: () => {
+        logEvent("ticketCollected", { from: "collectAndDonate" });
+        onDonationSuccess();
+      },
     });
   }
 

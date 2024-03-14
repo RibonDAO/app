@@ -33,6 +33,7 @@ function GoogleLogin({ onContinue, from }: Props): JSX.Element {
         onContinue();
         hideLoadingOverlay();
       } catch (error: any) {
+        hideLoadingOverlay();
         if (error.message.includes("Email does not match")) {
           setModalVisible(true);
         }

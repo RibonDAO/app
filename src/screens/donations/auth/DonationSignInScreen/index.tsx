@@ -59,7 +59,11 @@ function DonationSignInScreen() {
   };
 
   async function donateCallback() {
-    await handleCollect();
+    await handleCollect({
+      onSuccess: () => {
+        logEvent("ticketCollected", { from: "collect" });
+      },
+    });
     await handleDonate({
       nonProfit,
       ticketsQuantity: 1,
