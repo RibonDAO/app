@@ -50,7 +50,10 @@ function SignedInScreen() {
     await handleCollectAndDonate({
       nonProfit,
       email: currentUser.email,
-      onSuccess: () => onDonationSuccess(),
+      onSuccess: () => {
+        logEvent("ticketCollected", { from: "collectAndDonate" });
+        onDonationSuccess();
+      },
       onError: () => {
         onDonationFail();
       },

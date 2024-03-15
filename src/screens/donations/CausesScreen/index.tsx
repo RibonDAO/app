@@ -107,7 +107,11 @@ export default function CausesScreen() {
     const receivedTicketToday = await hasReceivedTicketToday();
     if (canCollect) {
       if (currentUser) {
-        await handleCollect();
+        await handleCollect({
+          onSuccess: () => {
+            logEvent("ticketCollected", { from: "collect" });
+          },
+        });
         refetchTickets();
       }
       if (!receivedTicketToday) {
