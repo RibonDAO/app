@@ -1,13 +1,11 @@
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
 import { theme } from "@ribon.io/shared/styles";
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.colors.neutral[100],
-  },
-  cardsSection: {
-    paddingHorizontal: theme.spacingNative(16),
-  },
-});
+export const Container = styled.View`
+  background-color: ${theme.colors.neutral[100]};
+  margin-top: ${(props: { outline: boolean }) => (props.outline ? "-50px" : 0)};
+`;
 
-export default styles;
+export const CardsSection = styled.View`
+  padding-horizontal: ${theme.spacing(16)};
+`;

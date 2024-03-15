@@ -34,14 +34,14 @@ function ClubScreen(): JSX.Element {
     keyPrefix: "promoters.clubScreen",
   });
 
-  const { navigateTo } = useNavigation();
+  const { navigateTo, popNavigation } = useNavigation();
   const [offer, setOffer] = useState<Offer>();
 
   const tabs = [
     {
       title: t("benefitsSection.title"),
       component: <BenefitsSection />,
-      handleBack: () => navigateTo("CausesScreen"),
+      handleBack: () => popNavigation(),
       handleNext: () => {
         logEvent("checkClubPlansBtn_click", { from: "clubDescription_page" });
         setTabIndex(tabIndex + 1);

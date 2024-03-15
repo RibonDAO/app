@@ -494,7 +494,10 @@
         "link": "Não mostrar novamente"
       },
       "profileSection": {
-        "userName": "Seu perfil"
+        "userName": "Seu perfil",
+        "noClubTagText": "Sem Clube Ribon",
+        "clubTagText": "Clube Ribon",
+        "ctaClubText": "Benefícios do Clube →"
       }
     }
   },

@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
-import { TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useWalletContext } from "contexts/walletContext";
 import WalletIcon from "components/vectors/WalletIcon";
 import { walletTruncate } from "lib/formatters/walletTruncate";
 import { logEvent } from "services/analytics";
-
-import S from "./styles";
+import { theme } from "@ribon.io/shared/styles";
+import Icon from "components/atomics/Icon";
 import TicketSection from "./TicketSection";
 import ConfigMenu from "./ConfigMenu";
+import * as S from "./styles";
 
 type Props = {
   hideTicket?: boolean;
   hideWallet?: boolean;
+  outline?: boolean;
 };
 function LayoutHeader({
   hideTicket = false,
   hideWallet = true,
+  outline = false,
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "layoutHeader",
@@ -44,34 +46,40 @@ function LayoutHeader({
   };
 
   return (
-    <View style={S.configContainer}>
-      {!hideTicket && <TicketSection hasDividerBorder />}
-
-      {!hideWallet && (
-        <TouchableOpacity
-          accessibilityRole="button"
-          style={S.container}
-          onPress={handleWalletButtonClick}
-        >
-          <View style={S.walletContainer}>
-            <Text style={S.walletText}>
-              {wallet ? walletTruncate(wallet) : t("connectWallet")}
-            </Text>
-            <WalletIcon />
-          </View>
-        </TouchableOpacity>
+    <S.ConfigContainer>
+      {!hideTicket && (
+        <TicketSection hasDividerBorder={!outline} outline={outline} />
       )}
 
-      <TouchableOpacity
-        accessibilityRole="button"
-        style={S.container}
-        onPress={toggleModal}
-      >
-        <CogIcon />
-      </TouchableOpacity>
+      {!hideWallet && (
+        <S.Container
+          accessibilityRole="button"
+          onPress={handleWalletButtonClick}
+        >
+          <S.WalletContainer>
+            <S.WalletText>
+              {wallet ? walletTruncate(wallet) : t("connectWallet")}
+            </S.WalletText>
+            <WalletIcon />
+          </S.WalletContainer>
+        </S.Container>
+      )}
+
+      <S.Container accessibilityRole="button" onPress={toggleModal}>
+        {outline ? (
+          <Icon
+            type="outlined"
+            name="settings"
+            size={24}
+            color={theme.colors.neutral10}
+          />
+        ) : (
+          <CogIcon />
+        )}
+      </S.Container>
 
       <ConfigMenu toggleModal={toggleModal} menuVisible={menuVisible} />
-    </View>
+    </S.ConfigContainer>
   );
 }
 
