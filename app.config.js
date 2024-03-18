@@ -141,6 +141,8 @@ export default () => ({
       "EXPO_PUBLIC_CIO_API_KEY": process.env.EXPO_PUBLIC_CIO_API_KEY,
       "EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID": process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID,
       "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+      "EXPO_PUBLIC_APPSFLYER_KEY": process.env.EXPO_PUBLIC_APPSFLYER_KEY,
+      "EXPO_PUBLIC_APPSFLYER_APP_ID": process.env.EXPO_PUBLIC_APPSFLYER_APP_ID
     },
     "runtimeVersion": {
       "policy": "appVersion"
