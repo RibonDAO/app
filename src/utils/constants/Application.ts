@@ -6,6 +6,9 @@ export const RIBON_INTEGRATION_ID =
 export const EXPO_PUBLIC_APPSFLYER_APP_ID =
   Constants.expoConfig?.extra?.EXPO_PUBLIC_APPSFLYER_APP_ID || "1337763424";
 
+export const EXPO_PUBLIC_APPSFLYER_KEY =
+  Constants.expoConfig?.extra?.EXPO_PUBLIC_APPSFLYER_KEY;
+
 export const EXPO_PUBLIC_RIBON_API =
   Constants.expoConfig?.extra?.EXPO_PUBLIC_RIBON_API;
 
