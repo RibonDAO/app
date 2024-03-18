@@ -1,5 +1,5 @@
-const version = "5.6.2";
-const buildNumber = 365;
+const version = "5.6.3";
+const buildNumber = 366;
 
 export default () => ({
   "expo": {
