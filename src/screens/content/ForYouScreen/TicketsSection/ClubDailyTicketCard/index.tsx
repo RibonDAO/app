@@ -58,8 +58,9 @@ export default function ClubDailyTicketCard({
       await handleCollectByClub({
         category: TicketsCategories.DAILY,
         onSuccess: () =>
-          logEvent("collectDailyClubTickets_click", {
+          logEvent("ticketCollected", {
             amount: tickets,
+            from: "dailyClub",
           }),
       });
 

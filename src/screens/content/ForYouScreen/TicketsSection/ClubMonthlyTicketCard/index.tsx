@@ -58,8 +58,9 @@ export default function ClubMonthlyTicketCard({
       await handleCollectByClub({
         category: TicketsCategories.MONTHLY,
         onSuccess: () =>
-          logEvent("collectMonthlyClubTickets_click", {
+          logEvent("ticketCollected", {
             amount: tickets,
+            from: "monthlyClub",
           }),
       });
       refetchTickets();
