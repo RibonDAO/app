@@ -51,7 +51,7 @@ function PixPaymentInformationProvider({ children }: Props) {
     PaymentIntent & ConfirmPaymentResult
   >();
 
-  const { navigateTo } = useNavigation();
+  const { navigateTo, popNavigation } = useNavigation();
 
   const { registerAction } = useTasksContext();
 
@@ -202,7 +202,7 @@ function PixPaymentInformationProvider({ children }: Props) {
   };
 
   const handleBackButtonClick = () => {
-    navigateTo("PromotersScreen");
+    popNavigation();
     setClientSecret(undefined);
     setPixInstructions(undefined);
   };
