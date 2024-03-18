@@ -25,10 +25,10 @@ function TicketSection({
     if (hasTickets) {
       navigateTo("GiveTicketScreen");
     } else if (isMember) {
-        navigateTo("ForYouScreen");
-      } else {
-        setZeroTicketModalVisible(true);
-      }
+      navigateTo("ForYouScreen");
+    } else {
+      setZeroTicketModalVisible(true);
+    }
   };
 
   return (
