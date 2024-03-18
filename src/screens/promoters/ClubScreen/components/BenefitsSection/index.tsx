@@ -1,5 +1,6 @@
 import { View, Text, Image } from "react-native";
 import { useTranslation } from "react-i18next";
+import usePageView from "hooks/usePageView";
 import S from "./styles";
 import TicketIcon from "./assets/TicketIcon";
 import BoxIcon from "./assets/BoxIcon";
@@ -8,6 +9,7 @@ import PinkCircle from "../../assets/pink-circle.png";
 import DepoimentsSection from "../DepoimentsSection";
 
 function BenefitsSection(): JSX.Element {
+  usePageView("P32_view");
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.clubScreen.benefitsSection",
   });

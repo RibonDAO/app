@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { theme, useUserTickets, TicketsCategories } from "@ribon.io/shared";
+import { theme, TicketsCategories } from "@ribon.io/shared";
 import PinkBoxIllustration from "assets/illustrations/PinkBoxIllustration";
 import Button from "components/atomics/buttons/Button";
 import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
@@ -9,8 +9,9 @@ import CardTicket from "components/moleculars/CardTicket";
 import TicketPinkIcon from "components/vectors/TicketPinkIcon";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useNavigation } from "hooks/useNavigation";
+import { useTickets } from "hooks/useTickets";
 import { useTranslation } from "react-i18next";
-import { PLATFORM } from "utils/constants/Application";
+import { logEvent } from "services/analytics";
 
 type Props = {
   tickets?: number;
@@ -43,17 +44,25 @@ export default function ClubMonthlyTicketCard({
 
   const { navigateTo } = useNavigation();
 
-  const { collectByClub } = useUserTickets();
+  const { handleCollectByClub } = useTickets();
 
   const { isAuthenticated } = useAuthentication();
 
   const handleButtonPress = async () => {
     if (!isMember) {
       navigateTo("ClubScreen");
+      logEvent("clubCTA_click", { from: "clubMonthlyTicket_card" });
     } else if (!isAuthenticated()) {
       setUnauthorizedModalVisible(true);
     } else {
-      await collectByClub(PLATFORM, TicketsCategories.MONTHLY);
+      await handleCollectByClub({
+        category: TicketsCategories.MONTHLY,
+        onSuccess: () =>
+          logEvent("ticketCollected", {
+            amount: tickets,
+            from: "monthlyClub",
+          }),
+      });
       refetchTickets();
     }
   };

@@ -1,5 +1,4 @@
 import { ScrollView, View, Text, TouchableOpacity } from "react-native";
-import usePageView from "hooks/usePageView";
 import Button from "components/atomics/buttons/Button";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import { useCallback, useState } from "react";
@@ -24,8 +23,6 @@ import PurchaseSection from "./components/PurchaseSection";
 import LeftSun from "./assets/left-sun.png";
 
 function ClubScreen(): JSX.Element {
-  usePageView("P32_view");
-
   const [tabIndex, setTabIndex] = useState(0);
   const { userIsMember } = useSubscriptions();
   const { isMember, refetch } = userIsMember();
@@ -45,7 +42,10 @@ function ClubScreen(): JSX.Element {
       title: t("benefitsSection.title"),
       component: <BenefitsSection />,
       handleBack: () => popNavigation(),
-      handleNext: () => setTabIndex(tabIndex + 1),
+      handleNext: () => {
+        logEvent("checkClubPlansBtn_click", { from: "clubDescription_page" });
+        setTabIndex(tabIndex + 1);
+      },
       buttonText: t("benefitsSection.buttonText"),
     },
     {

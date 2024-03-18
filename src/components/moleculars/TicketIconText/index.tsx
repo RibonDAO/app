@@ -40,13 +40,13 @@ function TicketIconText({
   };
 
   const outlineIcon = () => (
-      <Icon
-        type="outlined"
-        name="confirmation_number"
-        size={24}
-        color={theme.colors.neutral10}
-      />
-    );
+    <Icon
+      type="outlined"
+      name="confirmation_number"
+      size={24}
+      color={theme.colors.neutral10}
+    />
+  );
 
   return (
     <TouchableOpacity

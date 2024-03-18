@@ -1,5 +1,8 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useTickets as useTicketShared } from "@ribon.io/shared/hooks";
+import {
+  useTickets as useTicketShared,
+  useUserTickets,
+} from "@ribon.io/shared/hooks";
 
 import {
   DONATION_TOAST_INTEGRATION,
@@ -17,6 +20,12 @@ type HandleCollectProps = {
   onError?: (error: any) => void;
 };
 
+type HandleCollectByClubProps = {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+  category: string;
+};
+
 export function useTickets() {
   const { currentUser } = useCurrentUser();
   const {
@@ -25,6 +34,8 @@ export function useTickets() {
     collectByExternalIds,
     collectByIntegration,
   } = useTicketShared();
+
+  const { collectByClub } = useUserTickets();
 
   const { currentIntegrationId, externalId } = useIntegrationContext();
   const externalIds =
@@ -88,9 +99,24 @@ export function useTickets() {
     }
   }
 
+  async function handleCollectByClub({
+    onError,
+    onSuccess,
+    category,
+  }: HandleCollectByClubProps) {
+    try {
+      await collectByClub(PLATFORM, category);
+      if (onSuccess) onSuccess();
+    } catch (e: any) {
+      logError(e);
+      if (onError) onError(e);
+    }
+  }
+
   return {
     handleCanCollect,
     handleCollect,
     hasReceivedTicketToday,
+    handleCollectByClub,
   };
 }
