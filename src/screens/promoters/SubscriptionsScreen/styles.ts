@@ -58,6 +58,10 @@ export const Text = styled.Text`
   ${defaultBodySmMedium};
 `;
 
+export const InfosText = styled.View`
+  ${defaultBodySmMedium};
+`;
+
 export const HighlightedText = styled.Text`
   ${defaultBodySmSemibold};
   color: ${theme.colors.brand.primary[600]};

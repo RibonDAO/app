@@ -50,6 +50,8 @@ export default function SubscriptionsScreen(): JSX.Element {
 
   const isClub = (subscription: Subscription) =>
     subscription.offer?.category === "club";
+  const isPix = (subscription: Subscription) =>
+    subscription.personPayments[0]?.paymentMethod === "pix";
 
   return (
     <S.Container>
@@ -75,15 +77,17 @@ export default function SubscriptionsScreen(): JSX.Element {
                       subscription.offer.currency,
                     )}
                 </S.Amount>
-                <S.IconContainer>
-                  <Icon
-                    type="outlined"
-                    name="delete"
-                    size={24}
-                    color={theme.colors.neutral10}
-                    onPress={handleCancelSubscription}
-                  />
-                </S.IconContainer>
+                {!isPix(subscription) && (
+                  <S.IconContainer>
+                    <Icon
+                      type="outlined"
+                      name="delete"
+                      size={24}
+                      color={theme.colors.neutral10}
+                      onPress={handleCancelSubscription}
+                    />
+                  </S.IconContainer>
+                )}
               </S.IconTextContainer>
               <S.Text>
                 {!isClub(subscription) && t("to")}
@@ -93,12 +97,17 @@ export default function SubscriptionsScreen(): JSX.Element {
                     : subscription.receiver.name}
                 </S.HighlightedText>
               </S.Text>
-              <S.Text>
-                {t("nextContribution")}
-                <S.HighlightedText>
-                  {nextPaymetAttempt(subscription)}
-                </S.HighlightedText>
-              </S.Text>
+              <S.InfosText>
+                {isPix(subscription) && <S.Text>{t("pixPayment")}</S.Text>}
+                <S.Text>
+                  {isPix(subscription)
+                    ? t("perksExpiration")
+                    : t("nextContribution")}
+                  <S.HighlightedText>
+                    {nextPaymetAttempt(subscription)}
+                  </S.HighlightedText>
+                </S.Text>
+              </S.InfosText>
               {modalVisible && (
                 <CancelSubscriptionModal
                   setVisible={setModalVisible}

@@ -348,6 +348,8 @@
       "to": "Para ",
       "nextContribution": "Próxima contribuição em ",
       "ribonClubTag": "Clube Ribon",
+      "pixPayment": "Compra única por PIX",
+      "perksExpiration": "Benefícios expiram: ",
       "cancelSubscriptionModal": {
         "title": "Cancelar assinatura",
         "contributionTitle": "Cancelar contribuição mensal",
