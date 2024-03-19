@@ -8,7 +8,7 @@
   "layoutHeader": {
     "logout": "Sign out",
     "support": "User Support",
-    "monthlyContributions": "Monthly contributions",
+    "subscriptions": "Subscriptions",
     "notifications": "Allow notifications",
     "supportLink": "https://v2.zopim.com/widget/popout.html?key={{key}}",
     "login": "Login",
@@ -385,16 +385,18 @@
       "donatingTo": "Donating to ",
       "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments."
     },
-    "monthlyContributionsScreen": {
-      "title": "Monthly contributions",
+    "subscriptionsScreen": {
+      "title": "Subscriptions",
       "to": "To ",
-      "nextContribution": "Next contribution in ",
-      "cancelContributionModal": {
-        "title": "Cancel monthly contribution",
-        "description": "To finish this process, you'll need to confirm the cancelation request clicking in the link of the cancelation e-mail.",
-        "cancelButton": "Receive cancelation e-mail",
+      "nextContribution": "Next charge on ",
+      "ribonClubTag": "Ribon Club",
+      "cancelSubscriptionModal": {
+        "title": "Cancel subscription",
+        "contributionTitle": "Cancel monthly contribution",
+        "description": "To complete the process, please confirm the subscription cancellation via the email we will send to you.",
+        "cancelButton": "Receive cancellation email",
         "closeButton": "Close",
-        "sendEmail": "We sent you an e-mail"
+        "sendEmail": "E-mail sent."
       }
     },
     "club": {

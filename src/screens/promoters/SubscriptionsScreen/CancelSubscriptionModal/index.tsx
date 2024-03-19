@@ -8,28 +8,30 @@ import { logError } from "services/crashReport";
 type Props = {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-  contributionId: string | number;
+  club: boolean;
+  subscriptionId: string | number;
 };
 
-function CancelContributionModal({
+function CancelSubscriptionModal({
   visible,
   setVisible,
-  contributionId,
+  subscriptionId,
+  club = false,
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.monthlyContributionsScreen.cancelContributionModal",
+    keyPrefix: "promoters.subscriptionsScreen.cancelSubscriptionModal",
   });
 
   const { sendCancelSubscriptionEmail } = useSubscriptions();
 
   const handleCancelSubscription = async () => {
-    if (!contributionId) {
+    if (!subscriptionId) {
       return;
     }
 
     logEvent("cancelSubs_click");
     try {
-      const response = await sendCancelSubscriptionEmail(contributionId);
+      const response = await sendCancelSubscriptionEmail(subscriptionId);
       if (response) {
         showToast({
           type: "success",
@@ -45,7 +47,7 @@ function CancelContributionModal({
   };
 
   const deletionDialogProps = {
-    title: t("title"),
+    title: club ? t("title") : t("contributionTitle"),
     description: t("description"),
     icon: "delete_forever",
     type: "error",
@@ -66,4 +68,4 @@ function CancelContributionModal({
   );
 }
 
-export default CancelContributionModal;
+export default CancelSubscriptionModal;

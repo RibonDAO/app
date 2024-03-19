@@ -108,7 +108,7 @@ export type SelectTicketsScreenParamList = {
   cause: Cause;
 };
 
-export type MonthlyContributionsScreenParamList = {
+export type SubscriptionsScreenParamList = {
   from: string;
 };
 
@@ -160,7 +160,7 @@ export type RootStackParamList = {
   OnboardingScreen: undefined;
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
-  MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
+  SubscriptionsScreen: SubscriptionsScreenParamList;
   InsertEmailScreen: undefined;
   SentMagicLinkEmailScreen: SentMagicLinkEmailParamsList;
   SignInByMagicLinkScreen: undefined;

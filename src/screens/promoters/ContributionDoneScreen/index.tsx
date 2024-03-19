@@ -16,7 +16,7 @@ export default function ContributionDoneScreen(): JSX.Element {
   useEffect(() => {
     setTimeout(() => {
       if (offer?.subscription) {
-        navigateTo("MonthlyContributionsScreen", {
+        navigateTo("SubscriptionsScreen", {
           from: "ContributionDoneScreen",
         });
       } else {

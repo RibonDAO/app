@@ -8,7 +8,7 @@
   "layoutHeader": {
     "logout": "Sair",
     "support": "Suporte ao usuário",
-    "monthlyContributions": "Contribuições mensais",
+    "subscriptions": "Assinaturas",
     "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0",
     "login": "Fazer login",
     "notifications": "Ativar notificações",
@@ -343,16 +343,18 @@
       "donatingTo": "Doando para ",
       "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon."
     },
-    "monthlyContributionsScreen": {
-      "title": "Contribuições mensais",
+    "subscriptionsScreen": {
+      "title": "Assinaturas",
       "to": "Para ",
       "nextContribution": "Próxima contribuição em ",
-      "cancelContributionModal": {
-        "title": "Cancelar contribuição mensal",
-        "description": "Para efetuar o processo, confirme o cancelamento da contribuição mensal pelo e-mail que enviaremos para você.",
+      "ribonClubTag": "Clube Ribon",
+      "cancelSubscriptionModal": {
+        "title": "Cancelar assinatura",
+        "contributionTitle": "Cancel contribuição mensal",
+        "description": "Para efetuar o processo, confirme o cancelamento da assinatura pelo e-mail que enviaremos para você.",
         "cancelButton": "Receber e-mail de cancelamento",
         "closeButton": "Fechar",
-        "sendEmail": "Enviamos um e-mail para você."
+        "sendEmail": "E-mail enviado."
       }
     },
     "checkoutScreen": {
