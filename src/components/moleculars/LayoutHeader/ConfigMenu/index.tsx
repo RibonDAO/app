@@ -85,7 +85,7 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
     if (subscriptions && subscriptions?.length > 0) {
       return navigateTo("SubscriptionsScreen");
     } else {
-      return navigateTo("PromotersScreen");
+      return navigateTo("ClubScreen");
     }
   };
 

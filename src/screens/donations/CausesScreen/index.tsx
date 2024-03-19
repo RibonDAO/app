@@ -239,8 +239,8 @@ export default function CausesScreen() {
     };
   };
 
-  const navigateToPromotersScreen = () => {
-    navigateTo("PromotersScreen");
+  const navigateToClubScreen = () => {
+    navigateTo("ClubScreen");
   };
 
   const shouldShowIntegrationBanner =
@@ -379,7 +379,7 @@ export default function CausesScreen() {
           <View style={S.noCausesContainer}>
             <ZeroDonationsSection
               title={t("noCauses.title")}
-              onButtonPress={navigateToPromotersScreen}
+              onButtonPress={navigateToClubScreen}
               description={t("noCauses.text")}
               buttonText={t("noCauses.button")}
               image={<ImpactDonationsVector />}

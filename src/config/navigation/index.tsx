@@ -72,6 +72,7 @@ import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
 import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
 import SubscriptionsScreen from "screens/promoters/SubscriptionsScreen";
 import ClubScreen from "screens/promoters/ClubScreen";
+import PromotersScreen from "screens/promoters/PromotersScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -281,6 +282,12 @@ function RootNavigator() {
           title: "ReceiveTicketScreen",
           headerShown: false,
         }}
+      />
+
+      <Stack.Screen
+        name="PromotersScreen"
+        component={PromotersScreen}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
