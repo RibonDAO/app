@@ -350,7 +350,7 @@
       "ribonClubTag": "Clube Ribon",
       "cancelSubscriptionModal": {
         "title": "Cancelar assinatura",
-        "contributionTitle": "Cancel contribuição mensal",
+        "contributionTitle": "Cancelar contribuição mensal",
         "description": "Para efetuar o processo, confirme o cancelamento da assinatura pelo e-mail que enviaremos para você.",
         "cancelButton": "Receber e-mail de cancelamento",
         "closeButton": "Fechar",
