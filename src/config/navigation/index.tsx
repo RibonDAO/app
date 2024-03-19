@@ -50,7 +50,6 @@ import IntegrationProvider, {
 import RecurrenceScreen from "screens/promoters/RecurrenceScreen";
 import { Image } from "react-native";
 import { openInWebViewer } from "lib/linkOpener";
-import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsScreen";
 import UtmProvider, { useUtmContext } from "contexts/utmContext";
 import { logEvent } from "services/analytics";
 import PixInstructionsScreen from "screens/promoters/PixInstructionsScreen";
@@ -71,6 +70,7 @@ import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
 import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
+import SubscriptionsScreen from "screens/promoters/SubscriptionsScreen";
 import ClubScreen from "screens/promoters/ClubScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
@@ -409,8 +409,8 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="MonthlyContributionsScreen"
-        component={MonthlyContributionsScreen}
+        name="SubscriptionsScreen"
+        component={SubscriptionsScreen}
         options={{
           headerShown: false,
         }}

@@ -1,10 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Subscription from "@ribon.io/shared/types/entities/Subscription";
-import React, { useState } from "react";
+import { useState } from "react";
 import Icon from "components/atomics/Icon";
-
 import { theme } from "@ribon.io/shared";
 import { useLanguage } from "contexts/languageContext";
 import {
@@ -14,18 +13,19 @@ import {
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useNavigation } from "hooks/useNavigation";
 import { useRouteParams } from "hooks/useRouteParams";
-import S from "./styles";
-import CancelContributionModal from "./CancelContributionModal";
+import { formatPrice } from "lib/formatters/currencyFormatter";
+import CancelSubscriptionModal from "./CancelSubscriptionModal";
+import * as S from "./styles";
 
-export default function MonthlyContributionsScreen(): JSX.Element {
+export default function SubscriptionsScreen(): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "promoters.monthlyContributionsScreen",
+    keyPrefix: "promoters.subscriptionsScreen",
   });
 
   const { userSubscriptions } = useSubscriptions();
   const { subscriptions } = userSubscriptions();
   const [modalVisible, setModalVisible] = useState(false);
-  const { params } = useRouteParams<"MonthlyContributionsScreen">();
+  const { params } = useRouteParams<"SubscriptionsScreen">();
 
   const { navigateTo, popNavigation } = useNavigation();
 
@@ -36,9 +36,10 @@ export default function MonthlyContributionsScreen(): JSX.Element {
       ? stringToLocaleDateString(subscription.nextPaymentAttempt)
       : add30DaysAndFormatDate(subscription.createdAt, currentLang);
 
-  const handleCancelContribution = () => {
+  const handleCancelSubscription = () => {
     setModalVisible(!modalVisible);
   };
+
   const handleBackButtonClick = () => {
     if (params?.from === "ContributionDoneScreen") {
       navigateTo("PromotersScreen");
@@ -47,56 +48,68 @@ export default function MonthlyContributionsScreen(): JSX.Element {
     }
   };
 
+  const isClub = (subscription: Subscription) =>
+    subscription.offer?.category === "club";
+
   return (
-    <ScrollView style={S.container}>
-      <View style={S.arrow}>
+    <S.Container>
+      <S.Arrow>
         <TouchableOpacity
           accessibilityRole="button"
           onPress={handleBackButtonClick}
           testID="arrow-back-button"
         >
-          <ArrowLeft />
+          <ArrowLeft color={theme.colors.brand.primary[600]} />
         </TouchableOpacity>
-      </View>
-      <Text style={S.title}>{t("title")}</Text>
-      <View style={S.subscriptionsContainer}>
+      </S.Arrow>
+      <S.Title>{t("title")} </S.Title>
+      <S.SubscriptionsContainer>
         {subscriptions &&
           subscriptions.map((subscription: Subscription) => (
-            <View style={S.card} key={subscription.id}>
-              <View style={S.iconTextContainer}>
-                <Text style={S.amount}>{subscription.offer?.price}</Text>
-                <View style={S.iconContainer}>
+            <S.Card key={subscription.id}>
+              <S.IconTextContainer>
+                <S.Amount>
+                  {subscription.offer &&
+                    formatPrice(
+                      subscription.offer.priceValue,
+                      subscription.offer.currency,
+                    )}
+                </S.Amount>
+                <S.IconContainer>
                   <Icon
                     type="outlined"
                     name="delete"
                     size={24}
                     color={theme.colors.neutral10}
-                    onPress={handleCancelContribution}
+                    onPress={handleCancelSubscription}
                   />
-                </View>
-              </View>
-              <Text style={S.text}>
-                {t("to")}
-                <Text style={S.highlightedText}>
-                  {subscription.receiver.name}
-                </Text>
-              </Text>
-              <Text style={S.text}>
+                </S.IconContainer>
+              </S.IconTextContainer>
+              <S.Text>
+                {!isClub(subscription) && t("to")}
+                <S.HighlightedText>
+                  {isClub(subscription)
+                    ? t("ribonClubTag")
+                    : subscription.receiver.name}
+                </S.HighlightedText>
+              </S.Text>
+              <S.Text>
                 {t("nextContribution")}
-                <Text style={S.highlightedText}>
+                <S.HighlightedText>
                   {nextPaymetAttempt(subscription)}
-                </Text>
-              </Text>
+                </S.HighlightedText>
+              </S.Text>
               {modalVisible && (
-                <CancelContributionModal
+                <CancelSubscriptionModal
                   setVisible={setModalVisible}
                   visible={modalVisible}
-                  contributionId={subscription.id}
+                  subscriptionId={subscription.id}
+                  club={isClub(subscription)}
                 />
               )}
-            </View>
+            </S.Card>
           ))}
-      </View>
-    </ScrollView>
+      </S.SubscriptionsContainer>
+    </S.Container>
   );
 }
