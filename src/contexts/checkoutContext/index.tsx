@@ -48,7 +48,9 @@ export interface ICheckoutContext {
   setButtonDisabled: (value: SetStateAction<boolean>) => void;
   setCryptoGiving: (value: SetStateAction<string>) => void;
   setOffer: (value: SetStateAction<Offer | undefined>) => void;
-  setFlow: (value: SetStateAction<"cause" | "nonProfit">) => void;
+  setFlow: (
+    value: SetStateAction<"cause" | "nonProfit" | "club" | undefined>,
+  ) => void;
   buttonDisabled: boolean;
   currentCoin?: Currencies;
   country: string;
@@ -62,7 +64,7 @@ export interface ICheckoutContext {
   cvv: string;
   cryptoGiving: string;
   offer: Offer | undefined;
-  flow: "cause" | "nonProfit";
+  flow: "cause" | "nonProfit" | "club" | undefined;
 
   setCause: (value: SetStateAction<Cause | undefined>) => void;
 
@@ -92,7 +94,9 @@ function CheckoutProvider({ children }: Props) {
   const [offer, setOffer] = useState<Offer | undefined>();
   const [nonProfit, setNonProfit] = useState<NonProfit | undefined>();
   const [cause, setCause] = useState<Cause | undefined>();
-  const [flow, setFlow] = useState<"cause" | "nonProfit">("nonProfit");
+  const [flow, setFlow] = useState<
+    "cause" | "nonProfit" | "club" | undefined
+  >();
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
 
