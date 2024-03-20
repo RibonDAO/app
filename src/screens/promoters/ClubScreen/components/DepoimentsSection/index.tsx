@@ -13,7 +13,11 @@ function DepoimentsSection(): JSX.Element {
   return (
     <View style={S.container}>
       <Text style={S.title}>{t("title")}</Text>
-      <ScrollView horizontal style={S.innerContainer}>
+      <ScrollView
+        horizontal
+        style={S.innerContainer}
+        showsHorizontalScrollIndicator={false}
+      >
         <View style={S.card}>
           <View style={S.cardContainer}>
             <Image source={DepoimentIcon} accessibilityIgnoresInvertColors />
