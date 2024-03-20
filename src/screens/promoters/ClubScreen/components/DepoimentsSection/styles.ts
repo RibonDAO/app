@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   innerContainer: {
     display: "flex",
     flexDirection: "row",
-    gap: 8,
   },
   title: {
     ...stylizedDisplayMd,
@@ -27,6 +26,7 @@ const styles = StyleSheet.create({
     maxWidth: 300,
     backgroundColor: theme.colors.brand.tertiary[25],
     borderColor: theme.colors.brand.tertiary[25],
+    marginRight: theme.spacingNative(16),
   },
   titleCard: {
     ...defaultBodySmMedium,
