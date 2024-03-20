@@ -105,10 +105,17 @@ function PixInstructionsScreen(): JSX.Element {
             </TouchableOpacity>
           </View>
           <View style={S.mainContainer}>
-            <Text style={S.title}>
-              {t("donatingTo")}
-              <Text style={S.payableName}>{payable?.name}</Text>
-            </Text>
+            {target === "club" ? (
+              <Text style={S.title}>
+                {t("paymentOf")}
+                <Text style={S.payableName}>{t("ribonClub")} </Text>
+              </Text>
+            ) : (
+              <Text style={S.title}>
+                {t("donatingTo")}
+                <Text style={S.payableName}>{payable?.name} </Text>
+              </Text>
+            )}
 
             <View style={S.pixContainer}>
               <Text style={S.pixCode}>{t("pixCode")}</Text>

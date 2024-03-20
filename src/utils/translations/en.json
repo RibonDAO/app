@@ -383,6 +383,8 @@
       "copyCodeSuccess": "Code copied!",
       "expiresAt": "Expires at 30 minutes",
       "donatingTo": "Donating to ",
+      "paymentOf": "Payment of ",
+      "ribonClub": "Ribon Club",
       "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments."
     },
     "subscriptionsScreen": {
