@@ -25,6 +25,8 @@ export default function SubscriptionsScreen(): JSX.Element {
   const { userSubscriptions } = useSubscriptions();
   const { subscriptions } = userSubscriptions();
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedSubscription, setSelectedSubscription] =
+    useState<Subscription>({} as Subscription);
   const { params } = useRouteParams<"SubscriptionsScreen">();
 
   const { navigateTo, popNavigation } = useNavigation();
@@ -36,7 +38,8 @@ export default function SubscriptionsScreen(): JSX.Element {
       ? stringToLocaleDateString(subscription.nextPaymentAttempt)
       : add30DaysAndFormatDate(subscription.createdAt, currentLang);
 
-  const handleCancelSubscription = () => {
+  const handleCancelSubscription = (subscription: Subscription) => {
+    setSelectedSubscription(subscription);
     setModalVisible(!modalVisible);
   };
 
@@ -84,7 +87,7 @@ export default function SubscriptionsScreen(): JSX.Element {
                       name="delete"
                       size={24}
                       color={theme.colors.neutral10}
-                      onPress={handleCancelSubscription}
+                      onPress={() => handleCancelSubscription(subscription)}
                     />
                   </S.IconContainer>
                 )}
@@ -112,8 +115,8 @@ export default function SubscriptionsScreen(): JSX.Element {
                 <CancelSubscriptionModal
                   setVisible={setModalVisible}
                   visible={modalVisible}
-                  subscriptionId={subscription.id}
-                  club={isClub(subscription)}
+                  subscriptionId={selectedSubscription.id}
+                  club={isClub(selectedSubscription)}
                 />
               )}
             </S.Card>
