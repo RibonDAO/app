@@ -82,7 +82,7 @@ export default function SubscriptionsScreen(): JSX.Element {
 
   const handleCancelSubscriptionButtonClick = (subscription: Subscription) => {
     setSubscriptionToBeCanceled(subscription);
-    logEvent("cancelSubsBtn_click", eventParams());
+    logEvent("cancelSubs_click", eventParams());
     setModalVisible(!modalVisible);
   };
 
