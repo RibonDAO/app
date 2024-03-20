@@ -16,26 +16,28 @@ function BenefitsSection(): JSX.Element {
 
   return (
     <View>
-      <View style={S.container}>
-        <View style={S.innerContainer}>
-          <TicketIcon />
-          <View style={S.textContainer}>
-            <Text style={S.title}>{t("firstBenefitTitle")}</Text>
-            <Text style={S.description}>{t("firstBenefitDescription")}</Text>
+      <View style={S.cardContainer}>
+        <View style={S.container}>
+          <View style={S.innerContainer}>
+            <TicketIcon />
+            <View style={S.textContainer}>
+              <Text style={S.title}>{t("firstBenefitTitle")}</Text>
+              <Text style={S.description}>{t("firstBenefitDescription")}</Text>
+            </View>
           </View>
-        </View>
-        <View style={S.innerContainer}>
-          <BoxIcon />
-          <View style={S.textContainer}>
-            <Text style={S.title}>{t("secondBenefitTitle")}</Text>
-            <Text style={S.description}>{t("secondBenefitDescription")}</Text>
+          <View style={S.innerContainer}>
+            <BoxIcon />
+            <View style={S.textContainer}>
+              <Text style={S.title}>{t("secondBenefitTitle")}</Text>
+              <Text style={S.description}>{t("secondBenefitDescription")}</Text>
+            </View>
           </View>
-        </View>
-        <View style={S.innerContainer}>
-          <SmileIcon />
-          <View style={S.textContainer}>
-            <Text style={S.title}>{t("thirdBenefitTitle")}</Text>
-            <Text style={S.description}>{t("thirdBenefitDescription")}</Text>
+          <View style={S.innerContainer}>
+            <SmileIcon />
+            <View style={S.textContainer}>
+              <Text style={S.title}>{t("thirdBenefitTitle")}</Text>
+              <Text style={S.description}>{t("thirdBenefitDescription")}</Text>
+            </View>
           </View>
         </View>
       </View>

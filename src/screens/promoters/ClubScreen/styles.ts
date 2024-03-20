@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    padding: theme.spacingNative(16),
   },
   donateButtonContainer: {
     position: "absolute",
@@ -31,6 +30,7 @@ const styles = StyleSheet.create({
     ...stylizedDisplayMd,
     color: theme.colors.neutral[800],
     textAlign: "center",
+    margin: theme.spacingNative(16),
     marginBottom: theme.spacingNative(40),
   },
   subtitle: {

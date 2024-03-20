@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: theme.spacingNative(40),
   },
+  cardContainer: {
+    margin: theme.spacingNative(16),
+  },
   innerContainer: {
     display: "flex",
     flexDirection: "row",
