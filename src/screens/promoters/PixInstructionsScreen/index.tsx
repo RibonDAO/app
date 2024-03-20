@@ -113,7 +113,7 @@ function PixInstructionsScreen(): JSX.Element {
             ) : (
               <Text style={S.title}>
                 {t("donatingTo")}
-                <Text style={S.payableName}>{target === payable?.name} </Text>
+                <Text style={S.payableName}>{payable?.name} </Text>
               </Text>
             )}
 
