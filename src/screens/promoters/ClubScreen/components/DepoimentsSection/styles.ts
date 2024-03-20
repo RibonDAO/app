@@ -7,7 +7,9 @@ import {
 } from "styles/typography/default";
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    margin: theme.spacingNative(16),
+  },
   innerContainer: {
     display: "flex",
     flexDirection: "row",
