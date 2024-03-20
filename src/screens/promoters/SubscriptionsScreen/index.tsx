@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { TouchableOpacity } from "react-native";
 import Subscription from "@ribon.io/shared/types/entities/Subscription";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import { useLanguage } from "contexts/languageContext";
@@ -10,6 +10,7 @@ import {
   add30DaysAndFormatDate,
   stringToLocaleDateString,
 } from "lib/formatters/dateFormatter";
+import { logEvent } from "services/analytics";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useNavigation } from "hooks/useNavigation";
 import { useRouteParams } from "hooks/useRouteParams";
@@ -33,13 +34,55 @@ export default function SubscriptionsScreen(): JSX.Element {
 
   const { currentLang } = useLanguage();
 
+  const isClub = (subscription: Subscription) =>
+    subscription.offer?.category === "club";
+  const isPix = (subscription: Subscription) =>
+    subscription.personPayments[0]?.paymentMethod === "pix";
+
   const nextPaymetAttempt = (subscription: any) =>
     subscription.nextPaymentAttempt
       ? stringToLocaleDateString(subscription.nextPaymentAttempt)
       : add30DaysAndFormatDate(subscription.createdAt, currentLang);
 
+  const formattedAmount = (subscription: Subscription) =>
+    subscription.offer &&
+    formatPrice(subscription.offer.priceValue, subscription.offer.currency);
+
+  const receiverType = () => {
+    if (
+      subscriptionToBeCanceled?.receiver &&
+      Object.prototype.hasOwnProperty.call(
+        subscriptionToBeCanceled?.receiver,
+        "nonProfits",
+      )
+    ) {
+      return "cause";
+    }
+    return "nonProfit";
+  };
+
+  const eventParams = () => {
+    if (isClub(subscriptionToBeCanceled)) {
+      return {
+        amount: formattedAmount(subscriptionToBeCanceled),
+        from: "club",
+      };
+    } else if (receiverType() === "nonProfit") {
+      return {
+        amount: formattedAmount(subscriptionToBeCanceled),
+        nonProfitId: subscriptionToBeCanceled.receiver?.id,
+      };
+    } else {
+      return {
+        amount: formattedAmount(subscriptionToBeCanceled),
+        causeId: subscriptionToBeCanceled.receiver?.id,
+      };
+    }
+  };
+
   const handleCancelSubscriptionButtonClick = (subscription: Subscription) => {
     setSubscriptionToBeCanceled(subscription);
+    logEvent("cancelSubs_click", eventParams());
     setModalVisible(!modalVisible);
   };
 
@@ -51,10 +94,9 @@ export default function SubscriptionsScreen(): JSX.Element {
     }
   };
 
-  const isClub = (subscription: Subscription) =>
-    subscription.offer?.category === "club";
-  const isPix = (subscription: Subscription) =>
-    subscription.personPayments[0]?.paymentMethod === "pix";
+  useEffect(() => {
+    logEvent("P25_view");
+  }, []);
 
   return (
     <S.Container>
@@ -73,13 +115,7 @@ export default function SubscriptionsScreen(): JSX.Element {
           subscriptions.map((subscription: Subscription) => (
             <S.Card key={subscription.id}>
               <S.IconTextContainer>
-                <S.Amount>
-                  {subscription.offer &&
-                    formatPrice(
-                      subscription.offer.priceValue,
-                      subscription.offer.currency,
-                    )}
-                </S.Amount>
+                <S.Amount>{formattedAmount(subscription)}</S.Amount>
                 {!isPix(subscription) && (
                   <S.IconContainer>
                     <Icon
@@ -119,6 +155,7 @@ export default function SubscriptionsScreen(): JSX.Element {
                   visible={modalVisible}
                   subscriptionId={subscriptionToBeCanceled.id}
                   club={isClub(subscriptionToBeCanceled)}
+                  eventParams={eventParams()}
                 />
               )}
             </S.Card>
