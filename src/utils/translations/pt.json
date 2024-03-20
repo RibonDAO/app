@@ -341,6 +341,8 @@
       "copyCodeSuccess": "Codigo copiado!",
       "expiresAt": "Expira em 30 minutos",
       "donatingTo": "Doando para ",
+      "paymentOf": "Pagamento do ",
+      "ribonClub": "Clube Ribon",
       "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon."
     },
     "subscriptionsScreen": {
