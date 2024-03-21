@@ -1,6 +1,8 @@
 import { useNavigation } from "hooks/useNavigation";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
 import { useTranslation } from "react-i18next";
+import { logEvent } from "services/analytics";
+import { useEffect } from "react";
 
 type Props = {
   visible: boolean;
@@ -18,6 +20,7 @@ function ZeroTicketsModal({ visible, setVisible }: Props): JSX.Element {
   });
 
   const handleNavigation = () => {
+    logEvent("clubCTA_click", { from: "zeroTickets_modal" });
     dispose();
     navigateTo("ClubScreen");
   };
@@ -34,6 +37,10 @@ function ZeroTicketsModal({ visible, setVisible }: Props): JSX.Element {
   };
 
   const modalProps = ZeroTicketsDialogProps;
+
+  useEffect(() => {
+    if (visible) logEvent("clubCTA_view", { from: "zeroTickets_modal" });
+  }, [visible]);
 
   return (
     <ModalDialog visible={visible} setVisible={setVisible} {...modalProps} />
