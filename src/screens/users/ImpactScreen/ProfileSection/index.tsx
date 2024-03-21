@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import { useUserProfile, useSubscriptions } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useFocusEffect } from "@react-navigation/native";
@@ -53,6 +53,14 @@ function ProfileSection() {
 
     navigateTo("ClubScreen");
   };
+
+  useEffect(() => {
+    if (!isMemberLoading) {
+      logEvent("clubCTA_view", {
+        from: "impact_page",
+      });
+    }
+  }, [isMemberLoading, isMember]);
 
   if (!currentUser) return <View />;
   if (isMemberLoading) return <LoadingOverlay />;
