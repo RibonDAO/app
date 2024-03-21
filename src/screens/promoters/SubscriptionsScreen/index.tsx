@@ -37,7 +37,8 @@ export default function SubscriptionsScreen(): JSX.Element {
   const isClub = (subscription: Subscription) =>
     subscription.offer?.category === "club";
   const isPix = (subscription: Subscription) =>
-    subscription.personPayments[0]?.paymentMethod === "pix";
+    subscription.personPayments[subscription.personPayments.length - 1]
+      ?.paymentMethod === "pix";
 
   const nextPaymetAttempt = (subscription: any) =>
     subscription.nextPaymentAttempt
