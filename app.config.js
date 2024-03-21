@@ -1,5 +1,5 @@
-const version = "5.6.2";
-const buildNumber = 365;
+const version = "5.6.3";
+const buildNumber = 366;
 
 export default () => ({
   "expo": {
@@ -62,6 +62,9 @@ export default () => ({
       "favicon": "./src/assets/images/favicon.png"
     },
     "plugins": [
+      [
+        "react-native-appsflyer",{}
+      ],
       [
         "expo-build-properties",
         {
@@ -138,6 +141,8 @@ export default () => ({
       "EXPO_PUBLIC_CIO_API_KEY": process.env.EXPO_PUBLIC_CIO_API_KEY,
       "EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID": process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID,
       "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+      "EXPO_PUBLIC_APPSFLYER_KEY": process.env.EXPO_PUBLIC_APPSFLYER_KEY,
+      "EXPO_PUBLIC_APPSFLYER_APP_ID": process.env.EXPO_PUBLIC_APPSFLYER_APP_ID
     },
     "runtimeVersion": {
       "policy": "appVersion"
