@@ -323,7 +323,7 @@ export default function CausesScreen() {
     } finally {
       setRefreshing(false);
     }
-  }, [isMember]);
+  }, [refetchTickets, refetchIsMember, refetchFirstAccessToIntegration]);
 
   return isLoading || loadingFirstAccessToIntegration ? (
     <Placeholder />
