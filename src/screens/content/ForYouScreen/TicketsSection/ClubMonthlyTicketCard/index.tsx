@@ -3,15 +3,14 @@ import { theme, TicketsCategories } from "@ribon.io/shared";
 import PinkBoxIllustration from "assets/illustrations/PinkBoxIllustration";
 import Button from "components/atomics/buttons/Button";
 import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
-
 import CardTicket from "components/moleculars/CardTicket";
-
 import TicketPinkIcon from "components/vectors/TicketPinkIcon";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useTickets } from "hooks/useTickets";
-import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   tickets?: number;
@@ -66,6 +65,12 @@ export default function ClubMonthlyTicketCard({
       refetchTickets();
     }
   };
+
+  useEffect(() => {
+    if (!isMember) {
+      logEvent("clubCTA_view", { from: "clubMonthlyTicket_card" });
+    }
+  }, []);
 
   return (
     <CardTicket

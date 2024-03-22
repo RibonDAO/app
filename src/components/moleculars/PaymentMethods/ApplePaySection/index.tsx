@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 import {
   createPlatformPayPaymentMethod,
@@ -17,6 +17,7 @@ import { useIntegration, useSources, useUsers } from "@ribon.io/shared";
 import { useTranslation } from "react-i18next";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { normalizedLanguage } from "lib/currentLanguage";
+import { formatPrice } from "lib/formatters/currencyFormatter";
 import { PLATFORM } from "utils/constants/Application";
 import InputText from "components/atomics/inputs/InputText";
 import { useLanguage } from "contexts/languageContext";
@@ -88,6 +89,14 @@ export default function ApplePaySection({
   useEffect(() => {
     if (currentUser) setEmail(currentUser.email);
   }, [JSON.stringify(currentUser)]);
+
+  useEffect(() => {
+    logEvent("selectApplePay_click", {
+      value: formatPrice(offer.priceValue, offer.currency),
+      // eslint-disable-next-line no-nested-ternary
+      target: nonProfit?.id ? "nonProfit" : cause?.id ? "cause" : "club",
+    });
+  }, []);
 
   const login = async () => {
     if (!signedIn) {
