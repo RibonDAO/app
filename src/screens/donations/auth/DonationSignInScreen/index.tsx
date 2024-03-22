@@ -26,7 +26,6 @@ import { useTickets } from "hooks/useTickets";
 import S from "./styles";
 
 function DonationSignInScreen() {
-  usePageView("P27_view", { from: "donation_flow" });
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.auth.signInScreen",
   });
@@ -41,6 +40,7 @@ function DonationSignInScreen() {
   const { formattedImpactText } = useFormattedImpactText();
   const { handleDonate } = useDonationFlow();
   const { handleCollect } = useTickets();
+  usePageView("P27_view", { from: "donation_flow", nonProfitId: nonProfit.id });
 
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
