@@ -9,7 +9,7 @@ import ValidateAccount from "components/moleculars/validateAccount";
 import { useRouteParams } from "hooks/useRouteParams";
 
 function ValidateAccountScreen() {
-  usePageView("P28_view", { from: "validation_flow" });
+  usePageView("P27_view", { from: "validation_flow" });
   const {
     params: { from },
   } = useRouteParams<"ValidateAccountScreen">();

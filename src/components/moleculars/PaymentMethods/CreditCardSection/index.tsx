@@ -23,9 +23,14 @@ import S from "./styles";
 export type Props = {
   onSubmit: () => void;
   showFiscalFields: boolean;
+  eventParams?: Record<any, any>;
 };
 
-function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
+function CreditCardSection({
+  onSubmit,
+  showFiscalFields,
+  eventParams,
+}: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.checkoutScreen",
   });
@@ -60,7 +65,7 @@ function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
   const [maskedTaxId, setMaskedTaxId] = useState("999.999.999-99");
 
   useEffect(() => {
-    logEvent("selectCreditCard_click");
+    logEvent("selectCreditCard_click", eventParams);
   }, []);
 
   useEffect(() => {

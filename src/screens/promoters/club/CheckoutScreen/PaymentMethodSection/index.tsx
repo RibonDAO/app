@@ -6,6 +6,7 @@ import { useOffers } from "@ribon.io/shared/hooks";
 import { Categories, Currencies, Offer } from "@ribon.io/shared/types";
 import { useEffect, useState } from "react";
 import { useStripeContext } from "contexts/stripeContext";
+import { formatPrice } from "lib/formatters/currencyFormatter";
 import { useRouteParams } from "hooks/useRouteParams";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared/styles";
@@ -19,7 +20,6 @@ import PixSection from "components/moleculars/PaymentMethods/PixSection";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
-
 import S from "./styles";
 import PixIcon from "../assets/PixIcon";
 
@@ -118,6 +118,14 @@ export default function PaymentMethodSection() {
 
   const showApplePay = () => Platform.OS === "ios";
 
+  const eventParams = () => {
+    if (!currentOffer) return undefined;
+    return {
+      value: formatPrice(currentOffer?.priceValue, currentOffer?.currency),
+      target: "club",
+    };
+  };
+
   return (
     <>
       <View style={S.container}>
@@ -144,6 +152,7 @@ export default function PaymentMethodSection() {
                 <CreditCardSection
                   onSubmit={handlePayment}
                   showFiscalFields={currentOffer?.gateway === "stripe"}
+                  eventParams={eventParams()}
                 />
               ),
               rightIcon: <CreditCardIcon />,
@@ -181,7 +190,10 @@ export default function PaymentMethodSection() {
               title: t("checkoutScreen.paymentMethodSection.pix"),
               children: currentOffer && (
                 <View>
-                  <PixSection offer={currentOffer as Offer} />
+                  <PixSection
+                    offer={currentOffer as Offer}
+                    eventParams={eventParams()}
+                  />
                   <View style={S.infoTextContainer}>
                     <Text style={S.infoText}>
                       {t("club.checkoutScreen.pix")}

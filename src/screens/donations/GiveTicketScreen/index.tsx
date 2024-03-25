@@ -29,6 +29,7 @@ export default function GiveTicketScreen() {
   }, []);
 
   const receiveTicket = () => {
+    logEvent("P10_getTicketBtn_click");
     navigateTo("ReceiveTicketScreen");
   };
 
