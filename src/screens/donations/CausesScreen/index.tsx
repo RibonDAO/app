@@ -156,7 +156,7 @@ export default function CausesScreen() {
     });
   }, []);
 
-  const causesFilter = () => {
+  const causesFilter = useCallback(() => {
     const causesApi = causes.filter((cause) => cause.status === "active");
     return (
       [
@@ -167,7 +167,7 @@ export default function CausesScreen() {
         ...causesApi,
       ] || []
     );
-  };
+  }, [causes]);
 
   const handleCauseChange = useCallback((_element: any, index: number) => {
     const cause = _element;
@@ -194,11 +194,19 @@ export default function CausesScreen() {
     return nonProfits || [];
   }, [chosenCause, nonProfits]);
 
-  const sortedNonProfits = useMemo(() => [...nonProfitsFiltered].sort((a, b) => {
-      const causeAIndex = causes.findIndex((cause) => cause.id === a.cause.id);
-      const causeBIndex = causes.findIndex((cause) => cause.id === b.cause.id);
-      return causeAIndex - causeBIndex;
-    }), [nonProfitsFiltered, causes]);
+  const sortedNonProfits = useMemo(
+    () =>
+      [...nonProfitsFiltered].sort((a, b) => {
+        const causeAIndex = causes.findIndex(
+          (cause) => cause.id === a.cause.id,
+        );
+        const causeBIndex = causes.findIndex(
+          (cause) => cause.id === b.cause.id,
+        );
+        return causeAIndex - causeBIndex;
+      }),
+    [nonProfitsFiltered, causes],
+  );
 
   const handleNonProfitImagePress = async (nonProfit: NonProfit) => {
     setCurrentNonProfit(nonProfit);
@@ -269,21 +277,18 @@ export default function CausesScreen() {
     }
   };
 
-  const renderNotificationCard = useCallback(
-    () =>
-      isNotificationCardVisible && (
-        <View style={{ paddingBottom: 16 }}>
-          <InlineNotification
-            title={t("enableNotification.title")}
-            type="warning"
-            customIcon="notifications"
-            firstLink={t("enableNotification.link") || ""}
-            onFirstLinkClick={handleHideNotificationClick}
-          />
-        </View>
-      ),
-    [isNotificationCardVisible],
-  );
+  const renderNotificationCard = () =>
+    isNotificationCardVisible && (
+      <View style={{ paddingBottom: 16 }}>
+        <InlineNotification
+          title={t("enableNotification.title")}
+          type="warning"
+          customIcon="notifications"
+          firstLink={t("enableNotification.link") || ""}
+          onFirstLinkClick={handleHideNotificationClick}
+        />
+      </View>
+    );
 
   const handleButtonPress = (nonProfit: NonProfit) => {
     logEvent("donateTicketBtn_start", {
