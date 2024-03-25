@@ -169,7 +169,7 @@ export default function CausesScreen() {
     );
   };
 
-  const handleCauseChange = (_element: any, index: number) => {
+  const handleCauseChange = useCallback((_element: any, index: number) => {
     const cause = _element;
     setChosenCauseIndex(index);
     if (cause.id !== 0) {
@@ -181,9 +181,9 @@ export default function CausesScreen() {
     if (scrollViewRef.current) {
       scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
     }
-  };
+  }, []);
 
-  const nonProfitsFilter = () => {
+  const nonProfitsFilter = useCallback(() => {
     if (chosenCause) {
       const nonProfitsFiltered = nonProfits?.filter(
         (nonProfit) => nonProfit?.cause?.id === chosenCause?.id,
@@ -192,9 +192,9 @@ export default function CausesScreen() {
       return nonProfitsFiltered || [];
     }
     return nonProfits || [];
-  };
+  }, [chosenCause, nonProfits]);
 
-  const sortNonProfits = () => {
+  const sortNonProfits = useCallback(() => {
     const filteredNonProfits = nonProfitsFilter();
     const sorted = [...filteredNonProfits].sort((a, b) => {
       const causeAIndex = causes.findIndex((cause) => cause.id === a.cause.id);
@@ -203,7 +203,7 @@ export default function CausesScreen() {
       return causeAIndex - causeBIndex;
     });
     return sorted;
-  };
+  }, [nonProfitsFilter, causes]);
 
   useEffect(() => {
     sortNonProfits();
@@ -226,20 +226,24 @@ export default function CausesScreen() {
     }
   };
 
-  const nonProfitStylesFor = (index: number) => {
-    const isFirst = index === 0;
-    const isLast = index === nonProfitsFilter().length - 1;
+  const nonProfitStylesFor = useCallback(
+    (index: number) => {
+      const filteredNonProfits = nonProfitsFilter();
+      const isFirst = index === 0;
+      const isLast = index === filteredNonProfits.length - 1;
 
-    return {
-      marginLeft: isFirst ? 16 : 4,
-      marginRight: isLast ? 16 : 4,
-      ...S.causesCardContainer,
-    };
-  };
+      return {
+        marginLeft: isFirst ? 16 : 4,
+        marginRight: isLast ? 16 : 4,
+        ...S.causesCardContainer,
+      };
+    },
+    [nonProfitsFilter],
+  );
 
-  const navigateToPromotersScreen = () => {
+  const navigateToPromotersScreen = useCallback(() => {
     navigateTo("PromotersScreen");
-  };
+  }, []);
 
   const shouldShowIntegrationBanner =
     !integration?.name?.toLowerCase()?.includes("ribon") &&
@@ -275,18 +279,19 @@ export default function CausesScreen() {
     }
   };
 
-  const renderNotificationCard = () =>
-    isNotificationCardVisible && (
-      <View style={{ paddingBottom: 16 }}>
-        <InlineNotification
-          title={t("enableNotification.title")}
-          type="warning"
-          customIcon="notifications"
-          firstLink={t("enableNotification.link") || ""}
-          onFirstLinkClick={handleHideNotificationClick}
-        />
-      </View>
-    );
+  const renderNotificationCard = useCallback(() => (
+      isNotificationCardVisible && (
+        <View style={{ paddingBottom: 16 }}>
+          <InlineNotification
+            title={t("enableNotification.title")}
+            type="warning"
+            customIcon="notifications"
+            firstLink={t("enableNotification.link") || ""}
+            onFirstLinkClick={handleHideNotificationClick}
+          />
+        </View>
+      )
+    ), [isNotificationCardVisible]);
 
   const handleButtonPress = (nonProfit: NonProfit) => {
     logEvent("donateTicketBtn_start", {
