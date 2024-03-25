@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   useStories,
   useFirstAccessToIntegration,
@@ -183,31 +183,22 @@ export default function CausesScreen() {
     }
   }, []);
 
-  const nonProfitsFilter = useCallback(() => {
+  const nonProfitsFiltered = useMemo(() => {
     if (chosenCause) {
-      const nonProfitsFiltered = nonProfits?.filter(
-        (nonProfit) => nonProfit?.cause?.id === chosenCause?.id,
+      return (
+        nonProfits?.filter(
+          (nonProfit) => nonProfit?.cause?.id === chosenCause?.id,
+        ) || []
       );
-
-      return nonProfitsFiltered || [];
     }
     return nonProfits || [];
   }, [chosenCause, nonProfits]);
 
-  const sortNonProfits = useCallback(() => {
-    const filteredNonProfits = nonProfitsFilter();
-    const sorted = [...filteredNonProfits].sort((a, b) => {
+  const sortedNonProfits = useMemo(() => [...nonProfitsFiltered].sort((a, b) => {
       const causeAIndex = causes.findIndex((cause) => cause.id === a.cause.id);
       const causeBIndex = causes.findIndex((cause) => cause.id === b.cause.id);
-
       return causeAIndex - causeBIndex;
-    });
-    return sorted;
-  }, [nonProfitsFilter, causes]);
-
-  useEffect(() => {
-    sortNonProfits();
-  }, [chosenCause]);
+    }), [nonProfitsFiltered, causes]);
 
   const handleNonProfitImagePress = async (nonProfit: NonProfit) => {
     setCurrentNonProfit(nonProfit);
@@ -228,9 +219,8 @@ export default function CausesScreen() {
 
   const nonProfitStylesFor = useCallback(
     (index: number) => {
-      const filteredNonProfits = nonProfitsFilter();
       const isFirst = index === 0;
-      const isLast = index === filteredNonProfits.length - 1;
+      const isLast = index === nonProfitsFiltered.length - 1;
 
       return {
         marginLeft: isFirst ? 16 : 4,
@@ -238,7 +228,7 @@ export default function CausesScreen() {
         ...S.causesCardContainer,
       };
     },
-    [nonProfitsFilter],
+    [nonProfitsFiltered],
   );
 
   const navigateToPromotersScreen = useCallback(() => {
@@ -279,7 +269,8 @@ export default function CausesScreen() {
     }
   };
 
-  const renderNotificationCard = useCallback(() => (
+  const renderNotificationCard = useCallback(
+    () =>
       isNotificationCardVisible && (
         <View style={{ paddingBottom: 16 }}>
           <InlineNotification
@@ -290,8 +281,9 @@ export default function CausesScreen() {
             onFirstLinkClick={handleHideNotificationClick}
           />
         </View>
-      )
-    ), [isNotificationCardVisible]);
+      ),
+    [isNotificationCardVisible],
+  );
 
   const handleButtonPress = (nonProfit: NonProfit) => {
     logEvent("donateTicketBtn_start", {
@@ -347,14 +339,14 @@ export default function CausesScreen() {
           </ScrollView>
         </View>
 
-        {sortNonProfits()?.length > 0 ? (
+        {sortedNonProfits?.length > 0 ? (
           <ScrollView
             style={S.causesContainer}
             horizontal
             showsHorizontalScrollIndicator={false}
             ref={scrollViewRef}
           >
-            {sortNonProfits()?.map((nonProfit, index) => (
+            {sortedNonProfits?.map((nonProfit, index) => (
               <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
                 <CardCenterImageButton
                   image={nonProfit.mainImage}
