@@ -3,8 +3,9 @@ import {
   useStories,
   useFirstAccessToIntegration,
   useDonatedToday,
+  useSubscriptions,
 } from "@ribon.io/shared/hooks";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, RefreshControl } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
@@ -68,6 +69,7 @@ export default function CausesScreen() {
   } = useFirstAccessToIntegration(currentIntegrationId);
   const { integration } = useIntegrationContext();
   const { ticketsCounter } = useTicketsContext();
+
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
   const [currentNonProfit, setCurrentNonProfit] = useState<NonProfit>(
@@ -75,6 +77,8 @@ export default function CausesScreen() {
   );
   const [isNotificationCardVisible, setNotificationCardVisible] =
     useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
   const { navigateTo } = useNavigation();
   const scrollViewRef = useRef<any>(null);
   const { fetchNonProfitStories } = useStories();
@@ -305,11 +309,33 @@ export default function CausesScreen() {
     }
   };
 
+  const { userIsMember } = useSubscriptions();
+  const { isMember, refetch: refetchIsMember } = userIsMember();
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      refetchTickets();
+      await refetchIsMember();
+      await refetchFirstAccessToIntegration();
+    } catch (e) {
+      logError(e);
+    } finally {
+      setRefreshing(false);
+    }
+  }, [refetchTickets, refetchIsMember, refetchFirstAccessToIntegration]);
+
   return isLoading || loadingFirstAccessToIntegration ? (
     <Placeholder />
   ) : (
     <>
-      <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={S.container}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View style={S.containerPadding}>
           {currentNonProfit && (
             <StoriesSection
@@ -387,7 +413,7 @@ export default function CausesScreen() {
           </View>
         )}
 
-        <ClubSection />
+        <ClubSection isMember={isMember} refetch={refetchIsMember} />
       </ScrollView>
       <DonationErrorModal newState={params?.newState} />
     </>

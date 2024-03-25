@@ -26,6 +26,7 @@ import usePayable from "hooks/usePayable";
 import Icon from "components/atomics/Icon";
 import TrustSeal from "components/moleculars/TrustSeal";
 import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
+import { useNavigation } from "hooks/useNavigation";
 import S from "./styles";
 
 function PixInstructionsScreen(): JSX.Element {
@@ -35,8 +36,7 @@ function PixInstructionsScreen(): JSX.Element {
     keyPrefix: "promoters.pixInstructionsScreen",
   });
 
-  const { verifyPayment, pixInstructions, handleBackButtonClick } =
-    usePixPaymentInformation();
+  const { verifyPayment, pixInstructions } = usePixPaymentInformation();
 
   const copyToClipboard = () => {
     Clipboard.setString(
@@ -48,6 +48,12 @@ function PixInstructionsScreen(): JSX.Element {
   const { target, targetId } = useCheckoutContext();
 
   const payable = usePayable(target, targetId);
+
+  const { navigateTo } = useNavigation();
+
+  const handleBackButtonClick = () => {
+    navigateTo("CausesScreen");
+  };
 
   useEffect(() => {
     if (pixInstructions && pixInstructions.clientSecret) {

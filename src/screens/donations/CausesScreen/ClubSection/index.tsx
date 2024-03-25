@@ -3,15 +3,21 @@ import { TouchableOpacity, Image } from "react-native";
 import { useLanguage } from "contexts/languageContext";
 import { useCallback, useEffect, useState } from "react";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { useFocusEffect } from "@react-navigation/native";
 import { logEvent } from "services/analytics";
 import S from "./styles";
 
-export default function ClubSection(): JSX.Element | null {
+type Props = {
+  isMember: boolean;
+  refetch: () => void;
+};
+
+export default function ClubSection({
+  isMember,
+  refetch,
+}: Props): JSX.Element | null {
   const { currentLang } = useLanguage();
-  const { userIsMember } = useSubscriptions();
-  const { isMember, refetch } = userIsMember();
+
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
