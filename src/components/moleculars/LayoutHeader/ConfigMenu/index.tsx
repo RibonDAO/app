@@ -80,12 +80,12 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
       from: "configPage",
     });
 
-    if (!currentUser) return navigateTo("PromotersScreen");
+    if (!currentUser) return navigateTo("ClubScreen");
 
     if (subscriptions && subscriptions?.length > 0) {
-      return navigateTo("MonthlyContributionsScreen");
+      return navigateTo("SubscriptionsScreen");
     } else {
-      return navigateTo("PromotersScreen");
+      return navigateTo("ClubScreen");
     }
   };
 
@@ -173,7 +173,7 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
               color: theme.colors.brand.primary[600],
               size: 24,
             }}
-            text={t("monthlyContributions")}
+            text={t("subscriptions")}
             onPress={handleMonthlyContributionClick}
             cta={
               <Icon

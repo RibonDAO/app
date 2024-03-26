@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     display: "flex",
     flexDirection: "column",
+    overflow: "hidden",
   },
   content: {
     padding: theme.spacingNative(16),
@@ -40,13 +41,13 @@ const styles = StyleSheet.create({
   arrowContainer: {
     display: "flex",
     flexDirection: "row",
-    marginLeft: theme.spacingNative(16),
   },
   textContainer: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    width: "90%",
   },
   circle: {
     width: 36,

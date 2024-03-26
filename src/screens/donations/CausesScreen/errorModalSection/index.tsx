@@ -51,7 +51,7 @@ export default function DonationErrorModal({ newState }: Props): JSX.Element {
           text: t("unauthorizedModalButtonText"),
           onPress: () => {
             setUnauthorizedModalVisible(false);
-            navigateTo("ValidateAccountScreen");
+            navigateTo("ValidateAccountScreen", { from: "auth" });
           },
         }}
       />

@@ -51,7 +51,7 @@ function PixPaymentInformationProvider({ children }: Props) {
     PaymentIntent & ConfirmPaymentResult
   >();
 
-  const { navigateTo } = useNavigation();
+  const { navigateTo, popNavigation } = useNavigation();
 
   const { registerAction } = useTasksContext();
 
@@ -67,6 +67,7 @@ function PixPaymentInformationProvider({ children }: Props) {
     taxId,
     flow,
     country,
+    target,
   } = useCheckoutContext();
 
   const login = async () => {
@@ -128,20 +129,33 @@ function PixPaymentInformationProvider({ children }: Props) {
             offerId: offer?.id,
             source: "pix",
           });
-        } else {
+          navigateTo("ContributionDoneScreen", {
+            hasButton: true,
+            offerId: offer?.id ?? 0,
+            cause,
+            nonProfit,
+            flow,
+          });
+        } else if (cause?.id) {
           logEvent("causeGave_end", {
             causeId: cause?.id,
             offerId: offer?.id,
             source: "pix",
           });
+          navigateTo("ContributionDoneScreen", {
+            hasButton: true,
+            offerId: offer?.id ?? 0,
+            cause,
+            nonProfit,
+            flow,
+          });
+        } else {
+          logEvent("clubGave_end", {
+            offerId: offer?.id,
+            source: "googlePay",
+          });
+          navigateTo("ClubContributionDoneScreen");
         }
-        navigateTo("ContributionDoneScreen", {
-          hasButton: true,
-          offerId: offer?.id ?? 0,
-          cause,
-          nonProfit,
-          flow,
-        });
       }
     } catch (e) {
       logError(e);
@@ -151,6 +165,11 @@ function PixPaymentInformationProvider({ children }: Props) {
   };
 
   const handleSubmit = async () => {
+    showLoadingOverlay();
+    logEvent("confirmPaymentFormBtn_click", {
+      source: "pix",
+      target,
+    });
     try {
       const paymentInformation = {
         email: email ?? "",
@@ -170,7 +189,6 @@ function PixPaymentInformationProvider({ children }: Props) {
 
       setClientSecret(response.data.externalId);
       login();
-      showLoadingOverlay();
       generatePixPayment(response.data.externalId);
     } catch (error) {
       hideLoadingOverlay();
@@ -184,7 +202,7 @@ function PixPaymentInformationProvider({ children }: Props) {
   };
 
   const handleBackButtonClick = () => {
-    navigateTo("PromotersScreen");
+    popNavigation();
     setClientSecret(undefined);
     setPixInstructions(undefined);
   };

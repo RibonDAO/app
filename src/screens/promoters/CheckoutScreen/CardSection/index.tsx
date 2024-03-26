@@ -15,18 +15,18 @@ import { theme } from "@ribon.io/shared/styles";
 import { defaultBodyXsSemibold } from "styles/typography/default";
 import RadioAccordion from "components/moleculars/RadioAccordion";
 import { usePlatformPay } from "@stripe/stripe-react-native";
+import TrustSeal from "components/moleculars/TrustSeal";
+import CreditCardSection from "components/moleculars/PaymentMethods/CreditCardSection";
+import ApplePaySection from "components/moleculars/PaymentMethods/ApplePaySection";
+import GooglePaySection from "components/moleculars/PaymentMethods/GooglePaySection";
+import PixSection from "components/moleculars/PaymentMethods/PixSection";
 import ApplePayIcon from "../assets/ApplePayIcon";
 import GooglePayIcon from "../assets/GooglePayIcon";
 import CreditCardIcon from "../assets/CreditCardIcon";
-import CreditCardForm from "../Components/CreditCardForm";
 import PriceSelection from "../Components/PriceSelection";
 import ModalButtonSelector from "../Components/ModalButtonSelector";
-import ApplePaySection from "../Components/ApplePaySection";
-import GooglePaySection from "../Components/GooglePaySection";
 import S from "./styles";
 import PixIcon from "../assets/PixIcon";
-import PixSection from "../Components/PixSection";
-import TrustSeal from "../Components/TrustSeal";
 
 export default function CardSection() {
   const { t } = useTranslation("translation", {
@@ -239,7 +239,7 @@ export default function CardSection() {
             {
               title: t("paymentMethodSection.creditCard"),
               children: currentOffer && (
-                <CreditCardForm
+                <CreditCardSection
                   onSubmit={handlePayment}
                   showFiscalFields={currentOffer?.gateway === "stripe"}
                 />
