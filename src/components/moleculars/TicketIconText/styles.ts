@@ -8,10 +8,9 @@ const styles = StyleSheet.create({
     height: 30,
     alignItems: "center",
     justifyContent: "center",
+    opacity: 1,
   },
   ticketSection: {
-    paddingVertical: 5,
-    paddingHorizontal: 7,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

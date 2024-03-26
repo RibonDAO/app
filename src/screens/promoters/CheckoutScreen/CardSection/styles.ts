@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   recurrenceContainer: {
     display: "flex",
     flexDirection: "row",
-    gap: theme.spacingNative(16),
+    gap: theme.spacingNative(8),
     alignItems: "center",
   },
   recurrenceTitle: {

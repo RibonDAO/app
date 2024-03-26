@@ -61,6 +61,7 @@ function CardPaymentInformationProvider({ children }: Props) {
     nonProfit,
     flow,
     offer,
+    target,
     resetStates,
   } = useCheckoutContext();
 
@@ -81,6 +82,10 @@ function CardPaymentInformationProvider({ children }: Props) {
 
   const handleSubmit = async () => {
     showLoadingOverlay();
+    logEvent("confirmPaymentFormBtn_click", {
+      source: "creditCard",
+      target,
+    });
 
     const expiration = expirationDate.split("/");
 
@@ -116,20 +121,30 @@ function CardPaymentInformationProvider({ children }: Props) {
           offerId: offer?.id,
           source: "creditCard",
         });
-      } else {
+        navigateTo("ContributionDoneScreen", {
+          cause,
+          nonProfit,
+          offer,
+        });
+      } else if (cause?.id) {
         logEvent("causeGave_end", {
           causeId: cause?.id,
           offerId: offer?.id,
           source: "creditCard",
         });
+        navigateTo("ContributionDoneScreen", {
+          cause,
+          nonProfit,
+          offer,
+        });
+      } else {
+        logEvent("clubGave_end", {
+          offerId: offer?.id,
+          source: "creditCard",
+        });
+        navigateTo("ClubContributionDoneScreen");
       }
       registerAction("contribution_done_screen_view");
-
-      navigateTo("ContributionDoneScreen", {
-        cause,
-        nonProfit,
-        offer,
-      });
       resetStates();
     } catch (error: any) {
       logError(error);

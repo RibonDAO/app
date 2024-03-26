@@ -182,7 +182,7 @@ export default function Button({
         />
       </View>
       {leftIcon && <Icon {...leftIcon} style={S.leftIcon} />}
-      <View style={S.leftItem}>{leftItem && leftItem}</View>
+      {leftItem && <View style={S.leftItem}>{leftItem && leftItem}</View>}
       <Text style={[S.text, { color: textColorByState() }, customTextStyles]}>
         {text}
       </Text>

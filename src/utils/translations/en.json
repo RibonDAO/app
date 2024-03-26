@@ -8,7 +8,7 @@
   "layoutHeader": {
     "logout": "Sign out",
     "support": "User Support",
-    "monthlyContributions": "Monthly contributions",
+    "subscriptions": "Subscriptions",
     "notifications": "Allow notifications",
     "supportLink": "https://v2.zopim.com/widget/popout.html?key={{key}}",
     "login": "Login",
@@ -35,6 +35,11 @@
       "description": "If you want to donate again, you'll need to sign back in.",
       "confirm": "Sign out",
       "cancel": "Cancel"
+    },
+    "zeroTicketsModal": {
+      "title": "You have used all your tickets.",
+      "description": "Come back tomorrow for more.\n\nOr subscribe to Clube Ribon and receive 30 extra tickets right now!",
+      "confirm": "Get to know Ribon Club"
     },
     "disconnectWallet": "Disconnect wallet",
     "cancel": "cancel",
@@ -172,10 +177,6 @@
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "hasAccountButton": "I have an account"
     },
-    "zeroTicketScreen": {
-      "title": "You have used all your tickets",
-      "subtitle": "How about making a paid donation?"
-    },
     "forYouScreen": {
       "newsSection": {
         "title": "For you",
@@ -213,6 +214,42 @@
           "streakTitle": "days in a row completing tasks"
         },
         "countdown": "until task reset"
+      },
+      "ticketsSection": {
+        "dailyTicketCard": {
+          "title": "Daily Ticket (Free)",
+          "subtitle": "Earn 1 per day",
+          "buttonText": "Collected automatically"
+        }
+      },
+      "clubTicketsSection": {
+        "unauthorizedModalTitle": "Validate your account",
+        "unauthorizedModalText": "Please, validate your account to collect your Ribon Club tickets.",
+        "unauthorizedModalButtonText": "Validate my account",
+        "validateAccountScreen": {
+          "title": "Validate your account",
+          "description": "Validate your account created with {{email}} to collect your Ribon Club tickets.",
+          "descriptionWithoutEmail": "Validate your account to collect your Ribon Club tickets.",
+          "toastSuccessMessage": "Email sent"
+        },
+        "dailyTicketCard": {
+          "title": "Ribon Club tickets",
+          "subtitle": "Earn up to 20 per day",
+          "subtitleWithValue": "Earn up to {{value}} per day",
+          "buttonText": "Collect {{value}} ticket",
+          "buttonTextPlural": "Collect {{value}} tickets",
+          "buttonTextCollected": "Collected",
+          "buttonTextNoClub": "Unlock collection"
+        },
+        "monthlyTicketCard": {
+          "title": "Monthly Ribon Club package",
+          "subtitle": "Earn up to 60 per month",
+          "subtitleWithValue": "Earn up to {{value}} per month",
+          "buttonText": "Collect {{value}} ticket",
+          "buttonTextPlural": "Collect {{value}} tickets",
+          "buttonTextCollected": "Collected",
+          "buttonTextNoClub": "Unlock collection"
+        }
       }
     }
   },
@@ -346,19 +383,85 @@
       "copyCodeSuccess": "Code copied!",
       "expiresAt": "Expires at 30 minutes",
       "donatingTo": "Donating to ",
-      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments.",
-      "sealText": "Safe transaction by"
+      "paymentOf": "Payment of ",
+      "ribonClub": "Ribon Club",
+      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments."
     },
-    "monthlyContributionsScreen": {
-      "title": "Monthly contributions",
+    "subscriptionsScreen": {
+      "title": "Subscriptions",
       "to": "To ",
-      "nextContribution": "Next contribution in ",
-      "cancelContributionModal": {
-        "title": "Cancel monthly contribution",
-        "description": "To finish this process, you'll need to confirm the cancelation request clicking in the link of the cancelation e-mail.",
-        "cancelButton": "Receive cancelation e-mail",
+      "nextContribution": "Next charge on ",
+      "ribonClubTag": "Ribon Club",
+      "pixPayment": "Single purchase via PIX",
+      "perksExpiration": "Perks expire at: ",
+      "cancelSubscriptionModal": {
+        "title": "Cancel subscription",
+        "contributionTitle": "Cancel monthly contribution",
+        "description": "To complete the process, please confirm the subscription cancellation via the email we will send to you.",
+        "cancelButton": "Receive cancellation email",
         "closeButton": "Close",
-        "sendEmail": "We sent you an e-mail"
+        "sendEmail": "E-mail sent."
+      }
+    },
+    "club": {
+      "checkoutScreen": {
+        "title": "Payment of ",
+        "receiver": "Ribon Club",
+        "monthlyContribution": "Monthly subscription",
+        "uniqueContribution": "Contributing once",
+        "pix": "Por PIX, os benefícios duram 30 dias. Após esse período, refaça a assinatura para manter os benefícios."
+      }
+    },
+    "sealText": "Safe transaction by",
+    "clubContributionDoneScreen": {
+      "title": "Welcome!",
+      "buttonText": "Finish",
+      "description": "Now you’re part of Ribon Club",
+      "highlightedDescription": "Enjoy your extra tickets"
+    },
+    "clubScreen": {
+      "subtitle": "Cancel any plan anytime you want!",
+      "userSupportBannerTitle": "Big donations",
+      "userSupportBannerDescription": "If you want to make an even bigger donation, please contact our team directly :)",
+      "header": {
+        "ribonClub": "Ribon Club"
+      },
+      "benefitsSection": {
+        "title": "With Ribon Club, you can donate and help much more!",
+        "buttonText": "Be part of Ribon Club",
+        "firstBenefitTitle": "More daily tickets",
+        "secondBenefitTitle": "Ticket package every month",
+        "thirdBenefitTitle": "Your heart warmer",
+        "firstBenefitDescription": "Up to 20 extra tickets every day",
+        "secondBenefitDescription": "Up to 60 extra tickets to use now",
+        "thirdBenefitDescription": "Donating warms the heart. More tickets, more you help!"
+      },
+      "depoimentsSection": {
+        "title": "What they say about us",
+        "firstDepoimentTitle": "Matheus Morales",
+        "firstDepoimentDescription": "I donate with Ribon because I recognize the importance of donating effectively, and since Ribon has effective altruism as its philosophy, it's a match. Being able to see my impact is extremely gratifying, to the point where I want to put in real money as much as possible.",
+        "secondDepoimentTitle": "Elen Lucia Corrêa da Silva",
+        "secondDepoimentDescription": "Donating makes us feel good. As we go through life we ​​end up forgetting this, that's where Ribon comes in. You are there helping us to help. Beautiful work, always encouraging us to be engaged in this mission.",
+        "thirdDepoimentTitle": "Lays Corrêa da Silva",
+        "thirdDepoimentDescription": "I believe that donating is very important as it is a way of bringing help to those who need it. With the donations we make through Ribon we have the chance to contribute to making bigger changes happen!"
+      },
+      "purchaseSection": {
+        "title": "Choose the best way to spread your daily love",
+        "buttonText": "Proceed to payment",
+        "firstDescription": "{{dailyTickets}} extra tickets every day",
+        "secondDescription": "Monthly {{monthlyTickets}} tickets package",
+        "recurrenceMonthly": "month",
+        "recurrenceDaily": "year",
+        "tagText": "Most popular"
+      },
+      "unauthorizedModalTitle": "Validate your account",
+      "unauthorizedModalText": "Please, validate your account to continue with payment.",
+      "unauthorizedModalButtonText": "Validate my account",
+      "validateAccountScreen": {
+        "title": "Validate your account",
+        "description": "Validate your account created with {{email}} to continue with payment.",
+        "descriptionWithoutEmail": "Validate your account to continue with payment.",
+        "toastSuccessMessage": "Email sent"
       }
     }
   },
@@ -407,7 +510,10 @@
         "link": "Don’t show this again"
       },
       "profileSection": {
-        "userName": "Your profile"
+        "userName": "Your profile",
+        "noClubTagText": "No Ribon Club",
+        "clubTagText": "Ribon Club",
+        "ctaClubText": "Club benefits →"
       }
     }
   },
@@ -551,6 +657,7 @@
     "validateAccountScreen": {
       "title": "Validate your account",
       "description": "Validate your account created with {{email}} to complete your donation.",
+      "descriptionWithoutEmail": "Validate your account to complete your donation.",
       "toastSuccessMessage": "Email sent"
     }
   }

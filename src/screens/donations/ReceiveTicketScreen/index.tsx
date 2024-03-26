@@ -5,6 +5,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { View, Text, ImageBackground, Image } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useTickets, useUserProfile } from "@ribon.io/shared/hooks";
+import { logEvent } from "services/analytics";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useIntegrationContext } from "contexts/integrationContext";
@@ -45,6 +46,9 @@ function ReceiveTicketScreen(): JSX.Element {
         DONATION_TOAST_INTEGRATION,
         (currentIntegrationId ?? RIBON_COMPANY_ID).toString(),
       );
+      logEvent("receiveTicket_view", {
+        from: "onboarding_page",
+      });
       navigateTo("CausesScreen");
     }, 3000);
   };
