@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   useStories,
   useFirstAccessToIntegration,
@@ -156,7 +156,7 @@ export default function CausesScreen() {
     });
   }, []);
 
-  const causesFilter = () => {
+  const causesFilter = useCallback(() => {
     const causesApi = causes.filter((cause) => cause.status === "active");
     return (
       [
@@ -167,9 +167,9 @@ export default function CausesScreen() {
         ...causesApi,
       ] || []
     );
-  };
+  }, [causes]);
 
-  const handleCauseChange = (_element: any, index: number) => {
+  const handleCauseChange = useCallback((_element: any, index: number) => {
     const cause = _element;
     setChosenCauseIndex(index);
     if (cause.id !== 0) {
@@ -181,33 +181,32 @@ export default function CausesScreen() {
     if (scrollViewRef.current) {
       scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
     }
-  };
+  }, []);
 
-  const nonProfitsFilter = () => {
+  const nonProfitsFiltered = useMemo(() => {
     if (chosenCause) {
-      const nonProfitsFiltered = nonProfits?.filter(
-        (nonProfit) => nonProfit?.cause?.id === chosenCause?.id,
+      return (
+        nonProfits?.filter(
+          (nonProfit) => nonProfit?.cause?.id === chosenCause?.id,
+        ) || []
       );
-
-      return nonProfitsFiltered || [];
     }
     return nonProfits || [];
-  };
+  }, [chosenCause, nonProfits]);
 
-  const sortNonProfits = () => {
-    const filteredNonProfits = nonProfitsFilter();
-    const sorted = [...filteredNonProfits].sort((a, b) => {
-      const causeAIndex = causes.findIndex((cause) => cause.id === a.cause.id);
-      const causeBIndex = causes.findIndex((cause) => cause.id === b.cause.id);
-
-      return causeAIndex - causeBIndex;
-    });
-    return sorted;
-  };
-
-  useEffect(() => {
-    sortNonProfits();
-  }, [chosenCause]);
+  const sortedNonProfits = useMemo(
+    () =>
+      [...nonProfitsFiltered].sort((a, b) => {
+        const causeAIndex = causes.findIndex(
+          (cause) => cause.id === a.cause.id,
+        );
+        const causeBIndex = causes.findIndex(
+          (cause) => cause.id === b.cause.id,
+        );
+        return causeAIndex - causeBIndex;
+      }),
+    [nonProfitsFiltered, causes],
+  );
 
   const handleNonProfitImagePress = async (nonProfit: NonProfit) => {
     setCurrentNonProfit(nonProfit);
@@ -226,20 +225,23 @@ export default function CausesScreen() {
     }
   };
 
-  const nonProfitStylesFor = (index: number) => {
-    const isFirst = index === 0;
-    const isLast = index === nonProfitsFilter().length - 1;
+  const nonProfitStylesFor = useCallback(
+    (index: number) => {
+      const isFirst = index === 0;
+      const isLast = index === nonProfitsFiltered.length - 1;
 
-    return {
-      marginLeft: isFirst ? 16 : 4,
-      marginRight: isLast ? 16 : 4,
-      ...S.causesCardContainer,
-    };
-  };
+      return {
+        marginLeft: isFirst ? 16 : 4,
+        marginRight: isLast ? 16 : 4,
+        ...S.causesCardContainer,
+      };
+    },
+    [nonProfitsFiltered],
+  );
 
-  const navigateToPromotersScreen = () => {
+  const navigateToPromotersScreen = useCallback(() => {
     navigateTo("PromotersScreen");
-  };
+  }, []);
 
   const shouldShowIntegrationBanner =
     !integration?.name?.toLowerCase()?.includes("ribon") &&
@@ -342,14 +344,14 @@ export default function CausesScreen() {
           </ScrollView>
         </View>
 
-        {sortNonProfits()?.length > 0 ? (
+        {sortedNonProfits?.length > 0 ? (
           <ScrollView
             style={S.causesContainer}
             horizontal
             showsHorizontalScrollIndicator={false}
             ref={scrollViewRef}
           >
-            {sortNonProfits()?.map((nonProfit, index) => (
+            {sortedNonProfits?.map((nonProfit, index) => (
               <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
                 <CardCenterImageButton
                   image={nonProfit.mainImage}
