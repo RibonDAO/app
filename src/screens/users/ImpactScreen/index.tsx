@@ -1,15 +1,20 @@
-import React, { useCallback } from "react";
-import { View } from "react-native";
+import { useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useImpact, useStatistics } from "@ribon.io/shared/hooks";
+import {
+  useImpact,
+  useStatistics,
+  useUserProfile,
+} from "@ribon.io/shared/hooks";
 import usePageView from "hooks/usePageView";
 import TabViewSection from "./TabViewSection";
-import S from "./styles";
+import * as S from "./styles";
 
 function ImpactScreen() {
   const { currentUser } = useCurrentUser();
   const { refetch: refetchImpact } = useImpact(currentUser?.id);
+  const { userProfile } = useUserProfile();
+  const { isLoading } = userProfile();
   const { refetch: refetchStatistics } = useStatistics({
     userId: currentUser?.id,
   });
@@ -23,9 +28,9 @@ function ImpactScreen() {
   );
 
   return (
-    <View style={S.container}>
+    <S.Container outline={!!currentUser && !isLoading}>
       <TabViewSection />
-    </View>
+    </S.Container>
   );
 }
 

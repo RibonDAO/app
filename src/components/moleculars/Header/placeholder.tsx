@@ -1,17 +1,12 @@
 import { View } from "react-native";
-import {
-  Placeholder,
-  PlaceholderLine,
-  PlaceholderMedia,
-  Fade,
-} from "rn-placeholder";
-import S from "./styles";
+import { Placeholder, PlaceholderMedia, Fade } from "rn-placeholder";
+import * as S from "./styles";
 
 function HeaderPlaceholder() {
   return (
     <View>
       <Placeholder Animation={Fade}>
-        <View style={S.container}>
+        <S.Container>
           <PlaceholderMedia
             style={{
               height: 25,
@@ -33,7 +28,7 @@ function HeaderPlaceholder() {
               }}
             />
           </View>
-        </View>
+        </S.Container>
       </Placeholder>
     </View>
   );

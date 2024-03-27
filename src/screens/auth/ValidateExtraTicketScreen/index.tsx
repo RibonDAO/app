@@ -16,7 +16,7 @@ function ValidateExtraTicketScreen() {
   async function validateExtraTicket(token: string) {
     try {
       const result = await userAccountApi.postValidateExtraTicket(token);
-      if (result.status === 200) navigateTo("ReceiveExtraTicketScreen");
+      if (result?.status === 200) navigateTo("ReceiveExtraTicketScreen");
     } catch (error: any) {
       showToast({
         type: "error",

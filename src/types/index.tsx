@@ -88,6 +88,14 @@ export type CheckoutScreenParamList = {
   subscription?: boolean;
 };
 
+export type ClubCheckoutScreenParamList = {
+  target: string;
+  targetId: string;
+  offer: number;
+  currency: Currencies;
+  subscription?: boolean;
+};
+
 export type RecurrenceScreenParamList = {
   target: string;
   targetId: string;
@@ -100,7 +108,7 @@ export type SelectTicketsScreenParamList = {
   cause: Cause;
 };
 
-export type MonthlyContributionsScreenParamList = {
+export type SubscriptionsScreenParamList = {
   from: string;
 };
 
@@ -119,6 +127,10 @@ export type SentMagicLinkEmailParamsList = {
   email: string;
 };
 
+export type ValidateAccountScreenParamsList = {
+  from: string;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
@@ -132,7 +144,6 @@ export type RootStackParamList = {
   NotFound: undefined;
   ReceiveTicketScreen: undefined;
   GiveTicketScreen: GiveTicketScreenParamList;
-  ZeroTicketScreen: undefined;
   CausesScreen: CausesScreenParamList;
   ForYouScreen: ForYouScreenParamsList;
   PostDonationScreen: PostDonationScreenParams;
@@ -141,6 +152,7 @@ export type RootStackParamList = {
   SupportNonProfitScreen: SupportNonProfitParamList;
   PromotersScreen: PromotersScreenParams;
   CheckoutScreen: CheckoutScreenParamList;
+  ClubCheckoutScreen: ClubCheckoutScreenParamList;
   ValidateExtraTicketScreen: undefined;
   RecurrenceScreen: RecurrenceScreenParamList;
   SelectTicketsScreen: SelectTicketsScreenParamList;
@@ -148,7 +160,7 @@ export type RootStackParamList = {
   OnboardingScreen: undefined;
   DonateModal: undefined;
   ContributionStatsScreen: ContributionStatsScreenParamsList;
-  MonthlyContributionsScreen: MonthlyContributionsScreenParamList;
+  SubscriptionsScreen: SubscriptionsScreenParamList;
   InsertEmailScreen: undefined;
   SentMagicLinkEmailScreen: SentMagicLinkEmailParamsList;
   SignInByMagicLinkScreen: undefined;
@@ -156,7 +168,9 @@ export type RootStackParamList = {
   ReceiveExtraTicketScreen: undefined;
   ExtraTicketScreen: undefined;
   ExpiredLinkScreen: undefined;
-  ValidateAccountScreen: undefined;
+  ValidateAccountScreen: ValidateAccountScreenParamsList;
+  ClubContributionDoneScreen: undefined;
+  ClubScreen: undefined;
 };
 
 export type PrivateStackParamList = {

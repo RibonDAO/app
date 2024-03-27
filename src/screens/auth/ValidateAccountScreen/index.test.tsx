@@ -9,6 +9,9 @@ import ValidateAccountScreen from ".";
 jest.mock("services/googleSignIn", () => ({
   signIn: () => {},
 }));
+jest.mock("hooks/useRouteParams", () => ({
+  useRouteParams: () => ({ params: { from: "auth" } }),
+}));
 
 describe("ValidateAccountScreen", () => {
   beforeEach(() => {
@@ -19,9 +22,9 @@ describe("ValidateAccountScreen", () => {
     expectTextToBeInTheDocument("Validate your account");
   });
 
-  it("logs the P28_view event", async () => {
+  it("logs the P27_view event", async () => {
     waitForPromises();
-    expectLogEventToHaveBeenCalledWith("P28_view", {
+    expectLogEventToHaveBeenCalledWith("P27_view", {
       from: "validation_flow",
     });
   });

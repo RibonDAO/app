@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.spacingNative(16),
   },
   imageContainer: {
-    marginTop: theme.spacingNative(24),
+    marginTop: theme.spacingNative(48),
     paddingHorizontal: theme.spacingNative(64),
-    paddingVertical: theme.spacingNative(48),
+    paddingVertical: theme.spacingNative(24),
     alignItems: "center",
     justifyContent: "center",
   },
@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
   title: {
     ...stylizedDisplayXs,
     color: theme.colors.brand.primary[900],
-    marginBottom: theme.spacingNative(16),
   },
   description: {
     ...defaultBodyMdMedium,
     color: theme.colors.neutral[600],
     textAlign: "center",
+    marginBottom: theme.spacingNative(16),
   },
   keyboardView: {
     height:

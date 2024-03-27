@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as React from "react";
 import WalletProvider from "contexts/walletContext";
 import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
@@ -28,10 +27,10 @@ import CommunityAddScreen from "screens/promoters/SupportCauseScreen/CommunityAd
 import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
 import PaymentScreen from "screens/promoters/PaymentScreen";
 import CheckoutScreen from "screens/promoters/CheckoutScreen";
+import ClubCheckoutScreen from "screens/promoters/club/CheckoutScreen";
 import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
-import PromotersScreen from "screens/promoters/PromotersScreen";
 import TicketsProvider from "contexts/ticketsContext";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
 import ForYouScreen from "screens/content/ForYouScreen";
@@ -44,17 +43,16 @@ import GiveTicketScreen from "screens/donations/GiveTicketScreen";
 import ContributionStatsScreen from "screens/users/ContributionStatsScreen";
 import CheckoutProvider from "contexts/checkoutContext";
 import NonProfitsProvider from "contexts/nonProfitsContext";
+import { useCurrentUser } from "contexts/currentUserContext";
 import IntegrationProvider, {
   useIntegrationContext,
 } from "contexts/integrationContext";
 import RecurrenceScreen from "screens/promoters/RecurrenceScreen";
 import { Image } from "react-native";
 import { openInWebViewer } from "lib/linkOpener";
-import MonthlyContributionsScreen from "screens/promoters/MonthlyContributionsScreen";
 import UtmProvider, { useUtmContext } from "contexts/utmContext";
-import ZeroTicketScreen from "screens/donations/ZeroTicketScreen";
 import { logEvent } from "services/analytics";
-import PixInstructionsScreen from "screens/promoters/CheckoutScreen/PixInstructionsScreen";
+import PixInstructionsScreen from "screens/promoters/PixInstructionsScreen";
 import PixPaymentInformationProvider from "contexts/pixInformationContext";
 import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
 import SignedInScreen from "screens/donations/auth/SignedInScreen";
@@ -71,17 +69,19 @@ import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
+import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
+import SubscriptionsScreen from "screens/promoters/SubscriptionsScreen";
+import ClubScreen from "screens/promoters/ClubScreen";
+import PromotersScreen from "screens/promoters/PromotersScreen";
+import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
-import GivingIconOff from "./assets/GivingIconOff";
-import GivingIconOn from "./assets/GivingIconOn";
 import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import ForYouIconOn from "./assets/ForYouIconOn";
 import ForYouIconOff from "./assets/ForYouIconOff";
-import { initializeDeeplink } from "../../services/deepLink";
 
 const { primary } = theme.colors.brand;
 const { neutral } = theme.colors;
@@ -93,8 +93,8 @@ function BottomTabNavigator() {
   const { t } = useTranslation();
 
   const { currentIntegrationId, integration } = useIntegrationContext();
-
   const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
+  const { currentUser } = useCurrentUser();
 
   const navigateToIntegration = () => {
     if (!integration?.integrationTask?.linkAddress) {
@@ -122,16 +122,11 @@ function BottomTabNavigator() {
       onSideLogoClick={navigateToIntegration}
     />
   );
-  const headerWithoutTicket = () => (
+
+  const headerOutline = () => (
     <Header
-      rightComponent={<LayoutHeader hideTicket />}
-      sideLogo={sideLogo()}
-      onSideLogoClick={navigateToIntegration}
-    />
-  );
-  const headerWithWallet = () => (
-    <Header
-      rightComponent={<LayoutHeader hideTicket hideWallet={false} />}
+      outline={!!currentUser}
+      rightComponent={<LayoutHeader outline={!!currentUser} />}
       sideLogo={sideLogo()}
       onSideLogoClick={navigateToIntegration}
     />
@@ -185,32 +180,13 @@ function BottomTabNavigator() {
       />
 
       <BottomTab.Screen
-        name="PromotersScreen"
-        component={PromotersScreen}
-        options={{
-          title: t("tabs.giving") || "Donations",
-          tabBarIcon: ({ color }: any) =>
-            renderTabBarIcon(color, <GivingIconOn />, <GivingIconOff />),
-          header: headerWithWallet,
-          lazy: false,
-        }}
-        listeners={() => ({
-          tabPress: () => {
-            logEvent("giveNonProfitNavBtn_click", {
-              from: "header",
-            });
-          },
-        })}
-      />
-
-      <BottomTab.Screen
         name="ImpactScreen"
         component={ImpactScreen}
         options={{
           title: t("tabs.impact") || "Impact",
           tabBarIcon: ({ color }: any) =>
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
-          header: headerWithoutTicket,
+          header: headerOutline,
           lazy: false,
         }}
         listeners={() => ({
@@ -309,14 +285,14 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="GiveTicketScreen"
-        component={GiveTicketScreen}
-        options={{ headerShown: false, animation: "slide_from_bottom" }}
+        name="PromotersScreen"
+        component={PromotersScreen}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
-        name="ZeroTicketScreen"
-        component={ZeroTicketScreen}
+        name="GiveTicketScreen"
+        component={GiveTicketScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
@@ -380,6 +356,14 @@ function RootNavigator() {
       />
 
       <Stack.Screen
+        name="ClubCheckoutScreen"
+        component={ClubCheckoutScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
         name="PixInstructionsScreen"
         component={PixInstructionsScreen}
         options={{
@@ -432,8 +416,8 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="MonthlyContributionsScreen"
-        component={MonthlyContributionsScreen}
+        name="SubscriptionsScreen"
+        component={SubscriptionsScreen}
         options={{
           headerShown: false,
         }}
@@ -535,6 +519,22 @@ function RootNavigator() {
           headerShown: true,
           headerTintColor: theme.colors.brand.primary[800],
           headerTitle: "",
+        }}
+      />
+
+      <Stack.Screen
+        name="ClubScreen"
+        component={ClubScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ClubContributionDoneScreen"
+        component={ClubContributionDoneScreen}
+        options={{
+          headerShown: false,
         }}
       />
 

@@ -8,7 +8,7 @@ import { useAuthentication } from "contexts/authenticationContext";
 import ValidateAccount from "components/moleculars/validateAccount";
 
 function SignInExtraTicketScreen() {
-  usePageView("P28_view", { from: "validation_flow" });
+  usePageView("P27_view", { from: "validation_flow" });
   const { t } = useTranslation("translation", {
     keyPrefix: "auth.signInExtraTicketScreen",
   });

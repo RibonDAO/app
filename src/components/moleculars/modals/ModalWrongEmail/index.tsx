@@ -16,7 +16,7 @@ export type Props = {
 function ModalWrongEmail({
   visible = false,
   setVisible,
-  eventName = "P28_emailErrorModal_view",
+  eventName = "P27_emailErrorModal_view",
   eventParams = { from: "validation_flow" },
 }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
