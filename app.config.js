@@ -42,6 +42,7 @@ export default () => ({
            "fetch",
            "remote-notification",
          ],
+         "NSAdvertisingAttributionReportEndpoint": "https://appsflyer-skadnetwork.com/",
          "NSCameraUsageDescription": "This app requires access to your phone's camera."
       },
       "supportsTablet": true,
