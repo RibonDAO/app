@@ -56,7 +56,7 @@ export default function GooglePaySection({
   const { currentUser } = useCurrentUser();
   const { integration } = useIntegration(currentIntegrationId);
   const [email, setEmail] = useState(currentUser?.email ?? undefined);
-
+  const [disabled, setDisabled] = useState(false);
   const { createPlatformPayPaymentMethod } = usePlatformPay();
 
   const testEnv = false;
@@ -92,6 +92,7 @@ export default function GooglePaySection({
 
   const createPaymentMethod = async () => {
     showLoadingOverlay();
+    setDisabled(true);
     logEvent("confirmPaymentFormBtn_click", {
       source: "googlePay",
       // eslint-disable-next-line no-nested-ternary
@@ -114,7 +115,7 @@ export default function GooglePaySection({
         label: "Ribon Foundation Inc",
       },
     });
-
+    setDisabled(false);
     if (error) {
       logError(error);
       hideLoadingOverlay();
@@ -185,7 +186,8 @@ export default function GooglePaySection({
     }
   };
 
-  const googlePayButtonDisabled = () => showFiscalFields() && taxId.length < 14;
+  const googlePayButtonDisabled = () =>
+    (showFiscalFields() && taxId.length < 14) || disabled;
 
   return (
     <View>
