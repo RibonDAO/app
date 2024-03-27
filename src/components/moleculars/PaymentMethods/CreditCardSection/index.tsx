@@ -110,7 +110,7 @@ function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
       {!signedIn && (
         <InputText
           name="email"
-          placeholder={field("email")}
+          label={field("email")}
           value={email}
           onChangeText={(value) => setEmail(value)}
           style={{ display: "flex", flex: 1 }}
@@ -142,7 +142,7 @@ function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
           <View style={S.half}>
             <InputText
               name={city}
-              placeholder={field("city")}
+              label={field("city")}
               value={city}
               onChangeText={(value) => setCity(value)}
               containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
@@ -150,7 +150,7 @@ function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
             />
             <InputText
               name={state}
-              placeholder={field("state")}
+              label={field("state")}
               value={state}
               onChangeText={(value) => setState(value)}
               containerStyle={{ marginRight: theme.spacingNative(4), flex: 1 }}
@@ -159,7 +159,7 @@ function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
           </View>
           <InputText
             name={taxId}
-            placeholder={brazilFormatForTaxId ? field("cpf") : field("taxId")}
+            label={brazilFormatForTaxId ? field("cpf") : field("taxId")}
             mask={maskedTaxId}
             value={taxId}
             onChangeText={(value) => setTaxId(value)}
@@ -171,7 +171,7 @@ function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
       )}
       <InputText
         name="number"
-        placeholder={field("number")}
+        label={field("number")}
         mask="9999 9999 9999 9999"
         value={number}
         onChangeText={(value) => setNumber(value)}
@@ -182,7 +182,7 @@ function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
       />
       <InputText
         name="name"
-        placeholder={field("name")}
+        label={field("name")}
         value={name}
         onChangeText={(value) => setName(value)}
         style={{ display: "flex", flex: 1 }}
@@ -192,7 +192,7 @@ function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
         <InputText
           name="expirationDate"
           value={expirationDate}
-          placeholder={field("expirationDate")}
+          label={field("expirationDate")}
           mask="99/9999"
           autoComplete="cc-exp"
           onChangeText={(value) => setExpirationDate(value)}
@@ -204,7 +204,7 @@ function CreditCardSection({ onSubmit, showFiscalFields }: Props): JSX.Element {
         />
         <InputText
           name="cvv"
-          placeholder={field("cvv")}
+          label={field("cvv")}
           maxLength={4}
           value={cvv}
           onChangeText={(value) => setCvv(value)}

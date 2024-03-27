@@ -1,7 +1,7 @@
 {
   "tabs": {
     "causes": "Tickets",
-    "foryou": "For you",
+    "earnTickets": " Earn tickets",
     "giving": "Donations",
     "impact": "Impact"
   },
@@ -177,7 +177,7 @@
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "hasAccountButton": "I have an account"
     },
-    "forYouScreen": {
+    "earnTicketsScreen": {
       "newsSection": {
         "title": "For you",
         "openPostButtonText": "Open post",
@@ -368,7 +368,13 @@
           "number": "Card number",
           "name": "Cardholder name",
           "expirationDate": "Expiration date",
-          "cvv": "CVV"
+          "cvv": "Card verification code"
+        },
+        "pixFiels": {
+          "email": "E-mail",
+          "country": "Country",
+          "cpf": "CPF",
+          "name": "Full name"
         }
       },
       "confirmPayment": "Confirm payment"
@@ -381,11 +387,13 @@
       "thirdInfo": "3. Scan the QR Code",
       "copyCode": "Copy code",
       "copyCodeSuccess": "Code copied!",
-      "expiresAt": "Expires at 30 minutes",
+      "expiresAt": "Expires at ",
+      "date": "{{date}} at {{time}}",
       "donatingTo": "Donating to ",
       "paymentOf": "Payment of ",
       "ribonClub": "Ribon Club",
-      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments."
+      "pixReceiverText": "Your Pix will go to Stripe, the platform that processes Ribon payments.",
+      "pixAfterPayment": "After payment, confirmation may take a few minutes. Return to the home screen and continue using the app until the club benefits are unlocked."
     },
     "subscriptionsScreen": {
       "title": "Subscriptions",

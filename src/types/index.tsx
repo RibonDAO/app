@@ -24,7 +24,7 @@ export type DonationDoneParamsList = {
   impact?: number;
 };
 
-export type ForYouScreenParamsList = {
+export type EarnTicketsScreenParamsList = {
   currentTab?: number;
 };
 
@@ -70,10 +70,11 @@ export type CausesScreenParamList = {
 
 export type RootTabParamList = {
   CausesScreen: CausesScreenParamList;
-  ForYouScreen: undefined;
+  EarnTicketsScreen: undefined;
   ImpactScreen: undefined;
   PromotersScreen: PromotersScreenParams;
   PostDonationScreen: PostDonationScreenParams;
+  ClubScreen: undefined;
 };
 
 export type SupportNonProfitParamList = {
@@ -145,7 +146,7 @@ export type RootStackParamList = {
   ReceiveTicketScreen: undefined;
   GiveTicketScreen: GiveTicketScreenParamList;
   CausesScreen: CausesScreenParamList;
-  ForYouScreen: ForYouScreenParamsList;
+  EarnTicketsScreen: EarnTicketsScreenParamsList;
   PostDonationScreen: PostDonationScreenParams;
   CommunityAddModal: CommunityAddModalParamList;
   PaymentScreen: PaymentPageList;

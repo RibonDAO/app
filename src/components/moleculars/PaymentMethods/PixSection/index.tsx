@@ -110,7 +110,7 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
       {!signedIn && (
         <InputText
           name="email"
-          placeholder={field("email")}
+          label={field("email")}
           value={email}
           onChangeText={(value) => setEmail(value)}
           style={{ display: "flex", flex: 1 }}
@@ -127,7 +127,9 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
           countryCode={currentCountryCode as CountryCode}
           onSelect={handleCountryChange}
           withFilter
-          filterProps={{ placeholder: t("searchCountryPlaceholder") || "" }}
+          filterProps={{
+            placeholder: t("searchCountryPlaceholder") || "",
+          }}
           containerButtonStyle={[
             S.countryInputContainer,
             { borderColor: theme.colors.neutral[400] },
@@ -140,7 +142,7 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
         />
         <InputText
           name="tax"
-          placeholder={field("cpf")}
+          label={field("cpf")}
           mask={maskedTaxId}
           value={taxId}
           onChangeText={(value) => setTaxId(value)}
@@ -152,7 +154,7 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
 
       <InputText
         name="name"
-        placeholder={field("name")}
+        label={field("name")}
         value={name}
         onChangeText={(value) => setName(value)}
         style={{ display: "flex", flex: 1 }}

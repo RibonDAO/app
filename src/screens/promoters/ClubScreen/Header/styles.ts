@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 1,
     borderColor: theme.colors.brand.tertiary[25],
-    paddingLeft: theme.spacingNative(4),
+    padding: theme.spacingNative(4),
     alignSelf: "center",
   },
   textContainer: {

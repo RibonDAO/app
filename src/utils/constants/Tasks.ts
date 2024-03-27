@@ -54,7 +54,7 @@ export const TASKS = [
     title: "check_daily_news",
     actions: ["for_you_news_tab_view"],
     type: "daily",
-    navigationCallback: "ForYouScreen",
+    navigationCallback: "EarnTicketsScreen",
     isVisible(this: Task) {
       return true;
     },

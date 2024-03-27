@@ -4,6 +4,7 @@ import {
   defaultBodyMdSemibold,
   defaultBodyXsBold,
   defaultBodyXsRegular,
+  defaultBodyXsSemibold,
 } from "styles/typography/default";
 
 const styles = StyleSheet.create({
@@ -71,10 +72,14 @@ const styles = StyleSheet.create({
     ...defaultBodyXsRegular,
     color: theme.colors.neutral[800],
   },
+  infoBold: {
+    ...defaultBodyXsSemibold,
+    color: theme.colors.neutral[800],
+  },
   infoContainer: {
     display: "flex",
     flexDirection: "row",
-    maxWidth: "100%",
+    maxWidth: "90%",
     justifyContent: "flex-start",
     paddingRight: theme.spacingNative(8),
   },

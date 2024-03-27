@@ -37,11 +37,11 @@ export default function AvailableArticleScreen() {
 
   const navigateToNewsTab = () => {
     logEvent("checkpostCard_Click");
-    navigateTo("ForYouScreen", { currentTab: 1 });
+    navigateTo("EarnTicketsScreen", { currentTab: 1 });
   };
 
   const navigateToTasksTab = () => {
-    navigateTo("ForYouScreen", { currentTab: 0 });
+    navigateTo("EarnTicketsScreen", { currentTab: 0 });
   };
 
   useEffect(() => {

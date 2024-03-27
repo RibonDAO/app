@@ -1,7 +1,7 @@
 {
   "tabs": {
     "causes": "Tickets",
-    "foryou": "Para você",
+    "earnTickets": "Ganhe tickets",
     "giving": "Doações",
     "impact": "Impacto"
   },
@@ -172,9 +172,9 @@
       "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
       "hasAccountButton": "Já tenho uma conta"
     },
-    "forYouScreen": {
+    "earnTicketsScreen": {
       "newsSection": {
-        "title": "Para você",
+        "title": "Ganhe tickets",
         "openPostButtonText": "Ver publicação",
         "onboarding": {
           "publishedAt": "Agora",
@@ -339,11 +339,13 @@
       "thirdInfo": "Confirme sua doação",
       "copyCode": "Copiar código",
       "copyCodeSuccess": "Codigo copiado!",
-      "expiresAt": "Expira em 30 minutos",
+      "expiresAt": "Expira em ",
+      "date": "{{date}} às {{time}}",
       "donatingTo": "Doando para ",
       "paymentOf": "Pagamento do ",
       "ribonClub": "Clube Ribon",
-      "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon."
+      "pixReceiverText": "O destino do seu Pix será o Stripe, plataforma que processa os pagamentos da Ribon.",
+      "pixAfterPayment": "Após o pagamento, a confirmação pode levar alguns minutos. Volte a tela inicial e continue usando o app até a liberação dos benecífios do clube."
     },
     "subscriptionsScreen": {
       "title": "Assinaturas",
@@ -392,7 +394,13 @@
           "number": "Número do cartão",
           "name": "Nome impresso",
           "expirationDate": "Data de validade",
-          "cvv": "CVV"
+          "cvv": "Código de segurança"
+        },
+        "pixFiels": {
+          "email": "E-mail",
+          "country": "País",
+          "cpf": "CPF",
+          "name": "Nome completo"
         }
       },
       "confirmPayment": "Confirmar pagamento"

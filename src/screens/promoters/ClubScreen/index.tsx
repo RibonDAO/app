@@ -1,7 +1,7 @@
 import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Offer, theme, useSubscriptions } from "@ribon.io/shared";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useTranslation } from "react-i18next";
@@ -79,7 +79,13 @@ function ClubScreen(): JSX.Element {
     }, []),
   );
 
-  return !isMember ? (
+  useEffect(() => {
+    if (isMember) {
+      navigateTo("CausesScreen");
+    }
+  }, [isMember]);
+
+  return (
     <View style={S.innerContainer}>
       <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
         <View style={S.arrow}>
@@ -146,8 +152,6 @@ function ClubScreen(): JSX.Element {
         }}
       />
     </View>
-  ) : (
-    <View />
   );
 }
 

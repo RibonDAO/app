@@ -188,9 +188,7 @@ export default function GooglePaySection({
         {showFiscalFields() && (
           <InputText
             name="taxId"
-            placeholder={
-              currentLang === Languages.PT ? field("cpf") : field("taxId")
-            }
+            label={currentLang === Languages.PT ? field("cpf") : field("taxId")}
             mask="999.999.999-99"
             value={taxId}
             onChangeText={(value) => setTaxId(value)}
