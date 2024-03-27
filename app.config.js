@@ -1,5 +1,5 @@
-const version = "5.7.0";
-const buildNumber = 367;
+const version = "5.7.1";
+const buildNumber = 368;
 
 export default () => ({
   "expo": {
@@ -42,6 +42,7 @@ export default () => ({
            "fetch",
            "remote-notification",
          ],
+         "NSAdvertisingAttributionReportEndpoint": "https://appsflyer-skadnetwork.com/",
          "NSCameraUsageDescription": "This app requires access to your phone's camera."
       },
       "supportsTablet": true,
