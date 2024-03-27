@@ -188,6 +188,7 @@ function BottomTabNavigator() {
         component={ImpactScreen}
         options={{
           title: t("tabs.impact") || "Impact",
+
           tabBarIcon: ({ color }: any) =>
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
           header: headerOutline,

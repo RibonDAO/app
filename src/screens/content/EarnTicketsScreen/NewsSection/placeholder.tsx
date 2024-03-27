@@ -7,7 +7,7 @@ import {
   Fade,
 } from "rn-placeholder";
 
-function earnTicketsScreenPlaceholder() {
+function EarnTicketsScreenPlaceholder() {
   return (
     <View style={{ paddingHorizontal: 16 }}>
       <Placeholder Animation={Fade}>
@@ -127,4 +127,4 @@ function earnTicketsScreenPlaceholder() {
   );
 }
 
-export default earnTicketsScreenPlaceholder;
+export default EarnTicketsScreenPlaceholder;
