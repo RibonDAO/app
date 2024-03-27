@@ -25,9 +25,10 @@ import S from "./styles";
 export type Props = {
   offer: Offer;
   nonProfit?: NonProfit;
+  eventParams?: Record<any, any>;
 };
 
-function PixSection({ offer, nonProfit }: Props): JSX.Element {
+function PixSection({ offer, nonProfit, eventParams }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.checkoutScreen",
   });
@@ -54,7 +55,9 @@ function PixSection({ offer, nonProfit }: Props): JSX.Element {
   const [maskedTaxId, setMaskedTaxId] = useState("999.999.999-99");
 
   useEffect(() => {
-    logEvent("selectPix_click");
+    logEvent("selectPix_click", {
+      eventParams,
+    });
   }, []);
 
   function isBrazil(countryName: string) {

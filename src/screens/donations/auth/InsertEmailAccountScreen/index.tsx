@@ -14,7 +14,6 @@ import { useTranslation } from "react-i18next";
 import InputText from "components/atomics/inputs/InputText";
 import Image from "components/atomics/Image";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
-import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
 import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
@@ -29,7 +28,6 @@ function InsertEmailAccountScreen() {
   const {
     params: { nonProfit },
   } = useRouteParams<"InsertEmailAccountScreen">();
-  usePageView("P12_view", { nonProfitId: nonProfit.id });
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.auth.insertEmailAccountScreen",
   });

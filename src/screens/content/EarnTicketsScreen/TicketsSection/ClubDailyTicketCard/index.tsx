@@ -3,15 +3,14 @@ import { TicketsCategories, theme } from "@ribon.io/shared";
 import PinkTicketIllustration from "assets/illustrations/PinkTicketIllustration";
 import Button from "components/atomics/buttons/Button";
 import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
-
 import CardTicket from "components/moleculars/CardTicket";
-
 import TicketPinkIcon from "components/vectors/TicketPinkIcon";
+import { logEvent } from "services/analytics";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useTickets } from "hooks/useTickets";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { logEvent } from "services/analytics";
 
 type Props = {
   tickets?: number;
@@ -68,6 +67,11 @@ export default function ClubDailyTicketCard({
     }
   };
 
+  useEffect(() => {
+    if (!isMember) {
+      logEvent("clubCTA_view", { from: "clubDailyTicket_card" });
+    }
+  }, []);
   return (
     <CardTicket
       title={t("dailyTicketCard.title")}

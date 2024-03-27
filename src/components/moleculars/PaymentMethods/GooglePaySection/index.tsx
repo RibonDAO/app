@@ -14,6 +14,7 @@ import { showToast } from "lib/Toast";
 import { useIntegration, useSources, useUsers } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { normalizedLanguage } from "lib/currentLanguage";
+import { formatPrice } from "lib/formatters/currencyFormatter";
 import { PLATFORM } from "utils/constants/Application";
 import {
   PlatformPay,
@@ -63,7 +64,11 @@ export default function GooglePaySection({
   const { currentLang } = useLanguage();
 
   useEffect(() => {
-    logEvent("selectGooglePay_click");
+    logEvent("selectGooglePay_click", {
+      value: formatPrice(offer.priceValue, offer.currency),
+      // eslint-disable-next-line no-nested-ternary
+      target: nonProfit?.id ? "nonProfit" : cause?.id ? "cause" : "club",
+    });
   }, []);
 
   const showFiscalFields = () => offer.gateway === "stripe";

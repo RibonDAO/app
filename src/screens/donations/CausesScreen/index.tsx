@@ -138,6 +138,7 @@ export default function CausesScreen() {
           DONATION_TOAST_INTEGRATION,
           currentIntegrationId?.toLocaleString(),
         );
+        logEvent("receiveTicket_view", { from: "receivedTickets_toast" });
       }
     } else {
       refetchTickets();

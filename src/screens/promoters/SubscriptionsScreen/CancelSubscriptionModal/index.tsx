@@ -1,5 +1,6 @@
 import { useSubscriptions } from "@ribon.io/shared/hooks";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
+import { useLoadingOverlay } from "contexts/loadingOverlayContext";
 import { showToast } from "lib/Toast";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,6 +27,7 @@ function CancelSubscriptionModal({
   });
 
   const { sendCancelSubscriptionEmail } = useSubscriptions();
+  const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
 
   useEffect(() => {
     logEvent("cancelSubsModal_view", eventParams);
@@ -37,6 +39,7 @@ function CancelSubscriptionModal({
     }
     logEvent("cancelSubsBtn_click", eventParams);
     try {
+      showLoadingOverlay();
       const response = await sendCancelSubscriptionEmail(subscriptionId);
       if (response) {
         showToast({
@@ -46,8 +49,10 @@ function CancelSubscriptionModal({
         });
       }
     } catch (error) {
+      hideLoadingOverlay();
       logError(error);
     } finally {
+      hideLoadingOverlay();
       setVisible(false);
     }
   };

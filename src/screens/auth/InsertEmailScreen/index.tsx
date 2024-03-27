@@ -8,9 +8,7 @@ import {
   Text,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import usePageView from "hooks/usePageView";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
-
 import { useNavigation } from "hooks/useNavigation";
 import InputText from "components/atomics/inputs/InputText";
 import { isValidEmail } from "lib/validators";
@@ -23,7 +21,6 @@ import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
 function InsertEmailScreen() {
-  usePageView("P12_view", { nonProfitId: "" });
   const { t } = useTranslation("translation", {
     keyPrefix: "auth.insertEmailScreen",
   });
