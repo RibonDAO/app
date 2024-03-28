@@ -91,6 +91,7 @@ function CustomToast({
   const { navigateTo } = useNavigation();
   return (
     <TouchableOpacity
+      accessibilityRole="button"
       style={[
         S.toastContainer,
         {
@@ -98,7 +99,7 @@ function CustomToast({
           borderColor: borderColor || backgroundColorToast(type),
         },
       ]}
-      onPress={() => navigateTo(navigate ?? "ForYouScreen")}
+      onPress={() => navigateTo(navigate ?? "EarnTicketsScreen")}
     >
       <View style={S.textContainer}>
         <IconRounded

@@ -22,7 +22,7 @@ export interface Props extends Omit<TextInputProps, "placeholder"> {
   required?: boolean;
   leftIcon?: any;
   rightIcon?: any;
-  label?: string;
+  label?: string | null;
   labelIcon?: any;
   mask?: string;
 }

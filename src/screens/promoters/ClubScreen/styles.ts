@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     color: theme.colors.neutral[800],
     textAlign: "center",
     margin: theme.spacingNative(16),
-    marginBottom: theme.spacingNative(40),
+    marginBottom: theme.spacingNative(24),
   },
   subtitle: {
     ...defaultBodySmMedium,
