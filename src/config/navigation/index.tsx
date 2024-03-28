@@ -166,7 +166,7 @@ function BottomTabNavigator() {
         name="EarnTicketsScreen"
         component={EarnTicketsScreen}
         options={{
-          title: t("tabs.earnTickets") || "For you",
+          title: t("tabs.earntickets") || "Earn Tickets",
           tabBarIcon: ({ color }) =>
             renderTabBarIcon(
               color,

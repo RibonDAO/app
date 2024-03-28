@@ -1,7 +1,7 @@
 {
   "tabs": {
     "causes": "Tickets",
-    "earnTickets": "Ganhe tickets",
+    "earntickets": "Ganhe tickets",
     "giving": "Doações",
     "impact": "Impacto"
   },
@@ -350,13 +350,13 @@
     "subscriptionsScreen": {
       "title": "Assinaturas",
       "to": "Para ",
-      "nextContribution": "Próxima contribuição em ",
+      "nextPayment": "Próximo pagamento em ",
       "ribonClubTag": "Clube Ribon",
       "pixPayment": "Compra única por PIX",
       "perksExpiration": "Benefícios expiram: ",
       "cancelSubscriptionModal": {
         "title": "Cancelar assinatura",
-        "contributionTitle": "Cancelar contribuição mensal",
+        "subscriptionTitle": "Cancelar assinatura",
         "description": "Para efetuar o processo, confirme o cancelamento da assinatura pelo e-mail que enviaremos para você.",
         "cancelButton": "Receber e-mail de cancelamento",
         "closeButton": "Fechar",

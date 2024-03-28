@@ -313,7 +313,7 @@ export default function CausesScreen() {
   const { userIsMember } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
 
-  const onRefresh = useCallback(async () => {
+  const onRefresh = async () => {
     setRefreshing(true);
     try {
       refetchTickets();
@@ -324,7 +324,7 @@ export default function CausesScreen() {
     } finally {
       setRefreshing(false);
     }
-  }, [refetchTickets, refetchIsMember, refetchFirstAccessToIntegration]);
+  };
 
   return isLoading || loadingFirstAccessToIntegration ? (
     <Placeholder />

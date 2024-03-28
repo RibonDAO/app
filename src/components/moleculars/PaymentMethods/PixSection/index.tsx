@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import InputText from "components/atomics/inputs/InputText";
 import Button from "components/atomics/buttons/Button";
 import { useTranslation } from "react-i18next";
@@ -122,6 +122,9 @@ function PixSection({ offer, nonProfit, eventParams }: Props): JSX.Element {
       )}
 
       <>
+        <View style={S.labelIcon}>
+          <Text style={S.label}>{field("country")}</Text>
+        </View>
         <CountryPicker
           translation={currentLang === Languages.PT ? "por" : undefined}
           withEmoji

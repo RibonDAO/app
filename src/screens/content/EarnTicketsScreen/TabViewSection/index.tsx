@@ -97,7 +97,7 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
       (task) => task.id === taskDownloadApp.id,
     )?.done;
     if (index === 1 && donatedToday && !done) {
-      registerAction("for_you_news_tab_view");
+      registerAction("earn_tickets_news_tab_view");
     }
   }, [index]);
 

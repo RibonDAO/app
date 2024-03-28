@@ -40,7 +40,7 @@ export function useEarnTicketsTabsContext() {
 
   if (!context) {
     throw new Error(
-      "useEarnTicketsTabsContext must be used within a earnTicketsTabsProvider",
+      "useEarnTicketsTabsContext must be used within a EarnTicketsTabsProvider",
     );
   }
 

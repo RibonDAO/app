@@ -1,14 +1,14 @@
-import { ScrollView, RefreshControl } from "react-native";
+import { View } from "react-native";
 import { useDonatedToday, useSubscriptions } from "@ribon.io/shared";
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import EarnTicketsTabsProvider from "contexts/earnTicketsTabsContext";
 import { useRouteParams } from "hooks/useRouteParams";
 import { useFocusEffect } from "@react-navigation/native";
 
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useTicketsContext } from "contexts/ticketsContext";
-import { logError } from "services/crashReport";
+
 import TabViewSection from "./TabViewSection";
 import styles from "./styles";
 
@@ -22,37 +22,20 @@ export default function EarnTicketsScreen(): JSX.Element {
   const { refetch: refetchIsMember } = userIsMember();
   const { refetch: refetchSubscriptions } = userSubscriptions();
 
-  const [refreshing, setRefreshing] = useState(false);
   useFocusEffect(
     useCallback(() => {
       refetchDonatedToday();
       refetchTickets();
+      refetchIsMember();
+      refetchSubscriptions();
     }, [currentUser]),
   );
 
-  const onRefresh = useCallback(async () => {
-    setRefreshing(true);
-    try {
-      refetchTickets();
-      await refetchIsMember();
-      await refetchSubscriptions();
-    } catch (e) {
-      logError(e);
-    } finally {
-      setRefreshing(false);
-    }
-  }, [refetchTickets, refetchIsMember, refetchSubscriptions]);
-
   return (
     <EarnTicketsTabsProvider>
-      <ScrollView
-        style={styles.container}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
+      <View style={styles.container}>
         <TabViewSection initialTabIndex={params?.currentTab || 0} />
-      </ScrollView>
+      </View>
     </EarnTicketsTabsProvider>
   );
 }

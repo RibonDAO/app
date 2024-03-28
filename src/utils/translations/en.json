@@ -1,7 +1,7 @@
 {
   "tabs": {
     "causes": "Tickets",
-    "earnTickets": " Earn tickets",
+    "earntickets": " Earn tickets",
     "giving": "Donations",
     "impact": "Impact"
   },
@@ -179,7 +179,7 @@
     },
     "earnTicketsScreen": {
       "newsSection": {
-        "title": "For you",
+        "title": "Earn tickets",
         "openPostButtonText": "Open post",
         "onboarding": {
           "publishedAt": "Now",
@@ -398,13 +398,13 @@
     "subscriptionsScreen": {
       "title": "Subscriptions",
       "to": "To ",
-      "nextContribution": "Next charge on ",
+      "nextPayment": "Next payment on ",
       "ribonClubTag": "Ribon Club",
       "pixPayment": "Single purchase via PIX",
       "perksExpiration": "Perks expire at: ",
       "cancelSubscriptionModal": {
         "title": "Cancel subscription",
-        "contributionTitle": "Cancel monthly contribution",
+        "subscriptionTitle": "Cancel subscription",
         "description": "To complete the process, please confirm the subscription cancellation via the email we will send to you.",
         "cancelButton": "Receive cancellation email",
         "closeButton": "Close",
