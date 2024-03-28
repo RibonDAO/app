@@ -144,7 +144,7 @@ export default function SubscriptionsScreen(): JSX.Element {
                 <S.Text>
                   {isPix(subscription)
                     ? t("perksExpiration")
-                    : t("nextContribution")}
+                    : t("nextPayment")}
                   <S.HighlightedText>
                     {nextPaymetAttempt(subscription)}
                   </S.HighlightedText>

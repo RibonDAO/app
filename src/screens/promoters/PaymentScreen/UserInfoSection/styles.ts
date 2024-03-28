@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { defaultBodySmMedium } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -36,6 +37,20 @@ const styles = StyleSheet.create({
   },
   dropdownText: {
     textAlign: "left",
+  },
+  labelIcon: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  label: {
+    ...defaultBodySmMedium,
+    marginBottom: theme.spacingNative(4),
+    color: theme.colors.neutral[700],
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
 

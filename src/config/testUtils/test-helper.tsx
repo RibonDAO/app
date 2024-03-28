@@ -58,7 +58,7 @@ export const testLinkingConfig: LinkingOptions<RootStackParamList> = {
               DonationDoneScreen: "donation-done",
             },
           },
-          ForYouScreen: {
+          EarnTicketsScreen: {
             screens: {
               NewsScreen: "news",
             },

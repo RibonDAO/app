@@ -6,7 +6,6 @@ import {
   TouchableWithoutFeedback,
   View,
   Text,
-  Image,
   TouchableOpacity,
 } from "react-native";
 import Clipboard from "@react-native-clipboard/clipboard";
@@ -27,6 +26,11 @@ import Icon from "components/atomics/Icon";
 import TrustSeal from "components/moleculars/TrustSeal";
 import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
 import { useNavigation } from "hooks/useNavigation";
+import {
+  formatDateTime,
+  formatDate,
+} from "lib/web3Helpers/timeStampFormatters";
+
 import S from "./styles";
 
 function PixInstructionsScreen(): JSX.Element {
@@ -89,6 +93,14 @@ function PixInstructionsScreen(): JSX.Element {
     };
   }, []);
 
+  const date = formatDate(
+    Number(pixInstructions?.nextAction?.pixDisplayQrCode?.expiresAt) ?? "",
+  );
+
+  const time = formatDateTime(
+    Number(pixInstructions?.nextAction?.pixDisplayQrCode?.expiresAt) ?? "",
+  );
+
   return (
     <KeyboardAvoidingView
       behavior="position"
@@ -125,15 +137,15 @@ function PixInstructionsScreen(): JSX.Element {
 
             <View style={S.pixContainer}>
               <Text style={S.pixCode}>{t("pixCode")}</Text>
-              <Image
-                accessibilityIgnoresInvertColors
-                style={S.qrcode}
-                source={{
-                  uri: pixInstructions?.nextAction?.pixDisplayQrCode
-                    ?.imageUrlPng,
-                }}
-              />
-              <Text style={S.info}>{t("expiresAt")}</Text>
+              <Text style={S.info}>
+                {t("expiresAt")}
+                <Text style={S.infoBold}>
+                  {t("date", {
+                    date,
+                    time,
+                  })}
+                </Text>
+              </Text>
             </View>
             <InputText
               name={t("pixCode")}
@@ -174,7 +186,16 @@ function PixInstructionsScreen(): JSX.Element {
                     }
               }
             />
-
+            <View style={[S.infoContainer, { marginBottom: 16 }]}>
+              <Icon
+                type="rounded"
+                name="error"
+                color={theme.colors.neutral[600]}
+                size={24}
+                style={{ marginRight: 4 }}
+              />
+              <Text style={S.info}>{t("pixAfterPayment")}</Text>
+            </View>
             <View style={S.infoContainer}>
               <Icon
                 type="rounded"

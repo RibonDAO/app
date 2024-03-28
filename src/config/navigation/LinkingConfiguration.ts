@@ -25,7 +25,7 @@ const linking: LinkingOptions<RootStackParamList> = {
               ValidateExtraTicketScreen: "extra-ticket",
             },
           },
-          ForYouScreen: {
+          EarnTicketsScreen: {
             screens: {
               NewsScreen: "news",
             },
@@ -38,6 +38,11 @@ const linking: LinkingOptions<RootStackParamList> = {
           PromotersScreen: {
             screens: {
               PromotersScreen: "promoters",
+            },
+          },
+          ClubScreen: {
+            screens: {
+              ClubScreen: "club",
             },
           },
         },

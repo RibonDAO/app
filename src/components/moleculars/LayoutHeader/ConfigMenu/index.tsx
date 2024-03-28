@@ -74,6 +74,7 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
   );
 
   const handleMonthlyContributionClick = () => {
+    toggleModal();
     refetchSubscription();
 
     logEvent("manageSubs_click", {

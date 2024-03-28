@@ -33,7 +33,7 @@ import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import TicketsProvider from "contexts/ticketsContext";
 import OnboardingScreen from "screens/onboarding/OnboardingScreen";
-import ForYouScreen from "screens/content/ForYouScreen";
+import EarnTicketsScreen from "screens/content/EarnTicketsScreen";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "lib/Toast";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
@@ -80,8 +80,8 @@ import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
 import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
-import ForYouIconOn from "./assets/ForYouIconOn";
-import ForYouIconOff from "./assets/ForYouIconOff";
+import EarnTicketsIconOn from "./assets/EarnTicketsIconOn";
+import EarnTicketsIconOff from "./assets/EarnTicketsIconOff";
 
 const { primary } = theme.colors.brand;
 const { neutral } = theme.colors;
@@ -163,18 +163,22 @@ function BottomTabNavigator() {
       />
 
       <BottomTab.Screen
-        name="ForYouScreen"
-        component={ForYouScreen}
+        name="EarnTicketsScreen"
+        component={EarnTicketsScreen}
         options={{
-          title: t("tabs.foryou") || "For you",
+          title: t("tabs.earntickets") || "Earn Tickets",
           tabBarIcon: ({ color }) =>
-            renderTabBarIcon(color, <ForYouIconOn />, <ForYouIconOff />),
+            renderTabBarIcon(
+              color,
+              <EarnTicketsIconOn />,
+              <EarnTicketsIconOff />,
+            ),
           lazy: false,
           header,
         }}
         listeners={() => ({
           tabPress: () => {
-            logEvent("forYouNavBtn_click");
+            logEvent("earnTicketsNavBtn_click");
           },
         })}
       />
@@ -184,6 +188,7 @@ function BottomTabNavigator() {
         component={ImpactScreen}
         options={{
           title: t("tabs.impact") || "Impact",
+
           tabBarIcon: ({ color }: any) =>
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
           header: headerOutline,

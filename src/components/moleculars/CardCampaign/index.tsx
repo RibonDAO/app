@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import Image from "components/atomics/Image";
 import Button from "components/atomics/buttons/Button";
 import { theme } from "@ribon.io/shared/styles";
-import { openInWebViewer } from "lib/linkOpener";
+import { openInExternalBrowser, openInWebViewer } from "lib/linkOpener";
 import { Currencies, ImpressionCard } from "@ribon.io/shared/types";
 import { useImpressionCards } from "@ribon.io/shared/hooks";
 import { useImpactConversion } from "hooks/useImpactConversion";
@@ -72,7 +72,7 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
   const openLink = () => {
     if (!impressionCard) return;
 
-    openInWebViewer(impressionCard.ctaUrl);
+    openInExternalBrowser(impressionCard.ctaUrl);
   };
 
   const imageUri = useMemo<string | undefined>(

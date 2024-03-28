@@ -28,7 +28,7 @@ function PostDonationScreen({
   const navigateToAvailableArticleScreen = () => {
     if (appDonationsCount && appDonationsCount < 3)
       navigateTo("AvailableArticleScreen");
-    else navigateTo("ForYouScreen", { currentTab: 0 });
+    else navigateTo("EarnTicketsScreen", { currentTab: 0 });
   };
 
   const { registerAction } = useTasksContext();
