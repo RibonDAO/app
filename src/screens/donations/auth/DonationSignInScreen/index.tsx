@@ -45,7 +45,7 @@ function DonationSignInScreen() {
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
     setShouldRepeatAnimation(false);
-    logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
+    logEvent("ticketDonated_end", { nonProfitId: nonProfit.id, quantity: 1 });
   };
 
   const onDonationFail = (error: any) => {
