@@ -5,6 +5,8 @@ import { useStatistics } from "@ribon.io/shared/hooks";
 import { useTranslation } from "react-i18next";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { Currencies } from "@ribon.io/shared/types";
+import { useLanguage } from "contexts/languageContext";
+import { Languages } from "types/enums/Languages";
 import ImpactCard from "../ImpactCard";
 import S from "./styles";
 
@@ -14,8 +16,21 @@ function ImpactCards(): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "users.impactScreen.impactCards",
   });
+  const { currentLang } = useLanguage();
+  const totalDonated = () => {
+    if (currentLang === Languages.PT) {
+      return formatPrice(
+        userStatistics?.totalDonated?.brl || 0,
+        Currencies.BRL,
+      );
+    } else {
+      return formatPrice(
+        userStatistics?.totalDonated?.usd || 0,
+        Currencies.USD,
+      );
+    }
+  };
 
-  // TODO: dynamic currency on totaldonated
   const impacts = useCallback(
     () => [
       {
@@ -25,10 +40,7 @@ function ImpactCards(): JSX.Element {
       },
       {
         name: t("totalDonated"),
-        impact: formatPrice(
-          userStatistics?.totalDonated?.brl || 0,
-          Currencies.BRL,
-        ),
+        impact: totalDonated(),
         iconName: "monetization_on",
       },
       {
