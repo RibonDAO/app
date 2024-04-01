@@ -32,7 +32,8 @@ function SignedInScreen() {
   const onDonationSuccess = () => {
     setDonationSucceeded(true);
     setShouldRepeatAnimation(false);
-    logEvent("ticketDonated_end", { nonProfitId: nonProfit.id });
+    logEvent("ticketCollected", { from: "collectAndDonate" });
+    logEvent("ticketDonated_end", { nonProfitId: nonProfit.id, quantity: 1 });
   };
 
   const onDonationFail = () => {
@@ -51,7 +52,6 @@ function SignedInScreen() {
       nonProfit,
       email: currentUser.email,
       onSuccess: () => {
-        logEvent("ticketCollected", { from: "collectAndDonate" });
         onDonationSuccess();
       },
       onError: () => {
