@@ -3371,13 +3371,14 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.1.36":
-  version "1.1.36"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.36.tgz#0ec5203c27cf2dacf575c68b864f260894ec96c9"
-  integrity sha512-oXqgxsFWtPPPbk9x2qLY492Kvp0S8llp1poKg1IOXZE3Jf93GWo9YWEZKHixJhxowA0sAol+yVJu0o9taKZBww==
+"@ribon.io/shared@^1.1.40":
+  version "1.1.40"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.40.tgz#b4f386dafbcec7e64fde240a63a7d092310d2f10"
+  integrity sha512-gfZwU7Qy0lsMR1ktS1XcpflQ+EJy0KwWaRqF7X3GfbQsaifWGM9apQiN0/lrZ2W05fYULoZ4+C0kq1uwjg3QUw==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
+    activestorage "^5.2.8-1"
     axios "^0.27.2"
     camelcase-keys "^7.0.2"
     cross-fetch "^3.1.5"
@@ -4787,6 +4788,13 @@ acorn@^8.8.0:
   version "8.8.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.1.tgz#0a3f9cbecc4ec3bea6f0a80b66ae8dd2da250b73"
   integrity sha512-7zFpHzhnqYKrkYdUjF1HI1bzd0VygEGX8lFk4k5zVMqHEoES+P+7TKI+EvLO9WVMJ8eekdO0aDEK044xTXwPPA==
+
+activestorage@^5.2.8-1:
+  version "5.2.8-1"
+  resolved "https://registry.yarnpkg.com/activestorage/-/activestorage-5.2.8-1.tgz#18cca0d7f81da42ebaf3ec04b393209d740f4fa0"
+  integrity sha512-SJRKEZDF4Qyuq3RTvtsp4KRMqHV/dEujoxo7X0fiijJPpCjISsYfAWtTlH1WjMNEY9opFCGmlhakoW4XDHstQQ==
+  dependencies:
+    spark-md5 "^3.0.0"
 
 aes-js@3.0.0:
   version "3.0.0"
@@ -14140,6 +14148,11 @@ source-map@^0.7.3:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.4.tgz#a9bbe705c9d8846f4e08ff6765acf0f1b0898656"
   integrity sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==
+
+spark-md5@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/spark-md5/-/spark-md5-3.0.2.tgz#7952c4a30784347abcee73268e473b9c0167e3fc"
+  integrity sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==
 
 spdy-transport@^3.0.0:
   version "3.0.0"

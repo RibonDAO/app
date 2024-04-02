@@ -109,7 +109,7 @@ function PixSection({ offer, nonProfit, eventParams }: Props): JSX.Element {
   const { signedIn } = useCurrentUser();
 
   return (
-    <View style={S.container}>
+    <View>
       {!signedIn && (
         <InputText
           name="email"
