@@ -23,6 +23,13 @@ function setupMocks() {
     __esModule: true,
     default: () => true,
   }));
+  jest.mock("@ribon.io/shared", () => {
+    const original = jest.requireActual("@ribon.io/shared");
+    return {
+      ...original,
+      useUploadFile: jest.fn(),
+    };
+  });
   jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
 }
 
