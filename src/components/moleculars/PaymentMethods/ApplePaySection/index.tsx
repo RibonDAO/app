@@ -85,6 +85,7 @@ export default function ApplePaySection({
   const { integration } = useIntegration(currentIntegrationId);
   const { currentLang } = useLanguage();
   const [email, setEmail] = useState(currentUser?.email ?? undefined);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     if (currentUser) setEmail(currentUser.email);
@@ -113,6 +114,7 @@ export default function ApplePaySection({
 
   const pay = async () => {
     showLoadingOverlay();
+    setDisabled(true);
     logEvent("confirmPaymentFormBtn_click", {
       source: "applePay",
       // eslint-disable-next-line no-nested-ternary
@@ -131,6 +133,7 @@ export default function ApplePaySection({
         ],
       },
     });
+    setDisabled(false);
     if (error) {
       hideLoadingOverlay();
     } else if (paymentMethod) {
@@ -196,7 +199,8 @@ export default function ApplePaySection({
     }
   };
 
-  const applePayButtonDisabled = () => showFiscalFields() && taxId.length < 14;
+  const applePayButtonDisabled = () =>
+    (showFiscalFields() && taxId.length < 14) || disabled;
 
   return (
     <View>
@@ -204,9 +208,7 @@ export default function ApplePaySection({
         {showFiscalFields() && (
           <InputText
             name="taxId"
-            placeholder={
-              currentLang === Languages.PT ? field("cpf") : field("taxId")
-            }
+            label={currentLang === Languages.PT ? field("cpf") : field("taxId")}
             mask="999.999.999-99"
             value={taxId}
             onChangeText={(value) => setTaxId(value)}

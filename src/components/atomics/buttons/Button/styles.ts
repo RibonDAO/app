@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.brand.primary[900],
     width: "100%",
-    height: 40,
+    height: 48,
     borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",

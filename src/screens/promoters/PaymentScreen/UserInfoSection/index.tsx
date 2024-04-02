@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useLanguage } from "contexts/languageContext";
 import { maskForTaxId } from "@ribon.io/shared/lib";
 import InputText from "components/atomics/inputs/InputText";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import S from "screens/promoters/PaymentScreen/UserInfoSection/styles";
 import CountryPicker, {
   Country,
@@ -67,6 +67,9 @@ function UserInfoSection(): JSX.Element {
 
   return (
     <View style={S.container}>
+      <View style={S.labelIcon}>
+        <Text style={S.label}>{t("country")}</Text>
+      </View>
       <CountryPicker
         translation={currentLang === Languages.PT ? "por" : undefined}
         withEmoji

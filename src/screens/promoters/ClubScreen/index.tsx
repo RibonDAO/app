@@ -1,7 +1,7 @@
 import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Offer, theme, useSubscriptions } from "@ribon.io/shared";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useTranslation } from "react-i18next";
@@ -37,12 +37,21 @@ function ClubScreen(): JSX.Element {
   const { navigateTo, popNavigation } = useNavigation();
   const [offer, setOffer] = useState<Offer>();
 
+  const scrollViewRef = useRef<ScrollView>(null);
+
+  const scrollToTop = () => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollTo({ y: 0, animated: true });
+    }
+  };
+
   const tabs = [
     {
       title: t("benefitsSection.title"),
       component: <BenefitsSection />,
       handleBack: () => popNavigation(),
       handleNext: () => {
+        scrollToTop();
         logEvent("checkClubPlansBtn_click", { from: "clubDescription_page" });
         setTabIndex(tabIndex + 1);
       },
@@ -51,7 +60,10 @@ function ClubScreen(): JSX.Element {
     {
       title: t("purchaseSection.title"),
       component: <PurchaseSection setCurrentOffer={setOffer} />,
-      handleBack: () => setTabIndex(tabIndex - 1),
+      handleBack: () => {
+        scrollToTop();
+        setTabIndex(tabIndex - 1);
+      },
       handleNext: () => {
         logEvent("giveClubBtn_start", {
           from: "clubPlans_page",
@@ -79,9 +91,19 @@ function ClubScreen(): JSX.Element {
     }, []),
   );
 
-  return !isMember ? (
+  useEffect(() => {
+    if (isMember) {
+      navigateTo("CausesScreen");
+    }
+  }, [isMember]);
+
+  return (
     <View style={S.innerContainer}>
-      <ScrollView style={S.container} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        ref={scrollViewRef}
+        style={S.container}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={S.arrow}>
           <TouchableOpacity
             accessibilityRole="button"
@@ -146,8 +168,6 @@ function ClubScreen(): JSX.Element {
         }}
       />
     </View>
-  ) : (
-    <View />
   );
 }
 

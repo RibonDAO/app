@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { theme } from "@ribon.io/shared/styles";
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   background-color: ${theme.colors.neutral[100]};
   margin-top: ${(props: { outline: boolean }) => (props.outline ? "-50px" : 0)};
 `;

@@ -11,7 +11,7 @@ export const Container = styled.TouchableOpacity`
   width: 328px;
   border-radius: ${theme.spacing(16)};
   background-color: ${(props: { checked: boolean }) =>
-    props.checked ? theme.colors.brand.tertiary[25] : theme.colors.neutral10};
+    props.checked ? theme.colors.brand.tertiary[100] : theme.colors.neutral10};
   position: relative;
 `;
 
@@ -32,18 +32,18 @@ export const Tag = styled.View`
   border-radius: ${theme.spacing(12, 0)};
   align-self: flex-start;
   background: ${theme.colors.brand.tertiary[200]};
+  margin-bottom: -12px;
 `;
 
 export const TagText = styled.Text`
   ${defaultBodySmMedium}
-
   color: ${theme.colors.brand.tertiary[900]};
 `;
 
 export const MainContent = styled.View`
   display: flex;
   flex-direction: column;
-  padding: ${theme.spacing(8, 20, 20, 20)};
+  padding: ${theme.spacing(20)};
 `;
 
 export const SelectValue = styled.View`

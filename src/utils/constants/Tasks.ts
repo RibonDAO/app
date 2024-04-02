@@ -52,9 +52,9 @@ export const TASKS = [
   {
     id: "ee397e16-de1b-11ed-b5ea-0242ac120002",
     title: "check_daily_news",
-    actions: ["for_you_news_tab_view"],
+    actions: ["earn_tickets_news_tab_view"],
     type: "daily",
-    navigationCallback: "ForYouScreen",
+    navigationCallback: "EarnTicketsScreen",
     isVisible(this: Task) {
       return true;
     },

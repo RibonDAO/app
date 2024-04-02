@@ -52,7 +52,7 @@ function UserSupportBanner({
         }}
         withCircle
         cardBackground={cardBackground ?? RibonSunLeft}
-        textColor={theme.colors.neutral[900]}
+        textColor={theme.colors.neutral[800]}
         backgroundColor={backgroundColor ?? theme.colors.brand.secondary[100]}
         arrowLinkColor={theme.colors.brand.secondary[900]}
       />
