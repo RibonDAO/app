@@ -36,11 +36,12 @@ export function useFormattedImpactText() {
     prefix?: string,
   ): string | JSX.Element {
     if (!nonProfit) return "";
+    if (!nonProfit.nonProfitImpacts || nonProfit.nonProfitImpacts.length === 0)
+      return "";
     const impacts = nonProfit?.nonProfitImpacts || [];
     const nonProfitsImpactsLength = impacts.length;
     const impactByMinimumNumberOfTickets =
-      (nonProfit?.impactByTicket || 0) *
-      (nonProfitImpact?.minimumNumberOfTickets || 1);
+      nonProfit.impactByTicket * (nonProfitImpact?.minimumNumberOfTickets || 1);
 
     const roundedImpact =
       impact ||
