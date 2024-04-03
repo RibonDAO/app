@@ -370,7 +370,7 @@
           "expirationDate": "Expiration date",
           "cvv": "Card verification code"
         },
-        "pixFiels": {
+        "pixFields": {
           "email": "E-mail",
           "country": "Country",
           "cpf": "CPF",
