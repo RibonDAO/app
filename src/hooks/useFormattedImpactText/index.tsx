@@ -38,8 +38,15 @@ export function useFormattedImpactText() {
     if (!nonProfit) return "";
     const impacts = nonProfit?.nonProfitImpacts || [];
     const nonProfitsImpactsLength = impacts.length;
+    const impactByMinimumNumberOfTickets =
+      (nonProfit?.impactByTicket || 0) *
+      (nonProfitImpact?.minimumNumberOfTickets || 1);
+
     const roundedImpact =
-      impact || nonProfitImpact?.roundedImpact || nonProfit?.impactByTicket;
+      impact ||
+      nonProfitImpact?.roundedImpact ||
+      impactByMinimumNumberOfTickets ||
+      1;
     const prefixText = prefix ? `${prefix} ` : "";
 
     if (nonProfit && roundedImpact && impacts && nonProfitsImpactsLength) {
