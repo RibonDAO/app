@@ -7,7 +7,7 @@ import {
 } from "styles/typography/default";
 import { stylizedDisplayXl } from "styles/typography/stylized";
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.View`
   display: flex;
   height: 328px;
   width: 100%;
@@ -29,7 +29,7 @@ export const Text = styled.Text`
   padding-left: ${theme.spacing(8)};
 `;
 
-export const IconContainer = styled.View`
+export const IconContainer = styled.TouchableOpacity`
   display: flex;
   height: 30px;
 `;

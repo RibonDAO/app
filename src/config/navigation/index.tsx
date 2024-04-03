@@ -73,6 +73,7 @@ import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneSc
 import SubscriptionsScreen from "screens/promoters/SubscriptionsScreen";
 import ClubScreen from "screens/promoters/ClubScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
+import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -538,6 +539,14 @@ function RootNavigator() {
       <Stack.Screen
         name="ClubContributionDoneScreen"
         component={ClubContributionDoneScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="AboutTicketsScreen"
+        component={AboutTicketsScreen}
         options={{
           headerShown: false,
         }}

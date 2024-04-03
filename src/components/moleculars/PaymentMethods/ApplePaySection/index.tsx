@@ -106,7 +106,7 @@ export default function ApplePaySection({
         await normalizedLanguage(),
       );
       if (integration) {
-        createSource(user.id, integration.id);
+        createSource(user.id, integration.id ?? "");
       }
       setCurrentUser(user);
     }

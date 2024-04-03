@@ -78,7 +78,7 @@ function PixPaymentInformationProvider({ children }: Props) {
           await normalizedLanguage(),
         );
         if (integration) {
-          createSource(user.id, integration.id);
+          createSource(user.id, integration.id ?? "");
         }
         setCurrentUser(user);
       } catch (e) {

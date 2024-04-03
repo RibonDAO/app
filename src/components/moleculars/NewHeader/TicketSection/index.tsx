@@ -13,12 +13,18 @@ function TicketSection(): JSX.Element {
     keyPrefix: "newHeader",
   });
 
-  const { navigateTo } = useNavigation();
+  const { navigateTo, popNavigation } = useNavigation();
   const { ticketsCounter: tickets } = useTicketsContext();
 
   const handleToggleTooltip = () => {
     logEvent("earnTicketsCTA_click");
-    navigateTo("LalaScreen");
+
+    navigateTo("AboutTicketsScreen", {
+      title: t("aboutTicketsTitle"),
+      from: "ticketsTooltip",
+      buttonText: t("aboutTicketsButtonText"),
+      buttonOnPress: () => popNavigation(),
+    });
   };
 
   const handleToggleEarnTickets = () => {
@@ -32,7 +38,7 @@ function TicketSection(): JSX.Element {
         <S.TicketText>{t("myTickets")}</S.TicketText>
         <S.IconContainer
           accessibilityRole="button"
-          onPress={handleToggleTooltip}
+          onPress={() => handleToggleTooltip()}
         >
           <Icon
             type="outlined"
@@ -51,7 +57,7 @@ function TicketSection(): JSX.Element {
           color={theme.colors.neutral10}
         />
       </S.TicketCounter>
-      <S.TicketLink onPress={handleToggleEarnTickets}>
+      <S.TicketLink onPress={() => handleToggleEarnTickets}>
         {t("earnMoreTickets")}
       </S.TicketLink>
     </S.TicketContainer>
