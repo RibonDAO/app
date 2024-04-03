@@ -152,7 +152,7 @@ function BottomTabNavigator() {
           title: t("tabs.causes") || "Tickets",
           tabBarIcon: ({ color }) =>
             renderTabBarIcon(color, <CausesIconOn />, <CausesIconOff />),
-          header,
+          headerShown: false,
           lazy: false,
         }}
         listeners={() => ({

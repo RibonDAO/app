@@ -5,6 +5,12 @@
     "giving": "Donations",
     "impact": "Impact"
   },
+  "newHeader": {
+    "title": "Boas vindas a Ribon",
+    "description": "Fazer o bem faz bem!",
+    "myTickets": "Meus tickets",
+    "earnMoreTickets": "Ganhe mais tickets ->"
+  },
   "layoutHeader": {
     "logout": "Sign out",
     "support": "User Support",

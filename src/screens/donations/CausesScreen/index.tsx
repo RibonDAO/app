@@ -41,6 +41,7 @@ import {
   DONATION_TOAST_SEEN_AT_KEY,
 } from "lib/localStorage/constants";
 import { useRouteParams } from "hooks/useRouteParams";
+import NewHeader from "components/moleculars/NewHeader";
 import Placeholder from "./placeholder";
 import S from "./styles";
 import ContributionSection from "./ContributionSection";
@@ -337,6 +338,7 @@ export default function CausesScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
+        <NewHeader />
         <View style={S.containerPadding}>
           {currentNonProfit && (
             <StoriesSection
