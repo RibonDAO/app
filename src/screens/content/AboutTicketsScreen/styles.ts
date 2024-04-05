@@ -30,6 +30,7 @@ export const ButtonContainer = styled.View`
   position: absolute;
   bottom: 0;
   width: 100%;
+  margin-bottom: ${theme.spacing(12)};
 `;
 
 export const Arrow = styled.View`

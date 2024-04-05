@@ -31,7 +31,8 @@ export const Text = styled.Text`
 
 export const IconContainer = styled.TouchableOpacity`
   display: flex;
-  height: 30px;
+  height: 24px;
+  width: 24px;
 `;
 
 export const InfoContainer = styled.View`

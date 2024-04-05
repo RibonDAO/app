@@ -38,7 +38,7 @@ function TicketSection(): JSX.Element {
         <S.TicketText>{t("myTickets")}</S.TicketText>
         <S.IconContainer
           accessibilityRole="button"
-          onPress={() => handleToggleTooltip()}
+          onPress={handleToggleTooltip}
         >
           <Icon
             type="outlined"
@@ -57,7 +57,7 @@ function TicketSection(): JSX.Element {
           color={theme.colors.neutral10}
         />
       </S.TicketCounter>
-      <S.TicketLink onPress={() => handleToggleEarnTickets}>
+      <S.TicketLink onPress={handleToggleEarnTickets}>
         {t("earnMoreTickets")}
       </S.TicketLink>
     </S.TicketContainer>

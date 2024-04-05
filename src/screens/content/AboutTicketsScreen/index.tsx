@@ -69,7 +69,7 @@ function AboutTicketsScreen(): JSX.Element {
       <CardInfo
         icon={{
           name: "psychiatry",
-          type: "rounded",
+          type: "sharp",
           color: theme.colors.brand.primary[800],
           size: 20,
         }}
