@@ -3,13 +3,11 @@ import { theme } from "@ribon.io/shared/styles";
 import { defaultBodySmMedium } from "styles/typography/default";
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: theme.spacingNative(16),
-  },
   half: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    gap: theme.spacingNative(8),
   },
   button: {
     height: 48,

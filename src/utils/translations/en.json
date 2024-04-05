@@ -51,7 +51,7 @@
       "titleNonProfits": "NGOs",
       "buttonText": "Donate",
       "allCauses": "All",
-      "noTickets": "No tickets",
+      "notEnoughTickets": "Not enough tickets",
       "ticketToast": "You have a new ticket!",
       "enableNotification": {
         "title": "Don't miss your daily ticket!",
@@ -73,6 +73,7 @@
       },
       "impactPrefix": "Donate",
       "labelText": "Learn more",
+      "iconText": "(minimum)",
       "whatIsATicket": "What is a ticket?",
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "noCauses": {
@@ -375,7 +376,7 @@
           "expirationDate": "Expiration date",
           "cvv": "Card verification code"
         },
-        "pixFiels": {
+        "pixFields": {
           "email": "E-mail",
           "country": "Country",
           "cpf": "CPF",
