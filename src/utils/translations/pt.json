@@ -5,6 +5,14 @@
     "giving": "Doações",
     "impact": "Impacto"
   },
+  "newHeader": {
+    "title": "Boas vindas a Ribon",
+    "description": "Fazer o bem faz bem!",
+    "myTickets": "Meus tickets",
+    "earnMoreTickets": "Ganhe mais tickets ->",
+    "aboutTicketsTitle": "Sobre os tickets",
+    "aboutTicketsButtonText": "Voltar"
+  },
   "layoutHeader": {
     "logout": "Sair",
     "support": "Suporte ao usuário",
@@ -246,6 +254,14 @@
           "buttonTextNoClub": "Desbloquear coleta"
         }
       }
+    },
+    "aboutTicketsScreen": {
+      "cardTitle1": "O que são tickets?",
+      "cardDescription1": "Dinheiro de verdade, mas que vale exclusivamente para doações para  projetos sociais dentro da Ribon.",
+      "cardTitle2": "Quem paga os tickets?",
+      "cardDescription2": "Empresas, grandes doadores e membros da comunidade Ribon financiam os tickets com um único objetivo: mudar vidas para melhor através do poder coletivo da doação.",
+      "cardTitle3": "Como ganho mais tickets?",
+      "cardDescription3": "Você ganha e acumula tickets acessando o app diariamente."
     }
   },
   "contexts": {

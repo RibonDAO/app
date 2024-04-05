@@ -132,6 +132,13 @@ export type ValidateAccountScreenParamsList = {
   from: string;
 };
 
+export type AboutTicketsScreenParamsList = {
+  from: string;
+  title: string;
+  buttonText: string;
+  buttonOnPress: () => void;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
@@ -172,6 +179,7 @@ export type RootStackParamList = {
   ValidateAccountScreen: ValidateAccountScreenParamsList;
   ClubContributionDoneScreen: undefined;
   ClubScreen: undefined;
+  AboutTicketsScreen: AboutTicketsScreenParamsList;
 };
 
 export type PrivateStackParamList = {
