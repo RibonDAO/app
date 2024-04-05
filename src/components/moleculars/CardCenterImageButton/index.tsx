@@ -14,7 +14,11 @@ export type Props = {
   onImagePress?: () => void;
   imageDescription?: string | JSX.Element;
   infoTextTop?: string;
-  infoTextBottom?: string;
+  iconSubtitle: {
+    icon: string;
+    text: string;
+    boldText?: string;
+  };
   buttonDisabled?: boolean;
   labelText?: string;
 };
@@ -26,7 +30,7 @@ function CardCenterImageButton({
   onClickButton,
   onImagePress,
   infoTextTop,
-  infoTextBottom,
+  iconSubtitle,
   buttonDisabled = false,
   labelText,
 }: Props): JSX.Element {
@@ -77,9 +81,16 @@ function CardCenterImageButton({
                 </View>
               </View>
             )}
-            {infoTextBottom && (
-              <Text style={S.infoBottom}>{infoTextBottom}</Text>
-            )}
+            <View style={S.iconSubtitleContainer}>
+              <Icon
+                type="rounded"
+                name={iconSubtitle.icon}
+                size={24}
+                color={theme.colors.brand.primary[800]}
+              />
+              <Text style={S.iconBoldText}>{iconSubtitle.boldText}</Text>
+              <Text style={S.iconText}>{iconSubtitle.text}</Text>
+            </View>
           </View>
           <Button
             onPress={onClickButton}

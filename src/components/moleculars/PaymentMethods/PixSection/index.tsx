@@ -34,7 +34,7 @@ function PixSection({ offer, nonProfit, eventParams }: Props): JSX.Element {
   });
 
   const { t: field } = useTranslation("translation", {
-    keyPrefix: "promoters.checkoutScreen.paymentMethodSection.creditCardFields",
+    keyPrefix: "promoters.checkoutScreen.paymentMethodSection.pixFields",
   });
 
   const { handleSubmit } = usePixPaymentInformation();

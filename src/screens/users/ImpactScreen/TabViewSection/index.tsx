@@ -27,7 +27,7 @@ const renderTabBar = (props: any) => (
   <TabBar
     {...props}
     renderLabel={({ focused, route }) => (
-      <View style={{ width: 2000 }}>
+      <View>
         <Text
           style={{
             ...S.tabBarTitle,
@@ -69,10 +69,6 @@ function TabViewSection(): JSX.Element {
         renderScene={renderScene}
         onIndexChange={setIndex}
         renderHeader={() => <ProfileSection />}
-        disableSnap
-        tabBarProps={{
-          scrollEnabled: true,
-        }}
         style={{ backgroundColor: theme.colors.neutral10 }}
         initialLayout={{ width: layout.width }}
         renderTabBar={renderTabBar}

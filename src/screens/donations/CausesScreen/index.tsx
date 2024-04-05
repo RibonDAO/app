@@ -377,30 +377,42 @@ export default function CausesScreen() {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            {sortNonProfits()?.map((nonProfit, index) => (
-              <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
-                <CardCenterImageButton
-                  image={nonProfit.mainImage}
-                  infoTextTop={nonProfit.name}
-                  infoTextBottom={nonProfit.cause.name}
-                  imageDescription={formattedImpactText(
-                    nonProfit,
-                    undefined,
-                    false,
-                    false,
-                    undefined,
-                    t("impactPrefix") || "",
-                  )}
-                  buttonText={hasTickets ? t("buttonText") : t("noTickets")}
-                  onImagePress={() => {
-                    handleNonProfitImagePress(nonProfit);
-                  }}
-                  onClickButton={() => handleButtonPress(nonProfit)}
-                  buttonDisabled={!hasTickets}
-                  labelText={t("labelText") || ""}
-                />
-              </View>
-            ))}
+            {sortNonProfits()?.map((nonProfit, index) => {
+              const minNumberOfTickets =
+                nonProfit?.nonProfitImpacts?.[0]?.minimumNumberOfTickets ?? 0;
+              const hasEnoughTickets =
+                hasTickets && ticketsCounter >= minNumberOfTickets;
+              return (
+                <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
+                  <CardCenterImageButton
+                    image={nonProfit.mainImage}
+                    infoTextTop={nonProfit.name}
+                    imageDescription={formattedImpactText(
+                      nonProfit,
+                      undefined,
+                      false,
+                      false,
+                      undefined,
+                      t("impactPrefix") || "",
+                    )}
+                    iconSubtitle={{
+                      icon: "confirmation_number",
+                      boldText: String(minNumberOfTickets),
+                      text: t("iconText"),
+                    }}
+                    buttonText={
+                      hasEnoughTickets ? t("buttonText") : t("notEnoughTickets")
+                    }
+                    onImagePress={() => {
+                      handleNonProfitImagePress(nonProfit);
+                    }}
+                    onClickButton={() => handleButtonPress(nonProfit)}
+                    buttonDisabled={!hasEnoughTickets}
+                    labelText={t("labelText") || ""}
+                  />
+                </View>
+              );
+            })}
           </ScrollView>
         ) : (
           <View style={S.noCausesContainer}>

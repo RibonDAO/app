@@ -50,7 +50,7 @@
       "title": "Doe para um projeto",
       "titleNonProfits": "ONGs",
       "buttonText": "Doar ticket",
-      "noTickets": "Sem tickets",
+      "notEnoughTickets": "Tickets insuficientes",
       "allCauses": "Todas",
       "ticketToast": "Você tem um novo ticket!",
       "enableNotification": {
@@ -67,6 +67,7 @@
       },
       "impactPrefix": "Doe",
       "labelText": "Saiba mais",
+      "iconText": "(mínimo)",
       "whatIsATicket": "O que é um ticket?",
       "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
       "noCauses": {
@@ -396,7 +397,7 @@
           "expirationDate": "Data de validade",
           "cvv": "Código de segurança"
         },
-        "pixFiels": {
+        "pixFields": {
           "email": "E-mail",
           "country": "País",
           "cpf": "CPF",
