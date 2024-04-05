@@ -4,23 +4,23 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useFocusEffect } from "@react-navigation/native";
 import CardReport from "components/moleculars/CardReport";
 import Report from "@ribon.io/shared/types/entities/Report";
+import { useTranslation } from "react-i18next";
 import S from "./styles";
 
 type Props = {
-  title: string;
-  description: string;
   data: Report[];
   refetch: () => void;
 };
 
 export default function ReportsSection({
-  title,
-  description,
   data,
   refetch,
 }: Props): JSX.Element | null {
   const { currentUser } = useCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "donations.causesScreen",
+  });
 
   useFocusEffect(
     useCallback(() => {
@@ -38,8 +38,8 @@ export default function ReportsSection({
   return !isLoading ? (
     <View>
       <View style={S.container}>
-        <Text style={S.title}>{title}</Text>
-        <Text style={S.description}>{description}</Text>
+        <Text style={S.title}>{t("reports.title")}</Text>
+        <Text style={S.description}>{t("reports.description")}</Text>
       </View>
       <View style={S.reportList}>
         <FlatList
@@ -49,7 +49,11 @@ export default function ReportsSection({
           contentContainerStyle={S.flatList}
           renderItem={({ item }) => (
             <View style={S.cardViewItem}>
-              <CardReport title={item.name} />
+              <CardReport
+                title={`${item.name} →`}
+                link={item.link}
+                showIcon={item.name.toLowerCase() !== t("reports.seeAllCard")}
+              />
             </View>
           )}
         />

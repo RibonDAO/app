@@ -76,7 +76,8 @@
       },
       "reports": {
         "title": "Confira os relatórios de repasse",
-        "description": "Mensalmente, a Ribon repassa o valor total dos tickets doados para s ONGs."
+        "description": "Mensalmente, a Ribon repassa o valor total dos tickets doados para s ONGs.",
+        "seeAllCard": "ver todos"
       },
       "ticketSection": {
         "ticketToast": "Você tem um novo ticket!"

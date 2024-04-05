@@ -419,12 +419,7 @@ export default function CausesScreen() {
         )}
         {reports?.length ? (
           <View style={S.reportsContainer}>
-            <ReportsSection
-              title={t("reports.title")}
-              description={t("reports.description")}
-              data={reports}
-              refetch={refetchReports}
-            />
+            <ReportsSection data={reports} refetch={refetchReports} />
           </View>
         ) : null}
         <ClubSection isMember={isMember} refetch={refetchIsMember} />
