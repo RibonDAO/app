@@ -111,7 +111,7 @@ function CreditCardSection({
   const { signedIn } = useCurrentUser();
 
   return (
-    <View style={S.container}>
+    <View>
       {!signedIn && (
         <InputText
           name="email"

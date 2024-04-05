@@ -7,10 +7,15 @@ import * as S from "./styles";
 type SliderButtonProps = {
   rangeSize: number;
   setValue: (value: number) => void;
+  step: number;
 };
 
-function SliderButton({ rangeSize, setValue }: SliderButtonProps): JSX.Element {
-  const [sliderValue, setSliderValue] = useState(1);
+function SliderButton({
+  rangeSize,
+  setValue,
+  step,
+}: SliderButtonProps): JSX.Element {
+  const [sliderValue, setSliderValue] = useState(step);
 
   const handleSliderChange = (value: number | number[]) => {
     const newValue = Array.isArray(value) ? value[0] : value;
@@ -25,8 +30,8 @@ function SliderButton({ rangeSize, setValue }: SliderButtonProps): JSX.Element {
     setValue(newValue);
   };
 
-  const minusDisabled = sliderValue <= 1;
-  const plusDisabled = sliderValue >= rangeSize;
+  const minusDisabled = sliderValue <= step;
+  const plusDisabled = sliderValue + step > rangeSize;
 
   const minusBorderColor = minusDisabled
     ? theme.colors.neutral[400]
@@ -47,7 +52,7 @@ function SliderButton({ rangeSize, setValue }: SliderButtonProps): JSX.Element {
   return (
     <S.Container>
       <S.Button
-        onPress={() => handleButtonClick(-1)}
+        onPress={() => handleButtonClick(-step)}
         disabled={minusDisabled}
         style={{ borderColor: minusBorderColor }}
         testID="removeButton"
@@ -65,9 +70,9 @@ function SliderButton({ rangeSize, setValue }: SliderButtonProps): JSX.Element {
       </S.Button>
       <S.SliderContainer>
         <Slider
-          minimumValue={rangeSize === 1 ? 0 : 1}
-          maximumValue={rangeSize}
-          step={1}
+          minimumValue={rangeSize < 2 * step ? 0 : step}
+          maximumValue={rangeSize < 2 * step ? step : rangeSize}
+          step={step}
           value={sliderValue}
           onValueChange={handleSliderChange}
           disabled={rangeSize === 1}
@@ -78,7 +83,7 @@ function SliderButton({ rangeSize, setValue }: SliderButtonProps): JSX.Element {
       </S.SliderContainer>
       <S.Button
         testID="addButton"
-        onPress={() => handleButtonClick(1)}
+        onPress={() => handleButtonClick(step)}
         disabled={plusDisabled}
         style={{ borderColor: plusBorderColor }}
       >

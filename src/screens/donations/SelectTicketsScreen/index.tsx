@@ -38,6 +38,7 @@ export default function SelectTicketsScreen() {
   const [currentImpact, setCurrentImpact] = useState(
     nonProfit?.impactByTicket || undefined,
   );
+  const [step, setStep] = useState<number | undefined>(undefined);
 
   const errorType = (type: number) => {
     switch (type) {
@@ -115,6 +116,16 @@ export default function SelectTicketsScreen() {
     );
   }, [nonProfit, ticketsQuantity]);
 
+  useEffect(() => {
+    const impacts = nonProfit?.nonProfitImpacts || [];
+    const nonProfitsImpactsLength = impacts.length;
+    const lastImpact = impacts[nonProfitsImpactsLength - 1];
+    if (lastImpact.minimumNumberOfTickets) {
+      setStep(lastImpact.minimumNumberOfTickets);
+      setTicketsQuantity(lastImpact.minimumNumberOfTickets);
+    }
+  }, [nonProfit]);
+
   return (
     <S.KeyboardView
       behavior="position"
@@ -151,10 +162,13 @@ export default function SelectTicketsScreen() {
                   hasDividerBorder={false}
                   buttonDisabled
                 />
-                <SliderButton
-                  rangeSize={tickets}
-                  setValue={setTicketsQuantity}
-                />
+                {step && (
+                  <SliderButton
+                    rangeSize={tickets}
+                    setValue={setTicketsQuantity}
+                    step={step}
+                  />
+                )}
                 <Button
                   text={t("buttonText")}
                   textColor={theme.colors.neutral10}

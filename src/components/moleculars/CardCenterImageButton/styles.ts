@@ -1,9 +1,11 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
+  defaultBodyMdRegular,
   defaultBodySmRegular,
   defaultBodySmSemibold,
   defaultBodyXsRegular,
+  defaultBodyMdBold,
 } from "styles/typography/default";
 
 const styles = StyleSheet.create({
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     width: "100%",
-    marginBottom: theme.spacingNative(16),
+    marginBottom: theme.spacingNative(8),
     marginTop: theme.spacingNative(8),
     display: "flex",
     flexDirection: "column",
@@ -112,6 +114,22 @@ const styles = StyleSheet.create({
     zIndex: 1,
     paddingVertical: 4,
     paddingHorizontal: 8,
+  },
+  iconSubtitleContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  iconText: {
+    ...defaultBodyMdRegular,
+    color: theme.colors.brand.primary[800],
+    marginLeft: theme.spacingNative(4),
+  },
+  iconBoldText: {
+    ...defaultBodyMdBold,
+    marginRight: theme.spacingNative(4),
+    marginLeft: theme.spacingNative(4),
+    color: theme.colors.brand.primary[800],
   },
   button: {
     height: 48,
