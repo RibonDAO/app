@@ -11,32 +11,12 @@ type SlideProp = {
   subtitle: string;
 };
 
-const slides: SlideProp[] = [
-  {
-    id: "1",
-    image: require("./assets/image1.png"),
-    title: "Receba vales",
-    subtitle: "Todo dia você recebe um vale para fazer uma doação.",
-  },
-  {
-    id: "2",
-    image: require("./assets/image2.png"),
-    title: "Doe vales",
-    subtitle: "Com um vale, você pode doar para qualquer entidade cadastrada!",
-  },
-  {
-    id: "3",
-    image: require("./assets/image3.png"),
-    title: "Gere vales",
-    subtitle:
-      "Quando contribui com dinheiro, você gera vales para as outras pessoas doarem!",
-  },
-];
+const slides: SlideProp[] = [];
 
-const Onboarding = () => {
+function Onboarding() {
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
   const ref = React.useRef<any>();
-  const { width, height } = Dimensions.get("window");
+  const { width } = Dimensions.get("window");
 
   const updateCurrentSlideIndex = (e: any) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
@@ -46,19 +26,28 @@ const Onboarding = () => {
 
   const goToNextSlide = () => {
     const nextSlideIndex = currentSlideIndex + 1;
-    if (nextSlideIndex != slides.length) {
+    if (nextSlideIndex !== slides.length) {
       const offset = nextSlideIndex * width;
       ref?.current.scrollToOffset({ offset });
       setCurrentSlideIndex(currentSlideIndex + 1);
     }
   };
 
-  const skip = () => {
-    const lastSlideIndex = slides.length - 1;
-    const offset = lastSlideIndex * width;
-    ref?.current.scrollToOffset({ offset });
-    setCurrentSlideIndex(lastSlideIndex);
+  const goToPreviousSlide = () => {
+    const previousSlideIndex = currentSlideIndex - 1;
+    if (previousSlideIndex !== slides.length) {
+      const offset = previousSlideIndex * width;
+      ref?.current.scrollToOffset({ offset });
+      setCurrentSlideIndex(currentSlideIndex - 1);
+    }
   };
+
+  // const skip = () => {
+  //   const lastSlideIndex = slides.length - 1;
+  //   const offset = lastSlideIndex * width;
+  //   ref?.current.scrollToOffset({ offset });
+  //   setCurrentSlideIndex(lastSlideIndex);
+  // };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.neutral10 }}>
@@ -66,8 +55,8 @@ const Onboarding = () => {
       <FlatList
         ref={ref}
         onMomentumScrollEnd={updateCurrentSlideIndex}
-        contentContainerStyle={{ height: height * 0.75 }}
-        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ height: 100 }}
+        showsHorizontalScrollIndicator
         horizontal
         data={slides}
         pagingEnabled
@@ -76,12 +65,12 @@ const Onboarding = () => {
 
       <Footer
         slides={slides}
-        skip={skip}
         currentSlideIndex={currentSlideIndex}
         goToNextSlide={goToNextSlide}
+        goToPreviousSlide={goToPreviousSlide}
       />
     </SafeAreaView>
   );
-};
+}
 
 export default Onboarding;
