@@ -397,7 +397,7 @@
           "expirationDate": "Data de validade",
           "cvv": "Código de segurança"
         },
-        "pixFiels": {
+        "pixFields": {
           "email": "E-mail",
           "country": "País",
           "cpf": "CPF",

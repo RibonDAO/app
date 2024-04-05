@@ -9,6 +9,7 @@ import {
 const styles = StyleSheet.create({
   container: {
     margin: theme.spacingNative(16),
+    marginTop: 0,
   },
   innerContainer: {
     display: "flex",
