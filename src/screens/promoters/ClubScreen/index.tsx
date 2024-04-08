@@ -93,7 +93,7 @@ function ClubScreen(): JSX.Element {
 
   useEffect(() => {
     if (isMember) {
-      navigateTo("CausesScreen");
+      navigateTo("EarnTicketsScreen");
     }
   }, [isMember]);
 
