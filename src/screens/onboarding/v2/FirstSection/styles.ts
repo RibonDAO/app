@@ -13,7 +13,7 @@ export const Title = styled.Text`
 
   margin-top: ${theme.spacing(20)};
   text-align: center;
-  color: ${theme.colors.brand.primary[800]};
+  color: ${theme.colors.brand.primary[900]};
 `;
 
 export const Description = styled.Text`
