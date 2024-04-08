@@ -51,6 +51,13 @@
         "previous": "Anterior" ,
         "next": "Próximo",
         "start": "Começar"
+      },
+      "FirstSection": {
+        "title": "Vem com a Ribon!",
+        "integrationTitle": "{{integrationName}} te convida para a Ribon",
+        "description": "Aqui você ganha tickets para doar para projetos sociais de graça todos os dias!",
+        "haveAnAccount": "Já tem uma conta?",
+        "signIn": "Entrar com sua conta"
       }
     }
   },

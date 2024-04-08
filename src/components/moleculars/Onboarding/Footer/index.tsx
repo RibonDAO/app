@@ -54,7 +54,8 @@ function Footer({ slides, skip, goToNextSlide, currentSlideIndex }: Props) {
       <View style={{ marginBottom: 20 }}>
         {slides.length > 1 && currentSlideIndex === slides.length - 1 ? (
           <View style={{ height: 50 }}>
-            <TouchableOpacity accessibilityRole="button"
+            <TouchableOpacity
+              accessibilityRole="button"
               style={S.btn}
               onPress={() => navigateTo("HomeScreen")}
             >
@@ -71,7 +72,8 @@ function Footer({ slides, skip, goToNextSlide, currentSlideIndex }: Props) {
           </View>
         ) : (
           <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity accessibilityRole="button"
+            <TouchableOpacity
+              accessibilityRole="button"
               activeOpacity={0.8}
               style={[
                 S.btn,
@@ -94,7 +96,8 @@ function Footer({ slides, skip, goToNextSlide, currentSlideIndex }: Props) {
               </Text>
             </TouchableOpacity>
             <View style={{ width: 15 }} />
-            <TouchableOpacity accessibilityRole="button"
+            <TouchableOpacity
+              accessibilityRole="button"
               activeOpacity={0.8}
               onPress={goToNextSlide}
               style={S.btn}

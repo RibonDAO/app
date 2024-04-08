@@ -43,17 +43,22 @@ function Footer({
         onPress={goToPreviousSlide}
         style={S.buttonContainer}
       >
-        <Icon
-          type="outlined"
-          name="chevron_left"
-          size={20}
-          color={theme.colors.neutral[700]}
-        />
-        <Text style={S.buttonText}>{t("previous")}</Text>
+        {currentSlideIndex > 0 && (
+          <Icon
+            type="outlined"
+            name="chevron_left"
+            size={20}
+            color={theme.colors.neutral[700]}
+          />
+        )}
+        <Text style={S.buttonText}>
+          {currentSlideIndex > 0 && t("previous")}
+        </Text>
       </TouchableOpacity>
       <View style={S.indicatorContainer}>
         {slides?.map((_, index) => (
-          <TouchableOpacity accessibilityRole="button"
+          <TouchableOpacity
+            accessibilityRole="button"
             style={S.indicatorTouch}
             onPress={() => setCurrentSlideIndex(index)}
           >

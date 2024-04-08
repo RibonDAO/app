@@ -51,6 +51,13 @@
         "previous": "Previous" ,
         "next": "Next",
         "start": "Start"
+      },
+      "firstSection": {
+        "title": "Welcome to Ribon!",
+        "integrationTitle": "{{integrationName}} invited you to use Ribon's app",
+        "description": "Here you earn tickets to donate to social projects for free every day!",
+        "haveAnAccount": "Have an account?",
+        "signIn": "Sign in your account"
       }
     }
   },
