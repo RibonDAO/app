@@ -32,9 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: theme.spacingNative(16),
   },
-  reportsContainer: {
-    marginTop: theme.spacingNative(40),
-  },
   groupButtonsContainer: {
     paddingTop: theme.spacingNative(16),
   },

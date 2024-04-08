@@ -247,6 +247,11 @@ export default function CausesScreen() {
     };
   };
 
+  const reportsStylesFor = (isMember: boolean) => ({
+    marginTop: 40,
+    marginBottom: isMember ? 48 : 8,
+  });
+
   const navigateToClubScreen = () => {
     navigateTo("ClubScreen");
   };
@@ -430,7 +435,7 @@ export default function CausesScreen() {
           </View>
         )}
         {reports?.length ? (
-          <View style={S.reportsContainer}>
+          <View style={reportsStylesFor(isMember)}>
             <ReportsSection data={reports} refetch={refetchReports} />
           </View>
         ) : null}
