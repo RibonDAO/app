@@ -45,6 +45,15 @@
     "cancel": "cancel",
     "confirm": "confirm"
   },
+  "onboarding": {
+    "v2": {
+      "onboardingScreen": {
+        "previous": "Previous" ,
+        "next": "Next",
+        "start": "Start"
+      }
+    }
+  },
   "donations": {
     "causesScreen": {
       "title": "Donate to a Project",
