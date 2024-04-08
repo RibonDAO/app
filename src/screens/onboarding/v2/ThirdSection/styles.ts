@@ -12,12 +12,14 @@ export const Container = styled.View`
   height: 100%;
   align-items: center;
   gap: ${theme.spacing(16)};
+  margin-top: ${theme.spacing(48)};
 `;
 
 export const Title = styled.Text`
   ${stylizedDisplayXs}
   color: ${theme.colors.brand.primary[800]};
   margin-bottom: ${theme.spacing(8)};
+  text-align: center;
 `;
 
 export const Description = styled.Text`

@@ -1,8 +1,8 @@
 import React from "react";
 import { Dimensions, Text, TouchableOpacity, View } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import S from "./styles";
 import { useNavigation } from "hooks/useNavigation";
+import S from "./styles";
 
 type SlideProp = {
   id: string;
@@ -39,10 +39,10 @@ function Footer({ slides, skip, goToNextSlide, currentSlideIndex }: Props) {
       >
         {slides?.map((_, index) => (
           <View
-            key={index}
+            key={_.id}
             style={[
               S.indicator,
-              currentSlideIndex == index && {
+              currentSlideIndex === index && {
                 backgroundColor: theme.colors.green40,
                 width: 25,
               },
@@ -52,9 +52,10 @@ function Footer({ slides, skip, goToNextSlide, currentSlideIndex }: Props) {
       </View>
 
       <View style={{ marginBottom: 20 }}>
-        {currentSlideIndex == slides?.length - 1 ? (
+        {slides.length > 1 && currentSlideIndex === slides.length - 1 ? (
           <View style={{ height: 50 }}>
             <TouchableOpacity
+              accessibilityRole="button"
               style={S.btn}
               onPress={() => navigateTo("HomeScreen")}
             >
@@ -72,6 +73,7 @@ function Footer({ slides, skip, goToNextSlide, currentSlideIndex }: Props) {
         ) : (
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity
+              accessibilityRole="button"
               activeOpacity={0.8}
               style={[
                 S.btn,
@@ -95,6 +97,7 @@ function Footer({ slides, skip, goToNextSlide, currentSlideIndex }: Props) {
             </TouchableOpacity>
             <View style={{ width: 15 }} />
             <TouchableOpacity
+              accessibilityRole="button"
               activeOpacity={0.8}
               onPress={goToNextSlide}
               style={S.btn}

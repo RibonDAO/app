@@ -75,6 +75,7 @@ export type RootTabParamList = {
   PromotersScreen: PromotersScreenParams;
   PostDonationScreen: PostDonationScreenParams;
   ClubScreen: undefined;
+  OnboardingScreen: undefined;
 };
 
 export type SupportNonProfitParamList = {

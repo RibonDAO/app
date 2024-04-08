@@ -6,9 +6,9 @@ import { useEffect } from "react";
 import { logEvent } from "services/analytics";
 import * as S from "./styles";
 
-function AboutTicketsSection(): JSX.Element {
+function ThirdSection(): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "content.aboutTicketSection",
+    keyPrefix: "onboarding.v2.thirdSection",
   });
 
   useEffect(() => {
@@ -64,4 +64,4 @@ function AboutTicketsSection(): JSX.Element {
   );
 }
 
-export default AboutTicketsSection;
+export default ThirdSection;
