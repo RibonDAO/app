@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    height: 30,
+    height: 24,
   },
   iconTextContainer: {
     display: "flex",
