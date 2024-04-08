@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyMdRegular,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    height: 24,
+    height: Platform.OS !== "ios" ? 24 : "auto",
   },
   iconTextContainer: {
     display: "flex",
