@@ -75,6 +75,11 @@
         "text": "Mas você pode contribuir doando em comunidade para uma causa",
         "button": "Doe em comunidade"
       },
+      "reports": {
+        "title": "Confira os relatórios de repasse",
+        "description": "Mensalmente, a Ribon repassa o valor total dos tickets doados para s ONGs.",
+        "seeAllCard": "ver todos"
+      },
       "ticketSection": {
         "ticketToast": "Você tem um novo ticket!"
       },

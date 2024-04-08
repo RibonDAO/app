@@ -81,6 +81,11 @@
         "text": "But you can contribute donating in community for a cause",
         "button": "Donate in community"
       },
+      "reports": {
+        "title": "Check out the transfer reports",
+        "description": "Monthly, Ribon transfers the total value of donated tickets to the nonprofits",
+        "seeAllCard": "see all"
+      },
       "ticketSection": {
         "ticketToast": "You have a new ticket!"
       },
