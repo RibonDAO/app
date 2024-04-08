@@ -119,6 +119,13 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    height: 30,
+  },
+  iconTextContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   iconText: {
     ...defaultBodyMdRegular,

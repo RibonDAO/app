@@ -88,8 +88,10 @@ function CardCenterImageButton({
                 size={24}
                 color={theme.colors.brand.primary[800]}
               />
-              <Text style={S.iconBoldText}>{iconSubtitle.boldText}</Text>
-              <Text style={S.iconText}>{iconSubtitle.text}</Text>
+              <View style={S.iconTextContainer}>
+                <Text style={S.iconBoldText}>{iconSubtitle.boldText}</Text>
+                <Text style={S.iconText}>{iconSubtitle.text}</Text>
+              </View>
             </View>
           </View>
           <Button
