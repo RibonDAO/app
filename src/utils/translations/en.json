@@ -1,9 +1,9 @@
 {
   "tabs": {
-    "causes": "Tickets",
-    "earntickets": " Earn tickets",
+    "donateTickets": "Donate tickets",
+    "earnTickets": " Earn tickets",
     "giving": "Donations",
-    "impact": "Impact"
+    "myImpact": "My impact"
   },
   "newHeader": {
     "title": "Welcome to Ribon",
