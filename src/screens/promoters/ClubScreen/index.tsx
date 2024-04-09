@@ -10,6 +10,7 @@ import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
 import { useAuthentication } from "contexts/authenticationContext";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
+import { useUnsafeAreaContext } from "contexts/unsafeAreaContext";
 import AppleIcon from "./assets/AppleIcon";
 import GoogleIcon from "./assets/GoogleIcon";
 import S from "./styles";
@@ -29,6 +30,16 @@ function ClubScreen(): JSX.Element {
   const { isAuthenticated } = useAuthentication();
   const [unauthorizedModalVisible, setUnauthorizedModalVisible] =
     useState(false);
+
+  const { setTopBackgroundColor } = useUnsafeAreaContext();
+
+  useEffect(() => {
+    setTopBackgroundColor(theme.colors.brand.tertiary[50]);
+
+    return () => {
+      setTopBackgroundColor(theme.colors.neutral10);
+    };
+  }, []);
 
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.clubScreen",
