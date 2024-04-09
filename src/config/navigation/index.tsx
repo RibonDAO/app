@@ -150,7 +150,7 @@ function BottomTabNavigator() {
         name="CausesScreen"
         component={CausesScreen}
         options={{
-          title: t("tabs.causes") || "Tickets",
+          title: t("tabs.donateTickets") || "Donate tickets",
           tabBarIcon: ({ color }) =>
             renderTabBarIcon(color, <CausesIconOn />, <CausesIconOff />),
           headerShown: false,
@@ -167,7 +167,7 @@ function BottomTabNavigator() {
         name="EarnTicketsScreen"
         component={EarnTicketsScreen}
         options={{
-          title: t("tabs.earntickets") || "Earn Tickets",
+          title: t("tabs.earnTickets") || "Earn Tickets",
           tabBarIcon: ({ color }) =>
             renderTabBarIcon(
               color,
@@ -188,7 +188,7 @@ function BottomTabNavigator() {
         name="ImpactScreen"
         component={ImpactScreen}
         options={{
-          title: t("tabs.impact") || "Impact",
+          title: t("tabs.myImpact") || "My impact",
 
           tabBarIcon: ({ color }: any) =>
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
