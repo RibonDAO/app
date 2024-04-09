@@ -3,6 +3,8 @@ import { useIntegration } from "@ribon.io/shared/hooks";
 import { useNavigation } from "hooks/useNavigation";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useEffect } from "react";
+import { logEvent } from "services/analytics";
 import RibonLogo from "./assets/logo-ribon";
 import * as S from "./styles";
 import Envelope from "./assets/envelope";
@@ -25,8 +27,13 @@ function FirstSection(): JSX.Element {
       });
 
   const handleHasAccount = () => {
+    logEvent("openAuthBtn_click");
     navigateTo("SignInScreen");
   };
+
+  useEffect(() => {
+    logEvent("P10_view");
+  }, []);
 
   return (
     <S.Container>
