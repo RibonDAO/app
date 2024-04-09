@@ -183,6 +183,14 @@
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "hasAccountButton": "I have an account"
     },
+    "giveTicketV2Screen": {
+      "title": "You won 1 ticket!",
+      "titlePlural": "Yoy won {{ticketsCounter}} tickets!",
+      "integrationTitle": "{{integrationName}} give you 1 ticket!",
+      "integrationTitlePlural": "{{integrationName}} give you {{ticketsCounter}} tickets!",
+      "subtitle": "Use your ticket to do good!",
+      "button": "Next"
+    },
     "earnTicketsScreen": {
       "newsSection": {
         "title": "Earn tickets",
