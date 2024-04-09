@@ -20,6 +20,7 @@ const linking: LinkingOptions<RootStackParamList> = {
               CausesScreen: "causes",
               ReceiveTicketScreen: "receive-ticket",
               GiveTicketScreen: "give-ticket",
+              GiveTicketV2Screen: "give-ticket-v2",
               DonationDoneScreen: "donation-done",
               SigninByMagicLinkScreen: "auth",
               ValidateExtraTicketScreen: "extra-ticket",
