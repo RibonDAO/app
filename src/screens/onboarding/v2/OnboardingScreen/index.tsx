@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { SafeAreaView, FlatList, StatusBar, Dimensions } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { useNavigation } from "hooks/useNavigation";
 import Slide from "./Slide";
 import Footer from "./Footer";
 
@@ -25,6 +26,7 @@ function OnboardingScreen() {
   const ref = React.useRef<any>();
   const { width } = Dimensions.get("window");
 
+  const { navigateTo } = useNavigation();
   const updateCurrentSlideIndex = (e: any) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
     const currentIndex = Math.round(contentOffsetX / width);
@@ -35,6 +37,8 @@ function OnboardingScreen() {
     const nextSlideIndex = currentSlideIndex + 1;
     if (nextSlideIndex !== slides.length) {
       setCurrentSlideIndex(currentSlideIndex + 1);
+    } else if (nextSlideIndex === slides.length) {
+      navigateTo("CausesScreen");
     }
   };
 
