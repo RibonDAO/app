@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared/styles";
-import { openInExternalBrowser } from "lib/linkOpener";
+import { openInWebViewer } from "lib/linkOpener";
 import S from "./styles";
 
 export type Props = {
@@ -14,7 +14,7 @@ function CardReport({ title, link, showIcon }: Props): JSX.Element {
   return (
     <TouchableOpacity
       accessibilityRole="button"
-      onPress={() => openInExternalBrowser(link)}
+      onPress={() => openInWebViewer(link)}
       activeOpacity={0.5}
     >
       <View style={S.container}>
