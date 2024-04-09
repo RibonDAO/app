@@ -53,6 +53,26 @@
     "cancel": "cancel",
     "confirm": "confirm"
   },
+  "onboarding": {
+    "v2": {
+      "onboardingScreen": {
+        "previous": "Previous",
+        "next": "Next",
+        "start": "Start"
+      },
+      "firstSection": {
+        "title": "Welcome to Ribon!",
+        "integrationTitle": "{{integrationName}} invited you to use Ribon's app",
+        "description": "Here you earn tickets to donate to social projects for free every day!",
+        "haveAnAccount": "Have an account?",
+        "signIn": "Sign in your account"
+      },
+      "secondSection": {
+        "title": "Here at Ribon, everything revolves around doing good!",
+        "description": "Donation tickets give you that power, and you've just received your first one!"
+      }
+    }
+  },
   "donations": {
     "causesScreen": {
       "title": "Donate to a Project",

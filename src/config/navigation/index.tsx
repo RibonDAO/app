@@ -32,7 +32,7 @@ import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import TicketsProvider from "contexts/ticketsContext";
-import OnboardingScreen from "screens/onboarding/OnboardingScreen";
+import OnboardingScreen from "screens/onboarding/v2/OnboardingScreen";
 import EarnTicketsScreen from "screens/content/EarnTicketsScreen";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "lib/Toast";

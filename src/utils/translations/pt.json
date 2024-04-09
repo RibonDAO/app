@@ -53,6 +53,26 @@
     "cancel": "cancelar",
     "confirm": "confirmar"
   },
+  "onboarding": {
+    "v2": {
+      "onboardingScreen": {
+        "previous": "Anterior",
+        "next": "Próximo",
+        "start": "Começar"
+      },
+      "firstSection": {
+        "title": "Vem com a Ribon!",
+        "integrationTitle": "{{integrationName}} te convida para a Ribon",
+        "description": "Aqui você ganha tickets para doar para projetos sociais de graça todos os dias!",
+        "haveAnAccount": "Já tem uma conta?",
+        "signIn": "Entrar com sua conta"
+      },
+      "secondSection": {
+        "title": "Aqui na Ribon tudo gira em torno de fazer o bem!",
+        "description": "Os tickets de doação te dão esse poder, e você acaba de receber seu primeiro!"
+      }
+    }
+  },
   "donations": {
     "causesScreen": {
       "title": "Doe para um projeto",
