@@ -120,16 +120,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  iconTextContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   iconText: {
     ...defaultBodyMdRegular,
     color: theme.colors.brand.primary[800],
     marginLeft: theme.spacingNative(4),
+    lineHeight: 17,
   },
   iconBoldText: {
     ...defaultBodyMdBold,
     marginRight: theme.spacingNative(4),
     marginLeft: theme.spacingNative(4),
     color: theme.colors.brand.primary[800],
+    lineHeight: 17,
   },
   button: {
     height: 48,

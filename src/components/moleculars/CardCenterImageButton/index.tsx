@@ -5,6 +5,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import Image from "components/atomics/Image";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared/styles";
+import TicketIcon from "components/vectors/TicketIcon";
 import S from "./styles";
 
 export type Props = {
@@ -82,14 +83,11 @@ function CardCenterImageButton({
               </View>
             )}
             <View style={S.iconSubtitleContainer}>
-              <Icon
-                type="rounded"
-                name={iconSubtitle.icon}
-                size={24}
-                color={theme.colors.brand.primary[800]}
-              />
-              <Text style={S.iconBoldText}>{iconSubtitle.boldText}</Text>
-              <Text style={S.iconText}>{iconSubtitle.text}</Text>
+              <TicketIcon />
+              <View style={S.iconTextContainer}>
+                <Text style={S.iconBoldText}>{iconSubtitle.boldText}</Text>
+                <Text style={S.iconText}>{iconSubtitle.text}</Text>
+              </View>
             </View>
           </View>
           <Button
