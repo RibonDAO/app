@@ -131,12 +131,14 @@ const styles = StyleSheet.create({
     ...defaultBodyMdRegular,
     color: theme.colors.brand.primary[800],
     marginLeft: theme.spacingNative(4),
+    lineHeight: 17,
   },
   iconBoldText: {
     ...defaultBodyMdBold,
     marginRight: theme.spacingNative(4),
     marginLeft: theme.spacingNative(4),
     color: theme.colors.brand.primary[800],
+    lineHeight: 17,
   },
   button: {
     height: 48,
