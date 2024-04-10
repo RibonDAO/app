@@ -15,6 +15,11 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
+          OnboardingScreen: {
+            screens: {
+              OnboardingScreen: "onboarding",
+            },
+          },
           CausesScreen: {
             screens: {
               CausesScreen: "causes",
