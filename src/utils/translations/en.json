@@ -222,11 +222,10 @@
     },
     "giveTicketV2Screen": {
       "title": "You won 1 ticket!",
-      "titlePlural": "Yoy won {{ticketsCounter}} tickets!",
-      "integrationTitle": "{{integrationName}} give you 1 ticket!",
-      "integrationTitlePlural": "{{integrationName}} give you {{ticketsCounter}} tickets!",
+      "integrationTitle": "{{integrationName}} gave you 1 ticket!",
+      "integrationTitlePlural": "{{integrationName}} gave you tickets!",
       "subtitle": "Use your ticket to do good!",
-      "button": "Next"
+      "button": "Collect ticket"
     },
     "earnTicketsScreen": {
       "newsSection": {

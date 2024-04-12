@@ -217,9 +217,8 @@
     },
     "giveTicketV2Screen": {
       "title": "Você ganhou 1 ticket!",
-      "titlePlural": "Você ganhou {{ticketsCounter}} tickets!",
       "integrationTitle": "{{integrationName}} te deu 1 ticket!",
-      "integrationTitlePlural": "{{integrationName}} te deu {{ticketsCounter}} tickets!",
+      "integrationTitlePlural": "{{integrationName}} te deu tickets!",
       "subtitle": "Use o seu ticket para fazer o bem!",
       "button": "Ganhar ticket"
     },

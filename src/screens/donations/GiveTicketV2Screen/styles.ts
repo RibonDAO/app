@@ -16,7 +16,11 @@ const styles = StyleSheet.create({
   },
   logoItem: {
     marginRight: theme.spacingNative(16),
-    marginLeft: theme.spacingNative(16),
+  },
+  logoIntegration: {
+    width: "22%",
+    height: 24,
+    resizeMode: "contain",
   },
   content: {
     flex: 1,
