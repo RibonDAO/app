@@ -15,6 +15,7 @@ import TicketIconText from "components/moleculars/TicketIconText";
 import { useTicketsContext } from "contexts/ticketsContext";
 import { useFocusEffect } from "@react-navigation/native";
 import useDonationFlow from "hooks/useDonationFlow";
+import { useTasksContext } from "contexts/tasksContext";
 import DonationInProgressSection from "../auth/DonationInProgressSection";
 import * as S from "./styles";
 
@@ -39,6 +40,8 @@ export default function SelectTicketsScreen() {
     nonProfit?.impactByTicket || undefined,
   );
   const [step, setStep] = useState<number | undefined>(undefined);
+
+  const { registerAction } = useTasksContext();
 
   const errorType = (type: number) => {
     switch (type) {
@@ -99,6 +102,7 @@ export default function SelectTicketsScreen() {
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       navigateTo("DonationDoneScreen", { nonProfit, impact: currentImpact });
+      registerAction("P8_view");
     } else {
       const newState = {
         failedDonation: true,

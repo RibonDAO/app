@@ -123,6 +123,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 50,
   },
+  arrow: {
+    padding: theme.spacingNative(16),
+    alignSelf: "flex-start",
+  },
 });
 
 export default styles;

@@ -10,7 +10,7 @@ import {
 } from "lib/formatters/currencyFormatter";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
@@ -20,11 +20,12 @@ import { useCausesContext } from "contexts/causesContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import { useCheckoutContext } from "contexts/checkoutContext";
+import ArrowLeft from "components/vectors/ArrowLeft";
 import S from "./styles";
 import SelectOfferSection from "./SelectOfferSection";
 
 function CardScreen(): JSX.Element {
-  const { navigateTo } = useNavigation();
+  const { navigateTo, popNavigation } = useNavigation();
   const [currentOffer, setCurrentOffer] = useState<Offer>();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const { cause, setCause, setFlow } = useCheckoutContext();
@@ -93,6 +94,15 @@ function CardScreen(): JSX.Element {
       contentContainerStyle={S.container}
       scrollEnabled={scrollEnabled}
     >
+      <View style={S.arrow}>
+        <TouchableOpacity
+          accessibilityRole="button"
+          onPress={() => popNavigation()}
+          testID="arrow-back-button"
+        >
+          <ArrowLeft color={theme.colors.brand.secondary[800]} />
+        </TouchableOpacity>
+      </View>
       <Text style={S.title}>{t("title")}</Text>
       <GroupButtons
         elements={causes}
