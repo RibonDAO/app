@@ -1,9 +1,9 @@
 {
   "tabs": {
-    "causes": "Tickets",
-    "earntickets": "Ganhe tickets",
+    "donateTickets": "Doe tickets",
+    "earnTickets": "Ganhe tickets",
     "giving": "Doações",
-    "impact": "Impacto"
+    "myImpact": "Meu impacto"
   },
   "newHeader": {
     "title": "Boas vindas a Ribon",
@@ -87,7 +87,7 @@
       "title": "Doe para um projeto",
       "titleNonProfits": "ONGs",
       "buttonText": "Doar ticket",
-      "noTickets": "Sem tickets",
+      "notEnoughTickets": "Tickets insuficientes",
       "allCauses": "Todas",
       "ticketToast": "Você tem um novo ticket!",
       "enableNotification": {
@@ -104,12 +104,18 @@
       },
       "impactPrefix": "Doe",
       "labelText": "Saiba mais",
+      "iconText": "(mínimo)",
       "whatIsATicket": "O que é um ticket?",
       "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
       "noCauses": {
         "title": "Nenhuma causa disponível",
         "text": "Mas você pode contribuir doando em comunidade para uma causa",
         "button": "Doe em comunidade"
+      },
+      "reports": {
+        "title": "Confira os relatórios de repasse",
+        "description": "Mensalmente, a Ribon repassa o valor total dos tickets doados para s ONGs.",
+        "seeAllCard": "ver todos"
       },
       "ticketSection": {
         "ticketToast": "Você tem um novo ticket!"
@@ -208,6 +214,13 @@
       "whatIsATicket": "O que é um ticket?",
       "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
       "hasAccountButton": "Já tenho uma conta"
+    },
+    "giveTicketV2Screen": {
+      "title": "Você ganhou 1 ticket!",
+      "integrationTitle": "{{integrationName}} te deu 1 ticket!",
+      "integrationTitlePlural": "{{integrationName}} te deu tickets!",
+      "subtitle": "Use o seu ticket para fazer o bem!",
+      "button": "Ganhar ticket"
     },
     "earnTicketsScreen": {
       "newsSection": {
@@ -441,7 +454,7 @@
           "expirationDate": "Data de validade",
           "cvv": "Código de segurança"
         },
-        "pixFiels": {
+        "pixFields": {
           "email": "E-mail",
           "country": "País",
           "cpf": "CPF",

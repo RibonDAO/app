@@ -1,9 +1,9 @@
 {
   "tabs": {
-    "causes": "Tickets",
-    "earntickets": " Earn tickets",
+    "donateTickets": "Donate tickets",
+    "earnTickets": " Earn tickets",
     "giving": "Donations",
-    "impact": "Impact"
+    "myImpact": "My impact"
   },
   "newHeader": {
     "title": "Welcome to Ribon",
@@ -88,7 +88,7 @@
       "titleNonProfits": "NGOs",
       "buttonText": "Donate",
       "allCauses": "All",
-      "noTickets": "No tickets",
+      "notEnoughTickets": "Not enough tickets",
       "ticketToast": "You have a new ticket!",
       "enableNotification": {
         "title": "Don't miss your daily ticket!",
@@ -110,12 +110,18 @@
       },
       "impactPrefix": "Donate",
       "labelText": "Learn more",
+      "iconText": "(minimum)",
       "whatIsATicket": "What is a ticket?",
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "noCauses": {
         "title": "No causes available",
         "text": "But you can contribute donating in community for a cause",
         "button": "Donate in community"
+      },
+      "reports": {
+        "title": "Check out the transfer reports",
+        "description": "Monthly, Ribon transfers the total value of donated tickets to the nonprofits",
+        "seeAllCard": "see all"
       },
       "ticketSection": {
         "ticketToast": "You have a new ticket!"
@@ -213,6 +219,13 @@
       "whatIsATicket": "What is a ticket?",
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "hasAccountButton": "I have an account"
+    },
+    "giveTicketV2Screen": {
+      "title": "You won 1 ticket!",
+      "integrationTitle": "{{integrationName}} gave you 1 ticket!",
+      "integrationTitlePlural": "{{integrationName}} gave you tickets!",
+      "subtitle": "Use your ticket to do good!",
+      "button": "Collect ticket"
     },
     "earnTicketsScreen": {
       "newsSection": {
@@ -415,7 +428,7 @@
           "expirationDate": "Expiration date",
           "cvv": "Card verification code"
         },
-        "pixFiels": {
+        "pixFields": {
           "email": "E-mail",
           "country": "Country",
           "cpf": "CPF",

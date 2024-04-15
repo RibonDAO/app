@@ -8,6 +8,7 @@ describe("SliderButton", () => {
     beforeEach(() => {
       const props = {
         rangeSize: 10,
+        step: 1,
         setValue: jest.fn(),
       };
       renderComponent(<SliderButton {...props} />);
@@ -22,6 +23,7 @@ describe("SliderButton", () => {
     beforeEach(() => {
       const props = {
         rangeSize: 2,
+        step: 1,
         setValue: jest.fn(),
       };
       renderComponent(<SliderButton {...props} />);

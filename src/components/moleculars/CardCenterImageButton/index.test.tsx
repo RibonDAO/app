@@ -9,6 +9,7 @@ describe("CardCenterImageButton", () => {
         image=""
         buttonText="OK"
         onClickButton={() => {}}
+        iconSubtitle={{ icon: "", text: "" }}
       />,
     );
     expect(screen.getByText("OK")).toBeDefined();
