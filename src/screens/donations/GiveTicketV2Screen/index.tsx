@@ -8,6 +8,7 @@ import AddIcon from "assets/icons/AddIcon";
 import { useIntegrationContext } from "contexts/integrationContext";
 import usePageView from "hooks/usePageView";
 import { Image } from "react-native";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import S from "./styles";
 import Ticket from "./assets/Ticket";
 import { Logo } from "./assets/Logo";
@@ -34,6 +35,10 @@ export default function GiveTicketV2Screen() {
     const integrationName = integration.name;
 
     if (externalId) return t("integrationTitlePlural", { integrationName });
+
+    const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
+
+    if (isRibonIntegration) return t("title");
 
     return t("integrationTitle", { integrationName });
   };
