@@ -16,7 +16,6 @@ import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { logError } from "services/crashReport";
 import { useTicketsContext } from "contexts/ticketsContext";
-import { theme } from "@ribon.io/shared";
 import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
 import { logEvent } from "services/analytics";
@@ -36,10 +35,8 @@ import { useIntegrationContext } from "contexts/integrationContext";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useTickets } from "hooks/useTickets";
-import {
-  DONATION_TOAST_INTEGRATION,
-  DONATION_TOAST_SEEN_AT_KEY,
-} from "lib/localStorage/constants";
+import { useIsOnboarding } from "contexts/onboardingContext";
+
 import { useRouteParams } from "hooks/useRouteParams";
 import NewHeader from "components/moleculars/NewHeader";
 import Placeholder from "./placeholder";
@@ -86,9 +83,9 @@ export default function CausesScreen() {
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
-  const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
-    useTickets();
+  const { hasReceivedTicketToday, handleCanCollect } = useTickets();
   const { params } = useRouteParams<"CausesScreen">();
+  const { onboardingCompleted } = useIsOnboarding();
 
   useEffect(() => {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
@@ -111,35 +108,16 @@ export default function CausesScreen() {
     const canCollect = await handleCanCollect();
     const receivedTicketToday = await hasReceivedTicketToday();
     if (canCollect) {
-      if (currentUser) {
-        await handleCollect({
-          onSuccess: () => {
-            logEvent("ticketCollected", { from: "collect" });
-          },
-        });
-        refetchTickets();
-      }
-      if (!receivedTicketToday) {
-        showToast({
-          type: "custom",
-          message: t("ticketToast"),
-          position: "bottom",
-          navigate: "GiveTicketScreen",
-          icon: "confirmation_number",
-          backgroundColor: theme.colors.brand.primary[50],
-          iconColor: theme.colors.brand.primary[600],
-          borderColor: theme.colors.brand.primary[600],
-          textColor: theme.colors.brand.primary[600],
-        });
-        await setLocalStorageItem(
-          DONATION_TOAST_SEEN_AT_KEY,
-          Date.now().toString(),
-        );
-        await setLocalStorageItem(
-          DONATION_TOAST_INTEGRATION,
-          currentIntegrationId?.toLocaleString(),
-        );
-        logEvent("receiveTicket_view", { from: "receivedTickets_toast" });
+      if (currentUser && !receivedTicketToday) {
+        // trocar para o navigate do collet ticket novo
+        // await handleCollect({
+        //   onSuccess: () => {
+        //     logEvent("ticketCollected", { from: "collect" });
+        //   },
+        // });
+        // refetchTickets();
+      } else if (!currentUser && onboardingCompleted !== true) {
+        navigateTo("OnboardingScreen");
       }
     } else {
       refetchTickets();
@@ -150,7 +128,12 @@ export default function CausesScreen() {
       if (isFirstAccessToIntegration !== undefined) {
         receiveTicket();
       }
-    }, [isFirstAccessToIntegration, externalId]),
+    }, [
+      isFirstAccessToIntegration,
+      externalId,
+      currentUser,
+      onboardingCompleted,
+    ]),
   );
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-
+import { useIsOnboarding } from "contexts/onboardingContext";
 import CardInfo from "components/moleculars/CardInfo";
 import { theme } from "@ribon.io/shared";
 import { useEffect } from "react";
@@ -10,9 +10,11 @@ function ThirdSection(): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "onboarding.v2.thirdSection",
   });
+  const { setOnboardingCompleted } = useIsOnboarding();
 
   useEffect(() => {
     logEvent("P34_view", { from: "onboarding" });
+    setOnboardingCompleted(true);
   }, []);
 
   return (
