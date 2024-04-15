@@ -1,5 +1,5 @@
-const version = "5.7.2";
-const buildNumber = 369;
+const version = "5.8.0";
+const buildNumber = 370;
 
 export default () => ({
   "expo": {
@@ -48,7 +48,10 @@ export default () => ({
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
       "buildNumber": buildNumber.toString(),
-      "usesAppleSignIn": true
+      "usesAppleSignIn": true,
+      "associatedDomains": [
+        "applinks:donation.app.link",
+      ]
     },
     "android": {
       "googleServicesFile": "./google-services.json",

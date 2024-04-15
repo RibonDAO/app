@@ -73,6 +73,7 @@ import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneSc
 import SubscriptionsScreen from "screens/promoters/SubscriptionsScreen";
 import ClubScreen from "screens/promoters/ClubScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
+import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
 import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
@@ -299,6 +300,12 @@ function RootNavigator() {
       <Stack.Screen
         name="GiveTicketScreen"
         component={GiveTicketScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="GiveTicketV2Screen"
+        component={GiveTicketV2Screen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
