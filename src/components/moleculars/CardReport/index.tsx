@@ -8,13 +8,19 @@ export type Props = {
   title: string;
   link: string;
   showIcon: boolean;
+  onClick?: () => void;
 };
 
-function CardReport({ title, link, showIcon }: Props): JSX.Element {
+function CardReport({ title, link, showIcon, onClick }: Props): JSX.Element {
+  const handlePress = () => {
+    if (onClick) onClick();
+    openInWebViewer(link);
+  };
+
   return (
     <TouchableOpacity
       accessibilityRole="button"
-      onPress={() => openInWebViewer(link)}
+      onPress={handlePress}
       activeOpacity={0.5}
     >
       <View style={S.container}>

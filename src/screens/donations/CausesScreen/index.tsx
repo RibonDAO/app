@@ -11,7 +11,10 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
 import GroupButtons from "components/moleculars/GroupButtons";
-import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
+import {
+  INTEGRATION_AUTH_ID,
+  RIBON_INTEGRATION_ID,
+} from "utils/constants/Application";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
@@ -37,15 +40,19 @@ import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useTickets } from "hooks/useTickets";
 import { useIsOnboarding } from "contexts/onboardingContext";
-
 import { useRouteParams } from "hooks/useRouteParams";
 import NewHeader from "components/moleculars/NewHeader";
+import { theme } from "@ribon.io/shared/styles";
+import {
+  RECEIVED_TICKET_AT_KEY,
+  RECEIVED_TICKET_FROM_INTEGRATION,
+} from "lib/localStorage/constants";
 import Placeholder from "./placeholder";
-import S from "./styles";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
 import ClubSection from "./ClubSection";
 import ReportsSection from "./ReportsSection";
+import S from "./styles";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -86,7 +93,8 @@ export default function CausesScreen() {
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
-  const { hasReceivedTicketToday, handleCanCollect } = useTickets();
+  const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
+    useTickets();
   const { params } = useRouteParams<"CausesScreen">();
   const { onboardingCompleted } = useIsOnboarding();
 
@@ -110,15 +118,39 @@ export default function CausesScreen() {
   async function receiveTicket() {
     const canCollect = await handleCanCollect();
     const receivedTicketToday = await hasReceivedTicketToday();
+    const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
     if (canCollect) {
       if (currentUser && !receivedTicketToday) {
-        // trocar para o navigate do collet ticket novo
-        // await handleCollect({
-        //   onSuccess: () => {
-        //     logEvent("ticketCollected", { from: "collect" });
-        //   },
-        // });
-        // refetchTickets();
+        if (isRibonIntegration) {
+          await handleCollect({
+            onSuccess: () => {
+              logEvent("ticketCollected", { from: "collect" });
+            },
+          });
+          refetchTickets();
+          showToast({
+            type: "custom",
+            message: t("ticketToast"),
+            position: "bottom",
+            navigate: "GiveTicketScreen",
+            icon: "confirmation_number",
+            backgroundColor: theme.colors.brand.primary[50],
+            iconColor: theme.colors.brand.primary[600],
+            borderColor: theme.colors.brand.primary[600],
+            textColor: theme.colors.brand.primary[600],
+          });
+          await setLocalStorageItem(
+            RECEIVED_TICKET_AT_KEY,
+            Date.now().toString(),
+          );
+          await setLocalStorageItem(
+            RECEIVED_TICKET_FROM_INTEGRATION,
+            currentIntegrationId?.toLocaleString(),
+          );
+          logEvent("receiveTicket_view", { from: "receivedTickets_toast" });
+        } else {
+          navigateTo("GiveTicketV2Screen");
+        }
       } else if (!currentUser && onboardingCompleted !== true) {
         navigateTo("OnboardingScreen");
       }

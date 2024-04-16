@@ -5,8 +5,8 @@ import { useTicketsContext } from "contexts/ticketsContext";
 import { useTickets } from "hooks/useTickets";
 import { setLocalStorageItem } from "lib/localStorage";
 import {
-  DONATION_TOAST_INTEGRATION,
-  DONATION_TOAST_SEEN_AT_KEY,
+  RECEIVED_TICKET_AT_KEY,
+  RECEIVED_TICKET_FROM_INTEGRATION,
 } from "lib/localStorage/constants";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,18 +26,17 @@ function SecondSection(): JSX.Element {
     useFirstAccessToIntegration(currentIntegrationId);
   const { refetchTickets } = useTicketsContext();
 
-  // fazer o controle do receive ticket aqui pro usuario n logado
   async function receiveTicket() {
     const canCollect = await handleCanCollect();
     const receivedTicketToday = await hasReceivedTicketToday();
     if (canCollect) {
       if (!receivedTicketToday) {
         await setLocalStorageItem(
-          DONATION_TOAST_SEEN_AT_KEY,
+          RECEIVED_TICKET_AT_KEY,
           Date.now().toString(),
         );
         await setLocalStorageItem(
-          DONATION_TOAST_INTEGRATION,
+          RECEIVED_TICKET_FROM_INTEGRATION,
           currentIntegrationId?.toLocaleString(),
         );
         logEvent("receiveTicket_view", { from: "receivedTickets_toast" });
