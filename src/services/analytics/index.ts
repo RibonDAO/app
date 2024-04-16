@@ -2,6 +2,7 @@ import analytics from "@react-native-firebase/analytics";
 import { logError } from "services/crashReport";
 import { logDebugEvent } from "config/DebugEventsView";
 import { mixpanel } from "./mixpanel";
+import { appsFlyer } from "./appsflyer";
 
 export async function logEvent(eventName: string, params?: Record<any, any>) {
   const paramsWithPlatform = { ...params, platform: "app" };
@@ -11,6 +12,10 @@ export async function logEvent(eventName: string, params?: Record<any, any>) {
   }
   if (process.env.DEBUG_VIEW_ENABLED) {
     logDebugEvent(eventName, paramsWithPlatform);
+  }
+
+  if (appsFlyer !== undefined) {
+    appsFlyer.logEvent(eventName, paramsWithPlatform);
   }
 }
 
