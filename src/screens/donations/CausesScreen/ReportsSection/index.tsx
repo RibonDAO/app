@@ -35,6 +35,13 @@ export default function ReportsSection({
     }, 1000);
   }, [currentUser]);
 
+  const getReportClickEventName = (name: string) => {
+    if (name.toLowerCase() === t("reports.seeAllCard"))
+      return "allReportsCard_click";
+
+    return "reportCard_click";
+  };
+
   return !isLoading ? (
     <View>
       <View style={S.container}>
@@ -53,6 +60,7 @@ export default function ReportsSection({
                 title={`${item.name} →`}
                 link={item.link}
                 showIcon={item.name.toLowerCase() !== t("reports.seeAllCard")}
+                clickEventName={getReportClickEventName(item.name)}
               />
             </View>
           )}

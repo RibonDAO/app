@@ -10,6 +10,7 @@ import { useCallback, useState } from "react";
 import { useRouteParams } from "hooks/useRouteParams";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
+import { useTasksContext } from "contexts/tasksContext";
 import S from "./styles";
 import DonationInProgressSection from "../DonationInProgressSection";
 
@@ -24,6 +25,7 @@ function SignedInScreen() {
 
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
+  const { registerAction } = useTasksContext();
   const {
     params: { nonProfit },
   } = useRouteParams<"SignedInScreen">();
@@ -63,6 +65,7 @@ function SignedInScreen() {
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       navigateTo("DonationDoneScreen", { nonProfit });
+      registerAction("P8_view");
     } else {
       const newState = {
         failedDonation: true,

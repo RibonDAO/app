@@ -23,6 +23,7 @@ import usePageView from "hooks/usePageView";
 import AppleLogin from "components/moleculars/buttons/AppleLogin";
 import useDonationFlow from "hooks/useDonationFlow";
 import { useTickets } from "hooks/useTickets";
+import { useTasksContext } from "contexts/tasksContext";
 import S from "./styles";
 
 function DonationSignInScreen() {
@@ -40,6 +41,7 @@ function DonationSignInScreen() {
   const { formattedImpactText } = useFormattedImpactText();
   const { handleDonate } = useDonationFlow();
   const { handleCollect } = useTickets();
+  const { registerAction } = useTasksContext();
   usePageView("P27_view", { from: "donation_flow", nonProfitId: nonProfit.id });
 
   const onDonationSuccess = () => {
@@ -86,6 +88,7 @@ function DonationSignInScreen() {
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       navigateTo("DonationDoneScreen", { nonProfit });
+      registerAction("P8_view");
     } else {
       const newState = {
         failedDonation: true,

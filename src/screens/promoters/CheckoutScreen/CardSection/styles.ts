@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     width: "auto",
     display: "flex",
     alignItems: "center",
-    paddingRight: theme.spacingNative(8),
+    paddingHorizontal: theme.spacingNative(8),
     color: theme.colors.brand.primary[600],
     borderColor: theme.colors.brand.primary[600],
   },

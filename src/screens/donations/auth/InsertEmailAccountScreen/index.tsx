@@ -21,6 +21,7 @@ import { useRouteParams } from "hooks/useRouteParams";
 import { theme } from "@ribon.io/shared";
 import { useNavigation } from "hooks/useNavigation";
 import useDonationFlow from "hooks/useDonationFlow";
+import { useTasksContext } from "contexts/tasksContext";
 import DonationInProgressSection from "../DonationInProgressSection";
 import S from "./styles";
 
@@ -41,6 +42,8 @@ function InsertEmailAccountScreen() {
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(false);
   const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
+
+  const { registerAction } = useTasksContext();
 
   const onContinue = () => {
     setIsDonating(true);
@@ -64,6 +67,7 @@ function InsertEmailAccountScreen() {
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       navigateTo("DonationDoneScreen", { nonProfit, flow: "magicLink" });
+      registerAction("P8_view");
     } else {
       const newState = {
         failedDonation: true,

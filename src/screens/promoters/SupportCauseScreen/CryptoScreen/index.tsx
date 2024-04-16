@@ -8,7 +8,7 @@ import {
 } from "contexts/cryptoPaymentContext";
 import GroupButtons from "components/moleculars/GroupButtons";
 import { theme } from "@ribon.io/shared/styles";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { RefreshControl, ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
@@ -21,6 +21,7 @@ import { useCauseContributionContext } from "contexts/causesContributionContext"
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import { logEvent } from "services/analytics";
+import ArrowLeft from "components/vectors/ArrowLeft";
 import styles from "./styles";
 import SelectCryptoOfferSection from "./SelectCryptoOfferSection";
 
@@ -42,7 +43,7 @@ function CryptoScreen(): JSX.Element {
     setLoading,
     setCurrentPool,
   } = useCryptoPayment();
-  const { navigateTo } = useNavigation();
+  const { navigateTo, popNavigation } = useNavigation();
 
   const [refreshing, setRefreshing] = useState(false);
   const { causes, refetch: refetchCauses } = useCausesContext();
@@ -150,6 +151,15 @@ function CryptoScreen(): JSX.Element {
         <RefreshControl refreshing={refreshing} onRefresh={resetScreen} />
       }
     >
+      <View style={styles.arrow}>
+        <TouchableOpacity
+          accessibilityRole="button"
+          onPress={() => popNavigation()}
+          testID="arrow-back-button"
+        >
+          <ArrowLeft color={theme.colors.brand.secondary[800]} />
+        </TouchableOpacity>
+      </View>
       <Text style={styles.title}>{t("title")}</Text>
       <GroupButtons
         elements={causes}
