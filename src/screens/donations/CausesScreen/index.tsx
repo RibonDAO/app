@@ -4,6 +4,7 @@ import {
   useFirstAccessToIntegration,
   useDonatedToday,
   useSubscriptions,
+  useReports,
 } from "@ribon.io/shared/hooks";
 import { ScrollView, Text, View, RefreshControl } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
@@ -46,6 +47,7 @@ import S from "./styles";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
 import ClubSection from "./ClubSection";
+import ReportsSection from "./ReportsSection";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -69,6 +71,7 @@ export default function CausesScreen() {
   } = useFirstAccessToIntegration(currentIntegrationId);
   const { integration } = useIntegrationContext();
   const { ticketsCounter } = useTicketsContext();
+  const { reports, refetch: refetchReports } = useReports();
 
   const [storiesVisible, setStoriesVisible] = useState(false);
   const [stories, setStories] = useState<Story[]>([]);
@@ -244,6 +247,11 @@ export default function CausesScreen() {
     };
   };
 
+  const reportsStylesFor = (isMember: boolean) => ({
+    marginTop: 40,
+    marginBottom: isMember ? 48 : 8,
+  });
+
   const navigateToClubScreen = () => {
     navigateTo("ClubScreen");
   };
@@ -319,6 +327,7 @@ export default function CausesScreen() {
       refetchTickets();
       await refetchIsMember();
       await refetchFirstAccessToIntegration();
+      refetchReports();
     } catch (e) {
       logError(e);
     } finally {
@@ -377,30 +386,42 @@ export default function CausesScreen() {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            {sortNonProfits()?.map((nonProfit, index) => (
-              <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
-                <CardCenterImageButton
-                  image={nonProfit.mainImage}
-                  infoTextTop={nonProfit.name}
-                  infoTextBottom={nonProfit.cause.name}
-                  imageDescription={formattedImpactText(
-                    nonProfit,
-                    undefined,
-                    false,
-                    false,
-                    undefined,
-                    t("impactPrefix") || "",
-                  )}
-                  buttonText={hasTickets ? t("buttonText") : t("noTickets")}
-                  onImagePress={() => {
-                    handleNonProfitImagePress(nonProfit);
-                  }}
-                  onClickButton={() => handleButtonPress(nonProfit)}
-                  buttonDisabled={!hasTickets}
-                  labelText={t("labelText") || ""}
-                />
-              </View>
-            ))}
+            {sortNonProfits()?.map((nonProfit, index) => {
+              const minNumberOfTickets =
+                nonProfit?.nonProfitImpacts?.[0]?.minimumNumberOfTickets ?? 0;
+              const hasEnoughTickets =
+                hasTickets && ticketsCounter >= minNumberOfTickets;
+              return (
+                <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
+                  <CardCenterImageButton
+                    image={nonProfit.mainImage}
+                    infoTextTop={nonProfit.name}
+                    imageDescription={formattedImpactText(
+                      nonProfit,
+                      undefined,
+                      false,
+                      false,
+                      undefined,
+                      t("impactPrefix") || "",
+                    )}
+                    iconSubtitle={{
+                      icon: "confirmation_number",
+                      boldText: String(minNumberOfTickets),
+                      text: t("iconText"),
+                    }}
+                    buttonText={
+                      hasEnoughTickets ? t("buttonText") : t("notEnoughTickets")
+                    }
+                    onImagePress={() => {
+                      handleNonProfitImagePress(nonProfit);
+                    }}
+                    onClickButton={() => handleButtonPress(nonProfit)}
+                    buttonDisabled={!hasEnoughTickets}
+                    labelText={t("labelText") || ""}
+                  />
+                </View>
+              );
+            })}
           </ScrollView>
         ) : (
           <View style={S.noCausesContainer}>
@@ -413,7 +434,11 @@ export default function CausesScreen() {
             />
           </View>
         )}
-
+        {reports?.length ? (
+          <View style={reportsStylesFor(isMember)}>
+            <ReportsSection data={reports} refetch={refetchReports} />
+          </View>
+        ) : null}
         <ClubSection isMember={isMember} refetch={refetchIsMember} />
       </ScrollView>
       <DonationErrorModal newState={params?.newState} />

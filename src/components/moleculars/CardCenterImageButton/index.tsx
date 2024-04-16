@@ -5,6 +5,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import Image from "components/atomics/Image";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared/styles";
+import TicketIcon from "components/vectors/TicketIcon";
 import S from "./styles";
 
 export type Props = {
@@ -14,7 +15,11 @@ export type Props = {
   onImagePress?: () => void;
   imageDescription?: string | JSX.Element;
   infoTextTop?: string;
-  infoTextBottom?: string;
+  iconSubtitle: {
+    icon: string;
+    text: string;
+    boldText?: string;
+  };
   buttonDisabled?: boolean;
   labelText?: string;
 };
@@ -26,7 +31,7 @@ function CardCenterImageButton({
   onClickButton,
   onImagePress,
   infoTextTop,
-  infoTextBottom,
+  iconSubtitle,
   buttonDisabled = false,
   labelText,
 }: Props): JSX.Element {
@@ -77,9 +82,13 @@ function CardCenterImageButton({
                 </View>
               </View>
             )}
-            {infoTextBottom && (
-              <Text style={S.infoBottom}>{infoTextBottom}</Text>
-            )}
+            <View style={S.iconSubtitleContainer}>
+              <TicketIcon />
+              <View style={S.iconTextContainer}>
+                <Text style={S.iconBoldText}>{iconSubtitle.boldText}</Text>
+                <Text style={S.iconText}>{iconSubtitle.text}</Text>
+              </View>
+            </View>
           </View>
           <Button
             onPress={onClickButton}

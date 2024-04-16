@@ -15,6 +15,7 @@ import TicketIconText from "components/moleculars/TicketIconText";
 import { useTicketsContext } from "contexts/ticketsContext";
 import { useFocusEffect } from "@react-navigation/native";
 import useDonationFlow from "hooks/useDonationFlow";
+import { useTasksContext } from "contexts/tasksContext";
 import DonationInProgressSection from "../auth/DonationInProgressSection";
 import * as S from "./styles";
 
@@ -38,6 +39,9 @@ export default function SelectTicketsScreen() {
   const [currentImpact, setCurrentImpact] = useState(
     nonProfit?.impactByTicket || undefined,
   );
+  const [step, setStep] = useState<number | undefined>(undefined);
+
+  const { registerAction } = useTasksContext();
 
   const errorType = (type: number) => {
     switch (type) {
@@ -98,6 +102,7 @@ export default function SelectTicketsScreen() {
   const onAnimationEnd = useCallback(() => {
     if (donationSucceeded) {
       navigateTo("DonationDoneScreen", { nonProfit, impact: currentImpact });
+      registerAction("P8_view");
     } else {
       const newState = {
         failedDonation: true,
@@ -114,6 +119,16 @@ export default function SelectTicketsScreen() {
         : undefined,
     );
   }, [nonProfit, ticketsQuantity]);
+
+  useEffect(() => {
+    const impacts = nonProfit?.nonProfitImpacts || [];
+    const nonProfitsImpactsLength = impacts.length;
+    const lastImpact = impacts[nonProfitsImpactsLength - 1];
+    if (lastImpact?.minimumNumberOfTickets) {
+      setStep(lastImpact.minimumNumberOfTickets);
+      setTicketsQuantity(lastImpact.minimumNumberOfTickets);
+    }
+  }, [nonProfit]);
 
   return (
     <S.KeyboardView
@@ -151,10 +166,13 @@ export default function SelectTicketsScreen() {
                   hasDividerBorder={false}
                   buttonDisabled
                 />
-                <SliderButton
-                  rangeSize={tickets}
-                  setValue={setTicketsQuantity}
-                />
+                {step && (
+                  <SliderButton
+                    rangeSize={tickets}
+                    setValue={setTicketsQuantity}
+                    step={step}
+                  />
+                )}
                 <Button
                   text={t("buttonText")}
                   textColor={theme.colors.neutral10}

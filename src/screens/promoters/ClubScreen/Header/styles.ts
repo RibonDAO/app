@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { defaultBodyXsMedium } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +15,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 1,
     borderColor: theme.colors.brand.tertiary[25],
-    padding: theme.spacingNative(4),
+    paddingRight: theme.spacingNative(8),
+    paddingLeft: theme.spacingNative(8),
     alignSelf: "center",
   },
   textContainer: {
@@ -25,6 +27,7 @@ const styles = StyleSheet.create({
     marginTop: theme.spacingNative(16),
   },
   text: {
+    ...defaultBodyXsMedium,
     color: theme.colors.brand.tertiary[800],
   },
   sparkles: {

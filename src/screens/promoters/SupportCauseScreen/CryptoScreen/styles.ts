@@ -100,6 +100,10 @@ const styles = StyleSheet.create({
   supportSection: {
     paddingBottom: 72,
   },
+  arrow: {
+    paddingVertical: theme.spacingNative(16),
+    alignSelf: "flex-start",
+  },
 });
 
 export default styles;

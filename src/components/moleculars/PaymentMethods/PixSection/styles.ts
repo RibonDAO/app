@@ -3,9 +3,6 @@ import { theme } from "@ribon.io/shared/styles";
 import { defaultBodySmMedium } from "styles/typography/default";
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: theme.spacingNative(16),
-  },
   button: {
     height: 48,
   },

@@ -102,16 +102,8 @@ export default function TasksSection() {
     }, [tasksStatistics, refetchTasksStatistics, setShowMonthlyTasks]),
   );
 
-  useFocusEffect(
-    useCallback(() => {
-      reload();
-    }, []),
-  );
-
   useEffect(() => {
-    if (index === 0) {
-      reload();
-    }
+    reload();
   }, [index]);
 
   const { integration } = useIntegrationContext();

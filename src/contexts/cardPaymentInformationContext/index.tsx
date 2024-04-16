@@ -71,7 +71,7 @@ function CardPaymentInformationProvider({ children }: Props) {
         email ?? "",
         await normalizedLanguage(),
       );
-      if (integration) {
+      if (integration && integration.id) {
         createSource(user.id, integration.id);
       }
       setCurrentUser(user);
