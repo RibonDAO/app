@@ -95,7 +95,6 @@ export default function GiveTicketV2Screen() {
         textColor={theme.colors.neutral10}
         customStyles={{
           borderRadius: 4,
-          maxWidth: 328,
           maxHeight: 48,
         }}
       />
