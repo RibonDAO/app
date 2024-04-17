@@ -5,8 +5,8 @@ import {
 } from "@ribon.io/shared/hooks";
 
 import {
-  DONATION_TOAST_INTEGRATION,
-  DONATION_TOAST_SEEN_AT_KEY,
+  RECEIVED_TICKET_FROM_INTEGRATION,
+  RECEIVED_TICKET_AT_KEY,
 } from "lib/localStorage/constants";
 
 import { useIntegrationContext } from "contexts/integrationContext";
@@ -42,19 +42,21 @@ export function useTickets() {
     externalId && externalId?.length > 0 ? externalId?.split(",") : null;
 
   async function hasReceivedTicketToday() {
-    const donationToastSeenAtKey = await getLocalStorageItem(
-      DONATION_TOAST_SEEN_AT_KEY,
+    const receivedTicketAtKey = await getLocalStorageItem(
+      RECEIVED_TICKET_AT_KEY,
     );
-    const donationToastIntegration = await getLocalStorageItem(
-      DONATION_TOAST_INTEGRATION,
+    const receivedTicketIntegration = await getLocalStorageItem(
+      RECEIVED_TICKET_FROM_INTEGRATION,
     );
 
     if (
-      donationToastSeenAtKey &&
-      donationToastIntegration === currentIntegrationId.toLocaleString()
+      receivedTicketAtKey &&
+      receivedTicketIntegration === currentIntegrationId.toLocaleString()
     ) {
-      const dateUserSawToast = new Date(parseInt(donationToastSeenAtKey, 10));
-      return dateUserSawToast.toLocaleDateString() === todayDate();
+      const dateUserReceivedTicket = new Date(
+        parseInt(receivedTicketAtKey, 10),
+      );
+      return dateUserReceivedTicket.toLocaleDateString() === todayDate();
     }
     return false;
   }

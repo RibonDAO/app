@@ -9,7 +9,7 @@ function Slide({ item }: any) {
   return (
     <View style={{ width, height }}>
       {item.id === "1" && <FirstSection />}
-      {item.id === "2" && <SecondSection key={item.id} />}
+      {item.id === "2" && <SecondSection />}
       {item.id === "3" && <ThirdSection />}
     </View>
   );
