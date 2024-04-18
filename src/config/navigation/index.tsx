@@ -8,6 +8,7 @@ import CausesProvider from "contexts/causesContext";
 import CauseContributionProvider from "contexts/causesContributionContext";
 import CauseDonationProvider from "contexts/causesDonationContext";
 import NotFoundScreen from "screens/NotFoundScreen";
+import RequiredUpdateScreen from "screens/RequiredUpdateScreen";
 import CausesScreen from "screens/donations/CausesScreen";
 import ImpactScreen from "screens/users/ImpactScreen";
 import ReceiveTicketScreen from "screens/donations/ReceiveTicketScreen";
@@ -17,6 +18,7 @@ import {
   RootTabParamList,
 } from "types";
 import { theme } from "@ribon.io/shared/styles";
+import { useRibonConfig } from "@ribon.io/shared/hooks";
 import Header from "components/moleculars/Header";
 import LayoutHeader from "components/moleculars/LayoutHeader";
 import DonationDoneScreen from "screens/donations/DonationDoneStack/DonationDoneScreen";
@@ -73,6 +75,8 @@ import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneSc
 import SubscriptionsScreen from "screens/promoters/SubscriptionsScreen";
 import ClubScreen from "screens/promoters/ClubScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
+import Constants from "expo-constants";
+import { compareVersions } from "compare-versions";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -247,6 +251,7 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
+  const { ribonConfig, isLoading } = useRibonConfig();
   const {
     setMagicLinkToken,
     setAccountId,
@@ -265,6 +270,24 @@ function RootNavigator() {
       setExtraTicketToken,
     );
   }, []);
+  const appVersion = Constants?.expoConfig?.version || "0.0.0";
+  const minimumRequiredVersion = ribonConfig?.minimumVersionRequired;
+
+  if (!isLoading && minimumRequiredVersion) {
+    const shouldUpdate =
+      compareVersions(appVersion, minimumRequiredVersion) === -1;
+    if (shouldUpdate) {
+      return (
+        <Stack.Navigator>
+          <Stack.Screen
+            name="RequiredUpdate"
+            component={RequiredUpdateScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      );
+    }
+  }
 
   return (
     <Stack.Navigator>

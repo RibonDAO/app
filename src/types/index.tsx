@@ -143,6 +143,7 @@ export type RootStackParamList = {
   ContributionDoneScreen: ContributionDoneParamsList;
   AvailableArticleScreen: undefined;
   NotFound: undefined;
+  RequiredUpdate: undefined;
   ReceiveTicketScreen: undefined;
   GiveTicketScreen: GiveTicketScreenParamList;
   CausesScreen: CausesScreenParamList;
