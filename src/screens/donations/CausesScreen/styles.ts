@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
   },
   containerPadding: {
     paddingHorizontal: 16,
+    borderTopWidth: 1,
+    borderColor: theme.colors.neutral10,
+    backgroundColor: theme.colors.neutral10,
+    borderRadius: 16,
+    top: -16,
+    paddingTop: 16,
   },
   containerTicket: {
     height: 350,
