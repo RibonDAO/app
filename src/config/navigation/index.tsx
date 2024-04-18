@@ -73,6 +73,7 @@ import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneSc
 import SubscriptionsScreen from "screens/promoters/SubscriptionsScreen";
 import ClubScreen from "screens/promoters/ClubScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
+import CouponProvider, { useCouponContext } from "contexts/couponContext";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -216,6 +217,7 @@ function PrivateNavigator() {
     setExtraTicket,
     setExtraTicketToken,
   } = useAuthentication();
+  const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -226,6 +228,7 @@ function PrivateNavigator() {
       setAccountId,
       setExtraTicket,
       setExtraTicketToken,
+      setCouponId,
     );
   }, []);
 
@@ -253,6 +256,7 @@ function RootNavigator() {
     setExtraTicket,
     setExtraTicketToken,
   } = useAuthentication();
+  const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -263,6 +267,7 @@ function RootNavigator() {
       setAccountId,
       setExtraTicket,
       setExtraTicketToken,
+      setCouponId,
     );
   }, []);
 
@@ -584,10 +589,12 @@ export default function Navigation() {
                           <CauseContributionProvider>
                             <NonProfitsProvider>
                               <IntegrationProvider>
-                                <TicketsProvider>
-                                  <RootNavigator />
-                                  <Toast config={toastConfig} />
-                                </TicketsProvider>
+                                <CouponProvider>
+                                  <TicketsProvider>
+                                    <RootNavigator />
+                                    <Toast config={toastConfig} />
+                                  </TicketsProvider>
+                                </CouponProvider>
                               </IntegrationProvider>
                             </NonProfitsProvider>
                           </CauseContributionProvider>
