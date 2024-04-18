@@ -75,6 +75,7 @@ import ClubScreen from "screens/promoters/ClubScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
 import GiveTicketByCouponScreen from "screens/coupons/GiveTicketByCouponScreen";
 import CouponProvider, { useCouponContext } from "contexts/couponContext";
+import ExpiredCouponScreen from "screens/coupons/ExpiredCouponScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -313,11 +314,11 @@ function RootNavigator() {
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
-      {/* <Stack.Screen
+      <Stack.Screen
         name="ExpiredCouponScreen"
         component={ExpiredCouponScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
-      /> */}
+      />
 
       <Stack.Screen
         name="DonationDoneScreen"
