@@ -5,7 +5,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import CardReport from "components/moleculars/CardReport";
 import Report from "@ribon.io/shared/types/entities/Report";
 import { useTranslation } from "react-i18next";
-import { logEvent } from "services/analytics";
 import S from "./styles";
 
 type Props = {
@@ -36,6 +35,13 @@ export default function ReportsSection({
     }, 1000);
   }, [currentUser]);
 
+  const getReportClickEventName = (name: string) => {
+    if (name.toLowerCase() === t("reports.seeAllCard"))
+      return "allReportsCard_click";
+
+    return "reportCard_click";
+  };
+
   return !isLoading ? (
     <View>
       <View style={S.container}>
@@ -54,13 +60,7 @@ export default function ReportsSection({
                 title={`${item.name} →`}
                 link={item.link}
                 showIcon={item.name.toLowerCase() !== t("reports.seeAllCard")}
-                onClick={() => {
-                  logEvent(
-                    item.name.toLowerCase() !== t("reports.seeAllCard")
-                      ? "reportCard_click"
-                      : "allReportsCard_click",
-                  );
-                }}
+                clickEventName={getReportClickEventName(item.name)}
               />
             </View>
           )}
