@@ -22,11 +22,11 @@ export default function GiveTicketByCouponScreen() {
   const { ticketsCounter } = useTicketsContext();
 
   useEffect(() => {
-    logEvent("eventName", params);
+    logEvent("P37_view", params);
   }, []);
 
   const receiveTicket = () => {
-    logEvent("P10_getTicketBtn_click");
+    logEvent("P37_getTicketBtn_click");
     navigateTo("ReceiveTicketScreen");
   };
 

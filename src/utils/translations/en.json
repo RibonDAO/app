@@ -189,6 +189,11 @@
       "subtitle": "Dynamic data from coupon",
       "button": "Collect tickets"
     },
+    "expiredCouponScreen": {
+      "title": "Unavailable ticket",
+      "subtitle": "Either you have already collected this ticket or it has expired.",
+      "button": "Go back to the home screen"
+    },
     "earnTicketsScreen": {
       "newsSection": {
         "title": "Earn tickets",

@@ -183,6 +183,11 @@
       "subtitle": "Dynamic data from coupon",
       "button": "Coletar tickets"
     },
+    "expiredCouponScreen": {
+      "title": "Ticket indisponível",
+      "subtitle": "O tempo de coleta expirou ou você já coletou esse ticket.",
+      "button": "Voltar para tela inicial"
+    },
     "earnTicketsScreen": {
       "newsSection": {
         "title": "Ganhe tickets",
