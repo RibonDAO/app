@@ -17,8 +17,7 @@ function FirstSection(): JSX.Element {
   const { currentIntegrationId } = useIntegrationContext();
   const { integration } = useIntegration(currentIntegrationId);
 
-  const isRibonIntegration =
-    currentIntegrationId === parseInt(RIBON_INTEGRATION_ID, 10);
+  const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
 
   const title = isRibonIntegration
     ? t("title")
