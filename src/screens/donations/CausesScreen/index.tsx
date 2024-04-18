@@ -304,6 +304,7 @@ export default function CausesScreen() {
     );
 
   const handleButtonPress = (nonProfit: NonProfit) => {
+    navigateTo("GiveTicketByCouponScreen");
     logEvent("donateTicketBtn_start", {
       nonProfitId: nonProfit.id,
       from: "nonprofitCard",

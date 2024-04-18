@@ -42,6 +42,10 @@ export type GiveTicketScreenParamList = {
   isOnboarding?: boolean;
 };
 
+export type GiveTicketByCouponScreenParamList = {
+  couponId?: string;
+};
+
 export type CommunityAddModalParamList = {
   amount: string;
 };
@@ -145,6 +149,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   ReceiveTicketScreen: undefined;
   GiveTicketScreen: GiveTicketScreenParamList;
+  GiveTicketByCouponScreen: GiveTicketByCouponScreenParamList;
   CausesScreen: CausesScreenParamList;
   EarnTicketsScreen: EarnTicketsScreenParamsList;
   PostDonationScreen: PostDonationScreenParams;
