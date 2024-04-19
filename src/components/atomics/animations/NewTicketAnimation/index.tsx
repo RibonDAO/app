@@ -30,13 +30,13 @@ export default function NewTicketAnimation({ count = 1 }: Props): JSX.Element {
   return (
     <Animated.View entering={keyframe.duration(1000).delay(0)}>
       <S.Container>
+        <S.Count>+{count}</S.Count>
         <Icon
           type="outlined"
           name="confirmation_number"
           size={24}
           color={theme.colors.brand.primary[500]}
         />
-        <S.Count>{count}</S.Count>
       </S.Container>
     </Animated.View>
   );

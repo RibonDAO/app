@@ -12,7 +12,7 @@ export const Container = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 6px;
 `;
 
 export const Count = styled.Text`
