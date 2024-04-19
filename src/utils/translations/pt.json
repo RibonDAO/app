@@ -666,5 +666,11 @@
       "descriptionWithoutEmail": "Valide sua conta para completar sua doação.",
       "toastSuccessMessage": "Email enviado"
     }
+  },
+  "requiredUpdateScrren": {
+    "title": "Atualize seu aplicativo!",
+    "button": "Atualize seu aplicativo!",
+    "iosLink": "https://play.google.com/store/apps/details?id=com.app.ribon",
+    "androidLink": "https://apps.apple.com/app/id1337763424"
   }
 }

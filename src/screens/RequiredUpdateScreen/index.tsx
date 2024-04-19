@@ -1,6 +1,7 @@
 import { Linking, Platform, StyleSheet, Text, View } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import Button from "components/atomics/buttons/Button";
+import { useTranslation } from "react-i18next";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,16 +24,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const storeLink =
-  Platform.OS === "ios"
-    ? "https://apps.apple.com/app/id1337763424"
-    : "https://play.google.com/store/apps/details?id=com.app.ribon";
+const { t } = useTranslation("translation", {
+  keyPrefix: "requiredUpdateScrren",
+});
+
+const storeLink = Platform.OS === "ios" ? t("iosLink") : t("androidLink");
 
 export default function RequiredUpdateScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Update Version!</Text>
-      <Button text="Go to store!" onPress={() => Linking.openURL(storeLink)} />
+      <Text style={styles.title}>{t("title")}</Text>
+      <Button text={t("button")} onPress={() => Linking.openURL(storeLink)} />
     </View>
   );
 }
