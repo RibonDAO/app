@@ -12,7 +12,7 @@ export const Container = styled.TouchableOpacity`
   position: relative;
 `;
 
-export const MainContainer = styled.View<CustomColorProps>`
+export const ButtonContainer = styled.View<CustomColorProps>`
   background-color: ${({ color }: CustomColorProps) =>
     color || theme.colors.brand.primary[900]};
   width: 100%;

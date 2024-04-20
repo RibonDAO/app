@@ -17,10 +17,10 @@ export function LockedButton({
 }) {
   return (
     <S.Container disabled>
-      <S.MainContainer color={colors[4]}>
+      <S.ButtonContainer color={colors[4]}>
         <S.Text color={colors[0]}>{text}</S.Text>
         <Icon type="outlined" name="check" size={24} color={colors[0]} />
-      </S.MainContainer>
+      </S.ButtonContainer>
     </S.Container>
   );
 }
@@ -99,13 +99,13 @@ export function BackgroundLayersAnimation({ colors }: { colors: string[] }) {
     });
 
   const animatedViewStyle = useAnimatedStyle(() => ({
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      zIndex: 1,
-    }));
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: 1,
+  }));
 
   const durations = [300, 300, 300, 300];
   const delays = [0, 100, 200, 350];

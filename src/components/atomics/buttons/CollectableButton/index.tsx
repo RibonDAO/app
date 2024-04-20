@@ -60,7 +60,7 @@ export default function CollectableButton({
       <S.ToastContainer>
         {showToast && <NewTicketAnimation count={amount} />}
       </S.ToastContainer>
-      <S.MainContainer>
+      <S.ButtonContainer>
         <S.TextContainer>
           {clicked ? (
             <AfterTextAnimation colors={colors} text={afterText} />
@@ -69,7 +69,7 @@ export default function CollectableButton({
           )}
         </S.TextContainer>
         {clicked && <BackgroundLayersAnimation colors={colors} />}
-      </S.MainContainer>
+      </S.ButtonContainer>
     </S.Container>
   );
 }
