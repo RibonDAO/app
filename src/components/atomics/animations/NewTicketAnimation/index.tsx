@@ -23,12 +23,12 @@ export default function NewTicketAnimation({ count = 1 }: Props): JSX.Element {
     },
     100: {
       opacity: 0,
-      transform: [{ translateY: -50 }],
+      transform: [{ translateY: -40 }],
     },
   });
 
   return (
-    <Animated.View entering={keyframe.duration(1000).delay(0)}>
+    <Animated.View entering={keyframe.duration(800)}>
       <S.Container>
         <S.Count>+{count}</S.Count>
         <Icon
