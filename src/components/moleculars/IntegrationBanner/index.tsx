@@ -16,7 +16,7 @@ function IntegrationBanner({ integration }: Props): JSX.Element {
   const integrationName = integration?.name;
 
   return (
-    <View style={{ marginTop: theme.spacingNative(16) }}>
+    <View style={{ borderRadius: 16 }}>
       <BannerInfo
         title={{
           text: t("title", { integrationName }),

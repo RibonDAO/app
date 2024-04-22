@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    marginBottom: theme.spacingNative(48),
   },
   title: {
     ...defaultBodyMdSemibold,

@@ -84,7 +84,8 @@
   },
   "donations": {
     "causesScreen": {
-      "title": "Donate to a Project",
+      "title": "Make your daily donation!",
+      "titlePostDonation": "Check out the latest from Ribon!",
       "titleNonProfits": "NGOs",
       "buttonText": "Donate",
       "allCauses": "All",

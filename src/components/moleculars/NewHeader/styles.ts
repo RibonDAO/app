@@ -31,8 +31,12 @@ export const Text = styled.Text`
 
 export const IconContainer = styled.TouchableOpacity`
   display: flex;
-  height: 24px;
-  width: 24px;
+  height: 28px;
+  width: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${theme.spacing(4)};
+  background-color: ${theme.colors.brand.primary[800]};
 `;
 
 export const InfoContainer = styled.View`
