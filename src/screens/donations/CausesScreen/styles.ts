@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.neutral[50],
     width: "100%",
     height: 8,
+    marginTop: 36,
   },
 });
 
