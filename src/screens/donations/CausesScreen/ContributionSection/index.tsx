@@ -14,8 +14,7 @@ export default function ContributionSection() {
   const { nonProfit } = useImpactConversion();
 
   return (
-    <>
-      <View style={S.container}>
+    <View style={S.container}>
         <Text style={S.title}>
           {t("title", {
             nonProfitName: nonProfit?.name,
@@ -23,7 +22,5 @@ export default function ContributionSection() {
         </Text>
         <CardCampaign cardId={CURRENT_CARD_ID} />
       </View>
-      <Text style={S.nonProfitTitle}>{t("nonProfits")}</Text>
-    </>
   );
 }

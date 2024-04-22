@@ -43,7 +43,7 @@ function TicketSection(): JSX.Element {
           <Icon
             type="outlined"
             name="help"
-            size={24}
+            size={20}
             color={theme.colors.neutral10}
           />
         </S.IconContainer>
