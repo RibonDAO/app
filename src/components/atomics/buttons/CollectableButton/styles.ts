@@ -25,6 +25,7 @@ export const ButtonContainer = styled.View<CustomColorProps>`
   position: relative;
   overflow: hidden;
   max-width: 1000px;
+  gap: 6px;
 `;
 
 export const AnimatedBg = styled.View<CustomColorProps>`
