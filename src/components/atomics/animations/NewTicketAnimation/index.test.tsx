@@ -8,6 +8,6 @@ describe("NewTicketAnimation", () => {
   });
 
   it("renders without error", () => {
-    expectTextToBeInTheDocument("1");
+    expectTextToBeInTheDocument("+1");
   });
 });
