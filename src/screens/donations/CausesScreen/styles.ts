@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodyMdSemibold } from "styles/typography/default";
+import { defaultBodyLgSemibold } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     paddingTop: theme.spacingNative(16),
   },
   title: {
-    ...defaultBodyMdSemibold,
+    ...defaultBodyLgSemibold,
     color: theme.colors.neutral[800],
     width: "100%",
   },

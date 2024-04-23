@@ -85,7 +85,6 @@
   "donations": {
     "causesScreen": {
       "title": "Faça sua doação do dia!",
-      "titlePostDonation": "Confira a última novidade da Ribon",
       "titleNonProfits": "ONGs",
       "buttonText": "Doar ticket",
       "notEnoughTickets": "Tickets insuficientes",
@@ -626,7 +625,7 @@
   },
   "contributionSection": {
     "titleCard": "Faça ainda mais",
-    "title": "Que incrível! Obrigado por ajudar {{nonProfitName}}",
+    "title": "Confira a última novidade da Ribon",
     "titleNewImpact": "Graças a você a {{nonProfitName}} poderá impactar 1 pessoa. Obrigado!",
     "nonProfits": "ONGs",
     "button": "Doar",

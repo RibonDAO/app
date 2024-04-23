@@ -385,9 +385,11 @@ export default function CausesScreen() {
           )}
           {renderNotificationCard()}
 
-          <Text style={S.title}>
-            {t(donatedToday ? "titlePostDonation" : "title")}
-          </Text>
+          {donatedToday && currentUser ? (
+            <ContributionSection />
+          ) : (
+            <Text style={S.title}>{t("title")}</Text>
+          )}
 
           <ScrollView
             style={S.groupButtonsContainer}
@@ -401,7 +403,6 @@ export default function CausesScreen() {
               indexSelected={chosenCauseIndex}
             />
           </ScrollView>
-          {donatedToday && currentUser && <ContributionSection />}
         </View>
 
         {sortNonProfits()?.length > 0 ? (

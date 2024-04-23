@@ -85,7 +85,6 @@
   "donations": {
     "causesScreen": {
       "title": "Make your daily donation!",
-      "titlePostDonation": "Check out the latest from Ribon!",
       "titleNonProfits": "NGOs",
       "buttonText": "Donate",
       "allCauses": "All",
@@ -631,7 +630,7 @@
     }
   },
   "contributionSection": {
-    "title": "Amazing! Thank you for helping {{nonProfitName}}",
+    "title": "Check out the latest from Ribon!",
     "titleNewImpact": "Thanks to you, {{nonProfitName}} will be able to impact 1 person. Thank you!",
     "titleCard": "Do even more",
     "nonProfits": "NGOs",
