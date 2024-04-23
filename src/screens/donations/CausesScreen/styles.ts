@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
   causesContainer: {
     display: "flex",
     flexDirection: "row",
-    paddingTop: theme.spacingNative(16),
   },
   noCausesContainer: {
     display: "flex",
