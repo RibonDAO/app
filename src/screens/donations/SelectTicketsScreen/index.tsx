@@ -113,14 +113,14 @@ export default function SelectTicketsScreen() {
   }, [donationSucceeded, currentImpact]);
 
   useEffect(() => {
-    const impactForMinimumTickets =
+    const impactForMinimumNumberOfTickets =
       ticketsQuantity /
       (nonProfit?.nonProfitImpacts?.[0]?.minimumNumberOfTickets || 1);
 
     setCurrentImpact(
       nonProfit?.impactByTicket
         ? nonProfit.impactByTicket * ticketsQuantity
-        : impactForMinimumTickets,
+        : impactForMinimumNumberOfTickets,
     );
   }, [nonProfit, ticketsQuantity]);
 
