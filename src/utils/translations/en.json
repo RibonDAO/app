@@ -1,9 +1,17 @@
 {
   "tabs": {
-    "causes": "Tickets",
-    "earntickets": " Earn tickets",
+    "donateTickets": "Donate tickets",
+    "earnTickets": " Earn tickets",
     "giving": "Donations",
-    "impact": "Impact"
+    "myImpact": "My impact"
+  },
+  "newHeader": {
+    "title": "Welcome to Ribon",
+    "description": "Doing good feels good!",
+    "myTickets": "My tickets",
+    "earnMoreTickets": "Earn more tickets →",
+    "aboutTicketsTitle": "About tickets",
+    "aboutTicketsButtonText": "Back"
   },
   "layoutHeader": {
     "logout": "Sign out",
@@ -45,9 +53,38 @@
     "cancel": "cancel",
     "confirm": "confirm"
   },
+  "onboarding": {
+    "v2": {
+      "onboardingScreen": {
+        "previous": "Previous",
+        "next": "Next",
+        "start": "Start"
+      },
+      "firstSection": {
+        "title": "Welcome to Ribon!",
+        "integrationTitle": "{{integrationName}} invited you to use Ribon's app",
+        "description": "Here you earn tickets to donate to social projects for free every day!",
+        "haveAnAccount": "Have an account?",
+        "signIn": "Sign in your account"
+      },
+      "secondSection": {
+        "title": "Here at Ribon, everything revolves around doing good!",
+        "description": "Donation tickets give you that power, and you've just received your first one!"
+      },
+      "thirdSection": {
+        "title": "Before donating your ticket, here's a quick summary...",
+        "cardTitle1": "What are tickets?",
+        "cardDescription1": "Real money, but it's exclusively valid for donations to social projects within Ribon.",
+        "cardTitle2": "Who pays the tickets?",
+        "cardDescription2": "Companies, big donors, and members of the Ribon community fund the tickets with one goal in mind: to change lives for the better through the collective power of donation.",
+        "cardTitle3": "How to earn more tickets?",
+        "cardDescription3": "You earn and accumulate tickets by accessing the app daily."
+      }
+    }
+  },
   "donations": {
     "causesScreen": {
-      "title": "Donate to a Project",
+      "title": "Make your daily donation!",
       "titleNonProfits": "NGOs",
       "buttonText": "Donate",
       "allCauses": "All",
@@ -183,6 +220,13 @@
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
       "hasAccountButton": "I have an account"
     },
+    "giveTicketV2Screen": {
+      "title": "You won 1 ticket!",
+      "integrationTitle": "{{integrationName}} gave you 1 ticket!",
+      "integrationTitlePlural": "{{integrationName}} gave you tickets!",
+      "subtitle": "Use your ticket to do good!",
+      "button": "Collect ticket"
+    },
     "giveTicketByCouponScreen": {
       "title": "You won 1 ticket!",
       "titlePlural": "You won {{ticketsCounter}} tickets!",
@@ -268,6 +312,14 @@
           "buttonTextNoClub": "Unlock collection"
         }
       }
+    },
+    "aboutTicketsScreen": {
+      "cardTitle1": "What are tickets?",
+      "cardDescription1": "Real money, but it's exclusively valid for donations to social projects within Ribon.",
+      "cardTitle2": "Who pays the tickets?",
+      "cardDescription2": "Companies, big donors, and members of the Ribon community fund the tickets with one goal in mind: to change lives for the better through the collective power of donation.",
+      "cardTitle3": "How to earn more tickets?",
+      "cardDescription3": "You earn and accumulate tickets by accessing the app daily."
     }
   },
   "contexts": {
@@ -589,7 +641,7 @@
     }
   },
   "contributionSection": {
-    "title": "Amazing! Thank you for helping {{nonProfitName}}",
+    "title": "Check out the latest from Ribon!",
     "titleNewImpact": "Thanks to you, {{nonProfitName}} will be able to impact 1 person. Thank you!",
     "titleCard": "Do even more",
     "nonProfits": "NGOs",

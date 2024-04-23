@@ -32,7 +32,7 @@ import { Theme } from "@react-navigation/native/src/types";
 import { useTranslation } from "react-i18next";
 import ContributionDoneScreen from "screens/promoters/ContributionDoneScreen";
 import TicketsProvider from "contexts/ticketsContext";
-import OnboardingScreen from "screens/onboarding/OnboardingScreen";
+import OnboardingScreen from "screens/onboarding/v2/OnboardingScreen";
 import EarnTicketsScreen from "screens/content/EarnTicketsScreen";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "lib/Toast";
@@ -76,6 +76,8 @@ import PromotersScreen from "screens/promoters/PromotersScreen";
 import GiveTicketByCouponScreen from "screens/coupons/GiveTicketByCouponScreen";
 import CouponProvider, { useCouponContext } from "contexts/couponContext";
 import ExpiredCouponScreen from "screens/coupons/ExpiredCouponScreen";
+import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
+import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -152,10 +154,10 @@ function BottomTabNavigator() {
         name="CausesScreen"
         component={CausesScreen}
         options={{
-          title: t("tabs.causes") || "Tickets",
+          title: t("tabs.donateTickets") || "Donate tickets",
           tabBarIcon: ({ color }) =>
             renderTabBarIcon(color, <CausesIconOn />, <CausesIconOff />),
-          header,
+          headerShown: false,
           lazy: false,
         }}
         listeners={() => ({
@@ -169,7 +171,7 @@ function BottomTabNavigator() {
         name="EarnTicketsScreen"
         component={EarnTicketsScreen}
         options={{
-          title: t("tabs.earntickets") || "Earn Tickets",
+          title: t("tabs.earnTickets") || "Earn Tickets",
           tabBarIcon: ({ color }) =>
             renderTabBarIcon(
               color,
@@ -190,7 +192,7 @@ function BottomTabNavigator() {
         name="ImpactScreen"
         component={ImpactScreen}
         options={{
-          title: t("tabs.impact") || "Impact",
+          title: t("tabs.myImpact") || "My impact",
 
           tabBarIcon: ({ color }: any) =>
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
@@ -317,6 +319,12 @@ function RootNavigator() {
       <Stack.Screen
         name="ExpiredCouponScreen"
         component={ExpiredCouponScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="GiveTicketV2Screen"
+        component={GiveTicketV2Screen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
@@ -557,6 +565,14 @@ function RootNavigator() {
       <Stack.Screen
         name="ClubContributionDoneScreen"
         component={ClubContributionDoneScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="AboutTicketsScreen"
+        component={AboutTicketsScreen}
         options={{
           headerShown: false,
         }}

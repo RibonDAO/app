@@ -79,6 +79,7 @@ export type RootTabParamList = {
   PromotersScreen: PromotersScreenParams;
   PostDonationScreen: PostDonationScreenParams;
   ClubScreen: undefined;
+  OnboardingScreen: undefined;
 };
 
 export type SupportNonProfitParamList = {
@@ -136,6 +137,13 @@ export type ValidateAccountScreenParamsList = {
   from: string;
 };
 
+export type AboutTicketsScreenParamsList = {
+  from: string;
+  title: string;
+  buttonText: string;
+  buttonOnPress: () => void;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   PrivateStack: undefined;
@@ -151,6 +159,7 @@ export type RootStackParamList = {
   GiveTicketScreen: GiveTicketScreenParamList;
   GiveTicketByCouponScreen: GiveTicketByCouponScreenParamList;
   ExpiredCouponScreen: undefined;
+  GiveTicketV2Screen: undefined;
   CausesScreen: CausesScreenParamList;
   EarnTicketsScreen: EarnTicketsScreenParamsList;
   PostDonationScreen: PostDonationScreenParams;
@@ -178,6 +187,7 @@ export type RootStackParamList = {
   ValidateAccountScreen: ValidateAccountScreenParamsList;
   ClubContributionDoneScreen: undefined;
   ClubScreen: undefined;
+  AboutTicketsScreen: AboutTicketsScreenParamsList;
 };
 
 export type PrivateStackParamList = {

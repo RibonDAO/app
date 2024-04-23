@@ -4,7 +4,7 @@ import { defaultBodySmMedium } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 8,
+    borderRadius: 16,
     display: "flex",
     flexDirection: "row",
     marginLeft: -16,

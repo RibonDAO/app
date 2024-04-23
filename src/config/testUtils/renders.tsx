@@ -70,6 +70,10 @@ import PixInformationProvider, {
 } from "contexts/pixInformationContext";
 
 import CouponProvider, { CouponContext } from "contexts/couponContext";
+import IntegrationProvider, {
+  IIntegrationContext,
+  IntegrationContext,
+} from "contexts/integrationContext";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -119,6 +123,7 @@ export type RenderComponentProps = {
   causeDonationProviderValue?: Partial<ICauseDonationContext>;
   causeContributionProviderValue?: Partial<ICauseContributionContext>;
   nonProfitsProviderValue?: Partial<INonProfitsContext>;
+  integrationProviderValue?: Partial<IIntegrationContext>;
 };
 
 function renderAllProviders(
@@ -140,6 +145,7 @@ function renderAllProviders(
     causeContributionProviderValue = {},
     causeDonationProviderValue = {},
     nonProfitsProviderValue = {},
+    integrationProviderValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -210,10 +216,15 @@ function renderAllProviders(
                                         NonProfitsContext,
                                         nonProfitsProviderValue,
                                         renderProvider(
-                                          PixInformationProvider,
-                                          PixPaymentInformationContext,
-                                          pixInformationProviderValue,
-                                          children,
+                                          IntegrationProvider,
+                                          IntegrationContext,
+                                          integrationProviderValue,
+                                          renderProvider(
+                                            PixInformationProvider,
+                                            PixPaymentInformationContext,
+                                            pixInformationProviderValue,
+                                            children,
+                                          ),
                                         ),
                                       ),
                                     ),
