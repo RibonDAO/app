@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import Button from "components/atomics/buttons/Button";
 import { View, Text, TouchableOpacity } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { useRouteParams } from "hooks/useRouteParams";
 import ArrowLeft from "components/vectors/ArrowLeft";
 
 import { logEvent } from "services/analytics";
@@ -12,14 +11,13 @@ import Ticket from "./assets/Ticket";
 import S from "./styles";
 
 export default function ExpiredCouponScreen() {
-  const { params } = useRouteParams<"ExpiredCouponScreen">();
   const { t } = useTranslation("translation", {
     keyPrefix: "content.expiredCouponScreen",
   });
   const { navigateTo } = useNavigation();
 
   useEffect(() => {
-    logEvent("P38_view", params);
+    logEvent("P38_view");
   }, []);
 
   const handleBackButtonClick = () => {
