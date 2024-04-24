@@ -6,7 +6,7 @@
     "myImpact": "Meu impacto"
   },
   "newHeader": {
-    "title": "Boas vindas a Ribon",
+    "title": "Boas-vindas à Ribon",
     "description": "Fazer o bem faz bem!",
     "myTickets": "Meus tickets",
     "earnMoreTickets": "Ganhe mais tickets →",
@@ -84,7 +84,7 @@
   },
   "donations": {
     "causesScreen": {
-      "title": "Doe para um projeto",
+      "title": "Faça sua doação do dia!",
       "titleNonProfits": "ONGs",
       "buttonText": "Doar ticket",
       "notEnoughTickets": "Tickets insuficientes",
@@ -625,7 +625,7 @@
   },
   "contributionSection": {
     "titleCard": "Faça ainda mais",
-    "title": "Que incrível! Obrigado por ajudar {{nonProfitName}}",
+    "title": "Confira a última novidade da Ribon",
     "titleNewImpact": "Graças a você a {{nonProfitName}} poderá impactar 1 pessoa. Obrigado!",
     "nonProfits": "ONGs",
     "button": "Doar",

@@ -363,7 +363,15 @@ export default function CausesScreen() {
         }
       >
         <NewHeader />
-        <View style={S.containerPadding}>
+        <View
+          style={[
+            S.containerPadding,
+            !shouldShowIntegrationBanner && {
+              paddingTop: 16,
+              borderTopWidth: 1,
+            },
+          ]}
+        >
           {currentNonProfit && (
             <StoriesSection
               stories={stories}
@@ -372,11 +380,11 @@ export default function CausesScreen() {
               setStoriesVisible={setStoriesVisible}
             />
           )}
-
-          {renderNotificationCard()}
           {shouldShowIntegrationBanner && (
             <IntegrationBanner integration={integration} />
           )}
+          {renderNotificationCard()}
+
           {donatedToday && currentUser ? (
             <ContributionSection />
           ) : (
@@ -452,8 +460,11 @@ export default function CausesScreen() {
           </View>
         )}
         {reports?.length ? (
-          <View style={reportsStylesFor(isMember)}>
-            <ReportsSection data={reports} refetch={refetchReports} />
+          <View>
+            <View style={S.divider} />
+            <View style={reportsStylesFor(isMember)}>
+              <ReportsSection data={reports} refetch={refetchReports} />
+            </View>
           </View>
         ) : null}
         <ClubSection isMember={isMember} refetch={refetchIsMember} />

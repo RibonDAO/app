@@ -58,7 +58,7 @@ function CancelSubscriptionModal({
   };
 
   const deletionDialogProps = {
-    title: club ? t("title") : t("contributionTitle"),
+    title: club ? t("title") : t("subscriptionTitle"),
     description: t("description"),
     icon: "delete_forever",
     type: "error",

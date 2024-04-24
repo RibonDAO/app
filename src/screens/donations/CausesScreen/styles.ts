@@ -1,6 +1,6 @@
-import { stylizedDisplaySm } from "styles/typography/stylized";
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import { defaultBodyLgSemibold } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,12 +9,10 @@ const styles = StyleSheet.create({
   },
   containerPadding: {
     paddingHorizontal: 16,
-    borderTopWidth: 1,
     borderColor: theme.colors.neutral10,
     backgroundColor: theme.colors.neutral10,
     borderRadius: 16,
     top: -16,
-    paddingTop: 16,
   },
   containerTicket: {
     height: 350,
@@ -29,7 +27,6 @@ const styles = StyleSheet.create({
   causesContainer: {
     display: "flex",
     flexDirection: "row",
-    paddingTop: theme.spacingNative(16),
   },
   noCausesContainer: {
     display: "flex",
@@ -42,7 +39,7 @@ const styles = StyleSheet.create({
     paddingTop: theme.spacingNative(16),
   },
   title: {
-    ...stylizedDisplaySm,
+    ...defaultBodyLgSemibold,
     color: theme.colors.neutral[800],
     width: "100%",
   },
@@ -70,6 +67,12 @@ const styles = StyleSheet.create({
   },
   notificationWrapper: {
     marginBottom: theme.spacingNative(16),
+  },
+  divider: {
+    backgroundColor: theme.colors.neutral[50],
+    width: "100%",
+    height: 8,
+    marginTop: 36,
   },
 });
 
