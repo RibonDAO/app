@@ -47,6 +47,7 @@ import {
   RECEIVED_TICKET_AT_KEY,
   RECEIVED_TICKET_FROM_INTEGRATION,
 } from "lib/localStorage/constants";
+import { useCouponContext } from "contexts/couponContext";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
@@ -92,6 +93,7 @@ export default function CausesScreen() {
   const { fetchNonProfitStories } = useStories();
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets, refetchTickets } = useTicketsContext();
+  const { couponId } = useCouponContext();
   const { currentUser, signedIn } = useCurrentUser();
   const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
     useTickets();
@@ -160,6 +162,10 @@ export default function CausesScreen() {
   }
   useFocusEffect(
     useCallback(() => {
+      if (couponId) {
+        navigateTo("GiveTicketByCouponScreen");
+      }
+
       if (isFirstAccessToIntegration !== undefined) {
         receiveTicket();
       }
@@ -168,6 +174,7 @@ export default function CausesScreen() {
       externalId,
       currentUser,
       onboardingCompleted,
+      couponId,
     ]),
   );
 

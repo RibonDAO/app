@@ -1,38 +1,73 @@
 import { useNavigation } from "hooks/useNavigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "components/atomics/buttons/Button";
 import { View, Text, TouchableOpacity } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { useRouteParams } from "hooks/useRouteParams";
 import ArrowLeft from "components/vectors/ArrowLeft";
 
 import { logEvent } from "services/analytics";
-import { useTicketsContext } from "contexts/ticketsContext";
-import Ticket from "./assets/Ticket";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { useCoupons } from "hooks/useCoupons";
+import { useCouponContext } from "contexts/couponContext";
 import S from "./styles";
+import Ticket from "./assets/Ticket";
 
 export default function GiveTicketByCouponScreen() {
-  const { params } = useRouteParams<"GiveTicketByCouponScreen">();
   const { t } = useTranslation("translation", {
     keyPrefix: "content.giveTicketByCouponScreen",
   });
 
+  interface ICoupon {
+    id: string;
+    numberOfTickets: number;
+    rewardText?: string;
+  }
+
+  const { couponId, setCouponId } = useCouponContext();
   const { navigateTo } = useNavigation();
-  const { ticketsCounter } = useTicketsContext();
+  const { currentUser } = useCurrentUser();
+  const { handleCanCollectByCoupon, handleCollectByCoupon } = useCoupons();
+  const [coupon, setCoupon] = useState<ICoupon | undefined>(undefined);
+
+  async function canCollectByCoupon() {
+    const canCollectByCouponData = await handleCanCollectByCoupon();
+    if (!canCollectByCouponData.canCollectByCoupon) {
+      navigateTo("ExpiredCouponScreen");
+    } else {
+      setCoupon(canCollectByCouponData.coupon);
+    }
+  }
 
   useEffect(() => {
-    logEvent("P37_view", params);
+    logEvent("P37_view", { couponId });
+    if (!currentUser) {
+      navigateTo("SignInCouponScreen");
+    }
   }, []);
 
-  const receiveTicket = () => {
-    logEvent("P37_getTicketBtn_click");
-    navigateTo("ReceiveTicketScreen");
-  };
+  useEffect(() => {
+    canCollectByCoupon();
+  }, []);
+
+  async function receiveTicket() {
+    await handleCollectByCoupon({
+      onSuccess: () => {
+        setCouponId(undefined);
+        navigateTo("ReceiveTicketScreen");
+      },
+      onError: () => {
+        navigateTo("ExpiredCouponScreen");
+      },
+    });
+  }
 
   const handleBackButtonClick = () => {
+    logEvent("P37_getTicketBtn_click");
     navigateTo("CausesScreen");
   };
+
+  const numberOfTickets = coupon?.numberOfTickets || 1;
 
   return (
     <View style={S.container}>
@@ -49,16 +84,17 @@ export default function GiveTicketByCouponScreen() {
         <Ticket />
         <View style={S.textContainer}>
           <Text style={S.title}>
-            {ticketsCounter > 1
-              ? t("titlePlural", { ticketsCounter })
+            {numberOfTickets > 1
+              ? t("titlePlural", { numberOfTickets })
               : t("title")}
           </Text>
           <Text style={S.subtitle}>{t("subtitle")}</Text>
+          {/* TODO: add reward text as subtitle */}
         </View>
 
         <Button
           text={t("button")}
-          onPress={receiveTicket}
+          onPress={() => receiveTicket}
           borderColor={theme.colors.brand.primary[600]}
           backgroundColor={theme.colors.brand.primary[600]}
           customTextStyles={{
