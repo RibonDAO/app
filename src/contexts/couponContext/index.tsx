@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 export interface ICouponContext {
   couponId: string | undefined;
-  setCouponId: (couponId: string) => void;
+  setCouponId: (couponId: string | undefined) => void;
 }
 
 export type Props = {
