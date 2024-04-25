@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
   defaultBodyMdRegular,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     borderRadius: 4,
     position: "relative",
-    overflowX: "hidden",
+    overflow: "hidden",
     shadowColor: theme.colors.neutral[800],
     backgroundColor: theme.colors.neutral10,
     shadowOffset: { width: 2, height: 8 },

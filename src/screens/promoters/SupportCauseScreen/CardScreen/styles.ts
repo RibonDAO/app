@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     marginTop: theme.spacingNative(16),
     borderRadius: 8,
     position: "relative",
-    overflowX: "hidden",
+    overflow: "hidden",
     shadowColor: theme.colors.neutral[800],
     backgroundColor: theme.colors.neutral10,
     elevation: 2,
