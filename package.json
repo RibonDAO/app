@@ -1,5 +1,5 @@
 {
-  "name": "Ribon",
+  "name": "ribon",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "@config-plugins/react-native-branch": "^5.0.0",
+    "@config-plugins/react-native-branch": "^7.0.0",
     "@ethersproject/shims": "^5.7.0",
     "@expo/config-plugins": "~7.9.1",
     "@expo/metro-config": "~0.17.7",
