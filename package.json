@@ -95,7 +95,7 @@
     "react-native-mask-text": "^0.14.1",
     "react-native-modal": "^13.0.1",
     "react-native-pager-view": "6.2.0",
-    "react-native-reanimated": "~3.3.0",
+    "react-native-reanimated": "^3.8.1",
     "react-native-root-toast": "^3.3.1",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
