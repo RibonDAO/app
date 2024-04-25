@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.neutral10,
     borderBottomWidth: 1,
     borderColor: theme.colors.neutral[200],
+    shadowColor: theme.colors.neutral10,
   },
   tabStyle: {
     width: Dimensions.get("window").width / 2,

@@ -2,7 +2,6 @@ import { theme } from "@ribon.io/shared";
 import { StyleSheet } from "react-native";
 import {
   defaultBodyLgSemibold,
-  defaultBodyMdSemibold,
   defaultBodySmRegular,
 } from "styles/typography/default";
 import { stylizedDisplayXs } from "styles/typography/stylized";
@@ -11,11 +10,11 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    marginBottom: theme.spacingNative(48),
+    paddingTop: theme.spacingNative(8),
   },
   title: {
-    ...defaultBodyMdSemibold,
-    marginBottom: theme.spacingNative(16),
+    ...defaultBodyLgSemibold,
+    color: theme.colors.neutral[800],
   },
   image: {
     width: "110%",
