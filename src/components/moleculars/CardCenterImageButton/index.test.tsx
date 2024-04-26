@@ -4,14 +4,7 @@ import CardCenterImageButton from ".";
 
 describe("CardCenterImageButton", () => {
   it("should render without error", () => {
-    render(
-      <CardCenterImageButton
-        image=""
-        buttonText="OK"
-        onClickButton={() => {}}
-        iconSubtitle={{ icon: "", text: "" }}
-      />,
-    );
+    render(<CardCenterImageButton />);
     expect(screen.getByText("OK")).toBeDefined();
   });
 });

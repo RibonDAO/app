@@ -2,7 +2,6 @@ import React, { Suspense, useEffect } from "react";
 import "./global";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { WalletConnectModal } from "@walletconnect/modal-react-native";
 import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { View } from "react-native";
@@ -23,20 +22,6 @@ import UnsafeAreaProvider, {
 } from "./src/contexts/unsafeAreaContext";
 import TasksProvider from "./src/contexts/tasksContext";
 import initializeCRM from "./src/services/crm";
-import { WALLET_CONNECT_PROJECT_ID } from "./src/utils/constants/Application";
-
-const providerMetadata = {
-  name: "Ribon App",
-  description: "Donations that make new donors!",
-  url: "https://dapp.ribon.io/",
-  icons: [
-    "https://dapp.ribon.io/static/media/logo.a55fa47db5544540f8f9327782a45e5b.svg",
-  ],
-  redirect: {
-    native: "ribon://",
-    universal: "dapp.ribon.io",
-  },
-};
 
 function Main() {
   const isLoadingComplete = useCachedResources();
@@ -64,12 +49,7 @@ function Main() {
     return null;
   } else {
     return (
-      <>
-        <WalletConnectModal
-          projectId={WALLET_CONNECT_PROJECT_ID}
-          providerMetadata={providerMetadata}
-        />
-        <QueryClientComponent>
+      <QueryClientComponent>
           <TasksProvider>
             <SafeAreaProvider>
               <SafeAreaView
@@ -93,7 +73,6 @@ function Main() {
             </SafeAreaProvider>
           </TasksProvider>
         </QueryClientComponent>
-      </>
     );
   }
 }

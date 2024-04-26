@@ -147,6 +147,17 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.neutral[100],
     borderWidth: 1,
   },
+  item: {
+    margin: 10,
+  },
+  itemPhoto: {
+    width: 200,
+    height: 200,
+  },
+  itemText: {
+    color: "rgba(255, 255, 255, 0.5)",
+    marginTop: 5,
+  },
 });
 
 export default styles;

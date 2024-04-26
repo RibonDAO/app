@@ -61,9 +61,9 @@ function Footer({
             accessibilityRole="button"
             style={S.indicatorTouch}
             onPress={() => setCurrentSlideIndex(index)}
+            key={_.id}
           >
             <View
-              key={_.id}
               style={[
                 S.indicator,
                 currentSlideIndex === index && {
