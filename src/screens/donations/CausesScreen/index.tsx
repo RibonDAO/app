@@ -1,13 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   useFirstAccessToIntegration,
   useDonatedToday,
   useSubscriptions,
 } from "@ribon.io/shared/hooks";
-import { ScrollView, Text, View, RefreshControl } from "react-native";
+import { RefreshControl } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import GroupButtons from "components/moleculars/GroupButtons";
 import {
   INTEGRATION_AUTH_ID,
   RIBON_INTEGRATION_ID,
@@ -22,10 +21,8 @@ import * as SplashScreen from "expo-splash-screen";
 import { perform } from "lib/timeoutHelpers";
 import IntegrationBanner from "components/moleculars/IntegrationBanner";
 import usePageView from "hooks/usePageView";
-import { useCausesContext } from "contexts/causesContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
-import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useTickets } from "hooks/useTickets";
 import { useIsOnboarding } from "contexts/onboardingContext";
@@ -39,11 +36,11 @@ import {
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
-import NonProfitsList from "./CausesSection/NonProfitsList";
 import ClubSection from "./ClubSection";
 import ReportsSection from "./ReportsSection";
 import NotificationPermissionPrompt from "./NotificationPermissionPrompt";
-import S from "./styles";
+import CausesSection from "./CausesSection";
+import * as S from "./styles";
 
 export default function CausesScreen() {
   usePageView("P26_view");
@@ -52,11 +49,7 @@ export default function CausesScreen() {
     keyPrefix: "donations.causesScreen",
   });
 
-  const { nonProfitsWithPoolBalance: nonProfits, isLoading } =
-    useNonProfitsContext();
-  const { causesWithPoolBalance: causes } = useCausesContext();
-  const { chosenCause, setChosenCauseIndex, setChosenCause, chosenCauseIndex } =
-    useCauseDonationContext();
+  const { isLoading } = useNonProfitsContext();
   const { currentIntegrationId, externalId } = useIntegrationContext();
 
   const { donatedToday } = useDonatedToday();
@@ -71,7 +64,6 @@ export default function CausesScreen() {
   const [refreshing, setRefreshing] = useState(false);
 
   const { navigateTo } = useNavigation();
-  const scrollViewRef = useRef<any>(null);
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
   const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
@@ -139,6 +131,7 @@ export default function CausesScreen() {
       refetchTickets();
     }
   }
+
   useFocusEffect(
     useCallback(() => {
       if (isFirstAccessToIntegration !== undefined) {
@@ -151,59 +144,6 @@ export default function CausesScreen() {
       onboardingCompleted,
     ]),
   );
-
-  const causesFilter = () => {
-    const causesApi = causes.filter((cause) => cause.status === "active");
-    return (
-      [
-        {
-          id: 0,
-          name: t("allCauses"),
-        },
-        ...causesApi,
-      ] || []
-    );
-  };
-
-  const handleCauseChange = (_element: any, index: number) => {
-    const cause = _element;
-    setChosenCauseIndex(index);
-    if (cause.id !== 0) {
-      setChosenCause(cause);
-    } else {
-      setChosenCause(undefined);
-    }
-
-    if (scrollViewRef.current) {
-      scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-    }
-  };
-
-  const nonProfitsFilter = () => {
-    if (chosenCause) {
-      const nonProfitsFiltered = nonProfits?.filter(
-        (nonProfit) => nonProfit?.cause?.id === chosenCause?.id,
-      );
-
-      return nonProfitsFiltered || [];
-    }
-    return nonProfits || [];
-  };
-
-  const sortNonProfits = () => {
-    const filteredNonProfits = nonProfitsFilter();
-    const sorted = [...filteredNonProfits].sort((a, b) => {
-      const causeAIndex = causes.findIndex((cause) => cause.id === a.cause.id);
-      const causeBIndex = causes.findIndex((cause) => cause.id === b.cause.id);
-
-      return causeAIndex - causeBIndex;
-    });
-    return sorted;
-  };
-
-  useEffect(() => {
-    sortNonProfits();
-  }, [chosenCause]);
 
   const shouldShowIntegrationBanner =
     !integration?.name?.toLowerCase()?.includes("ribon") &&
@@ -230,57 +170,32 @@ export default function CausesScreen() {
     }
   };
 
-  return isLoading || loadingFirstAccessToIntegration ? (
-    <Placeholder />
-  ) : (
-    <>
-      <ScrollView
-        style={S.container}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <NewHeader />
-        <View
-          style={[
-            S.containerPadding,
-            !shouldShowIntegrationBanner && {
-              paddingTop: 16,
-              borderTopWidth: 1,
-            },
-          ]}
-        >
-          {shouldShowIntegrationBanner && (
-            <IntegrationBanner integration={integration} />
-          )}
-          <NotificationPermissionPrompt />
+  if (isLoading || loadingFirstAccessToIntegration) return <Placeholder />;
 
-          {donatedToday && currentUser ? (
-            <ContributionSection />
-          ) : (
-            <Text style={S.title}>{t("title")}</Text>
-          )}
+  return (
+    <S.Container
+      showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+      <NewHeader />
+      <S.ContainerPadding hasPadding={!shouldShowIntegrationBanner}>
+        {shouldShowIntegrationBanner && (
+          <IntegrationBanner integration={integration} />
+        )}
+        <NotificationPermissionPrompt />
 
-          <ScrollView
-            style={S.groupButtonsContainer}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          >
-            <GroupButtons
-              elements={causesFilter()}
-              onChange={handleCauseChange}
-              nameExtractor={(cause) => cause.name}
-              indexSelected={chosenCauseIndex}
-            />
-          </ScrollView>
-        </View>
-
-        <NonProfitsList nonProfits={sortNonProfits()} />
-        <ReportsSection />
-        <ClubSection isMember={isMember} refetch={refetchIsMember} />
-      </ScrollView>
+        {donatedToday && currentUser ? (
+          <ContributionSection />
+        ) : (
+          <S.Title>{t("title")}</S.Title>
+        )}
+      </S.ContainerPadding>
+      <CausesSection />
+      <ReportsSection />
+      <ClubSection isMember={isMember} refetch={refetchIsMember} />
       <DonationErrorModal newState={params?.newState} />
-    </>
+    </S.Container>
   );
 }

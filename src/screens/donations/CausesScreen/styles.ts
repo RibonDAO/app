@@ -1,79 +1,30 @@
-import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import { defaultBodyLgSemibold } from "styles/typography/default";
+import styled from "styled-components/native";
 
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    backgroundColor: theme.colors.neutral10,
-  },
-  containerPadding: {
-    paddingHorizontal: 16,
-    borderColor: theme.colors.neutral10,
-    backgroundColor: theme.colors.neutral10,
-    borderRadius: 16,
-    top: -16,
-  },
-  containerTicket: {
-    height: 350,
-    width: "100%",
-    margin: 0,
-  },
-  causesCardContainer: {
-    width: 256,
-    marginHorizontal: theme.spacingNative(4),
-    marginBottom: theme.spacingNative(16),
-  },
-  causesContainer: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  noCausesContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: theme.spacingNative(16),
-  },
-  groupButtonsContainer: {
-    paddingTop: theme.spacingNative(16),
-  },
-  title: {
-    ...defaultBodyLgSemibold,
-    color: theme.colors.neutral[800],
-    width: "100%",
-  },
-  ticketExplanationSection: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: theme.spacingNative(12),
-  },
-  ticketText: {
-    color: theme.colors.neutral[500],
-    marginLeft: theme.spacingNative(4),
-    lineHeight: 22,
-  },
-  ticketTextContainer: {
-    borderStyle: "dashed",
-    borderWidth: 1,
-    borderColor: theme.colors.neutral[300],
-    margin: -2,
-    marginBottom: 0,
-  },
-  tooltip: {
-    position: "absolute",
-    backgroundColor: theme.colors.neutral10,
-  },
-  notificationWrapper: {
-    marginBottom: theme.spacingNative(16),
-  },
-  divider: {
-    backgroundColor: theme.colors.neutral[50],
-    width: "100%",
-    height: 8,
-    marginTop: 36,
-  },
-});
+export const Container = styled.ScrollView`
+  height: 100%;
+  background-color: ${theme.colors.neutral10};
+`;
 
-export default styles;
+type ContainerPaddingProps = {
+  hasPadding: boolean;
+};
+
+export const ContainerPadding = styled.View<ContainerPaddingProps>`
+  padding-top: ${(props: ContainerPaddingProps) =>
+    props.hasPadding ? 16 : 0}px;
+  border-top-width: 1px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-color: ${theme.colors.neutral10};
+  background-color: ${theme.colors.neutral10};
+  border-radius: 16px;
+  top: -16px;
+`;
+
+export const Title = styled.Text`
+  ${defaultBodyLgSemibold};
+  color: ${theme.colors.neutral[800]};
+  width: 100%;
+`;
