@@ -1,39 +1,15 @@
 import { View, Text, FlatList } from "react-native";
-import { useCallback, useEffect, useState } from "react";
-import { useCurrentUser } from "contexts/currentUserContext";
-import { useFocusEffect } from "@react-navigation/native";
 import CardReport from "components/moleculars/CardReport";
-import Report from "@ribon.io/shared/types/entities/Report";
 import { useTranslation } from "react-i18next";
+import { useReports } from "@ribon.io/shared/hooks";
 import S from "./styles";
 
-type Props = {
-  data: Report[];
-  refetch: () => void;
-};
-
-export default function ReportsSection({
-  data,
-  refetch,
-}: Props): JSX.Element | null {
-  const { currentUser } = useCurrentUser();
-  const [isLoading, setIsLoading] = useState(false);
+export default function ReportsSection(): JSX.Element | null {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
 
-  useFocusEffect(
-    useCallback(() => {
-      refetch();
-    }, []),
-  );
-
-  useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, [currentUser]);
+  const { reports } = useReports();
 
   const getReportClickEventName = (name: string) => {
     if (name.toLowerCase() === t("reports.seeAllCard"))
@@ -42,7 +18,7 @@ export default function ReportsSection({
     return "reportCard_click";
   };
 
-  return !isLoading ? (
+  return reports.length ? (
     <View>
       <View style={S.container}>
         <Text style={S.title}>{t("reports.title")}</Text>
@@ -52,7 +28,7 @@ export default function ReportsSection({
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={data}
+          data={reports}
           contentContainerStyle={S.flatList}
           renderItem={({ item }) => (
             <View style={S.cardViewItem}>
