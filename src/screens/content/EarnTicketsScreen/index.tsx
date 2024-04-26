@@ -10,7 +10,8 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useTicketsContext } from "contexts/ticketsContext";
 
 import TabViewSection from "./TabViewSection";
-import styles from "./styles";
+import * as S from "./styles";
+import Header from "./Header";
 
 export default function EarnTicketsScreen(): JSX.Element {
   const { params } = useRouteParams<"EarnTicketsScreen">();
@@ -33,7 +34,8 @@ export default function EarnTicketsScreen(): JSX.Element {
 
   return (
     <EarnTicketsTabsProvider>
-      <View style={styles.container}>
+      <View style={S.Container}>
+        <Header />
         <TabViewSection initialTabIndex={params?.currentTab || 0} />
       </View>
     </EarnTicketsTabsProvider>

@@ -41,7 +41,6 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useTickets } from "hooks/useTickets";
 import { useIsOnboarding } from "contexts/onboardingContext";
 import { useRouteParams } from "hooks/useRouteParams";
-import NewHeader from "components/moleculars/NewHeader";
 import { theme } from "@ribon.io/shared/styles";
 import {
   RECEIVED_TICKET_AT_KEY,
@@ -53,6 +52,7 @@ import DonationErrorModal from "./errorModalSection";
 import ClubSection from "./ClubSection";
 import ReportsSection from "./ReportsSection";
 import S from "./styles";
+import Header from "./Header";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -362,7 +362,7 @@ export default function CausesScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <NewHeader />
+        <Header />
         <View
           style={[
             S.containerPadding,

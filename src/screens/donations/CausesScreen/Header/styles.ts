@@ -9,7 +9,7 @@ import { stylizedDisplayXl } from "styles/typography/stylized";
 
 export const Container = styled.View`
   display: flex;
-  height: 328px;
+  padding-bottom: ${theme.spacing(48)};
   width: 100%;
   padding-horizontal: ${theme.spacing(16)};
   background-color: ${theme.colors.brand.primary[800]};
@@ -21,6 +21,9 @@ export const Container = styled.View`
 export const ConfigContainer = styled.TouchableOpacity`
   display: flex;
   height: 30px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   align-self: flex-end;
   margin-top: ${theme.spacing(8)};
 `;
