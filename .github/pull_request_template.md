@@ -14,6 +14,11 @@
 - Put here the issue that must be closed with this PR
 - eg: closes [#001]()
 
+## Did you use styled-components?
+
+- [ ] Yes
+- [ ] No
+
 ## Type of change
 
 Please delete options that are not relevant.
