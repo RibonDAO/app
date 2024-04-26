@@ -88,6 +88,7 @@ export default function NonProfitsList({ nonProfits }: Props) {
           <S.NonProfitContainer
             isFirst={index === 0}
             isLast={index === nonProfits.length - 1}
+            key={nonProfit.id}
           >
             <CardCenterImageButton
               image={nonProfit.mainImage}
