@@ -2,8 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Asset } from "expo-asset";
 import { Animated, Image, StyleSheet, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
-import Constants from "expo-constants";
 import { logError } from "services/crashReport";
+import { theme } from "@ribon.io/shared";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,7 +45,7 @@ function AnimatedSplashScreen({ children, image }: Props) {
           style={[
             StyleSheet.absoluteFill,
             {
-              backgroundColor: Constants.manifest?.splash?.backgroundColor,
+              backgroundColor: theme.colors.neutral10,
               opacity: animation,
             },
           ]}
@@ -54,7 +54,7 @@ function AnimatedSplashScreen({ children, image }: Props) {
             style={{
               width: "100%",
               height: "100%",
-              resizeMode: Constants.manifest?.splash?.resizeMode || "contain",
+              resizeMode: "contain",
               transform: [
                 {
                   scale: animation,

@@ -1,5 +1,5 @@
-const version = "5.9.3";
-const buildNumber = 374;
+const version = "5.10.0";
+const buildNumber = 375;
 
 export default () => ({
   "expo": {
@@ -73,13 +73,13 @@ export default () => ({
         "expo-build-properties",
         {
           "android": {
-            "compileSdkVersion": 33,
-            "targetSdkVersion": 33,
-            "buildToolsVersion": "33.0.0"
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "34.0.0"
           },
           "ios": {
             "useFrameworks": "static",
-            "deploymentTarget": "13.0"
+            "deploymentTarget": "13.4"
           }
         },
       ],
