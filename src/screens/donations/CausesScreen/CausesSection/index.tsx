@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useCausesContext } from "contexts/causesContext";
-import CausesList from "./CausesList";
+import CausesFilter from "./CausesFilter";
 import NonProfitsList from "./NonProfitsList";
 import * as S from "./styles";
 
@@ -39,7 +39,7 @@ export default function CausesSection() {
 
   return (
     <S.Container>
-      <CausesList />
+      <CausesFilter />
       <NonProfitsList nonProfits={sortNonProfits()} />
     </S.Container>
   );

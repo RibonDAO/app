@@ -5,7 +5,7 @@ import {
 } from "config/testUtils/expects";
 import { renderComponent } from "config/testUtils/renders";
 import { causeFactory } from "@ribon.io/shared/config";
-import CausesList from ".";
+import CausesFilter from ".";
 
 const mockCause = causeFactory({
   id: 1,
@@ -28,9 +28,9 @@ jest.mock("@ribon.io/shared/hooks", () => ({
   }),
 }));
 
-describe("CausesList", () => {
+describe("CausesFilter", () => {
   beforeEach(async () => {
-    renderComponent(<CausesList />);
+    renderComponent(<CausesFilter />);
     await waitForPromises();
   });
 

@@ -4,7 +4,7 @@ import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useTranslation } from "react-i18next";
 import * as S from "./styles";
 
-export default function CausesList() {
+export default function CausesFilter() {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
@@ -13,7 +13,7 @@ export default function CausesList() {
   const { setChosenCauseIndex, setChosenCause, chosenCauseIndex } =
     useCauseDonationContext();
 
-  const causesFilter = () => {
+  const filteredCauses = () => {
     const causesApi = causes.filter((cause) => cause.status === "active");
     return (
       [
@@ -40,7 +40,7 @@ export default function CausesList() {
     <S.Container>
       <S.Scroll horizontal showsHorizontalScrollIndicator={false}>
         <GroupButtons
-          elements={causesFilter()}
+          elements={filteredCauses()}
           onChange={handleCauseChange}
           nameExtractor={(cause) => cause.name}
           indexSelected={chosenCauseIndex}
