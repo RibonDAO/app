@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useCausesContext } from "contexts/causesContext";
+import { NonProfit } from "@ribon.io/shared/types";
 import CausesFilter from "./CausesFilter";
 import NonProfitsList from "./NonProfitsList";
 import * as S from "./styles";
@@ -10,37 +11,43 @@ export default function CausesSection() {
   const { chosenCause } = useCauseDonationContext();
   const { nonProfitsWithPoolBalance: nonProfits } = useNonProfitsContext();
   const { causesWithPoolBalance: causes } = useCausesContext();
+  const [sortedNonProfits, setSortedNonProfits] = useState<NonProfit[]>(
+    nonProfits || [],
+  );
 
-  const nonProfitsFilter = () => {
-    if (chosenCause) {
-      const nonProfitsFiltered = nonProfits?.filter(
-        (nonProfit) => nonProfit?.cause?.id === chosenCause?.id,
-      );
+  const filterNonProfits = () => {
+    if (!chosenCause) return nonProfits || [];
 
-      return nonProfitsFiltered || [];
-    }
-    return nonProfits || [];
+    const chosenCauseId = chosenCause.id;
+    return (
+      nonProfits?.filter(
+        (nonProfit) => nonProfit?.cause?.id === chosenCauseId,
+      ) || []
+    );
   };
 
   const sortNonProfits = () => {
-    const filteredNonProfits = nonProfitsFilter();
-    const sorted = [...filteredNonProfits].sort((a, b) => {
-      const causeAIndex = causes.findIndex((cause) => cause.id === a.cause.id);
-      const causeBIndex = causes.findIndex((cause) => cause.id === b.cause.id);
+    const filteredNonProfits = filterNonProfits();
 
-      return causeAIndex - causeBIndex;
+    return filteredNonProfits.slice().sort((a, b) => {
+      const causeAId = a.cause.id;
+      const causeBId = b.cause.id;
+
+      return (
+        causes.findIndex((cause) => cause.id === causeAId) -
+        causes.findIndex((cause) => cause.id === causeBId)
+      );
     });
-    return sorted;
   };
 
   useEffect(() => {
-    sortNonProfits();
+    setSortedNonProfits(sortNonProfits());
   }, [chosenCause]);
 
   return (
     <S.Container>
       <CausesFilter />
-      <NonProfitsList nonProfits={sortNonProfits()} />
+      <NonProfitsList nonProfits={sortedNonProfits} />
     </S.Container>
   );
 }
