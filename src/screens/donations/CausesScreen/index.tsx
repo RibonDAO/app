@@ -180,7 +180,7 @@ export default function CausesScreen() {
       }
     >
       <NewHeader />
-      <S.ContainerPadding hasPadding={!shouldShowIntegrationBanner}>
+      <S.ContainerPadding hasPaddingTop={!shouldShowIntegrationBanner}>
         {shouldShowIntegrationBanner && (
           <IntegrationBanner integration={integration} />
         )}

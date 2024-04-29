@@ -8,12 +8,12 @@ export const Container = styled.ScrollView`
 `;
 
 type ContainerPaddingProps = {
-  hasPadding: boolean;
+  hasPaddingTop: boolean;
 };
 
 export const ContainerPadding = styled.View<ContainerPaddingProps>`
   padding-top: ${(props: ContainerPaddingProps) =>
-    props.hasPadding ? 16 : 0}px;
+    props.hasPaddingTop ? 16 : 0}px;
   border-top-width: 1px;
   padding-left: 16px;
   padding-right: 16px;
