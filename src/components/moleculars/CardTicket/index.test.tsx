@@ -1,5 +1,5 @@
+import * as React from "react";
 import { theme } from "@ribon.io/shared";
-import TicketIllustration from "assets/illustrations/TicketIllustration";
 import Button from "components/atomics/buttons/Button";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
 import { renderComponent } from "config/testUtils/renders";
@@ -20,7 +20,6 @@ describe("CardTicket", () => {
           text: "subtitle",
           color: theme.colors.brand.primary[900],
         }}
-        icon={<TicketIllustration />}
       >
         <Button
           text="text"

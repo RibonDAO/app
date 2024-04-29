@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { TicketsCategories, theme } from "@ribon.io/shared";
-import PinkTicketIllustration from "assets/illustrations/PinkTicketIllustration";
 import Button from "components/atomics/buttons/Button";
 import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
 import CardTicket from "components/moleculars/CardTicket";
@@ -82,8 +81,7 @@ export default function ClubDailyTicketCard({
           : t("dailyTicketCard.subtitle"),
         color: theme.colors.brand.tertiary[900],
       }}
-      borderColor={theme.colors.brand.tertiary[300]}
-      icon={<PinkTicketIllustration />}
+      background="multipleTickets"
     >
       {hasCollected ? (
         <ButtonNonClickable

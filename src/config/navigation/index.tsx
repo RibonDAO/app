@@ -198,6 +198,7 @@ function BottomTabNavigator() {
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
           header: headerOutline,
           lazy: false,
+          headerShown: false,
         }}
         listeners={() => ({
           tabPress: () => {
@@ -575,6 +576,7 @@ function RootNavigator() {
         component={AboutTicketsScreen}
         options={{
           headerShown: false,
+          animation: "slide_from_bottom",
         }}
       />
 
