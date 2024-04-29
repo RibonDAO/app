@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import {
-  defaultBodyMdRegular,
   defaultBodyMdSemibold,
   defaultBodyXsBold,
   defaultBodyXsRegular,
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
     width: 128,
     borderRadius: 4,
     position: "relative",
-    overflowX: "hidden",
+    overflow: "hidden",
     shadowColor: theme.colors.neutral[800],
     backgroundColor: theme.colors.neutral10,
     shadowOffset: { width: 2, height: 8 },

@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    cursor: "pointer",
   },
   lastItem: {
     borderBottomWidth: 0,
