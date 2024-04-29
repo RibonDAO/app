@@ -10,6 +10,8 @@ export interface ITicketsContext {
   setTicketsCounter: (tickets: number) => void;
   refetchTickets: () => void;
   hasTickets: boolean;
+  couponId: string | undefined;
+  setCouponId: (couponId: string) => void;
 }
 
 export type Props = {
@@ -27,6 +29,7 @@ function TicketsProvider({ children }: Props) {
   const { isAuthenticated } = useAuthentication();
   const { currentUser } = useCurrentUser();
   const [ticketsCounter, setTicketsCounter] = useState<number>(1);
+  const [couponId, setCouponId] = useState<string | undefined>();
 
   const hasTickets = ticketsCounter > 0;
 
@@ -62,6 +65,8 @@ function TicketsProvider({ children }: Props) {
       setTicketsCounter,
       hasTickets,
       refetchTickets: refetch,
+      couponId,
+      setCouponId,
     }),
     [ticketsCounter, currentIntegrationId, isAuthenticated, userTickets],
   );
