@@ -1,8 +1,7 @@
-import { View, Text, FlatList } from "react-native";
 import CardReport from "components/moleculars/CardReport";
 import { useTranslation } from "react-i18next";
 import { useReports } from "@ribon.io/shared/hooks";
-import S from "./styles";
+import * as S from "./styles";
 
 export default function ReportsSection(): JSX.Element | null {
   const { t } = useTranslation("translation", {
@@ -19,29 +18,28 @@ export default function ReportsSection(): JSX.Element | null {
   };
 
   return reports.length ? (
-    <View>
-      <View style={S.container}>
-        <Text style={S.title}>{t("reports.title")}</Text>
-        <Text style={S.description}>{t("reports.description")}</Text>
-      </View>
-      <View style={S.reportList}>
-        <FlatList
+    <S.Container>
+      <S.TitleContainer>
+        <S.Title>{t("reports.title")}</S.Title>
+        <S.Description>{t("reports.description")}</S.Description>
+      </S.TitleContainer>
+      <S.ReportListContainer>
+        <S.ReportList
           horizontal
           showsHorizontalScrollIndicator={false}
           data={reports}
-          contentContainerStyle={S.flatList}
-          renderItem={({ item }) => (
-            <View style={S.cardViewItem}>
+          renderItem={({ item }: any) => (
+            <S.CardViewItem>
               <CardReport
                 title={`${item.name} →`}
                 link={item.link}
                 showIcon={item.name.toLowerCase() !== t("reports.seeAllCard")}
                 clickEventName={getReportClickEventName(item.name)}
               />
-            </View>
+            </S.CardViewItem>
           )}
         />
-      </View>
-    </View>
+      </S.ReportListContainer>
+    </S.Container>
   ) : null;
 }
