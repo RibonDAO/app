@@ -1,5 +1,4 @@
 import { theme } from "@ribon.io/shared";
-import TicketIllustration from "assets/illustrations/TicketIllustration";
 import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
 import CardTicket from "components/moleculars/CardTicket";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
@@ -18,7 +17,7 @@ export default function DailyTicketCard() {
         text: t("dailyTicketCard.subtitle"),
         color: theme.colors.brand.primary[900],
       }}
-      icon={<TicketIllustration />}
+      background="singleTicket"
     >
       <ButtonNonClickable
         text={t("dailyTicketCard.buttonText")}
