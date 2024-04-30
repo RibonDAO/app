@@ -1,36 +1,40 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import {
   Placeholder,
   PlaceholderMedia,
   PlaceholderLine,
   Fade,
 } from "rn-placeholder";
-import S from "./styles";
+import { theme } from "@ribon.io/shared";
+import * as S from "./styles";
 
 function PaymentScreenPlaceholder() {
   return (
-    <View style={[S.container, { paddingTop: 28, paddingHorizontal: 16 }]}>
+    <S.Container style={{ paddingTop: 28, paddingHorizontal: 16 }}>
       <Placeholder Animation={Fade}>
         <PlaceholderLine height={22} />
         <PlaceholderLine height={22} />
-        <ScrollView horizontal style={S.causesContainer}>
+        <ScrollView
+          horizontal
+          style={{ display: "flex", flexDirection: "row" }}
+        >
           <PlaceholderMedia
-            style={[
-              S.causesCardContainer,
-              {
-                marginRight: 16,
-                height: 288,
-              },
-            ]}
+            style={{
+              width: 256,
+              marginHorizontal: theme.spacingNative(4),
+              marginBottom: theme.spacingNative(16),
+              marginRight: 16,
+              height: 288,
+            }}
           />
           <PlaceholderMedia
-            style={[
-              S.causesCardContainer,
-              {
-                marginRight: 16,
-                height: 288,
-              },
-            ]}
+            style={{
+              width: 256,
+              marginHorizontal: theme.spacingNative(4),
+              marginBottom: theme.spacingNative(16),
+              marginRight: 16,
+              height: 288,
+            }}
           />
         </ScrollView>
 
@@ -42,7 +46,7 @@ function PaymentScreenPlaceholder() {
           }}
         />
       </Placeholder>
-    </View>
+    </S.Container>
   );
 }
 
