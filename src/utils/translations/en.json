@@ -290,7 +290,7 @@
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Collected",
-          "buttonTextNoClub": "Unlock collection",
+          "buttonTextNoClub": "Unlock collection"
 
         },
         "monthlyTicketCard": {
