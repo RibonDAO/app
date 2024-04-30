@@ -50,15 +50,18 @@ export default function GiveTicketByCouponScreen() {
     canCollectByCoupon();
   }, []);
 
+  async function handleCouponIdAndNavigation(screen: string) {
+    await setCouponId(undefined);
+    navigateTo(screen);
+  }
+
   async function receiveTicket() {
     await handleCollectByCoupon({
       onSuccess: () => {
-        setCouponId(undefined);
-        navigateTo("ReceiveTicketScreen");
+        handleCouponIdAndNavigation("ReceiveTicketScreen");
       },
       onError: () => {
-        setCouponId(undefined);
-        navigateTo("ExpiredCouponScreen");
+        handleCouponIdAndNavigation("ExpiredCouponScreen");
       },
     });
   }

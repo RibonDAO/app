@@ -23,9 +23,13 @@ export default function ExpiredCouponScreen() {
     setCouponId(undefined);
   }, []);
 
-  const handleBackButtonClick = () => {
-    setCouponId(undefined);
+  async function handleCouponIdAndNavigation() {
+    await setCouponId(undefined);
     navigateTo("CausesScreen");
+  }
+
+  const handleBackButtonClick = () => {
+    handleCouponIdAndNavigation();
   };
 
   return (

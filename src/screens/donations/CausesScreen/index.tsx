@@ -47,6 +47,7 @@ import {
   RECEIVED_TICKET_AT_KEY,
   RECEIVED_TICKET_FROM_INTEGRATION,
 } from "lib/localStorage/constants";
+import { useCouponContext } from "contexts/couponContext";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
@@ -67,6 +68,7 @@ export default function CausesScreen() {
   const { chosenCause, setChosenCauseIndex, setChosenCause, chosenCauseIndex } =
     useCauseDonationContext();
   const { currentIntegrationId, externalId } = useIntegrationContext();
+  const { couponId } = useCouponContext();
 
   const { donatedToday } = useDonatedToday();
   const {
@@ -102,6 +104,12 @@ export default function CausesScreen() {
     if (!isLoading) perform(SplashScreen.hideAsync).in(100);
   }, [isLoading]);
 
+  useEffect(() => {
+    if (couponId) {
+      navigateTo("GiveTicketByCouponScreen");
+    }
+  }, [couponId]);
+
   useFocusEffect(
     useCallback(() => {
       refetchTickets();
@@ -119,6 +127,9 @@ export default function CausesScreen() {
     const canCollect = await handleCanCollect();
     const receivedTicketToday = await hasReceivedTicketToday();
     const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
+    if (couponId) {
+      navigateTo("GiveTicketByCouponScreen");
+    }
     if (canCollect) {
       if (currentUser && !receivedTicketToday) {
         if (isRibonIntegration) {
