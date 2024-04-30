@@ -1264,13 +1264,6 @@
   resolved "https://registry.yarnpkg.com/@config-plugins/react-native-branch/-/react-native-branch-7.0.0.tgz#e0a8c262a768291f2ce3208dce4dd63078205b3b"
   integrity sha512-Haf+5J3hBqpoFqL/7++0cwXaEaUYyNym/gQH4BDp09QQVRshWN4FVZH4stZ+sEzNTmMAaddPeHAQicFIx0//eA==
 
-"@egjs/hammerjs@^2.0.17":
-  version "2.0.17"
-  resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
-  integrity sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==
-  dependencies:
-    "@types/hammerjs" "^2.0.36"
-
 "@emotion/is-prop-valid@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-1.2.1.tgz#23116cf1ed18bfeac910ec6436561ecb1a3885cc"
@@ -3019,10 +3012,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.1.48":
-  version "1.1.48"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.48.tgz#c9efb569ed89bd2367663c32eb17c51f5b6d7857"
-  integrity sha512-nG3R/HRa8BgvfHANJIkD1SH8r9k8ZeSyXIl0d6c10qUjX55fw1cGXsfNzZqhNlBKxX5OhSB1T3yhE4fRAIT8Dg==
+"@ribon.io/shared@^1.1.49":
+  version "1.1.49"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.49.tgz#44c75c566048a4fe4c50e5c92ca71a7343a5d286"
+  integrity sha512-c7IKvYcsQvakXcqyF2zxOMLO/7qSZyJqahZtxUtodr6BwWmbNu6Vw1b1+M2JcAF/HqS3rc7wjroqUXQ3ly+ekA==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -3733,11 +3726,6 @@
   integrity sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==
   dependencies:
     "@types/node" "*"
-
-"@types/hammerjs@^2.0.36":
-  version "2.0.45"
-  resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.45.tgz#ffa764bb68a66c08db6efb9c816eb7be850577b1"
-  integrity sha512-qkcUlZmX6c4J8q45taBKTL3p+LbITgyx7qhlPYOdOHZB7B31K0mXbP5YA7i7SgDeEGuI9MnumiKPEMrxg8j3KQ==
 
 "@types/hoist-non-react-statics@*", "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.5"
