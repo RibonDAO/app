@@ -216,7 +216,7 @@
       "hasAccountButton": "Já tenho uma conta"
     },
     "giveTicketByCouponScreen": {
-      "title": "Você ganhou {{ticketsCounter}} tickets!",
+      "title": "Você ganhou {{numberOfTickets}} tickets!",
       "subtitle": "Dynamic data from coupon",
       "button": "Coletar tickets"
     },
@@ -681,6 +681,12 @@
       "title": "Entre na sua conta"
     },
     "insertEmailScreen": {
+      "title": "Entre com um e-mail",
+      "emailLabel": "E-mail",
+      "confirmText": "Continuar",
+      "emailPlaceholder": "Seu e-mail"
+    },
+    "insertEmailCouponScreen": {
       "title": "Entre com um e-mail",
       "emailLabel": "E-mail",
       "confirmText": "Continuar",

@@ -79,7 +79,7 @@ import ExpiredCouponScreen from "screens/coupons/ExpiredCouponScreen";
 import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
 import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
 import SignInCouponScreen from "screens/coupons/auth/SignInCouponScreen";
-import InsertCouponScreen from "screens/coupons/auth/InsertEmailCouponScreen";
+import InsertEmailCouponScreen from "screens/coupons/auth/InsertEmailCouponScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -327,7 +327,7 @@ function RootNavigator() {
 
       <Stack.Screen
         name="InsertEmailCouponScreen"
-        component={InsertCouponScreen}
+        component={InsertEmailCouponScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 

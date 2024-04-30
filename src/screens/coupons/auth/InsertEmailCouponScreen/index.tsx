@@ -20,9 +20,9 @@ import Button from "components/atomics/buttons/Button";
 import UserAvatarIcon from "./assets/UserAvatarIcon";
 import S from "./styles";
 
-function InsertCouponScreen() {
+function InsertEmailCouponScreen() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "auth.insertCouponScreen",
+    keyPrefix: "auth.insertEmailCouponScreen",
   });
 
   const [email, setEmail] = useState("");
@@ -94,4 +94,4 @@ function InsertCouponScreen() {
   );
 }
 
-export default InsertCouponScreen;
+export default InsertEmailCouponScreen;

@@ -229,7 +229,7 @@
     },
     "giveTicketByCouponScreen": {
       "title": "You won 1 ticket!",
-      "titlePlural": "You won {{ticketsCounter}} tickets!",
+      "titlePlural": "You won {{numberOfTickets}} tickets!",
       "subtitle": "Dynamic data from coupon",
       "button": "Collect tickets"
     },
@@ -690,6 +690,12 @@
       "footerEndText": " and"
     },
     "insertEmailScreen": {
+      "title": "Sign in with an e-mail",
+      "emailLabel": "E-mail",
+      "confirmText": "Continue",
+      "emailPlaceholder": "Your e-mail"
+    },
+    "insertEmailCouponScreen": {
       "title": "Sign in with an e-mail",
       "emailLabel": "E-mail",
       "confirmText": "Continue",
