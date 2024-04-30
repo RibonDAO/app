@@ -105,7 +105,7 @@ export default function CausesScreen() {
   }, [isLoading]);
 
   useEffect(() => {
-    if (couponId) {
+    if (couponId !== undefined) {
       navigateTo("GiveTicketByCouponScreen");
     }
   }, [couponId]);
@@ -127,7 +127,7 @@ export default function CausesScreen() {
     const canCollect = await handleCanCollect();
     const receivedTicketToday = await hasReceivedTicketToday();
     const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
-    if (couponId) {
+    if (couponId !== undefined) {
       navigateTo("GiveTicketByCouponScreen");
     }
     if (canCollect) {
