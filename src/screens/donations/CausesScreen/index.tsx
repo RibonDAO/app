@@ -42,11 +42,6 @@ import { useTickets } from "hooks/useTickets";
 import { useIsOnboarding } from "contexts/onboardingContext";
 import { useRouteParams } from "hooks/useRouteParams";
 import NewHeader from "components/moleculars/NewHeader";
-import { theme } from "@ribon.io/shared/styles";
-import {
-  RECEIVED_TICKET_AT_KEY,
-  RECEIVED_TICKET_FROM_INTEGRATION,
-} from "lib/localStorage/constants";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
@@ -93,8 +88,7 @@ export default function CausesScreen() {
   const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
-  const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
-    useTickets();
+  const { hasReceivedTicketToday, handleCanCollect } = useTickets();
   const { params } = useRouteParams<"CausesScreen">();
   const { onboardingCompleted } = useIsOnboarding();
 
@@ -121,34 +115,7 @@ export default function CausesScreen() {
     const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
     if (canCollect) {
       if (currentUser && !receivedTicketToday) {
-        if (isRibonIntegration) {
-          await handleCollect({
-            onSuccess: () => {
-              logEvent("ticketCollected", { from: "collect" });
-            },
-          });
-          refetchTickets();
-          showToast({
-            type: "custom",
-            message: t("ticketToast"),
-            position: "bottom",
-            navigate: "GiveTicketScreen",
-            icon: "confirmation_number",
-            backgroundColor: theme.colors.brand.primary[50],
-            iconColor: theme.colors.brand.primary[600],
-            borderColor: theme.colors.brand.primary[600],
-            textColor: theme.colors.brand.primary[600],
-          });
-          await setLocalStorageItem(
-            RECEIVED_TICKET_AT_KEY,
-            Date.now().toString(),
-          );
-          await setLocalStorageItem(
-            RECEIVED_TICKET_FROM_INTEGRATION,
-            currentIntegrationId?.toLocaleString(),
-          );
-          logEvent("receiveTicket_view", { from: "receivedTickets_toast" });
-        } else {
+        if (!isRibonIntegration) {
           navigateTo("GiveTicketV2Screen");
         }
       } else if (!currentUser && onboardingCompleted !== true) {

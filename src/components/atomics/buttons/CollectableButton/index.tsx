@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewTicketAnimation from "components/atomics/animations/NewTicketAnimation";
 import { theme } from "@ribon.io/shared";
 import {
@@ -10,11 +10,11 @@ import {
 import * as S from "./styles";
 
 const DEFAULT_COLORS = [
-  theme.colors.brand.primary[900], // Initial color
-  theme.colors.brand.primary[700],
-  theme.colors.brand.primary[600],
-  theme.colors.brand.primary[300],
-  theme.colors.brand.primary[50], // Final color
+  theme.colors.brand.primary[800], // initial color
+  theme.colors.brand.tertiary[600],
+  "#F97303",
+  theme.colors.brand.quaternary[200],
+  theme.colors.brand.primary[100], // final color
 ];
 
 export type Props = {
@@ -24,6 +24,7 @@ export type Props = {
   onClick: () => void;
   text: string;
   afterText: string;
+  collected?: boolean;
 };
 
 export default function CollectableButton({
@@ -33,25 +34,33 @@ export default function CollectableButton({
   text,
   afterText,
   onClick,
+  collected,
 }: Props) {
   const [clicked, setClicked] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
   const handleClick = () => {
-    setShowToast(false);
-    setClicked(!clicked);
-    setDisabled(true);
     onClick();
-
-    setTimeout(() => {
-      if (!clicked) setShowToast(true);
-    }, 500);
-
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
   };
+
+  useEffect(() => {
+    if (collected) {
+      setTimeout(() => {
+        if (!clicked) setShowToast(true);
+      }, 500);
+
+      setTimeout(() => {
+        setShowToast(false);
+      }, 10000);
+
+      setClicked(true);
+      setDisabled(true);
+    } else {
+      setClicked(false);
+      setDisabled(false);
+    }
+  }, [collected]);
 
   if (locked) return <LockedButton colors={colors} text={afterText} />;
 
