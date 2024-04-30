@@ -29,7 +29,9 @@ export default function ReportsSection(): JSX.Element | null {
           showsHorizontalScrollIndicator={false}
           data={reports}
           renderItem={({ item }: any) => (
-            <S.CardViewItem>
+            <S.CardViewItem
+              isLastChild={item.name.toLowerCase() === t("reports.seeAllCard")}
+            >
               <CardReport
                 title={`${item.name} →`}
                 link={item.link}

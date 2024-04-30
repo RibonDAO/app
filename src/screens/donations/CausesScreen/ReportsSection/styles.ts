@@ -27,12 +27,14 @@ export const ReportListContainer = styled.View`
   margin-top: ${theme.spacingNative(12)}px;
 `;
 
-export const ReportList = styled.FlatList`
-  padding-left: ${theme.spacingNative(16)}px;
-  padding-right: ${theme.spacingNative(16)}px;
-`;
+export const ReportList = styled.FlatList``;
 
-export const CardViewItem = styled.View`
-  margin-left: ${theme.spacingNative(6)}px;
-  margin-right: ${theme.spacingNative(6)}px;
+type CardViewItemProps = {
+  isLastChild?: boolean;
+};
+
+export const CardViewItem = styled.View<CardViewItemProps>`
+  margin-left: ${theme.spacingNative(16)}px;
+  margin-right: ${(props: CardViewItemProps) =>
+    props.isLastChild ? theme.spacingNative(16) : 0}px;
 `;
