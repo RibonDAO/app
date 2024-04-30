@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NewTicketAnimation from "components/atomics/animations/NewTicketAnimation";
 import { theme } from "@ribon.io/shared";
+import { perform } from "lib/timeoutHelpers";
 import {
   BackgroundLayersAnimation,
   TextAnimation,
@@ -43,14 +44,8 @@ export default function CollectableButton({
     setClicked(!clicked);
     setDisabled(true);
     onClick();
-
-    setTimeout(() => {
-      if (!clicked) setShowToast(true);
-    }, 500);
-
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
+    perform(() => !clicked && setShowToast(true)).in(500);
+    perform(() => setShowToast(false)).in(3000);
   };
 
   if (locked) return <LockedButton colors={colors} text={afterText} />;
