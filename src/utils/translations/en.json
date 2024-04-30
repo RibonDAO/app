@@ -723,6 +723,9 @@
       "email": "Continue with e-mail",
       "toastSuccessMessage": "Your ticket was sent by e-mail"
     },
+    "signInCouponScreen": {
+      "title": "Sign in to your account"
+    },
     "receiveExtraTicketScreen": {
       "title": "Validating your account brought you here",
       "description": "Your donation ticket is available",

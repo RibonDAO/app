@@ -714,6 +714,9 @@
       "email": "Continuar com e-mail",
       "toastSuccessMessage": "Seu ticket foi enviado por e-mail"
     },
+    "signInCouponScreen": {
+      "title": "Entre na sua conta"
+    },
     "receiveExtraTicketScreen": {
       "title": "Validar sua conta trouxe você aqui",
       "description": "Seu ticket extra está disponível",
