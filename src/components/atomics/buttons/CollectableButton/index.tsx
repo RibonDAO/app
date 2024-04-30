@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import NewTicketAnimation from "components/atomics/animations/NewTicketAnimation";
 import { theme } from "@ribon.io/shared";
+import { perform } from "lib/timeoutHelpers";
 import {
   BackgroundLayersAnimation,
   TextAnimation,
