@@ -1,6 +1,6 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCoupons as useCouponsShared } from "@ribon.io/shared/hooks/";
 import { PLATFORM } from "utils/constants/Application";
+import { useTickets as useTicketsShared } from "@ribon.io/shared/hooks";
 import { useCouponContext } from "contexts/couponContext";
 import { logError } from "services/crashReport";
 
@@ -11,15 +11,15 @@ type HandleCollectProps = {
 
 export function useCoupons() {
   const { currentUser } = useCurrentUser();
-  const { canCollectByCoupon, collectByCoupon } = useCouponsShared();
+  const { canCollectByCoupon, collectByCoupon } = useTicketsShared();
   const { couponId } = useCouponContext();
 
   async function handleCanCollectByCoupon() {
     if (!couponId) {
-      return false;
+      return { canCollect: false };
     }
 
-    return canCollectByCoupon(currentUser?.email ?? "", PLATFORM, couponId);
+    return canCollectByCoupon(couponId, PLATFORM, currentUser?.email ?? "");
   }
 
   async function handleCollectByCoupon({
@@ -28,7 +28,7 @@ export function useCoupons() {
   }: HandleCollectProps) {
     try {
       if (couponId) {
-        await collectByCoupon(currentUser?.email ?? "", PLATFORM, couponId);
+        await collectByCoupon(couponId, PLATFORM, currentUser?.email ?? "");
         if (onSuccess) onSuccess();
       }
     } catch (e: any) {
