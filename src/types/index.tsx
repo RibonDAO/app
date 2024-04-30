@@ -145,6 +145,8 @@ export type RootStackParamList = {
   PrivateStack: undefined;
   SignInScreen: undefined;
   SignInExtraTicketScreen: undefined;
+  SignInCouponScreen: undefined;
+  InsertEmailCouponScreen: undefined;
   DonationSignInScreen: DonateScreenList;
   SignedInScreen: DonateScreenList;
   DonationDoneScreen: DonationDoneParamsList;

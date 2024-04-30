@@ -52,7 +52,7 @@ function SignInCouponScreen() {
               />
             )}
             <MagicLinkLogin
-              onContinue={() => navigateTo("InsertEmailScreen")}
+              onContinue={() => navigateTo("InsertEmailCouponScreen")}
               from="coupon_flow"
             />
             <PrivacyPolicyLayout />

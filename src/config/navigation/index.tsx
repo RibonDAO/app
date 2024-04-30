@@ -78,6 +78,8 @@ import CouponProvider, { useCouponContext } from "contexts/couponContext";
 import ExpiredCouponScreen from "screens/coupons/ExpiredCouponScreen";
 import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
 import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
+import SignInCouponScreen from "screens/coupons/auth/SignInCouponScreen";
+import InsertCouponScreen from "screens/coupons/auth/InsertEmailCouponScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -314,6 +316,18 @@ function RootNavigator() {
       <Stack.Screen
         name="GiveTicketByCouponScreen"
         component={GiveTicketByCouponScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="SignInCouponScreen"
+        component={SignInCouponScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="InsertEmailCouponScreen"
+        component={InsertCouponScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
