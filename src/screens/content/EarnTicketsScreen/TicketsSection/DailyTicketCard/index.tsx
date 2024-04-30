@@ -1,6 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { setLocalStorageItem, theme } from "@ribon.io/shared";
-import TicketIllustration from "assets/illustrations/TicketIllustration";
 import CollectableButton from "components/atomics/buttons/CollectableButton";
 import CardTicket from "components/moleculars/CardTicket";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
@@ -79,12 +78,12 @@ export default function DailyTicketCard() {
         text: t("dailyTicketCard.subtitle"),
         color: theme.colors.brand.primary[900],
       }}
-      icon={<TicketIllustration />}
+      background="singleTicket"
     >
       <CollectableButton
         text={t("dailyTicketCard.buttonText")}
         afterText={t("dailyTicketCard.buttonTextCollected", { time })}
-        collected
+        collected={hasCollected}
         onClick={handleButtonPress}
       />
     </CardTicket>

@@ -17,7 +17,7 @@ export const ButtonContainer = styled.View<CustomColorProps>`
     color || theme.colors.brand.primary[600]};
   width: 100%;
   height: 48px;
-  border-radius: 5px;
+  border-radius: 12px;
   display: flex;
   flex-direction: row;
   justify-content: center;
