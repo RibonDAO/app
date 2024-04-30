@@ -1,6 +1,7 @@
 import { useNavigation } from "hooks/useNavigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useCouponContext } from "contexts/couponContext";
 import Button from "components/atomics/buttons/Button";
 import { View, Text, TouchableOpacity } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
@@ -11,6 +12,7 @@ import Ticket from "./assets/Ticket";
 import S from "./styles";
 
 export default function ExpiredCouponScreen() {
+  const { setCouponId } = useCouponContext();
   const { t } = useTranslation("translation", {
     keyPrefix: "content.expiredCouponScreen",
   });
@@ -18,9 +20,11 @@ export default function ExpiredCouponScreen() {
 
   useEffect(() => {
     logEvent("P38_view");
+    setCouponId(undefined);
   }, []);
 
   const handleBackButtonClick = () => {
+    setCouponId(undefined);
     navigateTo("CausesScreen");
   };
 

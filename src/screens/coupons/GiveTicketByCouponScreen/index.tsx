@@ -32,7 +32,7 @@ export default function GiveTicketByCouponScreen() {
 
   async function canCollectByCoupon() {
     const canCollectByCouponData = await handleCanCollectByCoupon();
-    if (!canCollectByCouponData.canCollectByCoupon) {
+    if (!canCollectByCouponData.canCollect) {
       navigateTo("ExpiredCouponScreen");
     } else {
       setCoupon(canCollectByCouponData.coupon);
@@ -44,7 +44,7 @@ export default function GiveTicketByCouponScreen() {
     if (!currentUser) {
       navigateTo("SignInCouponScreen");
     }
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     canCollectByCoupon();
@@ -57,6 +57,7 @@ export default function GiveTicketByCouponScreen() {
         navigateTo("ReceiveTicketScreen");
       },
       onError: () => {
+        setCouponId(undefined);
         navigateTo("ExpiredCouponScreen");
       },
     });
@@ -88,13 +89,12 @@ export default function GiveTicketByCouponScreen() {
               ? t("titlePlural", { numberOfTickets })
               : t("title")}
           </Text>
-          <Text style={S.subtitle}>{t("subtitle")}</Text>
-          {/* TODO: add reward text as subtitle */}
+          <Text style={S.subtitle}>{coupon?.rewardText}</Text>
         </View>
 
         <Button
           text={t("button")}
-          onPress={() => receiveTicket}
+          onPress={() => receiveTicket()}
           borderColor={theme.colors.brand.primary[600]}
           backgroundColor={theme.colors.brand.primary[600]}
           customTextStyles={{
