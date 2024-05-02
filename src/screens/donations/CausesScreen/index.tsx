@@ -10,6 +10,7 @@ import { ScrollView, Text, View, RefreshControl } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
+import TicketIcon from "components/vectors/TicketIcon";
 import GroupButtons from "components/moleculars/GroupButtons";
 import {
   INTEGRATION_AUTH_ID,
@@ -53,6 +54,7 @@ import DonationErrorModal from "./errorModalSection";
 import ClubSection from "./ClubSection";
 import ReportsSection from "./ReportsSection";
 import S from "./styles";
+import OngCard from "components/moleculars/OngCard";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -235,23 +237,6 @@ export default function CausesScreen() {
     sortNonProfits();
   }, [chosenCause]);
 
-  const handleNonProfitImagePress = async (nonProfit: NonProfit) => {
-    setCurrentNonProfit(nonProfit);
-    try {
-      const nonProfitStories = await fetchNonProfitStories(nonProfit.id);
-      ExpoImage.prefetch(nonProfitStories.map((story) => story.image));
-      if (nonProfitStories.length === 0) return;
-      setStories(nonProfitStories);
-      setStoriesVisible(true);
-      logEvent("storiesBtn_click", {
-        nonProfitId: nonProfit.id,
-        from: "NGOCard",
-      });
-    } catch (e) {
-      logError(e);
-    }
-  };
-
   const nonProfitStylesFor = (index: number) => {
     const isFirst = index === 0;
     const isLast = index === nonProfitsFilter().length - 1;
@@ -416,33 +401,45 @@ export default function CausesScreen() {
                 nonProfit?.nonProfitImpacts?.[0]?.minimumNumberOfTickets ?? 0;
               const hasEnoughTickets =
                 hasTickets && ticketsCounter >= minNumberOfTickets;
+
               return (
+                // <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
+                //   <CardCenterImageButton
+                //     image={nonProfit.mainImage}
+                //     infoTextTop={nonProfit.name}
+                //     imageDescription={formattedImpactText(
+                //       nonProfit,
+                //       undefined,
+                //       false,
+                //       false,
+                //       undefined,
+                //       t("impactPrefix") || "",
+                //     )}
+                //     iconSubtitle={{
+                //       icon: "confirmation_number",
+                //       boldText: String(minNumberOfTickets),
+                //       text: t("iconText"),
+                //     }}
+                //     buttonText={
+                //       hasEnoughTickets ? t("buttonText") : t("notEnoughTickets")
+                //     }
+                //     onImagePress={() => {
+                //       handleNonProfitImagePress(nonProfit);
+                //     }}
+                //     onClickButton={() => handleButtonPress(nonProfit)}
+                //     buttonDisabled={!hasEnoughTickets}
+                //     labelText={t("labelText") || ""}
+                //   />
+                // </View>
+
                 <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
-                  <CardCenterImageButton
-                    image={nonProfit.mainImage}
-                    infoTextTop={nonProfit.name}
-                    imageDescription={formattedImpactText(
-                      nonProfit,
-                      undefined,
-                      false,
-                      false,
-                      undefined,
-                      t("impactPrefix") || "",
-                    )}
-                    iconSubtitle={{
-                      icon: "confirmation_number",
-                      boldText: String(minNumberOfTickets),
-                      text: t("iconText"),
-                    }}
-                    buttonText={
-                      hasEnoughTickets ? t("buttonText") : t("notEnoughTickets")
-                    }
-                    onImagePress={() => {
-                      handleNonProfitImagePress(nonProfit);
-                    }}
-                    onClickButton={() => handleButtonPress(nonProfit)}
+                  <OngCard
+                    nonProfit={nonProfit}
+                    key={nonProfit.id}
+                    ticketsComponent={<Text>🎫 {minNumberOfTickets}</Text>}
                     buttonDisabled={!hasEnoughTickets}
-                    labelText={t("labelText") || ""}
+                    buttonText="Doar tickets"
+                    onButtonClick={() => handleButtonPress(nonProfit)}
                   />
                 </View>
               );
