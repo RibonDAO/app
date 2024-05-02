@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -75,6 +76,7 @@ import ClubScreen from "screens/promoters/ClubScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
 import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
 import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
+import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -274,7 +276,9 @@ function RootNavigator() {
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
 
       <Stack.Screen
@@ -398,10 +402,9 @@ function RootNavigator() {
         component={SignedInScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
-          headerBackTitleVisible: true,
-          headerBackTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -410,10 +413,9 @@ function RootNavigator() {
         component={DonationSignInScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
-          headerBackTitleVisible: true,
-          headerBackTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -422,10 +424,9 @@ function RootNavigator() {
         component={ContributionStatsScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
-          headerBackTitleVisible: true,
-          headerBackTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -442,8 +443,9 @@ function RootNavigator() {
         component={SignInScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -452,8 +454,9 @@ function RootNavigator() {
         component={SignInExtraTicketScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -462,8 +465,9 @@ function RootNavigator() {
         component={InsertEmailScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -472,8 +476,9 @@ function RootNavigator() {
         component={InsertEmailAccountScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
       <Stack.Screen
@@ -481,8 +486,9 @@ function RootNavigator() {
         component={SentMagicLinkEmailScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -531,8 +537,9 @@ function RootNavigator() {
         component={ValidateAccountScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
