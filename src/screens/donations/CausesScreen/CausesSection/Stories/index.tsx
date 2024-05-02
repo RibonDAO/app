@@ -8,7 +8,7 @@ type Props = {
   storiesVisible: boolean;
   setStoriesVisible: (visible: boolean) => void;
 };
-function StoriesSection({
+function Stories({
   stories,
   nonProfit,
   storiesVisible,
@@ -36,4 +36,4 @@ function StoriesSection({
   );
 }
 
-export default StoriesSection;
+export default Stories;
