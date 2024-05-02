@@ -39,7 +39,7 @@ export default function CollectableButton({
   startAnimation,
 }: Props) {
   const [clicked, setClicked] = useState(false);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [showToast, setShowToast] = useState(false);
 
   const handleClick = () => {
