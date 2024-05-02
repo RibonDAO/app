@@ -2,7 +2,6 @@ import { NonProfit } from "@ribon.io/shared";
 import * as S from "./styles";
 import { ReactNode } from "react";
 import Button from "components/atomics/buttons/Button";
-import { View } from "react-native";
 
 type Props = {
   nonProfit: NonProfit;
