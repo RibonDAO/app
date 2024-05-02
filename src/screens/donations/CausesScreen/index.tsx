@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  useStories,
   useFirstAccessToIntegration,
   useDonatedToday,
   useSubscriptions,
@@ -9,8 +8,6 @@ import {
 import { ScrollView, Text, View, RefreshControl } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import CardCenterImageButton from "components/moleculars/CardCenterImageButton";
-import TicketIcon from "components/vectors/TicketIcon";
 import GroupButtons from "components/moleculars/GroupButtons";
 import {
   INTEGRATION_AUTH_ID,
@@ -18,13 +15,11 @@ import {
 } from "utils/constants/Application";
 import { NonProfit, Story } from "@ribon.io/shared/types";
 import StoriesSection from "screens/donations/CausesScreen/StoriesSection";
-import useFormattedImpactText from "hooks/useFormattedImpactText";
 import { logError } from "services/crashReport";
 import { useTicketsContext } from "contexts/ticketsContext";
 import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
 import { logEvent } from "services/analytics";
-import { Image as ExpoImage } from "expo-image";
 import InlineNotification from "components/moleculars/notifications/InlineNotification";
 import requestUserPermissionForNotifications from "lib/notifications";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
@@ -92,8 +87,6 @@ export default function CausesScreen() {
 
   const { navigateTo } = useNavigation();
   const scrollViewRef = useRef<any>(null);
-  const { fetchNonProfitStories } = useStories();
-  const { formattedImpactText } = useFormattedImpactText();
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser, signedIn } = useCurrentUser();
   const { hasReceivedTicketToday, handleCanCollect, handleCollect } =
