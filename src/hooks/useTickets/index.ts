@@ -66,9 +66,10 @@ export function useTickets() {
     const receivedTicketAt = await getLocalStorageItem(
       RECEIVED_RIBON_DAILY_TICKET,
     );
+
     if (receivedTicketAt) {
       const dateUserReceivedTicket = new Date(parseInt(receivedTicketAt, 10));
-      return dateUserReceivedTicket.toLocaleDateString() === todayDate();
+      return !(dateUserReceivedTicket.toLocaleDateString() === todayDate());
     } else {
       const { canCollect } = await canCollectByIntegration(
         RIBON_INTEGRATION_ID,

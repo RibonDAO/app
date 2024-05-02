@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import NewTicketAnimation from "components/atomics/animations/NewTicketAnimation";
 import { theme } from "@ribon.io/shared";
+import { perform } from "lib/timeoutHelpers";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   BackgroundLayersAnimation,
   TextAnimation,
@@ -24,7 +26,7 @@ export type Props = {
   onClick: () => void;
   text: string;
   afterText: string;
-  collected?: boolean;
+  startAnimation?: boolean;
 };
 
 export default function CollectableButton({
@@ -34,7 +36,7 @@ export default function CollectableButton({
   text,
   afterText,
   onClick,
-  collected,
+  startAnimation,
 }: Props) {
   const [clicked, setClicked] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -44,27 +46,34 @@ export default function CollectableButton({
     onClick();
   };
 
-  useEffect(() => {
-    if (collected) {
-      setTimeout(() => {
-        if (!clicked) setShowToast(true);
-      }, 500);
+  const handleStartAnimation = () => {
+    setShowToast(false);
+    setClicked(true);
+    setDisabled(true);
+    perform(() => !clicked && setShowToast(true)).in(500);
+    perform(() => setShowToast(false)).in(3000);
+  };
 
-      setTimeout(() => {
-        setShowToast(false);
-      }, 10000);
+  useFocusEffect(
+    useCallback(() => {
+      if (startAnimation) {
+        handleStartAnimation();
+      }
+    }, [startAnimation]),
+  );
 
-      setClicked(true);
-      setDisabled(true);
-    } else {
-      setClicked(false);
-      setDisabled(false);
-    }
-  }, [collected]);
+  useFocusEffect(
+    useCallback(() => {
+      if (!locked) {
+        setDisabled(false);
+        setClicked(false);
+      }
+    }, [locked]),
+  );
 
-  if (locked) return <LockedButton colors={colors} text={afterText} />;
-
-  return (
+  return locked ? (
+    <LockedButton colors={colors} text={afterText} />
+  ) : (
     <S.Container onPress={handleClick} disabled={disabled}>
       <S.ToastContainer>
         {showToast && <NewTicketAnimation count={amount} />}

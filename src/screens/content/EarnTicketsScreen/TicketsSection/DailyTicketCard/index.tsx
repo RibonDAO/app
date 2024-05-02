@@ -1,5 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native";
-import { setLocalStorageItem, theme } from "@ribon.io/shared";
+import { theme } from "@ribon.io/shared";
+import { setLocalStorageItem } from "lib/localStorage";
 import CollectableButton from "components/atomics/buttons/CollectableButton";
 import CardTicket from "components/moleculars/CardTicket";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
@@ -8,7 +9,7 @@ import { useTicketsContext } from "contexts/ticketsContext";
 import { useNavigation } from "hooks/useNavigation";
 import { getTimeUntilMidnight } from "lib/formatters/dateFormatter";
 import { RECEIVED_RIBON_DAILY_TICKET } from "lib/localStorage/constants";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
 import { useTickets } from "../../../../../hooks/useTickets";
@@ -19,6 +20,7 @@ export default function DailyTicketCard() {
   });
 
   const [hasCollected, setHasCollected] = useState(false);
+  const [startAnimation, setStartAnimation] = useState(false);
   const [time, setTime] = useState<string>("24:00");
   const { canCollectRibonTicket, handleCollect } = useTickets();
   const { refetchTickets } = useTicketsContext();
@@ -30,16 +32,20 @@ export default function DailyTicketCard() {
     setTime(timeUntilMidnight);
   };
 
-  const receiveTicket = async () => {
+  const changeHasCollected = async () => {
     if (!currentUser) {
       setHasCollected(false);
-      return;
+    } else {
+      const canCollect = await canCollectRibonTicket();
+      setHasCollected(!canCollect);
     }
-    const canCollect = await canCollectRibonTicket();
-    if (!canCollect) {
-      setHasCollected(true);
-      setTimeUntilMidnight();
-    }
+  };
+
+  const handleSuccess = () => {
+    setStartAnimation(true);
+    logEvent("ticketCollected", { from: "collect" });
+    refetchTickets();
+    setLocalStorageItem(RECEIVED_RIBON_DAILY_TICKET, Date.now().toString());
   };
 
   const handleButtonPress = async () => {
@@ -47,25 +53,21 @@ export default function DailyTicketCard() {
     else {
       await handleCollect({
         onSuccess: () => {
-          setHasCollected(true);
-          logEvent("ticketCollected", { from: "collect" });
-          refetchTickets();
-          setTimeUntilMidnight();
-          setLocalStorageItem(
-            RECEIVED_RIBON_DAILY_TICKET,
-            Date.now().toString(),
-          );
+          handleSuccess();
         },
       });
+      setStartAnimation(false);
     }
   };
 
-  useEffect(() => {
-    receiveTicket();
-  }, [currentUser]);
+  useFocusEffect(
+    useCallback(() => {
+      changeHasCollected();
+    }, [currentUser]),
+  );
 
   useFocusEffect(() => {
-    if (hasCollected) {
+    if (hasCollected || startAnimation) {
       setTimeUntilMidnight();
     }
   });
@@ -83,8 +85,9 @@ export default function DailyTicketCard() {
       <CollectableButton
         text={t("dailyTicketCard.buttonText")}
         afterText={t("dailyTicketCard.buttonTextCollected", { time })}
-        collected={hasCollected}
+        locked={hasCollected}
         onClick={handleButtonPress}
+        startAnimation={startAnimation}
       />
     </CardTicket>
   );
