@@ -55,6 +55,7 @@ import ClubSection from "./ClubSection";
 import ReportsSection from "./ReportsSection";
 import S from "./styles";
 import OngCard from "components/moleculars/OngCard";
+import TicketIconText from "components/moleculars/TicketIconText";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
@@ -403,40 +404,13 @@ export default function CausesScreen() {
                 hasTickets && ticketsCounter >= minNumberOfTickets;
 
               return (
-                // <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
-                //   <CardCenterImageButton
-                //     image={nonProfit.mainImage}
-                //     infoTextTop={nonProfit.name}
-                //     imageDescription={formattedImpactText(
-                //       nonProfit,
-                //       undefined,
-                //       false,
-                //       false,
-                //       undefined,
-                //       t("impactPrefix") || "",
-                //     )}
-                //     iconSubtitle={{
-                //       icon: "confirmation_number",
-                //       boldText: String(minNumberOfTickets),
-                //       text: t("iconText"),
-                //     }}
-                //     buttonText={
-                //       hasEnoughTickets ? t("buttonText") : t("notEnoughTickets")
-                //     }
-                //     onImagePress={() => {
-                //       handleNonProfitImagePress(nonProfit);
-                //     }}
-                //     onClickButton={() => handleButtonPress(nonProfit)}
-                //     buttonDisabled={!hasEnoughTickets}
-                //     labelText={t("labelText") || ""}
-                //   />
-                // </View>
-
                 <View style={nonProfitStylesFor(index)} key={nonProfit.id}>
                   <OngCard
                     nonProfit={nonProfit}
                     key={nonProfit.id}
-                    ticketsComponent={<Text>🎫 {minNumberOfTickets}</Text>}
+                    ticketsComponent={
+                      <TicketIconText quantity={minNumberOfTickets} />
+                    }
                     buttonDisabled={!hasEnoughTickets}
                     buttonText="Doar tickets"
                     onButtonClick={() => handleButtonPress(nonProfit)}

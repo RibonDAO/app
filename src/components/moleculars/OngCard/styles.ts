@@ -20,6 +20,10 @@ export const Container = styled.View`
   background-color: ${theme.colors.brand.tertiary[50]};
 `;
 
+export const TicketsContainer = styled.View`
+  width: 50px;
+`;
+
 export const ButtonContainer = styled.View`
   margin-top: 150px;
 `;

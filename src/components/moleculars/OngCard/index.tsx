@@ -2,6 +2,7 @@ import { NonProfit } from "@ribon.io/shared";
 import * as S from "./styles";
 import { ReactNode } from "react";
 import Button from "components/atomics/buttons/Button";
+import { View } from "react-native";
 
 type Props = {
   nonProfit: NonProfit;
@@ -28,7 +29,7 @@ function OngCard({
         <S.OngName>{nonProfit.name}</S.OngName>
         <S.Title>{nonProfit.impactTitle}</S.Title>
 
-        {ticketsComponent}
+        <S.TicketsContainer>{ticketsComponent}</S.TicketsContainer>
 
         <S.ButtonContainer>
           <Button
