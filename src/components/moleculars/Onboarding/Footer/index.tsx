@@ -57,7 +57,7 @@ function Footer({ slides, skip, goToNextSlide, currentSlideIndex }: Props) {
             <TouchableOpacity
               accessibilityRole="button"
               style={S.btn}
-              onPress={() => navigateTo("HomeScreen")}
+              onPress={() => navigateTo("Cause")}
             >
               <Text
                 style={{

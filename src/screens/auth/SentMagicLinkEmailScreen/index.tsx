@@ -56,7 +56,7 @@ function SentMagicLinkEmailScreen() {
           </View>
           <Button
             text={t("buttonText")}
-            onPress={() => navigateTo("CausesScreen")}
+            onPress={() => navigateTo("Cause")}
             textColor={theme.colors.neutral10}
             borderColor={theme.colors.brand.primary[600]}
             backgroundColor={theme.colors.brand.primary[600]}

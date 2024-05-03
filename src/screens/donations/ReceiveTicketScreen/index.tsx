@@ -49,7 +49,7 @@ function ReceiveTicketScreen(): JSX.Element {
       logEvent("receiveTicket_view", {
         from: "onboarding_page",
       });
-      navigateTo("CausesScreen");
+      navigateTo("Cause");
     }, 3000);
   };
 

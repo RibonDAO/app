@@ -27,7 +27,7 @@ function NgoImpactCards(): JSX.Element {
   });
 
   const navigateToCausesScreen = () => {
-    navigateTo("CausesScreen");
+    navigateTo("Cause");
   };
 
   const impactCardsList = () => (

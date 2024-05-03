@@ -73,7 +73,7 @@ export default function DonationDoneScreen({
     } else if (!isAuthenticated() && isFirstAccessToAuthIntegration) {
       navigateTo("SignInExtraTicketScreen");
     } else if (!isLoading && userStatistics) {
-      navigateTo("CausesScreen");
+      navigateTo("Cause");
     }
   };
 

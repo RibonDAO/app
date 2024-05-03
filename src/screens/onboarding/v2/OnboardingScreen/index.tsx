@@ -38,7 +38,7 @@ function OnboardingScreen() {
     if (nextSlideIndex !== slides.length) {
       setCurrentSlideIndex(currentSlideIndex + 1);
     } else if (nextSlideIndex === slides.length) {
-      navigateTo("CausesScreen");
+      navigateTo("Cause");
     }
   };
 

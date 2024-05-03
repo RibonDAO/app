@@ -56,7 +56,7 @@ function PixInstructionsScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
 
   const handleBackButtonClick = () => {
-    navigateTo("CausesScreen");
+    navigateTo("Cause");
   };
 
   useEffect(() => {

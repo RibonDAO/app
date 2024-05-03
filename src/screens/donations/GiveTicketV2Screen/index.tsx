@@ -44,7 +44,7 @@ export default function GiveTicketV2Screen() {
     });
     refetchTickets();
     logEvent("P35_getTicketBtn_click");
-    navigateTo("CausesScreen");
+    navigateTo("Cause");
   };
 
   const renderTitle = () => {

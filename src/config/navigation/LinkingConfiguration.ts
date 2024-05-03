@@ -13,7 +13,7 @@ const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL("/")],
   config: {
     screens: {
-      Root: {
+      Cause: {
         screens: {
           OnboardingScreen: {
             screens: {
@@ -49,6 +49,11 @@ const linking: LinkingOptions<RootStackParamList> = {
           ClubScreen: {
             screens: {
               ClubScreen: "club",
+            },
+          },
+          HomeScreen: {
+            screens: {
+              HomeScreen: "home",
             },
           },
         },
