@@ -66,11 +66,13 @@ export default function DailyTicketCard() {
     }, [currentUser]),
   );
 
-  useFocusEffect(() => {
-    if (hasCollected || startAnimation) {
-      setTimeUntilMidnight();
-    }
-  });
+  useFocusEffect(
+    useCallback(() => {
+      if (hasCollected || startAnimation) {
+        setTimeUntilMidnight();
+      }
+    }, [hasCollected, startAnimation]),
+  );
 
   return (
     <CardTicket
