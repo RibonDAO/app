@@ -100,3 +100,8 @@ export const Description = styled.Text`
   ${defaultBodySmSemibold}
   color: ${theme.colors.neutral10};
 `;
+
+export const TicketCountWrapper = styled.View`
+  position: relative;
+  overflow: hidden;
+`;
