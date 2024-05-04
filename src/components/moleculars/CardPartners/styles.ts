@@ -8,7 +8,6 @@ import { theme } from "@ribon.io/shared/styles";
 
 export const Container = styled.View`
   position: relative;
-  width: 100%;
   padding: ${theme.spacingNative(24)}px;
   border-radius: ${theme.spacingNative(16)}px;
   display: flex;
@@ -16,6 +15,7 @@ export const Container = styled.View`
   gap: ${theme.spacingNative(16)}px;
   align-items: center;
   background-color: ${theme.colors.brand.primary[50]};
+  overflow: hidden;
 `;
 
 export const ContentContainer = styled.View`
@@ -41,6 +41,10 @@ export const Subtitle = styled.Text`
 
 export const Brands = styled.Image`
   filter: brightness(0);
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+  resize-mode: contain;
 `;
 
 export const Cta = styled.Text`
