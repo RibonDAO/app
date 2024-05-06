@@ -13,7 +13,7 @@ const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL("/")],
   config: {
     screens: {
-      Cause: {
+      TabNavigator: {
         screens: {
           OnboardingScreen: {
             screens: {

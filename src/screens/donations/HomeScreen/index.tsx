@@ -65,16 +65,16 @@ export default function HomeScreen() {
             currentIntegrationId?.toLocaleString(),
           );
           logEvent("receiveTicket_view", { from: "receivedTickets_toast" });
-          navigateTo("Cause");
+          navigateTo("TabNavigator", { screen: "CausesScreen" });
         } else {
           navigateTo("GiveTicketV2Screen");
         }
       } else if (!currentUser && onboardingCompleted !== true) {
-        navigateTo("OnboardingScreen");
+        navigateTo("TabNavigator", { screen: "ImpactScreen" });
       }
     } else {
       refetchTickets();
-      navigateTo("Cause");
+      navigateTo("TabNavigator", { screen: "CausesScreen" });
     }
   }
 

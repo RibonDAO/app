@@ -20,7 +20,7 @@ function ExtraTicketScreen(): JSX.Element {
     logEvent("authRewardSkipBtn_click", {
       from: "donation_flow",
     });
-    navigateTo("Cause");
+    navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
   return (

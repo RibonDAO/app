@@ -49,7 +49,7 @@ export const testLinkingConfig: LinkingOptions<RootStackParamList> = {
   prefixes: [],
   config: {
     screens: {
-      Cause: {
+      TabNavigator: {
         screens: {
           CausesScreen: {
             screens: {

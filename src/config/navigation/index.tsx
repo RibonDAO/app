@@ -278,7 +278,7 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Cause"
+        name="TabNavigator"
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />

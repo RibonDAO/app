@@ -63,7 +63,7 @@ function TicketSection(): JSX.Element {
 
   const handleToggleEarnTickets = () => {
     logEvent("aboutTicketTooltip_click");
-    navigateTo("EarnTicketsScreen");
+    navigateTo("TabNavigator", { screen: "EarnTicketsScreen" });
   };
 
   const renderTicketCounter = useCallback(

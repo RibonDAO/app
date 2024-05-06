@@ -142,7 +142,7 @@ export type AboutTicketsScreenParamsList = {
 };
 
 export type RootStackParamList = {
-  Cause: NavigatorScreenParams<RootTabParamList> | undefined;
+  TabNavigator: NavigatorScreenParams<RootTabParamList> | undefined;
   Home: undefined;
   PrivateStack: undefined;
   SignInScreen: undefined;
