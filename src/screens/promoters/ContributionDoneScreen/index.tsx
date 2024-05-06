@@ -20,7 +20,7 @@ export default function ContributionDoneScreen(): JSX.Element {
           from: "ContributionDoneScreen",
         });
       } else {
-        navigateTo("CausesScreen");
+        navigateTo("TabNavigator", { screen: "CausesScreen" });
       }
     }, 5000);
   }, []);

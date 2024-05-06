@@ -269,7 +269,8 @@
         "dailyTicketCard": {
           "title": "Daily Ticket (Free)",
           "subtitle": "Earn 1 per day",
-          "buttonText": "Collected automatically"
+          "buttonText": "Collect ticket",
+          "buttonTextCollected": "Next ticket in {{time}}"
         }
       },
       "clubTicketsSection": {
@@ -290,6 +291,7 @@
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Collected",
           "buttonTextNoClub": "Unlock collection"
+
         },
         "monthlyTicketCard": {
           "title": "Monthly Ribon Club package",

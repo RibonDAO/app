@@ -29,7 +29,7 @@ function ExpiredLinkScreen() {
     if (accountId) {
       sendEmail(accountId);
     } else {
-      navigateTo("CausesScreen");
+      navigateTo("TabNavigator", { screen: "CausesScreen" });
     }
   };
 

@@ -20,7 +20,7 @@ function SignInByMagicLinkScreen(): JSX.Element {
         if (extraTicket === "true" && isFirstAccessToIntegration) {
           navigateTo("ReceiveExtraTicketScreen");
         } else {
-          navigateTo("CausesScreen");
+          navigateTo("TabNavigator", { screen: "CausesScreen" });
         }
       },
       onError: () => {
