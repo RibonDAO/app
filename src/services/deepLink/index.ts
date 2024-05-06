@@ -38,7 +38,6 @@ export async function initializeDeeplink(
 
       const extraTicketToken =
         (latestParams.extra_ticket_token as string) || "";
-
       const couponId = (latestParams.coupon_id as string) || "";
 
       setCurrentIntegrationId(integrationId);

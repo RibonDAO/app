@@ -12,7 +12,7 @@ import Ticket from "./assets/Ticket";
 import S from "./styles";
 
 export default function ExpiredCouponScreen() {
-  const { setCouponId } = useCouponContext();
+  const { couponId, setCouponId } = useCouponContext();
   const { t } = useTranslation("translation", {
     keyPrefix: "content.expiredCouponScreen",
   });
@@ -21,15 +21,13 @@ export default function ExpiredCouponScreen() {
   useEffect(() => {
     logEvent("P38_view");
     setCouponId(undefined);
+    console.log("ExpiredCouponScreen (useEffect)");
+    console.log("couponid - ", couponId);
   }, []);
 
-  async function handleCouponIdAndNavigation() {
-    await setCouponId(undefined);
-    navigateTo("CausesScreen");
-  }
-
   const handleBackButtonClick = () => {
-    handleCouponIdAndNavigation();
+    setCouponId(undefined);
+    navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
   return (

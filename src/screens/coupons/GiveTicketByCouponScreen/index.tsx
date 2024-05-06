@@ -10,6 +10,7 @@ import { logEvent } from "services/analytics";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useCoupons } from "hooks/useCoupons";
 import { useCouponContext } from "contexts/couponContext";
+import { Loader } from "rn-placeholder";
 import S from "./styles";
 import Ticket from "./assets/Ticket";
 
@@ -29,9 +30,11 @@ export default function GiveTicketByCouponScreen() {
   const { currentUser } = useCurrentUser();
   const { handleCanCollectByCoupon, handleCollectByCoupon } = useCoupons();
   const [coupon, setCoupon] = useState<ICoupon | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
 
   async function canCollectByCoupon() {
     const canCollectByCouponData = await handleCanCollectByCoupon();
+    setLoading(false);
     if (!canCollectByCouponData.canCollect) {
       navigateTo("ExpiredCouponScreen");
     } else {
@@ -41,27 +44,21 @@ export default function GiveTicketByCouponScreen() {
 
   useEffect(() => {
     logEvent("P37_view", { couponId });
-    if (!currentUser) {
-      navigateTo("SignInCouponScreen");
+    setLoading(true);
+    if (currentUser) {
+      canCollectByCoupon();
     }
   }, [currentUser]);
-
-  useEffect(() => {
-    canCollectByCoupon();
-  }, []);
-
-  async function handleCouponIdAndNavigation(screen: string) {
-    await setCouponId(undefined);
-    navigateTo(screen);
-  }
 
   async function receiveTicket() {
     await handleCollectByCoupon({
       onSuccess: () => {
-        handleCouponIdAndNavigation("ReceiveTicketScreen");
+        setCouponId(undefined);
+        navigateTo("TabNavigator", { screen: "CausesScreen" });
       },
       onError: () => {
-        handleCouponIdAndNavigation("ExpiredCouponScreen");
+        setCouponId(undefined);
+        navigateTo("ExpiredCouponScreen");
       },
     });
   }
@@ -73,7 +70,11 @@ export default function GiveTicketByCouponScreen() {
 
   const numberOfTickets = coupon?.numberOfTickets || 1;
 
-  return (
+  return loading ? (
+    <View style={S.container}>
+      <Loader />
+    </View>
+  ) : (
     <View style={S.container}>
       <View style={S.arrow}>
         <TouchableOpacity
