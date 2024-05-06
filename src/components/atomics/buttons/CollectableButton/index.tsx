@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import NewTicketAnimation from "components/atomics/animations/NewTicketAnimation";
 import { theme } from "@ribon.io/shared";
 import { perform } from "lib/timeoutHelpers";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   BackgroundLayersAnimation,
   TextAnimation,
@@ -11,11 +12,11 @@ import {
 import * as S from "./styles";
 
 const DEFAULT_COLORS = [
-  theme.colors.brand.primary[900], // Initial color
-  theme.colors.brand.primary[700],
-  theme.colors.brand.primary[600],
-  theme.colors.brand.primary[300],
-  theme.colors.brand.primary[50], // Final color
+  theme.colors.brand.primary[800], // initial color
+  theme.colors.brand.tertiary[600],
+  "#F97303",
+  theme.colors.brand.quaternary[200],
+  theme.colors.brand.primary[100], // final color
 ];
 
 export type Props = {
@@ -25,6 +26,7 @@ export type Props = {
   onClick: () => void;
   text: string;
   afterText: string;
+  startAnimation?: boolean;
 };
 
 export default function CollectableButton({
@@ -34,23 +36,44 @@ export default function CollectableButton({
   text,
   afterText,
   onClick,
+  startAnimation,
 }: Props) {
   const [clicked, setClicked] = useState(false);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [showToast, setShowToast] = useState(false);
 
   const handleClick = () => {
-    setShowToast(false);
-    setClicked(!clicked);
-    setDisabled(true);
     onClick();
+  };
+
+  const handleStartAnimation = () => {
+    setShowToast(false);
+    setClicked(true);
+    setDisabled(true);
     perform(() => !clicked && setShowToast(true)).in(500);
     perform(() => setShowToast(false)).in(3000);
   };
 
-  if (locked) return <LockedButton colors={colors} text={afterText} />;
+  useFocusEffect(
+    useCallback(() => {
+      if (startAnimation) {
+        handleStartAnimation();
+      }
+    }, [startAnimation]),
+  );
 
-  return (
+  useFocusEffect(
+    useCallback(() => {
+      if (!locked) {
+        setDisabled(false);
+        setClicked(false);
+      }
+    }, [locked]),
+  );
+
+  return locked ? (
+    <LockedButton colors={colors} text={afterText} />
+  ) : (
     <S.Container onPress={handleClick} disabled={disabled}>
       <S.ToastContainer>
         {showToast && <NewTicketAnimation count={amount} />}

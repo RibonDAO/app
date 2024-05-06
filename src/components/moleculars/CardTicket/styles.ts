@@ -57,7 +57,7 @@ type SubtitleProps = {
 
 export const Subtitle = styled.Text<SubtitleProps>`
   ${defaultBodyMdSemibold};
-  color: ${({ color }: SubtitleProps) => (color || "black")};
+  color: ${({ color }: SubtitleProps) => color || "black"};
 `;
 
 export const SubtitleIcon = styled.View``;
