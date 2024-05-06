@@ -533,6 +533,12 @@
       }
     }
   },
+  "cardPartners": {
+    "title": "Ribon partners",
+    "subtitle": "Refer other companies or engage your own in ticket distribution, and earn rewards while being recognized as a proactive business.",
+    "ctaText": "I want to help ->",
+    "ctaLink": "https://projetos.ribon.io/partners"
+  },
   "users": {
     "impactScreen": {
       "title": "My Impact",
