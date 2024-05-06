@@ -12,8 +12,7 @@ import { useRouteParams } from "hooks/useRouteParams";
 import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
 import { theme } from "@ribon.io/shared/styles";
-import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
-import { useFirstAccessToIntegration } from "@ribon.io/shared";
+
 import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
@@ -22,12 +21,11 @@ function SentMagicLinkEmailScreen() {
     keyPrefix: "auth.sentMagicLinkEmailScreen",
   });
   const { navigateTo } = useNavigation();
-  const { isFirstAccessToIntegration } =
-    useFirstAccessToIntegration(INTEGRATION_AUTH_ID);
 
   const {
     params: { email },
   } = useRouteParams<"SentMagicLinkEmailScreen">();
+
   return (
     <KeyboardAvoidingView
       behavior="position"
@@ -44,15 +42,8 @@ function SentMagicLinkEmailScreen() {
           </View>
 
           <View style={S.contentContainer}>
-            <Text style={S.title}>
-              {" "}
-              {isFirstAccessToIntegration ? t("firstAccessTitle") : t("title")}
-            </Text>
-            <Text style={S.description}>
-              {isFirstAccessToIntegration
-                ? t("firstAccessText", { email })
-                : t("text", { email })}
-            </Text>
+            <Text style={S.title}>{t("title")}</Text>
+            <Text style={S.description}>{t("text", { email })}</Text>
           </View>
           <Button
             text={t("buttonText")}

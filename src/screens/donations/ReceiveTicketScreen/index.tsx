@@ -10,7 +10,9 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { PLATFORM } from "utils/constants/Application";
-import { RIBON_COMPANY_ID, setLocalStorageItem } from "@ribon.io/shared";
+import { RIBON_COMPANY_ID } from "@ribon.io/shared";
+import { setLocalStorageItem } from "lib/localStorage";
+
 import {
   RECEIVED_TICKET_AT_KEY,
   RECEIVED_TICKET_FROM_INTEGRATION,
