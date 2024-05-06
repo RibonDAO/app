@@ -1,44 +1,63 @@
 import { theme } from "@ribon.io/shared";
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import { defaultBodyMdSemibold } from "styles/typography/defaultStyledComponents";
 
-const styles = StyleSheet.create({
-  container: {
-    borderRadius: 8,
-    borderWidth: 1,
-    padding: theme.spacingNative(16),
-    alignItems: "flex-start",
-    minWidth: 328,
-  },
-  header: {
-    display: "flex",
-    flexDirection: "row",
-    gap: 16,
-    marginBottom: 16,
-  },
-  textContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignSelf: "center",
-    width: 200,
-  },
-  title: {
-    color: theme.colors.neutral[800],
-    fontSize: 16,
-    fontWeight: "600",
-    marginBottom: 4,
-    width: "auto",
-  },
-  subtitleContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-  },
-  subtitle: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  subtitleIcon: {},
-});
+type BackgroundProps = {
+  background: string;
+};
 
-export default styles;
+export const Container = styled.ScrollView<BackgroundProps>`
+  border-radius: 16px;
+  min-width: 328px;
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacingNative(24)}px;
+  background-color: ${(props: BackgroundProps) => props.background};
+  position: relative;
+`;
+
+export const InnerContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacingNative(24)}px;
+  padding: ${theme.spacingNative(24)}px;
+`;
+
+export const VectorContainer = styled.View`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+`;
+
+export const Header = styled.View`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 200px;
+`;
+
+export const Content = styled.View``;
+
+export const Title = styled.Text`
+  ${defaultBodyMdSemibold};
+  color: ${theme.colors.neutral[800]};
+`;
+
+export const SubtitleContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+`;
+
+type SubtitleProps = {
+  color?: string;
+};
+
+export const Subtitle = styled.Text<SubtitleProps>`
+  ${defaultBodyMdSemibold};
+  color: ${({ color }: SubtitleProps) => color || "black"};
+`;
+
+export const SubtitleIcon = styled.View``;

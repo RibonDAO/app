@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.neutral[300],
     borderWidth: 1,
     padding: theme.spacingNative(24),
-    wordwrap: "break-word",
   },
 });
 

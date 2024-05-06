@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-
 import { logEvent } from "services/analytics";
-
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
 import * as S from "./styles";
