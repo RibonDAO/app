@@ -25,7 +25,7 @@ function TicketSection({
     if (hasTickets) {
       navigateTo("GiveTicketScreen");
     } else if (isMember) {
-      navigateTo("EarnTicketsScreen");
+      navigateTo("TabNavigator", { screen: "EarnTicketsScreen" });
     } else {
       setZeroTicketModalVisible(true);
     }

@@ -51,7 +51,7 @@ function ReceiveTicketScreen(): JSX.Element {
       logEvent("receiveTicket_view", {
         from: "onboarding_page",
       });
-      navigateTo("CausesScreen");
+      navigateTo("TabNavigator", { screen: "CausesScreen" });
     }, 3000);
   };
 

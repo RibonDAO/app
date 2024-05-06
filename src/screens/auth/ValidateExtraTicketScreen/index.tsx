@@ -22,7 +22,7 @@ function ValidateExtraTicketScreen() {
         type: "error",
         message: t("error"),
       });
-      navigateTo("Root");
+      navigateTo("TabNavigator", { screen: "CausesScreen" });
     }
   }
 
