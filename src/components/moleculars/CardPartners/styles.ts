@@ -40,7 +40,6 @@ export const Subtitle = styled.Text`
 `;
 
 export const Brands = styled.Image`
-  filter: brightness(0);
   width: 100%;
   max-width: 400px;
   height: 40px;
@@ -52,7 +51,6 @@ export const Cta = styled.Text`
 
   margin-top: ${theme.spacingNative(8)}px;
   color: ${theme.colors.brand.primary[800]};
-  cursor: pointer;
 
   :hover {
     color: ${theme.colors.brand.primary[600]};
