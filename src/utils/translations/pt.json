@@ -274,7 +274,8 @@
         "dailyTicketCard": {
           "title": "Ticket diário (grátis)",
           "subtitle": "Ganhe 1 por dia",
-          "buttonText": "Coletado automaticamente"
+          "buttonText": "Coletar ticket",
+          "buttonTextCollected": "Próximo em {{time}}"
         }
       },
       "clubTicketsSection": {
@@ -534,6 +535,12 @@
         "toastSuccessMessage": "Email enviado"
       }
     }
+  },
+  "cardPartners": {
+    "title": "Parceiros Ribon",
+    "subtitle": "Ganhe tickets extras ao completar ações de nossos parceiros",
+    "ctaText": "Coletar tickets dos parceiros ->",
+    "ctaLink": "https://projetos.ribon.io/parceiros"
   },
   "users": {
     "impactScreen": {

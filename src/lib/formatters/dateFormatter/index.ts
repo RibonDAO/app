@@ -47,3 +47,13 @@ export function add30DaysAndFormatDate(
 
   return newDate.toLocaleDateString(locale);
 }
+
+export const getTimeUntilMidnight = () => {
+  const now = new Date();
+  const tomorrow = new Date(now);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(0, 1, 0, 0);
+  return new Date(tomorrow.getTime() - now.getTime())
+    .toUTCString()
+    .slice(17, 22);
+};

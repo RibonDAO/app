@@ -29,7 +29,7 @@ function Header({
   const { navigateTo, popNavigation } = useNavigation();
 
   const navigateToTicketsPage = () => {
-    navigateTo("CausesScreen");
+    navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
   const handleBackButtonClick = () => {

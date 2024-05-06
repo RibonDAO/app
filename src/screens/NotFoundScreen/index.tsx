@@ -30,7 +30,8 @@ export default function NotFoundScreen({
     <View style={styles.container}>
       <Text style={styles.title}>This screen does not exist.</Text>
       <TouchableOpacity
-        onPress={() => navigation.replace("Root")}
+        accessibilityRole="button"
+        onPress={() => navigation.replace("Home")}
         style={styles.link}
       >
         <Text style={styles.linkText}>Go to home screen!</Text>

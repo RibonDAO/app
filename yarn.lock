@@ -2987,7 +2987,7 @@
     color "^4.2.3"
     warn-once "^0.1.0"
 
-"@react-navigation/native-stack@^6.1.0":
+"@react-navigation/native-stack@^6.9.26":
   version "6.9.26"
   resolved "https://registry.yarnpkg.com/@react-navigation/native-stack/-/native-stack-6.9.26.tgz#90facf7783c9927f094bc9f01c613af75b6c241e"
   integrity sha512-++dueQ+FDj2XkZ902DVrK79ub1vp19nSdAZWxKRgd6+Bc0Niiesua6rMCqymYOVaYh+dagwkA9r00bpt/U5WLw==
@@ -3012,10 +3012,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.1.49":
-  version "1.1.49"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.49.tgz#44c75c566048a4fe4c50e5c92ca71a7343a5d286"
-  integrity sha512-c7IKvYcsQvakXcqyF2zxOMLO/7qSZyJqahZtxUtodr6BwWmbNu6Vw1b1+M2JcAF/HqS3rc7wjroqUXQ3ly+ekA==
+"@ribon.io/shared@^1.1.50":
+  version "1.1.50"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.50.tgz#3852df80f9b4ff8b3a67d443082adfc20c0a9585"
+  integrity sha512-ud0euf8WicRvFVbC6/BHuDvjRf/6DzbZoL5P8E0Zk60WFKk+JGXIjWwmQaRJ85AkFP9RNgAg0DeHalwjUQtWOQ==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"

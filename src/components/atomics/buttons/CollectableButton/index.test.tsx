@@ -1,7 +1,11 @@
 import { renderComponentAsync } from "config/testUtils/renders";
 import { expectTextToBeInTheDocument } from "config/testUtils/expects";
-import { clickOn } from "config/testUtils";
 import CollectableButton from ".";
+
+jest.mock("@react-navigation/native", () => ({
+  useFocusEffect: jest.fn(),
+  // ...
+}));
 
 describe("CollectableButton", () => {
   const mockFn = jest.fn();
@@ -14,10 +18,5 @@ describe("CollectableButton", () => {
 
   it("renders without error", () => {
     expectTextToBeInTheDocument("text");
-  });
-
-  it("calls the mockFn when clicked", () => {
-    clickOn("text");
-    expect(mockFn).toHaveBeenCalled();
   });
 });

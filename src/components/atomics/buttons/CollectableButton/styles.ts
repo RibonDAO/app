@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodyMdMedium } from "styles/typography/default";
+import { defaultBodyMdSemibold } from "styles/typography/default";
 
 type CustomColorProps = {
   color: string;
@@ -14,7 +14,7 @@ export const Container = styled.TouchableOpacity`
 
 export const ButtonContainer = styled.View<CustomColorProps>`
   background-color: ${({ color }: CustomColorProps) =>
-    color || theme.colors.brand.primary[900]};
+    color || theme.colors.brand.primary[600]};
   width: 100%;
   height: 48px;
   border-radius: 12px;
@@ -59,7 +59,7 @@ export const TextContainerAnimated = styled.View`
 `;
 
 export const Text = styled.Text<CustomColorProps>`
-  ${defaultBodyMdMedium}
+  ${defaultBodyMdSemibold}
   color: ${({ color }: CustomColorProps) => color || theme.colors.neutral10};
 `;
 
