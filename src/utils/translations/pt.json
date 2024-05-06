@@ -525,6 +525,12 @@
       }
     }
   },
+  "cardPartners": {
+    "title": "Parceiros Ribon",
+    "subtitle": "Ganhe tickets extras ao completar ações de nossos parceiros",
+    "ctaText": "Coletar tickets dos parceiros ->",
+    "ctaLink": "https://projetos.ribon.io/parceiros"
+  },
   "users": {
     "impactScreen": {
       "title": "Meu Impacto",
