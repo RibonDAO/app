@@ -216,8 +216,8 @@
       "hasAccountButton": "Já tenho uma conta"
     },
     "giveTicketByCouponScreen": {
-      "title": "Você ganhou {{numberOfTickets}} tickets!",
-      "subtitle": "Dynamic data from coupon",
+      "title": "Você ganhou 1 ticket!",
+      "titlePlural": "Você ganhou {{numberOfTickets}} tickets!",
       "button": "Coletar tickets"
     },
     "expiredCouponScreen": {

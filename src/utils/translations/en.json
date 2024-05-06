@@ -230,7 +230,6 @@
     "giveTicketByCouponScreen": {
       "title": "You won 1 ticket!",
       "titlePlural": "You won {{numberOfTickets}} tickets!",
-      "subtitle": "Dynamic data from coupon",
       "button": "Collect tickets"
     },
     "expiredCouponScreen": {
