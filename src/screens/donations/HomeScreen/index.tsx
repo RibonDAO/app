@@ -30,6 +30,9 @@ export default function HomeScreen() {
         }
       } else if (!currentUser && onboardingCompleted !== true) {
         navigateTo("OnboardingScreen");
+      } else {
+        refetchTickets();
+        navigateTo("TabNavigator", { screen: "CausesScreen" });
       }
     } else {
       refetchTickets();
