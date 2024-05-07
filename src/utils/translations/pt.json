@@ -542,6 +542,12 @@
     "ctaText": "Coletar tickets dos parceiros ->",
     "ctaLink": "https://projetos.ribon.io/parceiros"
   },
+  "cardReferral": {
+    "title": "Convide seus amigos",
+    "subtitle": "Quem entrar pelo seu convite recebe 1 ticket extra para começar a doar!",
+    "cta": "Copiar link de convite ->",
+    "ctaSuccess": "Copiado!"
+  },
   "users": {
     "impactScreen": {
       "title": "Meu Impacto",
