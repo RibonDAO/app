@@ -54,6 +54,7 @@ export default function GiveTicketByCouponScreen() {
     await handleCollectByCoupon({
       onSuccess: () => {
         setCouponId(undefined);
+        logEvent("ticketCollected", { from: "coupon" });
         navigateTo("TabNavigator", { screen: "CausesScreen" });
       },
       onError: () => {
