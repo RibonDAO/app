@@ -35,11 +35,7 @@ export default function DonationDoneScreen({
     useFirstAccessToIntegration(INTEGRATION_AUTH_ID);
   const { isAuthenticated } = useAuthentication();
 
-  const {
-    userStatistics,
-    refetch: refetchStatistics,
-    isLoading,
-  } = useStatistics({
+  const { userStatistics, refetch: refetchStatistics } = useStatistics({
     userId: currentUser?.id,
   });
 
@@ -72,7 +68,7 @@ export default function DonationDoneScreen({
       navigateTo("ExtraTicketScreen");
     } else if (!isAuthenticated() && isFirstAccessToAuthIntegration) {
       navigateTo("SignInExtraTicketScreen");
-    } else if (!isLoading && userStatistics) {
+    } else {
       navigateTo("TabNavigator", { screen: "CausesScreen" });
     }
   };

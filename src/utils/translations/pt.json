@@ -702,8 +702,6 @@
     "sentMagicLinkEmailScreen": {
       "title": "Link de entrada enviado",
       "text": "Clique no link enviado para {{email}} para entrar",
-      "firstAccessTitle": "Você ganhou um ticket extra",
-      "firstAccessText": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra",
       "buttonText": "Continuar"
     },
     "expiredLinkScreen": {
@@ -714,29 +712,8 @@
       "buttonText": "Me mande outro link",
       "buttonTextWithoutEmail": "Continuar"
     },
-    "extraTicketScreen": {
-      "title": "Você ganhou um ticket extra",
-      "description": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra",
-      "buttonText": "Continuar sem ticket extra"
-    },
-    "signInExtraTicketScreen": {
-      "title": "Valide sua conta e ganhe um ticket",
-      "description": "Finalize seu login com {{email}} pra receber seu prêmio",
-      "google": "Continuar com Google",
-      "apple": "Continuar com Apple",
-      "email": "Continuar com e-mail",
-      "toastSuccessMessage": "Seu ticket foi enviado por e-mail"
-    },
     "signInCouponScreen": {
       "title": "Entre na sua conta"
-    },
-    "receiveExtraTicketScreen": {
-      "title": "Validar sua conta trouxe você aqui",
-      "description": "Seu ticket extra está disponível",
-      "buttonText": "Receber meu ticket"
-    },
-    "validateExtraTicketScreen": {
-      "error": "Link inválido"
     },
     "validateAccountScreen": {
       "title": "Valide sua conta",
