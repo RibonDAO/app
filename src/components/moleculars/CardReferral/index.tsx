@@ -24,7 +24,7 @@ interface ReferralIntegration {
   };
 }
 
-const APP_LINK = "https://dapp.ribon.io";
+const APP_LINK = "https://donation.app.link/RibonApp";
 
 function CardReferral(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -67,6 +67,8 @@ function CardReferral(): JSX.Element {
 
   const handleClick = () => {
     logEvent("referralBtn_click");
+
+    console.log("integration", integration);
 
     if (!integration) {
       const payload: ReferralIntegration = {
