@@ -710,7 +710,7 @@
     },
     "sentMagicLinkEmailScreen": {
       "title": "We sent you a sign in link",
-      "text": "Click the link sent to {{email}} to sign in",
+      "text": "Click the link sent to {{email}} to sign in to your account on this device",
       "buttonText": "Continue"
     },
     "expiredLinkScreen": {

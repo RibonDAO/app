@@ -700,8 +700,8 @@
       "emailPlaceholder": "Seu e-mail"
     },
     "sentMagicLinkEmailScreen": {
-      "title": "Link de entrada enviado",
-      "text": "Clique no link enviado para {{email}} para entrar",
+      "title": "Enviamos um link para você",
+      "text": "Clique no link enviado para {{email}} e entre na sua conta neste dispositivo",
       "buttonText": "Continuar"
     },
     "expiredLinkScreen": {
