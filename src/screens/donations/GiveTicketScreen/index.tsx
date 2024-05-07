@@ -33,11 +33,11 @@ export default function GiveTicketScreen() {
   };
 
   const navigateToTicketsPage = () => {
-    navigateTo("CausesScreen");
+    navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
   const handleBackButtonClick = () => {
-    navigateTo("CausesScreen");
+    navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
   const handleHasAccount = () => {

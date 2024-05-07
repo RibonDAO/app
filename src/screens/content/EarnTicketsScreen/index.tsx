@@ -1,8 +1,11 @@
-import { View } from "react-native";
-import { useDonatedToday, useSubscriptions } from "@ribon.io/shared";
+import { ScrollView } from "react-native";
+import {
+  useDonatedToday,
+  useDonationStreak,
+  useSubscriptions,
+} from "@ribon.io/shared";
 
 import { useCallback } from "react";
-import EarnTicketsTabsProvider from "contexts/earnTicketsTabsContext";
 import { useRouteParams } from "hooks/useRouteParams";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -22,6 +25,7 @@ export default function EarnTicketsScreen(): JSX.Element {
   const { userIsMember, userSubscriptions } = useSubscriptions();
   const { refetch: refetchIsMember } = userIsMember();
   const { refetch: refetchSubscriptions } = userSubscriptions();
+  const { streak, refetch: refetchDonationStreak } = useDonationStreak();
 
   useFocusEffect(
     useCallback(() => {
@@ -29,15 +33,15 @@ export default function EarnTicketsScreen(): JSX.Element {
       refetchTickets();
       refetchIsMember();
       refetchSubscriptions();
+      refetchDonationStreak();
     }, [currentUser]),
   );
 
   return (
-    <EarnTicketsTabsProvider>
-      <View style={S.Container}>
-        <Header />
-        <TabViewSection initialTabIndex={params?.currentTab || 0} />
-      </View>
-    </EarnTicketsTabsProvider>
+    <ScrollView style={S.Container}>
+      <Header streak={streak} />
+
+      <TabViewSection initialTabIndex={params?.currentTab || 0} />
+    </ScrollView>
   );
 }

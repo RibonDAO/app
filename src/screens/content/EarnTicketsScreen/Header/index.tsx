@@ -4,7 +4,10 @@ import HeaderTemplate from "components/moleculars/HeaderTemplate";
 import * as S from "./styles";
 import { StrikeIcon } from "./assets/StrikeIcon";
 
-function Header(): JSX.Element {
+type Props = {
+  streak: number;
+};
+function Header({ streak }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "newHeader",
   });
@@ -14,7 +17,7 @@ function Header(): JSX.Element {
       <S.Container>
         <StrikeIcon />
         <S.Counter>
-          <S.CounterText>{7}</S.CounterText>
+          <S.CounterText>{streak}</S.CounterText>
 
           <S.Description>{t("myTickets")}</S.Description>
         </S.Counter>

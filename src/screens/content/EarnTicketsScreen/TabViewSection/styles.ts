@@ -5,6 +5,7 @@ import { stylizedDisplaySm } from "styles/typography/stylized";
 const styles = StyleSheet.create({
   tabViewSection: {
     minHeight: "100%",
+    marginTop: -16,
   },
   pagerView: {
     flex: 1,
@@ -35,11 +36,10 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacingNative(16),
   },
   paddingContainer: {
-    paddingHorizontal: theme.spacingNative(16),
+    padding: theme.spacingNative(16),
     backgroundColor: theme.colors.neutral10,
-  },
-  tabViewContainer: {
-    marginTop: theme.spacingNative(112),
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
   redBall: {
     width: 8,

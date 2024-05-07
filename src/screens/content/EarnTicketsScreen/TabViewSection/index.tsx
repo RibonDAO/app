@@ -7,16 +7,13 @@ import { CollapsibleTabView } from "react-native-collapsible-tab-view";
 import React, { useEffect } from "react";
 import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
 import { useDonatedToday } from "@ribon.io/shared";
-import { useEarnTicketsTabsContext } from "contexts/earnTicketsTabsContext";
-import { useTasksContext } from "contexts/tasksContext";
-import { TASKS } from "utils/constants/Tasks";
 import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
 
-import TasksSection from "../TasksSection";
 import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
 import S from "./styles";
+import TicketsSection from "../TicketsSection";
 
 type Route = {
   key: string;
@@ -35,7 +32,7 @@ function NewsSectionTabView(): JSX.Element {
 function TasksSectionTabView(): JSX.Element {
   return (
     <ParallaxTabViewContainer routeKey="TasksSectionTabView">
-      <TasksSection />
+      <TicketsSection />
     </ParallaxTabViewContainer>
   );
 }
@@ -56,9 +53,8 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
 
   const layout = useWindowDimensions();
   const { donatedToday } = useDonatedToday();
-  const { registerAction, hasCompletedATask, tasksState } = useTasksContext();
 
-  const { index, setIndex } = useEarnTicketsTabsContext();
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (initialTabIndex) {
@@ -82,25 +78,6 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
     { key: "NewsSectionTabView", title: t("newsSectionTitle") },
   ]);
 
-  const header = () => (
-    <View style={S.paddingContainer}>
-      <Text style={S.title}>{t("earnTicketsScreen.newsSection.title")}</Text>
-    </View>
-  );
-
-  useEffect(() => {
-    const taskDownloadApp = TASKS.filter(
-      (task) => task.title === "check_daily_news",
-    )[0];
-
-    const done = tasksState?.find(
-      (task) => task.id === taskDownloadApp.id,
-    )?.done;
-    if (index === 1 && donatedToday && !done) {
-      registerAction("earn_tickets_news_tab_view");
-    }
-  }, [index]);
-
   const renderTabBar = (props: any) => (
     <TabBar
       {...props}
@@ -116,11 +93,6 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
             }}
           >
             {route.title}
-            {hasCompletedATask && route.title === t("tasksSectionTitle") && (
-              <View style={S.tabContainer}>
-                <View style={S.redBall} />
-              </View>
-            )}
           </Text>
         </View>
       )}
@@ -137,8 +109,11 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
         navigationState={{ index, routes }}
         renderScene={renderScene}
         onIndexChange={setIndex}
-        renderHeader={header}
-        style={{ backgroundColor: theme.colors.neutral10 }}
+        style={{
+          backgroundColor: theme.colors.neutral10,
+          borderTopLeftRadius: 16,
+          borderTopRightRadius: 16,
+        }}
         initialLayout={{ width: layout.width }}
         renderTabBar={renderTabBar}
       />

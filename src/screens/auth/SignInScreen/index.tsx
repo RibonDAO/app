@@ -42,12 +42,16 @@ function SignInScreen() {
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
             <GoogleLogin
-              onContinue={() => navigateTo("CausesScreen")}
+              onContinue={() =>
+                navigateTo("TabNavigator", { screen: "CausesScreen" })
+              }
               from="direct_flow"
             />
             {Platform.OS === "ios" && (
               <AppleLogin
-                onContinue={() => navigateTo("CausesScreen")}
+                onContinue={() =>
+                  navigateTo("TabNavigator", { screen: "CausesScreen" })
+                }
                 from="direct_flow"
               />
             )}

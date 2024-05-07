@@ -8,5 +8,4 @@ export const Container = styled.View`
   border: 1px solid ${theme.colors.neutral10};
   background-color: ${theme.colors.neutral10};
   border-radius: 16px;
-  top: -16;
 `;

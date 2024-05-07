@@ -76,6 +76,7 @@ export type RootTabParamList = {
   PostDonationScreen: PostDonationScreenParams;
   ClubScreen: undefined;
   OnboardingScreen: undefined;
+  HomeScreen: undefined;
 };
 
 export type SupportNonProfitParamList = {
@@ -141,7 +142,8 @@ export type AboutTicketsScreenParamsList = {
 };
 
 export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  TabNavigator: NavigatorScreenParams<RootTabParamList> | undefined;
+  Home: undefined;
   PrivateStack: undefined;
   SignInScreen: undefined;
   SignInExtraTicketScreen: undefined;
