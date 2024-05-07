@@ -716,9 +716,7 @@
     },
     "sentMagicLinkEmailScreen": {
       "title": "We sent you a sign in link",
-      "text": "Click the link sent to {{email}} to sign in",
-      "firstAccessTitle": "You won an extra ticket",
-      "firstAccessText": "Validate your account clicking the link sent to {{email}} and get your extra ticket.",
+      "text": "Click the link sent to {{email}} to sign in to your account on this device",
       "buttonText": "Continue"
     },
     "expiredLinkScreen": {
@@ -729,29 +727,8 @@
       "buttonText": "Send me a new link",
       "buttonTextWithoutEmail": "Continue"
     },
-    "extraTicketScreen": {
-      "title": "You won an extra ticket",
-      "description": "Validate your account clicking the link sent to {{email}} and get your extra ticket.",
-      "buttonText": "Continue without extra ticket"
-    },
-    "signInExtraTicketScreen": {
-      "title": "Validate your account and get a ticket",
-      "description": "Complete your login with {{email}} to receive your prize",
-      "google": "Continue with Google",
-      "apple": "Continue with Apple",
-      "email": "Continue with e-mail",
-      "toastSuccessMessage": "Your ticket was sent by e-mail"
-    },
     "signInCouponScreen": {
       "title": "Sign in to your account"
-    },
-    "receiveExtraTicketScreen": {
-      "title": "Validating your account brought you here",
-      "description": "Your donation ticket is available",
-      "buttonText": "Get my ticket"
-    },
-    "validateExtraTicketScreen": {
-      "error": "Invalid link"
     },
     "validateAccountScreen": {
       "title": "Validate your account",
