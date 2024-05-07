@@ -1,5 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { useFirstAccessToIntegration } from "@ribon.io/shared";
+import { useCouponContext } from "contexts/couponContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useIsOnboarding } from "contexts/onboardingContext";
@@ -14,6 +15,7 @@ export default function HomeScreen() {
   const { hasReceivedTicketToday, handleCanCollect } = useTickets();
   const { onboardingCompleted } = useIsOnboarding();
   const { currentIntegrationId, externalId } = useIntegrationContext();
+  const { couponId } = useCouponContext();
   const { isFirstAccessToIntegration } =
     useFirstAccessToIntegration(currentIntegrationId);
 
@@ -21,21 +23,27 @@ export default function HomeScreen() {
     const canCollect = await handleCanCollect();
     const receivedTicketToday = await hasReceivedTicketToday();
     const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
-    if (canCollect) {
-      if (currentUser && !receivedTicketToday) {
-        if (!isRibonIntegration) {
-          navigateTo("GiveTicketV2Screen");
+    if (couponId !== undefined) {
+      if (!currentUser) {
+        navigateTo("SignInCouponScreen");
+      } else {
+        navigateTo("GiveTicketByCouponScreen");
+      }
+    } else if (canCollect) {
+        if (currentUser && !receivedTicketToday) {
+          if (!isRibonIntegration) {
+            navigateTo("GiveTicketV2Screen");
+          } else {
+            navigateTo("TabNavigator", { screen: "CausesScreen" });
+          }
+        } else if (!currentUser && onboardingCompleted !== true) {
+          navigateTo("OnboardingScreen");
         } else {
           navigateTo("TabNavigator", { screen: "CausesScreen" });
         }
-      } else if (!currentUser && onboardingCompleted !== true) {
-        navigateTo("OnboardingScreen");
       } else {
         navigateTo("TabNavigator", { screen: "CausesScreen" });
       }
-    } else {
-      navigateTo("TabNavigator", { screen: "CausesScreen" });
-    }
   }
 
   useFocusEffect(
@@ -48,6 +56,7 @@ export default function HomeScreen() {
       externalId,
       currentUser,
       onboardingCompleted,
+      couponId,
     ]),
   );
   return null;
