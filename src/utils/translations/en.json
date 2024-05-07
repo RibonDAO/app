@@ -227,6 +227,16 @@
       "subtitle": "Use your ticket to do good!",
       "button": "Collect ticket"
     },
+    "giveTicketByCouponScreen": {
+      "title": "You won 1 ticket!",
+      "titlePlural": "You won {{numberOfTickets}} tickets!",
+      "button": "Collect tickets"
+    },
+    "expiredCouponScreen": {
+      "title": "Unavailable ticket",
+      "subtitle": "Either you have already collected this ticket or it has expired.",
+      "button": "Go back to the home screen"
+    },
     "earnTicketsScreen": {
       "newsSection": {
         "title": "Earn tickets",
@@ -692,6 +702,12 @@
       "confirmText": "Continue",
       "emailPlaceholder": "Your e-mail"
     },
+    "insertEmailCouponScreen": {
+      "title": "Sign in with an e-mail",
+      "emailLabel": "E-mail",
+      "confirmText": "Continue",
+      "emailPlaceholder": "Your e-mail"
+    },
     "sentMagicLinkEmailScreen": {
       "title": "We sent you a sign in link",
       "text": "Click the link sent to {{email}} to sign in",
@@ -719,6 +735,9 @@
       "apple": "Continue with Apple",
       "email": "Continue with e-mail",
       "toastSuccessMessage": "Your ticket was sent by e-mail"
+    },
+    "signInCouponScreen": {
+      "title": "Sign in to your account"
     },
     "receiveExtraTicketScreen": {
       "title": "Validating your account brought you here",

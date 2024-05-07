@@ -74,8 +74,13 @@ import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneSc
 import SubscriptionsScreen from "screens/promoters/SubscriptionsScreen";
 import ClubScreen from "screens/promoters/ClubScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
+import GiveTicketByCouponScreen from "screens/coupons/GiveTicketByCouponScreen";
+import CouponProvider, { useCouponContext } from "contexts/couponContext";
+import ExpiredCouponScreen from "screens/coupons/ExpiredCouponScreen";
 import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
 import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
+import SignInCouponScreen from "screens/coupons/auth/SignInCouponScreen";
+import InsertEmailCouponScreen from "screens/coupons/auth/InsertEmailCouponScreen";
 import HomeScreen from "screens/donations/HomeScreen";
 import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
 import { initializeDeeplink } from "../../services/deepLink";
@@ -222,6 +227,7 @@ function PrivateNavigator() {
     setExtraTicket,
     setExtraTicketToken,
   } = useAuthentication();
+  const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -232,6 +238,7 @@ function PrivateNavigator() {
       setAccountId,
       setExtraTicket,
       setExtraTicketToken,
+      setCouponId,
     );
   }, []);
 
@@ -259,6 +266,7 @@ function RootNavigator() {
     setExtraTicket,
     setExtraTicketToken,
   } = useAuthentication();
+  const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -269,6 +277,7 @@ function RootNavigator() {
       setAccountId,
       setExtraTicket,
       setExtraTicketToken,
+      setCouponId,
     );
   }, []);
 
@@ -311,6 +320,30 @@ function RootNavigator() {
       <Stack.Screen
         name="GiveTicketScreen"
         component={GiveTicketScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="GiveTicketByCouponScreen"
+        component={GiveTicketByCouponScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="SignInCouponScreen"
+        component={SignInCouponScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="InsertEmailCouponScreen"
+        component={InsertEmailCouponScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="ExpiredCouponScreen"
+        component={ExpiredCouponScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
@@ -615,10 +648,12 @@ export default function Navigation() {
                           <CauseContributionProvider>
                             <NonProfitsProvider>
                               <IntegrationProvider>
-                                <TicketsProvider>
-                                  <RootNavigator />
-                                  <Toast config={toastConfig} />
-                                </TicketsProvider>
+                                <CouponProvider>
+                                  <TicketsProvider>
+                                    <RootNavigator />
+                                    <Toast config={toastConfig} />
+                                  </TicketsProvider>
+                                </CouponProvider>
                               </IntegrationProvider>
                             </NonProfitsProvider>
                           </CauseContributionProvider>

@@ -13,6 +13,7 @@ export async function initializeDeeplink(
   setAccountId: (accountId: string) => void,
   setExtraTicket: (extraTicket: string) => void,
   setExtraTicketToken: (extraTicketToken: string) => void,
+  setCouponId: (couponId: string) => void,
 ) {
   branch.subscribe({
     onOpenStart: ({ uri, cachedInitialEvent }) => {
@@ -37,6 +38,7 @@ export async function initializeDeeplink(
 
       const extraTicketToken =
         (latestParams.extra_ticket_token as string) || "";
+      const couponId = (latestParams.coupon_id as string) || "";
 
       setCurrentIntegrationId(integrationId);
       setExternalId(externalId);
@@ -47,6 +49,8 @@ export async function initializeDeeplink(
       setAccountId(accountId);
       setExtraTicket(extraTicket);
       setExtraTicketToken(extraTicketToken);
+
+      setCouponId(couponId);
 
       try {
         const isFirstTimeOpen = await AsyncStorage.getItem("isFirstTimeOpen");
