@@ -23,27 +23,27 @@ export default function HomeScreen() {
     const canCollect = await handleCanCollect();
     const receivedTicketToday = await hasReceivedTicketToday();
     const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
-    if (couponId !== undefined) {
+    if (couponId !== "" && couponId !== undefined) {
       if (!currentUser) {
         navigateTo("SignInCouponScreen");
       } else {
         navigateTo("GiveTicketByCouponScreen");
       }
     } else if (canCollect) {
-        if (currentUser && !receivedTicketToday) {
-          if (!isRibonIntegration) {
-            navigateTo("GiveTicketV2Screen");
-          } else {
-            navigateTo("TabNavigator", { screen: "CausesScreen" });
-          }
-        } else if (!currentUser && onboardingCompleted !== true) {
-          navigateTo("OnboardingScreen");
+      if (currentUser && !receivedTicketToday) {
+        if (!isRibonIntegration) {
+          navigateTo("GiveTicketV2Screen");
         } else {
           navigateTo("TabNavigator", { screen: "CausesScreen" });
         }
+      } else if (!currentUser && onboardingCompleted !== true) {
+        navigateTo("OnboardingScreen");
       } else {
         navigateTo("TabNavigator", { screen: "CausesScreen" });
       }
+    } else {
+      navigateTo("TabNavigator", { screen: "CausesScreen" });
+    }
   }
 
   useFocusEffect(
