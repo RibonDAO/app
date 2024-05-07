@@ -236,6 +236,9 @@
           "title": "Welcome! Here you'll find what's new at Ribon and the good news that we selected to warm your heart."
         }
       },
+      "header": {
+        "donationStreak": "Donation streak"
+      },
       "lockedSection": {
         "title": "A Ribon for you",
         "subtitle": "Donate your ticket to see what's new at Ribon and our selection of good news!",
@@ -291,7 +294,6 @@
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Collected",
           "buttonTextNoClub": "Unlock collection"
-
         },
         "monthlyTicketCard": {
           "title": "Monthly Ribon Club package",

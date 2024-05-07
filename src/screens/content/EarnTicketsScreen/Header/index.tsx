@@ -5,11 +5,11 @@ import * as S from "./styles";
 import { StrikeIcon } from "./assets/StrikeIcon";
 
 type Props = {
-  streak: number;
+  userStreak: number;
 };
-function Header({ streak }: Props): JSX.Element {
+function Header({ userStreak }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "newHeader",
+    keyPrefix: "content.earnTicketsScreen.header",
   });
 
   return (
@@ -17,9 +17,8 @@ function Header({ streak }: Props): JSX.Element {
       <S.Container>
         <StrikeIcon />
         <S.Counter>
-          <S.CounterText>{streak}</S.CounterText>
-
-          <S.Description>{t("myTickets")}</S.Description>
+          <S.CounterText>{userStreak}</S.CounterText>
+          <S.Description>{t("donationStreak")}</S.Description>
         </S.Counter>
       </S.Container>
     </HeaderTemplate>

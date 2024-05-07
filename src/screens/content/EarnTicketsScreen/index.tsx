@@ -1,7 +1,7 @@
 import { ScrollView } from "react-native";
 import {
   useDonatedToday,
-  useDonationStreak,
+  useUserDonationStreak,
   useSubscriptions,
 } from "@ribon.io/shared";
 
@@ -25,7 +25,8 @@ export default function EarnTicketsScreen(): JSX.Element {
   const { userIsMember, userSubscriptions } = useSubscriptions();
   const { refetch: refetchIsMember } = userIsMember();
   const { refetch: refetchSubscriptions } = userSubscriptions();
-  const { streak, refetch: refetchDonationStreak } = useDonationStreak();
+  const { streak, refetch: refetchUserDonationStreak } =
+    useUserDonationStreak();
 
   useFocusEffect(
     useCallback(() => {
@@ -33,13 +34,13 @@ export default function EarnTicketsScreen(): JSX.Element {
       refetchTickets();
       refetchIsMember();
       refetchSubscriptions();
-      refetchDonationStreak();
+      refetchUserDonationStreak();
     }, [currentUser]),
   );
 
   return (
     <ScrollView style={S.Container}>
-      <Header streak={streak} />
+      <Header userStreak={streak} />
 
       <TabViewSection initialTabIndex={params?.currentTab || 0} />
     </ScrollView>
