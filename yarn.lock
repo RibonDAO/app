@@ -3012,10 +3012,10 @@
   dependencies:
     nanoid "^3.1.23"
 
-"@ribon.io/shared@^1.1.50":
-  version "1.1.50"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.50.tgz#3852df80f9b4ff8b3a67d443082adfc20c0a9585"
-  integrity sha512-ud0euf8WicRvFVbC6/BHuDvjRf/6DzbZoL5P8E0Zk60WFKk+JGXIjWwmQaRJ85AkFP9RNgAg0DeHalwjUQtWOQ==
+"@ribon.io/shared@^1.1.51":
+  version "1.1.51"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.51.tgz#e2f86b24671d4c16215221693e2ed54cb56a9932"
+  integrity sha512-bAhJej/1R/gszIInOl2WLzW0xmeJAsCH43QUr+rH5GNwlAv7co4SVqs9yCsURp1FeUK2TbLY/G5NipcZbnvcnQ==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
@@ -7723,6 +7723,11 @@ expo-pwa@0.0.127:
     chalk "^4.0.0"
     commander "2.20.0"
     update-check "1.5.3"
+
+expo-sharing@~11.10.0:
+  version "11.10.0"
+  resolved "https://registry.yarnpkg.com/expo-sharing/-/expo-sharing-11.10.0.tgz#0e85197ee4d2634b00fe201e571fbdc64cf83eef"
+  integrity sha512-/64RyyKlZ25WfnMXa87HbPXhIIqWwNbIku/RaIYAq4SE0XTRC+KTH3v0XFkfDa+SCG/jKsAr1pJ3vQvsNo1sCQ==
 
 expo-splash-screen@~0.26.4:
   version "0.26.4"

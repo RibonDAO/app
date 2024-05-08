@@ -234,6 +234,16 @@
       "subtitle": "Use your ticket to do good!",
       "button": "Collect ticket"
     },
+    "giveTicketByCouponScreen": {
+      "title": "You won 1 ticket!",
+      "titlePlural": "You won {{numberOfTickets}} tickets!",
+      "button": "Collect tickets"
+    },
+    "expiredCouponScreen": {
+      "title": "Unavailable ticket",
+      "subtitle": "Either you have already collected this ticket or it has expired.",
+      "button": "Go back to the home screen"
+    },
     "earnTicketsScreen": {
       "newsSection": {
         "title": "Earn tickets",
@@ -545,6 +555,12 @@
     "ctaText": "I want to help ->",
     "ctaLink": "https://projetos.ribon.io/partners"
   },
+  "cardReferral": {
+    "title": "Invite your friends",
+    "subtitle": "Whoever enters using your invite gets 1 extra ticket to start donating!",
+    "cta": "Copy invite link ->",
+    "ctaSuccess": "Copied!"
+  },
   "users": {
     "impactScreen": {
       "title": "My Impact",
@@ -698,11 +714,15 @@
       "confirmText": "Continue",
       "emailPlaceholder": "Your e-mail"
     },
+    "insertEmailCouponScreen": {
+      "title": "Sign in with an e-mail",
+      "emailLabel": "E-mail",
+      "confirmText": "Continue",
+      "emailPlaceholder": "Your e-mail"
+    },
     "sentMagicLinkEmailScreen": {
       "title": "We sent you a sign in link",
-      "text": "Click the link sent to {{email}} to sign in",
-      "firstAccessTitle": "You won an extra ticket",
-      "firstAccessText": "Validate your account clicking the link sent to {{email}} and get your extra ticket.",
+      "text": "Click the link sent to {{email}} to sign in to your account on this device",
       "buttonText": "Continue"
     },
     "expiredLinkScreen": {
@@ -713,26 +733,8 @@
       "buttonText": "Send me a new link",
       "buttonTextWithoutEmail": "Continue"
     },
-    "extraTicketScreen": {
-      "title": "You won an extra ticket",
-      "description": "Validate your account clicking the link sent to {{email}} and get your extra ticket.",
-      "buttonText": "Continue without extra ticket"
-    },
-    "signInExtraTicketScreen": {
-      "title": "Validate your account and get a ticket",
-      "description": "Complete your login with {{email}} to receive your prize",
-      "google": "Continue with Google",
-      "apple": "Continue with Apple",
-      "email": "Continue with e-mail",
-      "toastSuccessMessage": "Your ticket was sent by e-mail"
-    },
-    "receiveExtraTicketScreen": {
-      "title": "Validating your account brought you here",
-      "description": "Your donation ticket is available",
-      "buttonText": "Get my ticket"
-    },
-    "validateExtraTicketScreen": {
-      "error": "Invalid link"
+    "signInCouponScreen": {
+      "title": "Sign in to your account"
     },
     "validateAccountScreen": {
       "title": "Validate your account",

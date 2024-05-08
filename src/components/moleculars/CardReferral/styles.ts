@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 import {
+  defaultBodyLgMedium,
   defaultBodyMdSemibold,
-  defaultBodySmRegular,
+  defaultHeadingXs,
 } from "styles/typography/default";
-import { stylizedDisplaySm } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
 
 export const Container = styled.View`
@@ -14,7 +14,7 @@ export const Container = styled.View`
   flex-direction: column;
   gap: ${theme.spacingNative(16)}px;
   align-items: center;
-  background-color: ${theme.colors.brand.primary[50]};
+  background-color: #c7e6f9;
   overflow: hidden;
 `;
 
@@ -29,36 +29,47 @@ export const Image = styled.Image`
 `;
 
 export const Title = styled.Text`
-  ${stylizedDisplaySm}
+  ${defaultHeadingXs}
+
+  color: #235174;
 `;
 
 export const Subtitle = styled.Text`
-  ${defaultBodySmRegular}
-
+  ${defaultBodyLgMedium}
+  color: #235174;
   text-align: center;
-  color: ${theme.colors.neutral[600]};
 `;
 
 export const Brands = styled.Image`
+  filter: brightness(0);
   width: 100%;
   max-width: 400px;
   height: 40px;
   resize-mode: contain;
 `;
 
+export const Button = styled.TouchableOpacity`
+  background-color: #235174;
+  color: ${theme.colors.neutral10};
+  text-align: center;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+`;
+
 export const Cta = styled.Text`
   ${defaultBodyMdSemibold}
 
-  margin-top: ${theme.spacingNative(8)}px;
-  color: ${theme.colors.brand.primary[800]};
-
-  :hover {
-    color: ${theme.colors.brand.primary[600]};
-  }
+  color: ${theme.colors.neutral10};
 `;
 
-export const HalfCircleContainer = styled.View`
+export const ShapeContainer = styled.View`
   position: absolute;
   top: 0;
+  left: 0;
   z-index: -1;
+  width: 100%;
 `;
