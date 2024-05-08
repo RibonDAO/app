@@ -12,7 +12,6 @@ import {
 } from "lib/localStorage/constants";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { logError } from "services/crashReport";
-import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 
 type authTokenProps = {
   onSuccess?: () => void;
@@ -29,8 +28,6 @@ export interface IAuthenticationContext {
   accessToken: string | null;
   magicLinkToken: string | null;
   accountId: string | null;
-  extraTicket: string | null;
-  extraTicketToken: string | null;
   logout: () => void;
   signInWithGoogle: (response: any) => void;
   signInByMagicLink: (signInByMagicLinkProps: authTokenProps) => void;
@@ -41,8 +38,6 @@ export interface IAuthenticationContext {
   isAuthenticated: () => boolean;
   setMagicLinkToken: (token: string) => void;
   setAccountId: (id: string) => void;
-  setExtraTicket: (extraTicket: string) => void;
-  setExtraTicketToken: (extraTicketToken: string) => void;
 }
 
 export type Props = {
@@ -57,8 +52,6 @@ function AuthenticationProvider({ children }: Props) {
   const [accessToken, setAccessToken] = useState<string | null>("");
   const [magicLinkToken, setMagicLinkToken] = useState("");
   const [accountId, setAccountId] = useState("");
-  const [extraTicket, setExtraTicket] = useState("");
-  const [extraTicketToken, setExtraTicketToken] = useState("");
   const { setCurrentUser } = useCurrentUser();
   const emailDoesNotMatchMessage = "Email does not match";
 
@@ -135,7 +128,6 @@ function AuthenticationProvider({ children }: Props) {
       const response = await userAuthenticationApi.postSendAuthenticationEmail(
         email,
         id,
-        INTEGRATION_AUTH_ID,
       );
       if (onSuccess) onSuccess();
       setCurrentUser(response.data.user);
@@ -184,12 +176,8 @@ function AuthenticationProvider({ children }: Props) {
       setAccountId,
       magicLinkToken,
       setMagicLinkToken,
-      extraTicket,
-      setExtraTicket,
-      extraTicketToken,
-      setExtraTicketToken,
     }),
-    [accessToken, magicLinkToken, accountId, extraTicket, extraTicketToken],
+    [accessToken, magicLinkToken, accountId],
   );
 
   return (
