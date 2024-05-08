@@ -1,4 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFirstAccessToIntegration } from "@ribon.io/shared";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { useIntegrationContext } from "contexts/integrationContext";
 import branch from "react-native-branch";
 import { logEvent } from "services/analytics";
 import { logError } from "services/crashReport";
@@ -44,9 +47,14 @@ export async function initializeDeeplink(
 
       setCouponId(couponId);
 
+      const { currentIntegrationId } = useIntegrationContext();
+      const { isFirstAccessToIntegration } =
+        useFirstAccessToIntegration(currentIntegrationId);
+      const { signedIn } = useCurrentUser();
+
       try {
         const isFirstTimeOpen = await AsyncStorage.getItem("isFirstTimeOpen");
-        if (!isFirstTimeOpen) {
+        if (!isFirstTimeOpen && isFirstAccessToIntegration && !signedIn) {
           logEvent("internal_first_open", {
             utmSource,
             utmMedium,
