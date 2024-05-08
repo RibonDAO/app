@@ -1,4 +1,5 @@
-import Animated, { Keyframe } from "react-native-reanimated";
+import { useEffect, useRef } from "react";
+import { Animated } from "react-native";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
 import * as S from "./styles";
@@ -8,27 +9,47 @@ export type Props = {
 };
 
 export default function NewTicketAnimation({ count = 1 }: Props): JSX.Element {
-  const keyframe = new Keyframe({
-    0: {
-      opacity: 0,
-      transform: [{ translateY: 0 }],
-    },
-    20: {
-      opacity: 1,
-      transform: [{ translateY: -20 }],
-    },
-    80: {
-      opacity: 1,
-      transform: [{ translateY: -30 }],
-    },
-    100: {
-      opacity: 0,
-      transform: [{ translateY: -40 }],
-    },
-  });
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 160,
+          useNativeDriver: true,
+        }),
+        Animated.timing(translateY, {
+          toValue: -20,
+          duration: 160,
+          useNativeDriver: true,
+        }),
+      ]),
+      Animated.timing(translateY, {
+        toValue: -30,
+        duration: 480,
+        useNativeDriver: true,
+      }),
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 160,
+          useNativeDriver: true,
+        }),
+        Animated.timing(translateY, {
+          toValue: -40,
+          duration: 160,
+          useNativeDriver: true,
+        }),
+      ]),
+    ]).start();
+  }, []);
 
   return (
-    <Animated.View entering={keyframe.duration(800)}>
+    <Animated.View
+      style={{ opacity: fadeAnim, transform: [{ translateY }] }}
+    >
       <S.Container>
         <S.Count>+{count}</S.Count>
         <Icon
