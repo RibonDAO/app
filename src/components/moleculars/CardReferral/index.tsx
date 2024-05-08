@@ -68,8 +68,6 @@ function CardReferral(): JSX.Element {
   const handleClick = () => {
     logEvent("referralBtn_click");
 
-    console.log("integration", integration);
-
     if (!integration) {
       const payload: ReferralIntegration = {
         name: profile?.name || "User",
