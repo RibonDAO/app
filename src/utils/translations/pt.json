@@ -96,6 +96,13 @@
         "successToastMessage": "Notificações ligadas",
         "errorToastMessage": "Erro ao ligar notificações"
       },
+      "paymentFailedNotification": {
+        "cardTitle": "O pagamento do Clube Ribon falhou",
+        "cardDescription": "Refaça a assinatura para continuar aproveitando os benefícios",
+        "cardLink": "Refazer assinatura",
+        "pixTitle": "Os benefícios do Clube Ribon expiraram",
+        "pixDescription": "Refaça a assinatura por PIX ou mude para cartão para continuar aproveitando os benefícios"
+      },
       "userSupportSection": {
         "title": "Suporte ao Usuário",
         "description": "Dúvidas, ideias, estornos. Estamos aqui!",

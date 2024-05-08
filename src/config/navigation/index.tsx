@@ -78,6 +78,7 @@ import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
 import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
 import HomeScreen from "screens/donations/HomeScreen";
 import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
+import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -616,8 +617,10 @@ export default function Navigation() {
                             <NonProfitsProvider>
                               <IntegrationProvider>
                                 <TicketsProvider>
-                                  <RootNavigator />
-                                  <Toast config={toastConfig} />
+                                  <PaymentFailedNotificationProvider>
+                                    <RootNavigator />
+                                    <Toast config={toastConfig} />
+                                  </PaymentFailedNotificationProvider>
                                 </TicketsProvider>
                               </IntegrationProvider>
                             </NonProfitsProvider>

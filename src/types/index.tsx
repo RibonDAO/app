@@ -68,13 +68,17 @@ export type CausesScreenParamList = {
   newState: LocationStateType;
 };
 
+export type ClubScreenParamList = {
+  ignoreBenefitsSection?: boolean;
+};
+
 export type RootTabParamList = {
   CausesScreen: CausesScreenParamList;
   EarnTicketsScreen: undefined;
   ImpactScreen: undefined;
   PromotersScreen: PromotersScreenParams;
   PostDonationScreen: PostDonationScreenParams;
-  ClubScreen: undefined;
+  ClubScreen: ClubScreenParamList;
   OnboardingScreen: undefined;
   HomeScreen: undefined;
 };
@@ -182,7 +186,7 @@ export type RootStackParamList = {
   ExpiredLinkScreen: undefined;
   ValidateAccountScreen: ValidateAccountScreenParamsList;
   ClubContributionDoneScreen: undefined;
-  ClubScreen: undefined;
+  ClubScreen: ClubScreenParamList;
   AboutTicketsScreen: AboutTicketsScreenParamsList;
 };
 
