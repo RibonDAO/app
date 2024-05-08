@@ -16,6 +16,18 @@ export default function NewTicketAnimation({ count = 1 }: Props): JSX.Element {
     Animated.sequence([
       Animated.parallel([
         Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 0,
+          useNativeDriver: true,
+        }),
+        Animated.timing(translateY, {
+          toValue: 0,
+          duration: 0,
+          useNativeDriver: true,
+        }),
+      ]),
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
           toValue: 1,
           duration: 160,
           useNativeDriver: true,
@@ -47,9 +59,7 @@ export default function NewTicketAnimation({ count = 1 }: Props): JSX.Element {
   }, []);
 
   return (
-    <Animated.View
-      style={{ opacity: fadeAnim, transform: [{ translateY }] }}
-    >
+    <Animated.View style={{ opacity: fadeAnim, transform: [{ translateY }] }}>
       <S.Container>
         <S.Count>+{count}</S.Count>
         <Icon
