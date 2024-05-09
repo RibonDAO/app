@@ -21,3 +21,14 @@ export const ConfigContainer = styled.TouchableOpacity`
   align-self: flex-end;
   margin-top: ${theme.spacing(8)};
 `;
+
+export const Background = styled.Image`
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-self: center;
+  object-fit: contain;
+`;

@@ -9,10 +9,12 @@ import TicketSection from "../LayoutHeader/TicketSection";
 type Props = {
   showsTicketsCounter?: boolean;
   children?: JSX.Element | JSX.Element[];
+  background?: any;
 };
 function HeaderTemplate({
   showsTicketsCounter = false,
   children,
+  background,
 }: Props): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
 
@@ -26,6 +28,7 @@ function HeaderTemplate({
 
   return (
     <S.Container>
+      <S.Background source={background} />
       <S.ConfigContainer accessibilityRole="button" onPress={toggleModal}>
         {showsTicketsCounter && <TicketSection outline />}
         <Icon
