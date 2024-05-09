@@ -4,7 +4,7 @@ import {
   useDonatedToday,
   useSubscriptions,
 } from "@ribon.io/shared/hooks";
-import { RefreshControl, SafeAreaView, StatusBar } from "react-native";
+import { RefreshControl } from "react-native";
 import { useTranslation } from "react-i18next";
 import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 import { logError } from "services/crashReport";
@@ -19,7 +19,6 @@ import { useIntegrationContext } from "contexts/integrationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useRouteParams } from "hooks/useRouteParams";
 
-import { theme } from "@ribon.io/shared";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
@@ -108,12 +107,6 @@ export default function CausesScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={theme.colors.brand.primary[800]}
-        />
-      </SafeAreaView>
       <Header />
       <S.ContainerPadding hasPaddingTop={!shouldShowIntegrationBanner}>
         {shouldShowIntegrationBanner && (
