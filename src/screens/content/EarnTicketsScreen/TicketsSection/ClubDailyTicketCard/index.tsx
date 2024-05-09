@@ -87,8 +87,8 @@ export default function ClubDailyTicketCard({
         <ButtonNonClickable
           text={t("dailyTicketCard.buttonTextCollected")}
           textColor={theme.colors.brand.tertiary[600]}
-          borderColor={theme.colors.brand.tertiary[50]}
-          backgroundColor={theme.colors.brand.tertiary[50]}
+          borderColor={theme.colors.brand.tertiary[100]}
+          backgroundColor={theme.colors.brand.tertiary[100]}
           leftIcon={{
             name: "check",
             color: theme.colors.brand.tertiary[600],
@@ -104,6 +104,7 @@ export default function ClubDailyTicketCard({
           textColor={theme.colors.neutral10}
           borderColor={theme.colors.brand.tertiary[600]}
           backgroundColor={theme.colors.brand.tertiary[600]}
+          customStyles={{ borderRadius: 12 }}
           leftIcon={
             hasCollected
               ? {

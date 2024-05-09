@@ -29,16 +29,16 @@ function NewsSectionTabView(): JSX.Element {
   );
 }
 
-function TasksSectionTabView(): JSX.Element {
+function TicketsSectionTabView(): JSX.Element {
   return (
-    <ParallaxTabViewContainer routeKey="TasksSectionTabView">
+    <ParallaxTabViewContainer routeKey="TicketsSectionTabView">
       <TicketsSection />
     </ParallaxTabViewContainer>
   );
 }
 
 const renderScene = SceneMap({
-  TasksSectionTabView,
+  TicketsSectionTabView,
   NewsSectionTabView,
 });
 
@@ -74,7 +74,7 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
   );
 
   const [routes] = useState([
-    { key: "TasksSectionTabView", title: t("tasksSectionTitle") },
+    { key: "TicketsSectionTabView", title: t("ticketsSectionTitle") },
     { key: "NewsSectionTabView", title: t("newsSectionTitle") },
   ]);
 
