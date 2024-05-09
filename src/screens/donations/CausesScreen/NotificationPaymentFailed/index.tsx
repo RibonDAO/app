@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
 import { useNavigation } from "hooks/useNavigation";
 import { usePaymentFailedNotification } from "contexts/paymentFailedNotificationContext";
+import { useEffect } from "react";
+import { logEvent } from "services/analytics";
 
 export default function NotificationPaymentFailed() {
   const { userSubscriptions } = useSubscriptions();
@@ -25,11 +27,22 @@ export default function NotificationPaymentFailed() {
 
   const isPix = lastPayment && lastPayment.paymentMethod === "pix";
 
-  const navigateToClubCheckout = () => {
+  const navigateToClubPlans = () => {
+    logEvent("notifInactiveClub_click", {
+      payment_method: lastPayment?.paymentMethod,
+    });
     navigateTo("ClubScreen", {
       ignoreBenefitsSection: true,
     });
   };
+
+  useEffect(() => {
+    if (visible) {
+      logEvent("notifInactiveClub_view", {
+        from: "P26",
+      });
+    }
+  });
 
   return (
     visible && (
@@ -39,7 +52,7 @@ export default function NotificationPaymentFailed() {
           description={t(isPix ? "pixDescription" : "cardDescription")}
           type="warning"
           firstLink={t("link") || "ou"}
-          onFirstLinkClick={navigateToClubCheckout}
+          onFirstLinkClick={navigateToClubPlans}
           onCloseClick={handleCloseNotificationClick}
         />
       </View>
