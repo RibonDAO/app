@@ -19,7 +19,7 @@ function Icon({ icon }: IconProps) {
     case "RibonFlagIcon":
       return <RibonFlagIcon />;
     default:
-      return <TicketOutlinedIcon />;
+      return null;
   }
 }
 
