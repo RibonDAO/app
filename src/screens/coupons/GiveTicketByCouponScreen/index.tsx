@@ -22,7 +22,11 @@ export default function GiveTicketByCouponScreen() {
   interface ICoupon {
     id: string;
     numberOfTickets: number;
-    rewardText?: string;
+    couponMessage: {
+      id: string;
+      rewardText?: string;
+      couponId: string;
+    };
   }
 
   const { couponId, setCouponId } = useCouponContext();
@@ -94,7 +98,7 @@ export default function GiveTicketByCouponScreen() {
               ? t("titlePlural", { numberOfTickets })
               : t("title")}
           </Text>
-          <Text style={S.subtitle}>{coupon?.rewardText}</Text>
+          <Text style={S.subtitle}>{coupon?.couponMessage?.rewardText}</Text>
         </View>
 
         <Button
