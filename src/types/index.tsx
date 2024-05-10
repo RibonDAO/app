@@ -146,7 +146,6 @@ export type RootStackParamList = {
   Home: undefined;
   PrivateStack: undefined;
   SignInScreen: undefined;
-  SignInExtraTicketScreen: undefined;
   SignInCouponScreen: undefined;
   InsertEmailCouponScreen: undefined;
   DonationSignInScreen: DonateScreenList;
@@ -169,7 +168,6 @@ export type RootStackParamList = {
   PromotersScreen: PromotersScreenParams;
   CheckoutScreen: CheckoutScreenParamList;
   ClubCheckoutScreen: ClubCheckoutScreenParamList;
-  ValidateExtraTicketScreen: undefined;
   RecurrenceScreen: RecurrenceScreenParamList;
   SelectTicketsScreen: SelectTicketsScreenParamList;
   PixInstructionsScreen: PixInstructionsScreenParamList;
@@ -181,8 +179,6 @@ export type RootStackParamList = {
   SentMagicLinkEmailScreen: SentMagicLinkEmailParamsList;
   SignInByMagicLinkScreen: undefined;
   InsertEmailAccountScreen: InsertEmailAccountParamsList;
-  ReceiveExtraTicketScreen: undefined;
-  ExtraTicketScreen: undefined;
   ExpiredLinkScreen: undefined;
   ValidateAccountScreen: ValidateAccountScreenParamsList;
   ClubContributionDoneScreen: undefined;

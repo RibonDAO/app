@@ -3,7 +3,6 @@ import usePageView from "hooks/usePageView";
 import { useNavigation } from "hooks/useNavigation";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { showToast } from "lib/Toast";
-import { userAccountApi } from "@ribon.io/shared";
 import { useAuthentication } from "contexts/authenticationContext";
 import ValidateAccount from "components/moleculars/validateAccount";
 import { useRouteParams } from "hooks/useRouteParams";
@@ -22,7 +21,6 @@ function ValidateAccountScreen() {
   const { sendAuthenticationEmail } = useAuthentication();
 
   const onContinue = async (pathname: string) => {
-    await userAccountApi.postSendValidatedEmail();
     navigateTo(pathname);
   };
 
