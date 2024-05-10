@@ -35,7 +35,8 @@ function PaymentFailedNotificationProvider({ children }: Props) {
   const isClubPaymentFailed =
     lastPayment &&
     lastPayment.status === "failed" &&
-    lastPayment.offer.category === "club";
+    lastPayment.offer.category === "club" &&
+    subscription?.status === "inactive";
 
   const HAS_CLOSED_FAILED_PAYMENT_NOTIFICATION_KEY = `HAS_CLOSED_FAILED_PAYMENT_NOTIFICATION${lastPayment?.id}`;
 
