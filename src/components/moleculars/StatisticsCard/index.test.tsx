@@ -9,6 +9,7 @@ describe("StatisticsCard", () => {
         description="Description"
         icon="TicketIconOutlined"
         totalDonated="100"
+        isMember
       />,
     );
     expect(screen.getByText("100")).toBeTruthy();
@@ -21,6 +22,7 @@ describe("StatisticsCard", () => {
         totalDonated="200"
         description="Another Description"
         icon="RibonFlagIcon"
+        isMember
       />,
     );
     expect(screen.getByText("200")).toBeTruthy();

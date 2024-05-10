@@ -5,7 +5,13 @@ import { defaultBodySmMedium } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
 export const Container = styled.View`
-  background-color: ${theme.colors.brand.primary[25]};
+  background-color: ${(props: { isMember: boolean }) => {
+    if (props.isMember) {
+      return theme.colors.brand.tertiary[25];
+    } else {
+      return theme.colors.brand.primary[25];
+    }
+  }};
   border-radius: 16px;
   padding: 24px;
   display: flex;
