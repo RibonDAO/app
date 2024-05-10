@@ -28,7 +28,6 @@ const linking: LinkingOptions<RootStackParamList> = {
               GiveTicketV2Screen: "give-ticket-v2",
               DonationDoneScreen: "donation-done",
               SigninByMagicLinkScreen: "auth",
-              ValidateExtraTicketScreen: "extra-ticket",
             },
           },
           EarnTicketsScreen: {

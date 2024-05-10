@@ -58,16 +58,12 @@ import PixPaymentInformationProvider from "contexts/pixInformationContext";
 import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
 import SignedInScreen from "screens/donations/auth/SignedInScreen";
 import SignInScreen from "screens/auth/SignInScreen";
-import SignInExtraTicketScreen from "screens/auth/SignInExtraTicketScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
 import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
 import { useAuthentication } from "contexts/authenticationContext";
 import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
-import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
-import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
 import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
-import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
 import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
@@ -221,12 +217,7 @@ function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const {
-    setMagicLinkToken,
-    setAccountId,
-    setExtraTicket,
-    setExtraTicketToken,
-  } = useAuthentication();
+  const { setMagicLinkToken, setAccountId } = useAuthentication();
   const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
@@ -236,8 +227,6 @@ function PrivateNavigator() {
       setUtm,
       setMagicLinkToken,
       setAccountId,
-      setExtraTicket,
-      setExtraTicketToken,
       setCouponId,
     );
   }, []);
@@ -260,12 +249,7 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const {
-    setMagicLinkToken,
-    setAccountId,
-    setExtraTicket,
-    setExtraTicketToken,
-  } = useAuthentication();
+  const { setMagicLinkToken, setAccountId } = useAuthentication();
   const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
@@ -275,8 +259,6 @@ function RootNavigator() {
       setUtm,
       setMagicLinkToken,
       setAccountId,
-      setExtraTicket,
-      setExtraTicketToken,
       setCouponId,
     );
   }, []);
@@ -489,17 +471,6 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="SignInExtraTicketScreen"
-        component={SignInExtraTicketScreen}
-        options={{
-          headerShown: true,
-          headerLeft: () => <ArrowBackButton />,
-          headerTitle: "",
-          headerShadowVisible: false,
-        }}
-      />
-
-      <Stack.Screen
         name="InsertEmailScreen"
         component={InsertEmailScreen}
         options={{
@@ -534,30 +505,6 @@ function RootNavigator() {
       <Stack.Screen
         name="SignInByMagicLinkScreen"
         component={SignInByMagicLinkScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="ReceiveExtraTicketScreen"
-        component={ReceiveExtraTicketScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="ValidateExtraTicketScreen"
-        component={ValidateExtraTicketScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="ExtraTicketScreen"
-        component={ExtraTicketScreen}
         options={{
           headerShown: false,
         }}
