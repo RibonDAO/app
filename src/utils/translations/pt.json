@@ -99,7 +99,7 @@
       "paymentFailedNotification": {
         "cardTitle": "O pagamento do Clube Ribon falhou",
         "cardDescription": "Refaça a assinatura para continuar aproveitando os benefícios",
-        "cardLink": "Refazer assinatura",
+        "link": "Refazer assinatura",
         "pixTitle": "Os benefícios do Clube Ribon expiraram",
         "pixDescription": "Refaça a assinatura por PIX ou mude para cartão para continuar aproveitando os benefícios"
       },
