@@ -1,3 +1,5 @@
+import VerifiedIcon from "components/vectors/VerifiedIcon";
+import Sparkles from "screens/promoters/ClubScreen/Header/assets/Sparkles";
 import * as S from "./styles";
 import ProfilePhoto from "../assets/ProfilePhoto";
 
@@ -6,8 +8,15 @@ type Props = {
   email?: string;
   name?: string | null;
   showInfo?: boolean;
+  isMember?: boolean;
 };
-function UserAvatar({ userAvatar, email, name, showInfo = true }: Props) {
+function UserAvatar({
+  userAvatar,
+  email,
+  name,
+  showInfo = true,
+  isMember,
+}: Props) {
   return (
     <S.AvatarSection>
       <S.AvatarContainer>
@@ -16,7 +25,20 @@ function UserAvatar({ userAvatar, email, name, showInfo = true }: Props) {
         ) : (
           <ProfilePhoto />
         )}
+
+        {isMember && (
+          <S.VerifiedContainer>
+            <VerifiedIcon />
+          </S.VerifiedContainer>
+        )}
+
+        {isMember && (
+          <S.Sparkles>
+            <Sparkles />
+          </S.Sparkles>
+        )}
       </S.AvatarContainer>
+
       {showInfo && (
         <S.ProfileSection>
           <S.Username>{name}</S.Username>
