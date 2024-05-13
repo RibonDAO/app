@@ -24,11 +24,7 @@ export default function HomeScreen() {
     const receivedTicketToday = await hasReceivedTicketToday();
     const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
     if (couponId !== "" && couponId !== undefined) {
-      if (!currentUser) {
-        navigateTo("SignInCouponScreen");
-      } else {
-        navigateTo("GiveTicketByCouponScreen");
-      }
+      navigateTo("GiveTicketByCouponScreen");
     } else if (canCollect) {
       if (currentUser && !receivedTicketToday) {
         if (!isRibonIntegration) {

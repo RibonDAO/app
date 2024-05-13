@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     ...stylizedDisplayXs,
     color: theme.colors.brand.primary[900],
     marginBottom: theme.spacingNative(16),
+    textAlign: "center",
   },
   keyboardView: {
     height:
