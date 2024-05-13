@@ -2,12 +2,11 @@ import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
 import { Integration } from "@ribon.io/shared/types/entities";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, Share } from "react-native";
 import useUserIntegration from "hooks/userHooks/useUserIntegration";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useUserProfile } from "@ribon.io/shared";
 import { useLanguage } from "contexts/languageContext";
-import * as Sharing from "expo-sharing";
 import Star from "./assets/Shape";
 import Letter from "./assets/Letter";
 import * as S from "./styles";
@@ -62,7 +61,9 @@ function CardReferral(): JSX.Element {
 
   const copyTextToClipboard = (data?: Integration) => {
     const text = finalLink(data);
-    Sharing.shareAsync(text);
+    Share.share({
+      message: text,
+    });
   };
 
   const handleClick = () => {
