@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   title: {
     ...stylizedDisplayXs,
     marginTop: theme.spacingNative(20),
+    marginBottom: theme.spacingNative(12),
     color: theme.colors.brand.primary[800],
     textAlign: "center",
   },
