@@ -1,3 +1,4 @@
+import Coupon from "@ribon.io/shared/types/entities/Coupon";
 import { useNavigation } from "hooks/useNavigation";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,17 +20,11 @@ export default function GiveTicketByCouponScreen() {
     keyPrefix: "content.giveTicketByCouponScreen",
   });
 
-  interface ICoupon {
-    id: string;
-    numberOfTickets: number;
-    rewardText?: string;
-  }
-
   const { couponId, setCouponId } = useCouponContext();
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
   const { handleCanCollectByCoupon, handleCollectByCoupon } = useCoupons();
-  const [coupon, setCoupon] = useState<ICoupon | undefined>(undefined);
+  const [couponData, setCouponData] = useState<Coupon | undefined>(undefined);
   const [loading, setLoading] = useState(false);
 
   async function canCollectByCoupon() {
@@ -38,7 +33,7 @@ export default function GiveTicketByCouponScreen() {
     if (!canCollectByCouponData.canCollect) {
       navigateTo("ExpiredCouponScreen");
     } else {
-      setCoupon(canCollectByCouponData.coupon);
+      setCouponData(canCollectByCouponData.coupon);
     }
   }
 
@@ -47,6 +42,8 @@ export default function GiveTicketByCouponScreen() {
     setLoading(true);
     if (currentUser) {
       canCollectByCoupon();
+    } else {
+      navigateTo("SignInCouponScreen");
     }
   }, [currentUser]);
 
@@ -69,7 +66,7 @@ export default function GiveTicketByCouponScreen() {
     navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
-  const numberOfTickets = coupon?.numberOfTickets || 1;
+  const numberOfTickets = couponData?.numberOfTickets || 1;
 
   return loading ? (
     <View style={S.container}>
@@ -94,7 +91,9 @@ export default function GiveTicketByCouponScreen() {
               ? t("titlePlural", { numberOfTickets })
               : t("title")}
           </Text>
-          <Text style={S.subtitle}>{coupon?.rewardText}</Text>
+          <Text style={S.subtitle}>
+            {couponData?.couponMessage?.rewardText}
+          </Text>
         </View>
 
         <Button
