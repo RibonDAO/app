@@ -11,7 +11,7 @@ type Props = {
   buttonDisabled: boolean;
 };
 
-function OngCard({
+function CardNonProfit({
   nonProfit,
   ticketsComponent,
   buttonText,
@@ -42,4 +42,4 @@ function OngCard({
   );
 }
 
-export default OngCard;
+export default CardNonProfit;
