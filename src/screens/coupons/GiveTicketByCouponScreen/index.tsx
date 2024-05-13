@@ -66,7 +66,7 @@ export default function GiveTicketByCouponScreen() {
 
   const handleBackButtonClick = () => {
     logEvent("P37_getTicketBtn_click");
-    navigateTo("CausesScreen");
+    navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
   const numberOfTickets = coupon?.numberOfTickets || 1;
