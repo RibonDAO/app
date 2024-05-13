@@ -18,13 +18,16 @@ export function useCoupons() {
     if (!couponId) {
       return { canCollect: false };
     }
-    const response = await canCollectByCoupon(
-      couponId,
-      PLATFORM,
-      currentUser?.email ?? "",
-    );
-
-    return response.data;
+    try {
+      const response = await canCollectByCoupon(
+        couponId,
+        PLATFORM,
+        currentUser?.email ?? "",
+      );
+      return response.data;
+    } catch (e: any) {
+      return { canCollect: false };
+    }
   }
 
   async function handleCollectByCoupon({
