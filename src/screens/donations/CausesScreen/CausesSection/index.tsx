@@ -3,7 +3,6 @@ import { useCauseDonationContext } from "contexts/causesDonationContext";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useCausesContext } from "contexts/causesContext";
 import { NonProfit } from "@ribon.io/shared/types";
-import CardNonProfitStories from "components/moleculars/CardNonProfitStories";
 import CausesFilter from "./CausesFilter";
 import NonProfitsList from "./NonProfitsList";
 import * as S from "./styles";
@@ -40,16 +39,6 @@ export default function CausesSection() {
       );
     });
   };
-  const markdownTest = `
-  ### **Quem recebe sua doação**
-  Direcionadas a pessoas em regiões de risco na Nigériaduhsoiuhiuhsiod lkshdoihpsi aoihdiuosgha aohdpisugha sohdpiodh
-
-  **O projeto oferece:**
-  - lorem ipsum dot
-  - lorem ipsum dot
-  - lorem ipsum dot
-  - lorem ipsum do
-  `;
 
   useEffect(() => {
     setSortedNonProfits(sortNonProfits());
@@ -58,7 +47,6 @@ export default function CausesSection() {
   return (
     <S.Container>
       <CausesFilter />
-      <CardNonProfitStories markdownText={markdownTest} />
       <NonProfitsList nonProfits={sortedNonProfits} />
     </S.Container>
   );
