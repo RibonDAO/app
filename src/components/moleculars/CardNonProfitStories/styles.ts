@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
+import { theme } from "@ribon.io/shared/styles";
 
 export const Container = styled.View`
   height: 432px;
   width: 296px;
-  border-radius: 16px;
+  border-radius: ${theme.spacingNative(16)}px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,14 +23,14 @@ export const BackgroundContainer = styled.View`
 `;
 
 export const MarkdownContainer = styled.View`
-  padding: 48px 24px;
+  padding: ${theme.spacing(48, 24)};
   width: 100%;
 `;
 
 export const ImageBackground = styled.ImageBackground`
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: ${theme.spacingNative(16)}px;
 `;
 
 export const MarkdownStyle = StyleSheet.create({
