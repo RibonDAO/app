@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
+import NotificationPaymentFailed from "screens/donations/CausesScreen/NotificationPaymentFailed";
 import RibonLogo from "./RibonLogo";
 import ConfigMenu from "../LayoutHeader/ConfigMenu";
 import TicketSection from "./TicketSection";
@@ -40,7 +41,7 @@ function NewHeader(): JSX.Element {
           <S.Description>{t("description")}</S.Description>
         </S.TitleContainer>
       </S.InfoContainer>
-
+      <NotificationPaymentFailed />
       <TicketSection />
       <ConfigMenu toggleModal={toggleModal} menuVisible={menuVisible} />
     </S.Container>
