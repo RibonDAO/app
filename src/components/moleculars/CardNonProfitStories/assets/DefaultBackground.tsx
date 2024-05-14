@@ -2,7 +2,13 @@ import { ClipPath, Defs, G, Path, Rect, Svg } from "react-native-svg";
 
 function DefaultBackground() {
   return (
-    <Svg width="296" height="432" viewBox="0 0 296 432" fill="none">
+    <Svg
+      width="296"
+      height="432"
+      viewBox="0 0 296 432"
+      fill="none"
+      testID="default-background"
+    >
       <G clip-path="url(#clip0_1077_9743)">
         <Rect width="296" height="432" rx="16" fill="#E5FBED" />
         <Path

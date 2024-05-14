@@ -32,6 +32,7 @@ function ImageBackgroundComponent({ markdownText, backgroundImage }: Props) {
         source={{ uri: backgroundImage }}
         resizeMode="cover"
         imageStyle={{ borderRadius: 16 }}
+        testID="image-background"
       >
         <S.MarkdownContainer>
           <Markdown>{markdownText}</Markdown>
