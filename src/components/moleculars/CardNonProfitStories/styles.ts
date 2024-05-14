@@ -5,7 +5,7 @@ import { theme } from "@ribon.io/shared/styles";
 export const Container = styled.View`
   height: 432px;
   width: 296px;
-  border-radius: ${theme.spacingNative(16)}px;
+  border-radius: ${theme.spacing(16)};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +30,7 @@ export const MarkdownContainer = styled.View`
 export const ImageBackground = styled.ImageBackground`
   width: 100%;
   height: 100%;
-  border-radius: ${theme.spacingNative(16)}px;
+  border-radius: ${theme.spacing(16)};
 `;
 
 export const MarkdownStyle = StyleSheet.create({
