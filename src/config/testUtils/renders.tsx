@@ -68,6 +68,10 @@ import PixInformationProvider, {
   IPixPaymentInformationContext,
   PixPaymentInformationContext,
 } from "contexts/pixInformationContext";
+import PaymentFailedNotificationProvider, {
+  IPaymentFailedNotificationContext,
+  PaymentFailedNotificationContext,
+} from "contexts/paymentFailedNotificationContext";
 
 import CouponProvider, { CouponContext } from "contexts/couponContext";
 import IntegrationProvider, {
@@ -124,6 +128,7 @@ export type RenderComponentProps = {
   causeContributionProviderValue?: Partial<ICauseContributionContext>;
   nonProfitsProviderValue?: Partial<INonProfitsContext>;
   integrationProviderValue?: Partial<IIntegrationContext>;
+  paymentFailedNotificationProviderValue?: Partial<IPaymentFailedNotificationContext>;
 };
 
 function renderAllProviders(
@@ -146,6 +151,7 @@ function renderAllProviders(
     causeDonationProviderValue = {},
     nonProfitsProviderValue = {},
     integrationProviderValue = {},
+    paymentFailedNotificationProviderValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -194,7 +200,6 @@ function renderAllProviders(
                               ScrollEnabledProvider,
                               ScrollEnabledContext,
                               scrollEnabledProviderValue,
-
                               renderProvider(
                                 StripeProvider,
                                 StripeContext,
@@ -220,10 +225,15 @@ function renderAllProviders(
                                           IntegrationContext,
                                           integrationProviderValue,
                                           renderProvider(
-                                            PixInformationProvider,
-                                            PixPaymentInformationContext,
-                                            pixInformationProviderValue,
-                                            children,
+                                            PaymentFailedNotificationProvider,
+                                            PaymentFailedNotificationContext,
+                                            paymentFailedNotificationProviderValue,
+                                            renderProvider(
+                                              PixInformationProvider,
+                                              PixPaymentInformationContext,
+                                              pixInformationProviderValue,
+                                              children,
+                                            ),
                                           ),
                                         ),
                                       ),
