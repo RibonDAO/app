@@ -699,6 +699,10 @@
         "modalDialog": {
           "accessUserSupport": "Access user support"
         }
+      },
+      "lastCard": {
+        "primaryButtonText": "Donate tickets",
+        "secondaryButtonText": "Donate money"
       }
     }
   },

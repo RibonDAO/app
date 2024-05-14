@@ -693,6 +693,10 @@
         "modalDialog": {
           "accessUserSupport": "Acessar o suporte ao usuário"
         }
+      },
+      "lastCard": {
+        "primaryButtonText": "Doar tickets",
+        "secondaryButtonText": "Doar dinheiro"
       }
     }
   },
