@@ -1,28 +1,39 @@
-import { theme } from "@ribon.io/shared";
+import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-  padding: ${theme.spacing(0, 24)};
+  height: 432px;
+  width: 296px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
-  background-color: ${theme.colors.brand.primary[50]};
+  justify-content: center;
   position: relative;
-  border-radius: 16px;
+`;
+
+export const BackgroundContainer = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
 `;
 
 export const MarkdownContainer = styled.View`
-  margin-top: ${theme.spacing(80)};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  z-index: ${theme.zindex.above};
+  padding: 48px 24px;
+  width: 100%;
 `;
 
 export const ImageBackground = styled.ImageBackground`
-  padding: 24px;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
 `;
 
-export const Background = styled.View`
-  background-color: ${theme.colors.brand.primary[50]};
-`;
+export const MarkdownStyle = StyleSheet.create({
+  text: {
+    lineHeight: 24,
+  },
+});
