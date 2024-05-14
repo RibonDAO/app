@@ -48,7 +48,7 @@ export default function ExpiredCouponScreen() {
 
         <Button
           text={t("button")}
-          onPress={() => navigateTo("CausesScreen")}
+          onPress={handleBackButtonClick}
           borderColor={theme.colors.brand.primary[600]}
           backgroundColor={theme.colors.brand.primary[600]}
           customTextStyles={{

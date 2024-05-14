@@ -96,6 +96,13 @@
         "successToastMessage": "Notifications turned on",
         "errorToastMessage": "Error turning on notifications"
       },
+      "paymentFailedNotification": {
+        "cardTitle": "The Ribon Club payment failed",
+        "cardDescription": "Redo your subscription to continue enjoying the benefits",
+        "link": "Redo subscription",
+        "pixTitle": "The benefits of the Ribon Club have expired",
+        "pixDescription": "Redo your subscription via PIX or switch to a card to continue enjoying the benefits"
+      },
       "userSupportSection": {
         "title": "Ribon Support",
         "description": "Doubts, ideas, refunds. We're here!",
