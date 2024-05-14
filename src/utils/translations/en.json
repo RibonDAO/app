@@ -301,7 +301,6 @@
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Collected",
           "buttonTextNoClub": "Unlock collection"
-
         },
         "monthlyTicketCard": {
           "title": "Monthly Ribon Club package",
@@ -693,6 +692,10 @@
         "modalDialog": {
           "accessUserSupport": "Access user support"
         }
+      },
+      "lastCard": {
+        "primaryButtonText": "Donate tickets",
+        "secondaryButtonText": "Donate money"
       }
     }
   },
