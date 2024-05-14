@@ -71,8 +71,9 @@ export default function CausesScreen() {
     hasTickets &&
     integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
 
-  const { userIsMember } = useSubscriptions();
+  const { userIsMember, userSubscriptions } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
+  const { refetch: refetchUserSubscriptions } = userSubscriptions();
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -81,6 +82,7 @@ export default function CausesScreen() {
         refetchTickets(),
         refetchIsMember(),
         refetchFirstAccessToIntegration(),
+        refetchUserSubscriptions(),
       ]);
     } catch (e) {
       logError(e);
