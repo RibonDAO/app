@@ -3,37 +3,54 @@ import DefaultBackground from "./assets/DefaultBackground";
 import * as S from "./styles";
 
 export type Props = {
-  children?: JSX.Element | JSX.Element[];
   markdownText?: string;
   backgroundImage?: string;
 };
 
-function CardNonProfitStories({
+function DefaultBackgroundComponent({
   markdownText,
-  backgroundImage,
-  children,
-}: Props) {
+}: {
+  markdownText: string | undefined;
+}) {
+  return (
+    <S.Container>
+      <S.BackgroundContainer>
+        <DefaultBackground />
+      </S.BackgroundContainer>
+
+      <S.MarkdownContainer>
+        <Markdown style={S.MarkdownStyle}>{markdownText}</Markdown>
+      </S.MarkdownContainer>
+    </S.Container>
+  );
+}
+
+function ImageBackgroundComponent({ markdownText, backgroundImage }: Props) {
+  return (
+    <S.Container>
+      <S.ImageBackground
+        source={{ uri: backgroundImage }}
+        resizeMode="cover"
+        imageStyle={{ borderRadius: 16 }}
+      >
+        <S.MarkdownContainer>
+          <Markdown>{markdownText}</Markdown>
+        </S.MarkdownContainer>
+      </S.ImageBackground>
+    </S.Container>
+  );
+}
+
+function CardNonProfitStories({ markdownText, backgroundImage }: Props) {
   return (
     <S.Container>
       {backgroundImage ? (
-        <S.ImageBackground
-          source={{ uri: backgroundImage }}
-          resizeMode="cover"
-          imageStyle={{ borderRadius: 16 }}
-        >
-          <S.MarkdownContainer>
-            <Markdown>{markdownText}</Markdown>
-          </S.MarkdownContainer>
-          {children}
-        </S.ImageBackground>
+        <ImageBackgroundComponent
+          markdownText={markdownText}
+          backgroundImage={backgroundImage}
+        />
       ) : (
-        <>
-          <DefaultBackground height={432} width={432} />
-          <S.MarkdownContainer>
-            <Markdown>{markdownText}</Markdown>
-          </S.MarkdownContainer>
-          {children}
-        </>
+        <DefaultBackgroundComponent markdownText={markdownText} />
       )}
     </S.Container>
   );
