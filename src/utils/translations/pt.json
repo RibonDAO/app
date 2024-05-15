@@ -301,7 +301,7 @@
           "subtitleWithValue": "Ganhe até {{value}} por dia",
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
-          "buttonTextCollected": "Coletado",
+          "buttonTextCollected": "Próximo em {{time}}",
           "buttonTextNoClub": "Desbloquear coleta"
         },
         "monthlyTicketCard": {
@@ -310,7 +310,7 @@
           "subtitleWithValue": "Ganhe até {{value}} por mês",
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
-          "buttonTextCollected": "Coletado",
+          "buttonTextCollected": "Próximo em {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Desbloquear coleta"
         }
       }

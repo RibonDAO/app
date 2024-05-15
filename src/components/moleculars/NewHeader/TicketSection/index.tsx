@@ -84,7 +84,7 @@ function TicketSection(): JSX.Element {
       setShowToast(false);
     };
 
-    if (showToast) perform(resetToast).in(1000);
+    if (showToast) perform(resetToast).in(2000);
   }, [showToast]);
 
   return (

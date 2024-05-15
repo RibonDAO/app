@@ -1,15 +1,23 @@
 /* eslint-disable no-nested-ternary */
 import { theme, TicketsCategories } from "@ribon.io/shared";
-import Button from "components/atomics/buttons/Button";
-import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
 import CardTicket from "components/moleculars/CardTicket";
 import TicketPinkIcon from "components/vectors/TicketPinkIcon";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useTickets } from "hooks/useTickets";
 import { logEvent } from "services/analytics";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import CollectableButton from "components/atomics/buttons/CollectableButton";
+import {
+  add30DaysAndFormatDate,
+  stringToLocaleDateString,
+} from "lib/formatters/dateFormatter";
+import { useFocusEffect } from "@react-navigation/native";
+import { perform } from "lib/timeoutHelpers";
+import { useClubSubscriptionContext } from "contexts/clubSubscriptionContext";
+import { useLanguage } from "contexts/languageContext";
+import { useCurrentUser } from "contexts/currentUserContext";
 
 type Props = {
   tickets?: number;
@@ -25,11 +33,27 @@ export default function ClubMonthlyTicketCard({
   plan,
   setUnauthorizedModalVisible,
 }: Props) {
+  const [startAnimation, setStartAnimation] = useState(false);
+  const [nextPaymentAttempt, setNextPaymentAttempt] = useState<string | null>(
+    null,
+  );
+  const [hasCollected, setHasCollected] = useState(false);
+
+  const { clubSubscription } = useClubSubscriptionContext();
+  const { currentLang } = useLanguage();
+  const { currentUser } = useCurrentUser();
+
   const { t } = useTranslation("translation", {
     keyPrefix: "content.earnTicketsScreen.clubTicketsSection",
   });
 
-  const hasCollected = isMember && tickets === 0;
+  const colors = [
+    theme.colors.brand.tertiary[600], // initial color
+    theme.colors.brand.tertiary[600],
+    "#F97303",
+    theme.colors.brand.quaternary[200],
+    theme.colors.brand.tertiary[100], // final color
+  ];
 
   const buttonText =
     tickets > 1
@@ -46,6 +70,26 @@ export default function ClubMonthlyTicketCard({
 
   const { isAuthenticated } = useAuthentication();
 
+  const changeHasCollected = async () => {
+    if (!currentUser) {
+      setHasCollected(false);
+    } else if (isMember && tickets === 0 && !startAnimation) {
+        setHasCollected(true);
+      } else {
+        setHasCollected(false);
+      }
+  };
+
+  const handleSuccess = () => {
+    setStartAnimation(true);
+    logEvent("ticketCollected", {
+      amount: tickets,
+      from: "monthlyClub",
+    });
+    refetchTickets();
+    perform(() => setStartAnimation(false)).in(2500);
+  };
+
   const handleButtonPress = async () => {
     if (!isMember) {
       navigateTo("ClubScreen");
@@ -55,13 +99,10 @@ export default function ClubMonthlyTicketCard({
     } else {
       await handleCollectByClub({
         category: TicketsCategories.MONTHLY,
-        onSuccess: () =>
-          logEvent("ticketCollected", {
-            amount: tickets,
-            from: "monthlyClub",
-          }),
+        onSuccess: () => {
+          handleSuccess();
+        },
       });
-      refetchTickets();
     }
   };
 
@@ -70,6 +111,22 @@ export default function ClubMonthlyTicketCard({
       logEvent("clubCTA_view", { from: "clubMonthlyTicket_card" });
     }
   }, []);
+
+  useEffect(() => {
+    if (clubSubscription && currentLang) {
+      setNextPaymentAttempt(
+        clubSubscription?.nextPaymentAttempt
+          ? stringToLocaleDateString(clubSubscription.nextPaymentAttempt)
+          : add30DaysAndFormatDate(clubSubscription.createdAt, currentLang),
+      );
+    }
+  }, [clubSubscription, currentLang]);
+
+  useFocusEffect(
+    useCallback(() => {
+      changeHasCollected();
+    }, [currentUser, isMember, tickets, startAnimation]),
+  );
 
   return (
     <CardTicket
@@ -83,53 +140,19 @@ export default function ClubMonthlyTicketCard({
       }}
       background="ticketBox"
     >
-      {hasCollected ? (
-        <ButtonNonClickable
-          text={t("monthlyTicketCard.buttonTextCollected")}
-          textColor={theme.colors.brand.tertiary[600]}
-          borderColor={theme.colors.brand.tertiary[50]}
-          backgroundColor={theme.colors.brand.tertiary[50]}
-          leftIcon={{
-            name: "check",
-            color: theme.colors.brand.tertiary[600],
-            type: "outlined",
-            size: 24,
-          }}
-        />
-      ) : (
-        <Button
-          text={
-            isMember
-              ? buttonTextHasClub
-              : t("monthlyTicketCard.buttonTextNoClub")
-          }
-          textColor={theme.colors.neutral10}
-          borderColor={theme.colors.brand.tertiary[600]}
-          backgroundColor={theme.colors.brand.tertiary[600]}
-          leftIcon={
-            hasCollected
-              ? {
-                  name: "check",
-                  color: hasCollected
-                    ? theme.colors.brand.tertiary[600]
-                    : theme.colors.neutral10,
-                  type: "outlined",
-                  size: 24,
-                }
-              : isMember
-              ? undefined
-              : {
-                  name: "lock",
-                  color: hasCollected
-                    ? theme.colors.brand.tertiary[600]
-                    : theme.colors.neutral10,
-                  type: "outlined",
-                  size: 24,
-                }
-          }
-          onPress={handleButtonPress}
-        />
-      )}
+      <CollectableButton
+        text={
+          isMember ? buttonTextHasClub : t("monthlyTicketCard.buttonTextNoClub")
+        }
+        afterText={t("monthlyTicketCard.buttonTextCollected", {
+          nextPaymentAttempt,
+        })}
+        locked={hasCollected}
+        onClick={handleButtonPress}
+        startAnimation={startAnimation}
+        colors={colors}
+        amount={plan}
+      />
     </CardTicket>
   );
 }
