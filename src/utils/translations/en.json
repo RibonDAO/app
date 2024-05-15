@@ -306,7 +306,7 @@
           "subtitleWithValue": "Earn up to {{value}} per day",
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
-          "buttonTextCollected": "Collected",
+          "buttonTextCollected": "Next in {{time}}",
           "buttonTextNoClub": "Unlock collection"
         },
         "monthlyTicketCard": {
@@ -315,7 +315,7 @@
           "subtitleWithValue": "Earn up to {{value}} per month",
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
-          "buttonTextCollected": "Collected",
+          "buttonTextCollected": "Next in {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Unlock collection"
         }
       }

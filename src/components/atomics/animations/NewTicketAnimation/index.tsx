@@ -11,24 +11,28 @@ export default function NewTicketAnimation({ count = 1 }: Props): JSX.Element {
   const keyframe = new Keyframe({
     0: {
       opacity: 0,
-      transform: [{ translateY: 0 }],
+      transform: [{ translateY: 100 }],
     },
     20: {
       opacity: 1,
-      transform: [{ translateY: -20 }],
+      transform: [{ translateY: 80 }],
+    },
+    40: {
+      opacity: 1,
+      transform: [{ translateY: 60 }],
     },
     80: {
       opacity: 1,
-      transform: [{ translateY: -30 }],
+      transform: [{ translateY: 40 }],
     },
     100: {
       opacity: 0,
-      transform: [{ translateY: -40 }],
+      transform: [{ translateY: 20 }],
     },
   });
 
   return (
-    <Animated.View entering={keyframe.duration(800)}>
+    <Animated.View entering={keyframe.duration(2000)}>
       <S.Container>
         <S.Count>+{count}</S.Count>
         <Icon
