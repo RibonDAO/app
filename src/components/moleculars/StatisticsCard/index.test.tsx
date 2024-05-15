@@ -9,7 +9,7 @@ describe("StatisticsCard", () => {
         description="Description"
         icon="TicketIconOutlined"
         totalDonated="100"
-        isMember
+        backgroundColor="#000"
       />,
     );
     expect(screen.getByText("100")).toBeTruthy();
@@ -22,7 +22,7 @@ describe("StatisticsCard", () => {
         totalDonated="200"
         description="Another Description"
         icon="RibonFlagIcon"
-        isMember
+        backgroundColor=""
       />,
     );
     expect(screen.getByText("200")).toBeTruthy();

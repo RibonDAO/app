@@ -8,7 +8,7 @@ type Props = {
   totalDonated: string;
   description: string;
   icon: IconType;
-  isMember: boolean;
+  backgroundColor: string;
 };
 
 type IconProps = { icon: IconType };
@@ -24,9 +24,14 @@ function Icon({ icon }: IconProps) {
   }
 }
 
-function StatisticsCard({ totalDonated, description, icon, isMember }: Props) {
+function StatisticsCard({
+  totalDonated,
+  description,
+  icon,
+  backgroundColor,
+}: Props) {
   return (
-    <S.Container isMember={isMember}>
+    <S.Container color={backgroundColor}>
       <S.Left>
         <S.Number>{totalDonated}</S.Number>
         <S.Text>{description}</S.Text>
