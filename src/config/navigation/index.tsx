@@ -79,6 +79,7 @@ import SignInCouponScreen from "screens/coupons/auth/SignInCouponScreen";
 import InsertEmailCouponScreen from "screens/coupons/auth/InsertEmailCouponScreen";
 import HomeScreen from "screens/donations/HomeScreen";
 import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
+import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -597,8 +598,10 @@ export default function Navigation() {
                               <IntegrationProvider>
                                 <CouponProvider>
                                   <TicketsProvider>
-                                    <RootNavigator />
-                                    <Toast config={toastConfig} />
+                                    <PaymentFailedNotificationProvider>
+                                      <RootNavigator />
+                                      <Toast config={toastConfig} />
+                                    </PaymentFailedNotificationProvider>
                                   </TicketsProvider>
                                 </CouponProvider>
                               </IntegrationProvider>
