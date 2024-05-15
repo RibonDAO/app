@@ -78,6 +78,10 @@ import IntegrationProvider, {
   IIntegrationContext,
   IntegrationContext,
 } from "contexts/integrationContext";
+import ClubSubscriptionProvider, {
+  ClubSubscriptionContext,
+  IClubSubscriptionContext,
+} from "contexts/clubSubscriptionContext";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -129,6 +133,7 @@ export type RenderComponentProps = {
   nonProfitsProviderValue?: Partial<INonProfitsContext>;
   integrationProviderValue?: Partial<IIntegrationContext>;
   paymentFailedNotificationProviderValue?: Partial<IPaymentFailedNotificationContext>;
+  clubSubscriptionValue?: Partial<IClubSubscriptionContext>;
 };
 
 function renderAllProviders(
@@ -152,6 +157,7 @@ function renderAllProviders(
     nonProfitsProviderValue = {},
     integrationProviderValue = {},
     paymentFailedNotificationProviderValue = {},
+    clubSubscriptionValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -229,10 +235,15 @@ function renderAllProviders(
                                             PaymentFailedNotificationContext,
                                             paymentFailedNotificationProviderValue,
                                             renderProvider(
-                                              PixInformationProvider,
-                                              PixPaymentInformationContext,
-                                              pixInformationProviderValue,
-                                              children,
+                                              ClubSubscriptionProvider,
+                                              ClubSubscriptionContext,
+                                              clubSubscriptionValue,
+                                              renderProvider(
+                                                PixInformationProvider,
+                                                PixPaymentInformationContext,
+                                                pixInformationProviderValue,
+                                                children,
+                                              ),
                                             ),
                                           ),
                                         ),

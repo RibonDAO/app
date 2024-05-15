@@ -80,6 +80,7 @@ import InsertEmailCouponScreen from "screens/coupons/auth/InsertEmailCouponScree
 import HomeScreen from "screens/donations/HomeScreen";
 import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
 import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
+import ClubSubscriptionProvider from "contexts/clubSubscriptionContext";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -599,8 +600,10 @@ export default function Navigation() {
                                 <CouponProvider>
                                   <TicketsProvider>
                                     <PaymentFailedNotificationProvider>
-                                      <RootNavigator />
-                                      <Toast config={toastConfig} />
+                                      <ClubSubscriptionProvider>
+                                        <RootNavigator />
+                                        <Toast config={toastConfig} />
+                                      </ClubSubscriptionProvider>
                                     </PaymentFailedNotificationProvider>
                                   </TicketsProvider>
                                 </CouponProvider>

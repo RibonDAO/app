@@ -82,6 +82,7 @@
     "i18next": "^22.4.9",
     "lottie-react-native": "6.5.1",
     "mixpanel-react-native": "^2.2.5",
+    "moment": "^2.30.1",
     "polished": "^4.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
