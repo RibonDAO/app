@@ -35,7 +35,7 @@ export default function DailyTicketCard() {
     setTime(timeUntilMidnight);
   };
 
-  const changeHasCollected = useCallback(async () => {
+  const changeHasCollected = async () => {
     try {
       if (!currentUser) {
         setHasCollected(false);
@@ -46,14 +46,17 @@ export default function DailyTicketCard() {
     } finally {
       perform(() => setIsLoading(false)).in(100);
     }
-  }, [currentUser]);
+  };
+
+  useFocusEffect(
+    useCallback(() => () => {
+        setIsLoading(true);
+      }, []),
+  );
 
   useFocusEffect(
     useCallback(() => {
       changeHasCollected();
-      return () => {
-        setIsLoading(true);
-      };
     }, [currentUser]),
   );
 
