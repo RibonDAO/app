@@ -12,7 +12,9 @@ import { RECEIVED_RIBON_DAILY_TICKET } from "lib/localStorage/constants";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
+import { perform } from "lib/timeoutHelpers";
 import { useTickets } from "../../../../../hooks/useTickets";
+import TicketCardPlaceholder from "../placeholder/placeholder";
 
 export default function DailyTicketCard() {
   const { t } = useTranslation("translation", {
@@ -20,6 +22,7 @@ export default function DailyTicketCard() {
   });
 
   const [hasCollected, setHasCollected] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [startAnimation, setStartAnimation] = useState(false);
   const [time, setTime] = useState<string>("24:00");
   const { canCollectRibonTicket, handleCollect } = useTickets();
@@ -32,14 +35,27 @@ export default function DailyTicketCard() {
     setTime(timeUntilMidnight);
   };
 
-  const changeHasCollected = async () => {
-    if (!currentUser) {
-      setHasCollected(false);
-    } else {
-      const canCollect = await canCollectRibonTicket();
-      setHasCollected(!canCollect);
+  const changeHasCollected = useCallback(async () => {
+    try {
+      if (!currentUser) {
+        setHasCollected(false);
+      } else {
+        const canCollect = await canCollectRibonTicket();
+        setHasCollected(!canCollect);
+      }
+    } finally {
+      perform(() => setIsLoading(false)).in(100);
     }
-  };
+  }, [currentUser]);
+
+  useFocusEffect(
+    useCallback(() => {
+      changeHasCollected();
+      return () => {
+        setIsLoading(true);
+      };
+    }, [currentUser]),
+  );
 
   const handleSuccess = () => {
     setStartAnimation(true);
@@ -62,18 +78,13 @@ export default function DailyTicketCard() {
 
   useFocusEffect(
     useCallback(() => {
-      changeHasCollected();
-    }, [currentUser]),
-  );
-
-  useFocusEffect(
-    useCallback(() => {
       if (hasCollected || startAnimation) {
         setTimeUntilMidnight();
       }
     }, [hasCollected, startAnimation]),
   );
 
+  if (isLoading) return <TicketCardPlaceholder />;
   return (
     <CardTicket
       title={t("dailyTicketCard.title")}
