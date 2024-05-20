@@ -28,11 +28,11 @@ export default function ClubDailyTicketCard({
   plan,
   setUnauthorizedModalVisible,
 }: Props) {
-  const [startAnimation, setStartAnimation] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasCollected, setHasCollected] = useState(false);
+  const [startAnimation, setStartAnimation] = useState(false);
   const [localTickets, setLocalTickets] = useState(tickets);
   const [time, setTime] = useState<string>("24:00");
-  const [hasCollected, setHasCollected] = useState(false);
 
   const { t } = useTranslation("translation", {
     keyPrefix: "content.earnTicketsScreen.clubTicketsSection",
@@ -76,9 +76,12 @@ export default function ClubDailyTicketCard({
   };
 
   useFocusEffect(
-    useCallback(() => () => {
+    useCallback(
+      () => () => {
         setIsLoading(true);
-      }, []),
+      },
+      [],
+    ),
   );
 
   useFocusEffect(

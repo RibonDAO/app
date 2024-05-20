@@ -17,18 +17,18 @@ import { useTickets } from "../../../../../hooks/useTickets";
 import TicketCardPlaceholder from "../placeholder/placeholder";
 
 export default function DailyTicketCard() {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "content.earnTicketsScreen.ticketsSection",
-  });
-
-  const [hasCollected, setHasCollected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasCollected, setHasCollected] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const [time, setTime] = useState<string>("24:00");
   const { canCollectRibonTicket, handleCollect } = useTickets();
   const { refetchTickets } = useTicketsContext();
   const { currentUser } = useCurrentUser();
   const { navigateTo } = useNavigation();
+
+  const { t } = useTranslation("translation", {
+    keyPrefix: "content.earnTicketsScreen.ticketsSection",
+  });
 
   const setTimeUntilMidnight = () => {
     const timeUntilMidnight = getTimeUntilMidnight();
@@ -49,9 +49,13 @@ export default function DailyTicketCard() {
   };
 
   useFocusEffect(
-    useCallback(() => () => {
+    useCallback(
+      () => () => {
+        console.log("DailyTicketCard unmount");
         setIsLoading(true);
-      }, []),
+      },
+      [],
+    ),
   );
 
   useFocusEffect(

@@ -33,14 +33,14 @@ export default function ClubMonthlyTicketCard({
   plan,
   setUnauthorizedModalVisible,
 }: Props) {
-  const [startAnimation, setStartAnimation] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasCollected, setHasCollected] = useState(false);
+  const [startAnimation, setStartAnimation] = useState(false);
   const [localTickets, setLocalTickets] = useState(tickets);
 
   const [nextPaymentAttempt, setNextPaymentAttempt] = useState<string | null>(
     null,
   );
-  const [hasCollected, setHasCollected] = useState(false);
 
   const { clubSubscription } = useClubSubscriptionContext();
   const { currentLang } = useLanguage();
@@ -82,9 +82,12 @@ export default function ClubMonthlyTicketCard({
   };
 
   useFocusEffect(
-    useCallback(() => () => {
+    useCallback(
+      () => () => {
         setIsLoading(true);
-      }, []),
+      },
+      [],
+    ),
   );
 
   useFocusEffect(
