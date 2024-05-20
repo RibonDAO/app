@@ -22,7 +22,7 @@ function ClubSubscriptionProvider({ children }: any) {
   useEffect(() => {
     if (subscriptions && subscriptions.length > 0) {
       const checkClubSubscription = subscriptions?.find(
-        (subscription) => subscription.offer.category === "club",
+        (subscription) => subscription.offer?.category === "club",
       );
       if (checkClubSubscription) setClubSubscription(checkClubSubscription);
     }

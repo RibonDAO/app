@@ -133,10 +133,10 @@ function InsertEmailAccountScreen() {
             onPress={Keyboard.dismiss}
           >
             <ScrollView contentContainerStyle={S.container}>
-              <View style={S.imageContainer}>
+              <View style={S.iconContainer}>
                 <Image
-                  style={S.mainImage}
-                  source={{ uri: nonProfit.mainImage }}
+                  style={S.icon}
+                  source={{ uri: nonProfit.icon }}
                   accessibilityIgnoresInvertColors
                 />
               </View>
