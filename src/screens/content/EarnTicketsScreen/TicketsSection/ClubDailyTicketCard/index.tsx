@@ -12,7 +12,7 @@ import CollectableButton from "components/atomics/buttons/CollectableButton";
 import { getTimeUntilMidnight } from "lib/formatters/dateFormatter";
 import { useFocusEffect } from "@react-navigation/native";
 import { perform } from "lib/timeoutHelpers";
-import { useCurrentUser } from "contexts/currentUserContext";
+import TicketCardPlaceholder from "../placeholder/placeholder";
 
 type Props = {
   tickets?: number;
@@ -28,10 +28,11 @@ export default function ClubDailyTicketCard({
   plan,
   setUnauthorizedModalVisible,
 }: Props) {
-  const [startAnimation, setStartAnimation] = useState(false);
-  const [time, setTime] = useState<string>("24:00");
+  const [isLoading, setIsLoading] = useState(true);
   const [hasCollected, setHasCollected] = useState(false);
-  const { currentUser } = useCurrentUser();
+  const [startAnimation, setStartAnimation] = useState(false);
+  const [localTickets, setLocalTickets] = useState(tickets);
+  const [time, setTime] = useState<string>("24:00");
 
   const { t } = useTranslation("translation", {
     keyPrefix: "content.earnTicketsScreen.clubTicketsSection",
@@ -66,14 +67,28 @@ export default function ClubDailyTicketCard({
   };
 
   const changeHasCollected = async () => {
-    if (!currentUser) {
+    try {
       setHasCollected(false);
-    } else if (isMember && tickets === 0 && !startAnimation) {
-        setHasCollected(true);
-      } else {
-        setHasCollected(false);
-      }
+      if (isMember && tickets === 0 && !startAnimation) setHasCollected(true);
+    } finally {
+      perform(() => setIsLoading(false)).in(1000);
+    }
   };
+
+  useFocusEffect(
+    useCallback(
+      () => () => {
+        setIsLoading(true);
+      },
+      [],
+    ),
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      changeHasCollected();
+    }, [isMember, tickets, startAnimation]),
+  );
 
   const handleSuccess = () => {
     setStartAnimation(true);
@@ -107,11 +122,11 @@ export default function ClubDailyTicketCard({
     }
   }, []);
 
-  useFocusEffect(
-    useCallback(() => {
-      changeHasCollected();
-    }, [currentUser, isMember, tickets, startAnimation]),
-  );
+  useEffect(() => {
+    if (tickets !== 0) {
+      setLocalTickets(tickets);
+    }
+  }, [tickets]);
 
   useFocusEffect(
     useCallback(() => {
@@ -120,6 +135,8 @@ export default function ClubDailyTicketCard({
       }
     }, [hasCollected, startAnimation]),
   );
+
+  if (isLoading) return <TicketCardPlaceholder />;
 
   return (
     <CardTicket
@@ -142,7 +159,7 @@ export default function ClubDailyTicketCard({
         onClick={handleButtonPress}
         startAnimation={startAnimation}
         colors={colors}
-        amount={plan}
+        amount={localTickets}
       />
     </CardTicket>
   );
