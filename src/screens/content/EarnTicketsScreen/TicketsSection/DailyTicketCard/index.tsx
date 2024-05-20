@@ -51,7 +51,6 @@ export default function DailyTicketCard() {
   useFocusEffect(
     useCallback(
       () => () => {
-        console.log("DailyTicketCard unmount");
         setIsLoading(true);
       },
       [],
