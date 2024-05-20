@@ -17,7 +17,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { perform } from "lib/timeoutHelpers";
 import { useClubSubscriptionContext } from "contexts/clubSubscriptionContext";
 import { useLanguage } from "contexts/languageContext";
-import { useCurrentUser } from "contexts/currentUserContext";
+import TicketCardPlaceholder from "../placeholder/placeholder";
 
 type Props = {
   tickets?: number;
@@ -33,15 +33,17 @@ export default function ClubMonthlyTicketCard({
   plan,
   setUnauthorizedModalVisible,
 }: Props) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasCollected, setHasCollected] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
+  const [localTickets, setLocalTickets] = useState(tickets);
+
   const [nextPaymentAttempt, setNextPaymentAttempt] = useState<string | null>(
     null,
   );
-  const [hasCollected, setHasCollected] = useState(false);
 
   const { clubSubscription } = useClubSubscriptionContext();
   const { currentLang } = useLanguage();
-  const { currentUser } = useCurrentUser();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "content.earnTicketsScreen.clubTicketsSection",
@@ -71,14 +73,28 @@ export default function ClubMonthlyTicketCard({
   const { isAuthenticated } = useAuthentication();
 
   const changeHasCollected = async () => {
-    if (!currentUser) {
+    try {
       setHasCollected(false);
-    } else if (isMember && tickets === 0 && !startAnimation) {
-        setHasCollected(true);
-      } else {
-        setHasCollected(false);
-      }
+      if (isMember && tickets === 0 && !startAnimation) setHasCollected(true);
+    } finally {
+      perform(() => setIsLoading(false)).in(1000);
+    }
   };
+
+  useFocusEffect(
+    useCallback(
+      () => () => {
+        setIsLoading(true);
+      },
+      [],
+    ),
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      changeHasCollected();
+    }, [isMember, tickets, startAnimation]),
+  );
 
   const handleSuccess = () => {
     setStartAnimation(true);
@@ -113,6 +129,12 @@ export default function ClubMonthlyTicketCard({
   }, []);
 
   useEffect(() => {
+    if (tickets !== 0) {
+      setLocalTickets(tickets);
+    }
+  }, [tickets]);
+
+  useEffect(() => {
     if (clubSubscription && currentLang) {
       setNextPaymentAttempt(
         clubSubscription?.nextPaymentAttempt
@@ -122,12 +144,7 @@ export default function ClubMonthlyTicketCard({
     }
   }, [clubSubscription, currentLang]);
 
-  useFocusEffect(
-    useCallback(() => {
-      changeHasCollected();
-    }, [currentUser, isMember, tickets, startAnimation]),
-  );
-
+  if (isLoading) return <TicketCardPlaceholder />;
   return (
     <CardTicket
       title={t("monthlyTicketCard.title")}
@@ -151,7 +168,7 @@ export default function ClubMonthlyTicketCard({
         onClick={handleButtonPress}
         startAnimation={startAnimation}
         colors={colors}
-        amount={plan}
+        amount={localTickets}
       />
     </CardTicket>
   );

@@ -5,7 +5,6 @@ import { useTicketsContext } from "contexts/ticketsContext";
 
 import { useCallback, useEffect, useState } from "react";
 
-import { useCurrentUser } from "contexts/currentUserContext";
 import { useFocusEffect } from "@react-navigation/native";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
 import { useNavigation } from "hooks/useNavigation";
@@ -22,7 +21,6 @@ export default function TicketsSection() {
   const { getTicketsToCollect } = useTickets();
   const { toCollect, refetch } = getTicketsToCollect(Categories.CLUB);
   const { refetchTickets } = useTicketsContext();
-  const { currentUser } = useCurrentUser();
   const { subscriptions, refetch: refetchSubscriptions } = userSubscriptions();
   const [plan, setPlan] = useState<Plan | undefined>(undefined);
 
@@ -58,9 +56,8 @@ export default function TicketsSection() {
   useFocusEffect(
     useCallback(() => {
       refetchTicketsToCollect();
-    }, [toCollect, isMember, currentUser]),
+    }, []),
   );
-
   return (
     <View style={S.container}>
       <DailyTicketCard />
