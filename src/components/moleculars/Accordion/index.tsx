@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import ArrowDown from "components/vectors/ArrowDown";
 import { theme } from "@ribon.io/shared";
+import { View } from "react-native";
 import * as S from "./styles";
 
 type Props = {
@@ -28,33 +29,33 @@ function Accordion({
         setIsExpanded(!isExpanded);
       }}
     >
-      <S.LeftArea>
-        <S.ArrowContainer>
+      <View>
+        <S.ArrowContainer isExpanded={isExpanded} isExpansible={isExpansible}>
           <ArrowDown
             color={theme.colors.brand.primary[600]}
             width={32}
             height={32}
           />
         </S.ArrowContainer>
-      </S.LeftArea>
+      </View>
 
-      <S.RightArea>
+      <View>
         <S.MainArea>
-          <S.MiddleContainer>
+          <View>
             <S.Title>{title}</S.Title>
             <S.Subtitle>{subtitle}</S.Subtitle>
             {ticketsComponent}
-          </S.MiddleContainer>
+          </View>
           <S.Image resizeMode="cover" source={{ uri: iconUrl }} />
         </S.MainArea>
 
         {isExpanded && isExpansible && (
-          <S.DescriptionArea>
+          <View>
             <S.DescriptionTitle>Equivalente a</S.DescriptionTitle>
             <S.Description>{description}</S.Description>
-          </S.DescriptionArea>
+          </View>
         )}
-      </S.RightArea>
+      </View>
     </S.Container>
   );
 }

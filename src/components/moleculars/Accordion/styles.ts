@@ -27,13 +27,15 @@ export const Subtitle = styled.Text`
 export const Image = styled.Image`
   width: 80px;
   height: 80px;
-  grid-area: image;
 `;
 
-export const ArrowContainer = styled.View``;
+export const ArrowContainer = styled.View`
+  ${(props: { isExpanded: boolean }) =>
+    props.isExpanded ? "transform: rotate(180deg)" : ""};
 
-export const MiddleContainer = styled.View``;
-
+  ${(props: { isExpansible: boolean }) =>
+    !props.isExpansible ? "display: none" : ""};
+`;
 export const MainArea = styled.View`
   display: flex;
   flex-direction: row;
@@ -41,7 +43,6 @@ export const MainArea = styled.View`
   gap: 8px;
 `;
 
-export const DescriptionArea = styled.View``;
 export const DescriptionTitle = styled.Text`
   ${defaultBodySmSemibold}
   color: ${theme.colors.brand.primary[800]};
@@ -51,8 +52,3 @@ export const Description = styled.Text`
   max-width: 272px;
   color: ${theme.colors.neutral[600]};
 `;
-
-export const LeftArea = styled.View``;
-export const RightArea = styled.View``;
-
-export const Body = styled.View``;
