@@ -122,6 +122,7 @@ export default function CausesScreen() {
   const sections = useMemo(
     () => [
       { id: "causes", component: <CausesSection /> },
+      { id: "divider", component: <S.Divider /> },
       { id: "reports", component: <ReportsSection /> },
       {
         id: "club",
