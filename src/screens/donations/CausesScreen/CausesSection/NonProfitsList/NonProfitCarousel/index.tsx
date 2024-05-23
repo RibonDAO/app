@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Currencies, NonProfit, Story } from "@ribon.io/shared/types";
 import { logEvent } from "services/analytics";
 import { useNavigation } from "hooks/useNavigation";
@@ -32,7 +32,7 @@ function NonProfitCarousel({ nonProfit }: Props) {
     nonProfit?.nonProfitImpacts?.[0]?.minimumNumberOfTickets ?? 0;
   const hasEnoughTickets = hasTickets && ticketsCounter >= minNumberOfTickets;
 
-  const handleDonateTicketButtonPress = useCallback(() => {
+  const handleDonateTicketButtonPress = () => {
     logEvent("donateTicketBtn_start", {
       nonProfitId: nonProfit.id,
       from: "nonprofitCard",
@@ -45,9 +45,9 @@ function NonProfitCarousel({ nonProfit }: Props) {
     } else {
       navigateTo("DonationSignInScreen", { nonProfit });
     }
-  }, [signedIn, navigateTo, nonProfit]);
+  };
 
-  const handleDirectDonationButtonPress = useCallback(() => {
+  const handleDirectDonationButtonPress = () => {
     logEvent("giveNgoBtn_start", {
       nonProfitId: nonProfit.id,
       from: "nonprofitCard",
@@ -60,7 +60,7 @@ function NonProfitCarousel({ nonProfit }: Props) {
       offer: 0,
       currency: currentCurrency,
     });
-  }, [navigateTo, nonProfit]);
+  };
 
   type RenderItemProps = {
     item: Story | null;
