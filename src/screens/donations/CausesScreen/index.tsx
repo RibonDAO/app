@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import {
   useFirstAccessToIntegration,
   useDonatedToday,
   useSubscriptions,
 } from "@ribon.io/shared/hooks";
-import { RefreshControl } from "react-native";
+import { RefreshControl, FlatList, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 import { logError } from "services/crashReport";
@@ -64,12 +64,15 @@ export default function CausesScreen() {
     ]),
   );
 
-  const shouldShowIntegrationBanner =
-    !integration?.name?.toLowerCase()?.includes("ribon") &&
-    integration &&
-    !donatedToday &&
-    hasTickets &&
-    integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
+  const shouldShowIntegrationBanner = useMemo(
+    () =>
+      !integration?.name?.toLowerCase()?.includes("ribon") &&
+      integration &&
+      !donatedToday &&
+      hasTickets &&
+      integration?.uniqueAddress !== INTEGRATION_AUTH_ID,
+    [integration, donatedToday, hasTickets],
+  );
 
   const { userIsMember, userSubscriptions } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
@@ -93,30 +96,56 @@ export default function CausesScreen() {
 
   if (isLoading || loadingFirstAccessToIntegration) return <Placeholder />;
 
+  const renderHeader = useMemo(
+    () => (
+      <>
+        <NewHeader />
+        <S.ContainerPadding hasPaddingTop={!shouldShowIntegrationBanner}>
+          {shouldShowIntegrationBanner && integration && (
+            <IntegrationBanner integration={integration} />
+          )}
+          <NotificationPermissionPrompt />
+          {donatedToday && currentUser ? (
+            <>
+              <ContributionSection />
+              <S.Title>{t("titlePostDonation")}</S.Title>
+            </>
+          ) : (
+            <S.Title>{t("title")}</S.Title>
+          )}
+        </S.ContainerPadding>
+      </>
+    ),
+    [shouldShowIntegrationBanner, donatedToday, currentUser],
+  );
+
+  const sections = useMemo(
+    () => [
+      { id: "causes", component: <CausesSection /> },
+      { id: "reports", component: <ReportsSection /> },
+      {
+        id: "club",
+        component: (
+          <ClubSection isMember={isMember} refetch={refetchIsMember} />
+        ),
+      },
+      {
+        id: "errorModal",
+        component: <DonationErrorModal newState={params?.newState} />,
+      },
+    ],
+    [isMember, params?.newState],
+  );
+
   return (
-    <S.Container
-      showsVerticalScrollIndicator={false}
+    <FlatList
+      data={sections}
+      keyExtractor={(item) => item.id}
+      ListHeaderComponent={renderHeader}
+      renderItem={({ item }) => <View>{item.component}</View>}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
-    >
-      <NewHeader />
-      <S.ContainerPadding hasPaddingTop={!shouldShowIntegrationBanner}>
-        {shouldShowIntegrationBanner && (
-          <IntegrationBanner integration={integration} />
-        )}
-        <NotificationPermissionPrompt />
-
-        {donatedToday && currentUser ? (
-          <ContributionSection />
-        ) : (
-          <S.Title>{t("title")}</S.Title>
-        )}
-      </S.ContainerPadding>
-      <CausesSection />
-      <ReportsSection />
-      <ClubSection isMember={isMember} refetch={refetchIsMember} />
-      <DonationErrorModal newState={params?.newState} />
-    </S.Container>
+    />
   );
 }

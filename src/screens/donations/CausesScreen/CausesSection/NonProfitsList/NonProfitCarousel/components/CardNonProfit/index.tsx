@@ -1,11 +1,11 @@
-import { NonProfit } from "@ribon.io/shared";
-import { ReactNode } from "react";
+import { NonProfit, theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
 import * as S from "./styles";
+import TicketIconText from "../../../../../../../../components/moleculars/TicketIconText";
 
 type Props = {
   nonProfit: NonProfit;
-  ticketsComponent: ReactNode;
+  ticketsQuantity: number;
   buttonText: string;
   onButtonClick: () => void;
   buttonDisabled: boolean;
@@ -13,7 +13,7 @@ type Props = {
 
 function CardNonProfit({
   nonProfit,
-  ticketsComponent,
+  ticketsQuantity,
   buttonText,
   onButtonClick,
   buttonDisabled,
@@ -25,16 +25,27 @@ function CardNonProfit({
         resizeMode="cover"
         imageStyle={{ borderRadius: 16 }}
       >
-        <S.OngName>{nonProfit.name}</S.OngName>
-        <S.Title>{nonProfit.impactTitle}</S.Title>
+        <S.Content>
+          <S.OngName>{nonProfit.name}</S.OngName>
+          <S.Title>{nonProfit.impactTitle}</S.Title>
 
-        <S.TicketsContainer>{ticketsComponent}</S.TicketsContainer>
+          <S.TicketsContainer>
+            <TicketIconText
+              quantity={ticketsQuantity}
+              buttonDisabled
+              color={theme.colors.brand.primary[800]}
+            />
+          </S.TicketsContainer>
+        </S.Content>
 
         <S.ButtonContainer>
           <Button
             text={buttonText}
             onPress={onButtonClick}
             disabled={buttonDisabled}
+            customStyles={{ borderRadius: 12, borderWidth: 0 }}
+            backgroundColor={theme.colors.brand.primary[600]}
+            textColor={theme.colors.neutral10}
           />
         </S.ButtonContainer>
       </S.ImageBackground>

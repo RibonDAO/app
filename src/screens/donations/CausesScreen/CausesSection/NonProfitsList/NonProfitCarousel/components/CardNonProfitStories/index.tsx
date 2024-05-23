@@ -35,7 +35,7 @@ function ImageBackgroundComponent({ markdownText, backgroundImage }: Props) {
         testID="image-background"
       >
         <S.MarkdownContainer>
-          <Markdown>{markdownText}</Markdown>
+          {markdownText && <Markdown>{markdownText}</Markdown>}
         </S.MarkdownContainer>
       </S.ImageBackground>
     </S.Container>
@@ -51,7 +51,9 @@ function CardNonProfitStories({ markdownText, backgroundImage }: Props) {
           backgroundImage={backgroundImage}
         />
       ) : (
-        <DefaultBackgroundComponent markdownText={markdownText} />
+        markdownText && (
+          <DefaultBackgroundComponent markdownText={markdownText} />
+        )
       )}
     </S.Container>
   );
