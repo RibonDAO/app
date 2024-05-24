@@ -45,7 +45,7 @@ export default () => ({
          "NSAdvertisingAttributionReportEndpoint": "https://appsflyer-skadnetwork.com/",
          "NSCameraUsageDescription": "This app requires access to your phone's camera."
       },
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
       "buildNumber": buildNumber.toString(),
       "usesAppleSignIn": true,
