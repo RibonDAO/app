@@ -7,7 +7,7 @@ import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import CausesProvider from "contexts/causesContext";
 import CauseContributionProvider from "contexts/causesContributionContext";
-import CauseDonationProvider from "contexts/causesDonationContext";
+import TagDonationProvider from "contexts/tagDonationContext";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
 import ImpactScreen from "screens/users/ImpactScreen";
@@ -593,7 +593,7 @@ export default function Navigation() {
                   <CardPaymentInformationProvider>
                     <PixPaymentInformationProvider>
                       <CausesProvider>
-                        <CauseDonationProvider>
+                        <TagDonationProvider>
                           <CauseContributionProvider>
                             <NonProfitsProvider>
                               <IntegrationProvider>
@@ -610,7 +610,7 @@ export default function Navigation() {
                               </IntegrationProvider>
                             </NonProfitsProvider>
                           </CauseContributionProvider>
-                        </CauseDonationProvider>
+                        </TagDonationProvider>
                       </CausesProvider>
                     </PixPaymentInformationProvider>
                   </CardPaymentInformationProvider>

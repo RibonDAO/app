@@ -52,10 +52,10 @@ import CausesProvider, {
   CausesContext,
   ICausesContext,
 } from "contexts/causesContext";
-import CauseDonationProvider, {
-  CauseDonationContext,
-  ICauseDonationContext,
-} from "contexts/causesDonationContext";
+import TagDonationProvider, {
+  TagDonationContext,
+  ITagDonationContext,
+} from "contexts/tagDonationContext";
 import CauseContributionProvider, {
   CauseContributionContext,
   ICauseContributionContext,
@@ -128,7 +128,7 @@ export type RenderComponentProps = {
   checkoutProviderValue?: Partial<ICheckoutContext>;
   stripeProviderValue?: Partial<IStripeContext>;
   causesProviderValue?: Partial<ICausesContext>;
-  causeDonationProviderValue?: Partial<ICauseDonationContext>;
+  tagDonationProviderValue?: Partial<ITagDonationContext>;
   causeContributionProviderValue?: Partial<ICauseContributionContext>;
   nonProfitsProviderValue?: Partial<INonProfitsContext>;
   integrationProviderValue?: Partial<IIntegrationContext>;
@@ -153,7 +153,7 @@ function renderAllProviders(
     stripeProviderValue = {},
     causesProviderValue = {},
     causeContributionProviderValue = {},
-    causeDonationProviderValue = {},
+    tagDonationProviderValue = {},
     nonProfitsProviderValue = {},
     integrationProviderValue = {},
     paymentFailedNotificationProviderValue = {},
@@ -215,9 +215,9 @@ function renderAllProviders(
                                   CausesContext,
                                   causesProviderValue,
                                   renderProvider(
-                                    CauseDonationProvider,
-                                    CauseDonationContext,
-                                    causeDonationProviderValue,
+                                    TagDonationProvider,
+                                    TagDonationContext,
+                                    tagDonationProviderValue,
                                     renderProvider(
                                       CauseContributionProvider,
                                       CauseContributionContext,
