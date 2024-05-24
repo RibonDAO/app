@@ -5,7 +5,7 @@ import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import * as S from "./styles";
 
-type Props = {
+export type Props = {
   title: string;
   subtitle: string;
   iconUrl: string;
