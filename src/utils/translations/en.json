@@ -603,7 +603,10 @@
         "userName": "Your profile",
         "noClubTagText": "No Ribon Club",
         "clubTagText": "Ribon Club",
-        "ctaClubText": "Club benefits →"
+        "ctaClubText": "Club benefits →",
+        "accordion": {
+          "equivalent": "Equivalent to"
+        }
       }
     }
   },

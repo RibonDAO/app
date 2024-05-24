@@ -12,6 +12,7 @@ export const Container = styled.Pressable`
   display: flex;
   flex-direction: row;
   gap: 8px;
+  padding: 16px 20px;
 `;
 
 export const Title = styled.Text`
@@ -39,8 +40,16 @@ export const ArrowContainer = styled.View`
 export const MainArea = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   gap: 8px;
+`;
+
+export const Content = styled.View`
+  flex: 1;
+`;
+
+export const TextArea = styled.View`
+  text-align: left;
 `;
 
 export const DescriptionTitle = styled.Text`
