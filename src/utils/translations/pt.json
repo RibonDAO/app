@@ -596,7 +596,10 @@
         "userName": "Seu perfil",
         "noClubTagText": "Sem Clube Ribon",
         "clubTagText": "Clube Ribon",
-        "ctaClubText": "Benefícios do Clube →"
+        "ctaClubText": "Benefícios do Clube →",
+        "accordion": {
+          "equivalent": "Equivalente à"
+        }
       }
     }
   },
