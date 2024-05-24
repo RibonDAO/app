@@ -7,7 +7,7 @@ type Props = {
   title: string;
   impactList: Pick<
     AccordionProps,
-    "title" | "subtitle" | "iconUrl" | "description"
+    "title" | "subtitle" | "iconUrl" | "description" | "quantity"
   >[];
 };
 
@@ -24,6 +24,7 @@ function AccordionList({ title, impactList }: Props) {
             iconUrl={item.iconUrl}
             description={item.description}
             isExpansible={Boolean(item?.description)}
+            quantity={item.quantity}
           />
         )}
         keyExtractor={(item) => item.title}

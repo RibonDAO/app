@@ -9,6 +9,7 @@ describe("CardCenterImageButton", () => {
         subtitle="subTest"
         iconUrl="testUrl"
         description="descTest"
+        quantity={3}
         isExpansible
       />,
     );

@@ -1,15 +1,16 @@
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import ArrowDown from "components/vectors/ArrowDown";
 import { theme } from "@ribon.io/shared";
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import * as S from "./styles";
+import TicketIconText from "../TicketIconText";
 
 export type Props = {
   title: string;
   subtitle: string;
   iconUrl: string;
-  ticketsComponent?: ReactNode;
+  quantity: number;
   description?: string;
   isExpansible?: boolean;
 };
@@ -20,7 +21,7 @@ function Accordion({
   iconUrl,
   isExpansible,
   description,
-  ticketsComponent,
+  quantity,
 }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation("translation", {
@@ -48,7 +49,7 @@ function Accordion({
           <S.TextArea>
             <S.Title>{title}</S.Title>
             <S.Subtitle>{subtitle}</S.Subtitle>
-            {ticketsComponent}
+            <TicketIconText quantity={quantity} />
           </S.TextArea>
           <S.Image resizeMode="cover" source={{ uri: iconUrl }} />
         </S.MainArea>
