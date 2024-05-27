@@ -248,7 +248,8 @@
         }
       },
       "header": {
-        "donationStreak": "Dias seguidos doando"
+        "donationStreak": "Dias seguidos doando",
+        "donationStreakSingular": "Dia seguido doando"
       },
       "lockedSection": {
         "title": "Uma Ribon pra você",

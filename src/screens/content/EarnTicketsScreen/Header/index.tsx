@@ -19,7 +19,11 @@ function Header({ userStreak }: Props): JSX.Element {
         <StrikeIcon />
         <S.Counter>
           <S.CounterText>{userStreak}</S.CounterText>
-          <S.Description>{t("donationStreak")}</S.Description>
+          <S.Description>
+            {userStreak === 1
+              ? t("donationStreakSingular")
+              : t("donationStreak")}
+          </S.Description>
         </S.Counter>
       </S.Container>
     </HeaderTemplate>

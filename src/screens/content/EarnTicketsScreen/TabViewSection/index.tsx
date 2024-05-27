@@ -6,13 +6,15 @@ import { useTranslation } from "react-i18next";
 import { CollapsibleTabView } from "react-native-collapsible-tab-view";
 import React, { useEffect } from "react";
 import ParallaxTabViewContainer from "components/moleculars/ParallaxTabViewContainer";
-import { useDonatedToday } from "@ribon.io/shared";
+import { useDonatedToday, useUserDonationStreak } from "@ribon.io/shared";
 import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
 
+import { useCurrentUser } from "contexts/currentUserContext";
 import LockedSection from "../LockedSection";
 import NewsSection from "../NewsSection";
 import S from "./styles";
+import Header from "../Header";
 import TicketsSection from "../TicketsSection";
 
 type Route = {
@@ -55,6 +57,19 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
   const { donatedToday } = useDonatedToday();
 
   const [index, setIndex] = useState(0);
+
+  const { refetch: refetchDonatedToday } = useDonatedToday();
+  const { currentUser } = useCurrentUser();
+
+  const { streak, refetch: refetchUserDonationStreak } =
+    useUserDonationStreak();
+
+  useFocusEffect(
+    useCallback(() => {
+      refetchDonatedToday();
+      refetchUserDonationStreak();
+    }, [currentUser]),
+  );
 
   useEffect(() => {
     if (initialTabIndex) {
@@ -103,6 +118,7 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
     />
   );
 
+  console.log("streak", streak);
   return (
     <View style={S.tabViewSection}>
       <CollapsibleTabView<Route>
@@ -115,6 +131,7 @@ function TabViewSection({ initialTabIndex }: TabViewSectionProps): JSX.Element {
           borderTopRightRadius: 16,
         }}
         initialLayout={{ width: layout.width }}
+        renderHeader={() => <Header userStreak={streak} />}
         renderTabBar={renderTabBar}
       />
     </View>
