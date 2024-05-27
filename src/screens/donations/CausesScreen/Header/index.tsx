@@ -10,6 +10,7 @@ import HeaderTemplate from "components/moleculars/HeaderTemplate";
 import * as S from "./styles";
 
 import RibonLogo from "./assets/RibonLogo";
+import NotificationPaymentFailed from "../NotificationPaymentFailed";
 
 function Header(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -44,7 +45,7 @@ function Header(): JSX.Element {
           <S.Description>{t("description")}</S.Description>
         </S.TitleContainer>
       </S.InfoContainer>
-
+      <NotificationPaymentFailed />
       <S.TicketContainer>
         <S.TextContainer>
           <S.TicketText>{t("myTickets")}</S.TicketText>

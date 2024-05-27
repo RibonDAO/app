@@ -1,4 +1,5 @@
 import { formattedShortLanguage } from "lib/currentLanguage";
+import Moment from "moment";
 
 export function stringToLocaleDateString(dateString: string) {
   const formattedDate = dateString
@@ -53,7 +54,8 @@ export const getTimeUntilMidnight = () => {
   const tomorrow = new Date(now);
   tomorrow.setDate(tomorrow.getDate() + 1);
   tomorrow.setHours(0, 1, 0, 0);
-  return new Date(tomorrow.getTime() - now.getTime())
-    .toUTCString()
-    .slice(17, 22);
+  const datetimeUntilMidnight = new Date(
+    tomorrow.getTime() - now.getTime(),
+  ).toUTCString();
+  return Moment.utc(datetimeUntilMidnight).format("HH[h] mm[min]");
 };

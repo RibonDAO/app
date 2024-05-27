@@ -96,6 +96,13 @@
         "successToastMessage": "Notificações ligadas",
         "errorToastMessage": "Erro ao ligar notificações"
       },
+      "paymentFailedNotification": {
+        "cardTitle": "O pagamento do Clube Ribon falhou",
+        "cardDescription": "Refaça a assinatura para continuar aproveitando os benefícios",
+        "link": "Refazer assinatura",
+        "pixTitle": "Os benefícios do Clube Ribon expiraram",
+        "pixDescription": "Refaça a assinatura por PIX ou mude para cartão para continuar aproveitando os benefícios"
+      },
       "userSupportSection": {
         "title": "Suporte ao Usuário",
         "description": "Dúvidas, ideias, estornos. Estamos aqui!",
@@ -103,7 +110,6 @@
         "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0"
       },
       "impactPrefix": "Doe",
-      "labelText": "Saiba mais",
       "iconText": "(mínimo)",
       "whatIsATicket": "O que é um ticket?",
       "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
@@ -273,7 +279,7 @@
           "subtitleWithValue": "Ganhe até {{value}} por dia",
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
-          "buttonTextCollected": "Coletado",
+          "buttonTextCollected": "Próximo em {{time}}",
           "buttonTextNoClub": "Desbloquear coleta"
         },
         "monthlyTicketCard": {
@@ -282,7 +288,7 @@
           "subtitleWithValue": "Ganhe até {{value}} por mês",
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
-          "buttonTextCollected": "Coletado",
+          "buttonTextCollected": "Próximo em {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Desbloquear coleta"
         }
       }
@@ -698,7 +704,7 @@
       "buttonTextWithoutEmail": "Continuar"
     },
     "signInCouponScreen": {
-      "title": "Entre na sua conta"
+      "title": "Entre na conta que deseja receber os tickets"
     },
     "validateAccountScreen": {
       "title": "Valide sua conta",

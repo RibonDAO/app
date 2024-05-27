@@ -9,7 +9,7 @@ import { stylizedDisplayXl } from "styles/typography/stylized";
 
 export const Container = styled.View`
   display: flex;
-  padding-bottom: ${theme.spacing(48)};
+  padding-bottom: ${theme.spacing(32)};
   width: 100%;
   padding-horizontal: ${theme.spacing(16)};
   background-color: ${theme.colors.brand.primary[800]};

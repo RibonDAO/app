@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   useFirstAccessToIntegration,
   useDonatedToday,
@@ -10,8 +10,6 @@ import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 import { logError } from "services/crashReport";
 import { useTicketsContext } from "contexts/ticketsContext";
 import { useFocusEffect } from "@react-navigation/native";
-import * as SplashScreen from "expo-splash-screen";
-import { perform } from "lib/timeoutHelpers";
 import IntegrationBanner from "components/moleculars/IntegrationBanner";
 import usePageView from "hooks/usePageView";
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
@@ -56,10 +54,6 @@ export default function CausesScreen() {
   const { currentUser, signedIn } = useCurrentUser();
   const { params } = useRouteParams<"CausesScreen">();
 
-  useEffect(() => {
-    if (!isLoading) perform(SplashScreen.hideAsync).in(100);
-  }, [isLoading]);
-
   useFocusEffect(
     useCallback(() => {
       refetchTickets();
@@ -80,8 +74,9 @@ export default function CausesScreen() {
     hasTickets &&
     integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
 
-  const { userIsMember } = useSubscriptions();
+  const { userIsMember, userSubscriptions } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
+  const { refetch: refetchUserSubscriptions } = userSubscriptions();
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -90,6 +85,7 @@ export default function CausesScreen() {
         refetchTickets(),
         refetchIsMember(),
         refetchFirstAccessToIntegration(),
+        refetchUserSubscriptions(),
       ]);
     } catch (e) {
       logError(e);

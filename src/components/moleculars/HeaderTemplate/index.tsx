@@ -38,6 +38,7 @@ function HeaderTemplate({
           color={theme.colors.neutral10}
         />
       </S.ConfigContainer>
+
       {children}
       <ConfigMenu toggleModal={toggleModal} menuVisible={menuVisible} />
     </S.Container>

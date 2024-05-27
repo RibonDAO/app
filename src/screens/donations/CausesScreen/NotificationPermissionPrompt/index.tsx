@@ -6,11 +6,14 @@ import { showToast } from "lib/Toast";
 import { logError } from "services/crashReport";
 import { useTranslation } from "react-i18next";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
+import { usePaymentFailedNotification } from "contexts/paymentFailedNotificationContext";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
 export default function NotificationPermissionPrompt() {
   const [visible, setVisible] = useState(false);
+  const { visible: paymentFailedNotificationVisible } =
+    usePaymentFailedNotification();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen.enableNotification",
@@ -46,13 +49,17 @@ export default function NotificationPermissionPrompt() {
   useEffect(() => {
     const notificationCardVisible = async () => {
       const value = await getLocalStorageItem(NOTIFICATION_CARD_VISIBLE_KEY);
-      return value === "true" || value === null;
+
+      return (
+        (value === "true" || value === null) &&
+        paymentFailedNotificationVisible === false
+      );
     };
 
     notificationCardVisible().then((isVisible) => {
       setVisible(isVisible);
     });
-  }, []);
+  }, [paymentFailedNotificationVisible]);
 
   return (
     visible && (

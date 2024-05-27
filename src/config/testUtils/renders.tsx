@@ -68,12 +68,20 @@ import PixInformationProvider, {
   IPixPaymentInformationContext,
   PixPaymentInformationContext,
 } from "contexts/pixInformationContext";
+import PaymentFailedNotificationProvider, {
+  IPaymentFailedNotificationContext,
+  PaymentFailedNotificationContext,
+} from "contexts/paymentFailedNotificationContext";
 
 import CouponProvider, { CouponContext } from "contexts/couponContext";
 import IntegrationProvider, {
   IIntegrationContext,
   IntegrationContext,
 } from "contexts/integrationContext";
+import ClubSubscriptionProvider, {
+  ClubSubscriptionContext,
+  IClubSubscriptionContext,
+} from "contexts/clubSubscriptionContext";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -124,6 +132,8 @@ export type RenderComponentProps = {
   causeContributionProviderValue?: Partial<ICauseContributionContext>;
   nonProfitsProviderValue?: Partial<INonProfitsContext>;
   integrationProviderValue?: Partial<IIntegrationContext>;
+  paymentFailedNotificationProviderValue?: Partial<IPaymentFailedNotificationContext>;
+  clubSubscriptionValue?: Partial<IClubSubscriptionContext>;
 };
 
 function renderAllProviders(
@@ -146,6 +156,8 @@ function renderAllProviders(
     causeDonationProviderValue = {},
     nonProfitsProviderValue = {},
     integrationProviderValue = {},
+    paymentFailedNotificationProviderValue = {},
+    clubSubscriptionValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -194,7 +206,6 @@ function renderAllProviders(
                               ScrollEnabledProvider,
                               ScrollEnabledContext,
                               scrollEnabledProviderValue,
-
                               renderProvider(
                                 StripeProvider,
                                 StripeContext,
@@ -220,10 +231,20 @@ function renderAllProviders(
                                           IntegrationContext,
                                           integrationProviderValue,
                                           renderProvider(
-                                            PixInformationProvider,
-                                            PixPaymentInformationContext,
-                                            pixInformationProviderValue,
-                                            children,
+                                            PaymentFailedNotificationProvider,
+                                            PaymentFailedNotificationContext,
+                                            paymentFailedNotificationProviderValue,
+                                            renderProvider(
+                                              ClubSubscriptionProvider,
+                                              ClubSubscriptionContext,
+                                              clubSubscriptionValue,
+                                              renderProvider(
+                                                PixInformationProvider,
+                                                PixPaymentInformationContext,
+                                                pixInformationProviderValue,
+                                                children,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),

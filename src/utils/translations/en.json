@@ -96,6 +96,13 @@
         "successToastMessage": "Notifications turned on",
         "errorToastMessage": "Error turning on notifications"
       },
+      "paymentFailedNotification": {
+        "cardTitle": "The Ribon Club payment failed",
+        "cardDescription": "Redo your subscription to continue enjoying the benefits",
+        "link": "Redo subscription",
+        "pixTitle": "The benefits of the Ribon Club have expired",
+        "pixDescription": "Redo your subscription via PIX or switch to a card to continue enjoying the benefits"
+      },
       "userSupportSection": {
         "title": "Ribon Support",
         "description": "Doubts, ideas, refunds. We're here!",
@@ -109,7 +116,6 @@
         "link": "https://ribon.io/en/privacy-policy/#terms"
       },
       "impactPrefix": "Donate",
-      "labelText": "Learn more",
       "iconText": "(minimum)",
       "whatIsATicket": "What is a ticket?",
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
@@ -278,7 +284,7 @@
           "subtitleWithValue": "Earn up to {{value}} per day",
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
-          "buttonTextCollected": "Collected",
+          "buttonTextCollected": "Next in {{time}}",
           "buttonTextNoClub": "Unlock collection"
         },
         "monthlyTicketCard": {
@@ -287,7 +293,7 @@
           "subtitleWithValue": "Earn up to {{value}} per month",
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
-          "buttonTextCollected": "Collected",
+          "buttonTextCollected": "Next in {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Unlock collection"
         }
       }
@@ -706,7 +712,7 @@
       "buttonTextWithoutEmail": "Continue"
     },
     "signInCouponScreen": {
-      "title": "Sign in to your account"
+      "title": "Log in to the account you want to receive tickets"
     },
     "validateAccountScreen": {
       "title": "Validate your account",

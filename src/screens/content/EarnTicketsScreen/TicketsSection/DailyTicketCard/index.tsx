@@ -12,13 +12,12 @@ import { RECEIVED_RIBON_DAILY_TICKET } from "lib/localStorage/constants";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
+import { perform } from "lib/timeoutHelpers";
 import { useTickets } from "../../../../../hooks/useTickets";
+import TicketCardPlaceholder from "../placeholder/placeholder";
 
 export default function DailyTicketCard() {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "content.earnTicketsScreen.ticketsSection",
-  });
-
+  const [isLoading, setIsLoading] = useState(true);
   const [hasCollected, setHasCollected] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const [time, setTime] = useState<string>("24:00");
@@ -27,19 +26,42 @@ export default function DailyTicketCard() {
   const { currentUser } = useCurrentUser();
   const { navigateTo } = useNavigation();
 
+  const { t } = useTranslation("translation", {
+    keyPrefix: "content.earnTicketsScreen.ticketsSection",
+  });
+
   const setTimeUntilMidnight = () => {
     const timeUntilMidnight = getTimeUntilMidnight();
     setTime(timeUntilMidnight);
   };
 
   const changeHasCollected = async () => {
-    if (!currentUser) {
-      setHasCollected(false);
-    } else {
-      const canCollect = await canCollectRibonTicket();
-      setHasCollected(!canCollect);
+    try {
+      if (!currentUser) {
+        setHasCollected(false);
+      } else {
+        const canCollect = await canCollectRibonTicket();
+        setHasCollected(!canCollect);
+      }
+    } finally {
+      perform(() => setIsLoading(false)).in(100);
     }
   };
+
+  useFocusEffect(
+    useCallback(
+      () => () => {
+        setIsLoading(true);
+      },
+      [],
+    ),
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      changeHasCollected();
+    }, [currentUser]),
+  );
 
   const handleSuccess = () => {
     setStartAnimation(true);
@@ -62,18 +84,13 @@ export default function DailyTicketCard() {
 
   useFocusEffect(
     useCallback(() => {
-      changeHasCollected();
-    }, [currentUser]),
-  );
-
-  useFocusEffect(
-    useCallback(() => {
       if (hasCollected || startAnimation) {
         setTimeUntilMidnight();
       }
     }, [hasCollected, startAnimation]),
   );
 
+  if (isLoading) return <TicketCardPlaceholder />;
   return (
     <CardTicket
       title={t("dailyTicketCard.title")}
