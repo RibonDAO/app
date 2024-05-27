@@ -96,6 +96,13 @@
         "successToastMessage": "Notificações ligadas",
         "errorToastMessage": "Erro ao ligar notificações"
       },
+      "paymentFailedNotification": {
+        "cardTitle": "O pagamento do Clube Ribon falhou",
+        "cardDescription": "Refaça a assinatura para continuar aproveitando os benefícios",
+        "link": "Refazer assinatura",
+        "pixTitle": "Os benefícios do Clube Ribon expiraram",
+        "pixDescription": "Refaça a assinatura por PIX ou mude para cartão para continuar aproveitando os benefícios"
+      },
       "userSupportSection": {
         "title": "Suporte ao Usuário",
         "description": "Dúvidas, ideias, estornos. Estamos aqui!",
@@ -215,6 +222,16 @@
       "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
       "hasAccountButton": "Já tenho uma conta"
     },
+    "giveTicketByCouponScreen": {
+      "title": "Você ganhou 1 ticket!",
+      "titlePlural": "Você ganhou {{numberOfTickets}} tickets!",
+      "button": "Coletar tickets"
+    },
+    "expiredCouponScreen": {
+      "title": "Ticket indisponível",
+      "subtitle": "O tempo de coleta expirou ou você já coletou esse ticket.",
+      "button": "Voltar para tela inicial"
+    },
     "giveTicketV2Screen": {
       "title": "Você ganhou 1 ticket!",
       "integrationTitle": "{{integrationName}} te deu 1 ticket!",
@@ -264,7 +281,8 @@
         "dailyTicketCard": {
           "title": "Ticket diário (grátis)",
           "subtitle": "Ganhe 1 por dia",
-          "buttonText": "Coletado automaticamente"
+          "buttonText": "Coletar ticket",
+          "buttonTextCollected": "Próximo em {{time}}"
         }
       },
       "clubTicketsSection": {
@@ -283,7 +301,7 @@
           "subtitleWithValue": "Ganhe até {{value}} por dia",
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
-          "buttonTextCollected": "Coletado",
+          "buttonTextCollected": "Próximo em {{time}}",
           "buttonTextNoClub": "Desbloquear coleta"
         },
         "monthlyTicketCard": {
@@ -292,7 +310,7 @@
           "subtitleWithValue": "Ganhe até {{value}} por mês",
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
-          "buttonTextCollected": "Coletado",
+          "buttonTextCollected": "Próximo em {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Desbloquear coleta"
         }
       }
@@ -525,6 +543,18 @@
       }
     }
   },
+  "cardPartners": {
+    "title": "Parceiros Ribon",
+    "subtitle": "Ganhe tickets extras ao completar ações de nossos parceiros",
+    "ctaText": "Coletar tickets dos parceiros ->",
+    "ctaLink": "https://projetos.ribon.io/parceiros"
+  },
+  "cardReferral": {
+    "title": "Convide seus amigos",
+    "subtitle": "Quem entrar pelo seu convite recebe 1 ticket extra para começar a doar!",
+    "cta": "Copiar link de convite ->",
+    "ctaSuccess": "Copiado!"
+  },
   "users": {
     "impactScreen": {
       "title": "Meu Impacto",
@@ -676,11 +706,15 @@
       "confirmText": "Continuar",
       "emailPlaceholder": "Seu e-mail"
     },
+    "insertEmailCouponScreen": {
+      "title": "Entre com um e-mail",
+      "emailLabel": "E-mail",
+      "confirmText": "Continuar",
+      "emailPlaceholder": "Seu e-mail"
+    },
     "sentMagicLinkEmailScreen": {
-      "title": "Link de entrada enviado",
-      "text": "Clique no link enviado para {{email}} para entrar",
-      "firstAccessTitle": "Você ganhou um ticket extra",
-      "firstAccessText": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra",
+      "title": "Enviamos um link para você",
+      "text": "Clique no link enviado para {{email}} e entre na sua conta neste dispositivo",
       "buttonText": "Continuar"
     },
     "expiredLinkScreen": {
@@ -691,26 +725,8 @@
       "buttonText": "Me mande outro link",
       "buttonTextWithoutEmail": "Continuar"
     },
-    "extraTicketScreen": {
-      "title": "Você ganhou um ticket extra",
-      "description": "Valide sua conta clicando no link enviado para {{email}} e receba seu ticket extra",
-      "buttonText": "Continuar sem ticket extra"
-    },
-    "signInExtraTicketScreen": {
-      "title": "Valide sua conta e ganhe um ticket",
-      "description": "Finalize seu login com {{email}} pra receber seu prêmio",
-      "google": "Continuar com Google",
-      "apple": "Continuar com Apple",
-      "email": "Continuar com e-mail",
-      "toastSuccessMessage": "Seu ticket foi enviado por e-mail"
-    },
-    "receiveExtraTicketScreen": {
-      "title": "Validar sua conta trouxe você aqui",
-      "description": "Seu ticket extra está disponível",
-      "buttonText": "Receber meu ticket"
-    },
-    "validateExtraTicketScreen": {
-      "error": "Link inválido"
+    "signInCouponScreen": {
+      "title": "Entre na conta que deseja receber os tickets"
     },
     "validateAccountScreen": {
       "title": "Valide sua conta",

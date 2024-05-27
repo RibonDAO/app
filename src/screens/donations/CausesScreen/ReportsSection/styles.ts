@@ -1,30 +1,40 @@
 import { theme } from "@ribon.io/shared";
-import { StyleSheet } from "react-native";
 import {
   defaultBodyLgSemibold,
   defaultBodySmRegular,
 } from "styles/typography/default";
+import styled from "styled-components/native";
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: theme.spacingNative(16),
-  },
-  title: {
-    ...defaultBodyLgSemibold,
-  },
-  description: {
-    ...defaultBodySmRegular,
-  },
-  reportList: {
-    marginTop: 10,
-  },
-  flatList: {
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  cardViewItem: {
-    marginHorizontal: 6,
-  },
-});
+export const Container = styled.View`
+  margin-top: ${theme.spacingNative(32)}px;
+  margin-bottom: ${theme.spacingNative(16)}px;
+`;
 
-export default styles;
+export const TitleContainer = styled.View`
+  padding-left: ${theme.spacingNative(16)}px;
+  padding-right: ${theme.spacingNative(16)}px;
+`;
+
+export const Title = styled.Text`
+  ${defaultBodyLgSemibold}
+`;
+
+export const Description = styled.Text`
+  ${defaultBodySmRegular}
+`;
+
+export const ReportListContainer = styled.View`
+  margin-top: ${theme.spacingNative(12)}px;
+`;
+
+export const ReportList = styled.FlatList``;
+
+type CardViewItemProps = {
+  isLastChild?: boolean;
+};
+
+export const CardViewItem = styled.View<CardViewItemProps>`
+  margin-left: ${theme.spacingNative(16)}px;
+  margin-right: ${(props: CardViewItemProps) =>
+    props.isLastChild ? theme.spacingNative(16) : 0}px;
+`;

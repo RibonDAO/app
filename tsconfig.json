@@ -5,7 +5,8 @@
     "baseUrl": "src",
     "sourceMap": true,
     "sourceRoot": "/",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "resolveJsonModule": true
   },
   "include": ["src", "images.d.ts", "sounds.d.ts"]
 }

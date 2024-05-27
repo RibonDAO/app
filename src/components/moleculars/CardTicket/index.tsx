@@ -1,47 +1,66 @@
+import * as React from "react";
 import { theme } from "@ribon.io/shared";
-import { Text, View } from "react-native";
-import S from "./styles";
+import GenericIcon from "./assets/Generic";
+import SingleTicketIcon from "./assets/SingleTicket";
+import MultipleTicketsIcon from "./assets/MultipleTickets";
+import TicketBoxIcon from "./assets/TicketBox";
+import * as S from "./styles";
 
 export type Props = {
-  icon?: JSX.Element;
   title: string;
   subtitle: {
     icon?: JSX.Element;
     text: string;
     color: string;
   };
-  borderColor?: string;
-  backgroundColor?: string;
+  background?: "singleTicket" | "multipleTickets" | "ticketBox" | "generic";
   children?: JSX.Element | JSX.Element[];
 };
 
+type Background = {
+  color: string;
+  vector: JSX.Element;
+};
+
+const backgrounds: Record<string, Background> = {
+  singleTicket: {
+    color: "#FEFBEA",
+    vector: <SingleTicketIcon />,
+  },
+  multipleTickets: {
+    color: theme.colors.brand.tertiary[50],
+    vector: <MultipleTicketsIcon />,
+  },
+  ticketBox: {
+    color: theme.colors.brand.tertiary[50],
+    vector: <TicketBoxIcon />,
+  },
+  generic: {
+    color: theme.colors.brand.secondary[50],
+    vector: <GenericIcon />,
+  },
+};
+
 function CardTicket({
-  icon,
   title,
   subtitle,
-  borderColor = theme.colors.brand.primary[300],
-  backgroundColor = theme.colors.neutral10,
+  background = "generic",
   children,
 }: Props): JSX.Element {
   return (
-    <View style={[S.container, { backgroundColor, borderColor }]}>
-      <View style={S.header}>
-        {icon && <View>{icon}</View>}
-
-        <View style={S.textContainer}>
-          <Text style={S.title}>{title}</Text>
-          <View style={S.subtitleContainer}>
-            {subtitle.icon && (
-              <View style={S.subtitleIcon}>{subtitle.icon}</View>
-            )}
-            <Text style={[S.subtitle, { color: subtitle.color }]}>
-              {subtitle.text}
-            </Text>
-          </View>
-        </View>
-      </View>
-      {children}
-    </View>
+    <S.Container background={backgrounds[background].color}>
+      <S.VectorContainer>{backgrounds[background].vector}</S.VectorContainer>
+      <S.InnerContainer>
+        <S.Header>
+          <S.Title>{title}</S.Title>
+          <S.SubtitleContainer>
+            {subtitle.icon && <S.SubtitleIcon>{subtitle.icon}</S.SubtitleIcon>}
+            <S.Subtitle color={subtitle.color}>{subtitle.text}</S.Subtitle>
+          </S.SubtitleContainer>
+        </S.Header>
+        <S.Content>{children}</S.Content>
+      </S.InnerContainer>
+    </S.Container>
   );
 }
 

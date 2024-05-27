@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -57,24 +58,29 @@ import PixPaymentInformationProvider from "contexts/pixInformationContext";
 import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
 import SignedInScreen from "screens/donations/auth/SignedInScreen";
 import SignInScreen from "screens/auth/SignInScreen";
-import SignInExtraTicketScreen from "screens/auth/SignInExtraTicketScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
 import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
 import { useAuthentication } from "contexts/authenticationContext";
 import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
-import ReceiveExtraTicketScreen from "screens/auth/ReceiveExtraTicketScreen";
-import ExtraTicketScreen from "screens/auth/ExtraTicketScreen";
 import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
-import ValidateExtraTicketScreen from "screens/auth/ValidateExtraTicketScreen";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
 import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
 import SubscriptionsScreen from "screens/promoters/SubscriptionsScreen";
 import ClubScreen from "screens/promoters/ClubScreen";
 import PromotersScreen from "screens/promoters/PromotersScreen";
+import GiveTicketByCouponScreen from "screens/coupons/GiveTicketByCouponScreen";
+import CouponProvider, { useCouponContext } from "contexts/couponContext";
+import ExpiredCouponScreen from "screens/coupons/ExpiredCouponScreen";
 import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
 import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
+import SignInCouponScreen from "screens/coupons/auth/SignInCouponScreen";
+import InsertEmailCouponScreen from "screens/coupons/auth/InsertEmailCouponScreen";
+import HomeScreen from "screens/donations/HomeScreen";
+import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
+import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
+import ClubSubscriptionProvider from "contexts/clubSubscriptionContext";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -195,6 +201,7 @@ function BottomTabNavigator() {
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
           header: headerOutline,
           lazy: false,
+          headerShown: false,
         }}
         listeners={() => ({
           tabPress: () => {
@@ -212,12 +219,8 @@ function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const {
-    setMagicLinkToken,
-    setAccountId,
-    setExtraTicket,
-    setExtraTicketToken,
-  } = useAuthentication();
+  const { setMagicLinkToken, setAccountId } = useAuthentication();
+  const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -226,8 +229,7 @@ function PrivateNavigator() {
       setUtm,
       setMagicLinkToken,
       setAccountId,
-      setExtraTicket,
-      setExtraTicketToken,
+      setCouponId,
     );
   }, []);
 
@@ -249,12 +251,8 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const {
-    setMagicLinkToken,
-    setAccountId,
-    setExtraTicket,
-    setExtraTicketToken,
-  } = useAuthentication();
+  const { setMagicLinkToken, setAccountId } = useAuthentication();
+  const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -263,17 +261,23 @@ function RootNavigator() {
       setUtm,
       setMagicLinkToken,
       setAccountId,
-      setExtraTicket,
-      setExtraTicketToken,
+      setCouponId,
     );
   }, []);
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
+        name="Home"
+        component={HomeScreen}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="TabNavigator"
+        component={BottomTabNavigator}
+        options={{
+          headerShown: false,
+        }}
       />
 
       <Stack.Screen
@@ -300,6 +304,30 @@ function RootNavigator() {
       <Stack.Screen
         name="GiveTicketScreen"
         component={GiveTicketScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="GiveTicketByCouponScreen"
+        component={GiveTicketByCouponScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="SignInCouponScreen"
+        component={SignInCouponScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="InsertEmailCouponScreen"
+        component={InsertEmailCouponScreen}
+        options={{ headerShown: false, animation: "slide_from_bottom" }}
+      />
+
+      <Stack.Screen
+        name="ExpiredCouponScreen"
+        component={ExpiredCouponScreen}
         options={{ headerShown: false, animation: "slide_from_bottom" }}
       />
 
@@ -397,10 +425,9 @@ function RootNavigator() {
         component={SignedInScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
-          headerBackTitleVisible: true,
-          headerBackTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -409,10 +436,9 @@ function RootNavigator() {
         component={DonationSignInScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
-          headerBackTitleVisible: true,
-          headerBackTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -421,10 +447,9 @@ function RootNavigator() {
         component={ContributionStatsScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
-          headerBackTitleVisible: true,
-          headerBackTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -441,18 +466,9 @@ function RootNavigator() {
         component={SignInScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
-        }}
-      />
-
-      <Stack.Screen
-        name="SignInExtraTicketScreen"
-        component={SignInExtraTicketScreen}
-        options={{
-          headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
-          headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -461,8 +477,9 @@ function RootNavigator() {
         component={InsertEmailScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -471,8 +488,9 @@ function RootNavigator() {
         component={InsertEmailAccountScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
       <Stack.Screen
@@ -480,38 +498,15 @@ function RootNavigator() {
         component={SentMagicLinkEmailScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
       <Stack.Screen
         name="SignInByMagicLinkScreen"
         component={SignInByMagicLinkScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="ReceiveExtraTicketScreen"
-        component={ReceiveExtraTicketScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="ValidateExtraTicketScreen"
-        component={ValidateExtraTicketScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="ExtraTicketScreen"
-        component={ExtraTicketScreen}
         options={{
           headerShown: false,
         }}
@@ -530,8 +525,9 @@ function RootNavigator() {
         component={ValidateAccountScreen}
         options={{
           headerShown: true,
-          headerTintColor: theme.colors.brand.primary[800],
+          headerLeft: () => <ArrowBackButton />,
           headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -556,6 +552,7 @@ function RootNavigator() {
         component={AboutTicketsScreen}
         options={{
           headerShown: false,
+          animation: "slide_from_bottom",
         }}
       />
 
@@ -600,10 +597,16 @@ export default function Navigation() {
                           <CauseContributionProvider>
                             <NonProfitsProvider>
                               <IntegrationProvider>
-                                <TicketsProvider>
-                                  <RootNavigator />
-                                  <Toast config={toastConfig} />
-                                </TicketsProvider>
+                                <CouponProvider>
+                                  <TicketsProvider>
+                                    <PaymentFailedNotificationProvider>
+                                      <ClubSubscriptionProvider>
+                                        <RootNavigator />
+                                        <Toast config={toastConfig} />
+                                      </ClubSubscriptionProvider>
+                                    </PaymentFailedNotificationProvider>
+                                  </TicketsProvider>
+                                </CouponProvider>
                               </IntegrationProvider>
                             </NonProfitsProvider>
                           </CauseContributionProvider>

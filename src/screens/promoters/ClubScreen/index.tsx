@@ -10,6 +10,7 @@ import { logEvent } from "services/analytics";
 import { useFocusEffect } from "@react-navigation/native";
 import { useAuthentication } from "contexts/authenticationContext";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
+import { useRouteParams } from "hooks/useRouteParams";
 import AppleIcon from "./assets/AppleIcon";
 import GoogleIcon from "./assets/GoogleIcon";
 import S from "./styles";
@@ -23,6 +24,8 @@ import PurchaseSection from "./components/PurchaseSection";
 import LeftSun from "./assets/left-sun.png";
 
 function ClubScreen(): JSX.Element {
+  const { params } = useRouteParams<"ClubScreen">();
+
   const [tabIndex, setTabIndex] = useState(0);
   const { userIsMember } = useSubscriptions();
   const { isMember, refetch } = userIsMember();
@@ -62,7 +65,8 @@ function ClubScreen(): JSX.Element {
       component: <PurchaseSection setCurrentOffer={setOffer} />,
       handleBack: () => {
         scrollToTop();
-        setTabIndex(tabIndex - 1);
+        if (!params?.ignoreBenefitsSection) setTabIndex(tabIndex - 1);
+        else popNavigation();
       },
       handleNext: () => {
         logEvent("giveClubBtn_start", {
@@ -93,9 +97,15 @@ function ClubScreen(): JSX.Element {
 
   useEffect(() => {
     if (isMember) {
-      navigateTo("EarnTicketsScreen");
+      navigateTo("TabNavigator", { screen: "EarnTicketsScreen" });
     }
   }, [isMember]);
+
+  useEffect(() => {
+    if (params?.ignoreBenefitsSection) {
+      setTabIndex(tabIndex + 1);
+    }
+  }, [params]);
 
   return (
     <View style={S.innerContainer}>

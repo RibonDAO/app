@@ -9,7 +9,7 @@ import { stylizedDisplayXl } from "styles/typography/stylized";
 
 export const Container = styled.View`
   display: flex;
-  height: 328px;
+  padding-bottom: ${theme.spacing(32)};
   width: 100%;
   padding-horizontal: ${theme.spacing(16)};
   background-color: ${theme.colors.brand.primary[800]};
@@ -99,4 +99,9 @@ export const Title = styled.Text`
 export const Description = styled.Text`
   ${defaultBodySmSemibold}
   color: ${theme.colors.neutral10};
+`;
+
+export const TicketCountWrapper = styled.View`
+  position: relative;
+  overflow: hidden;
 `;

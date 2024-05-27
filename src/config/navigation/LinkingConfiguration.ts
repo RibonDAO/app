@@ -13,7 +13,7 @@ const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL("/")],
   config: {
     screens: {
-      Root: {
+      TabNavigator: {
         screens: {
           OnboardingScreen: {
             screens: {
@@ -28,7 +28,6 @@ const linking: LinkingOptions<RootStackParamList> = {
               GiveTicketV2Screen: "give-ticket-v2",
               DonationDoneScreen: "donation-done",
               SigninByMagicLinkScreen: "auth",
-              ValidateExtraTicketScreen: "extra-ticket",
             },
           },
           EarnTicketsScreen: {
@@ -49,6 +48,11 @@ const linking: LinkingOptions<RootStackParamList> = {
           ClubScreen: {
             screens: {
               ClubScreen: "club",
+            },
+          },
+          HomeScreen: {
+            screens: {
+              HomeScreen: "home",
             },
           },
         },

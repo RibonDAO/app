@@ -1,8 +1,5 @@
 import { useEffect } from "react";
 import { useAuthentication } from "contexts/authenticationContext";
-
-import { useFirstAccessToIntegration } from "@ribon.io/shared/hooks";
-import { INTEGRATION_AUTH_ID } from "utils/constants/Application";
 import { useNavigation } from "hooks/useNavigation";
 import { Loader } from "rn-placeholder";
 import { View } from "react-native";
@@ -10,18 +7,12 @@ import S from "./styles";
 
 function SignInByMagicLinkScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
-  const { signInByMagicLink, extraTicket } = useAuthentication();
-  const { isFirstAccessToIntegration, isLoading } =
-    useFirstAccessToIntegration(INTEGRATION_AUTH_ID);
+  const { signInByMagicLink } = useAuthentication();
 
   const authenticate = () => {
     signInByMagicLink({
       onSuccess: () => {
-        if (extraTicket === "true" && isFirstAccessToIntegration) {
-          navigateTo("ReceiveExtraTicketScreen");
-        } else {
-          navigateTo("CausesScreen");
-        }
+        navigateTo("TabNavigator", { screen: "CausesScreen" });
       },
       onError: () => {
         navigateTo("ExpiredLinkScreen");
@@ -30,8 +21,8 @@ function SignInByMagicLinkScreen(): JSX.Element {
   };
 
   useEffect(() => {
-    if (!isLoading) authenticate();
-  }, [isLoading]);
+    authenticate();
+  }, []);
 
   return (
     <View style={S.container}>

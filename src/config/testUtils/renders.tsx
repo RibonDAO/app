@@ -68,11 +68,20 @@ import PixInformationProvider, {
   IPixPaymentInformationContext,
   PixPaymentInformationContext,
 } from "contexts/pixInformationContext";
+import PaymentFailedNotificationProvider, {
+  IPaymentFailedNotificationContext,
+  PaymentFailedNotificationContext,
+} from "contexts/paymentFailedNotificationContext";
 
+import CouponProvider, { CouponContext } from "contexts/couponContext";
 import IntegrationProvider, {
   IIntegrationContext,
   IntegrationContext,
 } from "contexts/integrationContext";
+import ClubSubscriptionProvider, {
+  ClubSubscriptionContext,
+  IClubSubscriptionContext,
+} from "contexts/clubSubscriptionContext";
 import i18n from "../../../i18n-test";
 
 export interface RenderWithContextResult {
@@ -113,6 +122,7 @@ export type RenderComponentProps = {
   cardPaymentProviderValue?: Partial<ICardPaymentInformationContext>;
   pixInformationProviderValue?: Partial<IPixPaymentInformationContext>;
   ticketsProviderValue?: Partial<ITicketsContext>;
+  couponProviderValue?: Partial<ITicketsContext>;
   scrollEnabledProviderValue?: Partial<IScrollEnabledContext>;
   unsafeAreaProviderValue?: Partial<IUnsafeAreaContext>;
   checkoutProviderValue?: Partial<ICheckoutContext>;
@@ -122,6 +132,8 @@ export type RenderComponentProps = {
   causeContributionProviderValue?: Partial<ICauseContributionContext>;
   nonProfitsProviderValue?: Partial<INonProfitsContext>;
   integrationProviderValue?: Partial<IIntegrationContext>;
+  paymentFailedNotificationProviderValue?: Partial<IPaymentFailedNotificationContext>;
+  clubSubscriptionValue?: Partial<IClubSubscriptionContext>;
 };
 
 function renderAllProviders(
@@ -134,6 +146,7 @@ function renderAllProviders(
     cardPaymentProviderValue = {},
     pixInformationProviderValue = {},
     ticketsProviderValue = {},
+    couponProviderValue = {},
     scrollEnabledProviderValue = {},
     unsafeAreaProviderValue = {},
     checkoutProviderValue = {},
@@ -143,6 +156,8 @@ function renderAllProviders(
     causeDonationProviderValue = {},
     nonProfitsProviderValue = {},
     integrationProviderValue = {},
+    paymentFailedNotificationProviderValue = {},
+    clubSubscriptionValue = {},
   }: RenderComponentProps = {},
 ) {
   const queryClient = new QueryClient();
@@ -180,43 +195,57 @@ function renderAllProviders(
                         CardPaymentInformationContext,
                         cardPaymentProviderValue,
                         renderProvider(
-                          TicketsProvider,
-                          TicketsContext,
-                          ticketsProviderValue,
+                          CouponProvider,
+                          CouponContext,
+                          couponProviderValue,
                           renderProvider(
-                            ScrollEnabledProvider,
-                            ScrollEnabledContext,
-                            scrollEnabledProviderValue,
-
+                            TicketsProvider,
+                            TicketsContext,
+                            ticketsProviderValue,
                             renderProvider(
-                              StripeProvider,
-                              StripeContext,
-                              stripeProviderValue,
+                              ScrollEnabledProvider,
+                              ScrollEnabledContext,
+                              scrollEnabledProviderValue,
                               renderProvider(
-                                CausesProvider,
-                                CausesContext,
-                                causesProviderValue,
+                                StripeProvider,
+                                StripeContext,
+                                stripeProviderValue,
                                 renderProvider(
-                                  CauseDonationProvider,
-                                  CauseDonationContext,
-                                  causeDonationProviderValue,
+                                  CausesProvider,
+                                  CausesContext,
+                                  causesProviderValue,
                                   renderProvider(
-                                    CauseContributionProvider,
-                                    CauseContributionContext,
-                                    causeContributionProviderValue,
+                                    CauseDonationProvider,
+                                    CauseDonationContext,
+                                    causeDonationProviderValue,
                                     renderProvider(
-                                      NonProfitsProvider,
-                                      NonProfitsContext,
-                                      nonProfitsProviderValue,
+                                      CauseContributionProvider,
+                                      CauseContributionContext,
+                                      causeContributionProviderValue,
                                       renderProvider(
-                                        IntegrationProvider,
-                                        IntegrationContext,
-                                        integrationProviderValue,
+                                        NonProfitsProvider,
+                                        NonProfitsContext,
+                                        nonProfitsProviderValue,
                                         renderProvider(
-                                          PixInformationProvider,
-                                          PixPaymentInformationContext,
-                                          pixInformationProviderValue,
-                                          children,
+                                          IntegrationProvider,
+                                          IntegrationContext,
+                                          integrationProviderValue,
+                                          renderProvider(
+                                            PaymentFailedNotificationProvider,
+                                            PaymentFailedNotificationContext,
+                                            paymentFailedNotificationProviderValue,
+                                            renderProvider(
+                                              ClubSubscriptionProvider,
+                                              ClubSubscriptionContext,
+                                              clubSubscriptionValue,
+                                              renderProvider(
+                                                PixInformationProvider,
+                                                PixPaymentInformationContext,
+                                                pixInformationProviderValue,
+                                                children,
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
