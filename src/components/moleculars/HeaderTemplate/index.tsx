@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
-import NotificationPaymentFailed from "screens/donations/CausesScreen/NotificationPaymentFailed";
-import RibonLogo from "./RibonLogo";
-import ConfigMenu from "../LayoutHeader/ConfigMenu";
-import TicketSection from "./TicketSection";
 import * as S from "./styles";
+import ConfigMenu from "../LayoutHeader/ConfigMenu";
+import TicketSection from "../LayoutHeader/TicketSection";
 
-function NewHeader(): JSX.Element {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "newHeader",
-  });
-
+type Props = {
+  showsTicketsCounter?: boolean;
+  children?: JSX.Element | JSX.Element[];
+  background?: any;
+};
+function HeaderTemplate({
+  showsTicketsCounter = false,
+  children,
+  background,
+}: Props): JSX.Element {
   const [menuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {
@@ -26,7 +28,9 @@ function NewHeader(): JSX.Element {
 
   return (
     <S.Container>
+      <S.Background source={background} />
       <S.ConfigContainer accessibilityRole="button" onPress={toggleModal}>
+        {showsTicketsCounter && <TicketSection outline />}
         <Icon
           type="outlined"
           name="settings"
@@ -34,18 +38,11 @@ function NewHeader(): JSX.Element {
           color={theme.colors.neutral10}
         />
       </S.ConfigContainer>
-      <S.InfoContainer>
-        <RibonLogo />
-        <S.TitleContainer>
-          <S.Title>{t("title")}</S.Title>
-          <S.Description>{t("description")}</S.Description>
-        </S.TitleContainer>
-      </S.InfoContainer>
-      <NotificationPaymentFailed />
-      <TicketSection />
+
+      {children}
       <ConfigMenu toggleModal={toggleModal} menuVisible={menuVisible} />
     </S.Container>
   );
 }
 
-export default NewHeader;
+export default HeaderTemplate;
