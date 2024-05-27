@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import { View } from "react-native";
 import { useRouteParams } from "hooks/useRouteParams";
 
 import TabViewSection from "./TabViewSection";
@@ -8,8 +8,8 @@ export default function EarnTicketsScreen(): JSX.Element {
   const { params } = useRouteParams<"EarnTicketsScreen">();
 
   return (
-    <ScrollView style={S.Container}>
+    <View style={S.Container}>
       <TabViewSection initialTabIndex={params?.currentTab || 0} />
-    </ScrollView>
+    </View>
   );
 }

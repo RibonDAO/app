@@ -5,7 +5,7 @@ import { stylizedDisplaySm } from "styles/typography/stylized";
 const styles = StyleSheet.create({
   tabViewSection: {
     minHeight: "100%",
-    marginTop: -16,
+    marginTop: 16,
   },
   pagerView: {
     flex: 1,
