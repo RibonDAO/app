@@ -135,7 +135,7 @@ export default function CausesScreen() {
         component: <DonationErrorModal newState={params?.newState} />,
       },
     ],
-    [isMember, params?.newState],
+    [isMember, params?.newState, currentUser],
   );
 
   return (
