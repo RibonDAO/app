@@ -81,6 +81,9 @@ export default function SubscriptionsScreen(): JSX.Element {
     }
   };
 
+  const isClubInactive = (subscription: Subscription) =>
+    subscription?.status === "inactive";
+
   const handleCancelSubscriptionButtonClick = (subscription: Subscription) => {
     setSubscriptionToBeCanceled(subscription);
     logEvent("cancelSubs_click", eventParams());
@@ -98,6 +101,24 @@ export default function SubscriptionsScreen(): JSX.Element {
   useEffect(() => {
     logEvent("P25_view");
   }, []);
+
+  const renderPaymentInfo = (subscription: Subscription) => {
+    if (isClubInactive(subscription)) {
+      return <S.Text>{t("inactiveSubscription")}</S.Text>;
+    } else {
+      return (
+        <>
+          {isPix(subscription) && <S.Text>{t("pixPayment")}</S.Text>}
+          <S.Text>
+            {isPix(subscription) ? t("perksExpiration") : t("nextPayment")}
+            <S.HighlightedText>
+              {nextPaymetAttempt(subscription)}
+            </S.HighlightedText>
+          </S.Text>
+        </>
+      );
+    }
+  };
 
   return (
     <S.Container>
@@ -139,17 +160,8 @@ export default function SubscriptionsScreen(): JSX.Element {
                     : subscription.receiver.name}
                 </S.HighlightedText>
               </S.Text>
-              <S.InfosText>
-                {isPix(subscription) && <S.Text>{t("pixPayment")}</S.Text>}
-                <S.Text>
-                  {isPix(subscription)
-                    ? t("perksExpiration")
-                    : t("nextPayment")}
-                  <S.HighlightedText>
-                    {nextPaymetAttempt(subscription)}
-                  </S.HighlightedText>
-                </S.Text>
-              </S.InfosText>
+              <S.InfosText>{renderPaymentInfo(subscription)}</S.InfosText>
+
               {modalVisible && (
                 <CancelSubscriptionModal
                   setVisible={setModalVisible}

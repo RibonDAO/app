@@ -408,6 +408,7 @@
       "ribonClubTag": "Clube Ribon",
       "pixPayment": "Compra única por PIX",
       "perksExpiration": "Benefícios expiram: ",
+      "inactiveSubscription": "Assinatura inativa",
       "cancelSubscriptionModal": {
         "title": "Cancelar assinatura",
         "subscriptionTitle": "Cancelar assinatura",
