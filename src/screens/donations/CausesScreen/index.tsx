@@ -36,7 +36,7 @@ export default function CausesScreen() {
   const { isLoading } = useNonProfitsContext();
   const { currentIntegrationId } = useIntegrationContext();
 
-  const { donatedToday } = useDonatedToday();
+  const { donatedToday, refetch: refetchDonatedToday } = useDonatedToday();
   const {
     isFirstAccessToIntegration,
     refetch: refetchFirstAccessToIntegration,
@@ -55,12 +55,14 @@ export default function CausesScreen() {
     useCallback(() => {
       refetchTickets();
       refetchFirstAccessToIntegration();
+      refetchDonatedToday();
     }, [
       currentUser,
       signedIn,
       ticketsCounter,
       currentIntegrationId,
       isFirstAccessToIntegration,
+      donatedToday,
     ]),
   );
 
