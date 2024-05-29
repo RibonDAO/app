@@ -88,6 +88,7 @@ export default function CausesScreen() {
         refetchIsMember(),
         refetchFirstAccessToIntegration(),
         refetchUserSubscriptions(),
+        refetchDonatedToday(),
       ]);
     } catch (e) {
       logError(e);
