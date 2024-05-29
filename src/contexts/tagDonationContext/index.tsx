@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { useTagsContext } from "contexts/tagsContext";
-import Tag from "@ribon.io/shared/types/apiResponses/Tag";
+import { Tag } from "@ribon.io/shared/types";
 
 export interface ITagDonationContext {
   chosenTag: Tag | undefined;

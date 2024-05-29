@@ -1,36 +1,28 @@
 import { waitForPromises } from "config/testUtils";
-import {
-  expectTextNotToBeInTheDocument,
-  expectTextToBeInTheDocument,
-} from "config/testUtils/expects";
+import { expectTextToBeInTheDocument } from "config/testUtils/expects";
 import { renderComponent } from "config/testUtils/renders";
-import { causeFactory } from "@ribon.io/shared/config";
-import CausesFilter from ".";
 
-const mockCause = causeFactory({
+import TagsFilter from ".";
+
+const mockTag = {
   id: 1,
-  name: "Animal",
-  withPoolBalance: false,
-});
-
-const mockCause2 = causeFactory({
-  id: 2,
-  name: "Health",
-  withPoolBalance: true,
-});
+  name: "Tag 1",
+  status: "active",
+  nonProfits: [],
+};
 
 jest.mock("@ribon.io/shared/hooks", () => ({
   __esModule: true,
   ...jest.requireActual("@ribon.io/shared/hooks"),
-  useCauses: () => ({
-    causes: [mockCause, mockCause2],
+  useTags: () => ({
+    tags: [mockTag],
     refetch: () => {},
   }),
 }));
 
-describe("CausesFilter", () => {
+describe("TagsFilter", () => {
   beforeEach(async () => {
-    renderComponent(<CausesFilter />);
+    renderComponent(<TagsFilter />);
     await waitForPromises();
   });
 
@@ -38,11 +30,7 @@ describe("CausesFilter", () => {
     expectTextToBeInTheDocument("All");
   });
 
-  it("should render the causes with pool balance", () => {
-    expectTextToBeInTheDocument("Health");
-  });
-
-  it("should not render the causes without pool balance", () => {
-    expectTextNotToBeInTheDocument("Animal");
+  it("should render the tags", () => {
+    expectTextToBeInTheDocument("Tag 1");
   });
 });

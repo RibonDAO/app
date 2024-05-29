@@ -1,6 +1,6 @@
 import { useTags } from "@ribon.io/shared/hooks";
 import { createContext, useContext, useMemo } from "react";
-import Tag from "@ribon.io/shared/types/apiResponses/Tag";
+import { Tag } from "@ribon.io/shared/types";
 
 export interface ITagsContext {
   tags: Tag[];
