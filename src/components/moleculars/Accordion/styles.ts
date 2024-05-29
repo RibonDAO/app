@@ -31,12 +31,17 @@ export const Image = styled.Image`
 `;
 
 export const ArrowContainer = styled.View`
+  width: 24px;
+`;
+
+export const ArrowController = styled.View`
   ${(props: { isExpanded: boolean }) =>
     props.isExpanded ? "transform: rotate(180deg)" : ""};
 
   ${(props: { isExpansible: boolean }) =>
     !props.isExpansible ? "display: none" : ""};
 `;
+
 export const MainArea = styled.View`
   display: flex;
   flex-direction: row;

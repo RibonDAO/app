@@ -34,15 +34,11 @@ function Accordion({
         setIsExpanded(!isExpanded);
       }}
     >
-      <View>
-        <S.ArrowContainer isExpanded={isExpanded} isExpansible={isExpansible}>
-          <ArrowDown
-            color={theme.colors.brand.primary[600]}
-            width={24}
-            height={24}
-          />
-        </S.ArrowContainer>
-      </View>
+      <S.ArrowContainer>
+        <S.ArrowController isExpanded={isExpanded} isExpansible={isExpansible}>
+          <ArrowDown color={theme.colors.brand.primary[600]} />
+        </S.ArrowController>
+      </S.ArrowContainer>
 
       <S.Content>
         <S.MainArea>
