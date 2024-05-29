@@ -16,6 +16,7 @@ describe("CardCenterImageButton", () => {
 
     expect(screen.getByText("titleTest")).toBeDefined();
     expect(screen.getByText("subTest")).toBeDefined();
+    expect(screen.queryByText("3")).toBeDefined();
     expect(screen.queryByText("descTest")).toBeNull();
 
     fireEvent(screen.getByText("titleTest"), "pressIn");

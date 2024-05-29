@@ -10,7 +10,7 @@ export type Props = {
   title: string;
   subtitle: string;
   iconUrl: string;
-  quantity: number;
+  quantity?: number;
   description?: string;
   isExpansible?: boolean;
 };
@@ -49,7 +49,7 @@ function Accordion({
           <S.TextArea>
             <S.Title>{title}</S.Title>
             <S.Subtitle>{subtitle}</S.Subtitle>
-            <TicketIconText quantity={quantity} />
+            {quantity && <TicketIconText quantity={quantity} />}
           </S.TextArea>
           <S.Image resizeMode="cover" source={{ uri: iconUrl }} />
         </S.MainArea>
