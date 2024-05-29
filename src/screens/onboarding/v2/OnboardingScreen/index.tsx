@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, FlatList, StatusBar, Dimensions } from "react-native";
-import { theme } from "@ribon.io/shared/styles";
+import { FlatList, Dimensions } from "react-native";
+
 import { useNavigation } from "hooks/useNavigation";
 import Slide from "./Slide";
 import Footer from "./Footer";
@@ -59,8 +59,7 @@ function OnboardingScreen() {
   }, [currentSlideIndex]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.neutral10 }}>
-      <StatusBar backgroundColor={theme.colors.neutral10} />
+    <>
       <FlatList
         ref={ref}
         onMomentumScrollEnd={updateCurrentSlideIndex}
@@ -79,7 +78,7 @@ function OnboardingScreen() {
         goToPreviousSlide={goToPreviousSlide}
         setCurrentSlideIndex={setCurrentSlideIndex}
       />
-    </SafeAreaView>
+    </>
   );
 }
 

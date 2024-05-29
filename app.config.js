@@ -1,5 +1,5 @@
-const version = "5.10.6";
-const buildNumber = 382;
+const version = "5.10.7";
+const buildNumber = 383;
 
 export default () => ({
   "expo": {
@@ -45,7 +45,7 @@ export default () => ({
          "NSAdvertisingAttributionReportEndpoint": "https://appsflyer-skadnetwork.com/",
          "NSCameraUsageDescription": "This app requires access to your phone's camera."
       },
-      "supportsTablet": false,
+      "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
       "buildNumber": buildNumber.toString(),
       "usesAppleSignIn": true,

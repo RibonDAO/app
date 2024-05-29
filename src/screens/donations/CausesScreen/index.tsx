@@ -16,12 +16,15 @@ import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useRouteParams } from "hooks/useRouteParams";
-import NewHeader from "components/moleculars/NewHeader";
+
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
 import ClubSection from "./ClubSection";
 import ReportsSection from "./ReportsSection";
+
+import Header from "./Header";
+
 import NotificationPermissionPrompt from "./NotificationPermissionPrompt";
 import CausesSection from "./CausesSection";
 import * as S from "./styles";
@@ -100,7 +103,7 @@ export default function CausesScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <NewHeader />
+      <Header />
       <S.ContainerPadding hasPaddingTop={!shouldShowIntegrationBanner}>
         {shouldShowIntegrationBanner && (
           <IntegrationBanner integration={integration} />

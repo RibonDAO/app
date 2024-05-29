@@ -124,14 +124,6 @@ function BottomTabNavigator() {
     return undefined;
   };
 
-  const header = () => (
-    <Header
-      rightComponent={<LayoutHeader />}
-      sideLogo={sideLogo()}
-      onSideLogoClick={navigateToIntegration}
-    />
-  );
-
   const headerOutline = () => (
     <Header
       outline={!!currentUser}
@@ -183,7 +175,7 @@ function BottomTabNavigator() {
               <EarnTicketsIconOff />,
             ),
           lazy: false,
-          header,
+          headerShown: false,
         }}
         listeners={() => ({
           tabPress: () => {
