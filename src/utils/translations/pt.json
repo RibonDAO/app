@@ -85,8 +85,10 @@
   "donations": {
     "causesScreen": {
       "title": "Faça sua doação do dia!",
+      "titlePostDonation": "Faça ainda mais doações",
       "titleNonProfits": "ONGs",
       "buttonText": "Doar ticket",
+      "buttonTextPlural": "Doar tickets",
       "notEnoughTickets": "Tickets insuficientes",
       "allCauses": "Todas",
       "ticketToast": "Você tem um novo ticket!",
@@ -672,6 +674,10 @@
         "modalDialog": {
           "accessUserSupport": "Acessar o suporte ao usuário"
         }
+      },
+      "lastCard": {
+        "primaryButtonText": "Doar tickets",
+        "secondaryButtonText": "Doar dinheiro"
       }
     }
   },
