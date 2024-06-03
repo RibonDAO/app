@@ -55,6 +55,7 @@ export const Content = styled.View`
 
 export const TextArea = styled.View`
   text-align: left;
+  max-width: 230px;
 `;
 
 export const DescriptionTitle = styled.Text`
