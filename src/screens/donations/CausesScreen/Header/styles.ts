@@ -21,6 +21,9 @@ export const Container = styled.View`
 export const ConfigContainer = styled.TouchableOpacity`
   display: flex;
   height: 30px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   align-self: flex-end;
   margin-top: ${theme.spacing(8)};
 `;

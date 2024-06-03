@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { theme } from "@ribon.io/shared/styles";
-import S from "./styles";
 import { View } from "react-native";
+import S from "./styles";
 import Button from "./Button";
 
 export type Props = {
@@ -47,6 +47,7 @@ function GroupButtons({
       <Button
         outline={index !== selectedButtonIndex}
         onPress={() => handleElementClick(index, element)}
+        // eslint-disable-next-line react/no-array-index-key
         key={index.toString()}
         backgroundColor={backgroundColor}
         backgroundColorOutline={backgroundColorOutline}

@@ -1,15 +1,18 @@
 /* eslint-disable no-nested-ternary */
 import { TicketsCategories, theme } from "@ribon.io/shared";
-import Button from "components/atomics/buttons/Button";
-import ButtonNonClickable from "components/atomics/buttons/ButtonNonClickable";
 import CardTicket from "components/moleculars/CardTicket";
 import TicketPinkIcon from "components/vectors/TicketPinkIcon";
 import { logEvent } from "services/analytics";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useNavigation } from "hooks/useNavigation";
 import { useTickets } from "hooks/useTickets";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import CollectableButton from "components/atomics/buttons/CollectableButton";
+import { getTimeUntilMidnight } from "lib/formatters/dateFormatter";
+import { useFocusEffect } from "@react-navigation/native";
+import { perform } from "lib/timeoutHelpers";
+import TicketCardPlaceholder from "../placeholder/placeholder";
 
 type Props = {
   tickets?: number;
@@ -25,11 +28,23 @@ export default function ClubDailyTicketCard({
   plan,
   setUnauthorizedModalVisible,
 }: Props) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasCollected, setHasCollected] = useState(false);
+  const [startAnimation, setStartAnimation] = useState(false);
+  const [localTickets, setLocalTickets] = useState(tickets);
+  const [time, setTime] = useState<string>("24:00");
+
   const { t } = useTranslation("translation", {
     keyPrefix: "content.earnTicketsScreen.clubTicketsSection",
   });
 
-  const hasCollected = isMember && tickets === 0;
+  const colors = [
+    theme.colors.brand.tertiary[600], // initial color
+    theme.colors.brand.primary[300],
+    "#F97303",
+    theme.colors.brand.quaternary[200],
+    theme.colors.brand.tertiary[100], // final color
+  ];
 
   const buttonText =
     tickets > 1
@@ -46,6 +61,45 @@ export default function ClubDailyTicketCard({
 
   const { isAuthenticated } = useAuthentication();
 
+  const setTimeUntilMidnight = () => {
+    const timeUntilMidnight = getTimeUntilMidnight();
+    setTime(timeUntilMidnight);
+  };
+
+  const changeHasCollected = async () => {
+    try {
+      setHasCollected(false);
+      if (isMember && tickets === 0 && !startAnimation) setHasCollected(true);
+    } finally {
+      perform(() => setIsLoading(false)).in(1000);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(
+      () => () => {
+        setIsLoading(true);
+      },
+      [],
+    ),
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      changeHasCollected();
+    }, [isMember, tickets, startAnimation]),
+  );
+
+  const handleSuccess = () => {
+    setStartAnimation(true);
+    logEvent("ticketCollected", {
+      amount: tickets,
+      from: "dailyClub",
+    });
+    refetchTickets();
+    perform(() => setStartAnimation(false)).in(2500);
+  };
+
   const handleButtonPress = async () => {
     if (!isMember) {
       navigateTo("ClubScreen");
@@ -55,14 +109,10 @@ export default function ClubDailyTicketCard({
     } else {
       await handleCollectByClub({
         category: TicketsCategories.DAILY,
-        onSuccess: () =>
-          logEvent("ticketCollected", {
-            amount: tickets,
-            from: "dailyClub",
-          }),
+        onSuccess: () => {
+          handleSuccess();
+        },
       });
-
-      refetchTickets();
     }
   };
 
@@ -71,6 +121,23 @@ export default function ClubDailyTicketCard({
       logEvent("clubCTA_view", { from: "clubDailyTicket_card" });
     }
   }, []);
+
+  useEffect(() => {
+    if (tickets !== 0) {
+      setLocalTickets(tickets);
+    }
+  }, [tickets]);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (hasCollected || startAnimation) {
+        setTimeUntilMidnight();
+      }
+    }, [hasCollected, startAnimation]),
+  );
+
+  if (isLoading) return <TicketCardPlaceholder />;
+
   return (
     <CardTicket
       title={t("dailyTicketCard.title")}
@@ -83,51 +150,17 @@ export default function ClubDailyTicketCard({
       }}
       background="multipleTickets"
     >
-      {hasCollected ? (
-        <ButtonNonClickable
-          text={t("dailyTicketCard.buttonTextCollected")}
-          textColor={theme.colors.brand.tertiary[600]}
-          borderColor={theme.colors.brand.tertiary[50]}
-          backgroundColor={theme.colors.brand.tertiary[50]}
-          leftIcon={{
-            name: "check",
-            color: theme.colors.brand.tertiary[600],
-            type: "outlined",
-            size: 24,
-          }}
-        />
-      ) : (
-        <Button
-          text={
-            isMember ? buttonTextHasClub : t("dailyTicketCard.buttonTextNoClub")
-          }
-          textColor={theme.colors.neutral10}
-          borderColor={theme.colors.brand.tertiary[600]}
-          backgroundColor={theme.colors.brand.tertiary[600]}
-          leftIcon={
-            hasCollected
-              ? {
-                  name: "check",
-                  color: hasCollected
-                    ? theme.colors.brand.tertiary[600]
-                    : theme.colors.neutral10,
-                  type: "outlined",
-                  size: 24,
-                }
-              : isMember
-              ? undefined
-              : {
-                  name: "lock",
-                  color: hasCollected
-                    ? theme.colors.brand.tertiary[600]
-                    : theme.colors.neutral10,
-                  type: "outlined",
-                  size: 24,
-                }
-          }
-          onPress={handleButtonPress}
-        />
-      )}
+      <CollectableButton
+        text={
+          isMember ? buttonTextHasClub : t("dailyTicketCard.buttonTextNoClub")
+        }
+        afterText={t("dailyTicketCard.buttonTextCollected", { time })}
+        locked={hasCollected}
+        onClick={handleButtonPress}
+        startAnimation={startAnimation}
+        colors={colors}
+        amount={localTickets}
+      />
     </CardTicket>
   );
 }

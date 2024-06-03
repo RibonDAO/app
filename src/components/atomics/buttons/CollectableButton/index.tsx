@@ -51,7 +51,7 @@ export default function CollectableButton({
     setClicked(true);
     setDisabled(true);
     perform(() => !clicked && setShowToast(true)).in(500);
-    perform(() => setShowToast(false)).in(3000);
+    perform(() => setShowToast(false)).in(2000);
   };
 
   useFocusEffect(
@@ -78,7 +78,7 @@ export default function CollectableButton({
       <S.ToastContainer>
         {showToast && <NewTicketAnimation count={amount} />}
       </S.ToastContainer>
-      <S.ButtonContainer>
+      <S.ButtonContainer color={colors[0]}>
         <S.TextContainer>
           {clicked ? (
             <AfterTextAnimation colors={colors} text={afterText} />
