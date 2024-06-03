@@ -3,7 +3,6 @@ import { View } from "react-native";
 import InlineNotification from "components/moleculars/notifications/InlineNotification";
 import requestUserPermissionForNotifications from "lib/notifications";
 import { showToast } from "lib/Toast";
-import { logError } from "services/crashReport";
 import { useTranslation } from "react-i18next";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { usePaymentFailedNotification } from "contexts/paymentFailedNotificationContext";
@@ -36,7 +35,6 @@ export default function NotificationPermissionPrompt() {
         hideAlert();
       }
     } catch (e) {
-      logError(e);
       showToast({
         type: "error",
         message: t("errorToastMessage"),

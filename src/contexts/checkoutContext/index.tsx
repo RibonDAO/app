@@ -18,7 +18,6 @@ import {
   useMemo,
   useState,
 } from "react";
-import { logError } from "services/crashReport";
 import { Currencies } from "types/enums/Currencies";
 
 export interface ICheckoutContext {
@@ -112,8 +111,6 @@ function CheckoutProvider({ children }: Props) {
         setLoading(true);
         const coin = await defaultCoin();
         setCurrentCoin(coin);
-      } catch (error) {
-        logError(error);
       } finally {
         setLoading(false);
       }
