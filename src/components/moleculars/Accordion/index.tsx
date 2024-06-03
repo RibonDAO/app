@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ArrowDown from "components/vectors/ArrowDown";
 import { theme } from "@ribon.io/shared";
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
+import Icon from "components/atomics/Icon";
 import * as S from "./styles";
 import TicketIconText from "../TicketIconText";
 
@@ -35,8 +35,13 @@ function Accordion({
       }}
     >
       <S.ArrowContainer>
-        <S.ArrowController isExpanded={isExpanded} isExpansible={isExpansible}>
-          <ArrowDown color={theme.colors.brand.primary[600]} />
+        <S.ArrowController isExpansible={isExpansible}>
+          <Icon
+            type="rounded"
+            name={isExpanded ? "expand_less" : "expand_more"}
+            size={24}
+            color={theme.colors.brand.primary[600]}
+          />
         </S.ArrowController>
       </S.ArrowContainer>
 

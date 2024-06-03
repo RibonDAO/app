@@ -35,9 +35,6 @@ export const ArrowContainer = styled.View`
 `;
 
 export const ArrowController = styled.View`
-  ${(props: { isExpanded: boolean }) =>
-    props.isExpanded ? "transform: rotate(180deg)" : ""};
-
   ${(props: { isExpansible: boolean }) =>
     !props.isExpansible ? "display: none" : ""};
 `;
@@ -56,6 +53,7 @@ export const Content = styled.View`
 export const TextArea = styled.View`
   text-align: left;
   max-width: 230px;
+  gap: 4px;
 `;
 
 export const DescriptionTitle = styled.Text`
