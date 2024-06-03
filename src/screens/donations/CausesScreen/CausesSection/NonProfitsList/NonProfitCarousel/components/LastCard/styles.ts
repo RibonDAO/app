@@ -16,10 +16,9 @@ export const Title = styled.Text`
 `;
 
 export const Container = styled.View`
+  width: 100%;
+  height: 100%;
   border-radius: 16px;
-
-  height: 432px;
-  width: 296px;
   display: flex;
   flex-direction: column;
   align-items: center;

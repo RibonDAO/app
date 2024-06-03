@@ -8,12 +8,14 @@ type Props = {
   nonProfit: NonProfit;
   primaryButtonClick: () => void;
   secondaryButtonClick: () => void;
+  primaryButtonDisabled?: boolean;
 };
 
 function LastCard({
   nonProfit,
   primaryButtonClick,
   secondaryButtonClick,
+  primaryButtonDisabled = false,
 }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "components.moleculars.lastCard",
@@ -35,6 +37,7 @@ function LastCard({
           borderColor={theme.colors.brand.primary[600]}
           textColor={theme.colors.neutral10}
           customStyles={{ borderRadius: 12 }}
+          disabled={primaryButtonDisabled}
         />
         <Button
           text={t("secondaryButtonText")}

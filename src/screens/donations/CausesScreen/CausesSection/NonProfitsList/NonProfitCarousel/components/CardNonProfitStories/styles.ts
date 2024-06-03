@@ -3,8 +3,7 @@ import styled from "styled-components/native";
 import { theme } from "@ribon.io/shared/styles";
 
 export const Container = styled.View`
-  height: 432px;
-  width: 296px;
+  width: 100%;
   border-radius: ${theme.spacing(16)};
   display: flex;
   align-items: center;
