@@ -253,7 +253,8 @@
         }
       },
       "header": {
-        "donationStreak": "Donation streak"
+        "donationStreak": "Donation streak",
+        "donationStreakSingular": "Donation streak"
       },
       "lockedSection": {
         "title": "A Ribon for you",
