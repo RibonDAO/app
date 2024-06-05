@@ -11,27 +11,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.spacingNative(16),
     paddingVertical: theme.spacingNative(48),
   },
-  imageContainer: {
-    marginTop: theme.spacingNative(24),
-    alignItems: "center",
-    justifyContent: "center",
-  },
   contentContainer: {
     marginTop: theme.spacingNative(24),
     alignItems: "center",
   },
-  imageBackground: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+  iconContainer: {
+    marginTop: theme.spacingNative(24),
+    alignItems: "center",
+    justifyContent: "center",
   },
-  mainImage: {
-    width: 200,
-    height: 200,
+  icon: {
+    width: 128,
+    height: 128,
     resizeMode: "cover",
-    borderRadius: 8,
   },
   title: {
     ...stylizedDisplayXs,

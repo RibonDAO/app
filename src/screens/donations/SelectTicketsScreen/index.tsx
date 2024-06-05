@@ -156,7 +156,7 @@ export default function SelectTicketsScreen() {
             <S.MainContainer>
               <S.ImageContainer>
                 <S.Image
-                  source={{ uri: nonProfit.mainImage }}
+                  source={{ uri: nonProfit.icon }}
                   accessibilityIgnoresInvertColors
                 />
               </S.ImageContainer>
