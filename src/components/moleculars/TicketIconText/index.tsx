@@ -1,7 +1,6 @@
 import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native";
 import TicketIcon from "components/vectors/TicketIcon";
-import GrayTicketIcon from "components/vectors/GrayTicketIcon";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
 import S from "./styles";
@@ -12,6 +11,7 @@ type TicketIconTextProps = {
   buttonDisabled?: boolean;
   onClick?: () => void;
   outline?: boolean;
+  color?: string;
 };
 
 function TicketIconText({
@@ -20,12 +20,19 @@ function TicketIconText({
   buttonDisabled = false,
   onClick,
   outline = false,
+  color,
 }: TicketIconTextProps): JSX.Element {
   const hasTickets = quantity > 0;
-  const ticketColor = hasTickets
-    ? theme.colors.brand.primary[600]
-    : theme.colors.neutral[500];
-  const ticketIcon = hasTickets ? <TicketIcon /> : <GrayTicketIcon />;
+  const ticketColor =
+    color ||
+    (hasTickets ? theme.colors.brand.primary[600] : theme.colors.neutral[500]);
+  const ticketIcon =
+    <TicketIcon color={color} /> ||
+    (hasTickets ? (
+      <TicketIcon />
+    ) : (
+      <TicketIcon color={theme.colors.neutral[400]} />
+    ));
 
   const borderStyle = () => {
     if (hasDividerBorder) {
