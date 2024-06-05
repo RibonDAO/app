@@ -66,15 +66,12 @@ export default function CausesScreen() {
     ]),
   );
 
-  const shouldShowIntegrationBanner = useMemo(
-    () =>
-      !integration?.name?.toLowerCase()?.includes("ribon") &&
-      integration &&
-      !donatedToday &&
-      hasTickets &&
-      integration?.uniqueAddress !== INTEGRATION_AUTH_ID,
-    [integration, donatedToday, hasTickets],
-  );
+  const shouldShowIntegrationBanner =
+    !integration?.name?.toLowerCase()?.includes("ribon") &&
+    integration &&
+    !donatedToday &&
+    hasTickets &&
+    integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
 
   const { userIsMember, userSubscriptions } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
@@ -99,7 +96,7 @@ export default function CausesScreen() {
 
   if (isLoading || loadingFirstAccessToIntegration) return <Placeholder />;
 
-  const renderHeader = useMemo(
+  const renderHeader = useCallback(
     () => (
       <>
         <Header />
