@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   useFirstAccessToIntegration,
   useDonatedToday,
@@ -17,6 +17,7 @@ import { useIntegrationContext } from "contexts/integrationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useRouteParams } from "hooks/useRouteParams";
 
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
@@ -93,6 +94,11 @@ export default function CausesScreen() {
       setRefreshing(false);
     }
   };
+
+  useEffect(() => {
+    if (isLoading) return;
+    requestTrackingPermissionsAsync();
+  }, [isLoading]);
 
   if (isLoading || loadingFirstAccessToIntegration) return <Placeholder />;
 
