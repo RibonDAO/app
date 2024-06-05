@@ -1,15 +1,16 @@
-import { ReactNode, useState } from "react";
-import ArrowDown from "components/vectors/ArrowDown";
+import { useState } from "react";
 import { theme } from "@ribon.io/shared";
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
+import Icon from "components/atomics/Icon";
 import * as S from "./styles";
+import TicketIconText from "../TicketIconText";
 
-type Props = {
+export type Props = {
   title: string;
   subtitle: string;
   iconUrl: string;
-  ticketsComponent?: ReactNode;
+  quantity?: number;
   description?: string;
   isExpansible?: boolean;
 };
@@ -20,7 +21,7 @@ function Accordion({
   iconUrl,
   isExpansible,
   description,
-  ticketsComponent,
+  quantity,
 }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation("translation", {
@@ -33,22 +34,23 @@ function Accordion({
         setIsExpanded(!isExpanded);
       }}
     >
-      <View>
-        <S.ArrowContainer isExpanded={isExpanded} isExpansible={isExpansible}>
-          <ArrowDown
+      <S.ArrowContainer>
+        <S.ArrowController isExpansible={isExpansible}>
+          <Icon
+            type="rounded"
+            name={isExpanded ? "expand_less" : "expand_more"}
+            size={24}
             color={theme.colors.brand.primary[600]}
-            width={24}
-            height={24}
           />
-        </S.ArrowContainer>
-      </View>
+        </S.ArrowController>
+      </S.ArrowContainer>
 
       <S.Content>
         <S.MainArea>
           <S.TextArea>
             <S.Title>{title}</S.Title>
             <S.Subtitle>{subtitle}</S.Subtitle>
-            {ticketsComponent}
+            {quantity && <TicketIconText quantity={quantity} />}
           </S.TextArea>
           <S.Image resizeMode="cover" source={{ uri: iconUrl }} />
         </S.MainArea>

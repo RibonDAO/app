@@ -9,12 +9,14 @@ describe("CardCenterImageButton", () => {
         subtitle="subTest"
         iconUrl="testUrl"
         description="descTest"
+        quantity={3}
         isExpansible
       />,
     );
 
     expect(screen.getByText("titleTest")).toBeDefined();
     expect(screen.getByText("subTest")).toBeDefined();
+    expect(screen.queryByText("3")).toBeDefined();
     expect(screen.queryByText("descTest")).toBeNull();
 
     fireEvent(screen.getByText("titleTest"), "pressIn");
