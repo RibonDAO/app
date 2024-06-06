@@ -26,7 +26,7 @@ function LastCard({
       <S.ImageBackground>
         <DefaultBackground />
       </S.ImageBackground>
-      <S.OngLogo source={{ uri: nonProfit?.logo }} />
+      <S.OngLogo source={{ uri: nonProfit?.logo }} resizeMode="contain" />
       <S.OngName>{nonProfit?.name}</S.OngName>
 
       <S.ButtonContainer>

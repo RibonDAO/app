@@ -1,4 +1,5 @@
-import Markdown from "react-native-markdown-display";
+import Markdown, { MarkdownIt } from "react-native-markdown-display";
+
 import DefaultBackground from "./assets/DefaultBackground";
 import * as S from "./styles";
 
@@ -19,7 +20,17 @@ function DefaultBackgroundComponent({
       </S.BackgroundContainer>
 
       <S.MarkdownContainer>
-        <Markdown style={S.MarkdownStyle}>{markdownText}</Markdown>
+        <Markdown
+          style={S.MarkdownStyle}
+          markdownit={MarkdownIt({
+            breaks: true,
+            linkify: true,
+            typographer: true,
+            html: true,
+          })}
+        >
+          {markdownText}
+        </Markdown>
       </S.MarkdownContainer>
     </S.Container>
   );
@@ -35,7 +46,19 @@ function ImageBackgroundComponent({ markdownText, backgroundImage }: Props) {
         testID="image-background"
       >
         <S.MarkdownContainer>
-          {markdownText && <Markdown>{markdownText}</Markdown>}
+          {markdownText && (
+            <Markdown
+              style={S.MarkdownStyle}
+              markdownit={MarkdownIt({
+                breaks: true,
+                linkify: true,
+                typographer: true,
+                html: true,
+              })}
+            >
+              {markdownText}
+            </Markdown>
+          )}
         </S.MarkdownContainer>
       </S.ImageBackground>
     </S.Container>

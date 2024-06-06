@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import { theme } from "@ribon.io/shared/styles";
+import {
+  defaultBodyLgBold,
+  defaultBodySmRegular,
+  defaultBodySmSemibold,
+} from "styles/typography/default";
 
 export const Container = styled.View`
   width: 100%;
@@ -33,7 +38,47 @@ export const ImageBackground = styled.ImageBackground`
 `;
 
 export const MarkdownStyle = StyleSheet.create({
-  text: {
+  body: {
+    color: theme.colors.neutral[800],
+  },
+  table: {
+    borderWidth: 0,
+    marginTop: 32,
+    padding: 0,
+    fontFamily: "Inter",
+    fontSize: 14,
     lineHeight: 24,
+  },
+  tr: {
+    borderBottomWidth: 0,
+    alignItems: "flex-start",
+    flexDirection: "row",
+  },
+  th: {
+    padding: 0,
+  },
+  td: {
+    padding: 0,
+  },
+  heading2: {
+    ...defaultBodyLgBold,
+  },
+  heading3: {
+    ...defaultBodySmSemibold,
+    color: theme.colors.neutral[700],
+  },
+  paragraph: {
+    ...defaultBodySmRegular,
+  },
+  bullet_list: {
+    marginTop: 10,
+    fontFamily: "Inter400",
+    fontSize: 14,
+    lineHeight: 24,
+  },
+  bullet_list_icon: {
+    marginLeft: 0,
+    marginRight: 8,
+    fontSize: 24,
   },
 });

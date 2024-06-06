@@ -28,8 +28,8 @@ export const Container = styled.View`
 `;
 
 export const OngLogo = styled.Image`
-  width: 80px;
-  height: 80px;
+  width: 232px;
+  height: 88px;
 `;
 
 export const OngIcon = styled.Image`
