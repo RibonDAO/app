@@ -459,6 +459,9 @@
       "ribonClubTag": "Ribon Club",
       "pixPayment": "Single purchase via PIX",
       "perksExpiration": "Perks expire at: ",
+      "inactiveSubscription": "Subscription canceled in ",
+      "redoSubscription": "Redo subscription",
+      "inactiveSubscriptionInfo": "Reason: Payment failed",
       "cancelSubscriptionModal": {
         "title": "Cancel subscription",
         "subscriptionTitle": "Cancel subscription",
