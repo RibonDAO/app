@@ -87,6 +87,16 @@ function NonProfitCarousel({ nonProfit }: Props) {
     index: number;
   };
 
+  const buttonText = () => {
+    if (!hasEnoughTickets) {
+      return "notEnoughTickets";
+    } else if (minNumberOfTickets > 1) {
+      return "buttonTextPlural";
+    } else {
+      return "buttonText";
+    }
+  };
+
   const renderItem = ({ item, index }: RenderItemProps) => {
     if (index === 0) {
       return (
@@ -94,9 +104,7 @@ function NonProfitCarousel({ nonProfit }: Props) {
           <CardNonProfit
             nonProfit={nonProfit}
             ticketsQuantity={minNumberOfTickets}
-            buttonText={t(
-              minNumberOfTickets > 1 ? "buttonTextPlural" : "buttonText",
-            )}
+            buttonText={t(buttonText())}
             onButtonClick={handleDonateTicketButtonPress}
             buttonDisabled={!hasEnoughTickets}
           />
