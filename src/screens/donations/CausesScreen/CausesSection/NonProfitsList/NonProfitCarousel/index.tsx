@@ -118,6 +118,7 @@ function NonProfitCarousel({ nonProfit }: Props) {
         <S.NonProfitContainer isLast>
           <LastCard
             nonProfit={nonProfit}
+            primaryButtonText={t(buttonText())}
             primaryButtonClick={handleDonateTicketButtonPress}
             secondaryButtonClick={handleDirectDonationButtonPress}
             primaryButtonDisabled={!hasEnoughTickets}

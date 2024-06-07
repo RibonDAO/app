@@ -6,6 +6,7 @@ import DefaultBackground from "./assets/DefaultBackground";
 
 type Props = {
   nonProfit: NonProfit;
+  primaryButtonText: string;
   primaryButtonClick: () => void;
   secondaryButtonClick: () => void;
   primaryButtonDisabled?: boolean;
@@ -13,6 +14,7 @@ type Props = {
 
 function LastCard({
   nonProfit,
+  primaryButtonText,
   primaryButtonClick,
   secondaryButtonClick,
   primaryButtonDisabled = false,
@@ -31,7 +33,7 @@ function LastCard({
 
       <S.ButtonContainer>
         <Button
-          text={t("primaryButtonText")}
+          text={primaryButtonText}
           onPress={primaryButtonClick}
           backgroundColor={theme.colors.brand.primary[600]}
           borderColor={theme.colors.brand.primary[600]}

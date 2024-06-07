@@ -18,6 +18,7 @@ describe("LastCard Component", () => {
     renderComponent(
       <LastCard
         nonProfit={mockNonProfit}
+        primaryButtonText="Donate tickets"
         primaryButtonClick={primaryButtonClick}
         secondaryButtonClick={secondaryButtonClick}
       />,
@@ -28,6 +29,7 @@ describe("LastCard Component", () => {
     renderComponent(
       <LastCard
         nonProfit={mockNonProfit}
+        primaryButtonText="Donate tickets"
         primaryButtonClick={primaryButtonClick}
         secondaryButtonClick={secondaryButtonClick}
       />,
@@ -41,6 +43,7 @@ describe("LastCard Component", () => {
     renderComponent(
       <LastCard
         nonProfit={mockNonProfit}
+        primaryButtonText="Donate tickets"
         primaryButtonClick={primaryButtonClick}
         secondaryButtonClick={secondaryButtonClick}
       />,
@@ -54,10 +57,12 @@ describe("LastCard Component", () => {
     renderComponent(
       <LastCard
         nonProfit={mockNonProfit}
+        primaryButtonText="Donate tickets"
         primaryButtonClick={primaryButtonClick}
         secondaryButtonClick={secondaryButtonClick}
       />,
     );
+
     clickOn("Donate money");
     expect(secondaryButtonClick).toHaveBeenCalledTimes(1);
   });
