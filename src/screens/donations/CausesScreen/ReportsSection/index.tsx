@@ -11,7 +11,7 @@ export default function ReportsSection(): JSX.Element | null {
   const { reports } = useReports();
 
   const getReportClickEventName = (name: string) => {
-    if (name.toLowerCase() === t("reports.seeAllCard"))
+    if (name?.toLowerCase() === t("reports.seeAllCard"))
       return "allReportsCard_click";
 
     return "reportCard_click";
@@ -30,12 +30,12 @@ export default function ReportsSection(): JSX.Element | null {
           data={reports}
           renderItem={({ item }: any) => (
             <S.CardViewItem
-              isLastChild={item.name.toLowerCase() === t("reports.seeAllCard")}
+              isLastChild={item.name?.toLowerCase() === t("reports.seeAllCard")}
             >
               <CardReport
                 title={`${item.name} →`}
                 link={item.link}
-                showIcon={item.name.toLowerCase() !== t("reports.seeAllCard")}
+                showIcon={item.name?.toLowerCase() !== t("reports.seeAllCard")}
                 clickEventName={getReportClickEventName(item.name)}
               />
             </S.CardViewItem>
