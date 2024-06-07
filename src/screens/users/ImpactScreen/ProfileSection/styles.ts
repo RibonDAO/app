@@ -81,3 +81,8 @@ export const TagText = styled.Text`
     }
   }}
 `;
+
+export const StatisticsContainer = styled.View`
+  gap: 12;
+  margin-top: 40px; 
+`

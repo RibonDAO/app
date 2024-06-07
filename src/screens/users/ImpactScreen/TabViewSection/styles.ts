@@ -3,8 +3,9 @@ import { theme } from "@ribon.io/shared/styles";
 
 const styles = StyleSheet.create({
   tabViewSection: {
-    minHeight: Dimensions.get("window").height,
+    maxHeight: Dimensions.get("window").height,
     paddingBottom: theme.spacingNative(80) - theme.spacingNative(112),
+    backgroundColor: "white"
   },
   pagerView: {
     flex: 1,

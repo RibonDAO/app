@@ -12,6 +12,8 @@ import LoadingOverlay from "components/moleculars/modals/LoadingOverlay";
 import ProfileTopShape from "components/vectors/ProfileTopShape";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
+import StatisticsCard from "components/moleculars/StatisticsCard";
+import { theme } from "@ribon.io/shared";
 
 function ProfileSection() {
   const { t } = useTranslation("translation", {
@@ -82,6 +84,22 @@ function ProfileSection() {
             </S.TagText>
           </S.ClubTag>
         </S.TagContainer>
+
+        <S.StatisticsContainer>
+          <StatisticsCard
+            backgroundColor={theme.colors.brand.primary[25]}
+            description="Tickets doados"
+            icon="TicketIconOutlined"
+            totalDonated="34"
+          />
+
+          <StatisticsCard
+            backgroundColor={theme.colors.brand.primary[25]}
+            description="Dias fazendo o bem"
+            icon="RibonFlagIcon"
+            totalDonated="50"
+          />
+        </S.StatisticsContainer>
       </S.CenterContainer>
     </S.Container>
   );
