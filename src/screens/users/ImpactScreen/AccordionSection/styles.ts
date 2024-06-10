@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   tabViewSection: {
     maxHeight: Dimensions.get("window").height,
     paddingBottom: theme.spacingNative(80) - theme.spacingNative(112),
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   pagerView: {
     flex: 1,

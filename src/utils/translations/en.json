@@ -301,7 +301,6 @@
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Collected",
           "buttonTextNoClub": "Unlock collection"
-
         },
         "monthlyTicketCard": {
           "title": "Monthly Ribon Club package",
