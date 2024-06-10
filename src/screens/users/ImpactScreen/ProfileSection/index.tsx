@@ -1,5 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useUserProfile, useSubscriptions } from "@ribon.io/shared/hooks";
+import {
+  useUserProfile,
+  useSubscriptions,
+  useStatistics,
+} from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
@@ -10,10 +14,10 @@ import { logEvent } from "services/analytics";
 import UserProfile from "@ribon.io/shared/types/entities/UserProfile";
 import LoadingOverlay from "components/moleculars/modals/LoadingOverlay";
 import ProfileTopShape from "components/vectors/ProfileTopShape";
-import UserAvatar from "./UserAvatar";
-import * as S from "./styles";
 import StatisticsCard from "components/moleculars/StatisticsCard";
 import { theme } from "@ribon.io/shared";
+import UserAvatar from "./UserAvatar";
+import * as S from "./styles";
 
 function ProfileSection() {
   const { t } = useTranslation("translation", {
@@ -30,6 +34,9 @@ function ProfileSection() {
     isLoading: isMemberLoading,
     refetch: refetchIsMember,
   } = userIsMember();
+  const { userStatistics } = useStatistics({
+    userId: currentUser?.id ?? undefined,
+  });
 
   const { profile, refetch } = userProfile();
 
@@ -88,16 +95,16 @@ function ProfileSection() {
         <S.StatisticsContainer>
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
-            description="Tickets doados"
+            description={t("donatedTickets")}
             icon="TicketIconOutlined"
-            totalDonated="34"
+            value={userStatistics?.totalTickets || 0}
           />
 
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
-            description="Dias fazendo o bem"
+            description={t("daysDoingGood")}
             icon="RibonFlagIcon"
-            totalDonated="50"
+            value={userStatistics?.daysDonating}
           />
         </S.StatisticsContainer>
       </S.CenterContainer>

@@ -599,7 +599,14 @@
         "ctaClubText": "Benefícios do Clube →",
         "accordion": {
           "equivalent": "Equivalente à"
-        }
+        },
+        "donatedTickets": "Tickets doados",
+        "daysDoingGood": "Dias fazendo o bem"
+      },
+      "impactList": {
+        "activeProjects": "Por projeto",
+        "inactiveProjects": "Projetos inativos",
+        "inactiveProjectsDescription": "Projetos de ONGs que já não estão mais no app"
       }
     }
   },
