@@ -1,88 +1,38 @@
-import { FlatList, SectionList, Text } from "react-native";
-import { View } from "react-native";
+import { SectionList } from "react-native";
+import { ReactElement } from "react";
 import Accordion, { Props as AccordionProps } from "../Accordion";
 import * as S from "./styles";
-import { ReactElement, ReactNode } from "react";
+
+type ImpactList = (
+  | {
+      title: string;
+      subtitle?: undefined;
+      data: Pick<
+        AccordionProps,
+        "title" | "subtitle" | "iconUrl" | "description" | "quantity"
+      >[];
+    }
+  | {
+      title: string;
+      subtitle: string;
+      data: Pick<
+        AccordionProps,
+        "title" | "subtitle" | "iconUrl" | "description" | "quantity"
+      >[];
+    }
+)[];
 
 type Props = {
-  title: string;
-  impactList: Pick<
-    AccordionProps,
-    "title" | "subtitle" | "iconUrl" | "description" | "quantity"
-  >[];
+  impactList: ImpactList;
   header?: ReactElement;
 };
 
-function AccordionList({ title, impactList, header }: Props) {
-  const data = [
-    {
-      title: "Por projeto",
-      data: [
-        {
-          title: "Item 1",
-          subtitle: "Subtitle 1",
-          iconUrl: "https://picsum.photos/200",
-          description: "This is the description for item 1.",
-        },
-        {
-          title: "Item 2",
-          subtitle: "Subtitle 2",
-          iconUrl: "https://picsum.photos/200",
-          description: "This is the description for item 2.",
-          quantity: 3,
-        },
-        {
-          title: "Item 3",
-          subtitle: "Subtitle 3",
-          iconUrl: "https://picsum.photos/200",
-          description: "", // No description for this item
-        },
-        {
-          title: "Item 4",
-          subtitle: "Subtitle 4",
-          iconUrl: "https://picsum.photos/200",
-          description: "This is the description for item 4.",
-        },
-      ],
-    },
-    {
-      title: "Projetos inativos",
-      subtitle: "Projetos de ONGs que já não estão mais no app",
-      data: [
-        {
-          title: "Item 1",
-          subtitle: "Subtitle 1",
-          iconUrl: "https://picsum.photos/200",
-          description: "This is the description for item 1.",
-          quantity: 3,
-        },
-        {
-          title: "Item 2",
-          subtitle: "Subtitle 2",
-          iconUrl: "https://picsum.photos/200",
-          description: "This is the description for item 2.",
-        },
-        {
-          title: "Item 3",
-          subtitle: "Subtitle 3",
-          iconUrl: "https://picsum.photos/200",
-          description: "", // No description for this item
-        },
-        {
-          title: "Item 4",
-          subtitle: "Subtitle 4",
-          iconUrl: "https://picsum.photos/200",
-          description: "This is the description for item 4.",
-        },
-      ],
-    },
-  ];
-
+function AccordionList({ impactList, header }: Props) {
   return (
     <SectionList
       ListHeaderComponent={header}
       ItemSeparatorComponent={S.ItemSeparator}
-      sections={data}
+      sections={impactList}
       keyExtractor={({ title }) => title}
       renderItem={({ item }) => (
         <Accordion
@@ -94,15 +44,13 @@ function AccordionList({ title, impactList, header }: Props) {
           quantity={item?.quantity}
         />
       )}
-      renderSectionHeader={({ section: { title, subtitle } }) => {
-        return (
-          <>
-            {title === "Projetos inativos" && <S.SectionSeparator />}
-            <S.Title>{title}</S.Title>
-            <S.SubTitle>{subtitle}</S.SubTitle>
-          </>
-        );
-      }}
+      renderSectionHeader={({ section: { title, subtitle } }) => (
+        <>
+          {title === "Projetos inativos" && <S.SectionSeparator />}
+          <S.Title>{title}</S.Title>
+          <S.SubTitle>{subtitle}</S.SubTitle>
+        </>
+      )}
     />
   );
 }

@@ -5,7 +5,7 @@ import * as S from "./styles";
 type IconType = "TicketIconOutlined" | "RibonFlagIcon";
 
 type Props = {
-  totalDonated: string;
+  value: number;
   description: string;
   icon: IconType;
   backgroundColor: string;
@@ -25,7 +25,7 @@ function Icon({ icon }: IconProps) {
 }
 
 function StatisticsCard({
-  totalDonated,
+  value,
   description,
   icon,
   backgroundColor,
@@ -33,7 +33,7 @@ function StatisticsCard({
   return (
     <S.Container color={backgroundColor}>
       <S.Left>
-        <S.Number>{totalDonated}</S.Number>
+        <S.Number>{value}</S.Number>
         <S.Text>{description}</S.Text>
       </S.Left>
       <S.Right>

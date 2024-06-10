@@ -51,9 +51,11 @@ export const Content = styled.View`
 `;
 
 export const TextArea = styled.View`
-  text-align: left;
+  display: flex;
+  align-items: flex-start;
   max-width: 230px;
   gap: 4px;
+  flex: 1;
 `;
 
 export const DescriptionTitle = styled.Text`

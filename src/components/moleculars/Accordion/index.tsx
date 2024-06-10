@@ -50,7 +50,8 @@ function Accordion({
           <S.TextArea>
             <S.Title>{title}</S.Title>
             <S.Subtitle>{subtitle}</S.Subtitle>
-            {quantity && <TicketIconText quantity={quantity} />}
+
+            {quantity ? <TicketIconText quantity={quantity} /> : null}
           </S.TextArea>
           <S.Image resizeMode="cover" source={{ uri: iconUrl }} />
         </S.MainArea>

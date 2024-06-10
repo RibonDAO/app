@@ -8,7 +8,7 @@ describe("StatisticsCard", () => {
       <StatisticsCard
         description="Description"
         icon="TicketIconOutlined"
-        totalDonated="100"
+        value={100}
         backgroundColor="#000"
       />,
     );
@@ -19,7 +19,7 @@ describe("StatisticsCard", () => {
   it("should render correctly with RibonFlagIcon", () => {
     renderComponent(
       <StatisticsCard
-        totalDonated="200"
+        value={200}
         description="Another Description"
         icon="RibonFlagIcon"
         backgroundColor=""
