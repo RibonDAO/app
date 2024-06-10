@@ -38,3 +38,10 @@ export const CardViewItem = styled.View<CardViewItemProps>`
   margin-right: ${(props: CardViewItemProps) =>
     props.isLastChild ? theme.spacingNative(16) : 0}px;
 `;
+
+export const Divider = styled.View`
+  height: 8px;
+  background-color: ${theme.colors.neutral[50]};
+  margin-left: ${theme.spacingNative(16)}px;
+  margin-right: ${theme.spacingNative(16)}px;
+`;
