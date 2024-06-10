@@ -38,17 +38,15 @@ export default function CausesScreen() {
 
   const { donatedToday, refetch: refetchDonatedToday } = useDonatedToday();
   const {
-    isFirstAccessToIntegration,
     refetch: refetchFirstAccessToIntegration,
     isLoading: loadingFirstAccessToIntegration,
   } = useFirstAccessToIntegration(currentIntegrationId);
   const { integration } = useIntegrationContext();
-  const { ticketsCounter } = useTicketsContext();
 
   const [refreshing, setRefreshing] = useState(false);
 
   const { hasTickets, refetchTickets } = useTicketsContext();
-  const { currentUser, signedIn } = useCurrentUser();
+  const { currentUser } = useCurrentUser();
   const { params } = useRouteParams<"CausesScreen">();
 
   useFocusEffect(
@@ -56,14 +54,7 @@ export default function CausesScreen() {
       refetchTickets();
       refetchFirstAccessToIntegration();
       refetchDonatedToday();
-    }, [
-      currentUser,
-      signedIn,
-      ticketsCounter,
-      currentIntegrationId,
-      isFirstAccessToIntegration,
-      donatedToday,
-    ]),
+    }, [currentUser, currentIntegrationId, donatedToday]),
   );
 
   const shouldShowIntegrationBanner = useMemo(
@@ -96,8 +87,6 @@ export default function CausesScreen() {
       setRefreshing(false);
     }
   };
-
-  if (isLoading || loadingFirstAccessToIntegration) return <Placeholder />;
 
   const renderHeader = useMemo(
     () => (
@@ -138,8 +127,10 @@ export default function CausesScreen() {
         component: <DonationErrorModal newState={params?.newState} />,
       },
     ],
-    [isMember, params?.newState, currentUser],
+    [isMember, params?.newState],
   );
+
+  if (isLoading || loadingFirstAccessToIntegration) return <Placeholder />;
 
   return (
     <FlatList

@@ -24,7 +24,7 @@ describe("NonProfitsList", () => {
 
   it("should render without error", () => {
     expectAllByTextToBeInTheDocument("Evidence Action");
-    expectAllByTextToBeInTheDocument("Donate tickets");
+    expectAllByTextToBeInTheDocument("Donate");
     expectAllByTextToBeInTheDocument("Lwala");
   });
 });
