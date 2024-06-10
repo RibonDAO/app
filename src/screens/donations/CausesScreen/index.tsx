@@ -54,7 +54,7 @@ export default function CausesScreen() {
       refetchTickets();
       refetchFirstAccessToIntegration();
       refetchDonatedToday();
-    }, [currentUser, currentIntegrationId, donatedToday]),
+    }, [currentUser, currentIntegrationId]),
   );
 
   const shouldShowIntegrationBanner = useMemo(
@@ -66,9 +66,8 @@ export default function CausesScreen() {
     [integration, hasTickets],
   );
 
-  const { userIsMember, userSubscriptions } = useSubscriptions();
+  const { userIsMember } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
-  const { refetch: refetchUserSubscriptions } = userSubscriptions();
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -77,7 +76,6 @@ export default function CausesScreen() {
         refetchTickets(),
         refetchIsMember(),
         refetchFirstAccessToIntegration(),
-        refetchUserSubscriptions(),
         refetchDonatedToday(),
       ]);
     } catch (e) {
