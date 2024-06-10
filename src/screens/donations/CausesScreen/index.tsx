@@ -57,11 +57,14 @@ export default function CausesScreen() {
     }, [currentUser, currentIntegrationId, donatedToday]),
   );
 
-  const shouldShowIntegrationBanner =
-    !integration?.name?.toLowerCase()?.includes("ribon") &&
-    integration &&
-    hasTickets &&
-    integration?.uniqueAddress !== INTEGRATION_AUTH_ID;
+  const shouldShowIntegrationBanner = useMemo(
+    () =>
+      !integration?.name?.toLowerCase()?.includes("ribon") &&
+      integration &&
+      hasTickets &&
+      integration?.uniqueAddress !== INTEGRATION_AUTH_ID,
+    [integration, hasTickets],
+  );
 
   const { userIsMember, userSubscriptions } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
