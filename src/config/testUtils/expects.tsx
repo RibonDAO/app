@@ -10,6 +10,10 @@ export function expectTextToBeInTheDocument(text: string) {
   return expect(screen.getByText(text)).toBeDefined();
 }
 
+export function expectAllByTextToBeInTheDocument(text: string) {
+  return expect(screen.getAllByText(text)).toBeDefined();
+}
+
 export function expectTextNotToBeInTheDocument(text: string) {
   return expect(screen.queryByText(text)).toEqual(null);
 }

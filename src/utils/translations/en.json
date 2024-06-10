@@ -85,8 +85,10 @@
   "donations": {
     "causesScreen": {
       "title": "Make your daily donation!",
+      "titlePostDonation": "Make even more donations",
       "titleNonProfits": "NGOs",
       "buttonText": "Donate",
+      "buttonTextPlural": "Donate tickets",
       "allCauses": "All",
       "notEnoughTickets": "Not enough tickets",
       "ticketToast": "You have a new ticket!",
@@ -95,6 +97,13 @@
         "link": "Enable notifications",
         "successToastMessage": "Notifications turned on",
         "errorToastMessage": "Error turning on notifications"
+      },
+      "paymentFailedNotification": {
+        "cardTitle": "The Ribon Club payment failed",
+        "cardDescription": "Redo your subscription to continue enjoying the benefits",
+        "link": "Redo subscription",
+        "pixTitle": "The benefits of the Ribon Club have expired",
+        "pixDescription": "Redo your subscription via PIX or switch to a card to continue enjoying the benefits"
       },
       "userSupportSection": {
         "title": "Ribon Support",
@@ -109,7 +118,6 @@
         "link": "https://ribon.io/en/privacy-policy/#terms"
       },
       "impactPrefix": "Donate",
-      "labelText": "Learn more",
       "iconText": "(minimum)",
       "whatIsATicket": "What is a ticket?",
       "ticketExplanation": "Tickets are used to make donations. You get one everyday when you sign in.",
@@ -200,8 +208,8 @@
     }
   },
   "content": {
-    "newsSectionTitle": "Posts",
-    "tasksSectionTitle": "Tasks",
+    "newsSectionTitle": "Good news",
+    "ticketsSectionTitle": "Today tickets",
     "availableArticleScreen": {
       "title": "A Ribon for you",
       "subtitle": "Now you can see what's new at Ribon and good news selected to warm your heart!",
@@ -246,34 +254,14 @@
           "title": "Welcome! Here you'll find what's new at Ribon and the good news that we selected to warm your heart."
         }
       },
+      "header": {
+        "donationStreak": "Donation streak",
+        "donationStreakSingular": "Donation streak"
+      },
       "lockedSection": {
         "title": "A Ribon for you",
         "subtitle": "Donate your ticket to see what's new at Ribon and our selection of good news!",
         "cta": "Donate now"
-      },
-      "tasksSection": {
-        "title": "Tasks",
-        "titleSuperTasks": "Super tasks",
-        "enableNotification": {
-          "title": "Get the task reset notification!",
-          "link": "Enable notifications",
-          "successToastMessage": "Notifications turned on",
-          "errorToastMessage": "Error turning on notifications"
-        },
-        "tasks": {
-          "donate_ticket": "Donate a ticket",
-          "donate_ticket_on_native": "Get the app and donate a ticket",
-          "check_daily_news": "Check daily posts",
-          "see_more_ngo_infos": "See more info about an NGO",
-          "make_contribution": "Make a paid donation",
-          "giving_day": "Change someone's life with only $10"
-        },
-        "statisticsCardsSection": {
-          "dailyTasksTitle": "daily tasks completed",
-          "superTasksTitle": "super tasks completed",
-          "streakTitle": "days in a row completing tasks"
-        },
-        "countdown": "until task reset"
       },
       "ticketsSection": {
         "dailyTicketCard": {
@@ -299,7 +287,7 @@
           "subtitleWithValue": "Earn up to {{value}} per day",
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
-          "buttonTextCollected": "Collected",
+          "buttonTextCollected": "Next in {{time}}",
           "buttonTextNoClub": "Unlock collection"
         },
         "monthlyTicketCard": {
@@ -308,7 +296,7 @@
           "subtitleWithValue": "Earn up to {{value}} per month",
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
-          "buttonTextCollected": "Collected",
+          "buttonTextCollected": "Next in {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Unlock collection"
         }
       }
@@ -471,6 +459,9 @@
       "ribonClubTag": "Ribon Club",
       "pixPayment": "Single purchase via PIX",
       "perksExpiration": "Perks expire at: ",
+      "inactiveSubscription": "Subscription canceled in ",
+      "redoSubscription": "Redo subscription",
+      "inactiveSubscriptionInfo": "Reason: Payment failed",
       "cancelSubscriptionModal": {
         "title": "Cancel subscription",
         "subscriptionTitle": "Cancel subscription",
@@ -702,6 +693,10 @@
         "modalDialog": {
           "accessUserSupport": "Access user support"
         }
+      },
+      "lastCard": {
+        "primaryButtonText": "Donate tickets",
+        "secondaryButtonText": "Donate money"
       }
     }
   },
@@ -737,7 +732,7 @@
       "buttonTextWithoutEmail": "Continue"
     },
     "signInCouponScreen": {
-      "title": "Sign in to your account"
+      "title": "Log in to the account you want to receive tickets"
     },
     "validateAccountScreen": {
       "title": "Validate your account",

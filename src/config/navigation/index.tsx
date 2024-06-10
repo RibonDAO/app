@@ -7,7 +7,7 @@ import NetworkProvider from "contexts/networkContext";
 import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import CausesProvider from "contexts/causesContext";
 import CauseContributionProvider from "contexts/causesContributionContext";
-import CauseDonationProvider from "contexts/causesDonationContext";
+import TagDonationProvider from "contexts/tagDonationContext";
 import NotFoundScreen from "screens/NotFoundScreen";
 import CausesScreen from "screens/donations/CausesScreen";
 import ImpactScreen from "screens/users/ImpactScreen";
@@ -79,6 +79,9 @@ import SignInCouponScreen from "screens/coupons/auth/SignInCouponScreen";
 import InsertEmailCouponScreen from "screens/coupons/auth/InsertEmailCouponScreen";
 import HomeScreen from "screens/donations/HomeScreen";
 import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
+import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
+import ClubSubscriptionProvider from "contexts/clubSubscriptionContext";
+import TagsProvider from "contexts/tagsContext";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -120,14 +123,6 @@ function BottomTabNavigator() {
       );
     return undefined;
   };
-
-  const header = () => (
-    <Header
-      rightComponent={<LayoutHeader />}
-      sideLogo={sideLogo()}
-      onSideLogoClick={navigateToIntegration}
-    />
-  );
 
   const headerOutline = () => (
     <Header
@@ -180,7 +175,7 @@ function BottomTabNavigator() {
               <EarnTicketsIconOff />,
             ),
           lazy: false,
-          header,
+          headerShown: false,
         }}
         listeners={() => ({
           tabPress: () => {
@@ -591,20 +586,26 @@ export default function Navigation() {
                   <CardPaymentInformationProvider>
                     <PixPaymentInformationProvider>
                       <CausesProvider>
-                        <CauseDonationProvider>
-                          <CauseContributionProvider>
-                            <NonProfitsProvider>
-                              <IntegrationProvider>
-                                <CouponProvider>
-                                  <TicketsProvider>
-                                    <RootNavigator />
-                                    <Toast config={toastConfig} />
-                                  </TicketsProvider>
-                                </CouponProvider>
-                              </IntegrationProvider>
-                            </NonProfitsProvider>
-                          </CauseContributionProvider>
-                        </CauseDonationProvider>
+                        <TagsProvider>
+                          <TagDonationProvider>
+                            <CauseContributionProvider>
+                              <NonProfitsProvider>
+                                <IntegrationProvider>
+                                  <CouponProvider>
+                                    <TicketsProvider>
+                                      <PaymentFailedNotificationProvider>
+                                        <ClubSubscriptionProvider>
+                                          <RootNavigator />
+                                          <Toast config={toastConfig} />
+                                        </ClubSubscriptionProvider>
+                                      </PaymentFailedNotificationProvider>
+                                    </TicketsProvider>
+                                  </CouponProvider>
+                                </IntegrationProvider>
+                              </NonProfitsProvider>
+                            </CauseContributionProvider>
+                          </TagDonationProvider>
+                        </TagsProvider>
                       </CausesProvider>
                     </PixPaymentInformationProvider>
                   </CardPaymentInformationProvider>

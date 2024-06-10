@@ -16,7 +16,9 @@ describe("SignInCouponScreen", () => {
   });
 
   it("should render without error", () => {
-    expectTextToBeInTheDocument("Sign in to your account");
+    expectTextToBeInTheDocument(
+      "Log in to the account you want to receive tickets",
+    );
   });
 
   it("logs the P27_view event", async () => {

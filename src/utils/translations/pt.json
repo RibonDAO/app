@@ -85,8 +85,10 @@
   "donations": {
     "causesScreen": {
       "title": "Faça sua doação do dia!",
+      "titlePostDonation": "Faça ainda mais doações",
       "titleNonProfits": "ONGs",
       "buttonText": "Doar ticket",
+      "buttonTextPlural": "Doar tickets",
       "notEnoughTickets": "Tickets insuficientes",
       "allCauses": "Todas",
       "ticketToast": "Você tem um novo ticket!",
@@ -96,6 +98,13 @@
         "successToastMessage": "Notificações ligadas",
         "errorToastMessage": "Erro ao ligar notificações"
       },
+      "paymentFailedNotification": {
+        "cardTitle": "O pagamento do Clube Ribon falhou",
+        "cardDescription": "Refaça a assinatura para continuar aproveitando os benefícios",
+        "link": "Refazer assinatura",
+        "pixTitle": "Os benefícios do Clube Ribon expiraram",
+        "pixDescription": "Refaça a assinatura por PIX ou mude para cartão para continuar aproveitando os benefícios"
+      },
       "userSupportSection": {
         "title": "Suporte ao Usuário",
         "description": "Dúvidas, ideias, estornos. Estamos aqui!",
@@ -103,7 +112,6 @@
         "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0"
       },
       "impactPrefix": "Doe",
-      "labelText": "Saiba mais",
       "iconText": "(mínimo)",
       "whatIsATicket": "O que é um ticket?",
       "ticketExplanation": "Os tickets servem para fazer doações. Você recebe um todo dia que entrar na Ribon.",
@@ -195,8 +203,8 @@
     }
   },
   "content": {
-    "newsSectionTitle": "Publicações",
-    "tasksSectionTitle": "Tarefas",
+    "newsSectionTitle": "Notícias do bem",
+    "ticketsSectionTitle": "Tickets de hoje",
     "availableArticleScreen": {
       "title": "Uma Ribon pra você",
       "subtitle": "Você doou e agora pode ver novidades da Ribon e notícias pra aquecer seu coração!",
@@ -241,34 +249,14 @@
           "title": "Seja bem vindo! Aqui você vê as novidades da Ribon e boas notícias escolhidas pra aquecer seu coração."
         }
       },
+      "header": {
+        "donationStreak": "Dias seguidos doando",
+        "donationStreakSingular": "Dia seguido doando"
+      },
       "lockedSection": {
         "title": "Uma Ribon pra você",
         "subtitle": "Doe seu ticket para ver as novidades da Ribon e nossa seleção de boas notícias!",
         "cta": "Doar agora"
-      },
-      "tasksSection": {
-        "title": "Tarefas",
-        "titleSuperTasks": "Super tarefas",
-        "enableNotification": {
-          "title": "Receba o alerta de tarefas!",
-          "link": "Ligar notificações",
-          "successToastMessage": "Notificações ligadas",
-          "errorToastMessage": "Erro ao ligar notificações"
-        },
-        "tasks": {
-          "donate_ticket": "Doar ticket",
-          "donate_ticket_on_native": "Baixar o app e doar um ticket",
-          "check_daily_news": "Conferir publicações diárias",
-          "see_more_ngo_infos": "Ver mais informações sobre uma ONG",
-          "make_contribution": "Fazer uma doação paga",
-          "giving_day": "Mudar a vida de alguém com apenas R$10"
-        },
-        "statisticsCardsSection": {
-          "dailyTasksTitle": "tarefas diárias completas",
-          "superTasksTitle": "super tarefas completas",
-          "streakTitle": "dias seguidos completando tarefas"
-        },
-        "countdown": "até reiniciar tarefas"
       },
       "ticketsSection": {
         "dailyTicketCard": {
@@ -294,7 +282,7 @@
           "subtitleWithValue": "Ganhe até {{value}} por dia",
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
-          "buttonTextCollected": "Coletado",
+          "buttonTextCollected": "Próximo em {{time}}",
           "buttonTextNoClub": "Desbloquear coleta"
         },
         "monthlyTicketCard": {
@@ -303,7 +291,7 @@
           "subtitleWithValue": "Ganhe até {{value}} por mês",
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
-          "buttonTextCollected": "Coletado",
+          "buttonTextCollected": "Próximo em {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Desbloquear coleta"
         }
       }
@@ -423,6 +411,9 @@
       "ribonClubTag": "Clube Ribon",
       "pixPayment": "Compra única por PIX",
       "perksExpiration": "Benefícios expiram: ",
+      "inactiveSubscription": "Assinatura cancelada em ",
+      "redoSubscription": "Refazer assinatura",
+      "inactiveSubscriptionInfo": "Motivo: Falha no pagamento",
       "cancelSubscriptionModal": {
         "title": "Cancelar assinatura",
         "subscriptionTitle": "Cancelar assinatura",
@@ -696,6 +687,10 @@
         "modalDialog": {
           "accessUserSupport": "Acessar o suporte ao usuário"
         }
+      },
+      "lastCard": {
+        "primaryButtonText": "Doar tickets",
+        "secondaryButtonText": "Doar dinheiro"
       }
     }
   },
@@ -729,7 +724,7 @@
       "buttonTextWithoutEmail": "Continuar"
     },
     "signInCouponScreen": {
-      "title": "Entre na sua conta"
+      "title": "Entre na conta que deseja receber os tickets"
     },
     "validateAccountScreen": {
       "title": "Valide sua conta",
