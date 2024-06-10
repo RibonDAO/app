@@ -104,7 +104,7 @@ function ProfileSection() {
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("daysDoingGood")}
             icon="RibonFlagIcon"
-            value={userStatistics?.daysDonating}
+            value={userStatistics?.daysDonating || 0}
           />
         </S.StatisticsContainer>
       </S.CenterContainer>
