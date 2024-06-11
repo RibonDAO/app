@@ -1,12 +1,15 @@
 import styled from "styled-components/native";
 import { Dimensions, Platform } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodyMdSemibold } from "styles/typography/defaultStyledComponents"; // Assuming you have a styled version for these typography styles
-import { stylizedDisplayXs } from "styles/typography/stylized";
+import { stylizedDisplaySm } from "styles/typography/stylized";
+import {
+  defaultBodyMdMedium,
+  defaultBodyMdSemibold,
+} from "styles/typography/default";
 
 export const Title = styled.Text`
-  ${stylizedDisplayXs}
-  color: ${theme.colors.brand.primary[900]};
+  ${stylizedDisplaySm}
+  color: ${theme.colors.neutral[800]};
 `;
 
 export const Container = styled.View`
@@ -18,6 +21,7 @@ export const Container = styled.View`
 
 export const MainContainer = styled.View`
   width: 100%;
+  height: 100%;
 `;
 
 export const KeyboardView = styled.View`
@@ -27,7 +31,7 @@ export const KeyboardView = styled.View`
 `;
 
 export const ImageContainer = styled.View`
-  margin-top: ${theme.spacing(24)};
+  position: relative;
   align-items: center;
   justify-content: center;
 `;
@@ -39,7 +43,7 @@ export const ContentContainer = styled.View`
 `;
 
 export const Subtitle = styled.Text`
-  ${defaultBodyMdSemibold}
+  ${defaultBodyMdMedium}
   height: 48px;
   text-align: center;
   color: ${theme.colors.neutral[600]};
@@ -51,4 +55,23 @@ export const Image = styled.Image`
   height: 132px;
   resize-mode: cover;
   border-radius: ${theme.spacing(8)};
+`;
+
+export const SliderContainer = styled.View``;
+
+export const Button = styled.TouchableOpacity`
+  background-color: ${theme.colors.brand.primary[600]};
+  text-align: center;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${theme.spacing(12)};
+  margin-top: ${theme.spacing(32)};
+`;
+
+export const Text = styled.Text`
+  ${defaultBodyMdSemibold}
+  color: ${theme.colors.neutral10};
 `;

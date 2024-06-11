@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 export const Container = styled.View`
   display: flex;
   flex-direction: row;
+  position: absolute;
 `;
 export const LeftContainer = styled.View`
   width: 128px;
