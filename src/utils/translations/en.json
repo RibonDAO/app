@@ -85,8 +85,10 @@
   "donations": {
     "causesScreen": {
       "title": "Make your daily donation!",
+      "titlePostDonation": "Make even more donations",
       "titleNonProfits": "NGOs",
       "buttonText": "Donate",
+      "buttonTextPlural": "Donate tickets",
       "allCauses": "All",
       "notEnoughTickets": "Not enough tickets",
       "ticketToast": "You have a new ticket!",
@@ -683,6 +685,10 @@
         "modalDialog": {
           "accessUserSupport": "Access user support"
         }
+      },
+      "lastCard": {
+        "primaryButtonText": "Donate tickets",
+        "secondaryButtonText": "Donate money"
       }
     }
   },

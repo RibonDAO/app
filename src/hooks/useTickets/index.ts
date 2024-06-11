@@ -7,11 +7,10 @@ import {
 import {
   RECEIVED_TICKET_FROM_INTEGRATION,
   RECEIVED_TICKET_AT_KEY,
-  RECEIVED_RIBON_DAILY_TICKET,
 } from "lib/localStorage/constants";
 
 import { useIntegrationContext } from "contexts/integrationContext";
-import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { PLATFORM } from "utils/constants/Application";
 import { todayDate } from "lib/dateUtils";
 import { getLocalStorageItem } from "lib/localStorage";
 import { logError } from "services/crashReport";
@@ -60,23 +59,6 @@ export function useTickets() {
       return dateUserReceivedTicket.toLocaleDateString() === todayDate();
     }
     return false;
-  }
-
-  async function canCollectRibonTicket() {
-    const receivedTicketAt = await getLocalStorageItem(
-      RECEIVED_RIBON_DAILY_TICKET,
-    );
-
-    if (receivedTicketAt) {
-      const dateUserReceivedTicket = new Date(parseInt(receivedTicketAt, 10));
-      return !(dateUserReceivedTicket.toLocaleDateString() === todayDate());
-    } else {
-      const { canCollect } = await canCollectByIntegration(
-        RIBON_INTEGRATION_ID,
-        currentUser?.email ?? "",
-      );
-      return canCollect;
-    }
   }
 
   async function handleCanCollect() {
@@ -138,6 +120,5 @@ export function useTickets() {
     handleCollect,
     hasReceivedTicketToday,
     handleCollectByClub,
-    canCollectRibonTicket,
   };
 }

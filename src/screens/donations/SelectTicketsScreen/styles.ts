@@ -51,10 +51,9 @@ export const Subtitle = styled.Text`
 `;
 
 export const Image = styled.Image`
-  width: 132px;
-  height: 132px;
+  width: 128px;
+  height: 128px;
   resize-mode: cover;
-  border-radius: ${theme.spacing(8)};
 `;
 
 export const SliderContainer = styled.View``;
