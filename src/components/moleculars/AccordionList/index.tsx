@@ -51,6 +51,7 @@ function AccordionList({ impactList, header }: Props) {
           <S.SubTitle>{subtitle}</S.SubTitle>
         </>
       )}
+      stickySectionHeadersEnabled={false}
     />
   );
 }

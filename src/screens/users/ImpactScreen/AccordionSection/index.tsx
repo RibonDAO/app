@@ -6,17 +6,16 @@ import { Impact, useImpact } from "@ribon.io/shared";
 import S from "./styles";
 import ProfileSection from "../ProfileSection";
 
-const getData = (status: "active" | "inactive", userImpact?: Impact[]) => (
-    userImpact
-      ?.filter((item) => item.nonProfit.status === status)
-      .map((item) => ({
-        title: item.nonProfit.impactTitle,
-        subtitle: item.nonProfit.name,
-        description: item.nonProfit.impactDescription,
-        iconUrl: item.nonProfit.coverImage,
-        quantity: item.nonProfit.impactByTicket,
-      })) || []
-  );
+const getData = (status: "active" | "inactive", userImpact?: Impact[]) =>
+  userImpact
+    ?.filter((item) => item.nonProfit.status === status)
+    .map((item) => ({
+      title: item.nonProfit.impactTitle,
+      subtitle: item.nonProfit.name,
+      description: item.nonProfit.impactDescription,
+      iconUrl: item.nonProfit.icon || item.nonProfit.coverImage,
+      quantity: item.nonProfit.impactByTicket,
+    })) || [];
 
 function AccordionSection(): JSX.Element {
   const { t } = useTranslation("translation", {

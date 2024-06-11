@@ -6,11 +6,11 @@ import * as S from "./styles";
 import ConfigMenu from "../LayoutHeader/ConfigMenu";
 import TicketSection from "../LayoutHeader/TicketSection";
 
-function HeaderButtons({
-  showsTicketsCounter,
-}: {
+type Props = {
   showsTicketsCounter?: boolean;
-}) {
+};
+
+function HeaderButtons({ showsTicketsCounter }: Props) {
   const [menuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {
