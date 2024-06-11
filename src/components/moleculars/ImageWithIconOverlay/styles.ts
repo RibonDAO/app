@@ -16,7 +16,7 @@ export const LeftImage = styled.Image`
   width: 104px;
   height: 104px;
   border: 4px solid ${theme.colors.neutral10};
-  border-radius: 48px;
+  border-radius: 52px;
 `;
 export const RightContainer = styled.View`
   width: 128px;
