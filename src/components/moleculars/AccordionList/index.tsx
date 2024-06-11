@@ -1,5 +1,6 @@
 import { SectionList } from "react-native";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import Accordion, { Props as AccordionProps } from "../Accordion";
 import * as S from "./styles";
 
@@ -28,6 +29,10 @@ type Props = {
 };
 
 function AccordionList({ impactList, header }: Props) {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "users.impactScreen.impactList",
+  });
+
   return (
     <SectionList
       ListHeaderComponent={header}
@@ -46,7 +51,7 @@ function AccordionList({ impactList, header }: Props) {
       )}
       renderSectionHeader={({ section: { title, subtitle } }) => (
         <>
-          {title === "Projetos inativos" && <S.SectionSeparator />}
+          {title === t("inactiveProjects") && <S.SectionSeparator />}
           <S.Title>{title}</S.Title>
           <S.SubTitle>{subtitle}</S.SubTitle>
         </>
