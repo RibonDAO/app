@@ -9,7 +9,7 @@ import TicketSection from "../LayoutHeader/TicketSection";
 function HeaderButtons({
   showsTicketsCounter,
 }: {
-  showsTicketsCounter: boolean;
+  showsTicketsCounter?: boolean;
 }) {
   const [menuVisible, setMenuVisible] = useState(false);
 

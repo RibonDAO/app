@@ -17,7 +17,6 @@ export const Container = styled.View`
       return theme.colors.brand.primary[50];
     }
   }};
-  overflow: hidden;
   padding-bottom: 40px;
   padding-top: 58px;
 `;
@@ -44,6 +43,11 @@ export const TagContainer = styled.TouchableOpacity`
   opacity: 1;
 `;
 
+export const HeaderButtonsContainer = styled.View`
+  position: absolute;
+  top: 0;
+  right: 16px;
+`;
 export const ClubTag = styled.View`
   display: flex;
   padding: ${theme.spacing(0, 8)};

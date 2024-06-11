@@ -16,6 +16,7 @@ import LoadingOverlay from "components/moleculars/modals/LoadingOverlay";
 import ProfileTopShape from "components/vectors/ProfileTopShape";
 import StatisticsCard from "components/moleculars/StatisticsCard";
 import { theme } from "@ribon.io/shared";
+import HeaderButtons from "components/moleculars/HeaderButtons";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
 
@@ -74,6 +75,9 @@ function ProfileSection() {
       <S.ShapeContainer>
         <ProfileTopShape isMember={isMember} />
       </S.ShapeContainer>
+      <S.HeaderButtonsContainer>
+        <HeaderButtons showsTicketsCounter />
+      </S.HeaderButtonsContainer>
       <S.CenterContainer>
         <UserAvatar
           userAvatar={newProfile?.photo}
