@@ -4,7 +4,7 @@ import { stylizedDisplayLg } from "styles/typography/stylized";
 import { defaultBodySmMedium } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   background-color: ${(props: { color: string }) => props.color};
   border-radius: 16px;
   padding: 24px;

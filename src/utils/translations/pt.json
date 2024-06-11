@@ -592,7 +592,9 @@
           "equivalent": "Equivalente à"
         },
         "donatedTickets": "Tickets doados",
-        "daysDoingGood": "Dias fazendo o bem"
+        "daysDoingGood": "Dias fazendo o bem",
+        "donatedTicketsDescription": "Representam o seu incrível impacto no mundo. Cada ticket doado é uma contribuição poderosa que ajuda a transformar vidas.",
+        "daysDoingGoodDescription": "Representam sua incrível jornada de generosidade, todos os dias que você fizer uma doação esse número aumentará."
       },
       "impactList": {
         "activeProjects": "Por projeto",
