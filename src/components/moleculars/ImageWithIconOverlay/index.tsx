@@ -2,7 +2,7 @@ import UserAvatarIcon from "screens/auth/assets/UserAvatarIcon";
 import * as S from "./styles";
 
 type Props = {
-  leftImage?: any;
+  leftImage?: string;
   rightImage?: string;
 };
 function ImageWithIconOverlay({ leftImage, rightImage }: Props): JSX.Element {
