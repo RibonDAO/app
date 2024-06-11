@@ -117,7 +117,7 @@ export default function SubscriptionsScreen(): JSX.Element {
       );
     } else {
       return (
-        <>
+        <S.InfosText>
           {isPix(subscription) && <S.Text>{t("pixPayment")}</S.Text>}
           <S.Text>
             {isPix(subscription) ? t("perksExpiration") : t("nextPayment")}
@@ -125,7 +125,7 @@ export default function SubscriptionsScreen(): JSX.Element {
               {nextPaymetAttempt(subscription)}
             </S.HighlightedText>
           </S.Text>
-        </>
+        </S.InfosText>
       );
     }
   };
