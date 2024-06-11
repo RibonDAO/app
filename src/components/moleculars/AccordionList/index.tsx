@@ -4,24 +4,18 @@ import { useTranslation } from "react-i18next";
 import Accordion, { Props as AccordionProps } from "../Accordion";
 import * as S from "./styles";
 
-type ImpactList = (
-  | {
-      title: string;
-      subtitle?: undefined;
-      data: Pick<
-        AccordionProps,
-        "title" | "subtitle" | "iconUrl" | "description" | "quantity"
-      >[];
-    }
-  | {
-      title: string;
-      subtitle: string;
-      data: Pick<
-        AccordionProps,
-        "title" | "subtitle" | "iconUrl" | "description" | "quantity"
-      >[];
-    }
-)[];
+type AccordionData = Pick<
+  AccordionProps,
+  "title" | "subtitle" | "iconUrl" | "description" | "quantity"
+>;
+
+type ImpactListItem = {
+  title: string;
+  subtitle?: string;
+  data: AccordionData[];
+};
+
+type ImpactList = ImpactListItem[];
 
 type Props = {
   impactList: ImpactList;
