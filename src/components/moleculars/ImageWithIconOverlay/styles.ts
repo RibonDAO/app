@@ -12,11 +12,20 @@ export const LeftContainer = styled.View`
   justify-content: center;
   align-items: center;
 `;
-export const LeftImage = styled.Image`
+export const LeftImageContainer = styled.View`
   width: 104px;
   height: 104px;
-  border: 4px solid ${theme.colors.neutral10};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LeftImage = styled.Image`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 52px;
+  border: 4px solid ${theme.colors.neutral10};
 `;
 export const RightContainer = styled.View`
   width: 128px;

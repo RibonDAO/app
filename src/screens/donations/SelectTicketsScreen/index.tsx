@@ -4,7 +4,6 @@ import { useRouteParams } from "hooks/useRouteParams";
 import Header from "components/moleculars/Header";
 import { theme } from "@ribon.io/shared/styles";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
-import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
 import { useCallback, useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
@@ -16,8 +15,11 @@ import { useTicketsContext } from "contexts/ticketsContext";
 import { useFocusEffect } from "@react-navigation/native";
 import useDonationFlow from "hooks/useDonationFlow";
 import { useTasksContext } from "contexts/tasksContext";
+import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
+import { useUserProfile } from "@ribon.io/shared/hooks";
 import DonationInProgressSection from "../auth/DonationInProgressSection";
 import * as S from "./styles";
+import Background from "./assets/Background";
 
 export default function SelectTicketsScreen() {
   const { t } = useTranslation("translation", {
@@ -31,7 +33,8 @@ export default function SelectTicketsScreen() {
   const { handleDonate } = useDonationFlow();
   const { ticketsCounter: tickets, refetchTickets } = useTicketsContext();
   const { nonProfit } = params;
-
+  const { userProfile } = useUserProfile();
+  const { profile } = userProfile();
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
@@ -155,39 +158,40 @@ export default function SelectTicketsScreen() {
           <S.Container accessibilityRole="button" onPress={Keyboard.dismiss}>
             <S.MainContainer>
               <S.ImageContainer>
-                <S.Image
-                  source={{ uri: nonProfit.icon }}
-                  accessibilityIgnoresInvertColors
+                <Background />
+                <ImageWithIconOverlay
+                  leftImage={profile?.photo}
+                  rightImage={nonProfit?.icon}
                 />
               </S.ImageContainer>
               <S.ContentContainer>
                 <S.Title>{t("title")}</S.Title>
                 <S.Subtitle>
-                  {formattedImpactText(nonProfit, currentImpact, false, true)}
+                  {t("prefix")}
+                  {formattedImpactText(nonProfit, currentImpact, false, false)}
                 </S.Subtitle>
-                <TicketIconText
-                  quantity={ticketsQuantity}
-                  hasDividerBorder={false}
-                  buttonDisabled
-                />
-                {step && (
-                  <SliderButton
-                    rangeSize={tickets}
-                    setValue={setTicketsQuantity}
-                    step={step}
+                <S.SliderContainer>
+                  <TicketIconText
+                    quantity={ticketsQuantity}
+                    hasDividerBorder={false}
+                    buttonDisabled
                   />
-                )}
-                <Button
-                  text={t("buttonText")}
-                  textColor={theme.colors.neutral10}
-                  backgroundColor={theme.colors.brand.primary[600]}
-                  borderColor={theme.colors.neutral[300]}
-                  onPress={handleButtonPress}
-                  customStyles={{
-                    height: 48,
-                    marginTop: 32,
-                  }}
-                />
+                  {step && (
+                    <SliderButton
+                      rangeSize={tickets}
+                      setValue={setTicketsQuantity}
+                      step={step}
+                    />
+                  )}
+                </S.SliderContainer>
+                <S.Button onPress={handleButtonPress}>
+                  <S.Text>
+                    {t(
+                      ticketsQuantity > 1 ? "buttonTextPlural" : "buttonText",
+                      { quantity: ticketsQuantity },
+                    )}
+                  </S.Text>
+                </S.Button>
               </S.ContentContainer>
             </S.MainContainer>
           </S.Container>

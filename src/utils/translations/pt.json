@@ -198,8 +198,10 @@
       }
     },
     "selectTicketsScreen": {
-      "title": "Escolha o tamanho da sua ajuda",
-      "buttonText": "Continuar"
+      "title": "Você está prestes a doar:",
+      "prefix": "O equivalente a ",
+      "buttonTextPlural": "Doar {{quantity}} tickets",
+      "buttonText": "Doar {{quantity}} ticket"
     }
   },
   "content": {

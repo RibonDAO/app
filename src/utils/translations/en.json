@@ -203,8 +203,10 @@
       }
     },
     "selectTicketsScreen": {
-      "title": "Choose the size of your help",
-      "buttonText": "Continue"
+      "title": "You're about to donate:",
+      "prefix": "The equivalent of ",
+      "buttonTextPlural": "Donate {{quantity}} tickets",
+      "buttonText": "Donate {{quantity}} ticket"
     }
   },
   "content": {
