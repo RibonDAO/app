@@ -7,7 +7,7 @@ import * as S from "./styles";
 type AccordionData = Pick<
   AccordionProps,
   "title" | "subtitle" | "iconUrl" | "description" | "quantity"
->;
+> & { id: number };
 
 type ImpactListItem = {
   title: string;
@@ -32,7 +32,7 @@ function AccordionList({ impactList, header }: Props) {
       ListHeaderComponent={header}
       ItemSeparatorComponent={S.ItemSeparator}
       sections={impactList}
-      keyExtractor={({ title }) => title}
+      keyExtractor={({ id }) => id.toString()}
       renderItem={({ item }) => (
         <Accordion
           title={item.title}

@@ -10,6 +10,7 @@ const getData = (status: "active" | "inactive", userImpact?: Impact[]) =>
   userImpact
     ?.filter((item) => item.nonProfit.status === status)
     .map((item) => ({
+      id: item.nonProfit.id,
       title: item.nonProfit.impactTitle,
       subtitle: item.nonProfit.name,
       description: item.nonProfit.impactDescription,
