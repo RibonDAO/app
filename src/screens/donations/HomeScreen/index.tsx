@@ -22,8 +22,7 @@ export default function HomeScreen() {
     useFirstAccessToIntegration(currentIntegrationId);
 
   const hasCoupon = couponId !== "" && couponId !== undefined;
-  const hasUserAndExternalId =
-    currentUser && externalId !== undefined && externalId !== null;
+  const hasUserAndExternalId = currentUser && externalId && externalId !== "";
   const hasUserAndNotCompletedOnboarding =
     !currentUser && onboardingCompleted !== true;
 
@@ -48,6 +47,7 @@ export default function HomeScreen() {
           navigateTo("TabNavigator", { screen: "CausesScreen" });
         }
       } else {
+        console.log("caiu aq5");
         navigateTo("TabNavigator", { screen: "CausesScreen" });
       }
     } finally {
