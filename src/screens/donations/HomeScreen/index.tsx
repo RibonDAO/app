@@ -47,7 +47,6 @@ export default function HomeScreen() {
           navigateTo("TabNavigator", { screen: "CausesScreen" });
         }
       } else {
-        console.log("caiu aq5");
         navigateTo("TabNavigator", { screen: "CausesScreen" });
       }
     } finally {
