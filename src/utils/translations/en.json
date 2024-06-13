@@ -165,6 +165,9 @@
         "donationError": "Unable to donate now"
       }
     },
+    "donationInProgress": {
+      "loadingText": "Processing your donation..."
+    },
     "donationDoneScreen": {
       "title": "Thanks for donating!",
       "description": "You donated",

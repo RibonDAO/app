@@ -159,10 +159,12 @@ export default function SelectTicketsScreen() {
             <S.MainContainer>
               <S.ImageContainer>
                 <Background />
-                <ImageWithIconOverlay
-                  leftImage={profile?.photo}
-                  rightImage={nonProfit?.icon}
-                />
+                <S.ImageOverlayContainer>
+                  <ImageWithIconOverlay
+                    leftImage={profile?.photo}
+                    rightImage={nonProfit?.icon}
+                  />
+                </S.ImageOverlayContainer>
               </S.ImageContainer>
               <S.ContentContainer>
                 <S.Title>{t("title")}</S.Title>

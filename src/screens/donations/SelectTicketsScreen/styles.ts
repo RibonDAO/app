@@ -74,3 +74,7 @@ export const Text = styled.Text`
   ${defaultBodyMdSemibold}
   color: ${theme.colors.neutral10};
 `;
+
+export const ImageOverlayContainer = styled.View`
+  position: absolute;
+`;
