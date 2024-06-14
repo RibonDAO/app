@@ -11,10 +11,7 @@ import React, {
 import { User } from "@ribon.io/shared/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CRMclearIdentify, CRMidentifyUser } from "services/crm";
-import {
-  ACCESS_TOKEN_KEY,
-  RECEIVED_RIBON_DAILY_TICKET,
-} from "lib/localStorage/constants";
+import { ACCESS_TOKEN_KEY } from "lib/localStorage/constants";
 import { REFRESH_TOKEN_KEY } from "@ribon.io/shared";
 
 export interface ICurrentUserContext {
@@ -86,7 +83,6 @@ function CurrentUserProvider({ children }: Props) {
     await AsyncStorage.removeItem(CURRENT_USER_KEY);
     await AsyncStorage.removeItem(ACCESS_TOKEN_KEY);
     await AsyncStorage.removeItem(REFRESH_TOKEN_KEY);
-    await AsyncStorage.removeItem(RECEIVED_RIBON_DAILY_TICKET);
   }
 
   async function setUserInLocalStorage() {

@@ -1,5 +1,5 @@
 import { waitForPromises } from "config/testUtils";
-import { expectTextToBeInTheDocument } from "config/testUtils/expects";
+import { expectAllByTextToBeInTheDocument } from "config/testUtils/expects";
 import { renderComponent } from "config/testUtils/renders";
 import { nonProfitFactory } from "@ribon.io/shared/config";
 import NonProfitsList from ".";
@@ -23,7 +23,8 @@ describe("NonProfitsList", () => {
   });
 
   it("should render without error", () => {
-    expectTextToBeInTheDocument("Evidence Action");
-    expectTextToBeInTheDocument("Lwala");
+    expectAllByTextToBeInTheDocument("Evidence Action");
+    expectAllByTextToBeInTheDocument("Donate");
+    expectAllByTextToBeInTheDocument("Lwala");
   });
 });

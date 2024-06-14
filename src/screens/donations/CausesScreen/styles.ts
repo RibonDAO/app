@@ -28,3 +28,8 @@ export const Title = styled.Text`
   color: ${theme.colors.neutral[800]};
   width: 100%;
 `;
+
+export const Divider = styled.View`
+  height: 8px;
+  background-color: ${theme.colors.neutral[50]};
+`;
