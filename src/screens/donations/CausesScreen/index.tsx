@@ -16,6 +16,7 @@ import { useNonProfitsContext } from "contexts/nonProfitsContext";
 import { useIntegrationContext } from "contexts/integrationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useRouteParams } from "hooks/useRouteParams";
+import { useAuthentication } from "contexts/authenticationContext";
 import Header from "./Header";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
@@ -47,6 +48,7 @@ export default function CausesScreen() {
 
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser } = useCurrentUser();
+  const { accessToken } = useAuthentication();
   const { params } = useRouteParams<"CausesScreen">();
 
   useFocusEffect(
@@ -54,7 +56,7 @@ export default function CausesScreen() {
       refetchTickets();
       refetchFirstAccessToIntegration();
       refetchDonatedToday();
-    }, [currentUser, currentIntegrationId]),
+    }, [currentUser, currentIntegrationId, accessToken]),
   );
 
   const shouldShowIntegrationBanner = useMemo(
