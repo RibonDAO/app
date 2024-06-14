@@ -2,21 +2,11 @@ import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import AccordionList from "components/moleculars/AccordionList";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { Impact, useImpact } from "@ribon.io/shared";
+import { useImpact, useLegacyImpact } from "@ribon.io/shared";
+import { useFormattedImpactText } from "hooks/useFormattedImpactText";
 import S from "./styles";
 import ProfileSection from "../ProfileSection";
-
-const getData = (status: "active" | "inactive", userImpact?: Impact[]) =>
-  userImpact
-    ?.filter((item) => item.nonProfit.status === status)
-    .map((item) => ({
-      id: item.nonProfit.id,
-      title: item.nonProfit.impactTitle,
-      subtitle: item.nonProfit.name,
-      description: item.nonProfit.impactDescription,
-      iconUrl: item.nonProfit.icon || item.nonProfit.coverImage,
-      quantity: item.nonProfit.impactByTicket,
-    })) || [];
+import { formatImpactData } from "./formatImpactData";
 
 function AccordionSection(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -25,16 +15,28 @@ function AccordionSection(): JSX.Element {
 
   const { currentUser } = useCurrentUser();
   const { userImpact } = useImpact(currentUser?.id);
+  const { legacyUserImpact } = useLegacyImpact(currentUser?.id);
+  const { formattedImpactText } = useFormattedImpactText();
 
   const impactList = [
     {
       title: t("activeProjects"),
-      data: getData("active", userImpact),
+      data: formatImpactData(
+        formattedImpactText,
+        "active",
+        userImpact,
+        undefined,
+      ),
     },
     {
       title: t("inactiveProjects"),
       subtitle: t("inactiveProjectsDescription"),
-      data: getData("inactive", userImpact),
+      data: formatImpactData(
+        formattedImpactText,
+        "inactive",
+        userImpact,
+        legacyUserImpact,
+      ),
     },
   ];
 

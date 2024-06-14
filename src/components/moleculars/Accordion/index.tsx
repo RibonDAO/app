@@ -11,7 +11,7 @@ export type Props = {
   subtitle: string;
   iconUrl: string;
   quantity?: number;
-  description?: string;
+  description?: string | JSX.Element;
   isExpansible?: boolean;
 };
 
