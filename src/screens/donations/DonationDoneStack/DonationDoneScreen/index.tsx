@@ -2,15 +2,23 @@ import { useCallback, useEffect, useState } from "react";
 import { RootStackScreenProps } from "types";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import { useStatistics, useUserConfig } from "@ribon.io/shared";
-import DoneScreenTemplate from "screens/templates/DoneScreenTemplate";
+import {
+  theme,
+  useStatistics,
+  useUserConfig,
+  useUserProfile,
+} from "@ribon.io/shared";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import useSound from "hooks/useSound";
-import { View } from "react-native";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
 import { useAuthentication } from "contexts/authenticationContext";
+import Button from "components/atomics/buttons/Button";
+import CheckBox from "components/atomics/inputs/Checkbox";
+import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
+import GreenSun from "./assets/GreenSun";
 import donationDoneSound from "./assets/donation-done.mp3";
+import * as S from "./styles";
 
 export default function DonationDoneScreen({
   route,
@@ -27,6 +35,8 @@ export default function DonationDoneScreen({
   const [allowedEmailMarketing, setAllowedEmailMarketing] = useState(false);
   const { currentUser } = useCurrentUser();
   const { isAuthenticated } = useAuthentication();
+  const { userProfile } = useUserProfile();
+  const { profile } = userProfile();
 
   const { userStatistics, refetch: refetchStatistics } = useStatistics({
     userId: currentUser?.id,
@@ -70,7 +80,7 @@ export default function DonationDoneScreen({
 
   useEffect(() => {
     playSound(donationDoneSound);
-
+    logEvent("ticketDonated_end");
     if (shouldShowEmailCheckbox()) {
       logEvent("acceptReceiveEmail_view", {
         from: "confirmedDonation_page",
@@ -78,48 +88,57 @@ export default function DonationDoneScreen({
     }
   }, []);
 
+  const hasCheckbox = shouldShowEmailCheckbox();
+
   return (
-    <View>
-      {shouldShowEmailCheckbox() ? (
-        <DoneScreenTemplate
-          image={nonProfit.confirmationImage || nonProfit.mainImage}
-          imageDescription={
-            nonProfit.confirmationImageDescription ||
-            nonProfit.mainImageDescription
-          }
-          title={t("title") || ""}
-          description={t("description") || ""}
-          highlightedDescription={formattedImpactText(
-            nonProfit,
-            impact ?? undefined,
-            false,
-            false,
-          )}
-          buttonTitle={t("buttonTitle") || ""}
-          onButtonPress={handleNavigate}
-          checkboxText={t("checkboxText") || ""}
-          checked={allowedEmailMarketing}
-          onChecked={() => setAllowedEmailMarketing(!allowedEmailMarketing)}
-        />
-      ) : (
-        <DoneScreenTemplate
-          image={nonProfit.confirmationImage || nonProfit.mainImage}
-          imageDescription={
-            nonProfit.confirmationImageDescription ||
-            nonProfit.mainImageDescription
-          }
-          title={t("title") || ""}
-          description={t("description") || ""}
-          highlightedDescription={formattedImpactText(
-            nonProfit,
-            impact ?? undefined,
-            false,
-            false,
-          )}
-          buttonTitle={t("buttonTitle") || ""}
-          onButtonPress={handleNavigate}
-        />
-      )}
-    </View>
+    <S.Container>
+      <S.TopContainer>
+        <S.CardImage source={{ uri: nonProfit?.confirmationImage }} />
+        <S.ImageWithIconOverlayContainer>
+          <ImageWithIconOverlay
+            leftImage={profile?.photo}
+            rightImage={nonProfit?.icon}
+          />
+        </S.ImageWithIconOverlayContainer>
+      </S.TopContainer>
+
+      <S.ContentContainer>
+        <S.TextContainer>
+          <S.Title>{t("title")}</S.Title>
+          <S.Description>
+            {t("description")}{" "}
+            {formattedImpactText(nonProfit, impact ?? undefined, false, false)}
+          </S.Description>
+        </S.TextContainer>
+
+        {hasCheckbox && (
+          <S.CheckboxContainer>
+            <CheckBox
+              text={t("checkboxText")}
+              checked={allowedEmailMarketing}
+              onChecked={() => setAllowedEmailMarketing(!allowedEmailMarketing)}
+              checkedColor={theme.colors.brand.primary[800]}
+              unCheckedColor={theme.colors.neutral[600]}
+            />
+          </S.CheckboxContainer>
+        )}
+      </S.ContentContainer>
+
+      <Button
+        onPress={handleNavigate}
+        text={t("buttonTitle")}
+        customTextStyles={{
+          color: theme.colors.neutral10,
+        }}
+        customStyles={{
+          backgroundColor: theme.colors.brand.primary[600],
+          borderColor: theme.colors.brand.primary[800],
+          borderRadius: 12,
+        }}
+      />
+      <S.BackgroundSun>
+        <GreenSun />
+      </S.BackgroundSun>
+    </S.Container>
   );
 }
