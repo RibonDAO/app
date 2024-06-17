@@ -81,6 +81,9 @@ export default function SubscriptionsScreen(): JSX.Element {
     }
   };
 
+  const isClubInactive = (subscription: Subscription) =>
+    subscription?.status === "inactive";
+
   const handleCancelSubscriptionButtonClick = (subscription: Subscription) => {
     setSubscriptionToBeCanceled(subscription);
     logEvent("cancelSubs_click", eventParams());
@@ -98,6 +101,34 @@ export default function SubscriptionsScreen(): JSX.Element {
   useEffect(() => {
     logEvent("P25_view");
   }, []);
+
+  const renderPaymentInfo = (subscription: Subscription) => {
+    if (isClubInactive(subscription)) {
+      return (
+        <S.InfosText>
+          <S.Text color={theme.colors.feedback.error[600]}>
+            {t("inactiveSubscription")}
+            <S.HighlightedText color={theme.colors.feedback.error[600]}>
+              {nextPaymetAttempt(subscription)}
+            </S.HighlightedText>
+          </S.Text>
+          <S.Text>{t("inactiveSubscriptionInfo")}</S.Text>
+        </S.InfosText>
+      );
+    } else {
+      return (
+        <S.InfosText>
+          {isPix(subscription) && <S.Text>{t("pixPayment")}</S.Text>}
+          <S.Text>
+            {isPix(subscription) ? t("perksExpiration") : t("nextPayment")}
+            <S.HighlightedText>
+              {nextPaymetAttempt(subscription)}
+            </S.HighlightedText>
+          </S.Text>
+        </S.InfosText>
+      );
+    }
+  };
 
   return (
     <S.Container>
@@ -117,18 +148,30 @@ export default function SubscriptionsScreen(): JSX.Element {
             <S.Card key={subscription.id}>
               <S.IconTextContainer>
                 <S.Amount>{formattedAmount(subscription)}</S.Amount>
-                {!isPix(subscription) && (
-                  <S.IconContainer>
-                    <Icon
-                      type="outlined"
-                      name="delete"
-                      size={24}
-                      color={theme.colors.neutral10}
-                      onPress={() =>
-                        handleCancelSubscriptionButtonClick(subscription)
-                      }
-                    />
-                  </S.IconContainer>
+
+                {isClubInactive(subscription) ? (
+                  <S.Button
+                    onPress={() => {
+                      navigateTo("ClubScreen");
+                    }}
+                    title={t("redoSubscription")}
+                  >
+                    <S.ButtonText>{t("redoSubscription")}</S.ButtonText>
+                  </S.Button>
+                ) : (
+                  !isPix(subscription) && (
+                    <S.IconContainer>
+                      <Icon
+                        type="outlined"
+                        name="delete"
+                        size={24}
+                        color={theme.colors.neutral10}
+                        onPress={() =>
+                          handleCancelSubscriptionButtonClick(subscription)
+                        }
+                      />
+                    </S.IconContainer>
+                  )
                 )}
               </S.IconTextContainer>
               <S.Text>
@@ -139,17 +182,7 @@ export default function SubscriptionsScreen(): JSX.Element {
                     : subscription.receiver.name}
                 </S.HighlightedText>
               </S.Text>
-              <S.InfosText>
-                {isPix(subscription) && <S.Text>{t("pixPayment")}</S.Text>}
-                <S.Text>
-                  {isPix(subscription)
-                    ? t("perksExpiration")
-                    : t("nextPayment")}
-                  <S.HighlightedText>
-                    {nextPaymetAttempt(subscription)}
-                  </S.HighlightedText>
-                </S.Text>
-              </S.InfosText>
+              {renderPaymentInfo(subscription)}
               {modalVisible && (
                 <CancelSubscriptionModal
                   setVisible={setModalVisible}

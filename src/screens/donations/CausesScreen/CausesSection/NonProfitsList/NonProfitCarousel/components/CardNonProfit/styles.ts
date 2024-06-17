@@ -16,18 +16,25 @@ export const Title = styled.Text`
 `;
 
 export const Container = styled.View`
+  width: 100%;
+  height: 100%;
   border-radius: 16px;
   background-color: ${theme.colors.brand.tertiary[50]};
 `;
 
 export const TicketsContainer = styled.View`
-  width: 50px;
+  align-self: flex-start;
 `;
 
-export const ButtonContainer = styled.View`
-  margin-top: 150px;
-`;
+export const ButtonContainer = styled.View``;
 
 export const ImageBackground = styled.ImageBackground`
+  flex: 1;
   padding: 24px;
+  justify-content: space-between;
+`;
+
+export const Content = styled.View`
+  flex: 1;
+  justify-content: flex-start;
 `;

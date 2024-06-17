@@ -7,6 +7,7 @@ import {
 import {
   defaultBodySmMedium,
   defaultBodySmSemibold,
+  defaultBodyXsSemibold,
 } from "styles/typography/default";
 
 export const Container = styled.ScrollView`
@@ -54,8 +55,13 @@ export const Amount = styled.Text`
 
 export const Icon = styled.View``;
 
-export const Text = styled.Text`
+type CustomColorProps = {
+  color: string;
+};
+
+export const Text = styled.Text<CustomColorProps>`
   ${defaultBodySmMedium};
+  color: ${({ color }: CustomColorProps) => color || theme.colors.neutral[600]};
 `;
 
 export const InfosText = styled.View`
@@ -64,7 +70,8 @@ export const InfosText = styled.View`
 
 export const HighlightedText = styled.Text`
   ${defaultBodySmSemibold};
-  color: ${theme.colors.brand.primary[600]};
+  color: ${({ color }: CustomColorProps) =>
+    color || theme.colors.brand.primary[600]};
 `;
 
 export const IconContainer = styled.View`
@@ -79,4 +86,19 @@ export const IconContainer = styled.View`
 export const Arrow = styled.View`
   align-self: flex-start;
   margin-bottom: ${theme.spacing(16)};
+`;
+
+export const Button = styled.TouchableOpacity`
+  background-color: ${theme.colors.brand.primary[600]};
+  border-radius: ${theme.spacing(8)};
+  padding: ${theme.spacing(4, 8)};
+  justify-content: center;
+  height: 28px;
+  display: flex;
+  align-items: center;
+`;
+
+export const ButtonText = styled.Text`
+  ${defaultBodyXsSemibold};
+  color: ${theme.colors.neutral10};
 `;

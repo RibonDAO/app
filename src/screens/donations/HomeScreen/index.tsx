@@ -21,21 +21,27 @@ export default function HomeScreen() {
   const { isFirstAccessToIntegration } =
     useFirstAccessToIntegration(currentIntegrationId);
 
+  const hasCoupon = couponId !== "" && couponId !== undefined;
+  const hasUserAndExternalId = currentUser && externalId && externalId !== "";
+  const hasUserAndNotCompletedOnboarding =
+    !currentUser && onboardingCompleted !== true;
+
   async function receiveTicket() {
     try {
       const canCollect = await handleCanCollect();
       const receivedTicketToday = await hasReceivedTicketToday();
       const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
-      if (couponId !== "" && couponId !== undefined) {
+      const hasUserAndNotReceivedIntegrationTicketToday =
+        currentUser && !receivedTicketToday && !isRibonIntegration;
+
+      if (hasCoupon) {
         navigateTo("GiveTicketByCouponScreen");
       } else if (canCollect) {
-        if (currentUser && !receivedTicketToday) {
-          if (!isRibonIntegration) {
-            navigateTo("GiveTicketV2Screen");
-          } else {
-            navigateTo("TabNavigator", { screen: "CausesScreen" });
-          }
-        } else if (!currentUser && onboardingCompleted !== true) {
+        if (hasUserAndExternalId) {
+          navigateTo("GiveTicketV2Screen");
+        } else if (hasUserAndNotReceivedIntegrationTicketToday) {
+          navigateTo("GiveTicketV2Screen");
+        } else if (hasUserAndNotCompletedOnboarding) {
           navigateTo("OnboardingScreen");
         } else {
           navigateTo("TabNavigator", { screen: "CausesScreen" });
