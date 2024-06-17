@@ -27,7 +27,7 @@ export const ContentContainer = styled.View`
 `;
 
 export const ImageWithIconOverlayContainer = styled.View`
-  margin-top: -52px;
+  margin-top: -64px;
   align-items: center;
 `;
 

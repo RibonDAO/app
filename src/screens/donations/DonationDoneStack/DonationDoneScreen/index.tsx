@@ -18,6 +18,7 @@ import CheckBox from "components/atomics/inputs/Checkbox";
 import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
 import GreenSun from "./assets/GreenSun";
 import donationDoneSound from "./assets/donation-done.mp3";
+import NonProfitImagePlaceholder from "./NonProfitImagePlaceholder";
 import * as S from "./styles";
 
 export default function DonationDoneScreen({
@@ -44,6 +45,8 @@ export default function DonationDoneScreen({
 
   const quantityOfDonationsToShowEmailCheckbox = 3;
   const firstDonation = 1;
+
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const shouldShowEmailCheckbox = useCallback(() => {
     if (userStatistics && config) {
@@ -92,7 +95,12 @@ export default function DonationDoneScreen({
   return (
     <S.Container>
       <S.TopContainer>
-        <S.CardImage source={{ uri: nonProfit?.confirmationImage }} />
+        {isImageLoading && <NonProfitImagePlaceholder />}
+        <S.CardImage
+          source={{ uri: nonProfit?.confirmationImage }}
+          onLoad={() => setIsImageLoading(false)}
+          onError={() => setIsImageLoading(false)}
+        />
         <S.ImageWithIconOverlayContainer>
           <ImageWithIconOverlay
             leftImage={profile?.photo}
