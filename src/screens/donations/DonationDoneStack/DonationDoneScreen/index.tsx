@@ -80,7 +80,6 @@ export default function DonationDoneScreen({
 
   useEffect(() => {
     playSound(donationDoneSound);
-    logEvent("ticketDonated_end");
     if (shouldShowEmailCheckbox()) {
       logEvent("acceptReceiveEmail_view", {
         from: "confirmedDonation_page",
