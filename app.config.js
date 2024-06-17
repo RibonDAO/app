@@ -70,6 +70,12 @@ export default () => ({
         "react-native-appsflyer",{}
       ],
       [
+        "expo-tracking-transparency",
+        {
+          "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+        }
+      ],
+      [
         "expo-build-properties",
         {
           "android": {
