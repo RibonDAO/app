@@ -1,6 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { theme } from "@ribon.io/shared";
-import { setLocalStorageItem } from "lib/localStorage";
+
 import CollectableButton from "components/atomics/buttons/CollectableButton";
 import CardTicket from "components/moleculars/CardTicket";
 import TicketWhiteIcon from "components/vectors/TicketWhiteIcon";
@@ -8,11 +8,13 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useTicketsContext } from "contexts/ticketsContext";
 import { useNavigation } from "hooks/useNavigation";
 import { getTimeUntilMidnight } from "lib/formatters/dateFormatter";
-import { RECEIVED_RIBON_DAILY_TICKET } from "lib/localStorage/constants";
+
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { logEvent } from "services/analytics";
 import { perform } from "lib/timeoutHelpers";
+import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
+import { useTickets as useTicketShared } from "@ribon.io/shared/hooks";
 import { useTickets } from "../../../../../hooks/useTickets";
 import TicketCardPlaceholder from "../placeholder/placeholder";
 
@@ -21,7 +23,8 @@ export default function DailyTicketCard() {
   const [hasCollected, setHasCollected] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const [time, setTime] = useState<string>("24:00");
-  const { canCollectRibonTicket, handleCollect } = useTickets();
+  const { handleCollect } = useTickets();
+  const { canCollectByIntegration } = useTicketShared();
   const { refetchTickets } = useTicketsContext();
   const { currentUser } = useCurrentUser();
   const { navigateTo } = useNavigation();
@@ -40,7 +43,10 @@ export default function DailyTicketCard() {
       if (!currentUser) {
         setHasCollected(false);
       } else {
-        const canCollect = await canCollectRibonTicket();
+        const { canCollect } = await canCollectByIntegration(
+          RIBON_INTEGRATION_ID,
+          currentUser?.email ?? "",
+        );
         setHasCollected(!canCollect);
       }
     } finally {
@@ -67,7 +73,6 @@ export default function DailyTicketCard() {
     setStartAnimation(true);
     logEvent("ticketCollected", { from: "collect" });
     refetchTickets();
-    setLocalStorageItem(RECEIVED_RIBON_DAILY_TICKET, Date.now().toString());
   };
 
   const handleButtonPress = async () => {

@@ -1,6 +1,7 @@
 import analytics from "@react-native-firebase/analytics";
 import { logError } from "services/crashReport";
 import { logDebugEvent } from "config/DebugEventsView";
+import { Platform } from "react-native";
 import { mixpanel } from "./mixpanel";
 import { appsFlyer } from "./appsflyer";
 
@@ -15,7 +16,13 @@ export async function logEvent(eventName: string, params?: Record<any, any>) {
   }
 
   if (appsFlyer !== undefined) {
-    appsFlyer.logEvent(eventName, paramsWithPlatform);
+    try {
+      appsFlyer.logEvent(eventName, paramsWithPlatform);
+    } catch (e) {
+      if (Platform.OS === "android") {
+        logError(e);
+      }
+    }
   }
 }
 
