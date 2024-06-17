@@ -128,6 +128,7 @@ function DonationSignInScreen() {
               <View style={S.contentContainer}>
                 <Text style={S.title}>{t("title")}</Text>
                 <Text style={S.description}>
+                  {t("impactDescription")}
                   {formattedImpactText(nonProfit, undefined, false, true)}
                 </Text>
                 <GoogleLogin onContinue={onContinue} from="donation_flow" />
