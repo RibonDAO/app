@@ -7,9 +7,14 @@ export const Container = styled.View`
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
-  padding: 64px 24px 24px 24px;
+  padding-top: ${theme.spacing(64)};
+  padding-bottom: ${theme.spacing(24)};
   align-items: center;
-  gap: 24px;
+`;
+
+export const AnimationContainer = styled.View`
+  align-items: center;
+  padding: ${theme.spacing(24)};
 `;
 
 export const LoadingContainer = styled.View`
@@ -22,6 +27,11 @@ export const LoadingContainer = styled.View`
   padding: 0 20px;
 `;
 
+export const BottomContainer = styled.View`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing(24)};
+`;
 export const LoadingText = styled.Text`
   ${defaultBodySmSemibold}
   text-align: center;
