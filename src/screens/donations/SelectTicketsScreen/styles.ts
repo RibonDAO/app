@@ -13,15 +13,10 @@ export const Title = styled.Text`
 `;
 
 export const Container = styled.View`
-  padding: 16px;
-  margin-top: 36px;
   height: 100%;
-  padding-right: 12px;
-`;
-
-export const MainContainer = styled.View`
-  width: 100%;
-  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex: 3;
 `;
 
 export const KeyboardView = styled.View`
@@ -37,9 +32,11 @@ export const ImageContainer = styled.View`
 `;
 
 export const ContentContainer = styled.View`
-  margin-top: ${theme.spacing(24)};
+  margin-top: ${theme.spacing(8)};
+  margin-bottom: ${theme.spacing(4)};
   align-items: center;
-  gap: ${theme.spacing(8)};
+  gap: ${theme.spacing(24)};
+  padding: ${theme.spacing(16)};
 `;
 
 export const Subtitle = styled.Text`
@@ -56,7 +53,9 @@ export const Image = styled.Image`
   resize-mode: cover;
 `;
 
-export const SliderContainer = styled.View``;
+export const SliderContainer = styled.View`
+  gap: ${theme.spacing(8)};
+`;
 
 export const Button = styled.TouchableOpacity`
   background-color: ${theme.colors.brand.primary[600]};
@@ -67,7 +66,7 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   border-radius: ${theme.spacing(12)};
-  margin-top: ${theme.spacing(32)};
+  margin-top: ${theme.spacing(8)};
 `;
 
 export const Text = styled.Text`
@@ -77,4 +76,9 @@ export const Text = styled.Text`
 
 export const ImageOverlayContainer = styled.View`
   position: absolute;
+`;
+
+export const TextContainer = styled.View`
+  gap: ${theme.spacing(8)};
+  align-items: center;
 `;

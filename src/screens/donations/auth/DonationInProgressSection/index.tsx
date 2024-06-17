@@ -46,14 +46,18 @@ function DonationInProgressSection({
   }, [shouldRepeatAnimation, goToNextScreen]);
   return (
     <S.Container>
-      <GreenSun />
-      <ImageWithIconOverlay
-        leftImage={profile?.photo}
-        rightImage={nonProfit?.icon}
-      />
-      <S.LoadingContainer>
-        <S.LoadingText>{t("loadingText")}</S.LoadingText>
-      </S.LoadingContainer>
+      <S.AnimationContainer>
+        <GreenSun />
+      </S.AnimationContainer>
+      <S.BottomContainer>
+        <ImageWithIconOverlay
+          leftImage={profile?.photo}
+          rightImage={nonProfit?.icon}
+        />
+        <S.LoadingContainer>
+          <S.LoadingText>{t("loadingText")}</S.LoadingText>
+        </S.LoadingContainer>
+      </S.BottomContainer>
     </S.Container>
   );
 }
