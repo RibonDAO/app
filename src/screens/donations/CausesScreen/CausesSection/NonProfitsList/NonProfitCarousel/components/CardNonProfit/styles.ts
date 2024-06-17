@@ -23,7 +23,7 @@ export const Container = styled.View`
 `;
 
 export const TicketsContainer = styled.View`
-  width: 50px;
+  align-self: flex-start;
 `;
 
 export const ButtonContainer = styled.View``;

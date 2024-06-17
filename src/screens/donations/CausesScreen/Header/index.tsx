@@ -7,10 +7,9 @@ import { useNavigation } from "hooks/useNavigation";
 import { useTicketsContext } from "contexts/ticketsContext";
 import { logEvent } from "services/analytics";
 import HeaderTemplate from "components/moleculars/HeaderTemplate";
-import * as S from "./styles";
-
-import RibonLogo from "./assets/RibonLogo";
 import NotificationPaymentFailed from "../NotificationPaymentFailed";
+import RibonLogo from "./assets/RibonLogo";
+import * as S from "./styles";
 
 function Header(): JSX.Element {
   const { t } = useTranslation("translation", {
