@@ -18,7 +18,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useRouteParams } from "hooks/useRouteParams";
 import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import { useAuthentication } from "contexts/authenticationContext";
-import Header from "./Header"
+import Header from "./Header";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
 import DonationErrorModal from "./errorModalSection";
@@ -92,7 +92,7 @@ export default function CausesScreen() {
     if (isLoading) return;
     requestTrackingPermissionsAsync();
   }, [isLoading]);
- 
+
   const renderHeader = useCallback(
     () => (
       <>
