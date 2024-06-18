@@ -490,10 +490,7 @@ function RootNavigator() {
         name="SentMagicLinkEmailScreen"
         component={SentMagicLinkEmailScreen}
         options={{
-          headerShown: true,
-          headerLeft: () => <ArrowBackButton />,
-          headerTitle: "",
-          headerShadowVisible: false,
+          headerShown: false,
         }}
       />
 
