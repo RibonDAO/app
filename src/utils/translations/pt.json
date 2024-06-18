@@ -594,7 +594,12 @@
         "donatedTickets": "Tickets doados",
         "daysDoingGood": "Dias fazendo o bem",
         "donatedTicketsDescription": "Representam o seu incrível impacto no mundo. Cada ticket doado é uma contribuição poderosa que ajuda a transformar vidas.",
-        "daysDoingGoodDescription": "Representam sua incrível jornada de generosidade, todos os dias que você fizer uma doação esse número aumentará."
+        "daysDoingGoodDescription": "Representam sua incrível jornada de generosidade, todos os dias que você fizer uma doação esse número aumentará.",
+        "emptyComponent": {
+          "button": "Doar ticket",
+          "firstParagraph": "Suas doações aparecerão aqui.",
+          "secondParagraph": "Doe seu primeiro ticket e comece a construir seu impacto!"
+        }
       },
       "impactList": {
         "activeProjects": "Por projeto",

@@ -600,7 +600,12 @@
         "donatedTickets": "Donated tickets",
         "daysDoingGood": "Days doing good",
         "donatedTicketsDescription": "Represents your incredible impact on the world. Each donated ticket is a powerful contribution that helps transform lives.",
-        "daysDoingGoodDescription": "Represents your incredible journey of generosity. Every day you make a donation, this number will increase."
+        "daysDoingGoodDescription": "Represents your incredible journey of generosity. Every day you make a donation, this number will increase.",
+        "emptyComponent": {
+          "button": "Donate ticket",
+          "firstParagraph": "Your donations will appear here",
+          "secondParagraph": "Donate your first ticket and start making an impact!"
+        }
       },
       "impactList": {
         "activeProjects": "By projects",
