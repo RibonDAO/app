@@ -3,7 +3,7 @@ import { StyleProp } from "react-native";
 
 export type Props = {
   animationData: string | AnimationObject;
-  width: number;
+  width: number | string;
   height: number;
   speed?: number;
   style?: StyleProp<any>;

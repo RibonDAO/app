@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { RootStackScreenProps } from "types";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
@@ -16,9 +16,10 @@ import { useAuthentication } from "contexts/authenticationContext";
 import Button from "components/atomics/buttons/Button";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
-import GreenSun from "./assets/GreenSun";
+import LottieAnimation from "components/atomics/LottieAnimation";
 import donationDoneSound from "./assets/donation-done.mp3";
 import NonProfitImagePlaceholder from "./NonProfitImagePlaceholder";
+import postDonationBgSpark from "./assets/postDonationBgSpark.json";
 import * as S from "./styles";
 
 export default function DonationDoneScreen({
@@ -93,59 +94,72 @@ export default function DonationDoneScreen({
   const hasCheckbox = shouldShowEmailCheckbox();
 
   return (
-    <S.Container>
-      <S.TopContainer>
-        {isImageLoading && <NonProfitImagePlaceholder />}
-        <S.CardImage
-          source={{ uri: nonProfit?.confirmationImage }}
-          onLoad={() => setIsImageLoading(false)}
-          onError={() => setIsImageLoading(false)}
-        />
-        <S.ImageWithIconOverlayContainer>
-          <ImageWithIconOverlay
-            leftImage={profile?.photo}
-            rightImage={nonProfit?.icon}
+    <>
+      <S.Container>
+        <S.TopContainer>
+          {isImageLoading && <NonProfitImagePlaceholder />}
+          <S.CardImage
+            source={{ uri: nonProfit?.confirmationImage }}
+            onLoad={() => setIsImageLoading(false)}
+            onError={() => setIsImageLoading(false)}
           />
-        </S.ImageWithIconOverlayContainer>
-      </S.TopContainer>
-
-      <S.ContentContainer>
-        <S.TextContainer>
-          <S.Title>{t("title")}</S.Title>
-          <S.Description>
-            {t("description")}{" "}
-            {formattedImpactText(nonProfit, impact ?? undefined, false, false)}
-          </S.Description>
-        </S.TextContainer>
-
-        {hasCheckbox && (
-          <S.CheckboxContainer>
-            <CheckBox
-              text={t("checkboxText")}
-              checked={allowedEmailMarketing}
-              onChecked={() => setAllowedEmailMarketing(!allowedEmailMarketing)}
-              checkedColor={theme.colors.brand.primary[800]}
-              unCheckedColor={theme.colors.neutral[600]}
+          <S.ImageWithIconOverlayContainer>
+            <ImageWithIconOverlay
+              leftImage={profile?.photo}
+              rightImage={nonProfit?.icon}
             />
-          </S.CheckboxContainer>
-        )}
-      </S.ContentContainer>
+          </S.ImageWithIconOverlayContainer>
+        </S.TopContainer>
 
-      <Button
-        onPress={handleNavigate}
-        text={t("buttonTitle")}
-        customTextStyles={{
-          color: theme.colors.neutral10,
-        }}
-        customStyles={{
-          backgroundColor: theme.colors.brand.primary[600],
-          borderColor: theme.colors.brand.primary[800],
-          borderRadius: 12,
-        }}
-      />
+        <S.ContentContainer>
+          <S.TextContainer>
+            <S.Title>{t("title")}</S.Title>
+            <S.Description>
+              {t("description")}{" "}
+              {formattedImpactText(
+                nonProfit,
+                impact ?? undefined,
+                false,
+                false,
+              )}
+            </S.Description>
+          </S.TextContainer>
+
+          {hasCheckbox && (
+            <S.CheckboxContainer>
+              <CheckBox
+                text={t("checkboxText")}
+                checked={allowedEmailMarketing}
+                onChecked={() =>
+                  setAllowedEmailMarketing(!allowedEmailMarketing)
+                }
+                checkedColor={theme.colors.brand.primary[800]}
+                unCheckedColor={theme.colors.neutral[600]}
+              />
+            </S.CheckboxContainer>
+          )}
+        </S.ContentContainer>
+
+        <Button
+          onPress={handleNavigate}
+          text={t("buttonTitle")}
+          customTextStyles={{
+            color: theme.colors.neutral10,
+          }}
+          customStyles={{
+            backgroundColor: theme.colors.brand.primary[600],
+            borderColor: theme.colors.brand.primary[800],
+            borderRadius: 12,
+          }}
+        />
+      </S.Container>
       <S.BackgroundSun>
-        <GreenSun />
+        <LottieAnimation
+          animationData={postDonationBgSpark}
+          width="100%"
+          height={262}
+        />
       </S.BackgroundSun>
-    </S.Container>
+    </>
   );
 }
