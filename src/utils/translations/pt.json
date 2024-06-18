@@ -159,6 +159,9 @@
         "donationError": "Não foi possível doar."
       }
     },
+    "donationInProgress": {
+      "loadingText": "Processando sua doação..."
+    },
     "donationDoneScreen": {
       "title": "Obrigada pela doação!",
       "buttonTitle": "Finalizar",

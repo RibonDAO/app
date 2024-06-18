@@ -1,14 +1,11 @@
-import TransferTicketAnimation from "components/moleculars/TransferTicketAnimation";
-import UserIcon from "components/vectors/UserIcon";
-import Image from "components/atomics/Image";
-import { View } from "react-native";
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { NonProfit } from "@ribon.io/shared/types";
-import TopMountainShapes from "components/vectors/TopMountainShapes";
-import { useNavigation } from "@react-navigation/native";
 import { useUserProfile } from "@ribon.io/shared/hooks";
-import S from "./styles";
+import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
+import { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
+import GreenSun from "./assets/GreenSun";
+import * as S from "./styles";
 
 type Props = {
   nonProfit: NonProfit;
@@ -21,11 +18,12 @@ function DonationInProgressSection({
   shouldRepeatAnimation,
 }: Props) {
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.donateScreen",
+    keyPrefix: "donations.donationInProgress",
   });
-  const navigation = useNavigation();
   const { userProfile } = useUserProfile();
+  const navigation = useNavigation();
   const { profile } = userProfile();
+  const [goToNextScreen, setGoToNextScreen] = useState(false);
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -35,35 +33,32 @@ function DonationInProgressSection({
     };
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setGoToNextScreen(true);
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    if (!shouldRepeatAnimation && goToNextScreen) {
+      onAnimationEnd();
+    }
+  }, [shouldRepeatAnimation, goToNextScreen]);
   return (
-    <View style={S.animationContainer}>
-      <TopMountainShapes />
-      <View style={S.centerContainer}>
-        <TransferTicketAnimation
-          shouldRepeat={shouldRepeatAnimation}
-          onAnimationEnd={onAnimationEnd}
-          senderIcon={
-            profile?.photo ? (
-              <Image
-                style={S.nonProfitLogo}
-                source={{ uri: profile?.photo }}
-                accessibilityIgnoresInvertColors
-              />
-            ) : (
-              <UserIcon />
-            )
-          }
-          receiverIcon={
-            <Image
-              style={S.nonProfitLogo}
-              source={{ uri: nonProfit.logo }}
-              accessibilityIgnoresInvertColors
-            />
-          }
-          description={t("animationText").toString()}
+    <S.Container>
+      <S.AnimationContainer>
+        <GreenSun />
+      </S.AnimationContainer>
+      <S.BottomContainer>
+        <ImageWithIconOverlay
+          leftImage={profile?.photo}
+          rightImage={nonProfit?.icon}
         />
-      </View>
-    </View>
+        <S.LoadingContainer>
+          <S.LoadingText>{t("loadingText")}</S.LoadingText>
+        </S.LoadingContainer>
+      </S.BottomContainer>
+    </S.Container>
   );
 }
 
