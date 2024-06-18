@@ -10,12 +10,12 @@ import * as S from "./styles";
 type Props = {
   nonProfit: NonProfit;
   onAnimationEnd: () => void;
-  shouldRepeatAnimation?: boolean;
+  shouldRepeatAnimation: boolean;
 };
 function DonationInProgressSection({
   nonProfit,
   onAnimationEnd,
-  shouldRepeatAnimation = true,
+  shouldRepeatAnimation,
 }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.donationInProgress",
