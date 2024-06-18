@@ -1,20 +1,22 @@
 import { useTranslation } from "react-i18next";
-
-import { useUserProfile, useSubscriptions } from "@ribon.io/shared/hooks";
+import {
+  useUserProfile,
+  useSubscriptions,
+  useStatistics,
+} from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "hooks/useNavigation";
-import { theme } from "@ribon.io/shared";
 import { logEvent } from "services/analytics";
 import UserProfile from "@ribon.io/shared/types/entities/UserProfile";
-import Sparkles from "screens/promoters/ClubScreen/Header/assets/Sparkles";
-import BackgroundShapeRight from "components/vectors/BackgroundShapes/BackgroundShapeRight";
-import VerifiedIcon from "components/vectors/VerifiedIcon";
-import BackgroundShapeLeft from "components/vectors/BackgroundShapes/BackgroundShapeLeft";
 import LoadingOverlay from "components/moleculars/modals/LoadingOverlay";
+import ProfileTopShape from "components/vectors/ProfileTopShape";
+import StatisticsCard from "components/moleculars/StatisticsCard";
+import { theme } from "@ribon.io/shared";
+import HeaderButtons from "components/moleculars/HeaderButtons";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
 
@@ -33,6 +35,9 @@ function ProfileSection() {
     isLoading: isMemberLoading,
     refetch: refetchIsMember,
   } = userIsMember();
+  const { userStatistics } = useStatistics({
+    userId: currentUser?.id ?? undefined,
+  });
 
   const { profile, refetch } = userProfile();
 
@@ -67,16 +72,12 @@ function ProfileSection() {
 
   return (
     <S.Container member={isMember}>
-      <S.ContainerShapeLeft>
-        <BackgroundShapeLeft
-          color={isMember ? theme.colors.brand.tertiary[800] : undefined}
-        />
-      </S.ContainerShapeLeft>
-      <S.ContainerShapeRight>
-        <BackgroundShapeRight
-          color={isMember ? theme.colors.brand.tertiary[800] : undefined}
-        />
-      </S.ContainerShapeRight>
+      <S.ShapeContainer>
+        <ProfileTopShape isMember={isMember} />
+      </S.ShapeContainer>
+      <S.HeaderButtonsContainer>
+        <HeaderButtons showsTicketsCounter />
+      </S.HeaderButtonsContainer>
       <S.CenterContainer>
         <UserAvatar
           userAvatar={newProfile?.photo}
@@ -84,31 +85,33 @@ function ProfileSection() {
           email={
             newProfile?.user?.email ? newProfile.user.email : currentUser?.email
           }
+          isMember={isMember}
         />
-        {isMember && (
-          <S.Sparkles>
-            <Sparkles />
-          </S.Sparkles>
-        )}
+
         <S.TagContainer onPress={handleClick}>
           <S.ClubTag member={isMember}>
             <S.TagText member={isMember}>
               {isMember ? t("clubTagText") : t("noClubTagText")}
             </S.TagText>
           </S.ClubTag>
-          {isMember && (
-            <VerifiedIcon
-              color={theme.colors.brand.quaternary[300]}
-              insideColor="black"
-            />
-          )}
         </S.TagContainer>
+
+        <S.StatisticsContainer>
+          <StatisticsCard
+            backgroundColor={theme.colors.brand.primary[25]}
+            description={t("donatedTickets")}
+            icon="TicketIconOutlined"
+            value={userStatistics?.totalTickets || 0}
+          />
+
+          <StatisticsCard
+            backgroundColor={theme.colors.brand.primary[25]}
+            description={t("daysDoingGood")}
+            icon="RibonFlagIcon"
+            value={userStatistics?.daysDonating || 0}
+          />
+        </S.StatisticsContainer>
       </S.CenterContainer>
-      {!isMember && (
-        <S.ClubCta onPress={handleClick}>
-          <S.ClubCtaText>{t("ctaClubText")}</S.ClubCtaText>
-        </S.ClubCta>
-      )}
     </S.Container>
   );
 }

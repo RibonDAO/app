@@ -9,11 +9,9 @@ import { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import UserAvatar from "screens/users/ImpactScreen/ProfileSection/UserAvatar";
 
-import VerifiedIcon from "components/vectors/VerifiedIcon";
-import Sparkles from "./assets/Sparkles";
 import S from "./styles";
-import RibonFlag from "./assets/RibonFlag";
 import PinkSun from "./assets/pink-sun.png";
+import RibonFlag from "./assets/RibonFlag";
 
 function Header(): JSX.Element {
   const { t } = useTranslation("translation", {
@@ -34,27 +32,18 @@ function Header(): JSX.Element {
       if (!accessToken) setNewProfile(undefined);
     }, [profile, accessToken]),
   );
+
   return (
     <ImageBackground source={PinkSun} style={S.container} resizeMode="contain">
-      {currentUser && newProfile ? (
-        <UserAvatar
-          userAvatar={newProfile?.photo}
-          email={
-            newProfile?.user?.email ? newProfile.user.email : currentUser?.email
-          }
-          showInfo={false}
-        />
+      {currentUser ? (
+        <UserAvatar userAvatar={newProfile?.photo} showInfo={false} isMember />
       ) : (
         <RibonFlag />
       )}
-      <View style={S.sparkles}>
-        <Sparkles />
-      </View>
       <View style={S.textContainer}>
         <View style={S.tag}>
           <Text style={S.text}>{t("ribonClub")}</Text>
         </View>
-        <VerifiedIcon />
       </View>
     </ImageBackground>
   );

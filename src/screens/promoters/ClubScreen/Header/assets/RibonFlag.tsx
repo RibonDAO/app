@@ -1,4 +1,3 @@
-import * as React from "react";
 import { SvgXml } from "react-native-svg";
 
 function RibonFlag() {

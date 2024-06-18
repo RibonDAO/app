@@ -587,7 +587,19 @@
         "userName": "Seu perfil",
         "noClubTagText": "Sem Clube Ribon",
         "clubTagText": "Clube Ribon",
-        "ctaClubText": "Benefícios do Clube →"
+        "ctaClubText": "Benefícios do Clube →",
+        "accordion": {
+          "equivalent": "Equivalente à"
+        },
+        "donatedTickets": "Tickets doados",
+        "daysDoingGood": "Dias fazendo o bem",
+        "donatedTicketsDescription": "Representam o seu incrível impacto no mundo. Cada ticket doado é uma contribuição poderosa que ajuda a transformar vidas.",
+        "daysDoingGoodDescription": "Representam sua incrível jornada de generosidade, todos os dias que você fizer uma doação esse número aumentará."
+      },
+      "impactList": {
+        "activeProjects": "Por projeto",
+        "inactiveProjects": "Projetos inativos",
+        "inactiveProjectsDescription": "Projetos de ONGs que já não estão mais no app"
       }
     }
   },

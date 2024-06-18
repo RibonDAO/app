@@ -593,7 +593,17 @@
         "userName": "Your profile",
         "noClubTagText": "No Ribon Club",
         "clubTagText": "Ribon Club",
-        "ctaClubText": "Club benefits →"
+        "ctaClubText": "Club benefits →",
+        "accordion": {
+          "equivalent": "Equivalent to"
+        },
+        "donatedTickets": "Donated tickets",
+        "daysDoingGood": "Days doing good"
+      },
+      "impactList": {
+        "activeProjects": "By projects",
+        "inactiveProjects": "Inactive projects",
+        "inactiveProjectsDescription": "ONG projects that aren't in the app anymore"
       }
     }
   },

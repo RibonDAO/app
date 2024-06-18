@@ -16,7 +16,6 @@ export const AvatarSection = styled.View`
 export const AvatarContainer = styled.View`
   width: 96px;
   height: 96px;
-
   border: 2px solid ${theme.colors.neutral[25]};
   border-radius: 8px;
   position: relative;
@@ -29,13 +28,13 @@ export const AvatarContainer = styled.View`
 export const Username = styled.Text`
   ${defaultBodyLgSemibold}
 
-  color: ${theme.colors.neutral[25]};
+  color: ${theme.colors.neutral[800]};
 `;
 
 export const Email = styled.Text`
   ${defaultBodySmRegular}
 
-  color: ${theme.colors.neutral[25]};
+  color: ${theme.colors.neutral[600]};
 `;
 
 export const Avatar = styled.Image`
@@ -50,4 +49,15 @@ export const ProfileSection = styled.View`
   flex-direction: column;
   align-items: center;
   margin-top: ${theme.spacing(12)};
+`;
+
+export const Sparkles = styled.View`
+  position: absolute;
+  top: ${theme.spacing(16)};
+`;
+
+export const VerifiedContainer = styled.View`
+  position: absolute;
+  right: -12px;
+  bottom: -12px;
 `;

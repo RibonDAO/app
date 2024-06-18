@@ -1,8 +1,6 @@
 import { theme } from "@ribon.io/shared/styles";
 import { StyleSheet } from "react-native";
-import {
-  defaultBodySmRegular,
-} from "styles/typography/default";
+import { defaultBodySmRegular } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
