@@ -137,7 +137,6 @@
       "unauthorizedModalButtonText": "Confirmar e-mail"
     },
     "donateScreen": {
-      "nonProfitText": "Você está doando para",
       "description": "Insira seu e-mail para usar seu ticket de doação",
       "title": "Preencha seu email para doar",
       "textInputPlaceholder": "Preencha seu email",
@@ -147,12 +146,13 @@
       "donateText": "Doar",
       "continueText": "Continuar",
       "animationText": "Doando ticket",
-      "agreementText": "Ao clicar em Continuar, eu concordo com os",
+      "agreementText": "Ao continuar você concorda com os ",
       "termsText": "Termos",
       "termsLink": "https://ribon.io/privacy-policy/#termos",
-      "privacyPolicyText": "Política de Privacidade",
+      "privacyPolicyText": "Políticas de Privacidade",
       "privacyPolicyLink": "https://ribon.io/privacy-policy/#pol%C3%ADtica",
-      "and": " e a",
+      "and": " e ",
+      "ribon": " da Ribon",
       "signedInScreen": {
         "title": "Sua doação",
         "confirmDonation": "Confirmar doação",
@@ -184,12 +184,12 @@
     },
     "auth": {
       "signInScreen": {
-        "title": "Você está doando",
+        "title": "Você está prestes a doar:",
+        "impactDescription": "O equivalente a ",
         "google": "Continuar com Google",
         "apple": "Continuar com Apple",
         "email": "Continuar com e-mail",
         "impactOneLife": "Impacte 1 pessoa",
-        "impactDescription": "com {{value}}",
         "checkboxText": "Aceito receber e-mails com informações sobre minhas doações"
       },
       "insertEmailAccountScreen": {

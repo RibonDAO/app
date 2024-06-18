@@ -182,7 +182,7 @@ export default function SubscriptionsScreen(): JSX.Element {
                     : subscription.receiver.name}
                 </S.HighlightedText>
               </S.Text>
-              <S.Text>{renderPaymentInfo(subscription)}</S.Text>
+              {renderPaymentInfo(subscription)}
               {modalVisible && (
                 <CancelSubscriptionModal
                   setVisible={setModalVisible}
