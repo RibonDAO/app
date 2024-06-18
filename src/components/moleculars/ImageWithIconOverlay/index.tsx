@@ -1,4 +1,4 @@
-import UserAvatarIcon from "screens/auth/assets/UserAvatarIcon";
+import ProfilePhoto from "screens/users/ImpactScreen/ProfileSection/assets/ProfilePhoto";
 import * as S from "./styles";
 
 type Props = {
@@ -13,7 +13,9 @@ function ImageWithIconOverlay({ leftImage, rightImage }: Props): JSX.Element {
           {leftImage ? (
             <S.LeftImage source={{ uri: leftImage }} testID="leftImage" />
           ) : (
-            <UserAvatarIcon width={104} height={104} />
+            <S.AvatarContainer>
+              <ProfilePhoto width={104} height={104} />
+            </S.AvatarContainer>
           )}
         </S.LeftImageContainer>
       </S.LeftContainer>

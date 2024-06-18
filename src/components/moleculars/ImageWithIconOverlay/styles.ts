@@ -26,6 +26,14 @@ export const LeftImage = styled.Image`
   border-radius: 52px;
   border: 4px solid ${theme.colors.neutral10};
 `;
+
+export const AvatarContainer = styled.View`
+  width: 100%;
+  height: 100%;
+  border-radius: 52px;
+  border: 4px solid ${theme.colors.neutral10};
+  background-color: ${theme.colors.neutral10};
+`;
 export const RightContainer = styled.View`
   width: 128px;
   height: 128px;
