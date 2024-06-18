@@ -7,21 +7,19 @@ import * as S from "./styles";
 
 export default function CausesSection() {
   const { chosenTag } = useTagDonationContext();
-  const { nonProfitsWithPoolBalance: nonProfits } = useNonProfitsContext();
+  const { shuffledNonProfits } = useNonProfitsContext();
 
   const filterNonProfits = () => {
     if (chosenTag && chosenTag.nonProfits) {
       return chosenTag.nonProfits;
     }
-    return nonProfits || [];
+    return shuffledNonProfits || [];
   };
-
-  const shuffledNonProfits = filterNonProfits().sort(() => 0.5 - Math.random());
 
   return (
     <S.Container>
       <CausesFilter />
-      <NonProfitsList nonProfits={shuffledNonProfits} />
+      <NonProfitsList nonProfits={filterNonProfits()} />
     </S.Container>
   );
 }

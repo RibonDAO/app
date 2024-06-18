@@ -5,6 +5,7 @@ import { NonProfit } from "@ribon.io/shared/types";
 export interface INonProfitsContext {
   nonProfits: NonProfit[] | undefined;
   nonProfitsWithPoolBalance: NonProfit[] | undefined;
+  shuffledNonProfits: NonProfit[] | undefined;
   refetch: () => void;
   isLoading: boolean;
 }
@@ -21,10 +22,13 @@ function NonProfitsProvider({ children }: any) {
     (nonProfit) => nonProfit.cause.withPoolBalance,
   );
 
+  const shuffledNonProfits = nonProfits?.sort(() => 0.5 - Math.random());
+
   const nonProfitsObject: INonProfitsContext = useMemo(
     () => ({
       nonProfits,
       nonProfitsWithPoolBalance,
+      shuffledNonProfits,
       refetch,
       isLoading,
     }),
