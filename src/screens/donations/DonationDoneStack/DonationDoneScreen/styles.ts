@@ -3,7 +3,9 @@ import { stylizedDisplaySm } from "styles/typography/stylized";
 import { defaultBodyMdMedium } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
-export const TopContainer = styled.View``;
+export const TopContainer = styled.View`
+  width: 100%;
+`;
 export const Container = styled.View`
   color: ${theme.colors.brand.primary[300]};
   width: 100%;
@@ -16,7 +18,7 @@ export const Container = styled.View`
 `;
 
 export const CardImage = styled.Image`
-  width: 328px;
+  width: 100%;
   height: 216px;
   border-radius: ${theme.spacing(16)};
 `;
