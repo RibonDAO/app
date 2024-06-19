@@ -63,17 +63,16 @@ export default function DonationDoneScreen({
     return false;
   }, [userStatistics, config]);
 
-  const handleNavigate = () => {
+  const handleNavigate = async () => {
     if (allowedEmailMarketing && currentUser) {
       logEvent("acceptReceiveEmail_click", {
         from: "confirmedDonation_page",
       });
-      updateUserConfig(currentUser.id, { allowedEmailMarketing });
+      await updateUserConfig(currentUser.id, { allowedEmailMarketing });
     } else if (!isAuthenticated()) {
       navigateTo("SentMagicLinkEmailScreen", { email: currentUser?.email });
-    } else {
-      navigateTo("TabNavigator", { screen: "CausesScreen" });
     }
+    navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
   useEffect(() => {
