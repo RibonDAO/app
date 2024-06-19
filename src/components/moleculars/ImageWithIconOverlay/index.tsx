@@ -1,5 +1,5 @@
 import { useState } from "react";
-import UserAvatarIcon from "screens/auth/assets/UserAvatarIcon";
+import ProfilePhoto from "screens/users/ImpactScreen/ProfileSection/assets/ProfilePhoto";
 import {
   LeftImagePlaceholder,
   RightImagePlaceholder,
@@ -28,7 +28,9 @@ function ImageWithIconOverlay({ leftImage, rightImage }: Props): JSX.Element {
               onError={() => setIsLeftImageLoading(false)}
             />
           ) : (
-            <UserAvatarIcon width={104} height={104} />
+            <S.AvatarContainer>
+              <ProfilePhoto width={104} height={104} />
+            </S.AvatarContainer>
           )}
         </S.LeftImageContainer>
       </S.LeftContainer>

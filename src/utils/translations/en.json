@@ -169,10 +169,10 @@
       "loadingText": "Processing your donation..."
     },
     "donationDoneScreen": {
-      "title": "Thanks for donating!",
-      "description": "You donated",
+      "title": "Thank you for donating!",
+      "description": "You donated the equivalent of",
       "checkboxText": "I want to receive information about my donations by e-mail",
-      "buttonTitle": "Finish"
+      "buttonTitle": "Continue"
     },
     "postDonationScreen": {
       "title": "If you want, you can do more",

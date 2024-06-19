@@ -163,9 +163,9 @@
       "loadingText": "Processando sua doação..."
     },
     "donationDoneScreen": {
-      "title": "Obrigada pela doação!",
-      "buttonTitle": "Finalizar",
-      "description": "Você doou",
+      "title": "Obrigada por doar!",
+      "buttonTitle": "Continuar",
+      "description": "Você doou o equivalente a",
       "checkboxText": "Quero receber informações sobre minhas doações por e-mail"
     },
     "postDonationScreen": {
