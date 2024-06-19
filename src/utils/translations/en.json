@@ -175,13 +175,8 @@
       "buttonTitle": "Continue"
     },
     "postDonationScreen": {
-      "title": "If you want, you can do more",
-      "buttonText": "Donate later",
-      "contributionImage": {
-        "donateFor": "Donate {{value}} for",
-        "labelTitle": "Boosted donation",
-        "buttonText": "Donate now"
-      }
+      "title": "Enjoy this moment...",
+      "buttonText": "Finish"
     },
     "receiveTicketScreen": {
       "textOrigin": "Community",
