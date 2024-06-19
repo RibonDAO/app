@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 2,
+    marginTop: 4,
   },
   navigationButton: {
     width: 24,

@@ -69,10 +69,12 @@ export default function DonationDoneScreen({
         from: "confirmedDonation_page",
       });
       await updateUserConfig(currentUser.id, { allowedEmailMarketing });
-    } else if (!isAuthenticated()) {
-      navigateTo("SentMagicLinkEmailScreen", { email: currentUser?.email });
     }
-    navigateTo("TabNavigator", { screen: "CausesScreen" });
+    if (!isAuthenticated()) {
+      navigateTo("SentMagicLinkEmailScreen", { email: currentUser?.email });
+    } else {
+      navigateTo("TabNavigator", { screen: "CausesScreen" });
+    }
   };
 
   useEffect(() => {
