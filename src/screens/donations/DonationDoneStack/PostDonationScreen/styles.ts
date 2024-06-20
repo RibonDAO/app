@@ -19,6 +19,7 @@ export const Container = styled.View`
 
 export const ContentContainer = styled.View`
   align-items: center;
+  gap: ${theme.spacing(12)};
 `;
 
 export const Title = styled.Text`
