@@ -127,7 +127,11 @@ function NonProfitCarousel({ nonProfit, show }: Props) {
   };
 
   const data = nonProfit.stories?.length
-    ? [null, ...nonProfit.stories, null]
+    ? [
+        null,
+        ...nonProfit.stories.sort((a, b) => a.position! - b.position!),
+        null,
+      ]
     : [null, null];
 
   return (
