@@ -77,7 +77,7 @@ function ProfileSection() {
         <HeaderButtons showsTicketsCounter />
       </S.HeaderButtonsContainer>
       <S.CenterContainer>
-        {newProfile && (
+        {currentUser && (
           <>
             <UserAvatar
               userAvatar={newProfile?.photo}
