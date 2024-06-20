@@ -17,9 +17,10 @@ import LastCard from "./components/LastCard";
 
 export type Props = {
   nonProfit: NonProfit;
+  show: boolean;
 };
 
-function NonProfitCarousel({ nonProfit }: Props) {
+function NonProfitCarousel({ nonProfit, show }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
@@ -142,7 +143,11 @@ function NonProfitCarousel({ nonProfit }: Props) {
   const data = stories?.length ? [null, ...stories, null] : [null, null];
 
   return (
-    <S.Container>
+    <S.Container
+      style={{
+        display: show ? "flex" : "none",
+      }}
+    >
       <FlatList
         data={data}
         renderItem={renderItem}

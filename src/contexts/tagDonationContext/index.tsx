@@ -6,15 +6,16 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useTagsContext } from "contexts/tagsContext";
-import { Tag } from "@ribon.io/shared/types";
+
+import { NonProfit, Tag } from "@ribon.io/shared/types";
+import { useNonProfitsContext } from "contexts/nonProfitsContext";
 
 export interface ITagDonationContext {
   chosenTag: Tag | undefined;
   chosenTagIndex: number | undefined;
   setChosenTag: (tag: SetStateAction<Tag | undefined>) => void;
-  setChosenTagId: (id: SetStateAction<number | undefined>) => void;
   setChosenTagIndex: (id: SetStateAction<number | undefined>) => void;
+  nonProfitsTag: NonProfit[] | undefined;
 }
 
 export const TagDonationContext = createContext<ITagDonationContext>(
@@ -23,31 +24,37 @@ export const TagDonationContext = createContext<ITagDonationContext>(
 TagDonationContext.displayName = "TagDonationContext";
 
 function TagDonationProvider({ children }: any) {
-  const { tags } = useTagsContext();
   const [chosenTag, setChosenTag] = useState<Tag | undefined>();
-  const [chosenTagId, setChosenTagId] = useState<number | undefined>();
+
   const [chosenTagIndex, setChosenTagIndex] = useState<number | undefined>(0);
+  const { nonProfitsWithPoolBalance } = useNonProfitsContext();
+  const [nonProfits, setNonProfits] = useState<NonProfit[] | undefined>(
+    nonProfitsWithPoolBalance,
+  );
 
   useEffect(() => {
-    if (chosenTagId) {
-      setChosenTag(tags.find((tag: any) => tag.id === chosenTagId));
+    if (chosenTag) {
+      setNonProfits(chosenTag?.nonProfits);
+    } else {
+      setNonProfits(nonProfitsWithPoolBalance);
     }
-  }, [chosenTagId]);
+  }, [chosenTag, nonProfitsWithPoolBalance]);
 
   const TagDonationObject: ITagDonationContext = useMemo(
     () => ({
       chosenTag,
       setChosenTag,
-      setChosenTagId,
       chosenTagIndex,
       setChosenTagIndex,
+      nonProfitsTag: nonProfits,
     }),
     [
       chosenTag,
       setChosenTag,
-      setChosenTagId,
       chosenTagIndex,
       setChosenTagIndex,
+      nonProfits,
+      nonProfitsWithPoolBalance,
     ],
   );
 
