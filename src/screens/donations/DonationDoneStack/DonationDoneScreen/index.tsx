@@ -12,7 +12,6 @@ import useFormattedImpactText from "hooks/useFormattedImpactText";
 import useSound from "hooks/useSound";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
-import { useAuthentication } from "contexts/authenticationContext";
 import Button from "components/atomics/buttons/Button";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
@@ -36,7 +35,6 @@ export default function DonationDoneScreen({
   const { refetch: refetchUserConfig, config } = userConfig();
   const [allowedEmailMarketing, setAllowedEmailMarketing] = useState(false);
   const { currentUser } = useCurrentUser();
-  const { isAuthenticated } = useAuthentication();
   const { userProfile } = useUserProfile();
   const { profile } = userProfile();
 
@@ -64,17 +62,14 @@ export default function DonationDoneScreen({
     return false;
   }, [userStatistics, config]);
 
-  const handleNavigate = () => {
+  const handleNavigate = async () => {
     if (allowedEmailMarketing && currentUser) {
       logEvent("acceptReceiveEmail_click", {
         from: "confirmedDonation_page",
       });
-      updateUserConfig(currentUser.id, { allowedEmailMarketing });
-    } else if (!isAuthenticated()) {
-      navigateTo("SentMagicLinkEmailScreen", { email: currentUser?.email });
-    } else {
-      navigateTo("TabNavigator", { screen: "CausesScreen" });
+      await updateUserConfig(currentUser.id, { allowedEmailMarketing });
     }
+    navigateTo("PostDonationScreen");
   };
 
   useEffect(() => {
