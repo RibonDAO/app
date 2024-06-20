@@ -35,8 +35,8 @@ function PostDonationScreen() {
       <S.TopContainer>
         <LottieAnimation
           animationData={postDonationAnimation}
-          width={360}
-          height={360}
+          width={428}
+          height={428}
         />
       </S.TopContainer>
       <S.ContentContainer>
