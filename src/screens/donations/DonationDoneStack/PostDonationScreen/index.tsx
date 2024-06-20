@@ -6,9 +6,10 @@ import { useWarmGlowMessages } from "@ribon.io/shared/hooks";
 import usePageView from "hooks/usePageView";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
+import LottieAnimation from "components/atomics/LottieAnimation";
 import GreenSun from "assets/illustrations/GreenSun";
+import postDonationAnimation from "./assets/postDonationAnimation.json";
 import * as S from "./styles";
-import BreathingFace from "./assets/BreathingFace";
 
 function PostDonationScreen() {
   usePageView("P39_view");
@@ -32,9 +33,12 @@ function PostDonationScreen() {
   return isLoading ? null : (
     <S.Container>
       <S.TopContainer>
-        <BreathingFace />
+        <LottieAnimation
+          animationData={postDonationAnimation}
+          width={360}
+          height={360}
+        />
       </S.TopContainer>
-
       <S.ContentContainer>
         <S.Title>{t("title")}</S.Title>
         <S.Description>{warmGlowMessage?.message}</S.Description>

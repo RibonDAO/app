@@ -4,7 +4,8 @@ import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import GreenSun from "./assets/GreenSun";
+import LottieAnimation from "components/atomics/LottieAnimation";
+import donationAnimation from "./assets/donationAnimation.json";
 import * as S from "./styles";
 
 type Props = {
@@ -47,7 +48,11 @@ function DonationInProgressSection({
   return (
     <S.Container>
       <S.AnimationContainer>
-        <GreenSun />
+        <LottieAnimation
+          animationData={donationAnimation}
+          width={360}
+          height={360}
+        />
       </S.AnimationContainer>
       <S.BottomContainer>
         <ImageWithIconOverlay

@@ -4,7 +4,8 @@ import { defaultBodyMdMedium } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
 export const TopContainer = styled.View`
-  width: 100%;
+  width: 360px;
+  height: 360px;
   align-items: center;
 `;
 export const Container = styled.View`
