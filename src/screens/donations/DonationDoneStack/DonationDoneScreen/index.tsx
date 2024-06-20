@@ -12,11 +12,10 @@ import useFormattedImpactText from "hooks/useFormattedImpactText";
 import useSound from "hooks/useSound";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
-import { useAuthentication } from "contexts/authenticationContext";
 import Button from "components/atomics/buttons/Button";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
-import GreenSun from "./assets/GreenSun";
+import GreenSun from "assets/illustrations/GreenSun";
 import donationDoneSound from "./assets/donation-done.mp3";
 import NonProfitImagePlaceholder from "./NonProfitImagePlaceholder";
 import * as S from "./styles";
@@ -35,7 +34,6 @@ export default function DonationDoneScreen({
   const { refetch: refetchUserConfig, config } = userConfig();
   const [allowedEmailMarketing, setAllowedEmailMarketing] = useState(false);
   const { currentUser } = useCurrentUser();
-  const { isAuthenticated } = useAuthentication();
   const { userProfile } = useUserProfile();
   const { profile } = userProfile();
 
@@ -70,11 +68,7 @@ export default function DonationDoneScreen({
       });
       await updateUserConfig(currentUser.id, { allowedEmailMarketing });
     }
-    if (!isAuthenticated()) {
-      navigateTo("SentMagicLinkEmailScreen", { email: currentUser?.email });
-    } else {
-      navigateTo("TabNavigator", { screen: "CausesScreen" });
-    }
+    navigateTo("PostDonationScreen");
   };
 
   useEffect(() => {

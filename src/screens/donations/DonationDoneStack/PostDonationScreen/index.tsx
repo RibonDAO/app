@@ -1,92 +1,62 @@
-import { Text, View } from "react-native";
-import { useCallback, useEffect } from "react";
-import HandIcon from "components/vectors/HandIcon";
 import { useTranslation } from "react-i18next";
 import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
-import { useTasksContext } from "contexts/tasksContext";
-import { theme, useDonations } from "@ribon.io/shared";
-import { RootStackScreenProps } from "types";
+import { theme } from "@ribon.io/shared";
+import { useWarmGlowMessages } from "@ribon.io/shared/hooks";
 import usePageView from "hooks/usePageView";
+import { useAuthentication } from "contexts/authenticationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
-import S from "./styles";
-import ContributionImage from "./ContributionImage";
+import GreenSun from "assets/illustrations/GreenSun";
+import * as S from "./styles";
+import BreathingFace from "./assets/BreathingFace";
 
-function PostDonationScreen({
-  route,
-}: RootStackScreenProps<"PostDonationScreen">) {
-  usePageView("P8_view");
+function PostDonationScreen() {
+  usePageView("P39_view");
 
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen",
   });
-  const { navigateTo } = useNavigation();
-  const { nonProfit, cause } = route.params;
+  const { isAuthenticated } = useAuthentication();
   const { currentUser } = useCurrentUser();
-  const { appDonationsCount } = useDonations(currentUser?.id);
+  const { navigateTo } = useNavigation();
+  const { warmGlowMessage, isLoading } = useWarmGlowMessages();
 
-  const navigateToAvailableArticleScreen = () => {
-    if (appDonationsCount && appDonationsCount < 3)
-      navigateTo("AvailableArticleScreen");
-    else navigateTo("EarnTicketsScreen", { currentTab: 0 });
+  const handleNavigate = () => {
+    if (!isAuthenticated()) {
+      navigateTo("SentMagicLinkEmailScreen", { email: currentUser?.email });
+    } else {
+      navigateTo("TabNavigator", { screen: "CausesScreen" });
+    }
   };
 
-  const { registerAction } = useTasksContext();
+  return isLoading ? null : (
+    <S.Container>
+      <S.TopContainer>
+        <BreathingFace />
+      </S.TopContainer>
 
-  useEffect(() => {
-    registerAction("P8_view");
-  }, []);
+      <S.ContentContainer>
+        <S.Title>{t("title")}</S.Title>
+        <S.Description>{warmGlowMessage?.message}</S.Description>
+      </S.ContentContainer>
 
-  const contributionList = useCallback(
-    () => (
-      <>
-        <ContributionImage
-          key={1}
-          idCause={cause.id}
-          name={cause.name}
-          coverImage={cause.coverImage}
-          isCause
-          from="givePostDonation_page"
-        />
-        <ContributionImage
-          key={2}
-          idCause={nonProfit.cause.id}
-          name={nonProfit.name}
-          coverImage={nonProfit.mainImage}
-          from="givePostDonation_page"
-        />
-      </>
-    ),
-    [nonProfit, cause],
+      <Button
+        onPress={handleNavigate}
+        text={t("buttonText")}
+        customTextStyles={{
+          color: theme.colors.neutral10,
+        }}
+        customStyles={{
+          backgroundColor: theme.colors.brand.primary[600],
+          borderColor: theme.colors.brand.primary[800],
+          borderRadius: 12,
+        }}
+      />
+      <S.BackgroundSun>
+        <GreenSun />
+      </S.BackgroundSun>
+    </S.Container>
   );
-
-  function renderContributionCards() {
-    return (
-      <View style={S.container}>
-        <View style={S.imageContainer}>
-          <HandIcon />
-        </View>
-
-        <Text style={S.text}>{t("title")}</Text>
-
-        {contributionList()}
-
-        <View style={S.buttonContainer}>
-          <Button
-            text={t("buttonText")}
-            customStyles={S.button}
-            customTextStyles={{
-              color: theme.colors.brand.primary[600],
-            }}
-            onPress={navigateToAvailableArticleScreen}
-            outline
-          />
-        </View>
-      </View>
-    );
-  }
-
-  return renderContributionCards();
 }
 
 export default PostDonationScreen;

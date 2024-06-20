@@ -169,13 +169,8 @@
       "checkboxText": "Quero receber informações sobre minhas doações por e-mail"
     },
     "postDonationScreen": {
-      "title": "Se quiser, você pode fazer mais",
-      "buttonText": "Doar depois",
-      "contributionImage": {
-        "donateFor": "Doe {{value}} para",
-        "labelTitle": "Doação impulsionada",
-        "buttonText": "Doar agora"
-      }
+      "title": "Aprecie este momento...",
+      "buttonText": "Finalizar"
     },
     "receiveTicketScreen": {
       "textOrigin": "Comunidade",
