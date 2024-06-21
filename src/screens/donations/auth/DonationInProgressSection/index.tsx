@@ -25,6 +25,16 @@ function DonationInProgressSection({
   const navigation = useNavigation();
   const { profile } = userProfile();
   const [goToNextScreen, setGoToNextScreen] = useState(false);
+  const getRandomFrame = () => {
+    // frame 20 -> garrafa
+    // frame 63 -> seringa
+    // frame 110 -> medicamento
+    // frame 136 -> pintinho
+    // frame 239 -> final
+    const frames = [20, 63, 110, 136];
+    return frames[Math.floor(Math.random() * frames.length)];
+  };
+  const endFrame = 239;
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -37,7 +47,7 @@ function DonationInProgressSection({
   useEffect(() => {
     setTimeout(() => {
       setGoToNextScreen(true);
-    }, 4500);
+    }, 4000);
   }, []);
 
   useEffect(() => {
@@ -45,6 +55,7 @@ function DonationInProgressSection({
       onAnimationEnd();
     }
   }, [shouldRepeatAnimation, goToNextScreen]);
+
   return (
     <S.Container>
       <S.AnimationContainer>
@@ -52,6 +63,8 @@ function DonationInProgressSection({
           animationData={donationAnimation}
           width={360}
           height={360}
+          startFrame={getRandomFrame()}
+          endFrame={endFrame}
         />
       </S.AnimationContainer>
       <S.BottomContainer>
