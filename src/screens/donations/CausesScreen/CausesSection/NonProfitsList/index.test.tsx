@@ -18,6 +18,11 @@ describe("NonProfitsList", () => {
   beforeEach(async () => {
     renderComponent(
       <NonProfitsList nonProfits={[mockNonProfit1, mockNonProfit2]} />,
+      {
+        tagDonationProviderValue: {
+          nonProfitsTag: [mockNonProfit1, mockNonProfit2],
+        },
+      },
     );
     await waitForPromises();
   });
