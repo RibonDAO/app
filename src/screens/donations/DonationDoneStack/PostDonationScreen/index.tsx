@@ -7,8 +7,8 @@ import usePageView from "hooks/usePageView";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import LottieAnimation from "components/atomics/LottieAnimation";
-import GreenSun from "assets/illustrations/GreenSun";
 import postDonationAnimation from "./assets/postDonationAnimation.json";
+import sunAnimation from "./assets/sunAnimation.json";
 import * as S from "./styles";
 
 function PostDonationScreen() {
@@ -57,7 +57,11 @@ function PostDonationScreen() {
         }}
       />
       <S.BackgroundSun>
-        <GreenSun />
+        <LottieAnimation
+          animationData={sunAnimation}
+          width="100%"
+          height={262}
+        />
       </S.BackgroundSun>
     </S.Container>
   );

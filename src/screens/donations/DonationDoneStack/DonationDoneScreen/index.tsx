@@ -18,7 +18,7 @@ import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
 import LottieAnimation from "components/atomics/LottieAnimation";
 import donationDoneSound from "./assets/donation-done.mp3";
 import NonProfitImagePlaceholder from "./NonProfitImagePlaceholder";
-import postDonationBgSpark from "./assets/postDonationBgSpark.json";
+import sunAnimation from "./assets/sunAnimation.json";
 import * as S from "./styles";
 
 export default function DonationDoneScreen({
@@ -150,7 +150,7 @@ export default function DonationDoneScreen({
       </S.Container>
       <S.BackgroundSun>
         <LottieAnimation
-          animationData={postDonationBgSpark}
+          animationData={sunAnimation}
           width="100%"
           height={262}
         />

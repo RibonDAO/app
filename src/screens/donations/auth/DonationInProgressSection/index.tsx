@@ -37,7 +37,7 @@ function DonationInProgressSection({
   useEffect(() => {
     setTimeout(() => {
       setGoToNextScreen(true);
-    }, 3000);
+    }, 4500);
   }, []);
 
   useEffect(() => {
