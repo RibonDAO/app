@@ -58,10 +58,6 @@ const styles = StyleSheet.create({
     gap: 18,
     marginBottom: theme.spacingNative(24),
   },
-  arrow: {
-    padding: theme.spacingNative(16),
-    alignSelf: "flex-start",
-  },
   supportBanner: {
     marginBottom: 124,
     width: 328,

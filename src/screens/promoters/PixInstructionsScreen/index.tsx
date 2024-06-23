@@ -6,7 +6,6 @@ import {
   TouchableWithoutFeedback,
   View,
   Text,
-  TouchableOpacity,
 } from "react-native";
 import Clipboard from "@react-native-clipboard/clipboard";
 
@@ -18,14 +17,12 @@ import { usePixPaymentInformation } from "contexts/pixInformationContext";
 import { theme } from "@ribon.io/shared";
 
 import { useEffect, useState } from "react";
-import ArrowLeft from "components/vectors/ArrowLeft";
 import { useTranslation } from "react-i18next";
 import { useCheckoutContext } from "contexts/checkoutContext";
 import usePayable from "hooks/usePayable";
 import Icon from "components/atomics/Icon";
 import TrustSeal from "components/moleculars/TrustSeal";
 import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
-import { useNavigation } from "hooks/useNavigation";
 import {
   formatDateTime,
   formatDate,
@@ -52,12 +49,6 @@ function PixInstructionsScreen(): JSX.Element {
   const { target, targetId } = useCheckoutContext();
 
   const payable = usePayable(target, targetId);
-
-  const { navigateTo } = useNavigation();
-
-  const handleBackButtonClick = () => {
-    navigateTo("TabNavigator", { screen: "CausesScreen" });
-  };
 
   useEffect(() => {
     if (pixInstructions && pixInstructions.clientSecret) {
@@ -113,15 +104,6 @@ function PixInstructionsScreen(): JSX.Element {
         style={S.outerContainer}
       >
         <ScrollView style={S.container}>
-          <View style={S.arrow}>
-            <TouchableOpacity
-              accessibilityRole="button"
-              onPress={handleBackButtonClick}
-              testID="arrow-back-button"
-            >
-              <ArrowLeft />
-            </TouchableOpacity>
-          </View>
           <View style={S.mainContainer}>
             {target === "club" ? (
               <Text style={S.title}>

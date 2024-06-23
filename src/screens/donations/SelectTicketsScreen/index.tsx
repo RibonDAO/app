@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Keyboard, Platform, View } from "react-native";
 import { useRouteParams } from "hooks/useRouteParams";
-import Header from "components/moleculars/Header";
 import { theme } from "@ribon.io/shared/styles";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import Button from "components/atomics/buttons/Button";
@@ -10,7 +9,6 @@ import { useCallback, useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
 import { useCurrentUser } from "contexts/currentUserContext";
 import SliderButton from "components/moleculars/SliderButton";
-import TicketSection from "components/moleculars/LayoutHeader/TicketSection";
 import TicketIconText from "components/moleculars/TicketIconText";
 import { useTicketsContext } from "contexts/ticketsContext";
 import { useFocusEffect } from "@react-navigation/native";
@@ -147,11 +145,6 @@ export default function SelectTicketsScreen() {
         />
       ) : (
         <View>
-          <Header
-            hasBackButton
-            backButtonColor={theme.colors.brand.primary[600]}
-            rightComponent={<TicketSection hasDividerBorder={false} />}
-          />
           <S.Container accessibilityRole="button" onPress={Keyboard.dismiss}>
             <S.MainContainer>
               <S.ImageContainer>

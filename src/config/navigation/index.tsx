@@ -18,8 +18,6 @@ import {
   RootTabParamList,
 } from "types";
 import { theme } from "@ribon.io/shared/styles";
-import Header from "components/moleculars/Header";
-import LayoutHeader from "components/moleculars/LayoutHeader";
 import DonationDoneScreen from "screens/donations/DonationDoneStack/DonationDoneScreen";
 import PostDonationScreen from "screens/donations/DonationDoneStack/PostDonationScreen";
 import AvailableArticleScreen from "screens/donations/DonationDoneStack/AvailableArticleScreen";
@@ -37,20 +35,16 @@ import OnboardingScreen from "screens/onboarding/v2/OnboardingScreen";
 import EarnTicketsScreen from "screens/content/EarnTicketsScreen";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "lib/Toast";
-import { RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { useEffect } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import GiveTicketScreen from "screens/donations/GiveTicketScreen";
 import ContributionStatsScreen from "screens/users/ContributionStatsScreen";
 import CheckoutProvider from "contexts/checkoutContext";
 import NonProfitsProvider from "contexts/nonProfitsContext";
-import { useCurrentUser } from "contexts/currentUserContext";
 import IntegrationProvider, {
   useIntegrationContext,
 } from "contexts/integrationContext";
 import RecurrenceScreen from "screens/promoters/RecurrenceScreen";
-import { Image } from "react-native";
-import { openInWebViewer } from "lib/linkOpener";
 import UtmProvider, { useUtmContext } from "contexts/utmContext";
 import { logEvent } from "services/analytics";
 import PixInstructionsScreen from "screens/promoters/PixInstructionsScreen";
@@ -82,6 +76,10 @@ import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
 import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
 import ClubSubscriptionProvider from "contexts/clubSubscriptionContext";
 import TagsProvider from "contexts/tagsContext";
+import { useSubscriptions } from "@ribon.io/shared";
+import { View } from "react-native";
+import { useCurrentUser } from "contexts/currentUserContext";
+import TicketSection from "components/moleculars/LayoutHeader/TicketSection";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -101,41 +99,25 @@ function BottomTabNavigator() {
   const activeColor = neutral[900];
   const { t } = useTranslation();
 
-  const { currentIntegrationId, integration } = useIntegrationContext();
-  const isRibonIntegration = currentIntegrationId === RIBON_INTEGRATION_ID;
-  const { currentUser } = useCurrentUser();
-
-  const navigateToIntegration = () => {
-    if (!integration?.integrationTask?.linkAddress) {
-      return;
-    }
-    openInWebViewer(integration?.integrationTask?.linkAddress ?? "");
-  };
-
-  const sideLogo = () => {
-    if (!isRibonIntegration && integration?.logo)
-      return (
-        <Image
-          source={{ uri: integration?.logo }}
-          accessibilityIgnoresInvertColors
-          style={S.logo}
-        />
-      );
-    return undefined;
-  };
-
-  const headerOutline = () => (
-    <Header
-      outline={!!currentUser}
-      rightComponent={<LayoutHeader outline={!!currentUser} />}
-      sideLogo={sideLogo()}
-      onSideLogoClick={navigateToIntegration}
-    />
-  );
-
   function renderTabBarIcon(color: any, iconOn: any, iconOff: any) {
     return color === activeColor ? iconOn : iconOff;
   }
+
+  const { currentUser } = useCurrentUser();
+  const { userIsMember } = useSubscriptions();
+  const { isMember } = userIsMember();
+
+  const backgroundStatusBar = () => {
+    if (currentUser) {
+      if (isMember) {
+        return theme.colors.brand.tertiary[100];
+      } else {
+        return theme.colors.brand.primary[800];
+      }
+    } else {
+      return theme.colors.neutral10;
+    }
+  };
 
   return (
     <BottomTab.Navigator
@@ -144,6 +126,12 @@ function BottomTabNavigator() {
         tabBarActiveTintColor: neutral[900],
         tabBarStyle: { ...S.tabBar },
         tabBarLabelStyle: { ...S.tabBarLabel },
+        headerStyle: {
+          backgroundColor: theme.colors.brand.primary[800],
+          shadowColor: "transparent",
+          elevation: 0,
+          height: 48,
+        },
       }}
     >
       <BottomTab.Screen
@@ -153,8 +141,6 @@ function BottomTabNavigator() {
           title: t("tabs.donateTickets") || "Donate tickets",
           tabBarIcon: ({ color }) =>
             renderTabBarIcon(color, <CausesIconOn />, <CausesIconOff />),
-          headerShown: false,
-          lazy: false,
         }}
         listeners={() => ({
           tabPress: () => {
@@ -175,7 +161,6 @@ function BottomTabNavigator() {
               <EarnTicketsIconOff />,
             ),
           lazy: false,
-          headerShown: false,
         }}
         listeners={() => ({
           tabPress: () => {
@@ -189,12 +174,15 @@ function BottomTabNavigator() {
         component={ImpactScreen}
         options={{
           title: t("tabs.myImpact") || "My impact",
-
           tabBarIcon: ({ color }: any) =>
             renderTabBarIcon(color, <ImpactIconOn />, <ImpactIconOff />),
-          header: headerOutline,
           lazy: false,
-          headerShown: false,
+          headerStyle: {
+            backgroundColor: backgroundStatusBar(),
+            shadowColor: "transparent",
+            elevation: 0,
+            height: 48,
+          },
         }}
         listeners={() => ({
           tabPress: () => {
@@ -246,6 +234,11 @@ function RootNavigator() {
   const { setUtm } = useUtmContext();
   const { setMagicLinkToken, setAccountId } = useAuthentication();
   const { setCouponId } = useCouponContext();
+
+  const handleBackToCausesScreen = () => {
+    navigateTo("TabNavigator", { screen: "CausesScreen" });
+  };
+
   useEffect(() => {
     initializeDeeplink(
       navigateTo,
@@ -259,12 +252,17 @@ function RootNavigator() {
   }, []);
 
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.colors.neutral10,
+        },
+        headerTitle: "",
+        headerShadowVisible: false,
+        headerLeft: () => <ArrowBackButton />,
+      }}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} options={{}} />
       <Stack.Screen
         name="TabNavigator"
         component={BottomTabNavigator}
@@ -288,11 +286,7 @@ function RootNavigator() {
         }}
       />
 
-      <Stack.Screen
-        name="PromotersScreen"
-        component={PromotersScreen}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="PromotersScreen" component={PromotersScreen} />
 
       <Stack.Screen
         name="GiveTicketScreen"
@@ -358,7 +352,7 @@ function RootNavigator() {
         name="SelectTicketsScreen"
         component={SelectTicketsScreen}
         options={{
-          headerShown: false,
+          headerRight: () => <TicketSection hasDividerBorder={false} />,
         }}
       />
 
@@ -389,19 +383,15 @@ function RootNavigator() {
         }}
       />
 
-      <Stack.Screen
-        name="ClubCheckoutScreen"
-        component={ClubCheckoutScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen name="ClubCheckoutScreen" component={ClubCheckoutScreen} />
 
       <Stack.Screen
         name="PixInstructionsScreen"
         component={PixInstructionsScreen}
         options={{
-          headerShown: false,
+          headerLeft: () => (
+            <ArrowBackButton onPress={handleBackToCausesScreen} />
+          ),
         }}
       />
 
@@ -409,7 +399,7 @@ function RootNavigator() {
         name="OnboardingScreen"
         component={OnboardingScreen}
         options={{
-          headerShown: false,
+          headerLeft: () => <View />,
         }}
       />
 
@@ -449,32 +439,11 @@ function RootNavigator() {
       <Stack.Screen
         name="SubscriptionsScreen"
         component={SubscriptionsScreen}
-        options={{
-          headerShown: false,
-        }}
       />
 
-      <Stack.Screen
-        name="SignInScreen"
-        component={SignInScreen}
-        options={{
-          headerShown: true,
-          headerLeft: () => <ArrowBackButton />,
-          headerTitle: "",
-          headerShadowVisible: false,
-        }}
-      />
+      <Stack.Screen name="SignInScreen" component={SignInScreen} />
 
-      <Stack.Screen
-        name="InsertEmailScreen"
-        component={InsertEmailScreen}
-        options={{
-          headerShown: true,
-          headerLeft: () => <ArrowBackButton />,
-          headerTitle: "",
-          headerShadowVisible: false,
-        }}
-      />
+      <Stack.Screen name="InsertEmailScreen" component={InsertEmailScreen} />
 
       <Stack.Screen
         name="InsertEmailAccountScreen"
@@ -489,12 +458,6 @@ function RootNavigator() {
       <Stack.Screen
         name="SentMagicLinkEmailScreen"
         component={SentMagicLinkEmailScreen}
-        options={{
-          headerShown: true,
-          headerLeft: () => <ArrowBackButton />,
-          headerTitle: "",
-          headerShadowVisible: false,
-        }}
       />
 
       <Stack.Screen
@@ -516,19 +479,18 @@ function RootNavigator() {
       <Stack.Screen
         name="ValidateAccountScreen"
         component={ValidateAccountScreen}
-        options={{
-          headerShown: true,
-          headerLeft: () => <ArrowBackButton />,
-          headerTitle: "",
-          headerShadowVisible: false,
-        }}
       />
 
       <Stack.Screen
         name="ClubScreen"
         component={ClubScreen}
         options={{
-          headerShown: false,
+          headerStyle: {
+            backgroundColor: theme.colors.brand.tertiary[50],
+          },
+          headerLeft: () => (
+            <ArrowBackButton color={theme.colors.brand.tertiary[800]} />
+          ),
         }}
       />
 
@@ -544,7 +506,6 @@ function RootNavigator() {
         name="AboutTicketsScreen"
         component={AboutTicketsScreen}
         options={{
-          headerShown: false,
           animation: "slide_from_bottom",
         }}
       />

@@ -4,11 +4,8 @@ import CardInfo from "components/moleculars/CardInfo";
 import { theme } from "@ribon.io/shared";
 import { useRouteParams } from "hooks/useRouteParams";
 import Button from "components/atomics/buttons/Button";
-import { TouchableOpacity } from "react-native";
-import ArrowLeft from "components/vectors/ArrowLeft";
 import { useEffect } from "react";
 import { logEvent } from "services/analytics";
-import { useNavigation } from "hooks/useNavigation";
 import * as S from "./styles";
 
 function AboutTicketsScreen(): JSX.Element {
@@ -20,23 +17,12 @@ function AboutTicketsScreen(): JSX.Element {
 
   const { from, title, buttonText, buttonOnPress } = params;
 
-  const { popNavigation } = useNavigation();
-
   useEffect(() => {
     logEvent("P34_view", { from });
   }, []);
 
   return (
     <S.Container>
-      <S.Arrow>
-        <TouchableOpacity
-          accessibilityRole="button"
-          onPress={() => popNavigation()}
-          testID="arrow-back-button"
-        >
-          <ArrowLeft color={theme.colors.brand.primary[800]} />
-        </TouchableOpacity>
-      </S.Arrow>
       <S.Title>{title}</S.Title>
       <CardInfo
         icon={{

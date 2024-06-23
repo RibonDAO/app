@@ -13,6 +13,7 @@ import {
 export const Container = styled.ScrollView`
   height: 100%;
   padding: ${theme.spacing(16)};
+  padding-top: 0px;
   display: flex;
   flex-direction: column;
   margin-bottom: ${theme.spacing(16)};

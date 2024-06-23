@@ -11,7 +11,7 @@ import { useCheckoutContext } from "contexts/checkoutContext";
 import usePageView from "hooks/usePageView";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
-import Header from "./Header";
+
 import PaymentMethodSection from "./PaymentMethodSection";
 import S from "./styles";
 import PriceSection from "./PriceSection";
@@ -46,7 +46,6 @@ function CheckoutScreen(): JSX.Element {
         style={S.outerContainer}
       >
         <ScrollView style={S.container}>
-          <Header />
           <PriceSection />
           <PaymentMethodSection />
         </ScrollView>

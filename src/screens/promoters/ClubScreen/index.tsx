@@ -1,9 +1,9 @@
-import { ScrollView, View, Text, TouchableOpacity } from "react-native";
+import { ScrollView, View, Text } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Offer, theme, useSubscriptions } from "@ribon.io/shared";
-import ArrowLeft from "components/vectors/ArrowLeft";
+
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
 import { logEvent } from "services/analytics";
@@ -114,15 +114,6 @@ function ClubScreen(): JSX.Element {
         style={S.container}
         showsVerticalScrollIndicator={false}
       >
-        <View style={S.arrow}>
-          <TouchableOpacity
-            accessibilityRole="button"
-            onPress={currentTab.handleBack}
-            testID="arrow-back-button"
-          >
-            <ArrowLeft color={theme.colors.brand.tertiary[800]} />
-          </TouchableOpacity>
-        </View>
         <View style={S.innerContainer}>
           <Header />
           <Text style={S.title}>{currentTab.title}</Text>

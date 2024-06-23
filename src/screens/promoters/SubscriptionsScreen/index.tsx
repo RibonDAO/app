@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useSubscriptions } from "@ribon.io/shared/hooks";
-import { TouchableOpacity } from "react-native";
 import Subscription from "@ribon.io/shared/types/entities/Subscription";
 import { useEffect, useState } from "react";
 import Icon from "components/atomics/Icon";
@@ -11,9 +10,7 @@ import {
   stringToLocaleDateString,
 } from "lib/formatters/dateFormatter";
 import { logEvent } from "services/analytics";
-import ArrowLeft from "components/vectors/ArrowLeft";
 import { useNavigation } from "hooks/useNavigation";
-import { useRouteParams } from "hooks/useRouteParams";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import CancelSubscriptionModal from "./CancelSubscriptionModal";
 import * as S from "./styles";
@@ -28,9 +25,8 @@ export default function SubscriptionsScreen(): JSX.Element {
   const [modalVisible, setModalVisible] = useState(false);
   const [subscriptionToBeCanceled, setSubscriptionToBeCanceled] =
     useState<Subscription>({} as Subscription);
-  const { params } = useRouteParams<"SubscriptionsScreen">();
 
-  const { navigateTo, popNavigation } = useNavigation();
+  const { navigateTo } = useNavigation();
 
   const { currentLang } = useLanguage();
 
@@ -90,14 +86,6 @@ export default function SubscriptionsScreen(): JSX.Element {
     setModalVisible(!modalVisible);
   };
 
-  const handleBackButtonClick = () => {
-    if (params?.from === "ContributionDoneScreen") {
-      navigateTo("PromotersScreen");
-    } else {
-      popNavigation();
-    }
-  };
-
   useEffect(() => {
     logEvent("P25_view");
   }, []);
@@ -132,15 +120,6 @@ export default function SubscriptionsScreen(): JSX.Element {
 
   return (
     <S.Container>
-      <S.Arrow>
-        <TouchableOpacity
-          accessibilityRole="button"
-          onPress={handleBackButtonClick}
-          testID="arrow-back-button"
-        >
-          <ArrowLeft color={theme.colors.brand.primary[600]} />
-        </TouchableOpacity>
-      </S.Arrow>
       <S.Title>{t("title")} </S.Title>
       <S.SubscriptionsContainer>
         {subscriptions &&

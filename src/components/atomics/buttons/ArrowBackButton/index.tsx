@@ -3,11 +3,21 @@ import { TouchableOpacity } from "react-native";
 import { useNavigation } from "hooks/useNavigation";
 import * as S from "./styles";
 
-export function ArrowBackButton() {
+type ArrowBackButtonProps = {
+  color?: string;
+  onPress?: () => void;
+};
+export function ArrowBackButton({ color, onPress }: ArrowBackButtonProps) {
   const { popNavigation } = useNavigation();
+
   const handleBackButtonClick = () => {
-    popNavigation();
+    if (onPress) {
+      onPress();
+    } else {
+      popNavigation();
+    }
   };
+
   return (
     <S.Arrow>
       <TouchableOpacity
@@ -15,7 +25,7 @@ export function ArrowBackButton() {
         onPress={handleBackButtonClick}
         testID="arrow-back-button"
       >
-        <ArrowLeft />
+        <ArrowLeft color={color} />
       </TouchableOpacity>
     </S.Arrow>
   );

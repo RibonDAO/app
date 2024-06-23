@@ -40,7 +40,7 @@ const providerMetadata = {
 
 function Main() {
   const isLoadingComplete = useCachedResources();
-  const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
+  const { bottomBackgroundColor } = useUnsafeAreaContext();
 
   async function onFetchUpdateAsync() {
     try {
@@ -73,22 +73,17 @@ function Main() {
           <TasksProvider>
             <SafeAreaProvider>
               <SafeAreaView
-                edges={["top"]}
-                style={{ flex: 1, backgroundColor: topBackgroundColor }}
+                edges={["bottom"]}
+                style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
               >
-                <SafeAreaView
-                  edges={["bottom"]}
-                  style={{ flex: 1, backgroundColor: bottomBackgroundColor }}
-                >
-                  {debugEventsEnabled() && <DebugEventsView />}
-                  <StripeProvider>
-                    <Navigation />
-                    <StatusBar
-                      // eslint-disable-next-line react/style-prop-object
-                      style="dark"
-                    />
-                  </StripeProvider>
-                </SafeAreaView>
+                {debugEventsEnabled() && <DebugEventsView />}
+                <StripeProvider>
+                  <Navigation />
+                  <StatusBar
+                    // eslint-disable-next-line react/style-prop-object
+                    style="dark"
+                  />
+                </StripeProvider>
               </SafeAreaView>
             </SafeAreaProvider>
           </TasksProvider>
