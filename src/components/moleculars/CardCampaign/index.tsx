@@ -11,7 +11,6 @@ import { useLanguage } from "contexts/languageContext";
 import { useTranslation } from "react-i18next";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { useNavigation } from "hooks/useNavigation";
-import { logError } from "services/crashReport";
 import { logEvent } from "services/analytics";
 import S from "./styles";
 
@@ -42,12 +41,8 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
   const { getImpressionCard } = useImpressionCards();
 
   const fetchImpressionCard = useCallback(async () => {
-    try {
-      const impressionCardData = await getImpressionCard(cardId);
-      setImpressionCard(impressionCardData);
-    } catch (e) {
-      logError(e);
-    }
+    const impressionCardData = await getImpressionCard(cardId);
+    setImpressionCard(impressionCardData);
   }, [cardId]);
 
   useEffect(() => {

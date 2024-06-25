@@ -14,7 +14,6 @@ import {
 } from "lib/dateUtils";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { showToast } from "lib/Toast";
-import { logError } from "services/crashReport";
 import { useTranslation } from "react-i18next";
 import TasksStatistics from "@ribon.io/shared/types/apiResponses/TasksStatistics";
 
@@ -185,11 +184,7 @@ function TasksProvider({ children }: any) {
 
   useEffect(() => {
     if (currentUser) {
-      try {
-        updateStreak();
-      } catch (error) {
-        logError(error);
-      }
+      updateStreak();
     }
   }, [buildTasksState]);
 

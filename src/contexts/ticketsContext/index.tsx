@@ -3,7 +3,6 @@ import { useTickets } from "@ribon.io/shared/hooks";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useIntegrationContext } from "contexts/integrationContext";
-import { logError } from "services/crashReport";
 
 export interface ITicketsContext {
   ticketsCounter: number;
@@ -36,14 +35,10 @@ function TicketsProvider({ children }: Props) {
     }
   }
   function updateTicketsCounterForNotLoggedInUser() {
-    try {
-      if (!currentUser) {
-        setTicketsCounter(1);
-      } else if (userTickets !== undefined) {
-        setTicketsCounter(userTickets);
-      }
-    } catch (error) {
-      logError(error);
+    if (!currentUser) {
+      setTicketsCounter(1);
+    } else if (userTickets !== undefined) {
+      setTicketsCounter(userTickets);
     }
   }
 
