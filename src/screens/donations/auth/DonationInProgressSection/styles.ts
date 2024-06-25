@@ -13,6 +13,8 @@ export const Container = styled.View`
 `;
 
 export const AnimationContainer = styled.View`
+  width: 360px;
+  height: 360px;
   align-items: center;
   padding: ${theme.spacing(24)};
 `;
