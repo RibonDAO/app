@@ -288,6 +288,7 @@
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Next in {{time}}",
+          "subscriptionExpiration": "Subscribe on {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Unlock collection"
         },
         "monthlyTicketCard": {
@@ -297,6 +298,7 @@
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Next in {{nextPaymentAttempt}}",
+          "subscriptionExpiration": "Subscribe on {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Unlock collection"
         }
       }

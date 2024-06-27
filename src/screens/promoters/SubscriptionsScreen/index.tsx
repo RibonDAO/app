@@ -23,7 +23,7 @@ export default function SubscriptionsScreen(): JSX.Element {
     keyPrefix: "promoters.subscriptionsScreen",
   });
 
-  const { userSubscriptions } = useSubscriptions();
+  const { userSubscriptions, userIsMember } = useSubscriptions();
   const { subscriptions } = userSubscriptions();
   const [modalVisible, setModalVisible] = useState(false);
   const [subscriptionToBeCanceled, setSubscriptionToBeCanceled] =
@@ -34,6 +34,9 @@ export default function SubscriptionsScreen(): JSX.Element {
 
   const { currentLang } = useLanguage();
 
+  const { isMember } = userIsMember();
+
+  console.log(isMember);
   const isClub = (subscription: Subscription) =>
     subscription.offer?.category === "club";
   const isPix = (subscription: Subscription) =>
@@ -81,7 +84,10 @@ export default function SubscriptionsScreen(): JSX.Element {
     }
   };
 
-  const isClubInactive = (subscription: Subscription) =>
+  const isActive = (subscription: Subscription) =>
+    subscription?.status === "active";
+
+  const isInactive = (subscription: Subscription) =>
     subscription?.status === "inactive";
 
   const handleCancelSubscriptionButtonClick = (subscription: Subscription) => {
@@ -103,7 +109,7 @@ export default function SubscriptionsScreen(): JSX.Element {
   }, []);
 
   const renderPaymentInfo = (subscription: Subscription) => {
-    if (isClubInactive(subscription)) {
+    if (!isActive(subscription)) {
       return (
         <S.InfosText>
           <S.Text color={theme.colors.feedback.error[600]}>
@@ -112,7 +118,9 @@ export default function SubscriptionsScreen(): JSX.Element {
               {nextPaymetAttempt(subscription)}
             </S.HighlightedText>
           </S.Text>
-          <S.Text>{t("inactiveSubscriptionInfo")}</S.Text>
+          {isInactive(subscription) && (
+            <S.Text>{t("inactiveSubscriptionInfo")}</S.Text>
+          )}
         </S.InfosText>
       );
     } else {
@@ -149,7 +157,9 @@ export default function SubscriptionsScreen(): JSX.Element {
               <S.IconTextContainer>
                 <S.Amount>{formattedAmount(subscription)}</S.Amount>
 
-                {isClubInactive(subscription) ? (
+                {!isActive(subscription) &&
+                isClub(subscription) &&
+                !isMember ? (
                   <S.Button
                     onPress={() => {
                       navigateTo("ClubScreen");
@@ -159,7 +169,8 @@ export default function SubscriptionsScreen(): JSX.Element {
                     <S.ButtonText>{t("redoSubscription")}</S.ButtonText>
                   </S.Button>
                 ) : (
-                  !isPix(subscription) && (
+                  !isPix(subscription) &&
+                  isActive(subscription) && (
                     <S.IconContainer>
                       <Icon
                         type="outlined"
