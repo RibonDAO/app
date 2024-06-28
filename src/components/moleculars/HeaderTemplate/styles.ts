@@ -19,7 +19,7 @@ export const ConfigContainer = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   align-self: flex-end;
-  margin-top: ${theme.spacing(8)};
+  margin-top: ${theme.spacing(12)};
 `;
 
 export const Background = styled.Image`

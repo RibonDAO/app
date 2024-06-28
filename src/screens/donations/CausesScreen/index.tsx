@@ -18,6 +18,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useRouteParams } from "hooks/useRouteParams";
 import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import { useAuthentication } from "contexts/authenticationContext";
+import { theme } from "@ribon.io/shared";
 import Header from "./Header";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
@@ -95,7 +96,7 @@ export default function CausesScreen() {
 
   const renderHeader = useCallback(
     () => (
-      <>
+      <View>
         <Header />
         <S.ContainerPadding hasPaddingTop={!shouldShowIntegrationBanner}>
           {shouldShowIntegrationBanner && integration && (
@@ -111,7 +112,7 @@ export default function CausesScreen() {
             <S.Title>{t("title")}</S.Title>
           )}
         </S.ContainerPadding>
-      </>
+      </View>
     ),
     [shouldShowIntegrationBanner, donatedToday, currentUser],
   );
@@ -138,14 +139,25 @@ export default function CausesScreen() {
   if (isLoading || loadingFirstAccessToIntegration) return <Placeholder />;
 
   return (
-    <FlatList
-      data={sections}
-      keyExtractor={(item) => item.id}
-      ListHeaderComponent={renderHeader}
-      renderItem={({ item }) => <View>{item.component}</View>}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    />
+    <View style={{ backgroundColor: theme.colors.brand.primary[800] }}>
+      <FlatList
+        data={sections}
+        keyExtractor={(item) => item.id}
+        style={{ backgroundColor: theme.colors.neutral10 }}
+        ListHeaderComponent={renderHeader}
+        refreshControl={
+          <RefreshControl
+            style={{
+              backgroundColor: theme.colors.brand.primary[800],
+              marginTop: -5,
+            }}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            progressViewOffset={-5}
+          />
+        }
+        renderItem={({ item }) => <View>{item.component}</View>}
+      />
+    </View>
   );
 }
