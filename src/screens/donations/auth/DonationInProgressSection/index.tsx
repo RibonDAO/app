@@ -26,12 +26,12 @@ function DonationInProgressSection({
   const { profile } = userProfile();
   const [goToNextScreen, setGoToNextScreen] = useState(false);
   const getRandomFrame = () => {
-    // frame 20 -> garrafa
+    // frame 0 -> inicio
     // frame 63 -> seringa
-    // frame 110 -> medicamento
-    // frame 136 -> pintinho
+    // frame 120 -> medicamento
+    // frame 162 -> pintinho
     // frame 239 -> final
-    const frames = [20, 63, 110, 136];
+    const frames = [0, 63, 120, 162];
     return frames[Math.floor(Math.random() * frames.length)];
   };
   const endFrame = 239;
