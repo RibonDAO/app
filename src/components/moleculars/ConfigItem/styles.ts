@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.neutral[200],
     borderBottomWidth: 2,
   },
+  pressedConfigItem: {
+    opacity: 0.5,
+  },
   lastConfigItem: {
     borderBottomWidth: 0,
   },
