@@ -283,6 +283,7 @@
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
           "buttonTextCollected": "Próximo em {{time}}",
+          "subscriptionExpiration": "Assine em {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Desbloquear coleta"
         },
         "monthlyTicketCard": {
@@ -292,6 +293,7 @@
           "buttonText": "Coletar {{value}} ticket",
           "buttonTextPlural": "Coletar {{value}} tickets",
           "buttonTextCollected": "Próximo em {{nextPaymentAttempt}}",
+          "subscriptionExpiration": "Assine em {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Desbloquear coleta"
         }
       }
