@@ -5,7 +5,10 @@ import Subscription from "@ribon.io/shared/types/entities/Subscription";
 import { useEffect, useState } from "react";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
-import { stringToLocaleDateString } from "lib/formatters/dateFormatter";
+import {
+  isOldDate,
+  stringToLocaleDateString,
+} from "lib/formatters/dateFormatter";
 import { logEvent } from "services/analytics";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useNavigation } from "hooks/useNavigation";
@@ -87,6 +90,14 @@ export default function SubscriptionsScreen(): JSX.Element {
   const isCanceled = (subscription: Subscription) =>
     subscription?.status === "canceled";
 
+  const isExpired = (subscription: Subscription) => {
+    try {
+      return isOldDate(subscription.nextPaymentAttempt);
+    } catch {
+      return true;
+    }
+  };
+
   const handleCancelSubscriptionButtonClick = (subscription: Subscription) => {
     setSubscriptionToBeCanceled(subscription);
     logEvent("cancelSubs_click", eventParams());
@@ -120,7 +131,7 @@ export default function SubscriptionsScreen(): JSX.Element {
           {isInactive(subscription) && (
             <S.Text>{t("inactiveSubscriptionInfo")}</S.Text>
           )}
-          {isCanceled(subscription) && (
+          {isCanceled(subscription) && !isExpired(subscription) && (
             <S.Text>
               {t("perksExpiration")}
               <S.HighlightedText>
