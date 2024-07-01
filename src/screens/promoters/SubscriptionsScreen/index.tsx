@@ -5,11 +5,7 @@ import Subscription from "@ribon.io/shared/types/entities/Subscription";
 import { useEffect, useState } from "react";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
-import { useLanguage } from "contexts/languageContext";
-import {
-  add30DaysAndFormatDate,
-  stringToLocaleDateString,
-} from "lib/formatters/dateFormatter";
+import { stringToLocaleDateString } from "lib/formatters/dateFormatter";
 import { logEvent } from "services/analytics";
 import ArrowLeft from "components/vectors/ArrowLeft";
 import { useNavigation } from "hooks/useNavigation";
@@ -32,11 +28,8 @@ export default function SubscriptionsScreen(): JSX.Element {
 
   const { navigateTo, popNavigation } = useNavigation();
 
-  const { currentLang } = useLanguage();
-
   const { isMember } = userIsMember();
 
-  console.log(isMember);
   const isClub = (subscription: Subscription) =>
     subscription.offer?.category === "club";
   const isPix = (subscription: Subscription) =>
@@ -44,9 +37,10 @@ export default function SubscriptionsScreen(): JSX.Element {
       ?.paymentMethod === "pix";
 
   const nextPaymetAttempt = (subscription: any) =>
-    subscription.nextPaymentAttempt
-      ? stringToLocaleDateString(subscription.nextPaymentAttempt)
-      : add30DaysAndFormatDate(subscription.createdAt, currentLang);
+    stringToLocaleDateString(subscription.nextPaymentAttempt);
+
+  const cancelDate = (subscription: any) =>
+    stringToLocaleDateString(subscription.cancelDate);
 
   const formattedAmount = (subscription: Subscription) =>
     subscription.offer &&
@@ -90,6 +84,9 @@ export default function SubscriptionsScreen(): JSX.Element {
   const isInactive = (subscription: Subscription) =>
     subscription?.status === "inactive";
 
+  const isCanceled = (subscription: Subscription) =>
+    subscription?.status === "canceled";
+
   const handleCancelSubscriptionButtonClick = (subscription: Subscription) => {
     setSubscriptionToBeCanceled(subscription);
     logEvent("cancelSubs_click", eventParams());
@@ -115,11 +112,21 @@ export default function SubscriptionsScreen(): JSX.Element {
           <S.Text color={theme.colors.feedback.error[600]}>
             {t("inactiveSubscription")}
             <S.HighlightedText color={theme.colors.feedback.error[600]}>
-              {nextPaymetAttempt(subscription)}
+              {subscription.cancelDate
+                ? cancelDate(subscription)
+                : nextPaymetAttempt(subscription)}
             </S.HighlightedText>
           </S.Text>
           {isInactive(subscription) && (
             <S.Text>{t("inactiveSubscriptionInfo")}</S.Text>
+          )}
+          {isCanceled(subscription) && (
+            <S.Text>
+              {t("perksExpiration")}
+              <S.HighlightedText>
+                {nextPaymetAttempt(subscription)}
+              </S.HighlightedText>
+            </S.Text>
           )}
         </S.InfosText>
       );
