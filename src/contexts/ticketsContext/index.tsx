@@ -54,7 +54,7 @@ function TicketsProvider({ children }: Props) {
   useEffect(() => {
     refetch();
     updateTicketsCounterForNotLoggedInUser();
-  }, [currentIntegrationId, currentUser]);
+  }, [currentUser, userTickets]);
 
   const ticketsObject: ITicketsContext = useMemo(
     () => ({

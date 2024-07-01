@@ -40,9 +40,16 @@ function AccordionSection(): JSX.Element {
     },
   ];
 
+  const isImpactListEmpty = !(
+    impactList[0].data.length || impactList[1].data.length
+  );
+
   return (
     <View style={S.tabViewSection}>
-      <AccordionList header={<ProfileSection />} impactList={impactList} />
+      <AccordionList
+        header={<ProfileSection />}
+        impactList={isImpactListEmpty ? [] : impactList}
+      />
     </View>
   );
 }

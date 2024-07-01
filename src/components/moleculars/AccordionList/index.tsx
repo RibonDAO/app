@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import Accordion, { Props as AccordionProps } from "../Accordion";
 import * as S from "./styles";
+import { EmptyComponent } from "./EmptyComponent";
 
 type AccordionData = Pick<
   AccordionProps,
@@ -51,6 +52,7 @@ function AccordionList({ impactList, header }: Props) {
         </>
       )}
       stickySectionHeadersEnabled={false}
+      ListEmptyComponent={EmptyComponent}
     />
   );
 }

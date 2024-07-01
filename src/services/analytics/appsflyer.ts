@@ -14,7 +14,7 @@ if (global.process.env.NODE_ENV === "production") {
     appId: EXPO_PUBLIC_APPSFLYER_APP_ID,
     devKey: EXPO_PUBLIC_APPSFLYER_KEY,
     isDebug: false,
-    onInstallConversionDataListener: false,
+    onInstallConversionDataListener: true,
     onDeepLinkListener: false,
     timeToWaitForATTUserAuthorization: 10,
     manualStart: true,
