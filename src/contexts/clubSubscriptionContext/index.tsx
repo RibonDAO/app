@@ -21,10 +21,14 @@ function ClubSubscriptionProvider({ children }: any) {
 
   useEffect(() => {
     if (subscriptions && subscriptions.length > 0) {
-      const checkClubSubscription = subscriptions?.find(
+      const checkClubSubscription = subscriptions?.filter(
         (subscription) => subscription.offer?.category === "club",
       );
-      if (checkClubSubscription) setClubSubscription(checkClubSubscription);
+
+      if (checkClubSubscription)
+        setClubSubscription(
+          checkClubSubscription[checkClubSubscription.length - 1],
+        );
     }
   }, [subscriptions]);
 
