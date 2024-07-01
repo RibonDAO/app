@@ -23,7 +23,7 @@ function formatUserImpact(
         true,
       ),
       iconUrl: item.nonProfit.icon || item.nonProfit.coverImage,
-      quantity: item.nonProfit.impactByTicket,
+      quantity: item.donationCount,
     }))
     .sort((a, b) => b.quantity - a.quantity );
 }
