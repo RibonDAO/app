@@ -26,9 +26,10 @@ export async function initializeDeeplink(
         (latestParams.integration_id as string) || RIBON_INTEGRATION_ID;
 
       const externalId = (latestParams.external_id as string) || "";
-      const utmSource = (latestParams.utm_source as string) || "";
-      const utmMedium = (latestParams.utm_medium as string) || "";
-      const utmCampaign = (latestParams.utm_campaign as string) || "";
+      const utmSource = (latestParams.utm_source as string) || "organic_unset";
+      const utmMedium = (latestParams.utm_medium as string) || "organic_unset";
+      const utmCampaign =
+        (latestParams.utm_campaign as string) || "organic_unset";
 
       const magicLinkToken = (latestParams.authToken as string) || "";
       const accountId = (latestParams.id as string) || "";
