@@ -62,9 +62,11 @@ export default function ClubMonthlyTicketCard({
       ? t("monthlyTicketCard.buttonTextPlural", { value: tickets })
       : t("monthlyTicketCard.buttonText", { value: tickets });
 
-  const buttonTextHasClub = hasCollected
-    ? t("monthlyTicketCard.buttonTextCollected")
-    : buttonText;
+  const buttonTextHasCollected = clubSubscription?.cancelDate
+    ? t("monthlyTicketCard.subscriptionExpiration", { nextPaymentAttempt })
+    : t("monthlyTicketCard.buttonTextCollected", { nextPaymentAttempt });
+
+  const buttonTextHasClub = hasCollected ? buttonTextHasCollected : buttonText;
 
   const { navigateTo } = useNavigation();
 
@@ -161,9 +163,7 @@ export default function ClubMonthlyTicketCard({
         text={
           isMember ? buttonTextHasClub : t("monthlyTicketCard.buttonTextNoClub")
         }
-        afterText={t("monthlyTicketCard.buttonTextCollected", {
-          nextPaymentAttempt,
-        })}
+        afterText={buttonTextHasCollected}
         locked={hasCollected}
         onClick={handleButtonPress}
         startAnimation={startAnimation}
