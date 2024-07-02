@@ -18,7 +18,7 @@ import { useTasksContext } from "contexts/tasksContext";
 import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
 import { useUserProfile } from "@ribon.io/shared/hooks";
 import DonationInProgressSection from "../auth/DonationInProgressSection";
-import LottieStepper from "./LottieStepper";
+import Lottie3Steps from "./Lottie3Steps";
 import * as S from "./styles";
 
 export default function SelectTicketsScreen() {
@@ -162,7 +162,7 @@ export default function SelectTicketsScreen() {
             rightComponent={<TicketSection hasDividerBorder={false} />}
           />
           <S.ImageContainer>
-            <LottieStepper
+            <Lottie3Steps
               rangeSize={tickets}
               step={step || 1}
               value={ticketsQuantity}

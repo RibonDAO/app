@@ -22,19 +22,32 @@ export default function LottieStepper({
 }: Props): JSX.Element {
   const animationRef = useRef<Lottie>(null);
 
+  function repeatElements(array: number[][], x: number) {
+    return array.flatMap((element) => Array(x).fill(element));
+  }
+
   const buildSegmentPaths = () => {
     const TOTAL_FRAMES = 150;
     const totalSegments = Math.ceil((rangeSize - step) / step) + 1;
-    const segmentSize = Math.floor(TOTAL_FRAMES / totalSegments);
+    const segmentSize =
+      totalSegments > TOTAL_FRAMES
+        ? 1
+        : Math.floor(TOTAL_FRAMES / totalSegments);
+    const repeatSize = Math.ceil(totalSegments / TOTAL_FRAMES);
 
-    const segmentsPaths = Array.from({ length: totalSegments }, (_, index) => {
-      const startFrame = index * segmentSize;
-      const endFrame = startFrame + segmentSize;
+    const segmentsPaths = Array.from(
+      { length: totalSegments > TOTAL_FRAMES ? TOTAL_FRAMES : totalSegments },
+      (_, index) => {
+        const startFrame = index * segmentSize;
+        const endFrame = startFrame + segmentSize;
 
-      return [startFrame || 1, endFrame];
-    });
+        return [startFrame || 1, endFrame];
+      },
+    );
 
-    return segmentsPaths;
+    return totalSegments > TOTAL_FRAMES
+      ? repeatElements(segmentsPaths, repeatSize)
+      : segmentsPaths;
   };
 
   const segmentsPaths = buildSegmentPaths();
