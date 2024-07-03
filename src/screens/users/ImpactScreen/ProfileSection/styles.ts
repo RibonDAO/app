@@ -34,8 +34,12 @@ export const ShapeContainer = styled.View`
   right: -100px;
 `;
 
+export const UserAvatarContainer = styled.View`
+  display: ${({ hide }: { hide: boolean }) => (hide ? "none" : "flex")};
+`;
+
 export const TagContainer = styled.TouchableOpacity`
-  display: flex;
+  display: ${({ hide }: { hide: boolean }) => (hide ? "none" : "flex")};
   flex-direction: row;
   gap: ${theme.spacing(8)};
   margin-top: ${theme.spacing(16)};
@@ -88,5 +92,6 @@ export const TagText = styled.Text`
 
 export const StatisticsContainer = styled.View`
   gap: 12;
-  margin-top: 40px;
+  margin-top: ${({ additionalTopMargin }: { additionalTopMargin: boolean }) =>
+    additionalTopMargin ? "100px" : "40px"};
 `;

@@ -1,11 +1,10 @@
-import TicketOutlinedIcon from "components/vectors/TicketOutlinedIcon";
-import RibonFlagIcon from "components/vectors/RibonFlagIcon";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as S from "./styles";
 import StatisticsModal from "./StatisticsModal";
+import { Icon } from "./Icon";
 
-type IconType = "TicketIconOutlined" | "RibonFlagIcon";
+export type IconType = "TicketIconOutlined" | "RibonFlagIcon";
 
 type Props = {
   value: number;
@@ -13,19 +12,6 @@ type Props = {
   icon: IconType;
   backgroundColor: string;
 };
-
-type IconProps = { icon: IconType };
-
-function Icon({ icon }: IconProps) {
-  switch (icon) {
-    case "TicketIconOutlined":
-      return <TicketOutlinedIcon />;
-    case "RibonFlagIcon":
-      return <RibonFlagIcon />;
-    default:
-      return null;
-  }
-}
 
 function StatisticsCard({ value, description, icon, backgroundColor }: Props) {
   const { t } = useTranslation("translation", {

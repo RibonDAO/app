@@ -6,7 +6,6 @@ import {
 } from "@ribon.io/shared/hooks";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useCallback, useEffect, useState } from "react";
-import { View } from "react-native";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "hooks/useNavigation";
@@ -67,7 +66,6 @@ function ProfileSection() {
     }
   }, [isMemberLoading, isMember]);
 
-  if (!currentUser) return <View />;
   if (isMemberLoading) return <LoadingOverlay />;
 
   return (
@@ -79,24 +77,30 @@ function ProfileSection() {
         <HeaderButtons showsTicketsCounter />
       </S.HeaderButtonsContainer>
       <S.CenterContainer>
-        <UserAvatar
-          userAvatar={newProfile?.photo}
-          name={newProfile?.name ? newProfile.name : t("userName")}
-          email={
-            newProfile?.user?.email ? newProfile.user.email : currentUser?.email
-          }
-          isMember={isMember}
-        />
+        {currentUser && (
+          <>
+            <UserAvatar
+              userAvatar={newProfile?.photo}
+              name={newProfile?.name ? newProfile.name : t("userName")}
+              email={
+                newProfile?.user?.email
+                  ? newProfile.user.email
+                  : currentUser?.email
+              }
+              isMember={isMember}
+            />
 
-        <S.TagContainer onPress={handleClick}>
-          <S.ClubTag member={isMember}>
-            <S.TagText member={isMember}>
-              {isMember ? t("clubTagText") : t("noClubTagText")}
-            </S.TagText>
-          </S.ClubTag>
-        </S.TagContainer>
+            <S.TagContainer onPress={handleClick}>
+              <S.ClubTag member={isMember}>
+                <S.TagText member={isMember}>
+                  {isMember ? t("clubTagText") : t("noClubTagText")}
+                </S.TagText>
+              </S.ClubTag>
+            </S.TagContainer>
+          </>
+        )}
 
-        <S.StatisticsContainer>
+        <S.StatisticsContainer additionalTopMargin={userProfile}>
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("donatedTickets")}
