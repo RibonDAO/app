@@ -29,6 +29,7 @@ export const ImageContainer = styled.View`
   position: relative;
   align-items: center;
   justify-content: center;
+  flex: 1;
 `;
 
 export const ContentContainer = styled.View`
