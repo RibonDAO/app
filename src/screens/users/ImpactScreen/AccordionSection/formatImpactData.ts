@@ -25,7 +25,7 @@ function formatUserImpact(
       iconUrl: item.nonProfit.icon || item.nonProfit.coverImage,
       quantity: item.donationCount,
     }))
-    .sort((a, b) => b.quantity - a.quantity );
+    .sort((a, b) => b.quantity - a.quantity);
 }
 
 function formatLegacyUserImpact(legacyUserImpact: LegacyUserImpact[]) {
@@ -34,9 +34,7 @@ function formatLegacyUserImpact(legacyUserImpact: LegacyUserImpact[]) {
     title: item.totalImpact,
     subtitle: item.legacyNonProfit.name,
     iconUrl: item.legacyNonProfit.logoUrl,
-    quantity: item.donationsCount,
-  }))
-  .sort((a, b) => b.quantity - a.quantity );
+  }));
 }
 
 export function formatImpactData(
@@ -50,7 +48,7 @@ export function formatImpactData(
   subtitle: string;
   description?: string | JSX.Element;
   iconUrl: string;
-  quantity: number;
+  quantity?: number;
 }[] {
   const data: ReturnType<typeof formatImpactData> = [];
 

@@ -78,6 +78,17 @@ export const ClubCtaText = styled.Text`
   color: ${theme.colors.neutral10};
 `;
 
+export const StatisticsContainer = styled.View`
+  gap: 12;
+  margin-top: ${(props: { additionalTopMargin: boolean }) => {
+    if (props.additionalTopMargin) {
+      return "100px";
+    } else {
+      return "40px";
+    }
+  }};
+`;
+
 export const TagText = styled.Text`
   ${defaultBodyXsMedium}
 
@@ -88,10 +99,4 @@ export const TagText = styled.Text`
       return theme.colors.neutral[600];
     }
   }}
-`;
-
-export const StatisticsContainer = styled.View`
-  gap: 12;
-  margin-top: ${({ additionalTopMargin }: { additionalTopMargin: boolean }) =>
-    additionalTopMargin ? "100px" : "40px"};
 `;

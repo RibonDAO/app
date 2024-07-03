@@ -100,7 +100,7 @@ function ProfileSection() {
           </>
         )}
 
-        <S.StatisticsContainer additionalTopMargin={userProfile}>
+        <S.StatisticsContainer additionalTopMargin={!currentUser}>
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("donatedTickets")}
