@@ -10,7 +10,7 @@ import {
 } from "lib/localStorage/constants";
 
 import { useIntegrationContext } from "contexts/integrationContext";
-import { PLATFORM } from "utils/constants/Application";
+import { PLATFORM, RIBON_INTEGRATION_ID } from "utils/constants/Application";
 import { todayDate } from "lib/dateUtils";
 import { getLocalStorageItem } from "lib/localStorage";
 import { logError } from "services/crashReport";
@@ -77,6 +77,23 @@ export function useTickets() {
     }
   }
 
+  async function handleCollectDailyTicket({
+    onError,
+    onSuccess,
+  }: HandleCollectProps) {
+    try {
+      await collectByIntegration(
+        RIBON_INTEGRATION_ID,
+        PLATFORM,
+        currentUser?.email ?? "",
+      );
+      if (onSuccess) onSuccess();
+    } catch (e: any) {
+      logError(e);
+      if (onError) onError(e);
+    }
+  }
+
   async function handleCollect({ onError, onSuccess }: HandleCollectProps) {
     try {
       if (externalIds && externalIds.length > 0 && currentIntegrationId) {
@@ -120,5 +137,6 @@ export function useTickets() {
     handleCollect,
     hasReceivedTicketToday,
     handleCollectByClub,
+    handleCollectDailyTicket,
   };
 }
