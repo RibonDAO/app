@@ -23,7 +23,7 @@ export default function DailyTicketCard() {
   const [hasCollected, setHasCollected] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const [time, setTime] = useState<string>("24:00");
-  const { handleCollect } = useTickets();
+  const { handleCollectDailyTicket } = useTickets();
   const { canCollectByIntegration } = useTicketShared();
   const { refetchTickets } = useTicketsContext();
   const { currentUser } = useCurrentUser();
@@ -78,7 +78,7 @@ export default function DailyTicketCard() {
   const handleButtonPress = async () => {
     if (!currentUser) navigateTo("SignInScreen");
     else {
-      await handleCollect({
+      await handleCollectDailyTicket({
         onSuccess: () => {
           handleSuccess();
         },
