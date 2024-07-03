@@ -4,7 +4,7 @@ import * as S from "./styles";
 import StatisticsModal from "./StatisticsModal";
 import { Icon } from "./Icon";
 
-export type IconType = "TicketIconOutlined" | "RibonFlagIcon";
+export type IconType = "TicketColorsIcon" | "CalendarIcon";
 
 type Props = {
   value: number;

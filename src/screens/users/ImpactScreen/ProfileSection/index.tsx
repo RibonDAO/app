@@ -104,14 +104,14 @@ function ProfileSection() {
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("donatedTickets")}
-            icon="TicketIconOutlined"
+            icon="TicketColorsIcon"
             value={userStatistics?.totalTickets || 0}
           />
 
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("daysDoingGood")}
-            icon="RibonFlagIcon"
+            icon="CalendarIcon"
             value={userStatistics?.daysDonating || 0}
           />
         </S.StatisticsContainer>

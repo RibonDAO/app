@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { theme } from "@ribon.io/shared";
-import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import Icon from "components/atomics/Icon";
 import * as S from "./styles";
@@ -57,10 +56,10 @@ function Accordion({
         </S.MainArea>
 
         {isExpanded && isExpansible && (
-          <View>
+          <S.expandedContent>
             <S.DescriptionTitle>{t("equivalent")}</S.DescriptionTitle>
             <S.Description>{description}</S.Description>
-          </View>
+          </S.expandedContent>
         )}
       </S.Content>
     </S.Container>

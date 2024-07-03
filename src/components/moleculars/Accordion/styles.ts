@@ -46,6 +46,10 @@ export const MainArea = styled.View`
   gap: 8px;
 `;
 
+export const expandedContent = styled.View`
+  margin-top: ${theme.spacing(12)};
+`;
+
 export const Content = styled.View`
   flex: 1;
 `;

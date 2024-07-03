@@ -3,11 +3,11 @@ import { screen } from "@testing-library/react-native";
 import StatisticsCard from ".";
 
 describe("StatisticsCard", () => {
-  it("should render correctly with TicketIconOutlined", () => {
+  it("should render correctly with TicketColorsIcon", () => {
     renderComponent(
       <StatisticsCard
         description="Description"
-        icon="TicketIconOutlined"
+        icon="TicketColorsIcon"
         value={100}
         backgroundColor="#000"
       />,
@@ -16,12 +16,12 @@ describe("StatisticsCard", () => {
     expect(screen.getByText("Description")).toBeTruthy();
   });
 
-  it("should render correctly with RibonFlagIcon", () => {
+  it("should render correctly with CalendarIcon", () => {
     renderComponent(
       <StatisticsCard
         value={200}
         description="Another Description"
-        icon="RibonFlagIcon"
+        icon="CalendarIcon"
         backgroundColor=""
       />,
     );

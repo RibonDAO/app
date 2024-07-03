@@ -1,14 +1,14 @@
-import TicketOutlinedIcon from "components/vectors/TicketOutlinedIcon";
-import RibonFlagIcon from "components/vectors/RibonFlagIcon";
+import TicketColorsIcon from "components/vectors/TicketColorsIcon";
+import CalendarIcon from "components/vectors/CalendarIcon";
 import { IconType } from ".";
 
 type IconProps = { icon: IconType };
 export function Icon({ icon }: IconProps) {
   switch (icon) {
-    case "TicketIconOutlined":
-      return <TicketOutlinedIcon />;
-    case "RibonFlagIcon":
-      return <RibonFlagIcon />;
+    case "TicketColorsIcon":
+      return <TicketColorsIcon />;
+    case "CalendarIcon":
+      return <CalendarIcon />;
     default:
       return null;
   }
