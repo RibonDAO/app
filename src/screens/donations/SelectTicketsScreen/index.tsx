@@ -18,8 +18,8 @@ import { useTasksContext } from "contexts/tasksContext";
 import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
 import { useUserProfile } from "@ribon.io/shared/hooks";
 import DonationInProgressSection from "../auth/DonationInProgressSection";
+import Lottie3Steps from "./Lottie3Steps";
 import * as S from "./styles";
-import Background from "./assets/Background";
 
 export default function SelectTicketsScreen() {
   const { t } = useTranslation("translation", {
@@ -162,7 +162,11 @@ export default function SelectTicketsScreen() {
             rightComponent={<TicketSection hasDividerBorder={false} />}
           />
           <S.ImageContainer>
-            <Background />
+            <Lottie3Steps
+              rangeSize={tickets}
+              step={step || 1}
+              value={ticketsQuantity}
+            />
             <S.ImageOverlayContainer>
               <ImageWithIconOverlay
                 leftImage={profile?.photo}

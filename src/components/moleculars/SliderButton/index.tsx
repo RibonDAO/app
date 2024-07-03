@@ -30,6 +30,9 @@ function SliderButton({
     setValue(newValue);
   };
 
+  const minimumValue = rangeSize < 2 * step ? 0 : step;
+  const maximumValue = Math.floor(rangeSize / step) * step;
+
   const minusDisabled = sliderValue <= step;
   const plusDisabled = sliderValue + step > rangeSize;
 
@@ -70,12 +73,12 @@ function SliderButton({
       </S.Button>
       <S.SliderContainer>
         <Slider
-          minimumValue={rangeSize < 2 * step ? 0 : step}
-          maximumValue={rangeSize < 2 * step ? step : rangeSize}
+          minimumValue={minimumValue}
+          maximumValue={maximumValue}
           step={step}
           value={sliderValue}
           onValueChange={handleSliderChange}
-          disabled={rangeSize === 1}
+          disabled={rangeSize < 2 * step}
           minimumTrackTintColor={theme.colors.brand.primary[600]}
           maximumTrackTintColor={theme.colors.neutral[200]}
           thumbStyle={thumbStyle}
