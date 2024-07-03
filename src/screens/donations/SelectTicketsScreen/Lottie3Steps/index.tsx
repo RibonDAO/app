@@ -27,15 +27,19 @@ export default function Lottie3Steps({
   const animationRef2 = useRef<Lottie>(null);
   const animationRef3 = useRef<Lottie>(null);
 
-  const minimumValue = rangeSize < 2 * step ? 0 : step;
+  const minimumValue = step;
   const maximumValue = Math.floor(rangeSize / step) * step;
 
   const removeDups = (arr: number[]): number[] => [...new Set(arr)];
 
   const steps = removeDups([
     minimumValue,
-    Math.floor(maximumValue / 3),
-    Math.floor((2 * maximumValue) / 3),
+    Math.floor(maximumValue / 3) % step !== 0
+      ? minimumValue
+      : Math.floor(maximumValue / 3),
+    Math.floor((2 * maximumValue) / 3) % step !== 0
+      ? minimumValue
+      : Math.floor((2 * maximumValue) / 3),
     maximumValue,
   ]);
 
