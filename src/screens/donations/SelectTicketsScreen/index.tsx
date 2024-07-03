@@ -1,10 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { Keyboard, Platform, View } from "react-native";
+import { Platform } from "react-native";
 import { useRouteParams } from "hooks/useRouteParams";
 import Header from "components/moleculars/Header";
 import { theme } from "@ribon.io/shared/styles";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
-import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
 import { useCallback, useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
@@ -16,7 +15,10 @@ import { useTicketsContext } from "contexts/ticketsContext";
 import { useFocusEffect } from "@react-navigation/native";
 import useDonationFlow from "hooks/useDonationFlow";
 import { useTasksContext } from "contexts/tasksContext";
+import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
+import { useUserProfile } from "@ribon.io/shared/hooks";
 import DonationInProgressSection from "../auth/DonationInProgressSection";
+import Lottie3Steps from "./Lottie3Steps";
 import * as S from "./styles";
 
 export default function SelectTicketsScreen() {
@@ -31,7 +33,8 @@ export default function SelectTicketsScreen() {
   const { handleDonate } = useDonationFlow();
   const { ticketsCounter: tickets, refetchTickets } = useTicketsContext();
   const { nonProfit } = params;
-
+  const { userProfile } = useUserProfile();
+  const { profile } = userProfile();
   const [isDonating, setIsDonating] = useState(false);
   const [donationSucceeded, setDonationSucceeded] = useState(true);
   const [shouldRepeatAnimation, setShouldRepeatAnimation] = useState(true);
@@ -134,6 +137,12 @@ export default function SelectTicketsScreen() {
     }
   }, [nonProfit]);
 
+  useEffect(() => {
+    logEvent("P40_view", {
+      nonProfitId: nonProfit.id,
+    });
+  }, [nonProfit]);
+
   return (
     <S.KeyboardView
       behavior="position"
@@ -146,52 +155,56 @@ export default function SelectTicketsScreen() {
           shouldRepeatAnimation={shouldRepeatAnimation}
         />
       ) : (
-        <View>
+        <S.Container>
           <Header
             hasBackButton
             backButtonColor={theme.colors.brand.primary[600]}
             rightComponent={<TicketSection hasDividerBorder={false} />}
           />
-          <S.Container accessibilityRole="button" onPress={Keyboard.dismiss}>
-            <S.MainContainer>
-              <S.ImageContainer>
-                <S.Image
-                  source={{ uri: nonProfit.icon }}
-                  accessibilityIgnoresInvertColors
+          <S.ImageContainer>
+            <Lottie3Steps
+              rangeSize={tickets}
+              step={step || 1}
+              value={ticketsQuantity}
+            />
+            <S.ImageOverlayContainer>
+              <ImageWithIconOverlay
+                leftImage={profile?.photo}
+                rightImage={nonProfit?.icon}
+              />
+            </S.ImageOverlayContainer>
+          </S.ImageContainer>
+          <S.ContentContainer>
+            <S.TextContainer>
+              <S.Title>{t("title")}</S.Title>
+              <S.Subtitle>
+                {t("prefix")}
+                {formattedImpactText(nonProfit, currentImpact, false, false)}
+              </S.Subtitle>
+            </S.TextContainer>
+            <S.SliderContainer>
+              <TicketIconText
+                quantity={ticketsQuantity}
+                hasDividerBorder={false}
+                buttonDisabled
+              />
+              {step && (
+                <SliderButton
+                  rangeSize={tickets}
+                  setValue={setTicketsQuantity}
+                  step={step}
                 />
-              </S.ImageContainer>
-              <S.ContentContainer>
-                <S.Title>{t("title")}</S.Title>
-                <S.Subtitle>
-                  {formattedImpactText(nonProfit, currentImpact, false, true)}
-                </S.Subtitle>
-                <TicketIconText
-                  quantity={ticketsQuantity}
-                  hasDividerBorder={false}
-                  buttonDisabled
-                />
-                {step && (
-                  <SliderButton
-                    rangeSize={tickets}
-                    setValue={setTicketsQuantity}
-                    step={step}
-                  />
-                )}
-                <Button
-                  text={t("buttonText")}
-                  textColor={theme.colors.neutral10}
-                  backgroundColor={theme.colors.brand.primary[600]}
-                  borderColor={theme.colors.neutral[300]}
-                  onPress={handleButtonPress}
-                  customStyles={{
-                    height: 48,
-                    marginTop: 32,
-                  }}
-                />
-              </S.ContentContainer>
-            </S.MainContainer>
-          </S.Container>
-        </View>
+              )}
+            </S.SliderContainer>
+            <S.Button onPress={handleButtonPress}>
+              <S.Text>
+                {t(ticketsQuantity > 1 ? "buttonTextPlural" : "buttonText", {
+                  quantity: ticketsQuantity,
+                })}
+              </S.Text>
+            </S.Button>
+          </S.ContentContainer>
+        </S.Container>
       )}
     </S.KeyboardView>
   );

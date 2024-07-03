@@ -20,7 +20,7 @@ describe("SelectTicketsScreen", () => {
   });
 
   it("should render without error", async () => {
-    expectTextToBeInTheDocument("Choose the size of your help");
-    expectTextToBeInTheDocument("Continue");
+    expectTextToBeInTheDocument("You're about to donate:");
+    expectTextToBeInTheDocument("Donate 1 ticket");
   });
 });

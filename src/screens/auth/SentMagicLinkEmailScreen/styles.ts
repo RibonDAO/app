@@ -10,9 +10,12 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: theme.spacingNative(16),
     paddingVertical: theme.spacingNative(48),
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
   },
   imageContainer: {
-    marginTop: theme.spacingNative(24),
     marginBottom: theme.spacingNative(24),
     alignItems: "center",
     justifyContent: "center",

@@ -78,6 +78,8 @@ function CheckBox({
         <Text
           style={{
             ...styles.paragraph,
+            flexShrink: 1,
+            flexWrap: "wrap",
             textDecorationLine:
               isChecked && lineThroughOnChecked ? "line-through" : "none",
           }}

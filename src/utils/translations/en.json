@@ -143,7 +143,6 @@
       "unauthorizedModalButtonText": "Validate my account"
     },
     "donateScreen": {
-      "nonProfitText": "You are donating to",
       "description": "Enter your e-mail to use your donation ticket",
       "title": "Place your e-mail to donate",
       "textInputPlaceholder": "Place your e-mail",
@@ -153,32 +152,31 @@
       "donateText": "Donate",
       "continueText": "Continue",
       "animationText": "Donating ticket",
-      "agreementText": "By clicking Continue I agree on Ribon’s",
+      "agreementText": "By clicking \"Continue\" you agree on Ribon’s ",
       "termsText": "Terms",
       "termsLink": "https://ribon.io/en/privacy-policy/#terms",
       "privacyPolicyText": "Privacy Policy",
       "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
-      "and": " and",
+      "and": " and ",
+      "ribon": "",
       "signedInScreen": {
         "title": "Your donation",
         "confirmDonation": "Confirm donation",
         "donationError": "Unable to donate now"
       }
     },
+    "donationInProgress": {
+      "loadingText": "Processing your donation..."
+    },
     "donationDoneScreen": {
-      "title": "Thanks for donating!",
-      "description": "You donated",
+      "title": "Thank you for donating!",
+      "description": "You donated the equivalent of",
       "checkboxText": "I want to receive information about my donations by e-mail",
-      "buttonTitle": "Finish"
+      "buttonTitle": "Continue"
     },
     "postDonationScreen": {
-      "title": "If you want, you can do more",
-      "buttonText": "Donate later",
-      "contributionImage": {
-        "donateFor": "Donate {{value}} for",
-        "labelTitle": "Boosted donation",
-        "buttonText": "Donate now"
-      }
+      "title": "Enjoy this moment...",
+      "buttonText": "Finish"
     },
     "receiveTicketScreen": {
       "textOrigin": "Community",
@@ -187,12 +185,12 @@
     },
     "auth": {
       "signInScreen": {
-        "title": "You are donating",
+        "title": "You're about to donate:",
+        "impactDescription": "The equivalent of ",
         "google": "Continue with Google",
         "apple": "Continue with Apple",
         "email": "Continue with e-mail",
         "impactOneLife": "Impact 1 person",
-        "impactDescription": "with {{value}}",
         "checkboxText": "I agree to receive emails with information about my donations"
       },
       "insertEmailAccountScreen": {
@@ -203,8 +201,10 @@
       }
     },
     "selectTicketsScreen": {
-      "title": "Choose the size of your help",
-      "buttonText": "Continue"
+      "title": "You're about to donate:",
+      "prefix": "The equivalent of ",
+      "buttonTextPlural": "Donate {{quantity}} tickets",
+      "buttonText": "Donate {{quantity}} ticket"
     }
   },
   "content": {
