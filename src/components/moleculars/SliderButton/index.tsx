@@ -30,7 +30,7 @@ function SliderButton({
     setValue(newValue);
   };
 
-  const minimumValue = rangeSize < 2 * step ? 0 : step;
+  const minimumValue = step;
   const maximumValue = Math.floor(rangeSize / step) * step;
 
   const minusDisabled = sliderValue <= step;
