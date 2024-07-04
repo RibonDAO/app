@@ -42,7 +42,6 @@ export const ContentContainer = styled.View`
 
 export const Subtitle = styled.Text`
   ${defaultBodyMdMedium}
-  height: 48px;
   text-align: center;
   color: ${theme.colors.neutral[600]};
   margin-bottom: ${theme.spacing(4)};
@@ -80,6 +79,8 @@ export const ImageOverlayContainer = styled.View`
 `;
 
 export const TextContainer = styled.View`
+  display: flex;
+  flex-direction: column;
   gap: ${theme.spacing(8)};
   align-items: center;
 `;
