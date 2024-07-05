@@ -21,9 +21,10 @@ type ImpactList = ImpactListItem[];
 type Props = {
   impactList: ImpactList;
   header?: ReactElement;
+  footer?: ReactElement;
 };
 
-function AccordionList({ impactList, header }: Props) {
+function AccordionList({ impactList, header, footer }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "users.impactScreen.impactList",
   });
@@ -31,6 +32,7 @@ function AccordionList({ impactList, header }: Props) {
   return (
     <SectionList
       ListHeaderComponent={header}
+      ListFooterComponent={footer}
       ItemSeparatorComponent={S.ItemSeparator}
       sections={impactList}
       keyExtractor={({ id }) => id.toString()}

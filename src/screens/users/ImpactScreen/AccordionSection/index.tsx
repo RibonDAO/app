@@ -4,7 +4,9 @@ import AccordionList from "components/moleculars/AccordionList";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useImpact, useLegacyImpact } from "@ribon.io/shared";
 import { useFormattedImpactText } from "hooks/useFormattedImpactText";
-import S from "./styles";
+import Button from "components/atomics/buttons/Button";
+import { useState } from "react";
+import * as S from "./styles";
 import ProfileSection from "../ProfileSection";
 import { formatImpactData } from "./formatImpactData";
 
@@ -17,6 +19,7 @@ function AccordionSection(): JSX.Element {
   const { userImpact } = useImpact(currentUser?.id);
   const { legacyUserImpact } = useLegacyImpact(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
+  const [showInactive, setShowInactive] = useState(false);
 
   const impactList = [
     {
@@ -40,15 +43,31 @@ function AccordionSection(): JSX.Element {
     },
   ];
 
+  const filteredImpactList = showInactive
+    ? impactList
+    : impactList.filter((item) => item.title !== t("inactiveProjects"));
+
   const isImpactListEmpty = !(
     impactList[0].data.length || impactList[1].data.length
   );
 
   return (
-    <View style={S.tabViewSection}>
+    <View style={S.styles.tabViewSection}>
       <AccordionList
         header={<ProfileSection />}
-        impactList={isImpactListEmpty ? [] : impactList}
+        impactList={isImpactListEmpty ? [] : filteredImpactList}
+        footer={
+          <S.InactiveButtonContainer displayButton={showInactive}>
+            <Button
+              onPress={() => {
+                setShowInactive(true);
+              }}
+              text="Mostrar projetos inativos"
+              outline
+              customStyles={{}}
+            />
+          </S.InactiveButtonContainer>
+        }
       />
     </View>
   );

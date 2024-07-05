@@ -1,7 +1,8 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
+import styled from "styled-components/native";
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   tabViewSection: {
     maxHeight: Dimensions.get("window").height,
     paddingBottom: theme.spacingNative(80) - theme.spacingNative(112),
@@ -31,4 +32,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export const InactiveButtonContainer = styled.View`
+  margin: 32px 65px;
+  ${(props: { displayButton: boolean }) =>
+    props.displayButton ? "display: none" : ""};
+`;
