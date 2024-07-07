@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as S from "./styles";
 import StatisticsModal from "./StatisticsModal";
-import { Icon } from "./Icon";
 
 export type IconType = "TicketIconOutlined" | "RibonFlagIcon";
 
 type Props = {
   value: number;
   description: string;
-  icon: IconType;
+  icon: ReactNode;
   backgroundColor: string;
 };
 
@@ -25,9 +24,7 @@ function StatisticsCard({ value, description, icon, backgroundColor }: Props) {
         <S.Number>{value}</S.Number>
         <S.Text>{description}</S.Text>
       </S.Left>
-      <S.Right>
-        <Icon icon={icon} />
-      </S.Right>
+      <S.Right>{icon}</S.Right>
       <StatisticsModal
         type={description === t("donatedTickets") ? "tickets" : "daysDonating"}
         visible={modalVisible}

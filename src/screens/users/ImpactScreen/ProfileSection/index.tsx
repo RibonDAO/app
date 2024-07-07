@@ -16,6 +16,7 @@ import ProfileTopShape from "components/vectors/ProfileTopShape";
 import StatisticsCard from "components/moleculars/StatisticsCard";
 import { theme } from "@ribon.io/shared";
 import HeaderButtons from "components/moleculars/HeaderButtons";
+import { Icon } from "components/moleculars/StatisticsCard/Icon";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
 
@@ -104,14 +105,14 @@ function ProfileSection() {
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("donatedTickets")}
-            icon="TicketIconOutlined"
+            icon={<Icon icon="TicketIconOutlined" />}
             value={userStatistics?.totalTickets || 0}
           />
 
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("daysDoingGood")}
-            icon="RibonFlagIcon"
+            icon={<Icon icon="RibonFlagIcon" />}
             value={userStatistics?.daysDonating || 0}
           />
         </S.StatisticsContainer>
