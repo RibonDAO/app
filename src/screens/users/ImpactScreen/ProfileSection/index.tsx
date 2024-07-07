@@ -16,8 +16,9 @@ import ProfileTopShape from "components/vectors/ProfileTopShape";
 import StatisticsCard from "components/moleculars/StatisticsCard";
 import { theme } from "@ribon.io/shared";
 import HeaderButtons from "components/moleculars/HeaderButtons";
-import { Icon } from "components/moleculars/StatisticsCard/Icon";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
+import RibonFlagIcon from "components/vectors/RibonFlagIcon";
+import TicketOutlinedIcon from "components/vectors/TicketOutlinedIcon";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
 
@@ -109,7 +110,7 @@ function ProfileSection() {
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("donatedTickets")}
-            icon={<Icon icon="TicketIconOutlined" />}
+            icon={<TicketOutlinedIcon />}
             value={userStatistics?.totalTickets || 0}
             handlePress={() => setDonatedTicketsModalVisible(true)}
           />
@@ -129,7 +130,7 @@ function ProfileSection() {
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("daysDoingGood")}
-            icon={<Icon icon="RibonFlagIcon" />}
+            icon={<RibonFlagIcon />}
             value={userStatistics?.daysDonating || 0}
             handlePress={() => setDaysDonatingModalVisible(true)}
           />

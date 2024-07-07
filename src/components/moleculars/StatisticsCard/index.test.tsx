@@ -1,14 +1,13 @@
 import { renderComponent } from "config/testUtils/renders";
 import { screen } from "@testing-library/react-native";
 import StatisticsCard from ".";
-import { Icon } from "./Icon";
 
 describe("StatisticsCard", () => {
   it("should render correctly with TicketIconOutlined", () => {
     renderComponent(
       <StatisticsCard
         description="Description"
-        icon={<Icon icon="TicketIconOutlined" />}
+        icon={null}
         value={100}
         backgroundColor="#000"
         handlePress={() => {}}
@@ -23,7 +22,7 @@ describe("StatisticsCard", () => {
       <StatisticsCard
         value={200}
         description="Another Description"
-        icon={<Icon icon="TicketIconOutlined" />}
+        icon={null}
         backgroundColor=""
         handlePress={() => {}}
       />,
