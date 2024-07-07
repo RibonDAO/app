@@ -1,7 +1,5 @@
-import { ReactNode, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { ReactNode } from "react";
 import * as S from "./styles";
-import StatisticsModal from "./StatisticsModal";
 
 export type IconType = "TicketIconOutlined" | "RibonFlagIcon";
 
@@ -10,26 +8,23 @@ type Props = {
   description: string;
   icon: ReactNode;
   backgroundColor: string;
+  handlePress: () => void;
 };
 
-function StatisticsCard({ value, description, icon, backgroundColor }: Props) {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "users.impactScreen.profileSection",
-  });
-  const [modalVisible, setModalVisible] = useState(false);
-
+function StatisticsCard({
+  value,
+  description,
+  icon,
+  backgroundColor,
+  handlePress,
+}: Props) {
   return (
-    <S.Container color={backgroundColor} onPress={() => setModalVisible(true)}>
+    <S.Container color={backgroundColor} onPress={handlePress}>
       <S.Left>
         <S.Number>{value}</S.Number>
         <S.Text>{description}</S.Text>
       </S.Left>
       <S.Right>{icon}</S.Right>
-      <StatisticsModal
-        type={description === t("donatedTickets") ? "tickets" : "daysDonating"}
-        visible={modalVisible}
-        setVisible={setModalVisible}
-      />
     </S.Container>
   );
 }

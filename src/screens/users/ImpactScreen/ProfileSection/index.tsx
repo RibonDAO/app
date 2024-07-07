@@ -17,6 +17,7 @@ import StatisticsCard from "components/moleculars/StatisticsCard";
 import { theme } from "@ribon.io/shared";
 import HeaderButtons from "components/moleculars/HeaderButtons";
 import { Icon } from "components/moleculars/StatisticsCard/Icon";
+import ModalDialog from "components/moleculars/modals/ModalDialog";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
 
@@ -38,8 +39,11 @@ function ProfileSection() {
   const { userStatistics } = useStatistics({
     userId: currentUser?.id ?? undefined,
   });
-
   const { profile, refetch } = userProfile();
+  const [donatedTicketsModalVisible, setDonatedTicketsModalVisible] =
+    useState(false);
+  const [daysDonatingModalVisible, setDaysDonatingModalVisible] =
+    useState(false);
 
   useFocusEffect(
     useCallback(() => {
@@ -107,6 +111,19 @@ function ProfileSection() {
             description={t("donatedTickets")}
             icon={<Icon icon="TicketIconOutlined" />}
             value={userStatistics?.totalTickets || 0}
+            handlePress={() => setDonatedTicketsModalVisible(true)}
+          />
+          <ModalDialog
+            setVisible={setDonatedTicketsModalVisible}
+            visible={donatedTicketsModalVisible}
+            title={t("donatedTickets")}
+            description={t("donatedTicketsDescription")}
+            primaryButton={{
+              text: "Fechar",
+              onPress() {
+                setDonatedTicketsModalVisible(false);
+              },
+            }}
           />
 
           <StatisticsCard
@@ -114,6 +131,19 @@ function ProfileSection() {
             description={t("daysDoingGood")}
             icon={<Icon icon="RibonFlagIcon" />}
             value={userStatistics?.daysDonating || 0}
+            handlePress={() => setDaysDonatingModalVisible(true)}
+          />
+          <ModalDialog
+            setVisible={setDaysDonatingModalVisible}
+            visible={daysDonatingModalVisible}
+            title={t("daysDoingGood")}
+            description={t("daysDoingGoodDescription")}
+            primaryButton={{
+              text: "Fechar",
+              onPress() {
+                setDaysDonatingModalVisible(false);
+              },
+            }}
           />
         </S.StatisticsContainer>
       </S.CenterContainer>

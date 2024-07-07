@@ -11,6 +11,7 @@ describe("StatisticsCard", () => {
         icon={<Icon icon="TicketIconOutlined" />}
         value={100}
         backgroundColor="#000"
+        handlePress={() => {}}
       />,
     );
     expect(screen.getByText("100")).toBeTruthy();
@@ -24,6 +25,7 @@ describe("StatisticsCard", () => {
         description="Another Description"
         icon={<Icon icon="TicketIconOutlined" />}
         backgroundColor=""
+        handlePress={() => {}}
       />,
     );
     expect(screen.getByText("200")).toBeTruthy();
