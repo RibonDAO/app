@@ -156,11 +156,13 @@ export default function SelectTicketsScreen() {
         />
       ) : (
         <S.Container>
-          <Header
-            hasBackButton
-            backButtonColor={theme.colors.brand.primary[600]}
-            rightComponent={<TicketSection hasDividerBorder={false} />}
-          />
+          <S.HeaderContainer>
+            <Header
+              hasBackButton
+              backButtonColor={theme.colors.brand.primary[600]}
+              rightComponent={<TicketSection hasDividerBorder={false} />}
+            />
+          </S.HeaderContainer>
           <S.ImageContainer>
             <Lottie3Steps
               rangeSize={tickets}

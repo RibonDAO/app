@@ -17,8 +17,12 @@ export const Container = styled.View`
   display: flex;
   justify-content: space-between;
   flex: 3;
+  z-index: 0;
 `;
 
+export const HeaderContainer = styled.View`
+  z-index: 1;
+`;
 export const KeyboardView = styled.View`
   height: ${Platform.OS === "android"
     ? Dimensions.get("window").height
