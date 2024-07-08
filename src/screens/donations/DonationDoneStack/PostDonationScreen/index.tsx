@@ -31,31 +31,33 @@ function PostDonationScreen() {
   };
 
   return isLoading ? null : (
-    <S.Container>
-      <S.TopContainer>
-        <LottieAnimation
-          animationData={postDonationAnimation}
-          width={428}
-          height={428}
-        />
-      </S.TopContainer>
-      <S.ContentContainer>
-        <S.Title>{t("title")}</S.Title>
-        <S.Description>{warmGlowMessage?.message}</S.Description>
-      </S.ContentContainer>
+    <>
+      <S.Container>
+        <S.TopContainer>
+          <LottieAnimation
+            animationData={postDonationAnimation}
+            width={428}
+            height={428}
+          />
+        </S.TopContainer>
+        <S.ContentContainer>
+          <S.Title>{t("title")}</S.Title>
+          <S.Description>{warmGlowMessage?.message}</S.Description>
+        </S.ContentContainer>
 
-      <Button
-        onPress={handleNavigate}
-        text={t("buttonText")}
-        customTextStyles={{
-          color: theme.colors.neutral10,
-        }}
-        customStyles={{
-          backgroundColor: theme.colors.brand.primary[600],
-          borderColor: theme.colors.brand.primary[800],
-          borderRadius: 12,
-        }}
-      />
+        <Button
+          onPress={handleNavigate}
+          text={t("buttonText")}
+          customTextStyles={{
+            color: theme.colors.neutral10,
+          }}
+          customStyles={{
+            backgroundColor: theme.colors.brand.primary[600],
+            borderColor: theme.colors.brand.primary[800],
+            borderRadius: 12,
+          }}
+        />
+      </S.Container>
       <S.BackgroundSun>
         <LottieAnimation
           animationData={sunAnimation}
@@ -63,7 +65,7 @@ function PostDonationScreen() {
           height={262}
         />
       </S.BackgroundSun>
-    </S.Container>
+    </>
   );
 }
 
