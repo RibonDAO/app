@@ -18,6 +18,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useRouteParams } from "hooks/useRouteParams";
 import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import { useAuthentication } from "contexts/authenticationContext";
+import * as StoreReview from "expo-store-review";
 import Header from "./Header";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
@@ -69,6 +70,11 @@ export default function CausesScreen() {
     [integration, hasTickets],
   );
 
+  const shouldAskForReview = useMemo(
+    () => donatedToday && currentUser,
+    [donatedToday, currentUser],
+  );
+
   const { userIsMember } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
 
@@ -88,9 +94,18 @@ export default function CausesScreen() {
     }
   };
 
+  const askForReview = async () => {
+    if (await StoreReview.isAvailableAsync()) {
+      StoreReview.requestReview();
+    }
+  };
+
   useEffect(() => {
     if (isLoading) return;
     requestTrackingPermissionsAsync();
+    if (shouldAskForReview) {
+      askForReview();
+    }
   }, [isLoading]);
 
   const renderHeader = useCallback(
