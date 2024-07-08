@@ -83,6 +83,7 @@ export const ImageOverlayContainer = styled.View`
 `;
 
 export const TextContainer = styled.View`
+  height: 120px;
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing(8)};
