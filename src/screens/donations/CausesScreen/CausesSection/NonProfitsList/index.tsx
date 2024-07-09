@@ -5,6 +5,7 @@ import { useNavigation } from "hooks/useNavigation";
 import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
 
 import { FlatList, SafeAreaView } from "react-native";
+import { useTagDonationContext } from "contexts/tagDonationContext";
 import * as S from "./styles";
 import NonProfitCarousel from "./NonProfitCarousel";
 
@@ -18,12 +19,18 @@ export default function NonProfitsList({ nonProfits }: Props) {
   });
 
   const { navigateTo } = useNavigation();
+  const { nonProfitsTag } = useTagDonationContext();
 
   return nonProfits.length ? (
     <SafeAreaView style={{ flex: 1 }}>
       <FlatList
         data={nonProfits}
-        renderItem={({ item }) => <NonProfitCarousel nonProfit={item} />}
+        renderItem={({ item }) => (
+          <NonProfitCarousel
+            nonProfit={item}
+            show={nonProfitsTag?.map((np) => np.id).includes(item.id) ?? false}
+          />
+        )}
         keyExtractor={(nonProfit) => nonProfit.id.toString()}
       />
     </SafeAreaView>

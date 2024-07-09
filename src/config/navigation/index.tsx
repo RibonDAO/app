@@ -490,10 +490,7 @@ function RootNavigator() {
         name="SentMagicLinkEmailScreen"
         component={SentMagicLinkEmailScreen}
         options={{
-          headerShown: true,
-          headerLeft: () => <ArrowBackButton />,
-          headerTitle: "",
-          headerShadowVisible: false,
+          headerShown: false,
         }}
       />
 
@@ -586,10 +583,10 @@ export default function Navigation() {
                   <CardPaymentInformationProvider>
                     <PixPaymentInformationProvider>
                       <CausesProvider>
-                        <TagsProvider>
-                          <TagDonationProvider>
-                            <CauseContributionProvider>
-                              <NonProfitsProvider>
+                        <NonProfitsProvider>
+                          <TagsProvider>
+                            <TagDonationProvider>
+                              <CauseContributionProvider>
                                 <IntegrationProvider>
                                   <CouponProvider>
                                     <TicketsProvider>
@@ -602,10 +599,10 @@ export default function Navigation() {
                                     </TicketsProvider>
                                   </CouponProvider>
                                 </IntegrationProvider>
-                              </NonProfitsProvider>
-                            </CauseContributionProvider>
-                          </TagDonationProvider>
-                        </TagsProvider>
+                              </CauseContributionProvider>
+                            </TagDonationProvider>
+                          </TagsProvider>
+                        </NonProfitsProvider>
                       </CausesProvider>
                     </PixPaymentInformationProvider>
                   </CardPaymentInformationProvider>

@@ -12,7 +12,7 @@ export const Container = styled.View`
   flex-direction: column;
 `;
 
-export const ConfigContainer = styled.TouchableOpacity`
+export const ConfigContainer = styled.Pressable`
   display: flex;
   height: 30px;
   flex-direction: row;

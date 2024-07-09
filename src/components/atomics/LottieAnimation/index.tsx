@@ -1,12 +1,15 @@
 import Lottie, { AnimationObject } from "lottie-react-native";
+import { useEffect, useRef } from "react";
 import { StyleProp } from "react-native";
 
 export type Props = {
   animationData: string | AnimationObject;
-  width: number;
+  width: number | string;
   height: number;
   speed?: number;
   style?: StyleProp<any>;
+  startFrame?: number;
+  endFrame?: number;
 };
 
 function LottieAnimation({
@@ -15,14 +18,27 @@ function LottieAnimation({
   height,
   style,
   speed,
+  startFrame,
+  endFrame,
 }: Props): JSX.Element {
+  const animationRef = useRef<Lottie>(null);
+
+  useEffect(() => {
+    if (startFrame && endFrame)
+      animationRef.current?.play(startFrame, endFrame);
+  }, []);
+
+  const handleAnimationEnd = () => {
+    if (startFrame && endFrame) animationRef.current?.play(0, endFrame);
+  };
   return (
     <Lottie
-      loop
-      autoPlay
+      loop={!(startFrame && endFrame)}
+      autoPlay={!(startFrame && endFrame)}
       source={animationData}
       style={{ width, height, ...style }}
-      testID="loader"
+      ref={animationRef}
+      onAnimationFinish={handleAnimationEnd}
       speed={speed}
     />
   );
