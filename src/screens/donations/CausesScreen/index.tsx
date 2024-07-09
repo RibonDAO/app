@@ -69,6 +69,7 @@ export default function CausesScreen() {
       integration?.uniqueAddress !== INTEGRATION_AUTH_ID,
     [integration, hasTickets],
   );
+
   const { userIsMember } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
 
@@ -97,7 +98,7 @@ export default function CausesScreen() {
   useEffect(() => {
     if (isLoading) return;
     requestTrackingPermissionsAsync();
-  }, []);
+  }, [isLoading]);
 
   useEffect(() => {
     if (isLoading) return;
