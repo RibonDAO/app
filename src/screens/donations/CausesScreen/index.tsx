@@ -69,12 +69,6 @@ export default function CausesScreen() {
       integration?.uniqueAddress !== INTEGRATION_AUTH_ID,
     [integration, hasTickets],
   );
-
-  const shouldAskForReview = useMemo(
-    () => donatedToday && currentUser,
-    [donatedToday, currentUser],
-  );
-
   const { userIsMember } = useSubscriptions();
   const { isMember, refetch: refetchIsMember } = userIsMember();
 
@@ -103,10 +97,14 @@ export default function CausesScreen() {
   useEffect(() => {
     if (isLoading) return;
     requestTrackingPermissionsAsync();
-    if (shouldAskForReview) {
+  }, []);
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (params?.shouldAskForReview) {
       askForReview();
     }
-  }, [isLoading]);
+  }, [params?.shouldAskForReview, isLoading]);
 
   const renderHeader = useCallback(
     () => (
