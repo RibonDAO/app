@@ -9,6 +9,7 @@ import { FlatList } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "contexts/languageContext";
 import { Image as ExpoImage } from "expo-image";
+import { useAuthentication } from "contexts/authenticationContext";
 import CardNonProfit from "./components/CardNonProfit";
 import CardNonProfitStories from "./components/CardNonProfitStories";
 import * as S from "./styles";
@@ -17,9 +18,14 @@ import LastCard from "./components/LastCard";
 export type Props = {
   nonProfit: NonProfit;
   show: boolean;
+  setUnauthorizedModalVisible: (value: boolean) => void;
 };
 
-function NonProfitCarousel({ nonProfit, show }: Props) {
+function NonProfitCarousel({
+  nonProfit,
+  show,
+  setUnauthorizedModalVisible,
+}: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
@@ -27,6 +33,7 @@ function NonProfitCarousel({ nonProfit, show }: Props) {
   const { hasTickets, ticketsCounter } = useTicketsContext();
   const { signedIn } = useCurrentUser();
   const { currentLang } = useLanguage();
+  const { isAuthenticated } = useAuthentication();
 
   const currentCurrency =
     currentLang === "pt-BR" ? Currencies.BRL : Currencies.USD;
@@ -55,14 +62,20 @@ function NonProfitCarousel({ nonProfit, show }: Props) {
       nonProfitId: nonProfit.id,
       from: "nonprofitCard",
     });
-    navigateTo("CheckoutScreen", {
-      nonProfit,
-      cause: nonProfit.cause,
-      target: "non_profit",
-      targetId: nonProfit.id,
-      offer: 0,
-      currency: currentCurrency,
-    });
+    if (isAuthenticated()) {
+      navigateTo("CheckoutScreen", {
+        nonProfit,
+        cause: nonProfit.cause,
+        target: "non_profit",
+        targetId: nonProfit.id,
+        offer: 0,
+        currency: currentCurrency,
+      });
+    } else if (signedIn) {
+      setUnauthorizedModalVisible(true);
+    } else {
+      navigateTo("SignInScreen", { from: "nonprofitCard" });
+    }
   };
 
   type RenderItemProps = {

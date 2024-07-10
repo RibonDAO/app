@@ -17,7 +17,10 @@ const mockNonProfit2 = nonProfitFactory({
 describe("NonProfitsList", () => {
   beforeEach(async () => {
     renderComponent(
-      <NonProfitsList nonProfits={[mockNonProfit1, mockNonProfit2]} />,
+      <NonProfitsList
+        nonProfits={[mockNonProfit1, mockNonProfit2]}
+        setUnauthorizedModalVisible={jest.fn()}
+      />,
       {
         tagDonationProviderValue: {
           nonProfitsTag: [mockNonProfit1, mockNonProfit2],

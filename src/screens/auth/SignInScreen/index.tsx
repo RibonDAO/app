@@ -17,8 +17,11 @@ import AppleLogin from "components/moleculars/buttons/AppleLogin";
 import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
-function SignInScreen() {
-  usePageView("P27_view", { from: "direct_flow" });
+type Props = {
+  from?: string;
+};
+function SignInScreen({ from = "direct_flow" }: Props) {
+  usePageView("P27_view", { from });
   const { t } = useTranslation("translation", {
     keyPrefix: "auth.signInScreen",
   });
