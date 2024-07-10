@@ -7,6 +7,8 @@ import usePageView from "hooks/usePageView";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useCurrentUser } from "contexts/currentUserContext";
 import LottieAnimation from "components/atomics/LottieAnimation";
+import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
+import { DONATION_COUNT } from "lib/localStorage/constants";
 import postDonationAnimation from "./assets/postDonationAnimation.json";
 import sunAnimation from "./assets/sunAnimation.json";
 import * as S from "./styles";
@@ -22,11 +24,29 @@ function PostDonationScreen() {
   const { navigateTo } = useNavigation();
   const { warmGlowMessage, isLoading } = useWarmGlowMessages();
 
-  const handleNavigate = () => {
+  const shouldAskForReview = async () => {
+    const donations = await getLocalStorageItem(DONATION_COUNT);
+    let donationCount = donations ? parseInt(donations, 10) : 0;
+    donationCount += 1;
+
+    await setLocalStorageItem(DONATION_COUNT, donationCount.toString());
+    if (donationCount === 2) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const handleNavigate = async () => {
     if (!isAuthenticated()) {
       navigateTo("SentMagicLinkEmailScreen", { email: currentUser?.email });
     } else {
-      navigateTo("TabNavigator", { screen: "CausesScreen" });
+      navigateTo("TabNavigator", {
+        screen: "CausesScreen",
+        params: {
+          shouldAskForReview: await shouldAskForReview(),
+        },
+      });
     }
   };
 
