@@ -27,6 +27,7 @@ import ClubSection from "./ClubSection";
 import ReportsSection from "./ReportsSection";
 import NotificationPermissionPrompt from "./NotificationPermissionPrompt";
 import CausesSection from "./CausesSection";
+import UnauthorizedModal from "./UnauthorizedModal";
 import * as S from "./styles";
 
 export default function CausesScreen() {
@@ -51,6 +52,8 @@ export default function CausesScreen() {
   const { hasTickets, refetchTickets } = useTicketsContext();
   const { currentUser } = useCurrentUser();
   const { accessToken } = useAuthentication();
+  const [unauthorizedModalVisible, setUnauthorizedModalVisible] =
+    useState(false);
   const { params } = useRouteParams<"CausesScreen">();
 
   useFocusEffect(
@@ -132,7 +135,14 @@ export default function CausesScreen() {
 
   const sections = useMemo(
     () => [
-      { id: "causes", component: <CausesSection /> },
+      {
+        id: "causes",
+        component: (
+          <CausesSection
+            setUnauthorizedModalVisible={setUnauthorizedModalVisible}
+          />
+        ),
+      },
       { id: "divider", component: <S.Divider /> },
       { id: "reports", component: <ReportsSection /> },
       {
@@ -145,8 +155,17 @@ export default function CausesScreen() {
         id: "errorModal",
         component: <DonationErrorModal newState={params?.newState} />,
       },
+      {
+        id: "unauthorizedModal",
+        component: (
+          <UnauthorizedModal
+            unauthorizedModalVisible={unauthorizedModalVisible}
+            setUnauthorizedModalVisible={setUnauthorizedModalVisible}
+          />
+        ),
+      },
     ],
-    [isMember, params?.newState],
+    [isMember, params?.newState, unauthorizedModalVisible],
   );
 
   if (isLoading || loadingFirstAccessToIntegration) return <Placeholder />;
