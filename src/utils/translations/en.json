@@ -140,7 +140,10 @@
       "errorModalButtonText": "Ok",
       "unauthorizedModalTitle": "Validate your e-mail",
       "unauthorizedModalText": "Please, validate your e-mail to ensure your donation arrives safely.",
-      "unauthorizedModalButtonText": "Validate my account"
+      "unauthorizedModalButtonText": "Validate my account",
+      "unauthorizedContributionModalTitle": "Validate your account",
+      "unauthorizedContributionModalText": "Please, validate your account to ensure your donation arrives safely",
+      "unauthorizedContributionModalButtonText": "Validate my account"
     },
     "donateScreen": {
       "description": "Enter your e-mail to use your donation ticket",

@@ -11,9 +11,13 @@ import NonProfitCarousel from "./NonProfitCarousel";
 
 export type Props = {
   nonProfits: NonProfit[];
+  setUnauthorizedModalVisible: (value: boolean) => void;
 };
 
-export default function NonProfitsList({ nonProfits }: Props) {
+export default function NonProfitsList({
+  nonProfits,
+  setUnauthorizedModalVisible,
+}: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
@@ -29,6 +33,7 @@ export default function NonProfitsList({ nonProfits }: Props) {
           <NonProfitCarousel
             nonProfit={item}
             show={nonProfitsTag?.map((np) => np.id).includes(item.id) ?? false}
+            setUnauthorizedModalVisible={setUnauthorizedModalVisible}
           />
         )}
         keyExtractor={(nonProfit) => nonProfit.id.toString()}
