@@ -11,8 +11,8 @@ export const Container = styled.View`
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  background-color: ${(props: { member: boolean }) =>
-    props.member
+  background-color: ${(props: { clubMember: boolean }) =>
+    props.clubMember
       ? theme.colors.brand.tertiary[600]
       : theme.colors.brand.primary[800]};
   overflow: hidden;
@@ -52,14 +52,16 @@ export const ClubTag = styled.View`
   padding: ${theme.spacing(0, 8)};
   border-radius: ${theme.spacing(8)};
   align-items: center;
-  background-color: ${(props: { member: boolean }) =>
-    props.member ? theme.colors.brand.tertiary[50] : theme.colors.neutral[50]};
+  background-color: ${(props: { clubMember: boolean }) =>
+    props.clubMember
+      ? theme.colors.brand.tertiary[50]
+      : theme.colors.neutral[50]};
 `;
 
 export const TagText = styled.Text`
   ${defaultBodyXsMedium}
-  color: ${(props: { member: boolean }) =>
-    props.member
+  color: ${(props: { clubMember: boolean }) =>
+    props.clubMember
       ? theme.colors.brand.tertiary[600]
       : theme.colors.neutral[600]};
 `;
