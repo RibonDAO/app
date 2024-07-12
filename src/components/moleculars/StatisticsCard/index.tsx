@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import * as S from "./styles";
 
-export type IconType = "TicketIconOutlined" | "RibonFlagIcon";
+export type IconType = "TicketColorsIcon" | "CalendarIcon";
 
 type Props = {
   value: number;
