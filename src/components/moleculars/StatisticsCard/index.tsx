@@ -1,10 +1,16 @@
 import { ReactNode } from "react";
+import {
+  Fade,
+  Placeholder,
+  PlaceholderLine,
+  PlaceholderMedia,
+} from "rn-placeholder";
 import * as S from "./styles";
 
 export type IconType = "TicketColorsIcon" | "CalendarIcon";
 
 type Props = {
-  value: number;
+  value?: number;
   description: string;
   icon: ReactNode;
   backgroundColor: string;
@@ -18,6 +24,17 @@ function StatisticsCard({
   backgroundColor,
   handlePress,
 }: Props) {
+  if (value === undefined)
+    return (
+      <S.Container color={backgroundColor}>
+        <Placeholder Right={PlaceholderMedia} Animation={Fade}>
+          <PlaceholderLine width={30} />
+          <PlaceholderLine width={30} />
+          <PlaceholderLine width={80} />
+        </Placeholder>
+      </S.Container>
+    );
+
   return (
     <S.Container color={backgroundColor} onPress={handlePress}>
       <S.Left>

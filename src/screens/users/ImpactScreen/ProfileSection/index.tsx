@@ -11,7 +11,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "hooks/useNavigation";
 import { logEvent } from "services/analytics";
 import UserProfile from "@ribon.io/shared/types/entities/UserProfile";
-import LoadingOverlay from "components/moleculars/modals/LoadingOverlay";
 import ProfileTopShape from "components/vectors/ProfileTopShape";
 import StatisticsCard from "components/moleculars/StatisticsCard";
 import { theme } from "@ribon.io/shared";
@@ -72,8 +71,6 @@ function ProfileSection() {
     }
   }, [isMemberLoading, isMember]);
 
-  if (isMemberLoading) return <LoadingOverlay />;
-
   return (
     <S.Container member={isMember}>
       <S.ShapeContainer>
@@ -111,7 +108,7 @@ function ProfileSection() {
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("donatedTickets")}
             icon={<TicketOutlinedIcon />}
-            value={userStatistics?.totalTickets || 0}
+            value={userStatistics?.totalTickets}
             handlePress={() => setDonatedTicketsModalVisible(true)}
           />
           <ModalDialog
@@ -131,7 +128,7 @@ function ProfileSection() {
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("daysDoingGood")}
             icon={<RibonFlagIcon />}
-            value={userStatistics?.daysDonating || 0}
+            value={userStatistics?.daysDonating}
             handlePress={() => setDaysDonatingModalVisible(true)}
           />
           <ModalDialog
