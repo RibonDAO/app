@@ -27,26 +27,26 @@ function ProfileSection() {
   const { accessToken } = useAuthentication();
   const [newProfile, setNewProfile] = useState<UserProfile>();
   const { navigateTo } = useNavigation();
-  const { userIsMember } = useSubscriptions();
+  const { userIsClubMember } = useSubscriptions();
   const {
-    isMember,
-    isLoading: isMemberLoading,
-    refetch: refetchIsMember,
-  } = userIsMember();
+    isClubMember,
+    isLoading: isClubMemberLoading,
+    refetch: refetchIsClubMember,
+  } = userIsClubMember();
 
   const { profile, refetch } = userProfile();
 
   useFocusEffect(
     useCallback(() => {
       refetch();
-      refetchIsMember();
+      refetchIsClubMember();
       setNewProfile(profile);
       if (!accessToken) setNewProfile(undefined);
     }, [profile, accessToken]),
   );
 
   const handleClick = () => {
-    if (isMember) return;
+    if (isClubMember) return;
     logEvent("clubCTA_click", {
       from: "impact_page",
     });
@@ -55,26 +55,26 @@ function ProfileSection() {
   };
 
   useEffect(() => {
-    if (!isMemberLoading) {
+    if (!isClubMemberLoading) {
       logEvent("clubCTA_view", {
         from: "impact_page",
       });
     }
-  }, [isMemberLoading, isMember]);
+  }, [isClubMemberLoading, isClubMember]);
 
   if (!currentUser) return <View />;
-  if (isMemberLoading) return <LoadingOverlay />;
+  if (isClubMemberLoading) return <LoadingOverlay />;
 
   return (
-    <S.Container member={isMember}>
+    <S.Container clubMember={isClubMember}>
       <S.ContainerShapeLeft>
         <BackgroundShapeLeft
-          color={isMember ? theme.colors.brand.tertiary[800] : undefined}
+          color={isClubMember ? theme.colors.brand.tertiary[800] : undefined}
         />
       </S.ContainerShapeLeft>
       <S.ContainerShapeRight>
         <BackgroundShapeRight
-          color={isMember ? theme.colors.brand.tertiary[800] : undefined}
+          color={isClubMember ? theme.colors.brand.tertiary[800] : undefined}
         />
       </S.ContainerShapeRight>
       <S.CenterContainer>
@@ -85,18 +85,18 @@ function ProfileSection() {
             newProfile?.user?.email ? newProfile.user.email : currentUser?.email
           }
         />
-        {isMember && (
+        {isClubMember && (
           <S.Sparkles>
             <Sparkles />
           </S.Sparkles>
         )}
         <S.TagContainer onPress={handleClick}>
-          <S.ClubTag member={isMember}>
-            <S.TagText member={isMember}>
-              {isMember ? t("clubTagText") : t("noClubTagText")}
+          <S.ClubTag clubMember={isClubMember}>
+            <S.TagText clubMember={isClubMember}>
+              {isClubMember ? t("clubTagText") : t("noClubTagText")}
             </S.TagText>
           </S.ClubTag>
-          {isMember && (
+          {isClubMember && (
             <VerifiedIcon
               color={theme.colors.brand.quaternary[300]}
               insideColor="black"
@@ -104,7 +104,7 @@ function ProfileSection() {
           )}
         </S.TagContainer>
       </S.CenterContainer>
-      {!isMember && (
+      {!isClubMember && (
         <S.ClubCta onPress={handleClick}>
           <S.ClubCtaText>{t("ctaClubText")}</S.ClubCtaText>
         </S.ClubCta>

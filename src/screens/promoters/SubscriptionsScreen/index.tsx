@@ -22,7 +22,7 @@ export default function SubscriptionsScreen(): JSX.Element {
     keyPrefix: "promoters.subscriptionsScreen",
   });
 
-  const { userSubscriptions, userIsMember } = useSubscriptions();
+  const { userSubscriptions, userIsClubMember } = useSubscriptions();
   const { subscriptions } = userSubscriptions();
   const [modalVisible, setModalVisible] = useState(false);
   const [subscriptionToBeCanceled, setSubscriptionToBeCanceled] =
@@ -31,7 +31,7 @@ export default function SubscriptionsScreen(): JSX.Element {
 
   const { navigateTo, popNavigation } = useNavigation();
 
-  const { isMember } = userIsMember();
+  const { isClubMember } = userIsClubMember();
 
   const isClub = (subscription: Subscription) =>
     subscription.offer?.category === "club";
@@ -177,7 +177,7 @@ export default function SubscriptionsScreen(): JSX.Element {
 
                 {!isActive(subscription) &&
                 isClub(subscription) &&
-                !isMember ? (
+                !isClubMember ? (
                   <S.Button
                     onPress={() => {
                       navigateTo("ClubScreen");

@@ -27,8 +27,8 @@ function ClubScreen(): JSX.Element {
   const { params } = useRouteParams<"ClubScreen">();
 
   const [tabIndex, setTabIndex] = useState(0);
-  const { userIsMember } = useSubscriptions();
-  const { isMember, refetch } = userIsMember();
+  const { userIsClubMember } = useSubscriptions();
+  const { isClubMember, refetch } = userIsClubMember();
   const { isAuthenticated } = useAuthentication();
   const [unauthorizedModalVisible, setUnauthorizedModalVisible] =
     useState(false);
@@ -96,10 +96,10 @@ function ClubScreen(): JSX.Element {
   );
 
   useEffect(() => {
-    if (isMember) {
+    if (isClubMember) {
       navigateTo("TabNavigator", { screen: "EarnTicketsScreen" });
     }
-  }, [isMember]);
+  }, [isClubMember]);
 
   useEffect(() => {
     if (params?.ignoreBenefitsSection) {
