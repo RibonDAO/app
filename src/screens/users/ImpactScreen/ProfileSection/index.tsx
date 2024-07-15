@@ -11,7 +11,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "hooks/useNavigation";
 import { logEvent } from "services/analytics";
 import UserProfile from "@ribon.io/shared/types/entities/UserProfile";
-import LoadingOverlay from "components/moleculars/modals/LoadingOverlay";
 import ProfileTopShape from "components/vectors/ProfileTopShape";
 import StatisticsCard from "components/moleculars/StatisticsCard";
 import { theme } from "@ribon.io/shared";
@@ -66,10 +65,9 @@ function ProfileSection() {
     }
   }, [isMemberLoading, isMember]);
 
-  if (isMemberLoading) return <LoadingOverlay />;
 
   return (
-    <S.Container member={isMember}>
+    <S.Container member={isMember} >
       <S.ShapeContainer>
         <ProfileTopShape isMember={isMember} />
       </S.ShapeContainer>
@@ -100,19 +98,19 @@ function ProfileSection() {
           </>
         )}
 
-        <S.StatisticsContainer additionalTopMargin={!currentUser}>
+        <S.StatisticsContainer additionalTopMargin={!currentUser} >
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("donatedTickets")}
             icon="TicketColorsIcon"
-            value={userStatistics?.totalTickets || 0}
+            value={userStatistics?.totalTickets}
           />
 
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("daysDoingGood")}
             icon="CalendarIcon"
-            value={userStatistics?.daysDonating || 0}
+            value={userStatistics?.daysDonating}
           />
         </S.StatisticsContainer>
       </S.CenterContainer>
