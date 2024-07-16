@@ -108,7 +108,7 @@ function ProfileSection() {
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("donatedTickets")}
             icon={<TicketOutlinedIcon />}
-            value={userStatistics?.totalTickets}
+            value={currentUser ? userStatistics?.totalTickets : 0}
             handlePress={() => setDonatedTicketsModalVisible(true)}
           />
           <ModalDialog
@@ -128,7 +128,7 @@ function ProfileSection() {
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("daysDoingGood")}
             icon={<RibonFlagIcon />}
-            value={userStatistics?.daysDonating}
+            value={currentUser ? userStatistics?.daysDonating : 0}
             handlePress={() => setDaysDonatingModalVisible(true)}
           />
           <ModalDialog
