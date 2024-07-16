@@ -1,4 +1,3 @@
-import { View } from "react-native";
 import { useTickets, useSubscriptions } from "@ribon.io/shared/hooks";
 import { Categories, Plan } from "@ribon.io/shared";
 import { useTicketsContext } from "contexts/ticketsContext";
@@ -12,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import CardPartners from "components/moleculars/CardPartners";
 import CardReferral from "components/moleculars/CardReferral";
 import DailyTicketCard from "./DailyTicketCard";
-import S from "./styles";
+import * as S from "./styles";
 import ClubDailyTicketCard from "./ClubDailyTicketCard";
 import ClubMonthlyTicketCard from "./ClubMonthlyTicketCard";
 
@@ -60,7 +59,7 @@ export default function TicketsSection() {
     }, []),
   );
   return (
-    <View style={S.container}>
+    <S.Container>
       <DailyTicketCard />
       <ClubDailyTicketCard
         tickets={toCollect?.dailyTickets}
@@ -96,6 +95,6 @@ export default function TicketsSection() {
           },
         }}
       />
-    </View>
+    </S.Container>
   );
 }
