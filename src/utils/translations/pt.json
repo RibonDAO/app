@@ -544,47 +544,6 @@
   "users": {
     "impactScreen": {
       "title": "Meu Impacto",
-      "impactCards": {
-        "totalTickets": "Tickets doados",
-        "totalDonated": "Dinheiro doado",
-        "totalNonProfits": "ONGs apoiadas",
-        "totalCauses": "Causas apoiadas",
-        "title": "Impacto"
-      },
-      "ngoImpactCards": {
-        "zeroDonationsSection": {
-          "community": {
-            "title": "Suas doações em comunidade aparecerão aqui.",
-            "description": "Você não fez doações em comunidade ainda, que tal fazer sua primeira?",
-            "buttonText": "Doar em comunidade",
-            "contributionDescription": "A comunidade impulsionará sua doação com"
-          },
-          "ticket": {
-            "title": "Suas doações de tickets aparecerão aqui.",
-            "description": "Você ainda não fez doações gratuitas com tickets ainda, que tal fazer a primeira?",
-            "buttonText": "Doar usando tickets"
-          },
-          "direct": {
-            "title": "Suas doações diretas aparecerão aqui.",
-            "description": "Você ainda não fez doações diretas, que tal fazer a sua primeira?",
-            "buttonText": "Doar diretamente"
-          },
-          "migrated": "Migrado",
-          "showMore": "Mostrar mais",
-          "generalReceiver": "Geral",
-          "seeDetails": "Acompanhar impacto →",
-          "increaseText": "Sua doação aumentada em +20% pela comunidade da Ribon"
-        }
-      },
-      "communityDonationsTitle": "Doações em Comunidade",
-      "ImpactCardsTitle": "Impacto",
-      "ticketDonationsTitle": "Doações em Ticket",
-      "directDonationsTitle": "Doações Diretas",
-      "impactNotification": {
-        "title": "Migramos seu impacto!",
-        "description": "O seu histórico de doações feitas na plataforma antiga está na aba \"doações em ticket\".",
-        "link": "Não mostrar novamente"
-      },
       "profileSection": {
         "userName": "Seu perfil",
         "noClubTagText": "Sem Clube Ribon",

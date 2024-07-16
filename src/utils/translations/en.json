@@ -550,47 +550,6 @@
   "users": {
     "impactScreen": {
       "title": "My Impact",
-      "impactCards": {
-        "totalTickets": "Donated tickets",
-        "totalDonated": "Donated money",
-        "totalNonProfits": "Supported NGOs",
-        "totalCauses": "Supporter causes",
-        "title": "Impact"
-      },
-      "ngoImpactCards": {
-        "zeroDonationsSection": {
-          "community": {
-            "title": "Your community donations will appear here.",
-            "description": "You have not made community donations yet, why not try your first one?",
-            "buttonText": "Donate in community",
-            "contributionDescription": "The community will boost your donation with"
-          },
-          "ticket": {
-            "title": "Your ticket donations will appear here.",
-            "description": "You have not made free donations using tickets yet, why not try your first one?",
-            "buttonText": "Donate using tickets"
-          },
-          "direct": {
-            "title": "Your direct donations will appear here.",
-            "description": "You have not made direct donations  yet, why not try your first one?",
-            "buttonText": "Donate directly"
-          },
-          "migrated": "Migrated",
-          "showMore": "Show more",
-          "generalReceiver": "General",
-          "seeDetails": "Monitor Increase →",
-          "increaseText": "The community increases the donation amount by +20%"
-        }
-      },
-      "communityDonationsTitle": "Community Donations",
-      "ImpactCardsTitle": "Impact",
-      "ticketDonationsTitle": "Ticket Donations",
-      "directDonationsTitle": "Direct Donations",
-      "impactNotification": {
-        "title": "We have imported your impact!",
-        "description": "Your history of donations from the old platform are in the \"Ticket donations\" tab.",
-        "link": "Don’t show this again"
-      },
       "profileSection": {
         "userName": "Your profile",
         "noClubTagText": "No Ribon Club",
