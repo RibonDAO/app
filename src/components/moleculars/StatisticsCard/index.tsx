@@ -11,7 +11,7 @@ export type IconType = "TicketColorsIcon" | "CalendarIcon";
 type Props = {
   value?: number;
   description: string;
-  icon: JSX.Element | null;
+  icon: JSX.Element;
   backgroundColor: string;
   handlePress: () => void;
 };
@@ -40,7 +40,7 @@ function StatisticsCard({
         <S.Number>{value}</S.Number>
         <S.Text>{description}</S.Text>
       </S.Left>
-      <S.Right>{icon}</S.Right>
+      <S.Right testID="icon">{icon}</S.Right>
     </S.Container>
   );
 }
