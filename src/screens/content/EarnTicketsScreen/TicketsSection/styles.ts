@@ -2,8 +2,8 @@ import styled from "styled-components/native";
 import { theme } from "@ribon.io/shared";
 
 export const Container = styled.View`
-  margin-bottom: ${theme.spacingNative(16)}px;
-  gap: ${theme.spacingNative(24)}px;
-  padding: ${theme.spacingNative(16)}px;
+  margin-bottom: ${theme.spacing(16)};
+  gap: ${theme.spacing(24)};
+  padding: ${theme.spacing(16)};
   background-color: ${theme.colors.neutral10};
 `;
