@@ -17,7 +17,6 @@ function ParallaxTabViewContainer({ routeKey, children }: Props) {
       contentContainerStyle={{
         ...contentContainerStyle,
         minHeight: 670,
-        paddingBottom: 200,
       }}
     >
       {children}

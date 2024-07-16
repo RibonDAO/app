@@ -15,6 +15,9 @@ import ProfileTopShape from "components/vectors/ProfileTopShape";
 import StatisticsCard from "components/moleculars/StatisticsCard";
 import { theme } from "@ribon.io/shared";
 import HeaderButtons from "components/moleculars/HeaderButtons";
+import ModalDialog from "components/moleculars/modals/ModalDialog";
+import CalendarIcon from "components/vectors/CalendarIcon";
+import TicketColorsIcon from "components/vectors/TicketColorsIcon";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
 
@@ -36,8 +39,11 @@ function ProfileSection() {
   const { userStatistics } = useStatistics({
     userId: currentUser?.id ?? undefined,
   });
-
   const { profile, refetch } = userProfile();
+  const [donatedTicketsModalVisible, setDonatedTicketsModalVisible] =
+    useState(false);
+  const [daysDonatingModalVisible, setDaysDonatingModalVisible] =
+    useState(false);
 
   useFocusEffect(
     useCallback(() => {
@@ -65,9 +71,8 @@ function ProfileSection() {
     }
   }, [isMemberLoading, isMember]);
 
-
   return (
-    <S.Container member={isMember} >
+    <S.Container member={isMember}>
       <S.ShapeContainer>
         <ProfileTopShape isMember={isMember} />
       </S.ShapeContainer>
@@ -98,19 +103,45 @@ function ProfileSection() {
           </>
         )}
 
-        <S.StatisticsContainer additionalTopMargin={!currentUser} >
+        <S.StatisticsContainer additionalTopMargin={!currentUser}>
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("donatedTickets")}
-            icon="TicketColorsIcon"
-            value={userStatistics?.totalTickets}
+            icon={<TicketColorsIcon />}
+            value={currentUser ? userStatistics?.totalTickets : 0}
+            handlePress={() => setDonatedTicketsModalVisible(true)}
+          />
+          <ModalDialog
+            setVisible={setDonatedTicketsModalVisible}
+            visible={donatedTicketsModalVisible}
+            title={t("donatedTickets")}
+            description={t("donatedTicketsDescription")}
+            primaryButton={{
+              text: t("close"),
+              onPress() {
+                setDonatedTicketsModalVisible(false);
+              },
+            }}
           />
 
           <StatisticsCard
             backgroundColor={theme.colors.brand.primary[25]}
             description={t("daysDoingGood")}
-            icon="CalendarIcon"
-            value={userStatistics?.daysDonating}
+            icon={<CalendarIcon />}
+            value={currentUser ? userStatistics?.daysDonating : 0}
+            handlePress={() => setDaysDonatingModalVisible(true)}
+          />
+          <ModalDialog
+            setVisible={setDaysDonatingModalVisible}
+            visible={daysDonatingModalVisible}
+            title={t("daysDoingGood")}
+            description={t("daysDoingGoodDescription")}
+            primaryButton={{
+              text: t("close"),
+              onPress() {
+                setDaysDonatingModalVisible(false);
+              },
+            }}
           />
         </S.StatisticsContainer>
       </S.CenterContainer>

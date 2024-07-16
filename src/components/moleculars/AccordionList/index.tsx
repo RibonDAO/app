@@ -1,5 +1,4 @@
 import { SectionList } from "react-native";
-import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import Accordion, { Props as AccordionProps } from "../Accordion";
 import * as S from "./styles";
@@ -20,10 +19,11 @@ type ImpactList = ImpactListItem[];
 
 type Props = {
   impactList: ImpactList;
-  header?: ReactElement;
+  header?: JSX.Element;
+  footer?: JSX.Element | null;
 };
 
-function AccordionList({ impactList, header }: Props) {
+function AccordionList({ impactList, header, footer }: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "users.impactScreen.impactList",
   });
@@ -31,6 +31,7 @@ function AccordionList({ impactList, header }: Props) {
   return (
     <SectionList
       ListHeaderComponent={header}
+      ListFooterComponent={footer}
       ItemSeparatorComponent={S.ItemSeparator}
       sections={impactList}
       keyExtractor={({ id }) => id.toString()}

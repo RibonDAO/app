@@ -1,10 +1,13 @@
-import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import AccordionList from "components/moleculars/AccordionList";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useImpact, useLegacyImpact } from "@ribon.io/shared";
+import { useImpact, useLegacyImpact } from "@ribon.io/shared/hooks";
 import { useFormattedImpactText } from "hooks/useFormattedImpactText";
-import S from "./styles";
+import Button from "components/atomics/buttons/Button";
+import { useCallback, useState } from "react";
+import { theme } from "@ribon.io/shared/styles";
+import { useFocusEffect } from "@react-navigation/native";
+import * as S from "./styles";
 import ProfileSection from "../ProfileSection";
 import { formatImpactData } from "./formatImpactData";
 
@@ -17,45 +20,76 @@ function AccordionSection(): JSX.Element {
   const { userImpact } = useImpact(currentUser?.id);
   const { legacyUserImpact } = useLegacyImpact(currentUser?.id);
   const { formattedImpactText } = useFormattedImpactText();
+  const [showInactive, setShowInactive] = useState(false);
+
+  const activeProjects = formatImpactData(
+    formattedImpactText,
+    "active",
+    userImpact,
+    undefined,
+  );
+  const inactiveProjects = formatImpactData(
+    formattedImpactText,
+    "inactive",
+    userImpact,
+    legacyUserImpact,
+  );
 
   const impactList = [
     {
       title: t("activeProjects"),
-      data: formatImpactData(
-        formattedImpactText,
-        "active",
-        userImpact,
-        undefined,
-      ),
+      data: activeProjects,
     },
     {
       title: t("inactiveProjects"),
       subtitle: t("inactiveProjectsDescription"),
-      data: formatImpactData(
-        formattedImpactText,
-        "inactive",
-        userImpact,
-        legacyUserImpact,
-      ),
+      data: inactiveProjects,
     },
   ];
 
-  const filterImpactList = () => {
-    if (impactList[1].data.length === 0) return [impactList[0]];
-    return impactList;
+  const filteredImpactList = showInactive
+    ? impactList
+    : impactList.filter((item) => item.title !== t("inactiveProjects"));
+
+  const isImpactListEmpty = !(activeProjects.length || inactiveProjects.length);
+  const hasInactiveProjects = inactiveProjects.length > 0;
+
+  const renderInactiveButton = () => {
+    if (hasInactiveProjects && !showInactive) {
+      return (
+        <S.InactiveButtonContainer displayButton={showInactive}>
+          <Button
+            onPress={() => {
+              setShowInactive(true);
+            }}
+            text={t("inactiveProjectsButton")}
+            outline
+            customStyles={{
+              borderRadius: 12,
+            }}
+            textColorOutline={theme.colors.brand.primary[600]}
+            borderColorOutline={theme.colors.brand.primary[600]}
+          />
+        </S.InactiveButtonContainer>
+      );
+    }
+    return null;
   };
 
-  const isImpactListEmpty = !(
-    impactList[0].data.length || impactList[1].data.length
+  useFocusEffect(
+    useCallback(() => {
+      setShowInactive(false);
+    }, []),
   );
 
   return (
-    <View style={S.tabViewSection}>
+    <S.TabViewSection>
       <AccordionList
         header={<ProfileSection />}
-        impactList={isImpactListEmpty ? [] : filterImpactList()}
+        impactList={isImpactListEmpty ? [] : filteredImpactList}
+        footer={renderInactiveButton()}
       />
-    </View>
+    </S.TabViewSection>
   );
 }
 

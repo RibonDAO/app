@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import {
   Fade,
   Placeholder,
@@ -7,28 +5,28 @@ import {
   PlaceholderMedia,
 } from "rn-placeholder";
 import * as S from "./styles";
-import StatisticsModal from "./StatisticsModal";
-import { Icon } from "./Icon";
 
 export type IconType = "TicketColorsIcon" | "CalendarIcon";
 
 type Props = {
   value?: number;
   description: string;
-  icon: IconType;
+  icon: JSX.Element;
   backgroundColor: string;
+  handlePress: () => void;
 };
 
-function StatisticsCard({ value, description, icon, backgroundColor }: Props) {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "users.impactScreen.profileSection",
-  });
-  const [modalVisible, setModalVisible] = useState(false);
-
+function StatisticsCard({
+  value,
+  description,
+  icon,
+  backgroundColor,
+  handlePress,
+}: Props) {
   if (value === undefined)
     return (
       <S.Container color={backgroundColor}>
-        <Placeholder Right={PlaceholderMedia} Animation={Fade} >
+        <Placeholder Right={PlaceholderMedia} Animation={Fade}>
           <PlaceholderLine width={30} />
           <PlaceholderLine width={30} />
           <PlaceholderLine width={80} />
@@ -37,19 +35,12 @@ function StatisticsCard({ value, description, icon, backgroundColor }: Props) {
     );
 
   return (
-    <S.Container color={backgroundColor} onPress={() => setModalVisible(true)}>
+    <S.Container color={backgroundColor} onPress={handlePress}>
       <S.Left>
         <S.Number>{value}</S.Number>
         <S.Text>{description}</S.Text>
       </S.Left>
-      <S.Right>
-        <Icon icon={icon} />
-      </S.Right>
-      <StatisticsModal
-        type={description === t("donatedTickets") ? "tickets" : "daysDonating"}
-        visible={modalVisible}
-        setVisible={setModalVisible}
-      />
+      <S.Right testID="icon">{icon}</S.Right>
     </S.Container>
   );
 }
