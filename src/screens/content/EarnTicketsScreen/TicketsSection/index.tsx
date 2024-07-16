@@ -10,6 +10,7 @@ import ModalDialog from "components/moleculars/modals/ModalDialog";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
 import CardPartners from "components/moleculars/CardPartners";
+import CardReferral from "components/moleculars/CardReferral";
 import DailyTicketCard from "./DailyTicketCard";
 import S from "./styles";
 import ClubDailyTicketCard from "./ClubDailyTicketCard";
@@ -76,6 +77,7 @@ export default function TicketsSection() {
         setUnauthorizedModalVisible={setUnauthorizedModalVisible}
       />
 
+      <CardReferral />
       <CardPartners />
 
       <ModalDialog
