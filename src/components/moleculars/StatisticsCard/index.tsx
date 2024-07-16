@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import {
   Fade,
   Placeholder,
@@ -12,7 +11,7 @@ export type IconType = "TicketColorsIcon" | "CalendarIcon";
 type Props = {
   value?: number;
   description: string;
-  icon: ReactNode;
+  icon: JSX.Element | null;
   backgroundColor: string;
   handlePress: () => void;
 };

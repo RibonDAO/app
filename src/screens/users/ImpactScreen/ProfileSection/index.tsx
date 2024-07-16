@@ -117,7 +117,7 @@ function ProfileSection() {
             title={t("donatedTickets")}
             description={t("donatedTicketsDescription")}
             primaryButton={{
-              text: "Fechar",
+              text: t("close"),
               onPress() {
                 setDonatedTicketsModalVisible(false);
               },
@@ -137,7 +137,7 @@ function ProfileSection() {
             title={t("daysDoingGood")}
             description={t("daysDoingGoodDescription")}
             primaryButton={{
-              text: "Fechar",
+              text: t("close"),
               onPress() {
                 setDaysDonatingModalVisible(false);
               },

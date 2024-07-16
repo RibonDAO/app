@@ -607,7 +607,8 @@
           "button": "Donate tickets",
           "firstParagraph": "Your donations will appear here",
           "secondParagraph": "Donate your first ticket and start making an impact!"
-        }
+        },
+        "close": "Close"
       },
       "impactList": {
         "activeProjects": "By projects",

@@ -601,7 +601,8 @@
           "button": "Doar tickets",
           "firstParagraph": "Suas doações aparecerão aqui.",
           "secondParagraph": "Doe seu primeiro ticket e comece a construir seu impacto!"
-        }
+        },
+        "close": "Fechar"
       },
       "impactList": {
         "activeProjects": "Por projeto",

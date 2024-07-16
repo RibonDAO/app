@@ -1,4 +1,3 @@
-import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import AccordionList from "components/moleculars/AccordionList";
 import { useCurrentUser } from "contexts/currentUserContext";
@@ -84,13 +83,13 @@ function AccordionSection(): JSX.Element {
   );
 
   return (
-    <View style={S.styles.tabViewSection}>
+    <S.TabViewSection>
       <AccordionList
         header={<ProfileSection />}
         impactList={isImpactListEmpty ? [] : filteredImpactList}
         footer={renderInactiveButton()}
       />
-    </View>
+    </S.TabViewSection>
   );
 }
 
