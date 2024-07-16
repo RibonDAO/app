@@ -66,6 +66,7 @@ export type PostDonationScreenParams = {
 
 export type CausesScreenParamList = {
   newState: LocationStateType;
+  shouldAskForReview: boolean;
 };
 
 export type ClubScreenParamList = {

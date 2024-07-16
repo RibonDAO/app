@@ -12,11 +12,11 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   paragraph: {
     ...defaultBodySmRegular,
-    color: theme.colors.neutral[600],
+    color: theme.colors.neutral[900],
     maxWidth: "98%",
   },
   checkbox: {
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 2,
+    marginTop: 4,
   },
   navigationButton: {
     width: 24,

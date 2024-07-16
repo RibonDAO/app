@@ -15,13 +15,7 @@ export function useFormattedImpactText() {
       {normalizedImpact.map((slice: any, index: any) => (
         // eslint-disable-next-line react/no-array-index-key
         <Fragment key={index.toString()}>
-          {index % 2 === 0 ? (
-            <Text style={{ fontWeight: "bold", fontFamily: "Inter700" }}>
-              {slice}
-            </Text>
-          ) : (
-            slice
-          )}{" "}
+          {index % 2 === 0 ? <Text>{slice}</Text> : slice}{" "}
         </Fragment>
       ))}
     </>

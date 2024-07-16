@@ -1,25 +1,23 @@
 import { useNonProfitsContext } from "contexts/nonProfitsContext";
 
-import { useTagDonationContext } from "contexts/tagDonationContext";
 import CausesFilter from "./TagsFilter";
 import NonProfitsList from "./NonProfitsList";
 import * as S from "./styles";
 
-export default function CausesSection() {
-  const { chosenTag } = useTagDonationContext();
-  const { nonProfitsWithPoolBalance: nonProfits } = useNonProfitsContext();
+export type Props = {
+  setUnauthorizedModalVisible: (value: boolean) => void;
+};
 
-  const filterNonProfits = () => {
-    if (chosenTag && chosenTag.nonProfits) {
-      return chosenTag.nonProfits;
-    }
-    return nonProfits || [];
-  };
+export default function CausesSection({ setUnauthorizedModalVisible }: Props) {
+  const { shuffledNonProfits } = useNonProfitsContext();
 
   return (
     <S.Container>
       <CausesFilter />
-      <NonProfitsList nonProfits={filterNonProfits()} />
+      <NonProfitsList
+        nonProfits={shuffledNonProfits || []}
+        setUnauthorizedModalVisible={setUnauthorizedModalVisible}
+      />
     </S.Container>
   );
 }

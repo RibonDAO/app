@@ -1,7 +1,7 @@
 import { theme } from "@ribon.io/shared";
 import styled from "styled-components/native";
 
-export const ConfigContainer = styled.TouchableOpacity`
+export const ConfigContainer = styled.Pressable`
   display: flex;
   height: 30px;
   flex-direction: row;

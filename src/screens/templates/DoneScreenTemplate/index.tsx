@@ -1,9 +1,7 @@
-import { View, Text } from "react-native";
-import Image from "components/atomics/Image";
 import { theme } from "@ribon.io/shared/styles";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import Button from "components/atomics/buttons/Button";
-import S from "./styles";
+import * as S from "./styles";
 
 type Props = {
   image?: string;
@@ -32,34 +30,33 @@ export default function DoneScreenTemplate({
   const hasCheckbox = checked !== undefined;
 
   return (
-    <View style={S.container}>
-      <View style={S.animationContainer}>
-        <View style={S.diamond}>
+    <S.Container>
+      <S.AnimationContainer>
+        <S.Diamond>
           {image && (
-            <Image
-              style={S.cardImage}
+            <S.CardImage
               source={{ uri: image }}
               accessibilityIgnoresInvertColors={false}
               accessibilityHint=""
               accessibilityLabel={imageDescription || ""}
             />
           )}
-        </View>
-      </View>
-      {title && <Text style={S.title}>{title}</Text>}
+        </S.Diamond>
+      </S.AnimationContainer>
+      {title && <S.Title>{title}</S.Title>}
       {description && (
-        <Text style={S.description}>
+        <S.Description>
           {description}
           {highlightedDescription && (
-            <Text style={S.highlightedDescription}>
+            <S.HighlightedDescription>
               {" "}
               {highlightedDescription}
-            </Text>
+            </S.HighlightedDescription>
           )}
-        </Text>
+        </S.Description>
       )}
       {hasCheckbox && (
-        <View style={S.checkboxContainer}>
+        <S.CheckboxContainer>
           <CheckBox
             text={checkboxText || ""}
             checked={checked}
@@ -67,7 +64,7 @@ export default function DoneScreenTemplate({
             checkedColor={theme.colors.brand.primary[800]}
             unCheckedColor={theme.colors.neutral[600]}
           />
-        </View>
+        </S.CheckboxContainer>
       )}
       {buttonTitle && onButtonPress && (
         <Button
@@ -79,9 +76,10 @@ export default function DoneScreenTemplate({
           customStyles={{
             backgroundColor: theme.colors.brand.primary[600],
             borderColor: theme.colors.brand.primary[800],
+            borderRadius: 12,
           }}
         />
       )}
-    </View>
+    </S.Container>
   );
 }

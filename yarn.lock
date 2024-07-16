@@ -7700,6 +7700,11 @@ expo-status-bar@~1.11.1:
   resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.11.1.tgz#a11318741d361048c11db2b16c4364a79a74af30"
   integrity sha512-ddQEtCOgYHTLlFUe/yH67dDBIoct5VIULthyT3LRJbEwdpzAgueKsX2FYK02ldh440V87PWKCamh7R9evk1rrg==
 
+expo-store-review@~6.8.3:
+  version "6.8.3"
+  resolved "https://registry.yarnpkg.com/expo-store-review/-/expo-store-review-6.8.3.tgz#201569e89aa35097514a89a146a917be83c0a24a"
+  integrity sha512-RuZ1P0AO9BT37FnVQgK93KtxGoriLfG0uH0HqYyWdN2GQAKHtm1Ucu6sfwrHkdXpOXs+xqbTd669k4D6HC/+0w==
+
 expo-structured-headers@~3.7.0:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/expo-structured-headers/-/expo-structured-headers-3.7.2.tgz#2bccba6af090ba2cc82295f7ec695058530b399f"

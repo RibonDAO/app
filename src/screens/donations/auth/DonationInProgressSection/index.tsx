@@ -1,14 +1,12 @@
-import TransferTicketAnimation from "components/moleculars/TransferTicketAnimation";
-import UserIcon from "components/vectors/UserIcon";
-import Image from "components/atomics/Image";
-import { View } from "react-native";
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { NonProfit } from "@ribon.io/shared/types";
-import TopMountainShapes from "components/vectors/TopMountainShapes";
-import { useNavigation } from "@react-navigation/native";
 import { useUserProfile } from "@ribon.io/shared/hooks";
-import S from "./styles";
+import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
+import { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
+import LottieAnimation from "components/atomics/LottieAnimation";
+import donationAnimation from "./assets/donationAnimation.json";
+import * as S from "./styles";
 
 type Props = {
   nonProfit: NonProfit;
@@ -21,11 +19,22 @@ function DonationInProgressSection({
   shouldRepeatAnimation,
 }: Props) {
   const { t } = useTranslation("translation", {
-    keyPrefix: "donations.donateScreen",
+    keyPrefix: "donations.donationInProgress",
   });
-  const navigation = useNavigation();
   const { userProfile } = useUserProfile();
+  const navigation = useNavigation();
   const { profile } = userProfile();
+  const [goToNextScreen, setGoToNextScreen] = useState(false);
+  const getRandomFrame = () => {
+    // frame 0 -> inicio
+    // frame 63 -> seringa
+    // frame 120 -> medicamento
+    // frame 162 -> pintinho
+    // frame 239 -> final
+    const frames = [0, 63, 120, 162];
+    return frames[Math.floor(Math.random() * frames.length)];
+  };
+  const endFrame = 239;
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -35,35 +44,39 @@ function DonationInProgressSection({
     };
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setGoToNextScreen(true);
+    }, 5500);
+  }, []);
+
+  useEffect(() => {
+    if (!shouldRepeatAnimation && goToNextScreen) {
+      onAnimationEnd();
+    }
+  }, [shouldRepeatAnimation, goToNextScreen]);
+
   return (
-    <View style={S.animationContainer}>
-      <TopMountainShapes />
-      <View style={S.centerContainer}>
-        <TransferTicketAnimation
-          shouldRepeat={shouldRepeatAnimation}
-          onAnimationEnd={onAnimationEnd}
-          senderIcon={
-            profile?.photo ? (
-              <Image
-                style={S.nonProfitLogo}
-                source={{ uri: profile?.photo }}
-                accessibilityIgnoresInvertColors
-              />
-            ) : (
-              <UserIcon />
-            )
-          }
-          receiverIcon={
-            <Image
-              style={S.nonProfitLogo}
-              source={{ uri: nonProfit.logo }}
-              accessibilityIgnoresInvertColors
-            />
-          }
-          description={t("animationText").toString()}
+    <S.Container>
+      <S.AnimationContainer>
+        <LottieAnimation
+          animationData={donationAnimation}
+          width={360}
+          height={360}
+          startFrame={getRandomFrame()}
+          endFrame={endFrame}
         />
-      </View>
-    </View>
+      </S.AnimationContainer>
+      <S.BottomContainer>
+        <ImageWithIconOverlay
+          leftImage={profile?.photo}
+          rightImage={nonProfit?.icon}
+        />
+        <S.LoadingContainer>
+          <S.LoadingText>{t("loadingText")}</S.LoadingText>
+        </S.LoadingContainer>
+      </S.BottomContainer>
+    </S.Container>
   );
 }
 

@@ -1,5 +1,5 @@
-const version = "5.12.5";
-const buildNumber = 390;
+const version = "6.0.4";
+const buildNumber = 395;
 
 export default () => ({
   "expo": {
@@ -47,6 +47,7 @@ export default () => ({
       },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
+      "appStoreUrl": "https://apps.apple.com/br/app/ribon/id1337763424",
       "buildNumber": buildNumber.toString(),
       "usesAppleSignIn": true,
       "associatedDomains": [

@@ -1,11 +1,16 @@
 import * as React from "react";
 import { Path, Svg, G } from "react-native-svg";
 
-function ProfilePhoto() {
+type Props = {
+  width?: number;
+  height?: number;
+};
+
+function ProfilePhoto({ height = 64, width = 64 }: Props) {
   return (
     <Svg
-      width="64"
-      height="64"
+      width={width}
+      height={height}
       viewBox="0 0 64 64"
       fill="none"
       testID="ProfilePhoto"

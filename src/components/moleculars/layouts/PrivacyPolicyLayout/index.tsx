@@ -1,7 +1,6 @@
-import { Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { openInWebViewer } from "lib/linkOpener";
-import S from "./styles";
+import * as S from "./styles";
 
 function PrivacyPolicyLayout() {
   const { t } = useTranslation("translation", {
@@ -17,18 +16,19 @@ function PrivacyPolicyLayout() {
   };
 
   return (
-    <View>
-      <Text style={S.privacyPolicyText}>
-        {t("agreementText")}{" "}
-        <Text style={S.privacyPolicyLink} onPress={linkToTerms}>
-          {t("termsText")}
-        </Text>
-        {t("and")}{" "}
-        <Text style={S.privacyPolicyLink} onPress={linkToPrivacyPolicy}>
+    <S.container>
+      <S.privacyPolicyText>{t("agreementText")}</S.privacyPolicyText>
+      <S.privacyPolicyLink onPress={linkToTerms}>
+        <S.privacyPolicyLinkText>{t("termsText")}</S.privacyPolicyLinkText>
+      </S.privacyPolicyLink>
+      <S.privacyPolicyText>{t("and")}</S.privacyPolicyText>
+      <S.privacyPolicyLink onPress={linkToPrivacyPolicy}>
+        <S.privacyPolicyLinkText>
           {t("privacyPolicyText")}
-        </Text>
-      </Text>
-    </View>
+        </S.privacyPolicyLinkText>
+      </S.privacyPolicyLink>
+      <S.privacyPolicyText>{t("ribon")}</S.privacyPolicyText>
+    </S.container>
   );
 }
 
