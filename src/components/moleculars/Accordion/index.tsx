@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { theme } from "@ribon.io/shared";
 import { useTranslation } from "react-i18next";
 import Icon from "components/atomics/Icon";
+import { useFocusEffect } from "@react-navigation/native";
 import * as S from "./styles";
 import TicketIconText from "../TicketIconText";
 
@@ -27,6 +28,12 @@ function Accordion({
     keyPrefix: "users.impactScreen.profileSection.accordion",
   });
 
+  useFocusEffect(
+    useCallback(() => {
+      setIsExpanded(false);
+    }, []),
+  );
+
   return (
     <S.Container
       onPressIn={() => {
@@ -51,7 +58,9 @@ function Accordion({
             <S.Title>{title}</S.Title>
             <S.Subtitle>{subtitle}</S.Subtitle>
 
-            {quantity ? <TicketIconText quantity={quantity} /> : null}
+            {quantity ? (
+              <TicketIconText quantity={quantity} buttonDisabled />
+            ) : null}
           </S.TextArea>
           <S.Image resizeMode="cover" source={{ uri: iconUrl }} />
         </S.MainArea>
