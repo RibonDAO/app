@@ -92,6 +92,29 @@ export default function DonationDoneScreen({
     <>
       <S.Container>
         <S.TopContainer>
+          <Button
+            onPress={() => {}}
+            text="Compartilhar"
+            leftIcon={{
+              name: "share",
+              type: "outlined",
+              color: "white",
+              size: 20,
+            }}
+            textColor="white"
+            backgroundColor="rgba(0,0,0,0.5)"
+            customTextStyles={{ fontSize: 12 }}
+            borderColor="rgba(0,0,0,0)"
+            customStyles={{
+              alignSelf: "flex-start",
+              width: "auto",
+              paddingHorizontal: 8,
+              paddingVertical: 4,
+              height: "auto",
+              borderRadius: 8,
+              marginLeft: "auto",
+            }}
+          />
           {isImageLoading && <NonProfitImagePlaceholder />}
           <S.CardImage
             source={{ uri: nonProfit?.confirmationImage }}
