@@ -1,11 +1,10 @@
 import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodyMdBold } from "styles/typography/default";
+import { defaultHeadingXxs } from "styles/typography/default";
 
 const styles = StyleSheet.create({
   container: {
     display: "flex",
-    height: 30,
     alignItems: "center",
     justifyContent: "center",
     opacity: 1,
@@ -18,8 +17,7 @@ const styles = StyleSheet.create({
     marginRight: theme.spacingNative(12),
   },
   ticketCounter: {
-    ...defaultBodyMdBold,
-    lineHeight: 17,
+    ...defaultHeadingXxs,
     marginRight: theme.spacingNative(4),
     marginLeft: theme.spacingNative(4),
   },

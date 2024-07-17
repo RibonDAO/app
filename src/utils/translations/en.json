@@ -553,52 +553,30 @@
   "users": {
     "impactScreen": {
       "title": "My Impact",
-      "impactCards": {
-        "totalTickets": "Donated tickets",
-        "totalDonated": "Donated money",
-        "totalNonProfits": "Supported NGOs",
-        "totalCauses": "Supporter causes",
-        "title": "Impact"
-      },
-      "ngoImpactCards": {
-        "zeroDonationsSection": {
-          "community": {
-            "title": "Your community donations will appear here.",
-            "description": "You have not made community donations yet, why not try your first one?",
-            "buttonText": "Donate in community",
-            "contributionDescription": "The community will boost your donation with"
-          },
-          "ticket": {
-            "title": "Your ticket donations will appear here.",
-            "description": "You have not made free donations using tickets yet, why not try your first one?",
-            "buttonText": "Donate using tickets"
-          },
-          "direct": {
-            "title": "Your direct donations will appear here.",
-            "description": "You have not made direct donations  yet, why not try your first one?",
-            "buttonText": "Donate directly"
-          },
-          "migrated": "Migrated",
-          "showMore": "Show more",
-          "generalReceiver": "General",
-          "seeDetails": "Monitor Increase →",
-          "increaseText": "The community increases the donation amount by +20%"
-        }
-      },
-      "communityDonationsTitle": "Community Donations",
-      "ImpactCardsTitle": "Impact",
-      "ticketDonationsTitle": "Ticket Donations",
-      "directDonationsTitle": "Direct Donations",
-      "impactNotification": {
-        "title": "We have imported your impact!",
-        "description": "Your history of donations from the old platform are in the \"Ticket donations\" tab.",
-        "link": "Don’t show this again"
-      },
       "profileSection": {
         "userName": "Your profile",
         "noClubTagText": "No Ribon Club",
         "clubTagText": "Ribon Club",
-        "ctaClubText": "Club benefits →"
+        "ctaClubText": "Club benefits →",
+        "accordion": {
+          "equivalent": "Equivalent to"
+        },
+        "donatedTickets": "Donated tickets",
+        "daysDoingGood": "Days doing good",
+        "donatedTicketsDescription": "Represents your incredible impact on the world. Each donated ticket is a powerful contribution that helps transform lives.",
+        "daysDoingGoodDescription": "Represents your incredible journey of generosity. Every day you make a donation, this number will increase.",
+        "emptyComponent": {
+          "button": "Donate tickets",
+          "firstParagraph": "Your donations will appear here",
+          "secondParagraph": "Donate your first ticket and start making an impact!"
+        },
+        "close": "Close"
+      },
+      "impactList": {
+        "activeProjects": "By projects",
+        "inactiveProjects": "Inactive projects",
+        "inactiveProjectsDescription": "ONG projects that aren't in the app anymore",
+        "inactiveProjectsButton": "Show inactive projects"
       }
     }
   },
