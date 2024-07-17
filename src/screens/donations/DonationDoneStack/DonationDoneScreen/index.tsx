@@ -16,6 +16,7 @@ import Button from "components/atomics/buttons/Button";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
 import LottieAnimation from "components/atomics/LottieAnimation";
+import { useReferralLink } from "hooks/useReferralLink";
 import donationDoneSound from "./assets/donation-done.mp3";
 import NonProfitImagePlaceholder from "./NonProfitImagePlaceholder";
 import sunAnimation from "./assets/sunAnimation.json";
@@ -37,6 +38,7 @@ export default function DonationDoneScreen({
   const { currentUser } = useCurrentUser();
   const { userProfile } = useUserProfile();
   const { profile } = userProfile();
+  const { copyLink } = useReferralLink();
 
   const { userStatistics, refetch: refetchStatistics } = useStatistics({
     userId: currentUser?.id,
@@ -93,7 +95,7 @@ export default function DonationDoneScreen({
       <S.Container>
         <S.TopContainer>
           <Button
-            onPress={() => {}}
+            onPress={copyLink}
             text="Compartilhar"
             leftIcon={{
               name: "share",
