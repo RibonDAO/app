@@ -3,6 +3,7 @@ import { theme } from "@ribon.io/shared";
 import { useTranslation } from "react-i18next";
 import Icon from "components/atomics/Icon";
 import { useFocusEffect } from "@react-navigation/native";
+import { perform } from "lib/timeoutHelpers";
 import * as S from "./styles";
 import TicketIconText from "../TicketIconText";
 import AccordionPlaceholder from "./AccordionPlaceholder";
@@ -31,12 +32,18 @@ function Accordion({
   });
 
   useFocusEffect(
+    useCallback(
+      () => () => {
+        setIsLoading(true);
+      },
+      [],
+    ),
+  );
+
+  useFocusEffect(
     useCallback(() => {
       setIsExpanded(false);
-      setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+      perform(() => setIsLoading(false)).in(100);
     }, []),
   );
 
@@ -44,9 +51,8 @@ function Accordion({
     setIsExpanded((prev) => !prev);
   };
 
-  return isLoading ? (
-    <AccordionPlaceholder />
-  ) : (
+  if (isLoading) return <AccordionPlaceholder />;
+  return (
     <S.Container onPress={handlePress} testID="accordion">
       <S.ArrowContainer>
         <S.ArrowController isExpansible={isExpansible}>
