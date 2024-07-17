@@ -32,6 +32,7 @@ function Accordion({
       onPressIn={() => {
         setIsExpanded(!isExpanded);
       }}
+      testID="accordion"
     >
       <S.ArrowContainer>
         <S.ArrowController isExpansible={isExpansible}>

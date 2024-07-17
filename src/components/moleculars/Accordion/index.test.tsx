@@ -1,9 +1,15 @@
-import { screen, render, fireEvent } from "@testing-library/react-native";
+import {
+  expectTextNotToBeInTheDocument,
+  expectTextToBeInTheDocument,
+} from "config/testUtils/expects";
+import { fireEvent, screen } from "@testing-library/react-native";
+
+import { renderComponent } from "config/testUtils/renders";
 import Accordion from ".";
 
 describe("CardCenterImageButton", () => {
-  it("should render without error", async () => {
-    render(
+  beforeEach(async () => {
+    await renderComponent(
       <Accordion
         title="titleTest"
         subtitle="subTest"
@@ -13,14 +19,16 @@ describe("CardCenterImageButton", () => {
         isExpansible
       />,
     );
+  });
+  it("should render without error", async () => {
+    expectTextToBeInTheDocument("titleTest");
+    expectTextToBeInTheDocument("subTest");
+    expectTextToBeInTheDocument("3");
+    expectTextNotToBeInTheDocument("descTest");
+  });
 
-    expect(screen.getByText("titleTest")).toBeDefined();
-    expect(screen.getByText("subTest")).toBeDefined();
-    expect(screen.queryByText("3")).toBeDefined();
-    expect(screen.queryByText("descTest")).toBeNull();
-
+  it("should render description when clicked", async () => {
     fireEvent(screen.getByText("titleTest"), "pressIn");
-    const description = await screen.findByText("descTest");
-    expect(description).toBeDefined();
+    expectTextToBeInTheDocument("descTest");
   });
 });
