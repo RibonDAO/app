@@ -46,7 +46,7 @@ export const MainArea = styled.View`
   gap: 8px;
 `;
 
-export const expandedContent = styled.View`
+export const ExpandedContent = styled.View`
   margin-top: ${theme.spacing(12)};
 `;
 
