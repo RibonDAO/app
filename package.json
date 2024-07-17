@@ -79,7 +79,6 @@
     "expo-store-review": "~6.8.3",
     "expo-system-ui": "~2.9.4",
     "expo-tracking-transparency": "~3.3.0",
-    "expo-updates": "~0.24.12",
     "expo-web-browser": "~12.8.2",
     "i18next": "^22.4.9",
     "lottie-react-native": "6.5.1",
