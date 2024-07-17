@@ -5,6 +5,7 @@ import Icon from "components/atomics/Icon";
 import { useFocusEffect } from "@react-navigation/native";
 import * as S from "./styles";
 import TicketIconText from "../TicketIconText";
+import AccordionPlaceholder from "./AccordionPlaceholder";
 
 export type Props = {
   title: string;
@@ -24,6 +25,7 @@ function Accordion({
   quantity,
 }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation("translation", {
     keyPrefix: "users.impactScreen.profileSection.accordion",
   });
@@ -31,16 +33,21 @@ function Accordion({
   useFocusEffect(
     useCallback(() => {
       setIsExpanded(false);
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     }, []),
   );
 
-  return (
-    <S.Container
-      onPressIn={() => {
-        setIsExpanded(!isExpanded);
-      }}
-      testID="accordion"
-    >
+  const handlePress = () => {
+    setIsExpanded((prev) => !prev);
+  };
+
+  return isLoading ? (
+    <AccordionPlaceholder />
+  ) : (
+    <S.Container onPress={handlePress} testID="accordion">
       <S.ArrowContainer>
         <S.ArrowController isExpansible={isExpansible}>
           <Icon
@@ -66,10 +73,10 @@ function Accordion({
         </S.MainArea>
 
         {isExpanded && isExpansible && (
-          <S.expandedContent>
+          <S.ExpandedContent>
             <S.DescriptionTitle>{t("equivalent")}</S.DescriptionTitle>
             <S.Description>{description}</S.Description>
-          </S.expandedContent>
+          </S.ExpandedContent>
         )}
       </S.Content>
     </S.Container>
