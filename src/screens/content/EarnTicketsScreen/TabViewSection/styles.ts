@@ -40,13 +40,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
   },
-  redBall: {
-    width: 8,
-    height: 8,
-    backgroundColor: theme.colors.feedback.error[500],
-    borderRadius: 100,
-    top: 0,
-  },
   tabContainer: {
     paddingLeft: theme.spacingNative(2),
     marginBottom: theme.spacingNative(8),

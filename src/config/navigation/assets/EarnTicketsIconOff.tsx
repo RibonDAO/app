@@ -1,12 +1,7 @@
-import { useTasksContext } from "contexts/tasksContext";
 import * as React from "react";
-import { View } from "react-native";
 import Svg, { Mask, Path, G } from "react-native-svg";
-import S from "./styles";
 
 function EarnTicketsIconOff() {
-  const { hasCompletedATask } = useTasksContext();
-
   return (
     <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
       <Mask
@@ -25,7 +20,6 @@ function EarnTicketsIconOff() {
           fill="#867F70"
         />
       </G>
-      {hasCompletedATask && <View style={S.redBall} />}
     </Svg>
   );
 }
