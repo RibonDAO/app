@@ -690,13 +690,7 @@
       "subtitle": "Enter the 6-digit verification code sent to {{email}}",
       "confirmText": "Continue",
       "resendText": "Resend code",
-      "ModalWrongOtp": {
-        "title": "Oops, incorrect code",
-        "description": "If you've entered the code correctly and it still doesn't work, please contact our support.",
-        "tryAgain": "Try again",
-        "contactSupport": "Contact support",
-        "userSupportLink": "https://v2.zopim.com/widget/popout.html?key={{key}}"
-      }
+      "incorrectCode": "Incorrect code. Please try again."
     },
     "insertEmailCouponScreen": {
       "title": "Sign in with an e-mail",
