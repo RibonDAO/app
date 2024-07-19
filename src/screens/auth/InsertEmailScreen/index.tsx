@@ -28,7 +28,7 @@ function InsertEmailScreen() {
   const [email, setEmail] = useState("");
   const { navigateTo } = useNavigation();
 
-  const { sendAuthenticationEmail } = useAuthentication();
+  const { sendOtpEmail } = useAuthentication();
 
   useEffect(() => {
     logEvent("P28_view", {
@@ -37,11 +37,11 @@ function InsertEmailScreen() {
   }, []);
 
   const handleButtonPress = async () => {
-    await sendAuthenticationEmail({ email });
+    await sendOtpEmail({ email });
     logEvent("authEmailFormBtn_click", {
       from: "sign_in",
     });
-    navigateTo("SentMagicLinkEmailScreen", { email });
+    navigateTo("InsertOtpCodeScreen", { email });
   };
 
   const handleTextChange = (text: string) => {
