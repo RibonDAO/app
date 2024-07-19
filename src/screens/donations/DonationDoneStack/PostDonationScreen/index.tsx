@@ -5,7 +5,6 @@ import { theme } from "@ribon.io/shared";
 import { useWarmGlowMessages } from "@ribon.io/shared/hooks";
 import usePageView from "hooks/usePageView";
 import { useAuthentication } from "contexts/authenticationContext";
-import { useCurrentUser } from "contexts/currentUserContext";
 import LottieAnimation from "components/atomics/LottieAnimation";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { DONATION_COUNT } from "lib/localStorage/constants";
@@ -20,7 +19,6 @@ function PostDonationScreen() {
     keyPrefix: "donations.postDonationScreen",
   });
   const { isAuthenticated } = useAuthentication();
-  const { currentUser } = useCurrentUser();
   const { navigateTo } = useNavigation();
   const { warmGlowMessage, isLoading } = useWarmGlowMessages();
 
@@ -39,7 +37,7 @@ function PostDonationScreen() {
 
   const handleNavigate = async () => {
     if (!isAuthenticated()) {
-      navigateTo("SentMagicLinkEmailScreen", { email: currentUser?.email });
+      navigateTo("ValidateAccountScreen");
     } else {
       navigateTo("TabNavigator", {
         screen: "CausesScreen",
