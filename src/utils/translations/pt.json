@@ -677,6 +677,19 @@
       "confirmText": "Continuar",
       "emailPlaceholder": "Seu e-mail"
     },
+    "insertOtpCodeScreen": {
+      "title": "Verifique sua conta",
+      "subtitle": "Por favor, insira o código de 6 dígitos enviado para {{email}}",
+      "confirmText": "Continuar",
+      "resendText": "Reenviar código",
+      "ModalWrongOtp": {
+        "title": "Oops, código incorreto",
+        "description": "Se você inseriu o código corretamente e ainda assim não conseguiu entrar, por favor entre em contato com nosso suporte.",
+        "tryAgain": "Tentar novamente",
+        "contactSupport": "Falar com o suporte",
+        "userSupportLink": "https://v2.zopim.com/widget/popout.html?key={{key}}"
+      }
+    },
     "insertEmailCouponScreen": {
       "title": "Entre com um e-mail",
       "emailLabel": "E-mail",
