@@ -8,10 +8,9 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
-import { isValidEmail } from "lib/validators";
-import { useEffect, useState } from "react";
 import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared";
@@ -23,10 +22,11 @@ import {
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
 import { useRouteParams } from "hooks/useRouteParams";
-import LockIcon from "../assets/LockIcon";
-
+import Icon from "components/atomics/Icon";
+import { isValidOTP } from "lib/validators";
+import { countdown } from "lib/timeoutHelpers";
 import S from "./styles";
-import ModalWrongOtp from "./ModalWrongOtp";
+import LockIcon from "../assets/LockIcon";
 
 const CELL_COUNT = 6;
 
@@ -39,16 +39,16 @@ function InsertOtpCodeScreen() {
   const [currentOtpCode, setCurrentOtpCode] = useState("");
   const [timer, setTimer] = useState<string>("");
   const [resendDisabled, setResendDisabled] = useState<boolean>(false);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [errorVisible, setErrorVisible] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value: currentOtpCode,
+    setValue: setCurrentOtpCode,
+  });
 
   const ref = useBlurOnFulfill({
     value: currentOtpCode,
     cellCount: CELL_COUNT,
-  });
-
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-    value: currentOtpCode,
-    setValue: setCurrentOtpCode,
   });
 
   const {
@@ -59,6 +59,8 @@ function InsertOtpCodeScreen() {
   const { signInByOtp, sendOtpEmail } = useAuthentication();
 
   useEffect(() => {
+    logEvent("P36_view");
+
     if (!email) {
       navigateTo("InsertEmailScreen");
     } else {
@@ -67,42 +69,41 @@ function InsertOtpCodeScreen() {
   }, []);
 
   const handleButtonPress = async () => {
-    const authenticate = () => {
-      signInByOtp({
-        code: currentOtpCode,
-        onSuccess: () => {
-          navigateTo("TabNavigator", { screen: "CausesScreen" });
-        },
-        onError: () => {
-          setModalVisible(true);
-        },
-      });
-    };
+    logEvent("authOtpFormBtn_click");
+    setLoading(true);
 
-    logEvent("authEmailFormBtn_click", {
-      from: "sign_in",
+    signInByOtp({
+      code: currentOtpCode,
+      onSuccess: () => {
+        navigateTo("TabNavigator", { screen: "CausesScreen" });
+      },
+      onError: () => {
+        setErrorVisible(true);
+        setLoading(false);
+      },
     });
-
-    authenticate();
   };
 
-  const handleResendCode = async () => {
+  const handleResendCode = () => {
     setResendDisabled(true);
     sendOtpEmail({ email: currentEmail });
 
-    let seconds = 60;
-
-    const interval = setInterval(() => {
-      seconds -= 1;
-      setTimer(`(${seconds}s)`);
-
-      if (seconds === 0) {
-        clearInterval(interval);
+    countdown({
+      timeInSeconds: 60,
+      onChange: (seconds) => setTimer(`(${seconds}s)`),
+      onComplete: () => {
         setResendDisabled(false);
         setTimer("");
-      }
-    }, 1000);
+      },
+    });
   };
+
+  const handleCodeChange = (code: string) => {
+    setErrorVisible(false);
+    setCurrentOtpCode(code);
+  };
+
+  const isButtonDisabled = loading || !isValidOTP(currentOtpCode);
 
   return (
     <KeyboardAvoidingView
@@ -128,12 +129,11 @@ function InsertOtpCodeScreen() {
               ref={ref}
               {...props}
               value={currentOtpCode}
-              onChangeText={setCurrentOtpCode}
+              onChangeText={handleCodeChange}
               cellCount={CELL_COUNT}
               rootStyle={S.codeFieldRoot}
               keyboardType="number-pad"
               textContentType="oneTimeCode"
-              testID="my-code-input"
               renderCell={({ index, symbol, isFocused }) => (
                 <Text
                   key={index}
@@ -144,27 +144,41 @@ function InsertOtpCodeScreen() {
                 </Text>
               )}
             />
+            <View
+              style={{
+                ...S.errorContainer,
+                display: errorVisible ? "flex" : "none",
+              }}
+            >
+              <Icon type="outlined" name="info" size={20} color="red" />
+              <Text style={S.errorText}>{t("incorrectCode")}</Text>
+            </View>
             <Button
               text={t("confirmText")}
               onPress={handleButtonPress}
-              disabled={!isValidEmail(email)}
-              customStyles={S.button}
-              customTextStyles={{
-                color: theme.colors.neutral10,
-              }}
+              customStyles={isButtonDisabled ? S.buttonDisabled : S.button}
+              customTextStyles={{ color: theme.colors.neutral10 }}
+              disabled={isButtonDisabled}
+              loading={loading}
             />
-            <TouchableOpacity accessibilityRole="button"
+            <TouchableOpacity
+              accessibilityRole="button"
               style={S.resendCodeContainer}
               onPress={handleResendCode}
               disabled={resendDisabled}
             >
-              <Text style={S.resendCodeLink}>{t("resendText")}</Text>
+              <Text
+                style={
+                  resendDisabled ? S.resendCodeLinkDisabled : S.resendCodeLink
+                }
+              >
+                {t("resendText")}
+              </Text>
               <Text style={S.timer}>{timer}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>
-      <ModalWrongOtp visible={modalVisible} setVisible={setModalVisible} />
     </KeyboardAvoidingView>
   );
 }

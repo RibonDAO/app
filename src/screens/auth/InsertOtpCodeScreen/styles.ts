@@ -1,7 +1,10 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
 import { stylizedDisplayXs } from "styles/typography/stylized";
 import { theme } from "@ribon.io/shared/styles";
-import { defaultBodyMdRegular } from "styles/typography/default";
+import {
+  defaultBodyMdRegular,
+  defaultBodyXsRegular,
+} from "styles/typography/default";
 
 const min = (a: number, b: number) => (a < b ? a : b);
 
@@ -37,6 +40,11 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.brand.primary[600],
     borderColor: theme.colors.brand.primary[800],
   },
+  buttonDisabled: {
+    height: 48,
+    backgroundColor: theme.colors.neutral[200],
+    borderColor: theme.colors.neutral[300],
+  },
   inputContainer: {
     height: 48,
     width: "100%",
@@ -59,14 +67,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: min(Dimensions.get("window").width - 32, 700),
-    marginBottom: theme.spacingNative(24),
+    marginBottom: theme.spacingNative(16),
   },
   cell: {
     width: 50,
     height: 50,
     lineHeight: 46,
     fontSize: 24,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: theme.colors.neutral[300],
     textAlign: "center",
     borderRadius: 8,
@@ -85,6 +93,11 @@ const styles = StyleSheet.create({
     color: theme.colors.brand.primary[600],
     textDecorationLine: "underline",
   },
+  resendCodeLinkDisabled: {
+    ...defaultBodyMdRegular,
+    color: theme.colors.neutral[400],
+    textDecorationLine: "underline",
+  },
   resendCodeContainer: {
     marginTop: theme.spacingNative(16),
     display: "flex",
@@ -93,18 +106,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: theme.spacingNative(8),
   },
-  resendCodeLinkDisabled: {
-    ...defaultBodyMdRegular,
-    color: theme.colors.neutral[400],
-    textDecorationLine: "underline",
-  },
   timer: {
     ...defaultBodyMdRegular,
-    color: theme.colors.neutral[800],
+    color: theme.colors.neutral[400],
   },
   timerDisabled: {
     ...defaultBodyMdRegular,
     color: theme.colors.neutral[400],
+  },
+  errorContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: theme.spacingNative(4),
+    marginBottom: theme.spacingNative(16),
+    width: "100%",
+  },
+  errorText: {
+    ...defaultBodyXsRegular,
+    color: "red",
   },
 });
 
