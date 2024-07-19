@@ -27,6 +27,7 @@ function InsertEmailScreen() {
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const { navigateTo } = useNavigation();
 
   const { sendOtpEmail } = useAuthentication();
@@ -38,11 +39,14 @@ function InsertEmailScreen() {
   }, []);
 
   const handleButtonPress = async () => {
+    if (emailSent) return;
+
     setLoading(true);
     await sendOtpEmail({ email });
     logEvent("authEmailFormBtn_click", {
       from: "sign_in",
     });
+    setEmailSent(true);
     navigateTo("InsertOtpCodeScreen", { email });
   };
 
