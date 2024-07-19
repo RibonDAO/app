@@ -26,6 +26,7 @@ function InsertEmailScreen() {
   });
 
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const { navigateTo } = useNavigation();
 
   const { sendOtpEmail } = useAuthentication();
@@ -37,6 +38,7 @@ function InsertEmailScreen() {
   }, []);
 
   const handleButtonPress = async () => {
+    setLoading(true);
     await sendOtpEmail({ email });
     logEvent("authEmailFormBtn_click", {
       from: "sign_in",
@@ -75,16 +77,18 @@ function InsertEmailScreen() {
               autoFocus
               containerStyle={S.inputContainer}
               style={S.input}
+              disabled={loading}
             />
 
             <Button
               text={t("confirmText")}
               onPress={handleButtonPress}
-              disabled={!isValidEmail(email)}
-              customStyles={S.button}
+              disabled={!isValidEmail(email) || loading}
+              customStyles={loading ? S.buttonDisabled : S.button}
               customTextStyles={{
                 color: theme.colors.neutral10,
               }}
+              loading={loading}
             />
             <PrivacyPolicyLayout />
           </View>
