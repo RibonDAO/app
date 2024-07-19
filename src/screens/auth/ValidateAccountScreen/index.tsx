@@ -1,55 +1,47 @@
-import { useTranslation } from "react-i18next";
 import usePageView from "hooks/usePageView";
 import { useNavigation } from "hooks/useNavigation";
 import { useCurrentUser } from "contexts/currentUserContext";
-import { showToast } from "lib/Toast";
 import { useAuthentication } from "contexts/authenticationContext";
-import ValidateAccount from "components/moleculars/validateAccount";
-import { useRouteParams } from "hooks/useRouteParams";
+import { useEffect } from "react";
+import { Loader } from "rn-placeholder";
+import { View } from "react-native";
+import S from "./styles";
 
 function ValidateAccountScreen() {
   usePageView("P27_view", { from: "validation_flow" });
-  const {
-    params: { from },
-  } = useRouteParams<"ValidateAccountScreen">();
-  const { t } = useTranslation("translation", {
-    keyPrefix: `${from}.validateAccountScreen`,
-  });
 
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
-  const { sendAuthenticationEmail } = useAuthentication();
+  const { isAuthenticated, sendOtpEmail, accountId } = useAuthentication();
 
-  const onContinue = async (pathname: string) => {
-    navigateTo(pathname);
+  const handleAuthenticatedUser = () => {
+    navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
-  const onContinueMagicLink = (pathname: string) => {
-    if (currentUser?.email) {
-      sendAuthenticationEmail({ email: currentUser?.email });
-      showToast({
-        type: "success",
-        message: t("toastSuccessMessage"),
-      });
-      navigateTo(pathname, { email: currentUser?.email });
-    } else {
-      navigateTo("InsertEmailScreen");
-    }
+  const handleUserNotFilledEmail = () => {
+    navigateTo("InsertEmailScreen");
   };
+
+  const handleUserWithoutAccountId = () => {
+    sendOtpEmail({ email: currentUser?.email });
+    navigateTo("InsertOtpCodeScreen", { email: currentUser?.email });
+  };
+
+  const handleUserWithAccountId = () => {
+    navigateTo("InsertOtpCodeScreen", { email: currentUser?.email });
+  };
+
+  useEffect(() => {
+    if (isAuthenticated()) handleAuthenticatedUser();
+    else if (!currentUser?.email) handleUserNotFilledEmail();
+    else if (!accountId) handleUserWithoutAccountId();
+    else handleUserWithAccountId();
+  }, [currentUser, accountId]);
 
   return (
-    <ValidateAccount
-      title={t("title")}
-      description={
-        currentUser?.email
-          ? t("description", { email: currentUser?.email })
-          : t("descriptionWithoutEmail")
-      }
-      onContinue={() => onContinue("CausesScreen")}
-      onContinueMagicLink={() =>
-        onContinueMagicLink("SentMagicLinkEmailScreen")
-      }
-    />
+    <View style={S.container}>
+      <Loader />
+    </View>
   );
 }
 
