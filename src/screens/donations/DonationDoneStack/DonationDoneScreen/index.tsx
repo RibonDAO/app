@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { RootStackScreenProps } from "types";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
@@ -96,7 +96,7 @@ export default function DonationDoneScreen({
         <S.TopContainer>
           <Button
             onPress={copyLink}
-            text="Compartilhar"
+            text={t("share")}
             leftIcon={{
               name: "share",
               type: "outlined",
