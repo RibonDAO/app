@@ -94,6 +94,19 @@ export default function DonationDoneScreen({
     <>
       <S.Container>
         <S.TopContainer>
+          {isImageLoading && <NonProfitImagePlaceholder />}
+          <S.CardImage
+            source={{ uri: nonProfit?.confirmationImage }}
+            onLoad={() => setIsImageLoading(false)}
+            onError={() => setIsImageLoading(false)}
+          />
+          <S.ImageWithIconOverlayContainer>
+            <ImageWithIconOverlay
+              leftImage={profile?.photo}
+              rightImage={nonProfit?.icon}
+            />
+          </S.ImageWithIconOverlayContainer>
+
           <Button
             onPress={copyLink}
             text={t("share")}
@@ -115,20 +128,11 @@ export default function DonationDoneScreen({
               height: "auto",
               borderRadius: 8,
               marginLeft: "auto",
+              position: "absolute",
+              top: 12,
+              right: 12 
             }}
           />
-          {isImageLoading && <NonProfitImagePlaceholder />}
-          <S.CardImage
-            source={{ uri: nonProfit?.confirmationImage }}
-            onLoad={() => setIsImageLoading(false)}
-            onError={() => setIsImageLoading(false)}
-          />
-          <S.ImageWithIconOverlayContainer>
-            <ImageWithIconOverlay
-              leftImage={profile?.photo}
-              rightImage={nonProfit?.icon}
-            />
-          </S.ImageWithIconOverlayContainer>
         </S.TopContainer>
 
         <S.ContentContainer>
