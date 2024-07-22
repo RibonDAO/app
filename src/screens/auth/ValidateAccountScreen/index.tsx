@@ -3,8 +3,7 @@ import { useNavigation } from "hooks/useNavigation";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { useAuthentication } from "contexts/authenticationContext";
 import { useEffect } from "react";
-import { Loader } from "rn-placeholder";
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import S from "./styles";
 
 function ValidateAccountScreen() {
@@ -40,7 +39,7 @@ function ValidateAccountScreen() {
 
   return (
     <View style={S.container}>
-      <Loader />
+      <ActivityIndicator size="small" color="black" testID="loader" />
     </View>
   );
 }
