@@ -22,6 +22,6 @@ describe("CardLargeImage", () => {
   it("renders without error", () => {
     renderComponent(<CardReferral />);
 
-    expectTextToBeInTheDocument("Invite your friends");
+    expectTextToBeInTheDocument("Gift someone 1 ticket");
   });
 });

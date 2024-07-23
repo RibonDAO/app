@@ -12,16 +12,6 @@ export const Container = styled.View`
   flex-direction: column;
 `;
 
-export const ConfigContainer = styled.Pressable`
-  display: flex;
-  height: 30px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  align-self: flex-end;
-  margin-top: ${theme.spacing(8)};
-`;
-
 export const Background = styled.Image`
   position: absolute;
   width: 100%;

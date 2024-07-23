@@ -25,7 +25,7 @@ function TicketIconText({
   const hasTickets = quantity > 0;
   const ticketColor =
     color ||
-    (hasTickets ? theme.colors.brand.primary[600] : theme.colors.neutral[500]);
+    (hasTickets ? theme.colors.brand.primary[800] : theme.colors.neutral[500]);
   const ticketIcon =
     <TicketIcon color={color} /> ||
     (hasTickets ? (

@@ -1,5 +1,5 @@
-const version = "6.0.4";
-const buildNumber = 395;
+const version = "6.1.1";
+const buildNumber = 397;
 
 export default () => ({
   "expo": {
@@ -91,13 +91,6 @@ export default () => ({
         },
       ],
       "expo-localization",
-      [
-        "expo-updates", 
-        {
-          "username": "thais.correa"
-        },
-
-      ],
       "sentry-expo",
       "@react-native-firebase/app",
       "@react-native-firebase/perf",

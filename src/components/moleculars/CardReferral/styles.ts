@@ -14,7 +14,7 @@ export const Container = styled.View`
   flex-direction: column;
   gap: ${theme.spacingNative(16)}px;
   align-items: center;
-  background-color: #c7e6f9;
+  background-color: #e8f4fc;
   overflow: hidden;
 `;
 
@@ -32,6 +32,7 @@ export const Title = styled.Text`
   ${defaultHeadingXs}
 
   color: #235174;
+  text-align: center;
 `;
 
 export const Subtitle = styled.Text`

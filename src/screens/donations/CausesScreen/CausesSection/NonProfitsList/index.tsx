@@ -2,7 +2,7 @@ import { NonProfit } from "@ribon.io/shared/types";
 import { useTranslation } from "react-i18next";
 import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
 import { useNavigation } from "hooks/useNavigation";
-import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
+import ImpactDonationsVector from "assets/illustrations/ImpactDonationsVector";
 
 import { FlatList, SafeAreaView } from "react-native";
 import { useTagDonationContext } from "contexts/tagDonationContext";
