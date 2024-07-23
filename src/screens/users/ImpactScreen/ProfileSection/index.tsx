@@ -105,7 +105,11 @@ function ProfileSection() {
 
         <S.StatisticsContainer additionalTopMargin={!currentUser}>
           <StatisticsCard
-            backgroundColor={theme.colors.brand.primary[25]}
+            backgroundColor={
+              isMember
+                ? theme.colors.brand.tertiary[25]
+                : theme.colors.brand.primary[25]
+            }
             description={t("donatedTickets")}
             icon={<TicketColorsIcon />}
             value={currentUser ? userStatistics?.totalTickets : 0}
@@ -125,7 +129,11 @@ function ProfileSection() {
           />
 
           <StatisticsCard
-            backgroundColor={theme.colors.brand.primary[25]}
+            backgroundColor={
+              isMember
+                ? theme.colors.brand.tertiary[25]
+                : theme.colors.brand.primary[25]
+            }
             description={t("daysDoingGood")}
             icon={<CalendarIcon />}
             value={currentUser ? userStatistics?.daysDonating : 0}
