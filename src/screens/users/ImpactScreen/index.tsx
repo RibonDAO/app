@@ -7,7 +7,7 @@ import {
   useUserProfile,
 } from "@ribon.io/shared/hooks";
 import usePageView from "hooks/usePageView";
-import TabViewSection from "./TabViewSection";
+import AccordionSection from "./AccordionSection";
 import * as S from "./styles";
 
 function ImpactScreen() {
@@ -30,7 +30,7 @@ function ImpactScreen() {
 
   return (
     <S.Container>
-      <TabViewSection />
+      <AccordionSection />
     </S.Container>
   );
 }

@@ -6,8 +6,6 @@ import { WalletConnectModal } from "@walletconnect/modal-react-native";
 import { QueryClientComponent } from "@ribon.io/shared/hooks";
 import "./i18n.config";
 import { View } from "react-native";
-import * as Updates from "expo-updates";
-import { logError } from "services/crashReport";
 import { debugEventsEnabled } from "./src/config/DebugEventsView/helpers";
 import DebugEventsView from "./src/config/DebugEventsView";
 import ScrollEnabledProvider from "./src/contexts/scrollEnabledContext";
@@ -42,22 +40,8 @@ function Main() {
   const isLoadingComplete = useCachedResources();
   const { topBackgroundColor, bottomBackgroundColor } = useUnsafeAreaContext();
 
-  async function onFetchUpdateAsync() {
-    try {
-      const update = await Updates.checkForUpdateAsync();
-
-      if (update.isAvailable) {
-        await Updates.fetchUpdateAsync();
-        await Updates.reloadAsync();
-      }
-    } catch (error) {
-      logError(`Error fetching latest Expo update: ${error}`);
-    }
-  }
-
   useEffect(() => {
     initializeCRM();
-    onFetchUpdateAsync();
   }, []);
 
   if (!isLoadingComplete) {

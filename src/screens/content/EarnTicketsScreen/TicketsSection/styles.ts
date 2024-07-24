@@ -1,13 +1,9 @@
+import styled from "styled-components/native";
 import { theme } from "@ribon.io/shared";
-import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: theme.spacingNative(16),
-    gap: theme.spacingNative(24),
-    padding: theme.spacingNative(16),
-    backgroundColor: theme.colors.neutral10,
-  },
-});
-
-export default styles;
+export const Container = styled.View`
+  margin-bottom: ${theme.spacing(16)};
+  gap: ${theme.spacing(24)};
+  padding: ${theme.spacing(16)};
+  background-color: ${theme.colors.neutral10};
+`;
