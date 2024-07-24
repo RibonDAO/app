@@ -35,7 +35,7 @@ export function useTickets() {
     collectByIntegration,
   } = useTicketShared();
 
-  const { collectByClub } = useUserTickets();
+  const { collectByClub, collectByBusiness } = useUserTickets();
 
   const { currentIntegrationId, externalId } = useIntegrationContext();
   const externalIds =
@@ -132,11 +132,26 @@ export function useTickets() {
     }
   }
 
+  async function handleCollectByBusiness({
+    onError,
+    onSuccess,
+    category,
+  }: HandleCollectByClubProps) {
+    try {
+      await collectByBusiness(PLATFORM, category);
+      if (onSuccess) onSuccess();
+    } catch (e: any) {
+      logError(e);
+      if (onError) onError(e);
+    }
+  }
+
   return {
     handleCanCollect,
     handleCollect,
     hasReceivedTicketToday,
     handleCollectByClub,
     handleCollectDailyTicket,
+    handleCollectByBusiness,
   };
 }
