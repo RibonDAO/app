@@ -56,7 +56,7 @@
     "@walletconnect/react-native-compat": "^2.12.2",
     "assert": "^2.1.0",
     "customerio-expo-plugin": "^1.0.0-beta.15",
-    "customerio-reactnative": "^3.7.0",
+    "customerio-reactnative": "^3.8.0",
     "ethers": "^5.7.2",
     "expo": "50",
     "expo-apple-authentication": "^6.1.2",
