@@ -677,6 +677,13 @@
       "confirmText": "Continuar",
       "emailPlaceholder": "Seu e-mail"
     },
+    "insertOtpCodeScreen": {
+      "title": "Verifique sua conta",
+      "subtitle": "Por favor, insira o código de 6 dígitos enviado para {{email}}",
+      "confirmText": "Continuar",
+      "resendText": "Reenviar código",
+      "incorrectCode": "Código incorreto. Tente novamente, por favor."
+    },
     "insertEmailCouponScreen": {
       "title": "Entre com um e-mail",
       "emailLabel": "E-mail",

@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.brand.primary[600],
     borderColor: theme.colors.brand.primary[800],
   },
+  buttonDisabled: {
+    height: 48,
+    backgroundColor: theme.colors.neutral[200],
+    borderColor: theme.colors.neutral[300],
+  },
   inputContainer: {
     height: 48,
     width: "100%",
