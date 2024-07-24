@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
   keyboardView: {
     height:
       Platform.OS === "android" ? Dimensions.get("window").height : "100%",
+    justifyContent: "center",
   },
   codeFieldRoot: {
     display: "flex",
