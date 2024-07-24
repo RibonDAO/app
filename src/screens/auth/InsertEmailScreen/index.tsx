@@ -12,11 +12,12 @@ import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayo
 import { useNavigation } from "hooks/useNavigation";
 import InputText from "components/atomics/inputs/InputText";
 import { isValidEmail } from "lib/validators";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
+import { useFocusEffect } from "@react-navigation/native";
 import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
@@ -37,6 +38,13 @@ function InsertEmailScreen() {
       from: "sign_in",
     });
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      setLoading(false);
+      setEmailSent(false);
+    }, []),
+  );
 
   const handleButtonPress = async () => {
     if (emailSent) return;

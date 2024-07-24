@@ -488,7 +488,10 @@ function RootNavigator() {
         name="InsertOtpCodeScreen"
         component={InsertOtpCodeScreen}
         options={{
-          headerShown: false,
+          headerShown: true,
+          headerLeft: () => <ArrowBackButton />,
+          headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
