@@ -25,6 +25,7 @@ import { useRouteParams } from "hooks/useRouteParams";
 import Icon from "components/atomics/Icon";
 import { isValidEmail, isValidOTP } from "lib/validators";
 import { countdown } from "lib/timeoutHelpers";
+import { showToast } from "lib/Toast";
 import LockIcon from "../assets/LockIcon";
 import S from "./styles";
 
@@ -78,6 +79,11 @@ function InsertOtpCodeScreen() {
     signInByOtp({
       code: currentOtpCode,
       onSuccess: () => {
+        showToast({
+          type: "success",
+          message: t("successToastMessage"),
+          position: "bottom",
+        });
         navigateTo("TabNavigator", { screen: "CausesScreen" });
       },
       onError: () => {
