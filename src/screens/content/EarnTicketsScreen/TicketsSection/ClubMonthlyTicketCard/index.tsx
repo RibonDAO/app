@@ -21,14 +21,14 @@ import TicketCardPlaceholder from "../placeholder/placeholder";
 
 type Props = {
   tickets?: number;
-  isMember?: boolean;
+  isClubMember?: boolean;
   refetchTickets: () => void;
   plan?: number;
   setUnauthorizedModalVisible: (value: boolean) => void;
 };
 export default function ClubMonthlyTicketCard({
   tickets = 0,
-  isMember,
+  isClubMember,
   refetchTickets,
   plan,
   setUnauthorizedModalVisible,
@@ -77,7 +77,8 @@ export default function ClubMonthlyTicketCard({
   const changeHasCollected = async () => {
     try {
       setHasCollected(false);
-      if (isMember && tickets === 0 && !startAnimation) setHasCollected(true);
+      if (isClubMember && tickets === 0 && !startAnimation)
+        setHasCollected(true);
     } finally {
       perform(() => setIsLoading(false)).in(1000);
     }
@@ -95,7 +96,7 @@ export default function ClubMonthlyTicketCard({
   useFocusEffect(
     useCallback(() => {
       changeHasCollected();
-    }, [isMember, tickets, startAnimation]),
+    }, [isClubMember, tickets, startAnimation]),
   );
 
   const handleSuccess = () => {
@@ -109,7 +110,7 @@ export default function ClubMonthlyTicketCard({
   };
 
   const handleButtonPress = async () => {
-    if (!isMember) {
+    if (!isClubMember) {
       navigateTo("ClubScreen");
       logEvent("clubCTA_click", { from: "clubMonthlyTicket_card" });
     } else if (!isAuthenticated()) {
@@ -125,7 +126,7 @@ export default function ClubMonthlyTicketCard({
   };
 
   useEffect(() => {
-    if (!isMember) {
+    if (!isClubMember) {
       logEvent("clubCTA_view", { from: "clubMonthlyTicket_card" });
     }
   }, []);
@@ -161,7 +162,9 @@ export default function ClubMonthlyTicketCard({
     >
       <CollectableButton
         text={
-          isMember ? buttonTextHasClub : t("monthlyTicketCard.buttonTextNoClub")
+          isClubMember
+            ? buttonTextHasClub
+            : t("monthlyTicketCard.buttonTextNoClub")
         }
         afterText={buttonTextHasCollected}
         locked={hasCollected}

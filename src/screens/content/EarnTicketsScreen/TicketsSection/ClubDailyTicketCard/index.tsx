@@ -16,14 +16,14 @@ import TicketCardPlaceholder from "../placeholder/placeholder";
 
 type Props = {
   tickets?: number;
-  isMember?: boolean;
+  isClubMember?: boolean;
   refetchTickets: () => void;
   plan?: number;
   setUnauthorizedModalVisible: (value: boolean) => void;
 };
 export default function ClubDailyTicketCard({
   tickets = 0,
-  isMember,
+  isClubMember,
   refetchTickets,
   plan,
   setUnauthorizedModalVisible,
@@ -69,7 +69,8 @@ export default function ClubDailyTicketCard({
   const changeHasCollected = async () => {
     try {
       setHasCollected(false);
-      if (isMember && tickets === 0 && !startAnimation) setHasCollected(true);
+      if (isClubMember && tickets === 0 && !startAnimation)
+        setHasCollected(true);
     } finally {
       perform(() => setIsLoading(false)).in(1000);
     }
@@ -87,7 +88,7 @@ export default function ClubDailyTicketCard({
   useFocusEffect(
     useCallback(() => {
       changeHasCollected();
-    }, [isMember, tickets, startAnimation]),
+    }, [isClubMember, tickets, startAnimation]),
   );
 
   const handleSuccess = () => {
@@ -101,7 +102,7 @@ export default function ClubDailyTicketCard({
   };
 
   const handleButtonPress = async () => {
-    if (!isMember) {
+    if (!isClubMember) {
       navigateTo("ClubScreen");
       logEvent("clubCTA_click", { from: "clubDailyTicket_card" });
     } else if (!isAuthenticated()) {
@@ -117,7 +118,7 @@ export default function ClubDailyTicketCard({
   };
 
   useEffect(() => {
-    if (!isMember) {
+    if (!isClubMember) {
       logEvent("clubCTA_view", { from: "clubDailyTicket_card" });
     }
   }, []);
@@ -152,7 +153,9 @@ export default function ClubDailyTicketCard({
     >
       <CollectableButton
         text={
-          isMember ? buttonTextHasClub : t("dailyTicketCard.buttonTextNoClub")
+          isClubMember
+            ? buttonTextHasClub
+            : t("dailyTicketCard.buttonTextNoClub")
         }
         afterText={t("dailyTicketCard.buttonTextCollected", { time })}
         locked={hasCollected}

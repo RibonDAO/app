@@ -31,7 +31,7 @@ describe("UserAvatar", () => {
   });
 
   it("renders the member user avatar", () => {
-    renderComponent(<UserAvatar name="Profile name" isMember />);
+    renderComponent(<UserAvatar name="Profile name" isClubMember />);
 
     expect(screen.queryByTestId("Sparkles")).toBeTruthy();
     expect(screen.queryByTestId("VerifiedIcon")).toBeTruthy();
