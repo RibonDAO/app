@@ -36,7 +36,10 @@ function PostDonationScreen() {
   };
 
   const handleNavigate = async () => {
-    if (!isAuthenticated()) {
+    const donations = await getLocalStorageItem(DONATION_COUNT);
+    const donationCount = donations ? parseInt(donations, 10) : 0;
+
+    if (!isAuthenticated() && donationCount > 1) {
       navigateTo("ValidateAccountScreen");
     } else {
       navigateTo("TabNavigator", {
