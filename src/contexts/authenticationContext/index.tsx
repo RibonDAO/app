@@ -13,7 +13,16 @@ import {
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { logError } from "services/crashReport";
 
+// TODO: Use the shared methods when R4B structure is done
+import otpAuthenticationApi from "services/user/userAuthenticationApi";
+
 type authTokenProps = {
+  onSuccess?: () => void;
+  onError?: () => void;
+};
+
+type otpAuthProps = {
+  code: string;
   onSuccess?: () => void;
   onError?: () => void;
 };
@@ -38,6 +47,10 @@ export interface IAuthenticationContext {
   isAuthenticated: () => boolean;
   setMagicLinkToken: (token: string) => void;
   setAccountId: (id: string) => void;
+  sendOtpEmail: (
+    sendOtpEmailProps: authenticationEmailProps,
+  ) => Promise<string>;
+  signInByOtp: (signInByOtpProps: otpAuthProps) => void;
 }
 
 export type Props = {
@@ -139,6 +152,41 @@ function AuthenticationProvider({ children }: Props) {
     return "";
   }
 
+  async function sendOtpEmail({
+    email,
+    id,
+    onSuccess,
+    onError,
+  }: authenticationEmailProps) {
+    try {
+      const response = await otpAuthenticationApi.postSendOtpEmail(email, id);
+      if (onSuccess) onSuccess();
+      setCurrentUser(response.data.user);
+      setAccountId(response.data.accountId);
+      return response.data.user.email;
+    } catch (error: any) {
+      logError(error);
+      if (onError) onError();
+    }
+    return "";
+  }
+
+  async function signInByOtp({ code, onSuccess, onError }: otpAuthProps) {
+    try {
+      const response = await otpAuthenticationApi.postAuthorizeFromOtpCode(
+        code,
+        accountId,
+      );
+
+      signIn(response);
+
+      if (onSuccess) onSuccess();
+    } catch (error: any) {
+      logError(error);
+      if (onError) onError();
+    }
+  }
+
   async function signInWithApple(response: any) {
     try {
       const authResponse = await userAuthenticationApi.postAuthenticate(
@@ -176,6 +224,8 @@ function AuthenticationProvider({ children }: Props) {
       setAccountId,
       magicLinkToken,
       setMagicLinkToken,
+      sendOtpEmail,
+      signInByOtp,
     }),
     [accessToken, magicLinkToken, accountId],
   );

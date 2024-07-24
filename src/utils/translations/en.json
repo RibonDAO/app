@@ -685,6 +685,13 @@
       "confirmText": "Continue",
       "emailPlaceholder": "Your e-mail"
     },
+    "insertOtpCodeScreen": {
+      "title": "We sent you a code",
+      "subtitle": "Enter the 6-digit verification code sent to {{email}}",
+      "confirmText": "Continue",
+      "resendText": "Resend code",
+      "incorrectCode": "Incorrect code. Please try again."
+    },
     "insertEmailCouponScreen": {
       "title": "Sign in with an e-mail",
       "emailLabel": "E-mail",

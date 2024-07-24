@@ -83,3 +83,7 @@ export function initializeApi({
     },
   );
 }
+
+export function apiPost(url: string, data: any) {
+  return authenticationApi.post(`${API_SCOPE}/${url}`, data);
+}

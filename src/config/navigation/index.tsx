@@ -59,11 +59,9 @@ import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
 import SignedInScreen from "screens/donations/auth/SignedInScreen";
 import SignInScreen from "screens/auth/SignInScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
-import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
+import InsertOtpCodeScreen from "screens/auth/InsertOtpCodeScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
 import { useAuthentication } from "contexts/authenticationContext";
-import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
-import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
 import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
@@ -487,26 +485,13 @@ function RootNavigator() {
         }}
       />
       <Stack.Screen
-        name="SentMagicLinkEmailScreen"
-        component={SentMagicLinkEmailScreen}
+        name="InsertOtpCodeScreen"
+        component={InsertOtpCodeScreen}
         options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="SignInByMagicLinkScreen"
-        component={SignInByMagicLinkScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="ExpiredLinkScreen"
-        component={ExpiredLinkScreen}
-        options={{
-          headerShown: false,
+          headerShown: true,
+          headerLeft: () => <ArrowBackButton />,
+          headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
