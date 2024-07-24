@@ -58,17 +58,20 @@ function InsertOtpCodeScreen() {
   const { navigateTo } = useNavigation();
   const { signInByOtp, sendOtpEmail } = useAuthentication();
 
-  const sendEmail = useCallback(() => {
-    sendOtpEmail({ email });
-  }, [email]);
-
   useEffect(() => {
-    if (!email || !isValidEmail(email)) {
+    if (!isValidEmail(email)) {
       navigateTo("InsertEmailScreen");
       return;
     }
 
     logEvent("P36_view");
+  }, []);
+
+  const sendEmail = useCallback(() => {
+    if (isValidEmail(email)) sendOtpEmail({ email });
+  }, [email]);
+
+  useEffect(() => {
     sendEmail();
   }, [email]);
 
