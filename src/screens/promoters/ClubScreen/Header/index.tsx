@@ -36,7 +36,11 @@ function Header(): JSX.Element {
   return (
     <ImageBackground source={PinkSun} style={S.container} resizeMode="contain">
       {currentUser ? (
-        <UserAvatar userAvatar={newProfile?.photo} showInfo={false} isMember />
+        <UserAvatar
+          userAvatar={newProfile?.photo}
+          showInfo={false}
+          isClubMember
+        />
       ) : (
         <RibonFlag />
       )}

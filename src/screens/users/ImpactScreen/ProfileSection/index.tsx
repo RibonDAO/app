@@ -30,12 +30,12 @@ function ProfileSection() {
   const { accessToken } = useAuthentication();
   const [newProfile, setNewProfile] = useState<UserProfile>();
   const { navigateTo } = useNavigation();
-  const { userIsMember } = useSubscriptions();
+  const { userIsClubMember } = useSubscriptions();
   const {
-    isMember,
-    isLoading: isMemberLoading,
-    refetch: refetchIsMember,
-  } = userIsMember();
+    isClubMember,
+    isLoading: isClubMemberLoading,
+    refetch: refetchIsClubMember,
+  } = userIsClubMember();
   const { userStatistics } = useStatistics({
     userId: currentUser?.id ?? undefined,
   });
@@ -48,14 +48,14 @@ function ProfileSection() {
   useFocusEffect(
     useCallback(() => {
       refetch();
-      refetchIsMember();
+      refetchIsClubMember();
       setNewProfile(profile);
       if (!accessToken) setNewProfile(undefined);
     }, [profile, accessToken]),
   );
 
   const handleClick = () => {
-    if (isMember) return;
+    if (isClubMember) return;
     logEvent("clubCTA_click", {
       from: "impact_page",
     });
@@ -64,17 +64,17 @@ function ProfileSection() {
   };
 
   useEffect(() => {
-    if (!isMemberLoading) {
+    if (!isClubMemberLoading) {
       logEvent("clubCTA_view", {
         from: "impact_page",
       });
     }
-  }, [isMemberLoading, isMember]);
+  }, [isClubMemberLoading, isClubMember]);
 
   return (
-    <S.Container member={isMember}>
+    <S.Container clubMember={isClubMember}>
       <S.ShapeContainer>
-        <ProfileTopShape isMember={isMember} />
+        <ProfileTopShape isClubMember={isClubMember} />
       </S.ShapeContainer>
       <S.HeaderButtonsContainer>
         <HeaderButtons showsTicketsCounter />
@@ -90,13 +90,13 @@ function ProfileSection() {
                   ? newProfile.user.email
                   : currentUser?.email
               }
-              isMember={isMember}
+              isClubMember={isClubMember}
             />
 
             <S.TagContainer onPress={handleClick}>
-              <S.ClubTag member={isMember}>
-                <S.TagText member={isMember}>
-                  {isMember ? t("clubTagText") : t("noClubTagText")}
+              <S.ClubTag member={isClubMember}>
+                <S.TagText member={isClubMember}>
+                  {isClubMember ? t("clubTagText") : t("noClubTagText")}
                 </S.TagText>
               </S.ClubTag>
             </S.TagContainer>
@@ -106,7 +106,7 @@ function ProfileSection() {
         <S.StatisticsContainer additionalTopMargin={!currentUser}>
           <StatisticsCard
             backgroundColor={
-              isMember
+              isClubMember
                 ? theme.colors.brand.tertiary[25]
                 : theme.colors.brand.primary[25]
             }
@@ -130,7 +130,7 @@ function ProfileSection() {
 
           <StatisticsCard
             backgroundColor={
-              isMember
+              isClubMember
                 ? theme.colors.brand.tertiary[25]
                 : theme.colors.brand.primary[25]
             }

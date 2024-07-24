@@ -8,12 +8,12 @@ import { logEvent } from "services/analytics";
 import S from "./styles";
 
 type Props = {
-  isMember: boolean;
+  isClubMember: boolean;
   refetch: () => void;
 };
 
 export default function ClubSection({
-  isMember,
+  isClubMember,
   refetch,
 }: Props): JSX.Element | null {
   const { currentLang } = useLanguage();
@@ -45,7 +45,7 @@ export default function ClubSection({
     navigateTo("ClubScreen");
   }
 
-  return !isLoading && !isMember ? (
+  return !isLoading && !isClubMember ? (
     <TouchableOpacity
       accessibilityRole="button"
       style={S.imageContainer}

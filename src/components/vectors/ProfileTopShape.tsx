@@ -1,10 +1,10 @@
 import { SvgXml } from "react-native-svg";
 
 type Props = {
-  isMember: boolean;
+  isClubMember: boolean;
 };
 
-function ProfileTopShape({ isMember }: Props) {
+function ProfileTopShape({ isClubMember }: Props) {
   const nonMemberShape = `
   <svg width="577" height="433" viewBox="0 0 577 433" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M359.9 432.5C358.3 432.5 356.9 432.5 355.5 432.5C354.9 432.5 354.2 432.5 353.6 432.5H71C31.8 432.5 0 400.6 0 361.5V79C0 48 25.2 22.8 56.3 22.8C71.2 22.8 85.3 28.7 95.9 39.3L169.8 113.2C182.5 89.8 199.5 68.8 219.8 51.5C258.8 18.3 308.6 0 359.9 0C479.1 0 576.2 97 576.2 216.3C576.1 335.5 479.1 432.5 359.9 432.5Z" fill="#6DDFA6"/>
@@ -21,7 +21,7 @@ function ProfileTopShape({ isMember }: Props) {
   </svg>
   `;
 
-  if (isMember) {
+  if (isClubMember) {
     return <SvgXml xml={memberShape} />;
   } else {
     return <SvgXml xml={nonMemberShape} />;

@@ -73,15 +73,15 @@ export default function CausesScreen() {
     [integration, hasTickets],
   );
 
-  const { userIsMember } = useSubscriptions();
-  const { isMember, refetch: refetchIsMember } = userIsMember();
+  const { userIsClubMember } = useSubscriptions();
+  const { isClubMember, refetch: refetchIsClubMember } = userIsClubMember();
 
   const onRefresh = async () => {
     setRefreshing(true);
     try {
       await Promise.allSettled([
         refetchTickets(),
-        refetchIsMember(),
+        refetchIsClubMember(),
         refetchFirstAccessToIntegration(),
         refetchDonatedToday(),
       ]);
@@ -148,7 +148,10 @@ export default function CausesScreen() {
       {
         id: "club",
         component: (
-          <ClubSection isMember={isMember} refetch={refetchIsMember} />
+          <ClubSection
+            isClubMember={isClubMember}
+            refetch={refetchIsClubMember}
+          />
         ),
       },
       {
@@ -165,7 +168,7 @@ export default function CausesScreen() {
         ),
       },
     ],
-    [isMember, params?.newState, unauthorizedModalVisible],
+    [isClubMember, params?.newState, unauthorizedModalVisible],
   );
 
   if (isLoading || loadingFirstAccessToIntegration) return <Placeholder />;

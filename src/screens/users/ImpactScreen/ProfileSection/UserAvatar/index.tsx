@@ -8,14 +8,14 @@ type Props = {
   email?: string;
   name?: string | null;
   showInfo?: boolean;
-  isMember?: boolean;
+  isClubMember?: boolean;
 };
 function UserAvatar({
   userAvatar,
   email,
   name,
   showInfo = true,
-  isMember,
+  isClubMember,
 }: Props) {
   return (
     <S.AvatarSection>
@@ -26,13 +26,13 @@ function UserAvatar({
           <ProfilePhoto />
         )}
 
-        {isMember && (
+        {isClubMember && (
           <S.VerifiedContainer>
             <VerifiedIcon />
           </S.VerifiedContainer>
         )}
 
-        {isMember && (
+        {isClubMember && (
           <S.Sparkles>
             <Sparkles />
           </S.Sparkles>
