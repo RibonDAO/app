@@ -34,7 +34,7 @@ function InsertEmailAccountScreen() {
   });
   const [email, setEmail] = useState("");
 
-  const { sendAuthenticationEmail } = useAuthentication();
+  const { sendOtpEmail } = useAuthentication();
   const { handleCollectAndDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
@@ -78,7 +78,7 @@ function InsertEmailAccountScreen() {
   }, [donationSucceeded]);
 
   async function donateCallback() {
-    await sendAuthenticationEmail({ email });
+    await sendOtpEmail({ email });
     await handleCollectAndDonate({
       nonProfit,
       email,

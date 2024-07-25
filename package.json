@@ -92,6 +92,7 @@
     "react-native-appsflyer": "^6.13.1",
     "react-native-branch": "^6.2.1",
     "react-native-collapsible-tab-view": "2.0.2",
+    "react-native-confirmation-code-field": "^7.4.0",
     "react-native-country-picker-modal": "^2.0.0",
     "react-native-dropdown-picker": "^5.4.4",
     "react-native-markdown-display": "^7.0.2",

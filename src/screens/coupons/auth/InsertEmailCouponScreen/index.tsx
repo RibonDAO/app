@@ -28,7 +28,7 @@ function InsertEmailCouponScreen() {
   const [email, setEmail] = useState("");
   const { navigateTo } = useNavigation();
 
-  const { sendAuthenticationEmail } = useAuthentication();
+  const { sendOtpEmail } = useAuthentication();
 
   useEffect(() => {
     logEvent("P28_view", {
@@ -37,7 +37,7 @@ function InsertEmailCouponScreen() {
   }, []);
 
   const handleButtonPress = async () => {
-    await sendAuthenticationEmail({ email });
+    await sendOtpEmail({ email });
     logEvent("authEmailFormBtn_click", {
       from: "coupon_flow",
     });
