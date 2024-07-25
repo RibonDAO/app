@@ -621,12 +621,12 @@
     }
   },
   "contributionSection": {
-    "titleCard": "Faça ainda mais",
-    "title": "Confira a última novidade da Ribon",
-    "titleNewImpact": "Graças a você a {{nonProfitName}} poderá impactar 1 pessoa. Obrigado!",
+    "title": "Ganhe tickets e mais!",
+    "titleCard": "Assine o Clube Ribon",
+    "titleHead": "Confira a última novidade da Ribon",
+    "description": "Como membro do clube, além de receber tickets extra TODOS OS DIAS, você pode acumulá-los na sua carteira de forma ilimitada. Vem conhecer!",
     "nonProfits": "ONGs",
-    "button": "Doar",
-    "donate": "Doe {{value}}"
+    "button": "Quero conhecer"
   },
   "contributionCard": {
     "button": "Doar",
