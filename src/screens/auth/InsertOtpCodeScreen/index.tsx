@@ -8,7 +8,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "hooks/useNavigation";
 import { useAuthentication } from "contexts/authenticationContext";
@@ -23,10 +23,11 @@ import {
 } from "react-native-confirmation-code-field";
 import { useRouteParams } from "hooks/useRouteParams";
 import Icon from "components/atomics/Icon";
-import { isValidOTP } from "lib/validators";
+import { isValidEmail, isValidOTP } from "lib/validators";
 import { countdown } from "lib/timeoutHelpers";
-import S from "./styles";
+import { showToast } from "lib/Toast";
 import LockIcon from "../assets/LockIcon";
+import S from "./styles";
 
 const CELL_COUNT = 6;
 
@@ -35,7 +36,6 @@ function InsertOtpCodeScreen() {
     keyPrefix: "auth.insertOtpCodeScreen",
   });
 
-  const [currentEmail, setCurrentEmail] = useState("");
   const [currentOtpCode, setCurrentOtpCode] = useState("");
   const [timer, setTimer] = useState<string>("");
   const [resendDisabled, setResendDisabled] = useState<boolean>(false);
@@ -59,14 +59,21 @@ function InsertOtpCodeScreen() {
   const { signInByOtp, sendOtpEmail } = useAuthentication();
 
   useEffect(() => {
-    logEvent("P36_view");
-
-    if (!email) {
+    if (!isValidEmail(email)) {
       navigateTo("InsertEmailScreen");
-    } else {
-      setCurrentEmail(email);
+      return;
     }
+
+    logEvent("P36_view");
   }, []);
+
+  const sendEmail = useCallback(() => {
+    if (isValidEmail(email)) sendOtpEmail({ email });
+  }, [email]);
+
+  useEffect(() => {
+    sendEmail();
+  }, [email]);
 
   const handleButtonPress = async () => {
     logEvent("authOtpFormBtn_click");
@@ -75,6 +82,11 @@ function InsertOtpCodeScreen() {
     signInByOtp({
       code: currentOtpCode,
       onSuccess: () => {
+        showToast({
+          type: "success",
+          message: t("successToastMessage"),
+          position: "bottom",
+        });
         navigateTo("TabNavigator", { screen: "CausesScreen" });
       },
       onError: () => {
@@ -86,7 +98,7 @@ function InsertOtpCodeScreen() {
 
   const handleResendCode = () => {
     setResendDisabled(true);
-    sendOtpEmail({ email: currentEmail });
+    sendEmail();
 
     countdown({
       timeInSeconds: 60,
@@ -122,9 +134,7 @@ function InsertOtpCodeScreen() {
           <View style={S.contentContainer}>
             <Text style={S.title}>{t("title")}</Text>
 
-            <Text style={S.subtitle}>
-              {t("subtitle", { email: currentEmail })}
-            </Text>
+            <Text style={S.subtitle}>{t("subtitle", { email })}</Text>
             <CodeField
               ref={ref}
               {...props}

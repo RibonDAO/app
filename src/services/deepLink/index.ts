@@ -9,8 +9,6 @@ export async function initializeDeeplink(
   setCurrentIntegrationId: (integrationId: string | number) => void,
   setExternalId: (externalId: string) => void,
   setUtm: (utmSource: string, utmMedium: string, utmCampaign: string) => void,
-  setMagicLinkToken: (magicLinkToken: string) => void,
-  setAccountId: (accountId: string) => void,
   setCouponId: (couponId: string) => void,
 ) {
   branch.subscribe({
@@ -31,18 +29,11 @@ export async function initializeDeeplink(
       const utmCampaign =
         (latestParams.utm_campaign as string) || "organic_unset";
 
-      const magicLinkToken = (latestParams.authToken as string) || "";
-      const accountId = (latestParams.id as string) || "";
       const couponId = (latestParams.coupon_id as string) || "";
 
       setCurrentIntegrationId(integrationId);
       setExternalId(externalId);
-
       setUtm(utmSource, utmMedium, utmCampaign);
-
-      setMagicLinkToken(magicLinkToken);
-      setAccountId(accountId);
-
       setCouponId(couponId);
 
       try {

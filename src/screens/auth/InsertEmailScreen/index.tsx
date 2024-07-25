@@ -12,12 +12,10 @@ import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayo
 import { useNavigation } from "hooks/useNavigation";
 import InputText from "components/atomics/inputs/InputText";
 import { isValidEmail } from "lib/validators";
-import { useCallback, useEffect, useState } from "react";
-import { useAuthentication } from "contexts/authenticationContext";
+import { useEffect, useState } from "react";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
-import { useFocusEffect } from "@react-navigation/native";
 import UserAvatarIcon from "../assets/UserAvatarIcon";
 import S from "./styles";
 
@@ -27,11 +25,7 @@ function InsertEmailScreen() {
   });
 
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
   const { navigateTo } = useNavigation();
-
-  const { sendOtpEmail } = useAuthentication();
 
   useEffect(() => {
     logEvent("P28_view", {
@@ -39,22 +33,7 @@ function InsertEmailScreen() {
     });
   }, []);
 
-  useFocusEffect(
-    useCallback(() => {
-      setLoading(false);
-      setEmailSent(false);
-    }, []),
-  );
-
-  const handleButtonPress = async () => {
-    if (emailSent) return;
-
-    setLoading(true);
-    await sendOtpEmail({ email });
-    logEvent("authEmailFormBtn_click", {
-      from: "sign_in",
-    });
-    setEmailSent(true);
+  const handleButtonPress = () => {
     navigateTo("InsertOtpCodeScreen", { email });
   };
 
@@ -89,18 +68,16 @@ function InsertEmailScreen() {
               autoFocus
               containerStyle={S.inputContainer}
               style={S.input}
-              disabled={loading}
             />
 
             <Button
               text={t("confirmText")}
               onPress={handleButtonPress}
-              disabled={!isValidEmail(email) || loading}
-              customStyles={loading ? S.buttonDisabled : S.button}
+              disabled={!isValidEmail(email)}
+              customStyles={S.button}
               customTextStyles={{
                 color: theme.colors.neutral10,
               }}
-              loading={loading}
             />
             <PrivacyPolicyLayout />
           </View>

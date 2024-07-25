@@ -16,11 +16,6 @@ import { logError } from "services/crashReport";
 // TODO: Use the shared methods when R4B structure is done
 import otpAuthenticationApi from "services/user/userAuthenticationApi";
 
-type authTokenProps = {
-  onSuccess?: () => void;
-  onError?: () => void;
-};
-
 type otpAuthProps = {
   code: string;
   onSuccess?: () => void;
@@ -35,17 +30,11 @@ type authenticationEmailProps = {
 };
 export interface IAuthenticationContext {
   accessToken: string | null;
-  magicLinkToken: string | null;
   accountId: string | null;
   logout: () => void;
   signInWithGoogle: (response: any) => void;
-  signInByMagicLink: (signInByMagicLinkProps: authTokenProps) => void;
-  sendAuthenticationEmail: (
-    sendAuthenticationEmailProps: authenticationEmailProps,
-  ) => void;
   signInWithApple: (response: any) => void;
   isAuthenticated: () => boolean;
-  setMagicLinkToken: (token: string) => void;
   setAccountId: (id: string) => void;
   sendOtpEmail: (
     sendOtpEmailProps: authenticationEmailProps,
@@ -63,7 +52,6 @@ export const AuthenticationContext = createContext<IAuthenticationContext>(
 
 function AuthenticationProvider({ children }: Props) {
   const [accessToken, setAccessToken] = useState<string | null>("");
-  const [magicLinkToken, setMagicLinkToken] = useState("");
   const [accountId, setAccountId] = useState("");
   const { setCurrentUser } = useCurrentUser();
   const emailDoesNotMatchMessage = "Email does not match";
@@ -113,43 +101,6 @@ function AuthenticationProvider({ children }: Props) {
       }
       throw new Error("google auth error");
     }
-  }
-
-  async function signInByMagicLink({ onSuccess, onError }: authTokenProps) {
-    try {
-      const response = await userAuthenticationApi.postAuthorizeFromAuthToken(
-        magicLinkToken,
-        accountId,
-      );
-
-      signIn(response);
-
-      if (onSuccess) onSuccess();
-    } catch (error: any) {
-      logError(error);
-      if (onError) onError();
-    }
-  }
-
-  async function sendAuthenticationEmail({
-    email,
-    id,
-    onSuccess,
-    onError,
-  }: authenticationEmailProps) {
-    try {
-      const response = await userAuthenticationApi.postSendAuthenticationEmail(
-        email,
-        id,
-      );
-      if (onSuccess) onSuccess();
-      setCurrentUser(response.data.user);
-      return response.data.user.email;
-    } catch (error: any) {
-      logError(error);
-      if (onError) onError();
-    }
-    return "";
   }
 
   async function sendOtpEmail({
@@ -216,18 +167,14 @@ function AuthenticationProvider({ children }: Props) {
       logout,
       accessToken,
       signInWithGoogle,
-      signInByMagicLink,
-      sendAuthenticationEmail,
       signInWithApple,
       isAuthenticated,
       accountId,
       setAccountId,
-      magicLinkToken,
-      setMagicLinkToken,
       sendOtpEmail,
       signInByOtp,
     }),
-    [accessToken, magicLinkToken, accountId],
+    [accessToken, accountId],
   );
 
   return (

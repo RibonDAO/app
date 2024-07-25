@@ -690,7 +690,8 @@
       "subtitle": "Enter the 6-digit verification code sent to {{email}}",
       "confirmText": "Continue",
       "resendText": "Resend code",
-      "incorrectCode": "Incorrect code. Please try again."
+      "incorrectCode": "Incorrect code. Please try again.",
+      "successToastMessage": "Account validated"
     },
     "insertEmailCouponScreen": {
       "title": "Sign in with an e-mail",
