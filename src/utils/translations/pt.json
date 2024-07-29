@@ -687,6 +687,13 @@
       "logout": "Sair"
     }
   },
+  "changeLanguageScreen": {
+    "title": "Alterar idioma",
+    "languages": {
+      "ptbr": "Português (Brasil)",
+      "en": "Inglês"
+    }
+  },
   "auth": {
     "signInScreen": {
       "title": "Entre na sua conta"

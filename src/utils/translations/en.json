@@ -693,6 +693,13 @@
       "logout": "Sign out"
     }
   },
+  "changeLanguageScreen": {
+    "title": "Change language",
+    "languages": {
+      "ptbr": "Portuguese (Brazil)",
+      "en": "English"
+    }
+  },
   "auth": {
     "signInScreen": {
       "title": "Sign in to your account",
