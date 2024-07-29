@@ -1,5 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
@@ -35,6 +35,10 @@ function ConfigScreen(): JSX.Element {
   const { userProfile } = useUserProfile();
   const { profile } = userProfile();
   const { isMember } = userIsMember();
+
+  useEffect(() => {
+    logEvent("P18_view");
+  }, []);
 
   const handleOpenSettings = () => {
     if (Platform.OS === "ios") {
@@ -105,7 +109,8 @@ function ConfigScreen(): JSX.Element {
     navigateTo("ChangeLanguageScreen");
   };
 
-  const guestHeader = useMemo(() => (
+  const guestHeader = useMemo(
+    () => (
       <S.Header>
         <ProfilePhoto />
         <S.ProfileInfo>
@@ -115,9 +120,12 @@ function ConfigScreen(): JSX.Element {
           </S.LoginButton>
         </S.ProfileInfo>
       </S.Header>
-    ), []);
+    ),
+    [],
+  );
 
-  const userHeader = useMemo(() => (
+  const userHeader = useMemo(
+    () => (
       <S.Header>
         {profile?.photo ? (
           <S.ProfilePicture source={{ uri: profile.photo }} />
@@ -136,7 +144,9 @@ function ConfigScreen(): JSX.Element {
           </S.TagContainer>
         </S.ProfileInfo>
       </S.Header>
-    ), [profile, currentUser]);
+    ),
+    [profile, currentUser],
+  );
 
   return (
     <S.Container>

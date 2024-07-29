@@ -3,8 +3,6 @@ import ConfigItem from "components/moleculars/ConfigItem";
 import { useLanguage } from "contexts/languageContext";
 import { Languages } from "types/enums/Languages";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
-import { logEvent } from "services/analytics";
 import * as S from "./styles";
 
 function ChangeLanguageScreen(): JSX.Element {
@@ -13,10 +11,6 @@ function ChangeLanguageScreen(): JSX.Element {
   const { t } = useTranslation("translation", {
     keyPrefix: "changeLanguageScreen",
   });
-
-  useEffect(() => {
-    logEvent("P18_view");
-  }, []);
 
   const currentIcon = (key: Languages) => {
     if (currentLang === key) {
