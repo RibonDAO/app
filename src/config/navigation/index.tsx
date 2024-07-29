@@ -250,6 +250,7 @@ function RootNavigator() {
       setCouponId,
     );
   }, []);
+  const { t } = useTranslation();
 
   return (
     <Stack.Navigator screenOptions={{ gestureEnabled: false }}>
@@ -532,7 +533,7 @@ function RootNavigator() {
         options={{
           headerShown: true,
           headerLeft: () => <ArrowBackButton />,
-          headerTitle: "Configurações",
+          headerTitle: t("configScreen.title") || "Settings",
           headerShadowVisible: false,
           headerTitleAlign: "center",
         }}
@@ -544,7 +545,7 @@ function RootNavigator() {
         options={{
           headerShown: true,
           headerLeft: () => <ArrowBackButton />,
-          headerTitle: "Alterar idioma",
+          headerTitle: t("changeLanguageScreen.title") || "Change Language",
           headerShadowVisible: false,
           headerTitleAlign: "center",
         }}
