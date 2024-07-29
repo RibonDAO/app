@@ -11,7 +11,7 @@ function ValidateAccountScreen() {
 
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
-  const { isAuthenticated, sendOtpEmail, accountId } = useAuthentication();
+  const { isAuthenticated, accountId } = useAuthentication();
 
   const handleAuthenticatedUser = () => {
     navigateTo("TabNavigator", { screen: "CausesScreen" });
@@ -22,7 +22,6 @@ function ValidateAccountScreen() {
   };
 
   const handleUserWithoutAccountId = () => {
-    sendOtpEmail({ email: currentUser?.email });
     navigateTo("InsertOtpCodeScreen", { email: currentUser?.email });
   };
 
