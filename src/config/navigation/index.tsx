@@ -74,6 +74,8 @@ import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
 import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
 import SignInCouponScreen from "screens/coupons/auth/SignInCouponScreen";
 import InsertEmailCouponScreen from "screens/coupons/auth/InsertEmailCouponScreen";
+import ChangeLanguageScreen from "screens/users/ConfigScreen/ChangeLanguageScreen";
+import ConfigScreen from "screens/users/ConfigScreen";
 import HomeScreen from "screens/donations/HomeScreen";
 import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
 import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
@@ -521,6 +523,30 @@ function RootNavigator() {
         options={{
           headerShown: false,
           animation: "slide_from_bottom",
+        }}
+      />
+
+      <Stack.Screen
+        name="ConfigScreen"
+        component={ConfigScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <ArrowBackButton />,
+          headerTitle: "Configurações",
+          headerShadowVisible: false,
+          headerTitleAlign: "center",
+        }}
+      />
+
+      <Stack.Screen
+        name="ChangeLanguageScreen"
+        component={ChangeLanguageScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <ArrowBackButton />,
+          headerTitle: "Alterar idioma",
+          headerShadowVisible: false,
+          headerTitleAlign: "center",
         }}
       />
 
