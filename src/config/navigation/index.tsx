@@ -61,7 +61,6 @@ import SignInScreen from "screens/auth/SignInScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
 import InsertOtpCodeScreen from "screens/auth/InsertOtpCodeScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
-import { useAuthentication } from "contexts/authenticationContext";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
 import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
@@ -81,7 +80,6 @@ import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificatio
 import ClubSubscriptionProvider from "contexts/clubSubscriptionContext";
 import TagsProvider from "contexts/tagsContext";
 import { initializeDeeplink } from "../../services/deepLink";
-import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
@@ -89,6 +87,7 @@ import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import EarnTicketsIconOn from "./assets/EarnTicketsIconOn";
 import EarnTicketsIconOff from "./assets/EarnTicketsIconOff";
+import S from "./styles";
 
 const { primary } = theme.colors.brand;
 const { neutral } = theme.colors;
@@ -210,7 +209,6 @@ function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId } = useAuthentication();
   const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
@@ -218,8 +216,6 @@ function PrivateNavigator() {
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
-      setMagicLinkToken,
-      setAccountId,
       setCouponId,
     );
   }, []);
@@ -242,7 +238,6 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId } = useAuthentication();
   const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
@@ -250,8 +245,6 @@ function RootNavigator() {
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
-      setMagicLinkToken,
-      setAccountId,
       setCouponId,
     );
   }, []);
