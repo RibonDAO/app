@@ -21,16 +21,15 @@ function BusinessSubscriptionProvider({ children }: any) {
   const { subscriptions, refetch } = userSubscriptions();
 
   useEffect(() => {
-    if (subscriptions && subscriptions.length > 0) {
-      const checkBusinessSubscription = subscriptions?.filter(
-        (subscription) => subscription.offer?.category === "business",
-      );
-
-      if (checkBusinessSubscription)
-        setBusinessSubscription(
-          checkBusinessSubscription[checkBusinessSubscription.length - 1],
-        );
-    }
+    //   if (subscriptions && subscriptions.length > 0) {
+    //     const checkBusinessSubscription = subscriptions?.filter(
+    //       (subscription) => subscription.offer?.category === "business",
+    //     );
+    //     if (checkBusinessSubscription)
+    //       setBusinessSubscription(
+    //         checkBusinessSubscription[checkBusinessSubscription.length - 1],
+    //       );
+    //   }
   }, [subscriptions]);
 
   const BusinessSubscriptionObject: IBusinessSubscriptionContext = useMemo(
