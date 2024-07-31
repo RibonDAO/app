@@ -1,5 +1,5 @@
 import Lottie, { AnimationObject } from "lottie-react-native";
-import { useEffect, useRef } from "react";
+import { ComponentProps, useEffect, useRef } from "react";
 import { StyleProp } from "react-native";
 
 export type Props = {
@@ -10,6 +10,7 @@ export type Props = {
   style?: StyleProp<any>;
   startFrame?: number;
   endFrame?: number;
+  colorFilters?: ComponentProps<typeof Lottie>["colorFilters"];
 };
 
 function LottieAnimation({
@@ -20,6 +21,7 @@ function LottieAnimation({
   speed,
   startFrame,
   endFrame,
+  colorFilters,
 }: Props): JSX.Element {
   const animationRef = useRef<Lottie>(null);
 
@@ -40,6 +42,7 @@ function LottieAnimation({
       ref={animationRef}
       onAnimationFinish={handleAnimationEnd}
       speed={speed}
+      colorFilters={colorFilters || []}
     />
   );
 }
