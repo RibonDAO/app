@@ -89,11 +89,11 @@ export function generateRandomColorArgs() {
       button: theme.colors.brand.secondary[600],
     }, // orange
     {
-      eyesAndMouth: "#5396C9",
-      face: "#7BC6FF",
-      eyeBrowns: "#7BC6FF",
-      sun: "#F6FBFE",
-      button: "#3E7AA8",
+      eyesAndMouth: theme.colors.brand.quinary[500],
+      face: theme.colors.brand.quinary[500],
+      eyeBrowns: theme.colors.brand.quinary[300],
+      sun: theme.colors.brand.quinary[25],
+      button: theme.colors.brand.quinary[600],
     }, // blue
   ];
 
