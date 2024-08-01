@@ -308,6 +308,19 @@
       "cardDescription2": "Empresas, grandes doadores e membros da comunidade Ribon financiam os tickets com um único objetivo: mudar vidas para melhor através do poder coletivo da doação.",
       "cardTitle3": "Como ganho mais tickets?",
       "cardDescription3": "Você ganha mais tickets ao acessar o app diariamente e sua carteira pode guardar até 10 tickets."
+    },
+    "businessScreen": {
+      "title": "Boas vindas ao plano Business da Ribon!",
+      "subtitle": "Aproveite tickets extras e outros benefícios pagos por {{companyName}}",
+      "button": "Continuar",
+      "firstBenefitDescription": "{{ticketsQuantity}} tickets extra por dia",
+      "secondBenefitDescription": "Pacote de {{monthlyTickets}} tickets por mês",
+      "thirdBenefitDescription": "Guarde quantos tickets quiser para fazer grandes doações",
+      "fourthBenefitDescription": "Pacotes de tickets não vencem e se acumulam até serem coletados",
+      "firstBenefitTitle": "Mais tickets diários",
+      "secondBenefitTitle": "Pacotes de tickets mensais",
+      "thirdBenefitTitle": "Espaço ilimitado na carteira",
+      "fourthBenefitTitle": "Tickets que te esperam"
     }
   },
   "contexts": {

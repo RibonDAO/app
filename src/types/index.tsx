@@ -189,6 +189,7 @@ export type RootStackParamList = {
   ClubContributionDoneScreen: undefined;
   ClubScreen: ClubScreenParamList;
   AboutTicketsScreen: AboutTicketsScreenParamsList;
+  BusinessScreen: undefined;
 };
 
 export type PrivateStackParamList = {

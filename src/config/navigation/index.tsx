@@ -82,6 +82,7 @@ import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
 import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
 import ClubSubscriptionProvider from "contexts/clubSubscriptionContext";
 import TagsProvider from "contexts/tagsContext";
+import BusinessScreen from "screens/content/BusinessScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -510,6 +511,13 @@ function RootNavigator() {
         }}
       />
 
+      <Stack.Screen
+        name="BusinessScreen"
+        component={BusinessScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="ValidateAccountScreen"
         component={ValidateAccountScreen}
