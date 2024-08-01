@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { useSubscriptions } from "@ribon.io/shared";
 import Subscription from "@ribon.io/shared/types/entities/Subscription";
+import { useCurrentUser } from "contexts/currentUserContext";
+import { Plan } from "@ribon.io/shared";
 
 export interface IBusinessSubscriptionContext {
   businessSubscription: Subscription | undefined;
-  refetch: () => void;
+  businessPlan: Plan | undefined;
 }
 
 export const BusinessSubscriptionContext =
@@ -17,28 +18,24 @@ function BusinessSubscriptionProvider({ children }: any) {
   const [businessSubscription, setBusinessSubscription] = useState<
     Subscription | undefined
   >();
-  const { userSubscriptions } = useSubscriptions();
-  const { subscriptions, refetch } = userSubscriptions();
+  const [businessPlan, setBusinessPlan] = useState<Plan | undefined>();
+  const { currentUser } = useCurrentUser();
 
   useEffect(() => {
-    //   if (subscriptions && subscriptions.length > 0) {
-    //     const checkBusinessSubscription = subscriptions?.filter(
-    //       (subscription) => subscription.offer?.category === "business",
-    //     );
-    //     if (checkBusinessSubscription)
-    //       setBusinessSubscription(
-    //         checkBusinessSubscription[checkBusinessSubscription.length - 1],
-    //       );
-    //   }
-  }, [subscriptions]);
+    if (currentUser?.directTransferSubscription) {
+      setBusinessSubscription(currentUser.directTransferSubscription);
+      setBusinessPlan(currentUser.directTransferSubscription.offer.plan);
+    }
+  }, [currentUser]);
 
   const BusinessSubscriptionObject: IBusinessSubscriptionContext = useMemo(
     () => ({
       businessSubscription,
       setBusinessSubscription,
-      refetch,
+      businessPlan,
+      setBusinessPlan,
     }),
-    [businessSubscription, refetch],
+    [businessSubscription],
   );
 
   return (
