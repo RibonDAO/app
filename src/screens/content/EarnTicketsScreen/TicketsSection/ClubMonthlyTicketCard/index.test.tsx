@@ -8,7 +8,7 @@ jest.mock("@react-navigation/native", () => ({
   // ...
 }));
 
-describe("ClubMonthlyTicketCard before collect and is not member", () => {
+describe("ClubMonthlyTicketCard before collect and is not a club member", () => {
   beforeEach(async () => {
     const isLoading = false;
     const hasCollected = false;
@@ -22,7 +22,7 @@ describe("ClubMonthlyTicketCard before collect and is not member", () => {
       <ClubMonthlyTicketCard
         refetchTickets={jest.fn()}
         setUnauthorizedModalVisible={jest.fn()}
-        isMember={false}
+        isClubMember={false}
       />,
     );
     await waitForPromises();
@@ -35,7 +35,7 @@ describe("ClubMonthlyTicketCard before collect and is not member", () => {
   });
 });
 
-describe("ClubMonthlyTicketCard before collect and is member", () => {
+describe("ClubMonthlyTicketCard before collect and is a club member", () => {
   beforeEach(async () => {
     const isLoading = false;
     const hasCollected = false;
@@ -49,7 +49,7 @@ describe("ClubMonthlyTicketCard before collect and is member", () => {
       <ClubMonthlyTicketCard
         refetchTickets={jest.fn()}
         setUnauthorizedModalVisible={jest.fn()}
-        isMember
+        isClubMember
       />,
     );
     await waitForPromises();
@@ -60,7 +60,7 @@ describe("ClubMonthlyTicketCard before collect and is member", () => {
   });
 });
 
-describe("ClubMonthlyTicketCard after collect and is member", () => {
+describe("ClubMonthlyTicketCard after collect and is a club member", () => {
   beforeEach(async () => {
     const isLoading = false;
     const hasCollected = true;
@@ -74,7 +74,7 @@ describe("ClubMonthlyTicketCard after collect and is member", () => {
       <ClubMonthlyTicketCard
         refetchTickets={jest.fn()}
         setUnauthorizedModalVisible={jest.fn()}
-        isMember
+        isClubMember
       />,
     );
     await waitForPromises();

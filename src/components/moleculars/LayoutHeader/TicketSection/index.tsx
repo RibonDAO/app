@@ -18,13 +18,13 @@ function TicketSection({
   const hasTickets = tickets > 0;
   const { navigateTo } = useNavigation();
   const [zeroTicketModalVisible, setZeroTicketModalVisible] = useState(false);
-  const { userIsMember } = useSubscriptions();
-  const { isMember } = userIsMember();
+  const { userIsClubMember } = useSubscriptions();
+  const { isClubMember } = userIsClubMember();
 
   const handleTicketClick = () => {
     if (hasTickets) {
       navigateTo("GiveTicketScreen");
-    } else if (isMember) {
+    } else if (isClubMember) {
       navigateTo("TabNavigator", { screen: "EarnTicketsScreen" });
     } else {
       setZeroTicketModalVisible(true);

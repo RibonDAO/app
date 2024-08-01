@@ -10,8 +10,8 @@ export const Container = styled.View`
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  background-color: ${(props: { member: boolean }) => {
-    if (props.member) {
+  background-color: ${(props: { clubMember: boolean }) => {
+    if (props.clubMember) {
       return theme.colors.brand.tertiary[50];
     } else {
       return theme.colors.brand.primary[50];
@@ -57,8 +57,8 @@ export const ClubTag = styled.View`
   padding: ${theme.spacing(0, 8)};
   border-radius: ${theme.spacing(8)};
   align-items: center;
-  background-color: ${(props: { member: boolean }) => {
-    if (props.member) {
+  background-color: ${(props: { clubMember: boolean }) => {
+    if (props.clubMember) {
       return theme.colors.neutral[25];
     } else {
       return theme.colors.neutral[50];
@@ -92,8 +92,8 @@ export const StatisticsContainer = styled.View`
 export const TagText = styled.Text`
   ${defaultBodyXsMedium}
 
-  color: ${(props: { member: boolean }) => {
-    if (props.member) {
+  color: ${(props: { clubMember: boolean }) => {
+    if (props.clubMember) {
       return theme.colors.brand.tertiary[600];
     } else {
       return theme.colors.neutral[600];
