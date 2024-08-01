@@ -1,7 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
-import { useCallback, useState } from "react";
-import { View } from "react-native";
-import Modal from "react-native-modal";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigation } from "hooks/useNavigation";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
@@ -12,32 +10,35 @@ import ButtonSwitch from "components/atomics/buttons/ButtonSwitch";
 import { isNotificationsEnabled } from "lib/notifications";
 import { useFocusEffect } from "@react-navigation/native";
 import { logEvent } from "services/analytics";
-import { useSubscriptions } from "@ribon.io/shared/hooks";
+import { useSubscriptions, useUserProfile } from "@ribon.io/shared/hooks";
 import { EXPO_PUBLIC_ZENDESK_KEY } from "utils/constants/Application";
-import ConfigItem from "../../ConfigItem";
-import ChangeLanguageItem from "./ChangeLanguageItem";
+import ConfigItem from "components/moleculars/ConfigItem";
+import DeleteAccountModal from "components/moleculars/LayoutHeader/modals/DeleteAccountModal";
+import LogoutModal from "components/moleculars/LayoutHeader/modals/LogoutModal";
+import ProfilePhoto from "assets/icons/ProfilePhoto";
+import * as S from "./styles";
 
-import S from "./styles";
-import DeleteAccountModal from "../modals/DeleteAccountModal";
-import LogoutModal from "../modals/LogoutModal";
-
-type Props = {
-  toggleModal: () => void;
-  menuVisible: boolean;
-};
-function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
+function ConfigScreen(): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "layoutHeader",
+    keyPrefix: "configScreen",
   });
 
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
     useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
-  const { userSubscriptions } = useSubscriptions();
+  const { userSubscriptions, userIsMember } = useSubscriptions();
   const { subscriptions, refetch: refetchSubscription } = userSubscriptions();
+  const { userProfile } = useUserProfile();
+  const { profile } = userProfile();
+  const { isMember } = userIsMember();
+
+  useEffect(() => {
+    logEvent("P18_view");
+  }, []);
 
   const handleOpenSettings = () => {
     if (Platform.OS === "ios") {
@@ -48,21 +49,13 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
   };
 
   const toggleDeleteAccountModal = () => {
-    toggleModal();
     logEvent("deleteAccountBtn_click");
-
-    setTimeout(() => {
-      setDeleteAccountModalVisible(!deleteAccountModalVisible);
-    }, 800);
+    setDeleteAccountModalVisible(!deleteAccountModalVisible);
   };
 
   const toggleLogoutModal = () => {
-    toggleModal();
     logEvent("signoutBtn_click");
-
-    setTimeout(() => {
-      setLogoutModalVisible(!logoutModalVisible);
-    }, 800);
+    setLogoutModalVisible(!logoutModalVisible);
   };
 
   useFocusEffect(
@@ -74,7 +67,6 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
   );
 
   const handleMonthlyContributionClick = () => {
-    toggleModal();
     refetchSubscription();
 
     logEvent("manageSubs_click", {
@@ -98,7 +90,7 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
 
   const linkToSupport = () => {
     const key = EXPO_PUBLIC_ZENDESK_KEY;
-    openInWebViewer(t("supportLink", { key }));
+    openInWebViewer(t("support.link", { key }));
     logEvent("supportBtn_click", {
       from: "config_page",
     });
@@ -113,38 +105,55 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
     />
   );
 
+  const linkToLanguages = () => {
+    navigateTo("ChangeLanguageScreen");
+  };
+
+  const guestHeader = useMemo(
+    () => (
+      <S.Header>
+        <ProfilePhoto />
+        <S.ProfileInfo>
+          <S.ProfileEmail>{t("header.guestUser")}</S.ProfileEmail>
+          <S.LoginButton onPress={() => navigateTo("SignInScreen")}>
+            <S.ButtonText>{t("header.signIn")}</S.ButtonText>
+          </S.LoginButton>
+        </S.ProfileInfo>
+      </S.Header>
+    ),
+    [],
+  );
+
+  const userHeader = useMemo(
+    () => (
+      <S.Header>
+        {profile?.photo ? (
+          <S.ProfilePicture source={{ uri: profile.photo }} />
+        ) : (
+          <ProfilePhoto />
+        )}
+
+        <S.ProfileInfo>
+          <S.ProfileEmail>{currentUser?.email}</S.ProfileEmail>
+          <S.TagContainer>
+            <S.ClubTag member={isMember}>
+              <S.TagText member={isMember}>
+                {isMember ? t("header.clubTagText") : t("header.noClubTagText")}
+              </S.TagText>
+            </S.ClubTag>
+          </S.TagContainer>
+        </S.ProfileInfo>
+      </S.Header>
+    ),
+    [profile, currentUser],
+  );
+
   return (
-    <>
-      <Modal
-        isVisible={menuVisible}
-        animationIn="slideInRight"
-        animationOut="slideOutRight"
-        hasBackdrop
-        backdropOpacity={0.2}
-        onBackdropPress={toggleModal}
-      >
-        <View style={S.supportContainer}>
-          {!currentUser && (
-            <ConfigItem
-              icon={{
-                name: "account_circle",
-                type: "rounded",
-                color: theme.colors.brand.primary[600],
-                size: 24,
-              }}
-              text={t("signInOrCreateAccount")}
-              onPress={() => navigateTo("SignInScreen")}
-              cta={
-                <Icon
-                  type="rounded"
-                  size={20}
-                  color={theme.colors.brand.primary[600]}
-                  name="arrow_forward_ios"
-                  onPress={() => navigateTo("SignInScreen")}
-                />
-              }
-            />
-          )}
+    <S.Container>
+      {currentUser ? userHeader : guestHeader}
+      <S.ConfigGroup>
+        <S.ConfigGroupTitle>{t("generalSettings.title")}</S.ConfigGroupTitle>
+        <S.ConfigGroupList>
           <ConfigItem
             icon={{
               name: "notifications",
@@ -152,10 +161,9 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
               color: theme.colors.brand.primary[600],
               size: 24,
             }}
-            text={t("notifications")}
+            text={t("generalSettings.notifications")}
             linkIcon={notificationsSwitchButton}
           />
-
           <ConfigItem
             icon={{
               name: "language",
@@ -163,10 +171,49 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
               color: theme.colors.brand.primary[600],
               size: 24,
             }}
-            text={t("language")}
-            linkIcon={ChangeLanguageItem}
+            text={t("generalSettings.language")}
+            onPress={linkToLanguages}
+            cta={
+              <Icon
+                type="rounded"
+                size={20}
+                color={theme.colors.brand.primary[600]}
+                name="arrow_forward_ios"
+                onPress={linkToLanguages}
+              />
+            }
+            last
           />
-
+        </S.ConfigGroupList>
+      </S.ConfigGroup>
+      <S.ConfigGroup>
+        <S.ConfigGroupTitle>{t("support.title")}</S.ConfigGroupTitle>
+        <S.ConfigGroupList>
+          <ConfigItem
+            icon={{
+              name: "support_agent",
+              type: "rounded",
+              color: theme.colors.brand.primary[600],
+              size: 24,
+            }}
+            text={t("support.talkToUs")}
+            onPress={linkToSupport}
+            cta={
+              <Icon
+                type="rounded"
+                size={20}
+                color={theme.colors.brand.primary[600]}
+                name="arrow_forward_ios"
+                onPress={linkToSupport}
+              />
+            }
+            last
+          />
+        </S.ConfigGroupList>
+      </S.ConfigGroup>
+      <S.ConfigGroup>
+        <S.ConfigGroupTitle>{t("subscriptions.title")}</S.ConfigGroupTitle>
+        <S.ConfigGroupList>
           <ConfigItem
             icon={{
               name: "volunteer_activism",
@@ -174,7 +221,7 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
               color: theme.colors.brand.primary[600],
               size: 24,
             }}
-            text={t("subscriptions")}
+            text={t("subscriptions.ribonClub")}
             onPress={handleMonthlyContributionClick}
             cta={
               <Icon
@@ -185,30 +232,15 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
                 onPress={handleMonthlyContributionClick}
               />
             }
+            last
           />
+        </S.ConfigGroupList>
+      </S.ConfigGroup>
 
-          <ConfigItem
-            icon={{
-              name: "support_agent",
-              type: "rounded",
-              color: theme.colors.brand.primary[600],
-              size: 24,
-            }}
-            text={t("support")}
-            onPress={linkToSupport}
-            last={!currentUser}
-            cta={
-              <Icon
-                type="rounded"
-                size={20}
-                color={theme.colors.brand.primary[600]}
-                name="arrow_forward_ios"
-                onPress={linkToSupport}
-              />
-            }
-          />
-
-          {currentUser && (
+      <S.ConfigGroup>
+        <S.ConfigGroupTitle>{t("account.title")}</S.ConfigGroupTitle>
+        <S.ConfigGroupList>
+          {currentUser ? (
             <>
               <ConfigItem
                 icon={{
@@ -217,7 +249,7 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
                   color: theme.colors.brand.primary[600],
                   size: 24,
                 }}
-                text={t("logout")}
+                text={t("account.logout")}
                 onPress={toggleLogoutModal}
                 cta={
                   <Icon
@@ -236,9 +268,8 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
                   color: theme.colors.brand.tertiary[400],
                   size: 24,
                 }}
-                text={t("deleteAccount")}
+                text={t("account.deleteAccount")}
                 onPress={toggleDeleteAccountModal}
-                last={Boolean(currentUser)}
                 cta={
                   <Icon
                     type="rounded"
@@ -247,11 +278,35 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
                     name="arrow_forward_ios"
                   />
                 }
+                last
               />
             </>
+          ) : (
+            <ConfigItem
+              icon={{
+                name: "account_circle",
+                type: "rounded",
+                color: theme.colors.brand.primary[600],
+                size: 24,
+              }}
+              text={t("account.signIn")}
+              onPress={() => navigateTo("SignInScreen")}
+              cta={
+                <Icon
+                  type="rounded"
+                  size={20}
+                  color={theme.colors.brand.primary[600]}
+                  name="arrow_forward_ios"
+                  onPress={() => navigateTo("SignInScreen")}
+                />
+              }
+              last
+            />
           )}
-        </View>
-      </Modal>
+        </S.ConfigGroupList>
+      </S.ConfigGroup>
+      <S.Footer />
+
       <DeleteAccountModal
         visible={deleteAccountModalVisible}
         setVisible={setDeleteAccountModalVisible}
@@ -260,8 +315,8 @@ function ConfigMenu({ toggleModal, menuVisible }: Props): JSX.Element {
         visible={logoutModalVisible}
         setVisible={setLogoutModalVisible}
       />
-    </>
+    </S.Container>
   );
 }
 
-export default ConfigMenu;
+export default ConfigScreen;
