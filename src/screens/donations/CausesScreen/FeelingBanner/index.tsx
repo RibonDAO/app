@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import CardCampaign from "components/moleculars/CardCampaign";
 import S from "./styles";
 
-export default function ContributionSection() {
+export default function FeelingBanner() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "contributionSection",
+    keyPrefix: "feelingBanner",
   });
   const CURRENT_CARD_ID = 2;
 

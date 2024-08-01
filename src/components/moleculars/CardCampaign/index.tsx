@@ -5,7 +5,7 @@ import Button from "components/atomics/buttons/Button";
 import { theme } from "@ribon.io/shared/styles";
 import { openInExternalBrowser, openInWebViewer } from "lib/linkOpener";
 import { ImpressionCard } from "@ribon.io/shared/types";
-import { useImpressionCards } from "@ribon.io/shared/hooks";
+import { useImpressionCards, useSubscriptions } from "@ribon.io/shared/hooks";
 import { useImpactConversion } from "hooks/useImpactConversion";
 import { useLanguage } from "contexts/languageContext";
 import { useTranslation } from "react-i18next";
@@ -31,6 +31,9 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
   const { navigateTo } = useNavigation();
 
   const { getImpressionCard } = useImpressionCards();
+
+  const { userIsClubMember } = useSubscriptions();
+  const { isClubMember } = userIsClubMember();
 
   const fetchImpressionCard = useCallback(async () => {
     try {
@@ -101,8 +104,18 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
 
   const imageCard = impressionCard ? { uri: imageUri } : bannerImage;
 
+  function showBanner() {
+    if (contribution) {
+      if (!impressionCard && isClubMember) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+
   return (
-    contribution && (
+    (showBanner() && (
       <View style={S.container}>
         <TouchableOpacity
           accessibilityRole="button"
@@ -153,6 +166,6 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
           />
         </View>
       </View>
-    )
+    )) || <View />
   );
 }

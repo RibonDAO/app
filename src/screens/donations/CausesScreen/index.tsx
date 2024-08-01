@@ -21,7 +21,7 @@ import { useAuthentication } from "contexts/authenticationContext";
 import * as StoreReview from "expo-store-review";
 import Header from "./Header";
 import Placeholder from "./placeholder";
-import ContributionSection from "./ContributionSection";
+import ContributionSection from "./FeelingBanner";
 import DonationErrorModal from "./errorModalSection";
 import ClubSection from "./ClubSection";
 import ReportsSection from "./ReportsSection";
