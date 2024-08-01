@@ -41,7 +41,7 @@ export default function SubscriptionsScreen(): JSX.Element {
     subscription.personPayments[subscription.personPayments.length - 1]
       ?.paymentMethod === "pix";
 
-  const nextPaymetAttempt = (subscription: any) =>
+  const nextPaymentAttempt = (subscription: any) =>
     stringToLocaleDateString(subscription.nextPaymentAttempt);
 
   const cancelDate = (subscription: any) =>
@@ -127,7 +127,7 @@ export default function SubscriptionsScreen(): JSX.Element {
             <S.HighlightedText color={theme.colors.feedback.error[600]}>
               {subscription.cancelDate
                 ? cancelDate(subscription)
-                : nextPaymetAttempt(subscription)}
+                : nextPaymentAttempt(subscription)}
             </S.HighlightedText>
           </S.Text>
           {isInactive(subscription) && (
@@ -137,7 +137,7 @@ export default function SubscriptionsScreen(): JSX.Element {
             <S.Text>
               {t("perksExpiration")}
               <S.HighlightedText>
-                {nextPaymetAttempt(subscription)}
+                {nextPaymentAttempt(subscription)}
               </S.HighlightedText>
             </S.Text>
           )}
@@ -150,7 +150,7 @@ export default function SubscriptionsScreen(): JSX.Element {
           <S.Text>
             {isPix(subscription) ? t("perksExpiration") : t("nextPayment")}
             <S.HighlightedText>
-              {nextPaymetAttempt(subscription)}
+              {nextPaymentAttempt(subscription)}
             </S.HighlightedText>
           </S.Text>
         </S.InfosText>
