@@ -146,6 +146,10 @@ export type AboutTicketsScreenParamsList = {
   buttonOnPress: () => void;
 };
 
+export type InsertOtpCodeScreenParamList = {
+  email: string;
+};
+
 export type RootStackParamList = {
   TabNavigator: NavigatorScreenParams<RootTabParamList> | undefined;
   Home: undefined;
@@ -181,14 +185,14 @@ export type RootStackParamList = {
   ContributionStatsScreen: ContributionStatsScreenParamsList;
   SubscriptionsScreen: SubscriptionsScreenParamList;
   InsertEmailScreen: undefined;
-  SentMagicLinkEmailScreen: SentMagicLinkEmailParamsList;
-  SignInByMagicLinkScreen: undefined;
+  InsertOtpCodeScreen: InsertOtpCodeScreenParamList;
   InsertEmailAccountScreen: InsertEmailAccountParamsList;
-  ExpiredLinkScreen: undefined;
   ValidateAccountScreen: ValidateAccountScreenParamsList;
   ClubContributionDoneScreen: undefined;
   ClubScreen: ClubScreenParamList;
   AboutTicketsScreen: AboutTicketsScreenParamsList;
+  ConfigScreen: undefined;
+  ChangeLanguageScreen: undefined;
 };
 
 export type PrivateStackParamList = {

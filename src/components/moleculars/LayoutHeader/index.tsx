@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
 import { Alert } from "react-native";
 import CogIcon from "components/vectors/CogIcon";
 import { useTranslation } from "react-i18next";
 import { useWalletContext } from "contexts/walletContext";
 import WalletIcon from "components/vectors/WalletIcon";
 import { walletTruncate } from "lib/formatters/walletTruncate";
-import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
+import { useNavigation } from "hooks/useNavigation";
 import TicketSection from "./TicketSection";
-import ConfigMenu from "./ConfigMenu";
 import * as S from "./styles";
 
 type Props = {
@@ -25,12 +23,8 @@ function LayoutHeader({
   const { t } = useTranslation("translation", {
     keyPrefix: "layoutHeader",
   });
-  const [menuVisible, setMenuVisible] = useState(false);
-  const { connectWallet, wallet, killSession } = useWalletContext();
 
-  useEffect(() => {
-    if (menuVisible) logEvent("P18_view");
-  }, [menuVisible]);
+  const { connectWallet, wallet, killSession } = useWalletContext();
 
   const handleWalletButtonClick = () => {
     if (wallet) {
@@ -41,8 +35,11 @@ function LayoutHeader({
     }
     if (!wallet) connectWallet();
   };
+
+  const { navigateTo } = useNavigation();
+
   const toggleModal = () => {
-    setMenuVisible(!menuVisible);
+    navigateTo("ConfigScreen");
   };
 
   return (
@@ -77,8 +74,6 @@ function LayoutHeader({
           <CogIcon />
         )}
       </S.Container>
-
-      <ConfigMenu toggleModal={toggleModal} menuVisible={menuVisible} />
     </S.ConfigContainer>
   );
 }

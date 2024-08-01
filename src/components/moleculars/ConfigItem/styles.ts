@@ -1,39 +1,36 @@
-import { StyleSheet } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 
-const styles = StyleSheet.create({
-  configItem: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    height: 53,
-    borderColor: theme.colors.neutral[200],
-    borderBottomWidth: 2,
-  },
-  pressedConfigItem: {
-    opacity: 0.5,
-  },
-  lastConfigItem: {
-    borderBottomWidth: 0,
-  },
-  text: {
-    paddingLeft: theme.spacingNative(8),
-  },
-  iconContainer: {
-    width: "10%",
-  },
-  textContainer: {
-    width: "60%",
-  },
-  ctaContainer: {
-    width: "30%",
-    paddingRight: theme.spacingNative(8),
-    alignItems: "flex-end",
-  },
-  configContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-});
+import styled from "styled-components/native";
 
-export default styles;
+export const ConfigItem = styled.TouchableOpacity<{ last?: boolean }>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-vertical: ${theme.spacingNative(16)};
+  padding-horizontal: ${theme.spacingNative(16)};
+  border-bottom-width: ${(props: any) => (props.last ? 0 : 1)}px;
+  border-bottom-color: ${theme.colors.neutral[100]};
+`;
+
+export const Text = styled.Text`
+  padding-left: ${theme.spacingNative(8)};
+`;
+
+export const IconContainer = styled.View`
+  width: 10%;
+`;
+
+export const TextContainer = styled.View`
+  width: 60%;
+`;
+
+export const CtaContainer = styled.View`
+  width: 30%;
+  padding-right: ${theme.spacingNative(8)};
+  align-items: flex-end;
+`;
+
+export const ConfigContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Easing,
   StyleProp,
@@ -9,6 +9,7 @@ import {
   StyleSheet,
   View,
   Text,
+  ActivityIndicator,
 } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import Icon from "components/atomics/Icon";
@@ -38,6 +39,7 @@ export type Props = {
   customStyles?: StyleProp<ViewStyle>;
   customTextStyles?: StyleProp<TextStyle>;
   leftItem?: JSX.Element;
+  loading?: boolean;
 };
 
 const { primary } = theme.colors.brand;
@@ -60,6 +62,7 @@ export default function Button({
   customTextStyles = {},
   leftIcon,
   leftItem,
+  loading,
 }: Props): JSX.Element {
   const counter = useRef(new Animated.Value(0)).current;
   const [running, setRunning] = useState(false);
@@ -183,9 +186,13 @@ export default function Button({
       </View>
       {leftIcon && <Icon {...leftIcon} style={S.leftIcon} />}
       {leftItem && <View style={S.leftItem}>{leftItem && leftItem}</View>}
-      <Text style={[S.text, { color: textColorByState() }, customTextStyles]}>
-        {text}
-      </Text>
+      {loading ? (
+        <ActivityIndicator size="small" color={textColorByState()} />
+      ) : (
+        <Text style={[S.text, { color: textColorByState() }, customTextStyles]}>
+          {text}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 }
