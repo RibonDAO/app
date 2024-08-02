@@ -4,9 +4,8 @@ import Subscription from "@ribon.io/shared/types/entities/Subscription";
 import { useEffect, useState } from "react";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared";
-import { useLanguage } from "contexts/languageContext";
 import {
-  add30DaysAndFormatDate,
+  isOldDate,
   stringToLocaleDateString,
 } from "lib/formatters/dateFormatter";
 import { logEvent } from "services/analytics";
@@ -20,7 +19,7 @@ export default function SubscriptionsScreen(): JSX.Element {
     keyPrefix: "promoters.subscriptionsScreen",
   });
 
-  const { userSubscriptions } = useSubscriptions();
+  const { userSubscriptions, userIsMember } = useSubscriptions();
   const { subscriptions } = userSubscriptions();
   const [modalVisible, setModalVisible] = useState(false);
   const [subscriptionToBeCanceled, setSubscriptionToBeCanceled] =
@@ -28,7 +27,7 @@ export default function SubscriptionsScreen(): JSX.Element {
 
   const { navigateTo } = useNavigation();
 
-  const { currentLang } = useLanguage();
+  const { isMember } = userIsMember();
 
   const isClub = (subscription: Subscription) =>
     subscription.offer?.category === "club";
@@ -37,9 +36,10 @@ export default function SubscriptionsScreen(): JSX.Element {
       ?.paymentMethod === "pix";
 
   const nextPaymetAttempt = (subscription: any) =>
-    subscription.nextPaymentAttempt
-      ? stringToLocaleDateString(subscription.nextPaymentAttempt)
-      : add30DaysAndFormatDate(subscription.createdAt, currentLang);
+    stringToLocaleDateString(subscription.nextPaymentAttempt);
+
+  const cancelDate = (subscription: any) =>
+    stringToLocaleDateString(subscription.cancelDate);
 
   const formattedAmount = (subscription: Subscription) =>
     subscription.offer &&
@@ -77,8 +77,22 @@ export default function SubscriptionsScreen(): JSX.Element {
     }
   };
 
-  const isClubInactive = (subscription: Subscription) =>
+  const isActive = (subscription: Subscription) =>
+    subscription?.status === "active";
+
+  const isInactive = (subscription: Subscription) =>
     subscription?.status === "inactive";
+
+  const isCanceled = (subscription: Subscription) =>
+    subscription?.status === "canceled";
+
+  const isExpired = (subscription: Subscription) => {
+    try {
+      return isOldDate(subscription.nextPaymentAttempt);
+    } catch {
+      return true;
+    }
+  };
 
   const handleCancelSubscriptionButtonClick = (subscription: Subscription) => {
     setSubscriptionToBeCanceled(subscription);
@@ -91,16 +105,28 @@ export default function SubscriptionsScreen(): JSX.Element {
   }, []);
 
   const renderPaymentInfo = (subscription: Subscription) => {
-    if (isClubInactive(subscription)) {
+    if (!isActive(subscription)) {
       return (
         <S.InfosText>
           <S.Text color={theme.colors.feedback.error[600]}>
             {t("inactiveSubscription")}
             <S.HighlightedText color={theme.colors.feedback.error[600]}>
-              {nextPaymetAttempt(subscription)}
+              {subscription.cancelDate
+                ? cancelDate(subscription)
+                : nextPaymetAttempt(subscription)}
             </S.HighlightedText>
           </S.Text>
-          <S.Text>{t("inactiveSubscriptionInfo")}</S.Text>
+          {isInactive(subscription) && (
+            <S.Text>{t("inactiveSubscriptionInfo")}</S.Text>
+          )}
+          {isCanceled(subscription) && !isExpired(subscription) && (
+            <S.Text>
+              {t("perksExpiration")}
+              <S.HighlightedText>
+                {nextPaymetAttempt(subscription)}
+              </S.HighlightedText>
+            </S.Text>
+          )}
         </S.InfosText>
       );
     } else {
@@ -128,7 +154,9 @@ export default function SubscriptionsScreen(): JSX.Element {
               <S.IconTextContainer>
                 <S.Amount>{formattedAmount(subscription)}</S.Amount>
 
-                {isClubInactive(subscription) ? (
+                {!isActive(subscription) &&
+                isClub(subscription) &&
+                !isMember ? (
                   <S.Button
                     onPress={() => {
                       navigateTo("ClubScreen");
@@ -138,7 +166,8 @@ export default function SubscriptionsScreen(): JSX.Element {
                     <S.ButtonText>{t("redoSubscription")}</S.ButtonText>
                   </S.Button>
                 ) : (
-                  !isPix(subscription) && (
+                  !isPix(subscription) &&
+                  isActive(subscription) && (
                     <S.IconContainer>
                       <Icon
                         type="outlined"

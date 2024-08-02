@@ -1,92 +1,93 @@
-import { Text, View } from "react-native";
-import { useCallback, useEffect } from "react";
-import HandIcon from "components/vectors/HandIcon";
 import { useTranslation } from "react-i18next";
 import Button from "components/atomics/buttons/Button";
 import { useNavigation } from "hooks/useNavigation";
-import { useTasksContext } from "contexts/tasksContext";
-import { theme, useDonations } from "@ribon.io/shared";
-import { RootStackScreenProps } from "types";
+import { theme } from "@ribon.io/shared";
+import { useWarmGlowMessages } from "@ribon.io/shared/hooks";
 import usePageView from "hooks/usePageView";
-import { useCurrentUser } from "contexts/currentUserContext";
-import S from "./styles";
-import ContributionImage from "./ContributionImage";
+import { useAuthentication } from "contexts/authenticationContext";
+import LottieAnimation from "components/atomics/LottieAnimation";
+import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
+import { DONATION_COUNT } from "lib/localStorage/constants";
+import postDonationAnimation from "./assets/postDonationAnimation.json";
+import sunAnimation from "./assets/sunAnimation.json";
+import * as S from "./styles";
 
-function PostDonationScreen({
-  route,
-}: RootStackScreenProps<"PostDonationScreen">) {
-  usePageView("P8_view");
+function PostDonationScreen() {
+  usePageView("P39_view");
 
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.postDonationScreen",
   });
+  const { isAuthenticated } = useAuthentication();
   const { navigateTo } = useNavigation();
-  const { nonProfit, cause } = route.params;
-  const { currentUser } = useCurrentUser();
-  const { appDonationsCount } = useDonations(currentUser?.id);
+  const { warmGlowMessage, isLoading } = useWarmGlowMessages();
 
-  const navigateToAvailableArticleScreen = () => {
-    if (appDonationsCount && appDonationsCount < 3)
-      navigateTo("AvailableArticleScreen");
-    else navigateTo("EarnTicketsScreen", { currentTab: 0 });
+  const shouldAskForReview = async () => {
+    const donations = await getLocalStorageItem(DONATION_COUNT);
+    let donationCount = donations ? parseInt(donations, 10) : 0;
+    donationCount += 1;
+
+    await setLocalStorageItem(DONATION_COUNT, donationCount.toString());
+    if (donationCount === 2) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
-  const { registerAction } = useTasksContext();
+  const handleNavigate = async () => {
+    const donations = await getLocalStorageItem(DONATION_COUNT);
+    const donationCount = donations ? parseInt(donations, 10) : 0;
 
-  useEffect(() => {
-    registerAction("P8_view");
-  }, []);
+    if (!isAuthenticated() && donationCount > 1) {
+      navigateTo("ValidateAccountScreen");
+    } else {
+      navigateTo("TabNavigator", {
+        screen: "CausesScreen",
+        params: {
+          shouldAskForReview: await shouldAskForReview(),
+        },
+      });
+    }
+  };
 
-  const contributionList = useCallback(
-    () => (
-      <>
-        <ContributionImage
-          key={1}
-          idCause={cause.id}
-          name={cause.name}
-          coverImage={cause.coverImage}
-          isCause
-          from="givePostDonation_page"
-        />
-        <ContributionImage
-          key={2}
-          idCause={nonProfit.cause.id}
-          name={nonProfit.name}
-          coverImage={nonProfit.mainImage}
-          from="givePostDonation_page"
-        />
-      </>
-    ),
-    [nonProfit, cause],
-  );
-
-  function renderContributionCards() {
-    return (
-      <View style={S.container}>
-        <View style={S.imageContainer}>
-          <HandIcon />
-        </View>
-
-        <Text style={S.text}>{t("title")}</Text>
-
-        {contributionList()}
-
-        <View style={S.buttonContainer}>
-          <Button
-            text={t("buttonText")}
-            customStyles={S.button}
-            customTextStyles={{
-              color: theme.colors.brand.primary[600],
-            }}
-            onPress={navigateToAvailableArticleScreen}
-            outline
+  return isLoading ? null : (
+    <>
+      <S.Container>
+        <S.TopContainer>
+          <LottieAnimation
+            animationData={postDonationAnimation}
+            width={428}
+            height={428}
           />
-        </View>
-      </View>
-    );
-  }
+        </S.TopContainer>
+        <S.ContentContainer>
+          <S.Title>{t("title")}</S.Title>
+          <S.Description>{warmGlowMessage?.message}</S.Description>
+        </S.ContentContainer>
 
-  return renderContributionCards();
+        <Button
+          onPress={handleNavigate}
+          text={t("buttonText")}
+          customTextStyles={{
+            color: theme.colors.neutral10,
+          }}
+          customStyles={{
+            backgroundColor: theme.colors.brand.primary[600],
+            borderColor: theme.colors.brand.primary[800],
+            borderRadius: 12,
+          }}
+        />
+      </S.Container>
+      <S.BackgroundSun>
+        <LottieAnimation
+          animationData={sunAnimation}
+          width="100%"
+          height={262}
+        />
+      </S.BackgroundSun>
+    </>
+  );
 }
 
 export default PostDonationScreen;

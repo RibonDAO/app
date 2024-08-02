@@ -13,7 +13,6 @@ import { useNavigation } from "hooks/useNavigation";
 import InputText from "components/atomics/inputs/InputText";
 import { isValidEmail } from "lib/validators";
 import { useEffect, useState } from "react";
-import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
@@ -28,8 +27,6 @@ function InsertEmailCouponScreen() {
   const [email, setEmail] = useState("");
   const { navigateTo } = useNavigation();
 
-  const { sendAuthenticationEmail } = useAuthentication();
-
   useEffect(() => {
     logEvent("P28_view", {
       from: "coupon_flow",
@@ -37,7 +34,6 @@ function InsertEmailCouponScreen() {
   }, []);
 
   const handleButtonPress = async () => {
-    await sendAuthenticationEmail({ email });
     logEvent("authEmailFormBtn_click", {
       from: "coupon_flow",
     });

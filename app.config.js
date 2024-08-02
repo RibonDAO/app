@@ -1,5 +1,5 @@
-const version = "5.12.4";
-const buildNumber = 389;
+const version = "6.1.4";
+const buildNumber = 400;
 
 export default () => ({
   "expo": {
@@ -47,6 +47,7 @@ export default () => ({
       },
       "supportsTablet": true,
       "bundleIdentifier": "org.reactjs.native.example.Ribon",
+      "appStoreUrl": "https://apps.apple.com/br/app/ribon/id1337763424",
       "buildNumber": buildNumber.toString(),
       "usesAppleSignIn": true,
       "associatedDomains": [
@@ -90,13 +91,6 @@ export default () => ({
         },
       ],
       "expo-localization",
-      [
-        "expo-updates", 
-        {
-          "username": "thais.correa"
-        },
-
-      ],
       "sentry-expo",
       "@react-native-firebase/app",
       "@react-native-firebase/perf",

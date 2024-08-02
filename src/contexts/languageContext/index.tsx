@@ -10,6 +10,7 @@ export const LANGUAGE_KEY = "LANGUAGE_KEY";
 export interface ILanguageContext {
   currentLang: Languages;
   handleSwitchLanguage: () => void;
+  setCurrentLang: (lang: Languages) => void;
 }
 
 export type Props = {
@@ -48,6 +49,7 @@ function LanguageProvider({ children }: Props) {
     () => ({
       currentLang,
       handleSwitchLanguage,
+      setCurrentLang,
     }),
     [currentLang],
   );

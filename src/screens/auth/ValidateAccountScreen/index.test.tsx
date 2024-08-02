@@ -1,17 +1,8 @@
 import { renderComponent } from "config/testUtils/renders";
-import {
-  expectLogEventToHaveBeenCalledWith,
-  expectTextToBeInTheDocument,
-} from "config/testUtils/expects";
+import { expectLogEventToHaveBeenCalledWith } from "config/testUtils/expects";
 import { waitForPromises } from "config/testUtils";
+import { screen } from "@testing-library/react-native";
 import ValidateAccountScreen from ".";
-
-jest.mock("services/googleSignIn", () => ({
-  signIn: () => {},
-}));
-jest.mock("hooks/useRouteParams", () => ({
-  useRouteParams: () => ({ params: { from: "auth" } }),
-}));
 
 describe("ValidateAccountScreen", () => {
   beforeEach(() => {
@@ -19,7 +10,7 @@ describe("ValidateAccountScreen", () => {
   });
 
   it("should render without error", () => {
-    expectTextToBeInTheDocument("Validate your account");
+    expect(screen.getByTestId("loader")).toBeTruthy();
   });
 
   it("logs the P27_view event", async () => {

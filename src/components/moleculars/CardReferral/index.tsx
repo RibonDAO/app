@@ -8,7 +8,7 @@ import { useCurrentUser } from "contexts/currentUserContext";
 import { useUserProfile } from "@ribon.io/shared";
 import { useLanguage } from "contexts/languageContext";
 import Star from "./assets/Shape";
-import Letter from "./assets/Letter";
+import GiftBox from "./assets/GiftBox";
 import * as S from "./styles";
 
 interface ReferralIntegration {
@@ -103,7 +103,7 @@ function CardReferral(): JSX.Element {
       <S.ShapeContainer>
         <Star />
       </S.ShapeContainer>
-      <Letter />
+      <GiftBox />
       <S.Title>{t("title")}</S.Title>
       <S.Subtitle>{t("subtitle")}</S.Subtitle>
       <S.Button accessibilityRole="button" onPress={handleClick}>

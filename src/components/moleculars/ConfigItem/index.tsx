@@ -1,6 +1,5 @@
 import Icon from "components/atomics/Icon";
-import { Text, TouchableOpacity, View } from "react-native";
-import S from "./styles";
+import * as S from "./styles";
 
 type IconProps = {
   name: string;
@@ -16,6 +15,7 @@ type Props = {
   cta?: JSX.Element;
   onPress?: () => void;
   last?: boolean;
+  hitSlop?: number;
 };
 
 function ConfigItem({
@@ -25,29 +25,26 @@ function ConfigItem({
   linkIcon,
   onPress,
   last,
+  hitSlop,
 }: Props): JSX.Element {
   return (
-    <TouchableOpacity
-      accessibilityRole="button"
-      style={{ ...S.configItem, ...(last && S.lastConfigItem) }}
-      onPress={onPress && onPress}
-    >
-      <View style={S.iconContainer}>
+    <S.ConfigItem onPress={onPress} hitSlop={hitSlop} last={last}>
+      <S.IconContainer>
         <Icon
           name={icon.name}
           type={icon.type}
           color={icon.color}
           size={icon.size}
         />
-      </View>
-      <View style={S.textContainer}>
-        <Text style={S.text}>{text}</Text>
-      </View>
-      <View style={S.ctaContainer}>
+      </S.IconContainer>
+      <S.TextContainer>
+        <S.Text>{text}</S.Text>
+      </S.TextContainer>
+      <S.CtaContainer>
         {cta && cta}
         {linkIcon && linkIcon()}
-      </View>
-    </TouchableOpacity>
+      </S.CtaContainer>
+    </S.ConfigItem>
   );
 }
 

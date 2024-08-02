@@ -1,16 +1,25 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { RootStackScreenProps } from "types";
 import { useNavigation } from "hooks/useNavigation";
 import { useTranslation } from "react-i18next";
-import { useStatistics, useUserConfig } from "@ribon.io/shared";
-import DoneScreenTemplate from "screens/templates/DoneScreenTemplate";
+import {
+  theme,
+  useStatistics,
+  useUserConfig,
+  useUserProfile,
+} from "@ribon.io/shared";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import useSound from "hooks/useSound";
-import { View } from "react-native";
 import { useCurrentUser } from "contexts/currentUserContext";
 import { logEvent } from "services/analytics";
-import { useAuthentication } from "contexts/authenticationContext";
+import Button from "components/atomics/buttons/Button";
+import CheckBox from "components/atomics/inputs/Checkbox";
+import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
+import LottieAnimation from "components/atomics/LottieAnimation";
 import donationDoneSound from "./assets/donation-done.mp3";
+import NonProfitImagePlaceholder from "./NonProfitImagePlaceholder";
+import sunAnimation from "./assets/sunAnimation.json";
+import * as S from "./styles";
 
 export default function DonationDoneScreen({
   route,
@@ -26,7 +35,8 @@ export default function DonationDoneScreen({
   const { refetch: refetchUserConfig, config } = userConfig();
   const [allowedEmailMarketing, setAllowedEmailMarketing] = useState(false);
   const { currentUser } = useCurrentUser();
-  const { isAuthenticated } = useAuthentication();
+  const { userProfile } = useUserProfile();
+  const { profile } = userProfile();
 
   const { userStatistics, refetch: refetchStatistics } = useStatistics({
     userId: currentUser?.id,
@@ -34,6 +44,8 @@ export default function DonationDoneScreen({
 
   const quantityOfDonationsToShowEmailCheckbox = 3;
   const firstDonation = 1;
+
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const shouldShowEmailCheckbox = useCallback(() => {
     if (userStatistics && config) {
@@ -50,17 +62,14 @@ export default function DonationDoneScreen({
     return false;
   }, [userStatistics, config]);
 
-  const handleNavigate = () => {
+  const handleNavigate = async () => {
     if (allowedEmailMarketing && currentUser) {
       logEvent("acceptReceiveEmail_click", {
         from: "confirmedDonation_page",
       });
-      updateUserConfig(currentUser.id, { allowedEmailMarketing });
-    } else if (!isAuthenticated()) {
-      navigateTo("SentMagicLinkEmailScreen", { email: currentUser?.email });
-    } else {
-      navigateTo("TabNavigator", { screen: "CausesScreen" });
+      await updateUserConfig(currentUser.id, { allowedEmailMarketing });
     }
+    navigateTo("PostDonationScreen");
   };
 
   useEffect(() => {
@@ -70,7 +79,6 @@ export default function DonationDoneScreen({
 
   useEffect(() => {
     playSound(donationDoneSound);
-
     if (shouldShowEmailCheckbox()) {
       logEvent("acceptReceiveEmail_view", {
         from: "confirmedDonation_page",
@@ -78,48 +86,75 @@ export default function DonationDoneScreen({
     }
   }, []);
 
+  const hasCheckbox = shouldShowEmailCheckbox();
+
   return (
-    <View>
-      {shouldShowEmailCheckbox() ? (
-        <DoneScreenTemplate
-          image={nonProfit.confirmationImage || nonProfit.mainImage}
-          imageDescription={
-            nonProfit.confirmationImageDescription ||
-            nonProfit.mainImageDescription
-          }
-          title={t("title") || ""}
-          description={t("description") || ""}
-          highlightedDescription={formattedImpactText(
-            nonProfit,
-            impact ?? undefined,
-            false,
-            false,
+    <>
+      <S.Container>
+        <S.TopContainer>
+          {isImageLoading && <NonProfitImagePlaceholder />}
+          <S.CardImage
+            source={{ uri: nonProfit?.confirmationImage }}
+            onLoad={() => setIsImageLoading(false)}
+            onError={() => setIsImageLoading(false)}
+          />
+          <S.ImageWithIconOverlayContainer>
+            <ImageWithIconOverlay
+              leftImage={profile?.photo}
+              rightImage={nonProfit?.icon}
+            />
+          </S.ImageWithIconOverlayContainer>
+        </S.TopContainer>
+
+        <S.ContentContainer>
+          <S.TextContainer>
+            <S.Title>{t("title")}</S.Title>
+            <S.Description>
+              {t("description")}{" "}
+              {formattedImpactText(
+                nonProfit,
+                impact ?? undefined,
+                false,
+                false,
+              )}
+            </S.Description>
+          </S.TextContainer>
+
+          {hasCheckbox && (
+            <S.CheckboxContainer>
+              <CheckBox
+                text={t("checkboxText")}
+                checked={allowedEmailMarketing}
+                onChecked={() =>
+                  setAllowedEmailMarketing(!allowedEmailMarketing)
+                }
+                checkedColor={theme.colors.brand.primary[800]}
+                unCheckedColor={theme.colors.neutral[600]}
+              />
+            </S.CheckboxContainer>
           )}
-          buttonTitle={t("buttonTitle") || ""}
-          onButtonPress={handleNavigate}
-          checkboxText={t("checkboxText") || ""}
-          checked={allowedEmailMarketing}
-          onChecked={() => setAllowedEmailMarketing(!allowedEmailMarketing)}
+        </S.ContentContainer>
+
+        <Button
+          onPress={handleNavigate}
+          text={t("buttonTitle")}
+          customTextStyles={{
+            color: theme.colors.neutral10,
+          }}
+          customStyles={{
+            backgroundColor: theme.colors.brand.primary[600],
+            borderColor: theme.colors.brand.primary[800],
+            borderRadius: 12,
+          }}
         />
-      ) : (
-        <DoneScreenTemplate
-          image={nonProfit.confirmationImage || nonProfit.mainImage}
-          imageDescription={
-            nonProfit.confirmationImageDescription ||
-            nonProfit.mainImageDescription
-          }
-          title={t("title") || ""}
-          description={t("description") || ""}
-          highlightedDescription={formattedImpactText(
-            nonProfit,
-            impact ?? undefined,
-            false,
-            false,
-          )}
-          buttonTitle={t("buttonTitle") || ""}
-          onButtonPress={handleNavigate}
+      </S.Container>
+      <S.BackgroundSun>
+        <LottieAnimation
+          animationData={sunAnimation}
+          width="100%"
+          height={262}
         />
-      )}
-    </View>
+      </S.BackgroundSun>
+    </>
   );
 }

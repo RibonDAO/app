@@ -2,7 +2,7 @@ import { NonProfit } from "@ribon.io/shared/types";
 import { useTranslation } from "react-i18next";
 import ZeroDonationsSection from "screens/users/ImpactScreen/ZeroDonationsSection";
 import { useNavigation } from "hooks/useNavigation";
-import ImpactDonationsVector from "screens/users/ImpactScreen/CommunityDonationsImpactCards/ImpactDonationsVector";
+import ImpactDonationsVector from "assets/illustrations/ImpactDonationsVector";
 
 import { FlatList, SafeAreaView } from "react-native";
 import { useTagDonationContext } from "contexts/tagDonationContext";
@@ -11,9 +11,13 @@ import NonProfitCarousel from "./NonProfitCarousel";
 
 export type Props = {
   nonProfits: NonProfit[];
+  setUnauthorizedModalVisible: (value: boolean) => void;
 };
 
-export default function NonProfitsList({ nonProfits }: Props) {
+export default function NonProfitsList({
+  nonProfits,
+  setUnauthorizedModalVisible,
+}: Props) {
   const { t } = useTranslation("translation", {
     keyPrefix: "donations.causesScreen",
   });
@@ -29,6 +33,7 @@ export default function NonProfitsList({ nonProfits }: Props) {
           <NonProfitCarousel
             nonProfit={item}
             show={nonProfitsTag?.map((np) => np.id).includes(item.id) ?? false}
+            setUnauthorizedModalVisible={setUnauthorizedModalVisible}
           />
         )}
         keyExtractor={(nonProfit) => nonProfit.id.toString()}

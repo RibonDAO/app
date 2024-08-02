@@ -14,15 +14,6 @@
     "aboutTicketsButtonText": "Back"
   },
   "layoutHeader": {
-    "logout": "Sign out",
-    "support": "User Support",
-    "subscriptions": "Subscriptions",
-    "notifications": "Allow notifications",
-    "supportLink": "https://v2.zopim.com/widget/popout.html?key={{key}}",
-    "login": "Login",
-    "language": "Change language",
-    "deleteAccount": "Delete account",
-    "signInOrCreateAccount": "Sign in or create a new account",
     "connectWallet": "Connect",
     "ticketModal": {
       "title": "Cool! You have 1 ticket to donate :)",
@@ -140,10 +131,12 @@
       "errorModalButtonText": "Ok",
       "unauthorizedModalTitle": "Validate your e-mail",
       "unauthorizedModalText": "Please, validate your e-mail to ensure your donation arrives safely.",
-      "unauthorizedModalButtonText": "Validate my account"
+      "unauthorizedModalButtonText": "Validate my account",
+      "unauthorizedContributionModalTitle": "Validate your account",
+      "unauthorizedContributionModalText": "Please, validate your account to ensure your donation arrives safely",
+      "unauthorizedContributionModalButtonText": "Validate my account"
     },
     "donateScreen": {
-      "nonProfitText": "You are donating to",
       "description": "Enter your e-mail to use your donation ticket",
       "title": "Place your e-mail to donate",
       "textInputPlaceholder": "Place your e-mail",
@@ -153,32 +146,31 @@
       "donateText": "Donate",
       "continueText": "Continue",
       "animationText": "Donating ticket",
-      "agreementText": "By clicking Continue I agree on Ribon’s",
+      "agreementText": "By clicking \"Continue\" you agree on Ribon’s ",
       "termsText": "Terms",
       "termsLink": "https://ribon.io/en/privacy-policy/#terms",
       "privacyPolicyText": "Privacy Policy",
       "privacyPolicyLink": "https://ribon.io/en/privacy-policy/#privacy",
-      "and": " and",
+      "and": " and ",
+      "ribon": "",
       "signedInScreen": {
         "title": "Your donation",
         "confirmDonation": "Confirm donation",
         "donationError": "Unable to donate now"
       }
     },
+    "donationInProgress": {
+      "loadingText": "Processing your donation..."
+    },
     "donationDoneScreen": {
-      "title": "Thanks for donating!",
-      "description": "You donated",
+      "title": "Thank you for donating!",
+      "description": "You donated the equivalent of",
       "checkboxText": "I want to receive information about my donations by e-mail",
-      "buttonTitle": "Finish"
+      "buttonTitle": "Continue"
     },
     "postDonationScreen": {
-      "title": "If you want, you can do more",
-      "buttonText": "Donate later",
-      "contributionImage": {
-        "donateFor": "Donate {{value}} for",
-        "labelTitle": "Boosted donation",
-        "buttonText": "Donate now"
-      }
+      "title": "Enjoy this moment...",
+      "buttonText": "Finish"
     },
     "receiveTicketScreen": {
       "textOrigin": "Community",
@@ -187,12 +179,12 @@
     },
     "auth": {
       "signInScreen": {
-        "title": "You are donating",
+        "title": "You're about to donate:",
+        "impactDescription": "The equivalent of ",
         "google": "Continue with Google",
         "apple": "Continue with Apple",
         "email": "Continue with e-mail",
         "impactOneLife": "Impact 1 person",
-        "impactDescription": "with {{value}}",
         "checkboxText": "I agree to receive emails with information about my donations"
       },
       "insertEmailAccountScreen": {
@@ -203,8 +195,10 @@
       }
     },
     "selectTicketsScreen": {
-      "title": "Choose the size of your help",
-      "buttonText": "Continue"
+      "title": "You're about to donate:",
+      "prefix": "The equivalent of ",
+      "buttonTextPlural": "Donate {{quantity}} tickets",
+      "buttonText": "Donate {{quantity}} ticket"
     }
   },
   "content": {
@@ -288,6 +282,7 @@
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Next in {{time}}",
+          "subscriptionExpiration": "Subscribe on {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Unlock collection"
         },
         "monthlyTicketCard": {
@@ -297,6 +292,7 @@
           "buttonText": "Collect {{value}} ticket",
           "buttonTextPlural": "Collect {{value}} tickets",
           "buttonTextCollected": "Next in {{nextPaymentAttempt}}",
+          "subscriptionExpiration": "Subscribe on {{nextPaymentAttempt}}",
           "buttonTextNoClub": "Unlock collection"
         }
       }
@@ -540,60 +536,38 @@
     "ctaLink": "https://projetos.ribon.io/partners"
   },
   "cardReferral": {
-    "title": "Invite your friends",
-    "subtitle": "Whoever enters using your invite gets 1 extra ticket to start donating!",
-    "cta": "Copy invite link ->",
+    "title": "Gift someone 1 ticket",
+    "subtitle": "Invite friends with your link to do good with you.",
+    "cta": "Share link →",
     "ctaSuccess": "Copied!"
   },
   "users": {
     "impactScreen": {
       "title": "My Impact",
-      "impactCards": {
-        "totalTickets": "Donated tickets",
-        "totalDonated": "Donated money",
-        "totalNonProfits": "Supported NGOs",
-        "totalCauses": "Supporter causes",
-        "title": "Impact"
-      },
-      "ngoImpactCards": {
-        "zeroDonationsSection": {
-          "community": {
-            "title": "Your community donations will appear here.",
-            "description": "You have not made community donations yet, why not try your first one?",
-            "buttonText": "Donate in community",
-            "contributionDescription": "The community will boost your donation with"
-          },
-          "ticket": {
-            "title": "Your ticket donations will appear here.",
-            "description": "You have not made free donations using tickets yet, why not try your first one?",
-            "buttonText": "Donate using tickets"
-          },
-          "direct": {
-            "title": "Your direct donations will appear here.",
-            "description": "You have not made direct donations  yet, why not try your first one?",
-            "buttonText": "Donate directly"
-          },
-          "migrated": "Migrated",
-          "showMore": "Show more",
-          "generalReceiver": "General",
-          "seeDetails": "Monitor Increase →",
-          "increaseText": "The community increases the donation amount by +20%"
-        }
-      },
-      "communityDonationsTitle": "Community Donations",
-      "ImpactCardsTitle": "Impact",
-      "ticketDonationsTitle": "Ticket Donations",
-      "directDonationsTitle": "Direct Donations",
-      "impactNotification": {
-        "title": "We have imported your impact!",
-        "description": "Your history of donations from the old platform are in the \"Ticket donations\" tab.",
-        "link": "Don’t show this again"
-      },
       "profileSection": {
         "userName": "Your profile",
         "noClubTagText": "No Ribon Club",
         "clubTagText": "Ribon Club",
-        "ctaClubText": "Club benefits →"
+        "ctaClubText": "Club benefits →",
+        "accordion": {
+          "equivalent": "Equivalent to"
+        },
+        "donatedTickets": "Donated tickets",
+        "daysDoingGood": "Days doing good",
+        "donatedTicketsDescription": "Represents your incredible impact on the world. Each donated ticket is a powerful contribution that helps transform lives.",
+        "daysDoingGoodDescription": "Represents your incredible journey of generosity. Every day you make a donation, this number will increase.",
+        "emptyComponent": {
+          "button": "Donate tickets",
+          "firstParagraph": "Your donations will appear here",
+          "secondParagraph": "Donate your first ticket and start making an impact!"
+        },
+        "close": "Close"
+      },
+      "impactList": {
+        "activeProjects": "By projects",
+        "inactiveProjects": "Inactive projects",
+        "inactiveProjectsDescription": "ONG projects that aren't in the app anymore",
+        "inactiveProjectsButton": "Show inactive projects"
       }
     }
   },
@@ -644,12 +618,12 @@
     }
   },
   "contributionSection": {
-    "title": "Check out the latest from Ribon!",
-    "titleNewImpact": "Thanks to you, {{nonProfitName}} will be able to impact 1 person. Thank you!",
-    "titleCard": "Do even more",
+    "title": "Get tickets and more!",
+    "titleHead": "Check out the latest from Ribon!",
+    "description": "As a Ribon Club member, you can accumulate unlimited tickets in your wallet and receive extra tickets EVERY DAY. Come and see for yourself!",
+    "titleCard": "Subscribe to Ribon Club",
     "nonProfits": "NGOs",
-    "button": "Donate",
-    "donate": "Donate {{value}}"
+    "button": "I want to know more"
   },
   "contributionCard": {
     "button": "Donate",
@@ -690,6 +664,42 @@
       }
     }
   },
+  "configScreen": {
+    "title": "Settings",
+    "header": {
+      "guestUser": "Guest user",
+      "signIn": "Sign in or create an account",
+      "noClubTagText": "No Ribon Club",
+      "clubTagText": "Ribon Club"
+    },
+    "generalSettings": {
+      "title": "General settings",
+      "notifications": "Allow notifications",
+      "language": "Change language"
+    },
+    "support": {
+      "title": "User Support",
+      "talkToUs": "Talk to us",
+      "link": "https://v2.zopim.com/widget/popout.html?key={{key}}"
+    },
+    "subscriptions": {
+      "title": "Subscriptions",
+      "ribonClub": "Ribon Club"
+    },
+    "account": {
+      "title": "Your account",
+      "signIn": "Sign in or create a new account",
+      "deleteAccount": "Delete account",
+      "logout": "Sign out"
+    }
+  },
+  "changeLanguageScreen": {
+    "title": "Change language",
+    "languages": {
+      "ptbr": "Portuguese (Brazil)",
+      "en": "English"
+    }
+  },
   "auth": {
     "signInScreen": {
       "title": "Sign in to your account",
@@ -701,6 +711,14 @@
       "emailLabel": "E-mail",
       "confirmText": "Continue",
       "emailPlaceholder": "Your e-mail"
+    },
+    "insertOtpCodeScreen": {
+      "title": "We sent you a code",
+      "subtitle": "Enter the 6-digit verification code sent to {{email}}",
+      "confirmText": "Continue",
+      "resendText": "Resend code",
+      "incorrectCode": "Incorrect code. Please try again.",
+      "successToastMessage": "Account validated"
     },
     "insertEmailCouponScreen": {
       "title": "Sign in with an e-mail",

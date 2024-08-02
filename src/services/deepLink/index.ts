@@ -9,8 +9,6 @@ export async function initializeDeeplink(
   setCurrentIntegrationId: (integrationId: string | number) => void,
   setExternalId: (externalId: string) => void,
   setUtm: (utmSource: string, utmMedium: string, utmCampaign: string) => void,
-  setMagicLinkToken: (magicLinkToken: string) => void,
-  setAccountId: (accountId: string) => void,
   setCouponId: (couponId: string) => void,
 ) {
   branch.subscribe({
@@ -26,22 +24,16 @@ export async function initializeDeeplink(
         (latestParams.integration_id as string) || RIBON_INTEGRATION_ID;
 
       const externalId = (latestParams.external_id as string) || "";
-      const utmSource = (latestParams.utm_source as string) || "";
-      const utmMedium = (latestParams.utm_medium as string) || "";
-      const utmCampaign = (latestParams.utm_campaign as string) || "";
+      const utmSource = (latestParams.utm_source as string) || "organic_unset";
+      const utmMedium = (latestParams.utm_medium as string) || "organic_unset";
+      const utmCampaign =
+        (latestParams.utm_campaign as string) || "organic_unset";
 
-      const magicLinkToken = (latestParams.authToken as string) || "";
-      const accountId = (latestParams.id as string) || "";
       const couponId = (latestParams.coupon_id as string) || "";
 
       setCurrentIntegrationId(integrationId);
       setExternalId(externalId);
-
       setUtm(utmSource, utmMedium, utmCampaign);
-
-      setMagicLinkToken(magicLinkToken);
-      setAccountId(accountId);
-
       setCouponId(couponId);
 
       try {

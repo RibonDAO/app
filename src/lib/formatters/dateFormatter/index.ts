@@ -1,6 +1,19 @@
 import { formattedShortLanguage } from "lib/currentLanguage";
 import Moment from "moment";
 
+export function isOldDate(dateString: string) {
+  try {
+    const formattedDate = dateString
+      .replace(/( \+|-)\d{4}$/, "")
+      .split(" ")
+      .join("T")
+      .slice(0, -1);
+    return new Date(formattedDate).toISOString() < new Date().toISOString();
+  } catch {
+    throw Error("invalid date");
+  }
+}
+
 export function stringToLocaleDateString(dateString: string) {
   const formattedDate = dateString
     .replace(/( \+|-)\d{4}$/, "")
