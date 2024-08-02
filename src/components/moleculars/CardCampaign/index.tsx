@@ -4,15 +4,16 @@ import Image from "components/atomics/Image";
 import Button from "components/atomics/buttons/Button";
 import { theme } from "@ribon.io/shared/styles";
 import { openInExternalBrowser, openInWebViewer } from "lib/linkOpener";
-import { Currencies, ImpressionCard } from "@ribon.io/shared/types";
+import { ImpressionCard } from "@ribon.io/shared/types";
 import { useImpressionCards } from "@ribon.io/shared/hooks";
 import { useImpactConversion } from "hooks/useImpactConversion";
 import { useLanguage } from "contexts/languageContext";
 import { useTranslation } from "react-i18next";
-import { formatPrice } from "lib/formatters/currencyFormatter";
 import { useNavigation } from "hooks/useNavigation";
 import { logError } from "services/crashReport";
 import { logEvent } from "services/analytics";
+import BannerEN from "./assets/bannerEN.png";
+import BannerBR from "./assets/bannerBR.png";
 import S from "./styles";
 
 export type Props = {
@@ -25,25 +26,16 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
   });
 
   const [impressionCard, setImpressionCard] = useState<ImpressionCard | null>();
-  const { nonProfit, offer, description, contribution } = useImpactConversion();
+  const { nonProfit, offer, contribution } = useImpactConversion();
   const { currentLang } = useLanguage();
   const { navigateTo } = useNavigation();
-
-  const [currency, setCurrency] = useState<Currencies>(Currencies.BRL);
-
-  useEffect(() => {
-    if (offer) {
-      setCurrency(offer?.currency === "brl" ? Currencies.BRL : Currencies.USD);
-    } else {
-      setCurrency(currentLang === "pt-BR" ? Currencies.BRL : Currencies.USD);
-    }
-  }, [currentLang, offer]);
 
   const { getImpressionCard } = useImpressionCards();
 
   const fetchImpressionCard = useCallback(async () => {
     try {
       const impressionCardData = await getImpressionCard(cardId);
+
       setImpressionCard(impressionCardData);
     } catch (e) {
       logError(e);
@@ -92,28 +84,22 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
       currency: offer?.currency,
     });
 
-    navigateTo("RecurrenceScreen", {
-      target: "non_profit",
-      targetId: nonProfit?.id,
-      offer: offer?.priceCents,
-      currency: offer?.currency,
-    });
+    navigateTo("ClubScreen");
   };
 
   const defaultImpressionCard: ImpressionCard = {
     headline: t("titleCard"),
-    title: t("donate", {
-      value: formatPrice(
-        (offer?.priceCents || 1000) / 100,
-        currency.toLowerCase(),
-      ),
-    }),
-    description: description || "",
+    title: t("title"),
+    description: t("description") || "",
     ctaText: t("button"),
-    image: nonProfit?.mainImage || nonProfit?.cause?.mainImage,
+    image: currentLang === "pt-BR" ? BannerBR : BannerEN,
     active: true,
     ctaUrl: "",
   };
+
+  const bannerImage = currentLang === "pt-BR" ? BannerBR : BannerEN;
+
+  const imageCard = impressionCard ? { uri: imageUri } : bannerImage;
 
   return (
     contribution && (
@@ -126,9 +112,7 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
         >
           <Image
             style={S.image}
-            source={{
-              uri: impressionCard ? imageUri : defaultImpressionCard.image,
-            }}
+            source={imageCard}
             accessibilityIgnoresInvertColors
           />
           {impressionCard?.videoUrl && (
@@ -153,7 +137,7 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
           <Text style={S.description}>
             {impressionCard?.description
               ? impressionCard.description
-              : description}
+              : t("description")}
           </Text>
 
           <Button

@@ -15,7 +15,6 @@ import InputText from "components/atomics/inputs/InputText";
 import Image from "components/atomics/Image";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import PrivacyPolicyLayout from "components/moleculars/layouts/PrivacyPolicyLayout";
-import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { useRouteParams } from "hooks/useRouteParams";
 import { theme } from "@ribon.io/shared";
@@ -34,7 +33,6 @@ function InsertEmailAccountScreen() {
   });
   const [email, setEmail] = useState("");
 
-  const { sendAuthenticationEmail } = useAuthentication();
   const { handleCollectAndDonate } = useDonationFlow();
   const { formattedImpactText } = useFormattedImpactText();
   const { navigateTo } = useNavigation();
@@ -78,7 +76,6 @@ function InsertEmailAccountScreen() {
   }, [donationSucceeded]);
 
   async function donateCallback() {
-    await sendAuthenticationEmail({ email });
     await handleCollectAndDonate({
       nonProfit,
       email,

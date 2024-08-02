@@ -59,11 +59,8 @@ import DonationSignInScreen from "screens/donations/auth/DonationSignInScreen";
 import SignedInScreen from "screens/donations/auth/SignedInScreen";
 import SignInScreen from "screens/auth/SignInScreen";
 import InsertEmailScreen from "screens/auth/InsertEmailScreen";
-import SentMagicLinkEmailScreen from "screens/auth/SentMagicLinkEmailScreen";
+import InsertOtpCodeScreen from "screens/auth/InsertOtpCodeScreen";
 import InsertEmailAccountScreen from "screens/donations/auth/InsertEmailAccountScreen";
-import { useAuthentication } from "contexts/authenticationContext";
-import SignInByMagicLinkScreen from "screens/auth/SignInByMagicLinkScreen";
-import ExpiredLinkScreen from "screens/auth/ExpiredLinkScreen";
 import SelectTicketsScreen from "screens/donations/SelectTicketsScreen";
 import ValidateAccountScreen from "screens/auth/ValidateAccountScreen";
 import ClubContributionDoneScreen from "screens/promoters/ClubContributionDoneScreen";
@@ -77,6 +74,8 @@ import GiveTicketV2Screen from "screens/donations/GiveTicketV2Screen";
 import AboutTicketsScreen from "screens/content/AboutTicketsScreen";
 import SignInCouponScreen from "screens/coupons/auth/SignInCouponScreen";
 import InsertEmailCouponScreen from "screens/coupons/auth/InsertEmailCouponScreen";
+import ChangeLanguageScreen from "screens/users/ConfigScreen/ChangeLanguageScreen";
+import ConfigScreen from "screens/users/ConfigScreen";
 import HomeScreen from "screens/donations/HomeScreen";
 import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
 import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
@@ -84,7 +83,6 @@ import ClubSubscriptionProvider from "contexts/clubSubscriptionContext";
 import TagsProvider from "contexts/tagsContext";
 import BusinessScreen from "screens/content/BusinessScreen";
 import { initializeDeeplink } from "../../services/deepLink";
-import S from "./styles";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ImpactIconOn from "./assets/ImpactIconOn";
 import ImpactIconOff from "./assets/ImpactIconOff";
@@ -92,6 +90,7 @@ import CausesIconOff from "./assets/CausesIconOff";
 import CausesIconOn from "./assets/CausesIconOn";
 import EarnTicketsIconOn from "./assets/EarnTicketsIconOn";
 import EarnTicketsIconOff from "./assets/EarnTicketsIconOff";
+import S from "./styles";
 
 const { primary } = theme.colors.brand;
 const { neutral } = theme.colors;
@@ -213,7 +212,6 @@ function PrivateNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId } = useAuthentication();
   const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
@@ -221,8 +219,6 @@ function PrivateNavigator() {
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
-      setMagicLinkToken,
-      setAccountId,
       setCouponId,
     );
   }, []);
@@ -245,7 +241,6 @@ function RootNavigator() {
   const { navigateTo } = useNavigation();
   const { setCurrentIntegrationId, setExternalId } = useIntegrationContext();
   const { setUtm } = useUtmContext();
-  const { setMagicLinkToken, setAccountId } = useAuthentication();
   const { setCouponId } = useCouponContext();
   useEffect(() => {
     initializeDeeplink(
@@ -253,11 +248,10 @@ function RootNavigator() {
       setCurrentIntegrationId,
       setExternalId,
       setUtm,
-      setMagicLinkToken,
-      setAccountId,
       setCouponId,
     );
   }, []);
+  const { t } = useTranslation();
 
   return (
     <Stack.Navigator screenOptions={{ gestureEnabled: false }}>
@@ -488,26 +482,13 @@ function RootNavigator() {
         }}
       />
       <Stack.Screen
-        name="SentMagicLinkEmailScreen"
-        component={SentMagicLinkEmailScreen}
+        name="InsertOtpCodeScreen"
+        component={InsertOtpCodeScreen}
         options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="SignInByMagicLinkScreen"
-        component={SignInByMagicLinkScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="ExpiredLinkScreen"
-        component={ExpiredLinkScreen}
-        options={{
-          headerShown: false,
+          headerShown: true,
+          headerLeft: () => <ArrowBackButton />,
+          headerTitle: "",
+          headerShadowVisible: false,
         }}
       />
 
@@ -551,6 +532,30 @@ function RootNavigator() {
         options={{
           headerShown: false,
           animation: "slide_from_bottom",
+        }}
+      />
+
+      <Stack.Screen
+        name="ConfigScreen"
+        component={ConfigScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <ArrowBackButton />,
+          headerTitle: t("configScreen.title") || "Settings",
+          headerShadowVisible: false,
+          headerTitleAlign: "center",
+        }}
+      />
+
+      <Stack.Screen
+        name="ChangeLanguageScreen"
+        component={ChangeLanguageScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <ArrowBackButton />,
+          headerTitle: t("changeLanguageScreen.title") || "Change Language",
+          headerShadowVisible: false,
+          headerTitleAlign: "center",
         }}
       />
 
