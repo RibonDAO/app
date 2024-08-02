@@ -1,7 +1,8 @@
 import VerifiedIcon from "components/vectors/VerifiedIcon";
-import Sparkles from "screens/promoters/ClubScreen/Header/assets/Sparkles";
 import * as S from "./styles";
 import ProfilePhoto from "../assets/ProfilePhoto";
+import RightSparkle from "./assets/RightSparkle";
+import LeftSparkle from "./assets/LeftSparkle";
 
 type Props = {
   userAvatar?: string;
@@ -9,6 +10,7 @@ type Props = {
   name?: string | null;
   showInfo?: boolean;
   isClubMember?: boolean;
+  isBusinessMember?: boolean;
 };
 function UserAvatar({
   userAvatar,
@@ -16,28 +18,54 @@ function UserAvatar({
   name,
   showInfo = true,
   isClubMember,
+  isBusinessMember = false,
 }: Props) {
+  const renderSparkles = () => {
+    if (!isClubMember) return null;
+    return (
+      <>
+        <S.LeftSparkles>
+          <LeftSparkle />
+        </S.LeftSparkles>
+        <S.RightSparkles>
+          <RightSparkle />
+        </S.RightSparkles>
+      </>
+    );
+  };
+
+  const renderAvatar = () =>
+    userAvatar ? (
+      <S.Avatar source={{ uri: userAvatar }} alt="user-avatar" />
+    ) : (
+      <ProfilePhoto />
+    );
+
   return (
     <S.AvatarSection>
-      <S.AvatarContainer>
-        {userAvatar ? (
-          <S.Avatar source={{ uri: userAvatar }} alt="user-avatar" />
-        ) : (
-          <ProfilePhoto />
-        )}
+      {isBusinessMember ? (
+        <S.PictureContainer>
+          <S.AvatarContainer>{renderAvatar()}</S.AvatarContainer>
 
-        {isClubMember && (
-          <S.VerifiedContainer>
-            <VerifiedIcon />
-          </S.VerifiedContainer>
-        )}
+          <S.BusinessIconContainer>
+            <S.BusinessIcon source={{ uri: userAvatar }} alt="user-avatar" />
+          </S.BusinessIconContainer>
 
-        {isClubMember && (
-          <S.Sparkles>
-            <Sparkles />
-          </S.Sparkles>
-        )}
-      </S.AvatarContainer>
+          {renderSparkles()}
+        </S.PictureContainer>
+      ) : (
+        <S.AvatarContainer>
+          {renderAvatar()}
+
+          {isClubMember && (
+            <S.VerifiedContainer>
+              <VerifiedIcon />
+            </S.VerifiedContainer>
+          )}
+
+          {renderSparkles()}
+        </S.AvatarContainer>
+      )}
 
       {showInfo && (
         <S.ProfileSection>

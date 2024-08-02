@@ -10,9 +10,11 @@ export const Container = styled.View`
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  background-color: ${(props: { clubMember: boolean }) => {
-    if (props.clubMember) {
+  background-color: ${(props: { type: string }) => {
+    if (props.type === "club") {
       return theme.colors.brand.tertiary[50];
+    } else if (props.type === "business") {
+      return theme.colors.brand.quinary[50];
     } else {
       return theme.colors.brand.primary[50];
     }
@@ -42,7 +44,6 @@ export const TagContainer = styled.TouchableOpacity`
   display: ${({ hide }: { hide: boolean }) => (hide ? "none" : "flex")};
   flex-direction: row;
   gap: ${theme.spacing(8)};
-  margin-top: ${theme.spacing(16)};
   align-items: center;
   opacity: 1;
 `;
@@ -93,10 +94,25 @@ export const TagText = styled.Text`
   ${defaultBodyXsMedium}
 
   color: ${(props: { clubMember: boolean }) => {
-    if (props.clubMember) {
-      return theme.colors.brand.tertiary[600];
+    if (props.clubMember === true) {
+      return theme.colors.brand.tertiary[800];
     } else {
       return theme.colors.neutral[600];
     }
   }}
+`;
+
+export const TagBusinessText = styled.Text`
+  ${defaultBodyXsMedium}
+
+  color: ${theme.colors.brand.quinary[800]};
+`;
+
+export const BusinessTag = styled.View`
+  display: flex;
+  padding: ${theme.spacing(0, 8)};
+  border-radius: ${theme.spacing(8)};
+  align-items: center;
+  background-color: ${theme.colors.neutral[50]};
+  margin-bottom: ${theme.spacing(8)};
 `;
