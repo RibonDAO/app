@@ -2,10 +2,9 @@ import { useNavigation } from "hooks/useNavigation";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "components/atomics/buttons/Button";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import { theme } from "@ribon.io/shared/styles";
 import { useRouteParams } from "hooks/useRouteParams";
-import ArrowLeft from "components/vectors/ArrowLeft";
 
 import { logEvent } from "services/analytics";
 import { useTicketsContext } from "contexts/ticketsContext";
@@ -36,10 +35,6 @@ export default function GiveTicketScreen() {
     navigateTo("TabNavigator", { screen: "CausesScreen" });
   };
 
-  const handleBackButtonClick = () => {
-    navigateTo("TabNavigator", { screen: "CausesScreen" });
-  };
-
   const handleHasAccount = () => {
     logEvent("openAuthBtn_click", { from: "onboarding_page" });
     navigateTo("SignInScreen");
@@ -49,17 +44,6 @@ export default function GiveTicketScreen() {
 
   return (
     <View style={S.container}>
-      {!isOnboarding && (
-        <View style={S.arrow}>
-          <TouchableOpacity
-            accessibilityRole="button"
-            onPress={handleBackButtonClick}
-            testID="arrow-back-button"
-          >
-            <ArrowLeft />
-          </TouchableOpacity>
-        </View>
-      )}
       <View style={S.content}>
         <Ticket />
         <View style={S.textContainer}>
