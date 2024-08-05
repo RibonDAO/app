@@ -38,13 +38,13 @@ export default function HomeScreen() {
         navigateTo("GiveTicketByCouponScreen");
       } else if (canCollect) {
         if (hasUserAndExternalId) {
-          navigateTo("GiveTicketV2Screen");
+          navigateTo("TabNavigator", { screen: "EarnTicketsScreen" });
         } else if (hasUserAndNotReceivedIntegrationTicketToday) {
-          navigateTo("GiveTicketV2Screen");
+          navigateTo("TabNavigator", { screen: "EarnTicketsScreen" });
         } else if (hasNoUserAndNotCompletedOnboarding) {
           navigateTo("OnboardingScreen");
         } else {
-          navigateTo("TabNavigator", { screen: "CausesScreen" });
+          navigateTo("TabNavigator", { screen: "EarnTicketsScreen" });
         }
       } else {
         navigateTo("TabNavigator", { screen: "CausesScreen" });
