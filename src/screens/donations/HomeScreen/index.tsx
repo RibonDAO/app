@@ -23,7 +23,7 @@ export default function HomeScreen() {
 
   const hasCoupon = couponId !== "" && couponId !== undefined;
   const hasUserAndExternalId = currentUser && externalId && externalId !== "";
-  const hasUserAndNotCompletedOnboarding =
+  const hasNoUserAndNotCompletedOnboarding =
     !currentUser && onboardingCompleted !== true;
 
   async function receiveTicket() {
@@ -41,7 +41,7 @@ export default function HomeScreen() {
           navigateTo("GiveTicketV2Screen");
         } else if (hasUserAndNotReceivedIntegrationTicketToday) {
           navigateTo("GiveTicketV2Screen");
-        } else if (hasUserAndNotCompletedOnboarding) {
+        } else if (hasNoUserAndNotCompletedOnboarding) {
           navigateTo("OnboardingScreen");
         } else {
           navigateTo("TabNavigator", { screen: "CausesScreen" });
