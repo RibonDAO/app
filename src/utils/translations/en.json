@@ -175,7 +175,8 @@
       "title": "Thank you for donating!",
       "description": "You donated the equivalent of",
       "checkboxText": "I want to receive information about my donations by e-mail",
-      "buttonTitle": "Continue"
+      "buttonTitle": "Continue",
+      "share": "Share"
     },
     "postDonationScreen": {
       "title": "Enjoy this moment...",
