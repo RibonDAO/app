@@ -309,7 +309,7 @@
       "title": "Welcome to Ribon’s Business plan!",
       "subtitle": "Enjoy extra tickets and other benefits sponsored by {{companyName}}",
       "button": "Continue",
-      "firstBenefitDescription": "{{ticketsQuantity}} extra tickets every day",
+      "firstBenefitDescription": "{{dailyTickets}} extra tickets every day",
       "secondBenefitDescription": "{{monthlyTickets}} ticket pack every month",
       "thirdBenefitDescription": "Hold as many tickets as you want and make larger donations",
       "fourthBenefitDescription": "Ticket packs never expire and pile up until collected",

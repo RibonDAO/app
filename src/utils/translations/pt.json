@@ -304,7 +304,7 @@
       "title": "Boas vindas ao plano Business da Ribon!",
       "subtitle": "Aproveite tickets extras e outros benefícios pagos por {{companyName}}",
       "button": "Continuar",
-      "firstBenefitDescription": "{{ticketsQuantity}} tickets extra por dia",
+      "firstBenefitDescription": "{{dailyTickets}} tickets extra por dia",
       "secondBenefitDescription": "Pacote de {{monthlyTickets}} tickets por mês",
       "thirdBenefitDescription": "Guarde quantos tickets quiser para fazer grandes doações",
       "fourthBenefitDescription": "Pacotes de tickets não vencem e se acumulam até serem coletados",
