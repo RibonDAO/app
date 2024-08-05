@@ -35,11 +35,13 @@ export default function SubscriptionsScreen(): JSX.Element {
 
   const isClub = (subscription: Subscription) =>
     subscription.offer?.category === "club";
+  const isBusiness = (subscription: Subscription) =>
+    subscription.offer?.category === "business";
   const isPix = (subscription: Subscription) =>
     subscription.personPayments[subscription.personPayments.length - 1]
       ?.paymentMethod === "pix";
 
-  const nextPaymetAttempt = (subscription: any) =>
+  const nextPaymentAttempt = (subscription: any) =>
     stringToLocaleDateString(subscription.nextPaymentAttempt);
 
   const cancelDate = (subscription: any) =>
@@ -125,7 +127,7 @@ export default function SubscriptionsScreen(): JSX.Element {
             <S.HighlightedText color={theme.colors.feedback.error[600]}>
               {subscription.cancelDate
                 ? cancelDate(subscription)
-                : nextPaymetAttempt(subscription)}
+                : nextPaymentAttempt(subscription)}
             </S.HighlightedText>
           </S.Text>
           {isInactive(subscription) && (
@@ -135,7 +137,7 @@ export default function SubscriptionsScreen(): JSX.Element {
             <S.Text>
               {t("perksExpiration")}
               <S.HighlightedText>
-                {nextPaymetAttempt(subscription)}
+                {nextPaymentAttempt(subscription)}
               </S.HighlightedText>
             </S.Text>
           )}
@@ -148,7 +150,7 @@ export default function SubscriptionsScreen(): JSX.Element {
           <S.Text>
             {isPix(subscription) ? t("perksExpiration") : t("nextPayment")}
             <S.HighlightedText>
-              {nextPaymetAttempt(subscription)}
+              {nextPaymentAttempt(subscription)}
             </S.HighlightedText>
           </S.Text>
         </S.InfosText>
@@ -170,59 +172,61 @@ export default function SubscriptionsScreen(): JSX.Element {
       <S.Title>{t("title")} </S.Title>
       <S.SubscriptionsContainer>
         {subscriptions &&
-          subscriptions.map((subscription: Subscription) => (
-            <S.Card key={subscription.id}>
-              <S.IconTextContainer>
-                <S.Amount>{formattedAmount(subscription)}</S.Amount>
+          subscriptions
+            .filter((subscription: Subscription) => !isBusiness(subscription))
+            .map((subscription: Subscription) => (
+              <S.Card key={subscription.id}>
+                <S.IconTextContainer>
+                  <S.Amount>{formattedAmount(subscription)}</S.Amount>
 
-                {!isActive(subscription) &&
-                isClub(subscription) &&
-                !isClubMember ? (
-                  <S.Button
-                    onPress={() => {
-                      navigateTo("ClubScreen");
-                    }}
-                    title={t("redoSubscription")}
-                  >
-                    <S.ButtonText>{t("redoSubscription")}</S.ButtonText>
-                  </S.Button>
-                ) : (
-                  !isPix(subscription) &&
-                  isActive(subscription) && (
-                    <S.IconContainer>
-                      <Icon
-                        type="outlined"
-                        name="delete"
-                        size={24}
-                        color={theme.colors.neutral10}
-                        onPress={() =>
-                          handleCancelSubscriptionButtonClick(subscription)
-                        }
-                      />
-                    </S.IconContainer>
-                  )
+                  {!isActive(subscription) &&
+                  isClub(subscription) &&
+                  !isClubMember ? (
+                    <S.Button
+                      onPress={() => {
+                        navigateTo("ClubScreen");
+                      }}
+                      title={t("redoSubscription")}
+                    >
+                      <S.ButtonText>{t("redoSubscription")}</S.ButtonText>
+                    </S.Button>
+                  ) : (
+                    !isPix(subscription) &&
+                    isActive(subscription) && (
+                      <S.IconContainer>
+                        <Icon
+                          type="outlined"
+                          name="delete"
+                          size={24}
+                          color={theme.colors.neutral10}
+                          onPress={() =>
+                            handleCancelSubscriptionButtonClick(subscription)
+                          }
+                        />
+                      </S.IconContainer>
+                    )
+                  )}
+                </S.IconTextContainer>
+                <S.Text>
+                  {!isClub(subscription) && t("to")}
+                  <S.HighlightedText>
+                    {isClub(subscription)
+                      ? t("ribonClubTag")
+                      : subscription.receiver.name}
+                  </S.HighlightedText>
+                </S.Text>
+                {renderPaymentInfo(subscription)}
+                {modalVisible && (
+                  <CancelSubscriptionModal
+                    setVisible={setModalVisible}
+                    visible={modalVisible}
+                    subscriptionId={subscriptionToBeCanceled.id}
+                    club={isClub(subscriptionToBeCanceled)}
+                    eventParams={eventParams()}
+                  />
                 )}
-              </S.IconTextContainer>
-              <S.Text>
-                {!isClub(subscription) && t("to")}
-                <S.HighlightedText>
-                  {isClub(subscription)
-                    ? t("ribonClubTag")
-                    : subscription.receiver.name}
-                </S.HighlightedText>
-              </S.Text>
-              {renderPaymentInfo(subscription)}
-              {modalVisible && (
-                <CancelSubscriptionModal
-                  setVisible={setModalVisible}
-                  visible={modalVisible}
-                  subscriptionId={subscriptionToBeCanceled.id}
-                  club={isClub(subscriptionToBeCanceled)}
-                  eventParams={eventParams()}
-                />
-              )}
-            </S.Card>
-          ))}
+              </S.Card>
+            ))}
       </S.SubscriptionsContainer>
     </S.Container>
   );
