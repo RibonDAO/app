@@ -13,7 +13,6 @@ import { useNavigation } from "hooks/useNavigation";
 import InputText from "components/atomics/inputs/InputText";
 import { isValidEmail } from "lib/validators";
 import { useEffect, useState } from "react";
-import { useAuthentication } from "contexts/authenticationContext";
 import { logEvent } from "services/analytics";
 import { theme } from "@ribon.io/shared";
 import Button from "components/atomics/buttons/Button";
@@ -28,20 +27,14 @@ function InsertEmailScreen() {
   const [email, setEmail] = useState("");
   const { navigateTo } = useNavigation();
 
-  const { sendAuthenticationEmail } = useAuthentication();
-
   useEffect(() => {
     logEvent("P28_view", {
       from: "sign_in",
     });
   }, []);
 
-  const handleButtonPress = async () => {
-    await sendAuthenticationEmail({ email });
-    logEvent("authEmailFormBtn_click", {
-      from: "sign_in",
-    });
-    navigateTo("SentMagicLinkEmailScreen", { email });
+  const handleButtonPress = () => {
+    navigateTo("InsertOtpCodeScreen", { email });
   };
 
   const handleTextChange = (text: string) => {

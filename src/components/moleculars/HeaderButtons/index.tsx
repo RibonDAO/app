@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-import { logEvent } from "services/analytics";
 import Icon from "components/atomics/Icon";
 import { theme } from "@ribon.io/shared/styles";
 import { PressableStateCallbackType } from "react-native";
+import { useNavigation } from "hooks/useNavigation";
 import * as S from "./styles";
-import ConfigMenu from "../LayoutHeader/ConfigMenu";
 import TicketSection from "../LayoutHeader/TicketSection";
 
 type Props = {
@@ -13,14 +11,10 @@ type Props = {
 };
 
 function HeaderButtons({ showsTicketsCounter, hitSlop = 15 }: Props) {
-  const [menuVisible, setMenuVisible] = useState(false);
-
-  useEffect(() => {
-    if (menuVisible) logEvent("P18_view");
-  }, [menuVisible]);
+  const { navigateTo } = useNavigation();
 
   const toggleModal = () => {
-    setMenuVisible(!menuVisible);
+    navigateTo("ConfigScreen");
   };
 
   return (
@@ -39,7 +33,6 @@ function HeaderButtons({ showsTicketsCounter, hitSlop = 15 }: Props) {
         size={24}
         color={theme.colors.neutral10}
       />
-      <ConfigMenu toggleModal={toggleModal} menuVisible={menuVisible} />
     </S.ConfigContainer>
   );
 }

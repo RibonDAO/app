@@ -14,15 +14,6 @@
     "aboutTicketsButtonText": "Back"
   },
   "layoutHeader": {
-    "logout": "Sign out",
-    "support": "User Support",
-    "subscriptions": "Subscriptions",
-    "notifications": "Allow notifications",
-    "supportLink": "https://v2.zopim.com/widget/popout.html?key={{key}}",
-    "login": "Login",
-    "language": "Change language",
-    "deleteAccount": "Delete account",
-    "signInOrCreateAccount": "Sign in or create a new account",
     "connectWallet": "Connect",
     "ticketModal": {
       "title": "Cool! You have 1 ticket to donate :)",
@@ -78,7 +69,7 @@
         "cardTitle2": "Who pays the tickets?",
         "cardDescription2": "Companies, big donors, and members of the Ribon community fund the tickets with one goal in mind: to change lives for the better through the collective power of donation.",
         "cardTitle3": "How to earn more tickets?",
-        "cardDescription3": "You earn tickets by accessing the app daily and your ticket wallet can hold up to 10 tickets."
+        "cardDescription3": "You earn and accumulate tickets by accessing the app daily."
       }
     }
   },
@@ -312,13 +303,13 @@
       "cardTitle2": "Who pays the tickets?",
       "cardDescription2": "Companies, big donors, and members of the Ribon community fund the tickets with one goal in mind: to change lives for the better through the collective power of donation.",
       "cardTitle3": "How to earn more tickets?",
-      "cardDescription3": "You earn tickets by accessing the app daily and your ticket wallet can hold up to 10 tickets."
+      "cardDescription3": "You earn and accumulate tickets by accessing the app daily."
     },
     "businessScreen": {
       "title": "Welcome to Ribon’s Business plan!",
       "subtitle": "Enjoy extra tickets and other benefits sponsored by {{companyName}}",
       "button": "Continue",
-      "firstBenefitDescription": "{{ticketsQuantity}} extra tickets every day",
+      "firstBenefitDescription": "{{dailyTickets}} extra tickets every day",
       "secondBenefitDescription": "{{monthlyTickets}} ticket pack every month",
       "thirdBenefitDescription": "Hold as many tickets as you want and make larger donations",
       "fourthBenefitDescription": "Ticket packs never expire and pile up until collected",
@@ -641,12 +632,12 @@
     }
   },
   "contributionSection": {
-    "title": "Check out the latest from Ribon!",
-    "titleNewImpact": "Thanks to you, {{nonProfitName}} will be able to impact 1 person. Thank you!",
-    "titleCard": "Do even more",
+    "title": "Get tickets and more!",
+    "titleHead": "Check out the latest from Ribon!",
+    "description": "As a Ribon Club member, you can accumulate unlimited tickets in your wallet and receive extra tickets EVERY DAY. Come and see for yourself!",
+    "titleCard": "Subscribe to Ribon Club",
     "nonProfits": "NGOs",
-    "button": "Donate",
-    "donate": "Donate {{value}}"
+    "button": "I want to know more"
   },
   "contributionCard": {
     "button": "Donate",
@@ -687,6 +678,42 @@
       }
     }
   },
+  "configScreen": {
+    "title": "Settings",
+    "header": {
+      "guestUser": "Guest user",
+      "signIn": "Sign in or create an account",
+      "noClubTagText": "No Ribon Club",
+      "clubTagText": "Ribon Club"
+    },
+    "generalSettings": {
+      "title": "General settings",
+      "notifications": "Allow notifications",
+      "language": "Change language"
+    },
+    "support": {
+      "title": "User Support",
+      "talkToUs": "Talk to us",
+      "link": "https://v2.zopim.com/widget/popout.html?key={{key}}"
+    },
+    "subscriptions": {
+      "title": "Subscriptions",
+      "ribonClub": "Ribon Club"
+    },
+    "account": {
+      "title": "Your account",
+      "signIn": "Sign in or create a new account",
+      "deleteAccount": "Delete account",
+      "logout": "Sign out"
+    }
+  },
+  "changeLanguageScreen": {
+    "title": "Change language",
+    "languages": {
+      "ptbr": "Portuguese (Brazil)",
+      "en": "English"
+    }
+  },
   "auth": {
     "signInScreen": {
       "title": "Sign in to your account",
@@ -698,6 +725,14 @@
       "emailLabel": "E-mail",
       "confirmText": "Continue",
       "emailPlaceholder": "Your e-mail"
+    },
+    "insertOtpCodeScreen": {
+      "title": "We sent you a code",
+      "subtitle": "Enter the 6-digit verification code sent to {{email}}",
+      "confirmText": "Continue",
+      "resendText": "Resend code",
+      "incorrectCode": "Incorrect code. Please try again.",
+      "successToastMessage": "Account validated"
     },
     "insertEmailCouponScreen": {
       "title": "Sign in with an e-mail",

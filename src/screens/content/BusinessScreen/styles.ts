@@ -42,6 +42,7 @@ export const CompanyLogoContainer = styled.View`
   border: 2px solid ${theme.colors.brand.quinary[100]};
   padding: 12px;
   margin-bottom: ${theme.spacing(16)};
+  background-color: ${theme.colors.neutral10};
 `;
 
 export const Title = styled.Text`
