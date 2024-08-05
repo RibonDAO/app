@@ -1,9 +1,7 @@
 import { useTickets, useSubscriptions } from "@ribon.io/shared/hooks";
 import { Categories, Plan } from "@ribon.io/shared";
 import { useTicketsContext } from "contexts/ticketsContext";
-
 import { useCallback, useEffect, useState } from "react";
-
 import { useFocusEffect } from "@react-navigation/native";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
 import { useNavigation } from "hooks/useNavigation";
@@ -16,8 +14,8 @@ import ClubDailyTicketCard from "./ClubDailyTicketCard";
 import ClubMonthlyTicketCard from "./ClubMonthlyTicketCard";
 
 export default function TicketsSection() {
-  const { userIsMember, userSubscriptions } = useSubscriptions();
-  const { isMember, refetch: refetchIsMember } = userIsMember();
+  const { userIsClubMember, userSubscriptions } = useSubscriptions();
+  const { isClubMember, refetch: refetchIsClubMember } = userIsClubMember();
   const { getTicketsToCollect } = useTickets();
   const { toCollect, refetch } = getTicketsToCollect(Categories.CLUB);
   const { refetchTickets } = useTicketsContext();
@@ -49,7 +47,7 @@ export default function TicketsSection() {
   const refetchTicketsToCollect = () => {
     refetch();
     refetchTickets();
-    refetchIsMember();
+    refetchIsClubMember();
     refetchSubscriptions();
   };
 
@@ -63,14 +61,14 @@ export default function TicketsSection() {
       <DailyTicketCard />
       <ClubDailyTicketCard
         tickets={toCollect?.dailyTickets}
-        isMember={isMember}
+        isClubMember={isClubMember}
         refetchTickets={refetchTicketsToCollect}
         plan={plan?.dailyTickets}
         setUnauthorizedModalVisible={setUnauthorizedModalVisible}
       />
       <ClubMonthlyTicketCard
         tickets={toCollect?.monthlyTickets}
-        isMember={isMember}
+        isClubMember={isClubMember}
         refetchTickets={refetchTicketsToCollect}
         plan={plan?.monthlyTickets}
         setUnauthorizedModalVisible={setUnauthorizedModalVisible}
