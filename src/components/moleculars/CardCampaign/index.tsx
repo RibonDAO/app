@@ -37,7 +37,7 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
 
   const fetchImpressionCard = useCallback(async () => {
     try {
-      const impressionCardData = await getImpressionCard(cardId);
+      const impressionCardData = await getImpressionCard(2);
 
       setImpressionCard(impressionCardData);
     } catch (e) {
@@ -107,12 +107,16 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
   function showBanner() {
     if (contribution) {
       if (!impressionCard && isClubMember) {
+        console.log("showBanner", !impressionCard, isClubMember);
         return false;
       }
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
+
+  console.log("showBanner", showBanner());
 
   return (
     (showBanner() && (

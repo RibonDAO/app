@@ -7,7 +7,7 @@ export default function FeelingBanner() {
   const { t } = useTranslation("translation", {
     keyPrefix: "feelingBanner",
   });
-  const CURRENT_CARD_ID = 2;
+  const CURRENT_CARD_ID = 1;
 
   return (
     <View style={S.container}>
