@@ -92,7 +92,7 @@ export default function BusinessScreen(): JSX.Element {
           </S.BenefitsContainer>
           <S.ButtonContainer>
             <Button
-              text="Continue"
+              text={t("button")}
               onPress={() => {
                 navigateTo("CausesScreen");
               }}
