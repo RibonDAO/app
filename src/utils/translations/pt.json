@@ -170,7 +170,8 @@
       "buttonTitle": "Continuar",
       "description": "Você doou o equivalente a",
       "checkboxText": "Quero receber informações sobre minhas doações por e-mail",
-      "share": "Compartilhar"
+      "share": "Compartilhar",
+      "donationsMadeToday": "Mais de {{totalDonationsToday}} pessoas já doaram hoje"
     },
     "postDonationScreen": {
       "title": "Aprecie este momento...",

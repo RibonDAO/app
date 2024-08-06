@@ -180,7 +180,7 @@ export default function DonationDoneScreen({
                 ))}
               </S.RibonitosContainer>
               <S.DonationsCountText>
-                Mais de {totalDonationsToday || 0} pessoas já doaram hoje
+                {t("donationsMadeToday", {totalDonationsToday})}
               </S.DonationsCountText>
             </View>
           )}
