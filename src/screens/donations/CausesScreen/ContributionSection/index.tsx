@@ -11,7 +11,7 @@ export default function ContributionSection() {
 
   return (
     <View style={S.container}>
-      <Text style={S.title}>{t("title")}</Text>
+      <Text style={S.title}>{t("titleHead")}</Text>
       <CardCampaign cardId={CURRENT_CARD_ID} />
     </View>
   );
