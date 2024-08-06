@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { stylizedDisplaySm } from "styles/typography/stylized";
-import { defaultBodyMdMedium } from "styles/typography/default";
+import { defaultBodyMdMedium, defaultBodyXsSemibold } from "styles/typography/default";
 import { theme } from "@ribon.io/shared/styles";
 
 export const TopContainer = styled.View`
@@ -69,3 +69,24 @@ export const PlaceholderContainer = styled.View`
   width: 328px;
   height: 216px;
 `;
+
+export const RibonitosImage = styled.Image`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  border-color: white;
+  border-width: 2px;       
+`
+
+export const RibonitosContainer = styled.View`
+  flex-direction: row;
+  gap: -8px;
+  justify-content: center;
+  margin-bottom: 8px;
+`
+
+export const DonationsCountText = styled.Text`
+  ${defaultBodyXsSemibold};
+  color: ${theme.colors.neutral[600]};
+  font-size: 12px;
+`
