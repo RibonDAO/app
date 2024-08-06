@@ -8,9 +8,9 @@ import { logError } from "services/crashReport";
 import { useImpressionCards, useSubscriptions } from "@ribon.io/shared";
 import S from "./styles";
 
-export default function FeelingBanner() {
+export default function ImpressBannerSection() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "feelingBanner",
+    keyPrefix: "impressBannerSection",
   });
   const CURRENT_CARD_ID = 1;
 

@@ -22,7 +22,7 @@ export type Props = {
 
 export default function CardCampaign({ cardId }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "feelingBanner",
+    keyPrefix: "impressBannerSection",
   });
 
   const [impressionCard, setImpressionCard] = useState<ImpressionCard | null>();
