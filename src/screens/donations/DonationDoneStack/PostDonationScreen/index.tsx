@@ -8,9 +8,11 @@ import { useAuthentication } from "contexts/authenticationContext";
 import LottieAnimation from "components/atomics/LottieAnimation";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { DONATION_COUNT } from "lib/localStorage/constants";
+import { useState } from "react";
 import postDonationAnimation from "./assets/postDonationAnimation.json";
 import sunAnimation from "./assets/sunAnimation.json";
 import * as S from "./styles";
+import { generateRandomColorArgs } from "./generateRandomColorArgs";
 
 function PostDonationScreen() {
   usePageView("P39_view");
@@ -21,6 +23,7 @@ function PostDonationScreen() {
   const { isAuthenticated } = useAuthentication();
   const { navigateTo } = useNavigation();
   const { warmGlowMessage, isLoading } = useWarmGlowMessages();
+  const [colorArgs] = useState(generateRandomColorArgs());
 
   const shouldAskForReview = async () => {
     const donations = await getLocalStorageItem(DONATION_COUNT);
@@ -59,6 +62,7 @@ function PostDonationScreen() {
             animationData={postDonationAnimation}
             width={428}
             height={428}
+            colorFilters={colorArgs.face}
           />
         </S.TopContainer>
         <S.ContentContainer>
@@ -73,8 +77,8 @@ function PostDonationScreen() {
             color: theme.colors.neutral10,
           }}
           customStyles={{
-            backgroundColor: theme.colors.brand.primary[600],
-            borderColor: theme.colors.brand.primary[800],
+            backgroundColor: colorArgs.button,
+            borderColor: colorArgs.button,
             borderRadius: 12,
           }}
         />
@@ -84,6 +88,7 @@ function PostDonationScreen() {
           animationData={sunAnimation}
           width="100%"
           height={262}
+          colorFilters={colorArgs.sun}
         />
       </S.BackgroundSun>
     </>

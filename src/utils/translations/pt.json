@@ -169,7 +169,8 @@
       "title": "Obrigada por doar!",
       "buttonTitle": "Continuar",
       "description": "Você doou o equivalente a",
-      "checkboxText": "Quero receber informações sobre minhas doações por e-mail"
+      "checkboxText": "Quero receber informações sobre minhas doações por e-mail",
+      "share": "Compartilhar"
     },
     "postDonationScreen": {
       "title": "Aprecie este momento...",

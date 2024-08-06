@@ -7,7 +7,7 @@ import {
   useStatistics,
   useUserConfig,
   useUserProfile,
-  useDonations
+  useDonations,
 } from "@ribon.io/shared";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import useSound from "hooks/useSound";
@@ -18,6 +18,7 @@ import CheckBox from "components/atomics/inputs/Checkbox";
 import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
 import LottieAnimation from "components/atomics/LottieAnimation";
 import { View } from "react-native";
+import { useReferralLink } from "hooks/useReferralLink";
 import NonProfitImagePlaceholder from "./NonProfitImagePlaceholder";
 import sunAnimation from "./assets/sunAnimation.json";
 import * as S from "./styles";
@@ -40,8 +41,9 @@ export default function DonationDoneScreen({
   const { currentUser } = useCurrentUser();
   const { userProfile } = useUserProfile();
   const { profile } = userProfile();
-  const { totalDonationsToday } = useDonations(undefined)
+  const { totalDonationsToday } = useDonations(undefined);
   const [randomImages] = useState(getRandomImages(4));
+  const { copyLink } = useReferralLink();
 
   const { userStatistics, refetch: refetchStatistics } = useStatistics({
     userId: currentUser?.id,
@@ -109,6 +111,33 @@ export default function DonationDoneScreen({
               rightImage={nonProfit?.icon}
             />
           </S.ImageWithIconOverlayContainer>
+
+          <Button
+            onPress={copyLink}
+            text={t("share")}
+            leftIcon={{
+              name: "share",
+              type: "outlined",
+              color: "white",
+              size: 20,
+            }}
+            textColor="white"
+            backgroundColor="rgba(0,0,0,0.5)"
+            customTextStyles={{ fontSize: 12 }}
+            borderColor="rgba(0,0,0,0)"
+            customStyles={{
+              alignSelf: "flex-start",
+              width: "auto",
+              paddingHorizontal: 8,
+              paddingVertical: 4,
+              height: "auto",
+              borderRadius: 8,
+              marginLeft: "auto",
+              position: "absolute",
+              top: 12,
+              right: 12,
+            }}
+          />
         </S.TopContainer>
 
         <S.ContentContainer>
