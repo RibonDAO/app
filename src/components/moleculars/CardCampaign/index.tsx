@@ -22,11 +22,11 @@ export type Props = {
 
 export default function CardCampaign({ cardId }: Props): JSX.Element {
   const { t } = useTranslation("translation", {
-    keyPrefix: "contributionSection",
+    keyPrefix: "impressBannerSection",
   });
 
   const [impressionCard, setImpressionCard] = useState<ImpressionCard | null>();
-  const { nonProfit, offer, contribution } = useImpactConversion();
+  const { nonProfit, offer } = useImpactConversion();
   const { currentLang } = useLanguage();
   const { navigateTo } = useNavigation();
 
@@ -102,57 +102,55 @@ export default function CardCampaign({ cardId }: Props): JSX.Element {
   const imageCard = impressionCard ? { uri: imageUri } : bannerImage;
 
   return (
-    contribution && (
-      <View style={S.container}>
-        <TouchableOpacity
-          accessibilityRole="button"
-          onPress={openYouTubeVideo}
-          activeOpacity={0.8}
-          style={S.imageContainer}
-        >
-          <Image
-            style={S.image}
-            source={imageCard}
-            accessibilityIgnoresInvertColors
-          />
-          {impressionCard?.videoUrl && (
-            <View style={S.playButton}>
-              <View style={S.playButtonInner} />
-            </View>
-          )}
-        </TouchableOpacity>
-        <View style={[S.textContainer]}>
-          <Text style={S.headline}>
-            {impressionCard?.headline
-              ? impressionCard.headline
-              : defaultImpressionCard.headline}
-          </Text>
+    <View style={S.container}>
+      <TouchableOpacity
+        accessibilityRole="button"
+        onPress={openYouTubeVideo}
+        activeOpacity={0.8}
+        style={S.imageContainer}
+      >
+        <Image
+          style={S.image}
+          source={imageCard}
+          accessibilityIgnoresInvertColors
+        />
+        {impressionCard?.videoUrl && (
+          <View style={S.playButton}>
+            <View style={S.playButtonInner} />
+          </View>
+        )}
+      </TouchableOpacity>
+      <View style={[S.textContainer]}>
+        <Text style={S.headline}>
+          {impressionCard?.headline
+            ? impressionCard.headline
+            : defaultImpressionCard.headline}
+        </Text>
 
-          <Text style={S.title}>
-            {impressionCard?.title
-              ? impressionCard.title
-              : defaultImpressionCard.title}
-          </Text>
+        <Text style={S.title}>
+          {impressionCard?.title
+            ? impressionCard.title
+            : defaultImpressionCard.title}
+        </Text>
 
-          <Text style={S.description}>
-            {impressionCard?.description
-              ? impressionCard.description
-              : t("description")}
-          </Text>
+        <Text style={S.description}>
+          {impressionCard?.description
+            ? impressionCard.description
+            : t("description")}
+        </Text>
 
-          <Button
-            onPress={impressionCard ? openLink : checkoutLink}
-            text={
-              impressionCard?.ctaText
-                ? impressionCard.ctaText
-                : defaultImpressionCard.ctaText
-            }
-            backgroundColor={theme.colors.brand.primary[600]}
-            borderColor={theme.colors.brand.primary[600]}
-            textColor={theme.colors.neutral10}
-          />
-        </View>
+        <Button
+          onPress={impressionCard ? openLink : checkoutLink}
+          text={
+            impressionCard?.ctaText
+              ? impressionCard.ctaText
+              : defaultImpressionCard.ctaText
+          }
+          backgroundColor={theme.colors.brand.primary[600]}
+          borderColor={theme.colors.brand.primary[600]}
+          textColor={theme.colors.neutral10}
+        />
       </View>
-    )
+    </View>
   );
 }
