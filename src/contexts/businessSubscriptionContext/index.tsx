@@ -6,6 +6,7 @@ import { Plan } from "@ribon.io/shared";
 export interface IBusinessSubscriptionContext {
   businessSubscription: Subscription | undefined;
   businessPlan: Plan | undefined;
+  isBusinessMember: boolean;
 }
 
 export const BusinessSubscriptionContext =
@@ -19,6 +20,7 @@ function BusinessSubscriptionProvider({ children }: any) {
     Subscription | undefined
   >();
   const [businessPlan, setBusinessPlan] = useState<Plan | undefined>();
+  const [isBusinessMember, setIsBusinessMember] = useState<boolean>(false);
   const { currentUser } = useCurrentUser();
 
   useEffect(() => {
@@ -26,12 +28,27 @@ function BusinessSubscriptionProvider({ children }: any) {
       setBusinessSubscription(currentUser.directTransferSubscription);
       setBusinessPlan(currentUser.directTransferSubscription.offer.plan);
     }
+
+    if (!currentUser) {
+      console.log("resetting business subscription");
+      setBusinessSubscription(undefined);
+      setBusinessPlan(undefined);
+      setIsBusinessMember(false);
+    }
   }, [currentUser]);
+
+  useEffect(() => {
+    if (businessSubscription?.status === "active") {
+      setIsBusinessMember(true);
+    }
+    console.log("businessSubscription context", businessSubscription);
+  }, [businessSubscription, currentUser]);
 
   const BusinessSubscriptionObject: IBusinessSubscriptionContext = useMemo(
     () => ({
       businessSubscription,
       setBusinessSubscription,
+      isBusinessMember,
       businessPlan,
       setBusinessPlan,
     }),

@@ -1,4 +1,5 @@
 import VerifiedIcon from "components/vectors/VerifiedIcon";
+import { useCurrentUser } from "contexts/currentUserContext";
 import * as S from "./styles";
 import ProfilePhoto from "../assets/ProfilePhoto";
 import RightSparkle from "./assets/RightSparkle";
@@ -18,8 +19,9 @@ function UserAvatar({
   name,
   showInfo = true,
   isClubMember,
-  isBusinessMember = false,
+  isBusinessMember,
 }: Props) {
+  const { currentUser } = useCurrentUser();
   const renderSparkles = () => {
     if (!isClubMember) return null;
     return (
@@ -48,7 +50,7 @@ function UserAvatar({
           <S.AvatarContainer>{renderAvatar()}</S.AvatarContainer>
 
           <S.BusinessIconContainer>
-            <S.BusinessIcon source={{ uri: userAvatar }} alt="user-avatar" />
+            <S.BusinessIcon source={{ uri: currentUser?.company?.logo }} />
           </S.BusinessIconContainer>
 
           {renderSparkles()}

@@ -18,6 +18,7 @@ import HeaderButtons from "components/moleculars/HeaderButtons";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
 import CalendarIcon from "components/vectors/CalendarIcon";
 import TicketColorsIcon from "components/vectors/TicketColorsIcon";
+import { useBusinessSubscriptionContext } from "contexts/businessSubscriptionContext";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
 
@@ -31,6 +32,8 @@ function ProfileSection() {
   const [newProfile, setNewProfile] = useState<UserProfile>();
   const { navigateTo } = useNavigation();
   const { userIsClubMember } = useSubscriptions();
+  const { isBusinessMember, businessPlan, businessSubscription } =
+    useBusinessSubscriptionContext();
   const {
     isClubMember,
     isLoading: isClubMemberLoading,
@@ -44,6 +47,13 @@ function ProfileSection() {
     useState(false);
   const [daysDonatingModalVisible, setDaysDonatingModalVisible] =
     useState(false);
+  const [userType, setUserType] = useState("free");
+
+  const verifyUserType = () => {
+    if (isClubMember) return "club";
+    else if (isBusinessMember) return "business";
+    return "free";
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -71,13 +81,24 @@ function ProfileSection() {
     }
   }, [isClubMemberLoading, isClubMember]);
 
-  const isBusinessMember = true;
+  useEffect(() => {
+    console.log("isClubMember", isClubMember);
+    console.log("isBusinessMember", isBusinessMember);
+    console.log("businessPlan", businessPlan);
+    console.log("businessSubscription", businessSubscription);
+  }, []);
 
-  const userType = () => {
-    if (isClubMember) return "club";
-    else if (isBusinessMember) return "business";
-    return "free";
-  };
+  useFocusEffect(
+    useCallback(() => {
+      setUserType(verifyUserType());
+    }, [
+      profile,
+      isClubMember,
+      isBusinessMember,
+      businessSubscription,
+      businessPlan,
+    ]),
+  );
 
   const statisticsBackgroundColor = () => {
     if (isClubMember) return theme.colors.brand.tertiary[25];
@@ -86,9 +107,9 @@ function ProfileSection() {
   };
 
   return (
-    <S.Container type={userType()}>
+    <S.Container type={userType}>
       <S.ShapeContainer>
-        <ProfileTopShape userType={userType()} />
+        <ProfileTopShape userType={userType} />
       </S.ShapeContainer>
       <S.HeaderButtonsContainer>
         <HeaderButtons showsTicketsCounter />
@@ -105,7 +126,7 @@ function ProfileSection() {
                   : currentUser?.email
               }
               isClubMember={isClubMember}
-              isBusinessMember
+              isBusinessMember={isBusinessMember}
             />
 
             {isBusinessMember && (

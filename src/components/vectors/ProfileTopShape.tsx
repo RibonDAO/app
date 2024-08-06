@@ -1,9 +1,7 @@
 import { SvgXml } from "react-native-svg";
 
-export type userTypes = "club" | "business" | "free";
-
 type Props = {
-  userType: userTypes;
+  userType: string;
 };
 
 function ProfileTopShape({ userType }: Props) {
