@@ -82,6 +82,7 @@ import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificatio
 import ClubSubscriptionProvider from "contexts/clubSubscriptionContext";
 import BusinessSubscriptionProvider from "contexts/businessSubscriptionContext";
 import TagsProvider from "contexts/tagsContext";
+import BusinessScreen from "screens/content/BusinessScreen";
 import { initializeDeeplink } from "../../services/deepLink";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ImpactIconOn from "./assets/ImpactIconOn";
@@ -492,6 +493,13 @@ function RootNavigator() {
         }}
       />
 
+      <Stack.Screen
+        name="BusinessScreen"
+        component={BusinessScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="ValidateAccountScreen"
         component={ValidateAccountScreen}

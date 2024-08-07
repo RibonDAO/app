@@ -191,6 +191,7 @@ export type RootStackParamList = {
   ClubContributionDoneScreen: undefined;
   ClubScreen: ClubScreenParamList;
   AboutTicketsScreen: AboutTicketsScreenParamsList;
+  BusinessScreen: undefined;
   ConfigScreen: undefined;
   ChangeLanguageScreen: undefined;
 };

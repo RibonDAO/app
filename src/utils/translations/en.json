@@ -304,6 +304,19 @@
       "cardDescription2": "Companies, big donors, and members of the Ribon community fund the tickets with one goal in mind: to change lives for the better through the collective power of donation.",
       "cardTitle3": "How to earn more tickets?",
       "cardDescription3": "You earn and accumulate tickets by accessing the app daily."
+    },
+    "businessScreen": {
+      "title": "Welcome to Ribon’s Business plan!",
+      "subtitle": "Enjoy extra tickets and other benefits sponsored by {{companyName}}",
+      "button": "Continue",
+      "firstBenefitDescription": "{{dailyTickets}} extra tickets every day",
+      "secondBenefitDescription": "{{monthlyTickets}} ticket pack every month",
+      "thirdBenefitDescription": "Hold as many tickets as you want and make larger donations",
+      "fourthBenefitDescription": "Ticket packs never expire and pile up until collected",
+      "firstBenefitTitle": "More daily tickets",
+      "secondBenefitTitle": "Monthly ticket pack",
+      "thirdBenefitTitle": "Unlimited wallet space",
+      "fourthBenefitTitle": "Tickets wait for you"
     }
   },
   "contexts": {
