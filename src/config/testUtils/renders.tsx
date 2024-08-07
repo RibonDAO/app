@@ -82,6 +82,10 @@ import ClubSubscriptionProvider, {
   ClubSubscriptionContext,
   IClubSubscriptionContext,
 } from "contexts/clubSubscriptionContext";
+import BusinessSubscriptionProvider, {
+  BusinessSubscriptionContext,
+  IBusinessSubscriptionContext,
+} from "contexts/businessSubscriptionContext";
 import AuthenticationProvider, {
   IAuthenticationContext,
   AuthenticationContext,
@@ -140,6 +144,7 @@ export type RenderComponentProps = {
   integrationProviderValue?: Partial<IIntegrationContext>;
   paymentFailedNotificationProviderValue?: Partial<IPaymentFailedNotificationContext>;
   clubSubscriptionValue?: Partial<IClubSubscriptionContext>;
+  businessSubscriptionValue?: Partial<IBusinessSubscriptionContext>;
   authenticationProviderValue?: Partial<IAuthenticationContext>;
 };
 
@@ -166,6 +171,7 @@ function renderAllProviders(
     integrationProviderValue = {},
     paymentFailedNotificationProviderValue = {},
     clubSubscriptionValue = {},
+    businessSubscriptionValue = {},
     authenticationProviderValue = {},
   }: RenderComponentProps = {},
 ) {
@@ -256,10 +262,15 @@ function renderAllProviders(
                                                   ClubSubscriptionContext,
                                                   clubSubscriptionValue,
                                                   renderProvider(
-                                                    PixInformationProvider,
-                                                    PixPaymentInformationContext,
-                                                    pixInformationProviderValue,
-                                                    children,
+                                                    BusinessSubscriptionProvider,
+                                                    BusinessSubscriptionContext,
+                                                    businessSubscriptionValue,
+                                                    renderProvider(
+                                                      PixInformationProvider,
+                                                      PixPaymentInformationContext,
+                                                      pixInformationProviderValue,
+                                                      children,
+                                                    ),
                                                   ),
                                                 ),
                                               ),

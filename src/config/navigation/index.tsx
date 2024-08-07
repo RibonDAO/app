@@ -80,6 +80,7 @@ import HomeScreen from "screens/donations/HomeScreen";
 import { ArrowBackButton } from "components/atomics/buttons/ArrowBackButton";
 import PaymentFailedNotificationProvider from "contexts/paymentFailedNotificationContext";
 import ClubSubscriptionProvider from "contexts/clubSubscriptionContext";
+import BusinessSubscriptionProvider from "contexts/businessSubscriptionContext";
 import TagsProvider from "contexts/tagsContext";
 import { initializeDeeplink } from "../../services/deepLink";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -597,7 +598,9 @@ export default function Navigation() {
                                     <TicketsProvider>
                                       <PaymentFailedNotificationProvider>
                                         <ClubSubscriptionProvider>
-                                          <RootNavigator />
+                                          <BusinessSubscriptionProvider>
+                                            <RootNavigator />
+                                          </BusinessSubscriptionProvider>
                                           <Toast config={toastConfig} />
                                         </ClubSubscriptionProvider>
                                       </PaymentFailedNotificationProvider>
