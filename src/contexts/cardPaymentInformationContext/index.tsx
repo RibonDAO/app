@@ -1,6 +1,5 @@
 import { useCurrentUser } from "contexts/currentUserContext";
 import { createContext, useContext, useMemo } from "react";
-import { useTranslation } from "react-i18next";
 import { logError } from "services/crashReport";
 import { creditCardPaymentApi } from "@ribon.io/shared/services";
 import { showToast } from "lib/Toast";
@@ -34,10 +33,6 @@ function CardPaymentInformationProvider({ children }: Props) {
   const { registerAction } = useTasksContext();
 
   const { navigateTo } = useNavigation();
-
-  const { t } = useTranslation("translation", {
-    keyPrefix: "contexts.cardPaymentInformation",
-  });
 
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
   const { findOrCreateUser } = useUsers();
@@ -150,7 +145,7 @@ function CardPaymentInformationProvider({ children }: Props) {
       logError(error);
       showToast({
         type: "error",
-        message: t("onErrorMessage", "error"),
+        message: error.response.data.formatted_message,
       });
     } finally {
       setButtonDisabled(false);
