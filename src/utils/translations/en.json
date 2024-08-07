@@ -176,7 +176,8 @@
       "description": "You donated the equivalent of",
       "checkboxText": "I want to receive information about my donations by e-mail",
       "buttonTitle": "Continue",
-      "share": "Share"
+      "share": "Share",
+      "donationsMadeToday": "More than {{totalDonationsToday}} people have donated today"
     },
     "postDonationScreen": {
       "title": "Enjoy this moment...",

@@ -7,6 +7,7 @@ import {
   useStatistics,
   useUserConfig,
   useUserProfile,
+  useDonations,
 } from "@ribon.io/shared";
 import useFormattedImpactText from "hooks/useFormattedImpactText";
 import useSound from "hooks/useSound";
@@ -16,11 +17,13 @@ import Button from "components/atomics/buttons/Button";
 import CheckBox from "components/atomics/inputs/Checkbox";
 import ImageWithIconOverlay from "components/moleculars/ImageWithIconOverlay";
 import LottieAnimation from "components/atomics/LottieAnimation";
+import { View } from "react-native";
 import { useReferralLink } from "hooks/useReferralLink";
-import donationDoneSound from "./assets/donation-done.mp3";
 import NonProfitImagePlaceholder from "./NonProfitImagePlaceholder";
 import sunAnimation from "./assets/sunAnimation.json";
 import * as S from "./styles";
+import donationDoneSound from "./assets/donation-done.mp3";
+import { getRandomImages } from "./getRandomImages";
 
 export default function DonationDoneScreen({
   route,
@@ -38,6 +41,8 @@ export default function DonationDoneScreen({
   const { currentUser } = useCurrentUser();
   const { userProfile } = useUserProfile();
   const { profile } = userProfile();
+  const { totalDonationsToday } = useDonations(undefined);
+  const [randomImages] = useState(getRandomImages(4));
   const { copyLink } = useReferralLink();
 
   const { userStatistics, refetch: refetchStatistics } = useStatistics({
@@ -130,7 +135,7 @@ export default function DonationDoneScreen({
               marginLeft: "auto",
               position: "absolute",
               top: 12,
-              right: 12 
+              right: 12,
             }}
           />
         </S.TopContainer>
@@ -161,6 +166,23 @@ export default function DonationDoneScreen({
                 unCheckedColor={theme.colors.neutral[600]}
               />
             </S.CheckboxContainer>
+          )}
+
+          {!hasCheckbox && (
+            <View>
+              <S.RibonitosContainer>
+                {randomImages.map((source) => (
+                  <S.RibonitosImage
+                    key={source}
+                    source={{ uri: source }}
+                    accessibilityIgnoresInvertColors
+                  />
+                ))}
+              </S.RibonitosContainer>
+              <S.DonationsCountText>
+                {t("donationsMadeToday", {totalDonationsToday})}
+              </S.DonationsCountText>
+            </View>
           )}
         </S.ContentContainer>
 

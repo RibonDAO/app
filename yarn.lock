@@ -3013,9 +3013,9 @@
     nanoid "^3.1.23"
 
 "@ribon.io/shared@^1.1.71":
-  version "1.1.71"
-  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.71.tgz#a17e4d4d82827afa6e7d1a5ffa2ce8e1ca71a239"
-  integrity sha512-Aifxu7LT1kmljBDdvti2dmqict9kjj24wILvE4icBzvA/71+AXy8aNgISjqmS5OVrPIfctHzVBg1NfWoLQ54HQ==
+  version "1.1.72"
+  resolved "https://registry.yarnpkg.com/@ribon.io/shared/-/shared-1.1.72.tgz#ccfb0a4dd85340049b91909bd96c4d8c737b4242"
+  integrity sha512-TWe+QeNfuzl01CnFMcVC8U8jZtG6cnf2JO0+9+fNFSosgq+kpf6ZalcGK6aiFZBz3iisNYKhEadxRflnRXBNsQ==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@types/base-64" "^1.0.0"
