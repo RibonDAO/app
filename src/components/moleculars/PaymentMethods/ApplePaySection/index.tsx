@@ -74,9 +74,6 @@ export default function ApplePaySection({
 
   const { navigateTo } = useNavigation();
   const { showLoadingOverlay, hideLoadingOverlay } = useLoadingOverlay();
-  const { t } = useTranslation("translation", {
-    keyPrefix: "contexts.cardPaymentInformation",
-  });
 
   const { findOrCreateUser } = useUsers();
   const { signedIn, setCurrentUser } = useCurrentUser();
@@ -187,11 +184,11 @@ export default function ApplePaySection({
           });
           navigateTo("ClubContributionDoneScreen");
         }
-      } catch (e) {
+      } catch (e: any) {
         logError(e);
         showToast({
           type: "error",
-          message: t("onErrorMessage", "error"),
+          message: e.response.data.formatted_message,
         });
       } finally {
         hideLoadingOverlay();
