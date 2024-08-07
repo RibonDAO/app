@@ -19,6 +19,8 @@ import { useRouteParams } from "hooks/useRouteParams";
 import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import { useAuthentication } from "contexts/authenticationContext";
 import * as StoreReview from "expo-store-review";
+import { CRMregisterDeviceToken, CRMupdateUserAttributes } from "services/crm";
+import { getNotificationToken } from "lib/notifications";
 import Header from "./Header";
 import Placeholder from "./placeholder";
 import ContributionSection from "./ContributionSection";
@@ -55,6 +57,17 @@ export default function CausesScreen() {
   const [unauthorizedModalVisible, setUnauthorizedModalVisible] =
     useState(false);
   const { params } = useRouteParams<"CausesScreen">();
+
+  useEffect(() => {
+    if (!currentUser) return;
+
+    CRMupdateUserAttributes(currentUser.email, {
+      last_access: new Date().toISOString(),
+    });
+    getNotificationToken().then((token) => {
+      CRMregisterDeviceToken(currentUser.email, token);
+    });
+  }, [currentUser]);
 
   useFocusEffect(
     useCallback(() => {
@@ -118,7 +131,7 @@ export default function CausesScreen() {
           {shouldShowIntegrationBanner && integration && (
             <IntegrationBanner integration={integration} />
           )}
-          <NotificationPermissionPrompt />
+          <NotificationPermissionPrompt currentUser={currentUser} />
           {donatedToday && currentUser ? (
             <>
               <ContributionSection />

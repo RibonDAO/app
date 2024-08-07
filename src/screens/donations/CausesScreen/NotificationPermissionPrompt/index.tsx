@@ -1,16 +1,27 @@
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import InlineNotification from "components/moleculars/notifications/InlineNotification";
-import requestUserPermissionForNotifications from "lib/notifications";
 import { showToast } from "lib/Toast";
 import { logError } from "services/crashReport";
 import { useTranslation } from "react-i18next";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { usePaymentFailedNotification } from "contexts/paymentFailedNotificationContext";
+import {
+  CRMAskForPushNotificationPermission,
+  CRMregisterDeviceToken,
+} from "services/crm";
+import { getNotificationToken } from "lib/notifications";
+import { User } from "@ribon.io/shared/types";
 
 const NOTIFICATION_CARD_VISIBLE_KEY = "NOTIFICATION_CARD_VISIBLE";
 
-export default function NotificationPermissionPrompt() {
+export type Props = {
+  currentUser?: User;
+};
+
+export default function NotificationPermissionPrompt({ currentUser }: Props) {
+  if (!currentUser) return null;
+
   const [visible, setVisible] = useState(false);
   const { visible: paymentFailedNotificationVisible } =
     usePaymentFailedNotification();
@@ -19,23 +30,32 @@ export default function NotificationPermissionPrompt() {
     keyPrefix: "donations.causesScreen.enableNotification",
   });
 
+  const setDeviceToken = async () => {
+    const token = await getNotificationToken();
+    CRMregisterDeviceToken(currentUser.email, token);
+  };
+
   const handleHideNotificationClick = async () => {
     const hideAlert = () => {
       setLocalStorageItem(NOTIFICATION_CARD_VISIBLE_KEY, "false");
       setVisible(false);
     };
 
-    try {
-      const enabled = await requestUserPermissionForNotifications();
-      if (enabled) {
-        showToast({
-          type: "success",
-          message: t("successToastMessage"),
-          position: "bottom",
-        });
-        hideAlert();
-      }
-    } catch (e) {
+    const handleGranted = () => {
+      showToast({
+        type: "success",
+        message: t("successToastMessage"),
+        position: "bottom",
+      });
+      hideAlert();
+      setDeviceToken();
+    };
+
+    const handleDenied = () => {
+      hideAlert();
+    };
+
+    const handleError = (e: Error) => {
       logError(e);
       showToast({
         type: "error",
@@ -43,7 +63,13 @@ export default function NotificationPermissionPrompt() {
         position: "bottom",
       });
       hideAlert();
-    }
+    };
+
+    CRMAskForPushNotificationPermission({
+      onGranted: handleGranted,
+      onDenied: handleDenied,
+      onError: handleError,
+    });
   };
 
   useEffect(() => {
