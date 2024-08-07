@@ -14,15 +14,6 @@
     "aboutTicketsButtonText": "Voltar"
   },
   "layoutHeader": {
-    "logout": "Sair",
-    "support": "Suporte ao usuário",
-    "subscriptions": "Assinaturas",
-    "supportLink": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0",
-    "login": "Fazer login",
-    "notifications": "Ativar notificações",
-    "language": "Alterar idioma",
-    "deleteAccount": "Excluir conta",
-    "signInOrCreateAccount": "Entre ou crie uma nova conta",
     "connectWallet": "Conectar",
     "ticketModal": {
       "title": "Legal! Você tem 1 vale para doar :)",
@@ -667,6 +658,42 @@
       }
     }
   },
+  "configScreen": {
+    "title": "Configurações",
+    "header": {
+      "guestUser": "Usuário sem conta",
+      "signIn": "Faça login ou crie uma conta",
+      "noClubTagText": "Sem Clube Ribon",
+      "clubTagText": "Clube Ribon"
+    },
+    "generalSettings": {
+      "title": "Configurações gerais",
+      "notifications": "Ativar notificações",
+      "language": "Alterar idioma"
+    },
+    "support": {
+      "title": "Suporte",
+      "talkToUs": "Fale com a gente",
+      "link": "https://api.whatsapp.com/send/?phone=554896605461&text=Oii+Ribon%2C+vamos+conversar%3F+&type=phone_number&app_absent=0"
+    },
+    "subscriptions": {
+      "title": "Assinaturas",
+      "ribonClub": "Clube Ribon"
+    },
+    "account": {
+      "title": "Sua conta",
+      "signIn": "Entre ou crie uma nova conta",
+      "deleteAccount": "Excluir conta",
+      "logout": "Sair"
+    }
+  },
+  "changeLanguageScreen": {
+    "title": "Alterar idioma",
+    "languages": {
+      "ptbr": "Português (Brasil)",
+      "en": "Inglês"
+    }
+  },
   "auth": {
     "signInScreen": {
       "title": "Entre na sua conta"
@@ -683,7 +710,7 @@
       "confirmText": "Continuar",
       "resendText": "Reenviar código",
       "incorrectCode": "Código incorreto. Tente novamente, por favor.",
-      "successToastMessage": "Conta verificada"
+      "successToastMessage": "Login realizado"
     },
     "insertEmailCouponScreen": {
       "title": "Entre com um e-mail",
