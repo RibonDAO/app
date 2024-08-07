@@ -710,7 +710,7 @@
       "confirmText": "Continuar",
       "resendText": "Reenviar código",
       "incorrectCode": "Código incorreto. Tente novamente, por favor.",
-      "successToastMessage": "Conta verificada"
+      "successToastMessage": "Login realizado"
     },
     "insertEmailCouponScreen": {
       "title": "Entre com um e-mail",
