@@ -6,6 +6,7 @@ import { Plan } from "@ribon.io/shared";
 export interface IBusinessSubscriptionContext {
   businessSubscription: Subscription | undefined;
   businessPlan: Plan | undefined;
+  isBusinessMember: boolean;
 }
 
 export const BusinessSubscriptionContext =
@@ -19,12 +20,22 @@ function BusinessSubscriptionProvider({ children }: any) {
     Subscription | undefined
   >();
   const [businessPlan, setBusinessPlan] = useState<Plan | undefined>();
+  const [isBusinessMember, setIsBusinessMember] = useState<boolean>(false);
   const { currentUser } = useCurrentUser();
 
   useEffect(() => {
     if (currentUser?.directTransferSubscription) {
       setBusinessSubscription(currentUser.directTransferSubscription);
       setBusinessPlan(currentUser.directTransferSubscription.offer.plan);
+      setIsBusinessMember(
+        currentUser.directTransferSubscription.status === "active",
+      );
+    }
+
+    if (!currentUser) {
+      setBusinessSubscription(undefined);
+      setBusinessPlan(undefined);
+      setIsBusinessMember(false);
     }
   }, [currentUser]);
 
@@ -32,6 +43,7 @@ function BusinessSubscriptionProvider({ children }: any) {
     () => ({
       businessSubscription,
       setBusinessSubscription,
+      isBusinessMember,
       businessPlan,
       setBusinessPlan,
     }),

@@ -5,6 +5,8 @@ import { theme } from "@ribon.io/shared/styles";
 import { useTranslation } from "react-i18next";
 import { useBusinessSubscriptionContext } from "contexts/businessSubscriptionContext";
 import LottieAnimation from "components/atomics/LottieAnimation";
+import { useEffect } from "react";
+import { logEvent } from "services/analytics";
 import * as S from "./styles";
 import Box from "./assets/Box";
 import Wallet from "./assets/Wallet";
@@ -21,6 +23,10 @@ export default function BusinessScreen(): JSX.Element {
   const { navigateTo } = useNavigation();
   const { currentUser } = useCurrentUser();
   const { businessPlan } = useBusinessSubscriptionContext();
+
+  useEffect(() => {
+    logEvent("businessClubActivation_view");
+  });
 
   return (
     <>

@@ -18,6 +18,7 @@ import HeaderButtons from "components/moleculars/HeaderButtons";
 import ModalDialog from "components/moleculars/modals/ModalDialog";
 import CalendarIcon from "components/vectors/CalendarIcon";
 import TicketColorsIcon from "components/vectors/TicketColorsIcon";
+import { useBusinessSubscriptionContext } from "contexts/businessSubscriptionContext";
 import UserAvatar from "./UserAvatar";
 import * as S from "./styles";
 
@@ -31,6 +32,7 @@ function ProfileSection() {
   const [newProfile, setNewProfile] = useState<UserProfile>();
   const { navigateTo } = useNavigation();
   const { userIsClubMember } = useSubscriptions();
+  const { isBusinessMember } = useBusinessSubscriptionContext();
   const {
     isClubMember,
     isLoading: isClubMemberLoading,
@@ -44,6 +46,13 @@ function ProfileSection() {
     useState(false);
   const [daysDonatingModalVisible, setDaysDonatingModalVisible] =
     useState(false);
+  const [userType, setUserType] = useState("free");
+
+  const verifyUserType = () => {
+    if (isClubMember) return "club";
+    else if (isBusinessMember) return "business";
+    return "free";
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -71,10 +80,22 @@ function ProfileSection() {
     }
   }, [isClubMemberLoading, isClubMember]);
 
+  useFocusEffect(
+    useCallback(() => {
+      setUserType(verifyUserType());
+    }, [profile, isClubMember, isBusinessMember]),
+  );
+
+  const statisticsBackgroundColor = () => {
+    if (isClubMember) return theme.colors.brand.tertiary[25];
+    else if (isBusinessMember) return theme.colors.brand.quinary[25];
+    return theme.colors.brand.primary[25];
+  };
+
   return (
-    <S.Container clubMember={isClubMember}>
+    <S.Container type={userType}>
       <S.ShapeContainer>
-        <ProfileTopShape isClubMember={isClubMember} />
+        <ProfileTopShape userType={userType} />
       </S.ShapeContainer>
       <S.HeaderButtonsContainer>
         <HeaderButtons showsTicketsCounter />
@@ -91,11 +112,20 @@ function ProfileSection() {
                   : currentUser?.email
               }
               isClubMember={isClubMember}
+              isBusinessMember={isBusinessMember}
             />
 
-            <S.TagContainer onPress={handleClick}>
-              <S.ClubTag member={isClubMember}>
-                <S.TagText member={isClubMember}>
+            {isBusinessMember && (
+              <S.TagContainer disabled>
+                <S.BusinessTag>
+                  <S.TagBusinessText>{t("businessTag")}</S.TagBusinessText>
+                </S.BusinessTag>
+              </S.TagContainer>
+            )}
+
+            <S.TagContainer disabled={isClubMember} onPress={handleClick}>
+              <S.ClubTag clubMember={isClubMember}>
+                <S.TagText clubMember={isClubMember}>
                   {isClubMember ? t("clubTagText") : t("noClubTagText")}
                 </S.TagText>
               </S.ClubTag>
@@ -105,11 +135,7 @@ function ProfileSection() {
 
         <S.StatisticsContainer additionalTopMargin={!currentUser}>
           <StatisticsCard
-            backgroundColor={
-              isClubMember
-                ? theme.colors.brand.tertiary[25]
-                : theme.colors.brand.primary[25]
-            }
+            backgroundColor={statisticsBackgroundColor()}
             description={t("donatedTickets")}
             icon={<TicketColorsIcon />}
             value={currentUser ? userStatistics?.totalTickets : 0}
