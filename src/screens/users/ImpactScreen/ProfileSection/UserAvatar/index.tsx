@@ -26,7 +26,7 @@ function UserAvatar({
     if (!isClubMember) return null;
     return (
       <>
-        <S.LeftSparkles>
+        <S.LeftSparkles testID="Sparkles">
           <LeftSparkle />
         </S.LeftSparkles>
         <S.RightSparkles>
@@ -49,7 +49,7 @@ function UserAvatar({
         <S.PictureContainer>
           <S.AvatarContainer>{renderAvatar()}</S.AvatarContainer>
 
-          <S.BusinessIconContainer>
+          <S.BusinessIconContainer testID="BusinessIcon">
             <S.BusinessIcon source={{ uri: currentUser?.company?.logo }} />
           </S.BusinessIconContainer>
 

@@ -36,4 +36,10 @@ describe("UserAvatar", () => {
     expect(screen.queryByTestId("Sparkles")).toBeTruthy();
     expect(screen.queryByTestId("VerifiedIcon")).toBeTruthy();
   });
+
+  it("renders the business user avatar", () => {
+    renderComponent(<UserAvatar name="Profile name" isBusinessMember />);
+
+    expect(screen.queryByTestId("BusinessIcon")).toBeTruthy();
+  });
 });
