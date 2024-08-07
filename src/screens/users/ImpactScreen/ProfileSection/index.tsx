@@ -32,8 +32,7 @@ function ProfileSection() {
   const [newProfile, setNewProfile] = useState<UserProfile>();
   const { navigateTo } = useNavigation();
   const { userIsClubMember } = useSubscriptions();
-  const { isBusinessMember, businessPlan, businessSubscription } =
-    useBusinessSubscriptionContext();
+  const { isBusinessMember } = useBusinessSubscriptionContext();
   const {
     isClubMember,
     isLoading: isClubMemberLoading,
@@ -81,23 +80,10 @@ function ProfileSection() {
     }
   }, [isClubMemberLoading, isClubMember]);
 
-  useEffect(() => {
-    console.log("isClubMember", isClubMember);
-    console.log("isBusinessMember", isBusinessMember);
-    console.log("businessPlan", businessPlan);
-    console.log("businessSubscription", businessSubscription);
-  }, []);
-
   useFocusEffect(
     useCallback(() => {
       setUserType(verifyUserType());
-    }, [
-      profile,
-      isClubMember,
-      isBusinessMember,
-      businessSubscription,
-      businessPlan,
-    ]),
+    }, [profile, isClubMember, isBusinessMember]),
   );
 
   const statisticsBackgroundColor = () => {

@@ -27,22 +27,17 @@ function BusinessSubscriptionProvider({ children }: any) {
     if (currentUser?.directTransferSubscription) {
       setBusinessSubscription(currentUser.directTransferSubscription);
       setBusinessPlan(currentUser.directTransferSubscription.offer.plan);
+      setIsBusinessMember(
+        currentUser.directTransferSubscription.status === "active",
+      );
     }
 
     if (!currentUser) {
-      console.log("resetting business subscription");
       setBusinessSubscription(undefined);
       setBusinessPlan(undefined);
       setIsBusinessMember(false);
     }
   }, [currentUser]);
-
-  useEffect(() => {
-    if (businessSubscription?.status === "active") {
-      setIsBusinessMember(true);
-    }
-    console.log("businessSubscription context", businessSubscription);
-  }, [businessSubscription, currentUser]);
 
   const BusinessSubscriptionObject: IBusinessSubscriptionContext = useMemo(
     () => ({
