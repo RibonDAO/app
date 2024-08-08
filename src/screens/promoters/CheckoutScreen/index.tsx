@@ -12,7 +12,6 @@ import usePageView from "hooks/usePageView";
 import { withPlaceholder } from "config/navigation/withPlaceholder";
 import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
 import Header from "./Components/Header";
-import CryptoSection from "./CryptoSection";
 import CardSection from "./CardSection";
 import S from "./styles";
 
@@ -27,7 +26,7 @@ function CheckoutScreen(): JSX.Element {
     currency: currencyParam,
   } = params;
 
-  const { setTarget, setTargetId, setCurrency, currency, setOfferPrice } =
+  const { setTarget, setTargetId, setCurrency, setOfferPrice } =
     useCheckoutContext();
 
   useEffect(() => {
@@ -50,7 +49,7 @@ function CheckoutScreen(): JSX.Element {
       >
         <ScrollView style={S.container}>
           <Header />
-          {currency === "USDC" ? <CryptoSection /> : <CardSection />}
+          <CardSection />
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

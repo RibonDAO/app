@@ -15,7 +15,6 @@ import { ScrollView } from "react-native";
 import Button from "components/atomics/buttons/Button";
 import MaskedWaveCut from "components/moleculars/MaskedWaveCut";
 import { useScrollEnabled } from "contexts/scrollEnabledContext";
-import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import { useCausesContext } from "contexts/causesContext";
 import { useCauseContributionContext } from "contexts/causesContributionContext";
 import UserSupportBanner from "components/moleculars/UserSupportBanner";
@@ -33,7 +32,6 @@ function CardScreen(): JSX.Element {
   const { causes } = useCausesContext();
   const { chosenCause, setChosenCause, chosenCauseIndex, setChosenCauseIndex } =
     useCauseContributionContext();
-  const { cause: causeCrypto } = useCryptoPayment();
   const { scrollEnabled } = useScrollEnabled();
 
   const { t } = useTranslation("translation", {
@@ -41,7 +39,7 @@ function CardScreen(): JSX.Element {
   });
 
   useEffect(() => {
-    setCause(causeCrypto || chosenCause || causes[chosenCauseIndex ?? 0]);
+    setCause(chosenCause || causes[chosenCauseIndex ?? 0]);
   }, [causes]);
 
   const handleCauseClick = (causeClicked: Cause, index: number) => {

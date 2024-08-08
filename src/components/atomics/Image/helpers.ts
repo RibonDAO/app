@@ -1,13 +1,4 @@
 import * as FileSystem from "expo-file-system";
-import * as Crypto from "expo-crypto";
-
-export async function hashFromString(value: string) {
-  const digest = await Crypto.digestStringAsync(
-    Crypto.CryptoDigestAlgorithm.SHA256,
-    value,
-  );
-  return digest;
-}
 
 export async function findImageInCache(uri: string) {
   try {

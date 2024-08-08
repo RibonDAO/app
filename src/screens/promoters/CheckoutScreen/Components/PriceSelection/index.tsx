@@ -33,7 +33,6 @@ function PriceSelection({
   const hasAdditionalTaxes =
     currentOffer?.gateway === "stripe_global" &&
     currentOffer?.currency === "brl";
-  const isCrypto = tokenSymbol && priceValue && !currentOffer;
 
   const renderGivingFees = () => {
     if (!cardGivingFees) return null;
@@ -73,7 +72,7 @@ function PriceSelection({
           </View>
         )}
       </View>
-      {!isCrypto && renderGivingFees()}
+      {renderGivingFees()}
     </View>
   );
 }

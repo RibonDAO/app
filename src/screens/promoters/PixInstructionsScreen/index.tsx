@@ -26,10 +26,7 @@ import Icon from "components/atomics/Icon";
 import TrustSeal from "components/moleculars/TrustSeal";
 import PaymentPlaceholder from "components/moleculars/PaymentPlaceholder";
 import { useNavigation } from "hooks/useNavigation";
-import {
-  formatDateTime,
-  formatDate,
-} from "lib/web3Helpers/timeStampFormatters";
+import { formatDateTime, formatDate } from "lib/formatters/timeStampFormatters";
 
 import S from "./styles";
 

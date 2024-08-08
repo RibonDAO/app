@@ -19,17 +19,21 @@ if (Platform.OS !== "web") {
     "The provided value 'ms-stream' is not a valid 'responseType'.",
     "The provided value 'moz-chunked-arraybuffer' is not a valid 'responseType'.",
   ]);
-  require("react-native-get-random-values");
-  require("@ethersproject/shims");
 }
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const base64 = require("base-64");
 
-global.btoa = global.btoa || require("base-64").encode;
-global.atob = global.atob || require("base-64").decode;
+global.btoa = global.btoa || base64.encode;
+global.atob = global.atob || base64.decode;
 
-global.Buffer = require("buffer").Buffer;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const buffer = require("buffer");
 
-global.process = require("process");
+global.Buffer = buffer.Buffer;
 
+global.process = process;
+
+// eslint-disable-next-line no-undef
 global.process.env.NODE_ENV = __DEV__ ? "development" : "production";
 global.process.version = "v9.40";
 

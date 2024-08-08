@@ -14,7 +14,6 @@
     "aboutTicketsButtonText": "Voltar"
   },
   "layoutHeader": {
-    "connectWallet": "Conectar",
     "ticketModal": {
       "title": "Legal! Você tem 1 vale para doar :)",
       "description": "Você pode destiná-lo para qualquer projeto",
@@ -40,7 +39,6 @@
       "description": "Volte amanhã para receber mais.\n\nOu assine o Clube Ribon e receba agora mesmo 30 tickets extras!",
       "confirm": "Conhecer Clube Ribon"
     },
-    "disconnectWallet": "Desconectar carteira",
     "cancel": "cancelar",
     "confirm": "confirmar"
   },
@@ -302,9 +300,6 @@
     }
   },
   "contexts": {
-    "walletContext": {
-      "walletConnectionErrorMessage": "Erro ao conectar carteira"
-    },
     "cardPaymentInformation": {
       "successMessage": "Você doou com sucesso para a causa!",
       "onErrorMessage": "Falha no pagamento. Tente novamente."
@@ -326,16 +321,6 @@
       "donateButtonText": "Doar {{value}}",
       "selectOfferSection": {
         "causeText": "Você doará para"
-      },
-      "connectWalletButtonText": "Conectar carteira",
-      "userBalanceText": "Seu saldo: ",
-      "refundText": "*Pagamentos em criptomoeda não são estornáveis",
-      "tokenAmountTransferMessage": "Aprovando quantidade de tokens pra transação...",
-      "contractTransferMessage": "Transferindo pro contrato...",
-      "successDonationMessage": "Você doou {{amount}} {{tokenSymbol}} com sucesso!",
-      "communityAddScreen": {
-        "title": "Como a comunidade aumenta a sua doação de {{value}}?",
-        "button": "Doar {{value}}"
       },
       "paymentScreen": {
         "title": "Sua doação para",
@@ -359,8 +344,7 @@
           "brazilName": "Brasil",
           "searchCountryPlaceholder": "Procurar país"
         }
-      },
-      "invalidNetwork": "Rede inválida. Por favor troque para {{network}}"
+      }
     },
     "contributionDoneScreen": {
       "title": "Obrigado!",
