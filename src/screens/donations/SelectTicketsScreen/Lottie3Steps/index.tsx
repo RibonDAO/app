@@ -13,20 +13,16 @@ export type Props = {
 
 const DURATION = 300;
 
-// Passing 250 tickets, the animation will be completed
-const MAX_TICKETS_TO_COMPLETE = 250;
-
 export default function Lottie3Steps({
   rangeSize,
   value,
   step,
 }: Props): JSX.Element {
-  const adjustedRangeSize = Math.min(rangeSize, MAX_TICKETS_TO_COMPLETE) - step;
   const isRangeLocked = step * 2 > rangeSize;
 
   const rangePercentage = isRangeLocked
     ? 70
-    : ((value - step) / adjustedRangeSize) * 100;
+    : ((value - step) / (rangeSize - step)) * 100;
 
   const layer1Visible = rangePercentage >= 5;
   const layer2Visible = rangePercentage >= 50;
