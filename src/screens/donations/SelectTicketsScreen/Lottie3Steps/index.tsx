@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import Animated, { Keyframe } from "react-native-reanimated";
 import Lottie from "lottie-react-native";
-
 import step1 from "./assets/STEP1.json";
 import step2 from "./assets/STEP2.json";
 import step3 from "./assets/STEP3.json";
@@ -12,175 +11,99 @@ export type Props = {
   value: number;
 };
 
-type Segment = {
-  index: number;
-  path: number[];
-  direction: "forward" | "backward";
-};
+const DURATION = 300;
+
+// Passing 250 tickets, the animation will be completed
+const MAX_TICKETS_TO_COMPLETE = 250;
 
 export default function Lottie3Steps({
   rangeSize,
   value,
   step,
 }: Props): JSX.Element {
-  const animationRef1 = useRef<Lottie>(null);
-  const animationRef2 = useRef<Lottie>(null);
-  const animationRef3 = useRef<Lottie>(null);
+  const adjustedRangeSize = Math.min(rangeSize, MAX_TICKETS_TO_COMPLETE) - step;
+  const rangeIsLocked = step * 2 > rangeSize;
 
-  const minimumValue = rangeSize < 2 * step ? 0 : step;
-  const maximumValue = Math.floor(rangeSize / step) * step;
+  const rangePercentage = rangeIsLocked
+    ? 70
+    : ((value - step) / adjustedRangeSize) * 100;
 
-  const removeDups = (arr: number[]): number[] => [...new Set(arr)];
+  const layer1Visible = rangePercentage >= 5;
+  const layer2Visible = rangePercentage >= 50;
+  const layer3Visible = rangePercentage >= 95;
 
-  const steps = removeDups([
-    minimumValue,
-    Math.floor(maximumValue / 3) % step !== 0
-      ? minimumValue
-      : Math.floor(maximumValue / 3),
-    Math.floor((2 * maximumValue) / 3) % step !== 0
-      ? minimumValue
-      : Math.floor((2 * maximumValue) / 3),
-    maximumValue,
-  ]);
-
-  const [currentSegment, setCurrentSegment] = useState<Segment>({
-    index: 0,
-    path: [0, 150],
-    direction: "forward",
+  const enteringKeyframes = new Keyframe({
+    0: {
+      opacity: 0,
+      transform: [{ scale: 0 }],
+    },
+    100: {
+      opacity: 1,
+      transform: [{ scale: 1 }],
+    },
   });
 
-  useEffect(() => {
-    animationRef1.current?.reset();
-    animationRef2.current?.reset();
-    animationRef3.current?.reset();
-  }, []);
-
-  useEffect(() => {
-    const direction = value > currentSegment.index ? "forward" : "backward";
-
-    setCurrentSegment({
-      index: value,
-      path: [0, 150],
-      direction,
-    });
-  }, [value]);
-
-  const handle4Steps = () => {
-    if (value === steps[0]) {
-      if (currentSegment.direction === "backward") {
-        animationRef1.current?.play(0, 0);
-        animationRef2.current?.play(0, 0);
-        animationRef3.current?.play(0, 0);
-      }
-    }
-    if (value === steps[1]) {
-      if (currentSegment.direction === "forward")
-        animationRef1.current?.play(0, 150);
-      else {
-        animationRef2.current?.play(0, 0);
-      }
-    }
-    if (value > steps[1] && value < steps[2]) {
-      if (currentSegment.direction === "forward")
-        animationRef1.current?.play(149, 150);
-      else animationRef2.current?.play(0, 0);
-    }
-    if (value === steps[2]) {
-      if (currentSegment.direction === "forward")
-        animationRef2.current?.play(0, 150);
-      else animationRef2.current?.play(0, 0);
-    }
-    if (value > steps[2] && value < steps[3]) {
-      if (currentSegment.direction === "forward")
-        animationRef2.current?.play(149, 150);
-      else animationRef3.current?.play(0, 0);
-    }
-    if (value === steps[3]) {
-      if (currentSegment.direction === "forward") {
-        animationRef1.current?.play(149, 150);
-        animationRef2.current?.play(149, 150);
-        animationRef3.current?.play(0, 150);
-      }
-    }
-  };
-  const handle3Steps = () => {
-    if (value === steps[0])
-      if (currentSegment.direction === "backward") {
-        animationRef1.current?.play(0, 0);
-        animationRef2.current?.play(0, 0);
-      }
-
-    if (value === steps[1]) {
-      if (currentSegment.direction === "forward")
-        animationRef1.current?.play(0, 150);
-      else animationRef2.current?.play(0, 0);
-    }
-    if (value > steps[1] && value < steps[2]) {
-      if (currentSegment.direction === "forward")
-        animationRef1.current?.play(149, 150);
-      else animationRef2.current?.play(0, 0);
-    }
-    if (value === steps[2]) {
-      if (currentSegment.direction === "forward") {
-        animationRef1.current?.play(149, 150);
-        animationRef2.current?.play(0, 150);
-      }
-    }
-  };
-
-  const handle2Steps = () => {
-    if (value === steps[0]) {
-      if (currentSegment.direction === "backward")
-        animationRef1.current?.play(0, 0);
-    }
-    if (value === steps[1]) {
-      if (currentSegment.direction === "forward")
-        animationRef1.current?.play(0, 150);
-    }
-  };
-
-  useEffect(() => {
-    switch (steps.length) {
-      case 4:
-        return handle4Steps();
-      case 3:
-        return handle3Steps();
-      case 2:
-        return handle2Steps();
-      default:
-        return handle2Steps();
-    }
-  }, [currentSegment]);
+  const exitingKeyframes = new Keyframe({
+    0: {
+      opacity: 1,
+      transform: [{ scale: 1 }],
+    },
+    100: {
+      opacity: 0,
+      transform: [{ scale: 0 }],
+    },
+  });
 
   return (
-    <S.container>
-      <S.lottieContainer>
-        <Lottie
-          source={step1}
-          style={{ width: 360, height: 360 }}
-          ref={animationRef1}
-          loop={false}
-          autoPlay={false}
-        />
-      </S.lottieContainer>
-      <S.lottieContainer>
-        <Lottie
-          source={step2}
-          style={{ width: 360, height: 360 }}
-          ref={animationRef2}
-          loop={false}
-          autoPlay={false}
-        />
-      </S.lottieContainer>
-      <S.lottieContainer>
-        <Lottie
-          source={step3}
-          style={{ width: 360, height: 360 }}
-          ref={animationRef3}
-          loop={false}
-          autoPlay={false}
-        />
-      </S.lottieContainer>
-    </S.container>
+    <S.Container>
+      {layer1Visible && (
+        <Animated.View
+          entering={enteringKeyframes.duration(DURATION)}
+          exiting={exitingKeyframes.duration(DURATION)}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        >
+          <Lottie
+            source={step1}
+            style={{ width: 360, height: 360 }}
+            loop={false}
+            autoPlay
+          />
+        </Animated.View>
+      )}
+
+      {layer2Visible && (
+        <Animated.View
+          entering={enteringKeyframes.duration(DURATION)}
+          exiting={exitingKeyframes.duration(DURATION)}
+          style={{ position: "absolute", top: 0, left: 0 }}
+        >
+          <Lottie
+            source={step2}
+            style={{ width: 360, height: 360 }}
+            loop={false}
+            autoPlay
+          />
+        </Animated.View>
+      )}
+
+      {layer3Visible && (
+        <Animated.View
+          entering={enteringKeyframes.duration(DURATION)}
+          exiting={exitingKeyframes.duration(DURATION)}
+          style={{ position: "absolute", top: 0, left: 0 }}
+        >
+          <Lottie
+            source={step3}
+            style={{ width: 360, height: 360 }}
+            loop={false}
+            autoPlay
+          />
+        </Animated.View>
+      )}
+    </S.Container>
   );
 }
