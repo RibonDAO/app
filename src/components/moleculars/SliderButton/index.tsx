@@ -48,8 +48,9 @@ function SliderButton({
     backgroundColor: theme.colors.brand.primary[600],
     borderColor: theme.colors.neutral10,
     borderWidth: 2,
-    height: 16,
-    width: 16,
+    height: 24,
+    width: 24,
+    borderRadius: 32,
   };
 
   return (
