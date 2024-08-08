@@ -22,9 +22,9 @@ export default function Lottie3Steps({
   step,
 }: Props): JSX.Element {
   const adjustedRangeSize = Math.min(rangeSize, MAX_TICKETS_TO_COMPLETE) - step;
-  const rangeIsLocked = step * 2 > rangeSize;
+  const isRangeLocked = step * 2 > rangeSize;
 
-  const rangePercentage = rangeIsLocked
+  const rangePercentage = isRangeLocked
     ? 70
     : ((value - step) / adjustedRangeSize) * 100;
 
