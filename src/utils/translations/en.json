@@ -327,6 +327,10 @@
       "selectOfferSection": {
         "causeText": "You'll donate to"
       },
+      "communityAddScreen": {
+        "title": "How does the community increase your {{value}} donation?",
+        "button": "Donate {{value}}"
+      },
       "paymentScreen": {
         "title": "Your donation to",
         "button": "Continue",
@@ -702,7 +706,7 @@
       "confirmText": "Continue",
       "resendText": "Resend code",
       "incorrectCode": "Incorrect code. Please try again.",
-      "successToastMessage": "Account validated"
+      "successToastMessage": "Login successful"
     },
     "insertEmailCouponScreen": {
       "title": "Sign in with an e-mail",

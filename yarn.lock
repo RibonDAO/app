@@ -5281,7 +5281,7 @@ customerio-expo-plugin@^1.0.0-beta.15:
   dependencies:
     find-package-json "^1.2.0"
 
-customerio-reactnative@^3.7.0:
+customerio-reactnative@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/customerio-reactnative/-/customerio-reactnative-3.8.0.tgz#4e4c7c36e320c65445b834f042e1c6c3a984fd2f"
   integrity sha512-F0F+L7A7sVi1uZXoV82WEZ2vtHTTL2k5Q6HsVOh4dyWbaA/AA8j71XWhJN08nwtJsS6BFvUjczqsdiGcV3Bz5Q==

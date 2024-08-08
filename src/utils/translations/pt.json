@@ -322,6 +322,10 @@
       "selectOfferSection": {
         "causeText": "Você doará para"
       },
+      "communityAddScreen": {
+        "title": "Como a comunidade aumenta a sua doação de {{value}}?",
+        "button": "Doar {{value}}"
+      },
       "paymentScreen": {
         "title": "Sua doação para",
         "button": "Continuar",
@@ -694,7 +698,7 @@
       "confirmText": "Continuar",
       "resendText": "Reenviar código",
       "incorrectCode": "Código incorreto. Tente novamente, por favor.",
-      "successToastMessage": "Conta verificada"
+      "successToastMessage": "Login realizado"
     },
     "insertEmailCouponScreen": {
       "title": "Entre com um e-mail",
