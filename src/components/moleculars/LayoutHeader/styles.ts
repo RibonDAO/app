@@ -74,23 +74,3 @@ export const TicketCounter = styled.Text`
   margin-right: ${theme.spacing(4)};
   margin-left: ${theme.spacing(4)};
 `;
-
-export const WalletContainer = styled.View`
-  padding-vertical: 5px;
-  padding-horizontal: 7px;
-  border-radius: ${theme.spacing(4)};
-  border-width: 1px;
-  border-color: ${theme.colors.brand.primary[600]};
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-right: ${theme.spacing(12)};
-`;
-
-export const WalletText = styled.Text`
-  font-size: ${theme.spacing(12)};
-  margin-right: ${theme.spacing(4)};
-  color: ${theme.colors.brand.primary[600]};
-  text-align: center;
-  line-height: 16px;
-`;

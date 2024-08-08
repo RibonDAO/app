@@ -14,7 +14,6 @@
     "aboutTicketsButtonText": "Back"
   },
   "layoutHeader": {
-    "connectWallet": "Connect",
     "ticketModal": {
       "title": "Cool! You have 1 ticket to donate :)",
       "description": "You can use to donate to any project",
@@ -40,7 +39,6 @@
       "description": "Come back tomorrow for more.\n\nOr subscribe to Clube Ribon and receive 30 extra tickets right now!",
       "confirm": "Get to know Ribon Club"
     },
-    "disconnectWallet": "Disconnect wallet",
     "cancel": "cancel",
     "confirm": "confirm"
   },
@@ -307,9 +305,6 @@
     }
   },
   "contexts": {
-    "walletContext": {
-      "walletConnectionErrorMessage": "Error connecting wallet"
-    },
     "cardPaymentInformation": {
       "successMessage": "You have successfully donated to this cause!",
       "onErrorMessage": "Payment failed. Try again."
@@ -332,12 +327,6 @@
       "selectOfferSection": {
         "causeText": "You'll donate to"
       },
-      "connectWalletButtonText": "Connect wallet",
-      "userBalanceText": "Your balance: ",
-      "refundText": "*Cryptocurrency payments are non-refundable",
-      "tokenAmountTransferMessage": "Approving token amount transfer...",
-      "contractTransferMessage": "Transferring to contract...",
-      "successDonationMessage": "You successfully donated {{amount}} {{tokenSymbol}}",
       "communityAddScreen": {
         "title": "How does the community increase your {{value}} donation?",
         "button": "Donate {{value}}"
@@ -364,8 +353,7 @@
           "brazilName": "Brazil",
           "searchCountryPlaceholder": "Search country"
         }
-      },
-      "invalidNetwork": "Invalid network, please change to {{network}}"
+      }
     },
     "contributionDoneScreen": {
       "title": "Thank you!",

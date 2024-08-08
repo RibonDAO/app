@@ -2,9 +2,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import WalletProvider from "contexts/walletContext";
-import NetworkProvider from "contexts/networkContext";
-import CryptoPaymentProvider from "contexts/cryptoPaymentContext";
 import CausesProvider from "contexts/causesContext";
 import CauseContributionProvider from "contexts/causesContributionContext";
 import TagDonationProvider from "contexts/tagDonationContext";
@@ -581,40 +578,34 @@ export default function Navigation() {
     <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
       <LoadingOverlayProvider>
         <UtmProvider>
-          <WalletProvider>
-            <NetworkProvider>
-              <CheckoutProvider>
-                <CryptoPaymentProvider>
-                  <CardPaymentInformationProvider>
-                    <PixPaymentInformationProvider>
-                      <CausesProvider>
-                        <NonProfitsProvider>
-                          <TagsProvider>
-                            <TagDonationProvider>
-                              <CauseContributionProvider>
-                                <IntegrationProvider>
-                                  <CouponProvider>
-                                    <TicketsProvider>
-                                      <PaymentFailedNotificationProvider>
-                                        <ClubSubscriptionProvider>
-                                          <RootNavigator />
-                                          <Toast config={toastConfig} />
-                                        </ClubSubscriptionProvider>
-                                      </PaymentFailedNotificationProvider>
-                                    </TicketsProvider>
-                                  </CouponProvider>
-                                </IntegrationProvider>
-                              </CauseContributionProvider>
-                            </TagDonationProvider>
-                          </TagsProvider>
-                        </NonProfitsProvider>
-                      </CausesProvider>
-                    </PixPaymentInformationProvider>
-                  </CardPaymentInformationProvider>
-                </CryptoPaymentProvider>
-              </CheckoutProvider>
-            </NetworkProvider>
-          </WalletProvider>
+          <CheckoutProvider>
+            <CardPaymentInformationProvider>
+              <PixPaymentInformationProvider>
+                <CausesProvider>
+                  <NonProfitsProvider>
+                    <TagsProvider>
+                      <TagDonationProvider>
+                        <CauseContributionProvider>
+                          <IntegrationProvider>
+                            <CouponProvider>
+                              <TicketsProvider>
+                                <PaymentFailedNotificationProvider>
+                                  <ClubSubscriptionProvider>
+                                    <RootNavigator />
+                                    <Toast config={toastConfig} />
+                                  </ClubSubscriptionProvider>
+                                </PaymentFailedNotificationProvider>
+                              </TicketsProvider>
+                            </CouponProvider>
+                          </IntegrationProvider>
+                        </CauseContributionProvider>
+                      </TagDonationProvider>
+                    </TagsProvider>
+                  </NonProfitsProvider>
+                </CausesProvider>
+              </PixPaymentInformationProvider>
+            </CardPaymentInformationProvider>
+          </CheckoutProvider>
         </UtmProvider>
       </LoadingOverlayProvider>
     </NavigationContainer>

@@ -1,5 +1,5 @@
-const version = "6.1.4";
-const buildNumber = 400;
+const version = "7.0.0";
+const buildNumber = 401;
 
 export default () => ({
   "expo": {
@@ -143,7 +143,6 @@ export default () => ({
       "EXPO_PUBLIC_ZENDESK_KEY": process.env.EXPO_PUBLIC_ZENDESK_KEY,
       "EXPO_PUBLIC_CIO_SITE_ID": process.env.EXPO_PUBLIC_CIO_SITE_ID,
       "EXPO_PUBLIC_CIO_API_KEY": process.env.EXPO_PUBLIC_CIO_API_KEY,
-      "EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID": process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID,
       "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
       "EXPO_PUBLIC_APPSFLYER_KEY": process.env.EXPO_PUBLIC_APPSFLYER_KEY,
       "EXPO_PUBLIC_APPSFLYER_APP_ID": process.env.EXPO_PUBLIC_APPSFLYER_APP_ID

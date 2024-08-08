@@ -6,18 +6,6 @@ import {
 } from "@testing-library/react-hooks";
 import { I18nextProvider } from "react-i18next";
 import { QueryClient, QueryClientProvider } from "react-query";
-import NetworkProvider, {
-  INetworkContext,
-  NetworkContext,
-} from "contexts/networkContext";
-import WalletProvider, {
-  IWalletContext,
-  WalletContext,
-} from "contexts/walletContext";
-import CryptoPaymentProvider, {
-  CryptoPaymentContext,
-  ICryptoPaymentContext,
-} from "contexts/cryptoPaymentContext";
 import LoadingOverlayProvider, {
   ILoadingOverlayContext,
   LoadingOverlayContext,
@@ -120,10 +108,7 @@ function renderProvider(
 
 export type RenderComponentProps = {
   locationState?: Record<any, any>;
-  networkProviderValue?: Partial<INetworkContext>;
-  walletProviderValue?: Partial<IWalletContext>;
   loadingOverlayValue?: Partial<ILoadingOverlayContext>;
-  cryptoPaymentProviderValue?: Partial<ICryptoPaymentContext>;
   cardPaymentProviderValue?: Partial<ICardPaymentInformationContext>;
   pixInformationProviderValue?: Partial<IPixPaymentInformationContext>;
   ticketsProviderValue?: Partial<ITicketsContext>;
@@ -146,9 +131,6 @@ export type RenderComponentProps = {
 function renderAllProviders(
   children: any,
   {
-    networkProviderValue = {},
-    walletProviderValue = {},
-    cryptoPaymentProviderValue = {},
     loadingOverlayValue = {},
     cardPaymentProviderValue = {},
     pixInformationProviderValue = {},
@@ -180,89 +162,74 @@ function renderAllProviders(
             LoadingOverlayContext,
             loadingOverlayValue,
             renderProvider(
-              WalletProvider,
-              WalletContext,
-              walletProviderValue,
+              AuthenticationProvider,
+              AuthenticationContext,
+              authenticationProviderValue,
               renderProvider(
-                AuthenticationProvider,
-                AuthenticationContext,
-                authenticationProviderValue,
+                CheckoutProvider,
+                CheckoutContext,
+                checkoutProviderValue,
                 renderProvider(
-                  NetworkProvider,
-                  NetworkContext,
-                  networkProviderValue,
+                  UnsafeAreaProvider,
+                  UnsafeAreaContext,
+                  unsafeAreaProviderValue,
                   renderProvider(
-                    CheckoutProvider,
-                    CheckoutContext,
-                    checkoutProviderValue,
+                    CardPaymentInformationProvider,
+                    CardPaymentInformationContext,
+                    cardPaymentProviderValue,
                     renderProvider(
-                      UnsafeAreaProvider,
-                      UnsafeAreaContext,
-                      unsafeAreaProviderValue,
+                      CouponProvider,
+                      CouponContext,
+                      couponProviderValue,
                       renderProvider(
-                        CryptoPaymentProvider,
-                        CryptoPaymentContext,
-                        cryptoPaymentProviderValue,
+                        TagsProvider,
+                        TagsContext,
+                        tagsProviderValue,
                         renderProvider(
-                          CardPaymentInformationProvider,
-                          CardPaymentInformationContext,
-                          cardPaymentProviderValue,
+                          TicketsProvider,
+                          TicketsContext,
+                          ticketsProviderValue,
                           renderProvider(
-                            CouponProvider,
-                            CouponContext,
-                            couponProviderValue,
+                            ScrollEnabledProvider,
+                            ScrollEnabledContext,
+                            scrollEnabledProviderValue,
                             renderProvider(
-                              TagsProvider,
-                              TagsContext,
-                              tagsProviderValue,
+                              StripeProvider,
+                              StripeContext,
+                              stripeProviderValue,
                               renderProvider(
-                                TicketsProvider,
-                                TicketsContext,
-                                ticketsProviderValue,
+                                CausesProvider,
+                                CausesContext,
+                                causesProviderValue,
                                 renderProvider(
-                                  ScrollEnabledProvider,
-                                  ScrollEnabledContext,
-                                  scrollEnabledProviderValue,
+                                  TagDonationProvider,
+                                  TagDonationContext,
+                                  tagDonationProviderValue,
                                   renderProvider(
-                                    StripeProvider,
-                                    StripeContext,
-                                    stripeProviderValue,
+                                    CauseContributionProvider,
+                                    CauseContributionContext,
+                                    causeContributionProviderValue,
                                     renderProvider(
-                                      CausesProvider,
-                                      CausesContext,
-                                      causesProviderValue,
+                                      NonProfitsProvider,
+                                      NonProfitsContext,
+                                      nonProfitsProviderValue,
                                       renderProvider(
-                                        TagDonationProvider,
-                                        TagDonationContext,
-                                        tagDonationProviderValue,
+                                        IntegrationProvider,
+                                        IntegrationContext,
+                                        integrationProviderValue,
                                         renderProvider(
-                                          CauseContributionProvider,
-                                          CauseContributionContext,
-                                          causeContributionProviderValue,
+                                          PaymentFailedNotificationProvider,
+                                          PaymentFailedNotificationContext,
+                                          paymentFailedNotificationProviderValue,
                                           renderProvider(
-                                            NonProfitsProvider,
-                                            NonProfitsContext,
-                                            nonProfitsProviderValue,
+                                            ClubSubscriptionProvider,
+                                            ClubSubscriptionContext,
+                                            clubSubscriptionValue,
                                             renderProvider(
-                                              IntegrationProvider,
-                                              IntegrationContext,
-                                              integrationProviderValue,
-                                              renderProvider(
-                                                PaymentFailedNotificationProvider,
-                                                PaymentFailedNotificationContext,
-                                                paymentFailedNotificationProviderValue,
-                                                renderProvider(
-                                                  ClubSubscriptionProvider,
-                                                  ClubSubscriptionContext,
-                                                  clubSubscriptionValue,
-                                                  renderProvider(
-                                                    PixInformationProvider,
-                                                    PixPaymentInformationContext,
-                                                    pixInformationProviderValue,
-                                                    children,
-                                                  ),
-                                                ),
-                                              ),
+                                              PixInformationProvider,
+                                              PixPaymentInformationContext,
+                                              pixInformationProviderValue,
+                                              children,
                                             ),
                                           ),
                                         ),

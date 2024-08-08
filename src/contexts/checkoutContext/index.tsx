@@ -46,7 +46,6 @@ export interface ICheckoutContext {
   setExpirationDate: (value: SetStateAction<string>) => void;
   setCvv: (value: SetStateAction<string>) => void;
   setButtonDisabled: (value: SetStateAction<boolean>) => void;
-  setCryptoGiving: (value: SetStateAction<string>) => void;
   setOffer: (value: SetStateAction<Offer | undefined>) => void;
   setFlow: (
     value: SetStateAction<"cause" | "nonProfit" | "club" | undefined>,
@@ -62,7 +61,6 @@ export interface ICheckoutContext {
   name: string;
   expirationDate: string;
   cvv: string;
-  cryptoGiving: string;
   offer: Offer | undefined;
   flow: "cause" | "nonProfit" | "club" | undefined;
 
@@ -135,7 +133,6 @@ function CheckoutProvider({ children }: Props) {
   const [name, setName] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [cvv, setCvv] = useState("");
-  const [cryptoGiving, setCryptoGiving] = useState("");
 
   const resetStates = () => {
     setCountry("");
@@ -178,8 +175,6 @@ function CheckoutProvider({ children }: Props) {
       setLoading,
       currentCoin,
       setCurrentCoin,
-      setCryptoGiving,
-      cryptoGiving,
       country,
       state,
       city,

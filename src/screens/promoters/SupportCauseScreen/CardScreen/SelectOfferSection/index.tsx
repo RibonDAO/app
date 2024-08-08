@@ -7,9 +7,8 @@ import { theme } from "@ribon.io/shared/styles";
 import { formatPrice } from "lib/formatters/currencyFormatter";
 import { getLocalStorageItem, setLocalStorageItem } from "lib/localStorage";
 import { Text, View } from "react-native";
-import Dropdown from "components/moleculars/Dropdown";
-import { useCryptoPayment } from "contexts/cryptoPaymentContext";
 import { useCheckoutContext } from "contexts/checkoutContext";
+import Dropdown from "components/moleculars/Dropdown";
 import styles from "./styles";
 
 const { secondary } = theme.colors.brand;
@@ -30,7 +29,6 @@ function SelectOfferPage({
 }: Props): JSX.Element {
   const [maxRange, setMaxRange] = useState(0);
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
-  const { setIsInCryptoPage } = useCryptoPayment();
 
   const defaultCurrentOfferIndex = async () => {
     const localstorageIndex = await getLocalStorageItem(
@@ -67,13 +65,9 @@ function SelectOfferPage({
     setLocalStorageItem(CURRENT_OFFER_INDEX_KEY, currentOfferIndex.toString());
   }, [currentOfferIndex]);
 
-  const onCurrencyChanged = (currency: Currencies | "USDC") => {
-    if (currency === "USDC") {
-      setIsInCryptoPage(true);
-    } else {
-      setCurrentCoin(currency);
-      setCurrentOfferIndex(0);
-    }
+  const onCurrencyChanged = (currency: Currencies) => {
+    setCurrentCoin(currency);
+    setCurrentOfferIndex(0);
   };
 
   if (loading) return <View />;
@@ -96,10 +90,9 @@ function SelectOfferPage({
           items={[
             { label: Currencies.BRL, value: Currencies.BRL },
             { label: Currencies.USD, value: Currencies.USD },
-            { label: "USDC", value: "USDC" },
           ]}
           onSelect={({ value }) => {
-            onCurrencyChanged(value as Currencies | "USDC");
+            onCurrencyChanged(value as Currencies);
           }}
           label={currentCoin || Currencies.USD}
           containerStyle={styles.dropdownContainerStyles}

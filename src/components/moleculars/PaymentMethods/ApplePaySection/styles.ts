@@ -19,11 +19,6 @@ const styles = StyleSheet.create({
   standardButtonText: {
     ...defaultBodyLgBold,
   },
-  addToWalletButton: {
-    marginTop: 30,
-    width: 190,
-    height: 60,
-  },
 });
 
 export default styles;
